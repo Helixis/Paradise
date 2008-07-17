@@ -19,5 +19,12 @@
 	construction_time = 200
 	category = list("Exosuit Equipment")
 
-
-
+/datum/design/borg_upgrade_rped
+	name = "Cyborg Upgrade (Cyborg RPED)"
+	id = "borg_upgrade_rped"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/rped
+	req_tech = list("engineering" = 5)
+	materials = list(MAT_METAL = 15000, MAT_GLASS = 5000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")

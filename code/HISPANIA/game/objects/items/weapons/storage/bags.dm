@@ -20,10 +20,6 @@
 	icon_state = "component_bag_inge"
 	desc = "This bag with engineers colors can be used to store many machine components."
 
-/obj/item/storage/bag/component/inge/cyborg
-	name = "cyborg component bag"
-	flags = NODROP
-
 
 // -----------------------------
 //          Kitchen Bag
