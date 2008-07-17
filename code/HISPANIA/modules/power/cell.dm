@@ -11,7 +11,7 @@
 	materials = list(MAT_GLASS = 800)
 	rating = 7
 	self_recharge = 1 // Infused slime cores self-recharge, over time
-	chargerate = 600
+	chargerate = 750
 
 /obj/item/stock_parts/cell/xenoblue/empty/New()
 	..()
@@ -50,12 +50,12 @@
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the Xenobluespace power cell.</span>")
 				var/turf/T = get_turf(src)
-				usr.put_in_hands(new /obj/item/stock_parts/cell/xenoblue(T))
 				qdel(src)
-
-
+				usr.put_in_hands(new /obj/item/stock_parts/cell/xenoblue/empty(T))
 
 //fin de la xenoblue cell
+
+
 /obj/item/stock_parts/cell/high/plus/empty/New()
 	..()
 	charge = 0
