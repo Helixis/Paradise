@@ -2,6 +2,7 @@
 	name = "aplu paint kit"
 	desc =  "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
 	var/list/colored = list("black", "death")
+	w_class = WEIGHT_CLASS_SMALL
 
 
 /obj/item/paintkit/hispania/attack_self(mob/user as mob)
@@ -12,20 +13,19 @@
 		return
 	if(t1 == "black")
 		var/turf/T = get_turf(src)
-		new /obj/item/paintkit/hispania/black(T)
 		qdel(src)
+		usr.put_in_hands(new /obj/item/paintkit/hispania/black(T))
 
 	if(t1 == "death")
 		var/turf/T = get_turf(src)
-		new /obj/item/paintkit/hispania/death(T)
 		qdel(src)
+		usr.put_in_hands(new /obj/item/paintkit/hispania/death(T))
 
 /obj/item/paintkit/hispania_hack               // estos son los painkit de alta personalizacion
 	name = "aplu customisation kit"
 	desc = "A generic kit containing all the needed tools and parts to turn a mech into another mech."
 	icon_state = "paintkit_2"
 	var/list/colored = list("titansfist", "griffin")
-
 
 /obj/item/paintkit/hispania_hack/attack_self(mob/user as mob)
 	var/list/L = colored
@@ -35,15 +35,15 @@
 		return
 	if(t1 == "titansfist")
 		var/turf/T = get_turf(src)
-		new /obj/item/paintkit/hispania_hack/titansfist(T)
 		qdel(src)
+		usr.put_in_hands(new /obj/item/paintkit/hispania_hack/titansfist(T))
 
 	if(t1 == "griffin")
 		var/turf/T = get_turf(src)
-		new /obj/item/paintkit/hispania_hack/griffin(T)
 		qdel(src)
+		usr.put_in_hands(new /obj/item/paintkit/hispania_hack/griffin(T))
 
-
+//paintkit de alta personalización//
 /obj/item/paintkit/hispania_hack/titansfist
 	name = "Mercenary APLU \"Ripley\" kit"
 	desc = "A kit containing all the needed tools and parts to turn an APLU \"Ripley\" into a Titan's Fist worker mech."
@@ -64,6 +64,7 @@
 	new_icon2 = 'icons/hispania/mecha/ripley/ripley_griffin.dmi'
 	allowed_types = list("ripley","firefighter")
 
+//paintkit de solo recolor//
 /obj/item/paintkit/hispania/death
 	name = "Death paint kit"
 	desc = "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
