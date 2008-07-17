@@ -242,7 +242,6 @@
 	icon_state = "plasmacutter"
 	damage_type = BRUTE
 	damage = 5
-	forcedodge = 1
 	range = 3
 	dismemberment = 20
 
@@ -256,6 +255,7 @@
 		if(pressure < 30)
 			name = "full strength plasma blast"
 			damage *= 3
+			forcedodge = 1
 	..()
 
 /obj/item/projectile/plasma/on_hit(atom/target)
@@ -270,7 +270,7 @@
 
 /obj/item/projectile/plasma/adv/mech
 	damage = 10
-	range = 7
+	range = 6
 
 /obj/item/projectile/energy/teleport
 	name = "teleportation burst"
