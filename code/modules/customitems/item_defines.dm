@@ -1818,6 +1818,20 @@
 
 //ASDFLYY TOASTER BRAIN ENDS HERE
 
+///razeshit
+
+/obj/item/clothing/suit/hooded/wintercoat/coatwinterblue
+	name = "Blue winter coat"
+	desc = "Blue conmfy winter coat"
+	icon_state = "coatwinterblue"
+	item_state = "coatwinterblue"
+	hispania_icon = TRUE
+	allowed = list(/obj/item/flashlight, /obj/item/tank/emergency_oxygen, /obj/item/t_scanner, /obj/item/rcd)
+	hoodtype = /obj/item/clothing/head/winterhood/coatwinterblue
+
+/obj/item/clothing/head/winterhood/coatwinterblue
+	icon_state = "winterhood_blue"
+///
 
 //MELTYAS LENNOX SUITS START HERE
 

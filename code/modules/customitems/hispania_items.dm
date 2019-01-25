@@ -250,7 +250,23 @@
 	armor = list(melee = 50, bullet = 40, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	hispania_icon = TRUE
 
+
 //MELTYAS LENNOX SUITS ENDS HERE
+
+///razeshit
+
+/obj/item/clothing/suit/hooded/wintercoat/coatwinterblue3
+	name = "Blue winter coat"
+	desc = "Blue conmfy winter coat"
+	icon_state = "coatwinterblue"
+	item_state = "coatwinterblue"
+	hispania_icon = TRUE
+	allowed = list(/obj/item/flashlight, /obj/item/tank/emergency_oxygen, /obj/item/t_scanner, /obj/item/rcd)
+	hoodtype = /obj/item/clothing/head/winterhood/coatwinterblue3
+
+/obj/item/clothing/head/winterhood/coatwinterblue3
+	icon_state = "winterhood_blue"
+
 
 // Funci?n de mierda que detecta cuando un pj entra a la estaci?n
 /mob/new_player/proc/start_player(mob/user)

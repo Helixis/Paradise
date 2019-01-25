@@ -1374,7 +1374,7 @@
 	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this free swag!;Why leave style up to fate? Use the ClothesMate!"
 	vend_delay = 15
 	vend_reply = "Thank you for using the ClothesMate!"
-	products = list(/obj/item/clothing/head/that=2,/obj/item/clothing/head/fedora=1,/obj/item/clothing/glasses/monocle=1,
+	products = list(/obj/item/clothing/suit/hooded/wintercoat/coatwinterblue=1,/obj/item/clothing/head/that=2,/obj/item/clothing/head/fedora=1,/obj/item/clothing/glasses/monocle=1,
 	/obj/item/clothing/under/suit_jacket/navy=2,/obj/item/clothing/under/kilt=1,/obj/item/clothing/under/overalls=1,
 	/obj/item/clothing/under/suit_jacket/really_black=2,/obj/item/clothing/under/pants/jeans=3,/obj/item/clothing/under/pants/classicjeans=2,
 	/obj/item/clothing/under/pants/camo = 1,/obj/item/clothing/under/pants/blackjeans=2,/obj/item/clothing/under/pants/khaki=2,
