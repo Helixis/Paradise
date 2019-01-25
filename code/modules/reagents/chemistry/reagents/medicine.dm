@@ -1032,16 +1032,16 @@
 	description = "Restores bruising. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 30
+	overdose_threshold = 20
 
 /datum/reagent/medicine/bicaridine/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustBruteLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustBruteLoss(-1.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/medicine/bicaridine/overdose_process(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustBruteLoss(4*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustBruteLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return list(0, update_flags)
 
 /datum/reagent/medicine/kelotane
@@ -1050,16 +1050,16 @@
 	description = "Restores fire damage. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 30
+	overdose_threshold = 20
 
 /datum/reagent/medicine/kelotane/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustFireLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustFireLoss(-1.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/medicine/kelotane/overdose_process(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustFireLoss(4*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustFireLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/medicine/tricordrazine
@@ -1068,22 +1068,22 @@
     description = "Has a high chance to heal all types of damage. Overdose instead causes it."
     reagent_state = LIQUID
     color = "#C8A5DC"
-    overdose_threshold = 30
+    overdose_threshold = 20
 
 /datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/M)
     var/update_flags = STATUS_UPDATE_NONE
-    update_flags |= M.adjustBruteLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustFireLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustToxLoss(-2* REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustOxyLoss(-2* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustBruteLoss(-1.8*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustFireLoss(-1.8*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustToxLoss(-1.5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustOxyLoss(-1.5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
     return ..() | update_flags
 
 /datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
     var/update_flags = STATUS_UPDATE_NONE
-    update_flags |= M.adjustBruteLoss(5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustFireLoss(5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustToxLoss(5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
-    update_flags |= M.adjustOxyLoss(5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustBruteLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustFireLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustToxLoss(3* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustOxyLoss(3* REAGENTS_EFFECT_MULTIPLIER, FALSE)
     return list(0, update_flags)
 
 /datum/reagent/medicine/antitoxin
@@ -1092,7 +1092,7 @@
     description = "Heals toxin damage. Overdose causes toxin damage."
     reagent_state = LIQUID
     color = "#C8A5DC"
-    overdose_threshold = 30
+    overdose_threshold = 35
 
 /datum/reagent/medicine/antitoxin/on_mob_life(mob/living/M)
     var/update_flags = STATUS_UPDATE_NONE
@@ -1101,7 +1101,7 @@
 
 /datum/reagent/medicine/antitoxin/overdose_process(mob/living/M)
     var/update_flags = STATUS_UPDATE_NONE
-    update_flags |= M.adjustToxLoss(4*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustToxLoss(2.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
     return list(0, update_flags)
 
 //////

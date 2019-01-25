@@ -281,27 +281,27 @@
     id = "tricordrazine"
     result = "tricordrazine"
     required_reagents = list("bicaridine" = 1, "kelotane" = 1, "antitoxin" = 1, "ethanol" = 1)
-    result_amount = 2
+    result_amount = 3
 
 /datum/chemical_reaction/bicaridine
     name = "Bicaridine"
     id = "bicaridine"
     result = "bicaridine"
-    required_reagents = list("carbon" = 1, "oxygen" = 1, "sugar" = 1)
+    required_reagents = list("carbon" = 1, "oxygen" = 1, "sugar" = 1, "ethanol" = 2)
     result_amount = 3
 
 /datum/chemical_reaction/kelotane
     name = "Kelotane"
     id = "kelotane"
     result = "kelotane"
-    required_reagents = list("carbon" = 1, "silicon" = 1)
+    required_reagents = list("carbon" = 1, "silicon" = 1, "chlorine" = 1)
     result_amount = 2
 
 /datum/chemical_reaction/antitoxin
     name = "Anti-toxin"
     id = "antitoxin"
     result = "antitoxin"
-    required_reagents = list("nitrogen" = 1, "silicon" = 1, "potassium" = 1)
+    required_reagents = list("nitrogen" = 1, "silicon" = 1, "potassium" = 1, "ethanol" = 1)
     result_amount = 3
 
 ///////
