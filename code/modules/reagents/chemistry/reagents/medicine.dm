@@ -1024,7 +1024,7 @@
 	return ..() | update_flags
 
 
-
+///Medicinas de TG
 //Trek-Chems. DO NOT USE THES OUTSIDE OF BOTANY OR FOR VERY SPECIFIC PURPOSES. NEVER GIVE A RECIPE UNDER ANY CIRCUMSTANCES//
 /datum/reagent/medicine/bicaridine
 	name = "Bicaridine"
@@ -1062,6 +1062,49 @@
 	update_flags |= M.adjustFireLoss(4*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
+/datum/reagent/medicine/tricordrazine
+    name = "Tricordrazine"
+    id = "tricordrazine"
+    description = "Has a high chance to heal all types of damage. Overdose instead causes it."
+    reagent_state = LIQUID
+    color = "#C8A5DC"
+    overdose_threshold = 30
+
+/datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/M)
+    var/update_flags = STATUS_UPDATE_NONE
+    update_flags |= M.adjustBruteLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustFireLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustToxLoss(-2* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustOxyLoss(-2* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    return ..() | update_flags
+
+/datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
+    var/update_flags = STATUS_UPDATE_NONE
+    update_flags |= M.adjustBruteLoss(5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustFireLoss(5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustToxLoss(5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    update_flags |= M.adjustOxyLoss(5* REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    return list(0, update_flags)
+
+/datum/reagent/medicine/antitoxin
+    name = "Anti-Toxin"
+    id = "antitoxin"
+    description = "Heals toxin damage. Overdose causes toxin damage."
+    reagent_state = LIQUID
+    color = "#C8A5DC"
+    overdose_threshold = 30
+
+/datum/reagent/medicine/antitoxin/on_mob_life(mob/living/M)
+    var/update_flags = STATUS_UPDATE_NONE
+    update_flags |= M.adjustToxLoss(-1.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    return ..() | update_flags
+
+/datum/reagent/medicine/antitoxin/overdose_process(mob/living/M)
+    var/update_flags = STATUS_UPDATE_NONE
+    update_flags |= M.adjustToxLoss(4*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+    return list(0, update_flags)
+
+//////
 
 /datum/reagent/medicine/earthsblood //Created by ambrosia gaia plants
 	name = "Earthsblood"
