@@ -15,8 +15,8 @@
 	skinned_type = /obj/item/stack/sheet/metal // Let's grind up IPCs for station resources!
 
 	eyes = "blank_eyes"
-	brute_mod = 2.28 // 100% * 2.28 * 0.66 (robolimbs) ~= 150%
-	burn_mod = 2.28  // So they take 50% extra damage from brute/burn overall
+	brute_mod = 1.95 // 100% * 2.28 * 0.66 (robolimbs) ~= 150% ///Raze nerf:  100% * 1.95 * 0.59 = 116%///
+	burn_mod = 1.95  // So they take 50% extra damage from brute/burn overall /// Raze nerf: toman un 38% mas de dmg bruto/quemado
 	tox_mod = 0
 	clone_mod = 0
 	oxy_mod = 0

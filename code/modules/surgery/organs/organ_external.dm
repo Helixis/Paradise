@@ -635,8 +635,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	..()
 	//robot limbs take reduced damage
 	if(!make_tough)
-		brute_mod = 0.66
-		burn_mod = 0.66
+		brute_mod = 0.59 ///antes estaba a 0.66
+		burn_mod = 0.59
 		dismember_at_max_damage = TRUE
 	else
 		tough = TRUE
