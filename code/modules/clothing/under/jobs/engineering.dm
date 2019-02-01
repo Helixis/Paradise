@@ -9,6 +9,14 @@
 	flags_size = ONESIZEFITSALL
 	burn_state = FIRE_PROOF
 
+/obj/item/clothing/under/rank/chief_engineer/brown
+	desc = "It's a high visibility jumpsuit given to those engineers insane enough to achieve the rank of \"Chief engineer\". It has minor radiation shielding."
+	name = "chief engineer's worksuit"
+	icon_state = "chiefworksuit"
+	item_state = "chiefworksuit"
+	item_color = "chiefworksuit"
+	hispania_icon = TRUE
+
 /obj/item/clothing/under/rank/chief_engineer/skirt
 	desc = "It's a high visibility jumpskirt given to those engineers insane enough to achieve the rank of \"Chief engineer\". It has minor radiation shielding."
 	name = "chief engineer's jumpskirt"

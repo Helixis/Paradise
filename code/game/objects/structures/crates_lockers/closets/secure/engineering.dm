@@ -19,6 +19,7 @@
 	new /obj/item/areaeditor/blueprints(src)
 	new /obj/item/storage/box/permits(src)
 	new /obj/item/clothing/under/rank/chief_engineer(src)
+	new /obj/item/clothing/under/rank/chief_engineer/brown(src)
 	new /obj/item/clothing/under/rank/chief_engineer/skirt(src)
 	new /obj/item/clothing/head/hardhat/white(src)
 	new /obj/item/clothing/glasses/welding/superior(src)
