@@ -1,3 +1,12 @@
+
+///Hispania food
+
+
+
+//////////////////////
+//	  Mug Cakes		//
+//////////////////////
+
 /obj/item/reagent_containers/food/snacks/mugcake
 	name = "Mugcake"
 	desc = "A delicious and spongy little cake inside a coffee mug."
@@ -70,12 +79,12 @@
 	filling_color = "#F40909"
 	list_reagents = list("nutriment" = 7, "psilocybin" = 1, "amanitin" = 1)
 
+///empanadas by Soulster
 
-/obj/item/reagent_containers/food/snacks/macacosoup
-	name = "Macaco Soup"
-	desc = "Uma delicia"
+/obj/item/reagent_containers/food/snacks/empanada
+	name = "Empanada"
+	desc = "A meaty goodness"
 	icon = 'icons/hispania/obj/food/food.dmi'
-	icon_state = "macacosoup"
-	trash = /obj/item/trash/snack_bowl
-	bitesize = 5
-	list_reagents = list("nutriment" = 7, "vitamin" = 2)
+	icon_state = "empanada"
+	bitesize = 3
+	list_reagents = list("nutriment" = 3, "vitamin" = 2)

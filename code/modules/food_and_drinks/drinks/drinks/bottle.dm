@@ -249,6 +249,7 @@
 	volume = 50
 	list_reagents = list("suicider" = 50)
 
+
 //////////////////////////JUICES AND STUFF ///////////////////////
 
 /obj/item/reagent_containers/food/drinks/bottle/orangejuice
@@ -357,3 +358,4 @@
 		to_chat(user, "<span class='info'>You snuff out the flame on \the [src].</span>")
 		overlays -= fire_overlay
 		active = 0
+
