@@ -64,6 +64,7 @@
 	new /obj/item/clothing/under/rank/research_director(src)
 	new /obj/item/clothing/suit/storage/labcoat(src)
 	new /obj/item/cartridge/rd(src)
+	new /obj/item/clothing/suit/storage/labcoat/RDlargeroundcutdark(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/gloves/color/latex(src)
 	new /obj/item/radio/headset/heads/rd(src)
