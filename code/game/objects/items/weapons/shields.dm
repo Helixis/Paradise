@@ -5,7 +5,7 @@
 
 /obj/item/shield/hit_reaction(mob/living/carbon/human/owner, attack_text, final_block_chance, damage, attack_type)
 	if(attack_type == THROWN_PROJECTILE_ATTACK)
-		final_block_chance += 30
+		final_block_chance += 33
 	if(attack_type == LEAP_ATTACK)
 		final_block_chance = 100
 	return ..()
