@@ -242,6 +242,7 @@
 	icon_state = "plasmacutter"
 	damage_type = BRUTE
 	damage = 5
+	forcedodge = 1
 	range = 3
 	dismemberment = 20
 
@@ -262,16 +263,14 @@
 	if(istype(target, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = target
 		M.gets_drilled(firer)
-		Range()
-		if(range > 0)
-			return -1
 
 /obj/item/projectile/plasma/adv
 	range = 5
+	damage = 7
 
 /obj/item/projectile/plasma/adv/mech
 	damage = 10
-	range = 6
+	range = 7
 
 /obj/item/projectile/energy/teleport
 	name = "teleportation burst"

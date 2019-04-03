@@ -976,7 +976,7 @@
 	build_type = MECHFAB
 	req_tech = list("engineering" = 3, "materials" = 3, "plasmatech" = 4)
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma
-	materials = list(MAT_METAL = 8000, MAT_GLASS = 1000, MAT_PLASMA = 2000)
+	materials = list(MAT_METAL = 8000, MAT_GLASS = 1000, MAT_PLASMA = 8500)
 	construction_time = 100
 	category = list("Exosuit Equipment")
 
