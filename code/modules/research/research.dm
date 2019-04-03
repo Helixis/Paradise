@@ -219,18 +219,21 @@ research holder datum.
 	name = "Materials Research"
 	desc = "Development of new and improved materials."
 	id = "materials"
+	level = 2
 	max_level = 7
 
 /datum/tech/engineering
 	name = "Engineering Research"
 	desc = "Development of new and improved engineering parts and methods."
 	id = "engineering"
+	level = 2
 	max_level = 7
 
 /datum/tech/plasmatech
 	name = "Plasma Research"
 	desc = "Research into the mysterious substance colloqually known as 'plasma'."
 	id = "plasmatech"
+	level = 2
 	max_level = 7
 	rare = 3
 
@@ -238,12 +241,14 @@ research holder datum.
 	name = "Power Manipulation Technology"
 	desc = "The various technologies behind the storage and generation of electicity."
 	id = "powerstorage"
+	level = 2
 	max_level = 7
 
 /datum/tech/bluespace
 	name = "'Blue-space' Research"
 	desc = "Research into the sub-reality known as 'blue-space'."
 	id = "bluespace"
+	level = 2
 	max_level = 7
 	rare = 2
 
@@ -251,24 +256,28 @@ research holder datum.
 	name = "Biological Technology"
 	desc = "Research into the deeper mysteries of life and organic substances."
 	id = "biotech"
+	level = 2
 	max_level = 7
 
 /datum/tech/combat
 	name = "Combat Systems Research"
 	desc = "The development of offensive and defensive systems."
 	id = "combat"
+	level = 2
 	max_level = 7
 
 /datum/tech/magnets
 	name = "Electromagnetic Spectrum Research"
 	desc = "Research into the electromagnetic spectrum. No clue how they actually work, though."
 	id = "magnets"
+	level = 2
 	max_level = 7
 
 /datum/tech/programming
 	name = "Data Theory Research"
 	desc = "The development of new computer and artificial intelligence and data storage systems."
 	id = "programming"
+	level = 2
 	max_level = 7
 
 /datum/tech/toxins //not meant to be raised by deconstruction, do not give objects toxins as an origin_tech
