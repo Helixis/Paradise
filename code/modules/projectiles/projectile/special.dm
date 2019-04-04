@@ -266,7 +266,7 @@
 
 /obj/item/projectile/plasma/adv
 	range = 5
-	damage = 7
+	damage = 6
 
 /obj/item/projectile/plasma/adv/mech
 	damage = 10
