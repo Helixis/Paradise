@@ -262,9 +262,9 @@
 	if(istype(target, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = target
 		M.gets_drilled(firer)
-        forcedodge = 1
-        else
-          forcedodge = 0
+		forcedodge = 1
+	else
+		forcedodge = 0
 
 /obj/item/projectile/plasma/adv
 	range = 5
