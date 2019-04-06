@@ -255,7 +255,6 @@
 		if(pressure < 30)
 			name = "full strength plasma blast"
 			damage *= 3
-			forcedodge = 1
 	..()
 
 /obj/item/projectile/plasma/on_hit(atom/target)
@@ -263,6 +262,9 @@
 	if(istype(target, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = target
 		M.gets_drilled(firer)
+        forcedodge = 1
+        else
+          forcedodge = 0
 
 /obj/item/projectile/plasma/adv
 	range = 5
