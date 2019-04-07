@@ -5658,7 +5658,7 @@
 "ceP" = (/obj/machinery/light_switch{pixel_x = 27},/turf/simulated/floor/wood,/area/ntrep)
 "ceQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plasteel{icon_state = "white"},/area/crew_quarters/hor)
 "ceR" = (/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/administration)
-"ceS" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/structure/rack,/obj/item/storage/toolbox/mechanical{step_x = 0; step_y = 0; pixel_x = 0; pixel_y = 0},/obj/item/storage/belt/utility{step_x = 0; step_y = 0},/turf/simulated/floor/plasteel{dir = 2; icon_state = "cafeteria"; tag = "icon-cafeteria (NORTHEAST)"},/area/crew_quarters/hor)
+"ceS" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/structure/rack,/obj/item/storage/toolbox/mechanical{step_x = 0; step_y = 0; pixel_x = 0; pixel_y = 0},/obj/item/storage/belt/utility{step_x = 0; step_y = 0},/obj/item/multitool{pixel_x = 3},/turf/simulated/floor/plasteel{dir = 2; icon_state = "cafeteria"; tag = "icon-cafeteria (NORTHEAST)"},/area/crew_quarters/hor)
 "ceT" = (/obj/machinery/door/airlock/centcom{id_tag = "adminshuttle"; name = "Medbay"; opacity = 1; req_access_txt = "103"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/shuttle/administration)
 "ceU" = (/obj/structure/shuttle/engine/propulsion,/turf/space,/area/shuttle/supply)
 "ceV" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-burst_l"; icon_state = "burst_l"},/turf/space,/area/shuttle/supply)
