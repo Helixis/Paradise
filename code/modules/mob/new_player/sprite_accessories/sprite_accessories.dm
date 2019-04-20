@@ -611,3 +611,8 @@
 /datum/sprite_accessory/socks/black_fishnet
 	name = "Black Fishnet"
 	icon_state = "black_fishnet"
+
+/datum/sprite_accessory/hair/hispania/Jojo
+	icon = 'icons/hispania/mob/sprite_accessories/human/human_hair.dmi'
+	name = "Jojonster"
+	icon_state = "gangs"
