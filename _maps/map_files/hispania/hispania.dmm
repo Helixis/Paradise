@@ -97071,6 +97071,7 @@
 	name = "Sciences sitting room";
 	req_access_txt = "47"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/medical/research{
 	name = "Research Division"
