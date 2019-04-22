@@ -52664,8 +52664,7 @@
 	name = "Surgery Cleaner"
 	},
 /turf/simulated/floor/plasteel{
-	icon_state = "whitehall";
-	dir = 4
+	icon_state = "white"
 	},
 /area/assembly/robotics)
 "bSK" = (
@@ -54331,8 +54330,9 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitecorner"
+	tag = "icon-whitepurple (NORTH)";
+	icon_state = "whitepurple";
+	dir = 1
 	},
 /area/assembly/robotics)
 "bVE" = (
@@ -96642,6 +96642,13 @@
 /area/medical/research{
 	name = "Research Division"
 	})
+"gfB" = (
+/turf/simulated/floor/plasteel{
+	tag = "icon-whitepurple (NORTH)";
+	icon_state = "whitepurple";
+	dir = 1
+	},
+/area/assembly/robotics)
 "gvq" = (
 /obj/structure/chair/comfy/black{
 	color = "#800080";
@@ -97107,8 +97114,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "whitecorner"
+	icon_state = "white"
 	},
 /area/assembly/robotics)
 "rlO" = (
@@ -97195,7 +97201,11 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/plasteel,
+/turf/simulated/floor/plasteel{
+	tag = "icon-whitepurple (NORTH)";
+	icon_state = "whitepurple";
+	dir = 1
+	},
 /area/assembly/robotics)
 "ugs" = (
 /obj/structure/chair/comfy/blue{
@@ -141143,7 +141153,7 @@ qbh
 bNi
 bPo
 bPo
-bPo
+gfB
 bSJ
 bIa
 caj
@@ -141400,7 +141410,7 @@ bPa
 bRy
 bPo
 bPo
-bId
+gfB
 crH
 bIa
 cad
@@ -141657,7 +141667,7 @@ bLL
 bRs
 bTX
 bPo
-bId
+gfB
 bUF
 bIa
 cal
