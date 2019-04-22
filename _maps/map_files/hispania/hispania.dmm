@@ -45443,7 +45443,6 @@
 /area/medical/chemistry)
 "bGw" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/reagent_containers/glass/beaker/sulphuric,
 /turf/simulated/floor/plasteel{
 	icon_state = "white"
 	},
@@ -48648,7 +48647,6 @@
 	pixel_x = 3;
 	pixel_y = 5
 	},
-/obj/item/reagent_containers/glass/beaker/sulphuric,
 /obj/effect/decal/warning_stripes/southeast,
 /turf/simulated/floor/plasteel,
 /area/toxins/lab)
@@ -96515,7 +96513,9 @@
 	icon_state = "whitepurple";
 	dir = 10
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "dVg" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -96535,14 +96535,18 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "ecq" = (
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (NORTHWEST)";
 	icon_state = "whitepurple";
 	dir = 9
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "esQ" = (
 /obj/structure/chair/comfy/black{
 	color = "#008000";
@@ -96553,7 +96557,9 @@
 	icon_state = "whitepurple";
 	dir = 4
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "etr" = (
 /obj/machinery/vending/snack,
 /obj/machinery/light{
@@ -96564,7 +96570,9 @@
 	icon_state = "whitepurple";
 	dir = 8
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "ewE" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -96581,7 +96589,9 @@
 	icon_state = "whitepurple";
 	dir = 5
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "eQw" = (
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/plasteel{
@@ -96589,7 +96599,9 @@
 	icon_state = "whitepurple";
 	dir = 9
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "fec" = (
 /obj/machinery/requests_console{
 	department = "Science";
@@ -96602,7 +96614,9 @@
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "fNn" = (
 /obj/machinery/camera{
 	c_tag = "Sciences sitting room";
@@ -96615,7 +96629,9 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "fPG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel{
@@ -96623,7 +96639,9 @@
 	icon_state = "whitepurple";
 	dir = 4
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "gvq" = (
 /obj/structure/chair/comfy/black{
 	color = "#800080";
@@ -96634,7 +96652,9 @@
 	icon_state = "whitepurple";
 	dir = 8
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "gHP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -96643,7 +96663,9 @@
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "gMl" = (
 /obj/machinery/light/small,
 /turf/simulated/floor/engine,
@@ -96683,7 +96705,9 @@
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "hsy" = (
 /obj/machinery/atmospherics/pipe/simple/insulated{
 	dir = 4
@@ -96717,9 +96741,6 @@
 /area/medical/research{
 	name = "Research Division"
 	})
-"hOA" = (
-/turf/simulated/wall/r_wall,
-/area/space)
 "hQk" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -96812,7 +96833,9 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "kFl" = (
 /obj/machinery/slot_machine,
 /turf/simulated/floor/plasteel{
@@ -96820,7 +96843,9 @@
 	icon_state = "whitepurple";
 	dir = 5
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "kLv" = (
 /obj/machinery/vending/coffee,
 /turf/simulated/floor/plasteel{
@@ -96828,7 +96853,9 @@
 	icon_state = "whitepurple";
 	dir = 8
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "kOE" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 4
@@ -96855,7 +96882,9 @@
 	icon_state = "whitepurple";
 	dir = 4
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "lnq" = (
 /obj/machinery/light/small{
 	tag = "icon-bulb1 (EAST)";
@@ -96901,14 +96930,18 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "msG" = (
 /obj/machinery/light,
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "mXU" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -96927,7 +96960,9 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "nfR" = (
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -96962,7 +96997,9 @@
 	icon_state = "whitepurple";
 	dir = 1
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "owI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -97006,7 +97043,9 @@
 "oIe" = (
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "pmV" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -97026,7 +97065,9 @@
 	req_access_txt = "47"
 	},
 /turf/simulated/floor/plating,
-/area/toxins/xenobiology)
+/area/medical/research{
+	name = "Research Division"
+	})
 "pFt" = (
 /obj/machinery/computer/security/telescreen/entertainment{
 	pixel_x = 32
@@ -97039,7 +97080,9 @@
 	icon_state = "whitepurple";
 	dir = 6
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "pZO" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
@@ -97075,14 +97118,18 @@
 	icon_state = "whitepurple";
 	dir = 10
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "rrG" = (
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (SOUTHEAST)";
 	icon_state = "whitepurple";
 	dir = 6
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "rYj" = (
 /obj/machinery/vending/chinese,
 /obj/machinery/light{
@@ -97093,7 +97140,9 @@
 	icon_state = "whitepurple";
 	dir = 8
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "stN" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -97113,7 +97162,9 @@
 	icon_state = "whitepurplefull";
 	tag = "icon-whitepurple (WEST)"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "tNU" = (
 /obj/machinery/recharge_station,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -97154,7 +97205,9 @@
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "umw" = (
 /obj/machinery/door/poddoor{
 	density = 0;
@@ -97227,7 +97280,9 @@
 	dir = 2;
 	icon_state = "whitepurple"
 	},
-/area/space)
+/area/medical/research{
+	name = "Research Division"
+	})
 "xAw" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
@@ -140853,11 +140908,11 @@ crL
 cpR
 cxO
 cAe
-cep
+bPt
 oIe
-hOA
+bPt
 oIe
-hOA
+bPt
 oIe
 cep
 cep
@@ -141110,7 +141165,7 @@ cwm
 cpR
 cxR
 cAd
-cep
+bPt
 eQw
 etr
 kLv
@@ -141367,7 +141422,7 @@ cpR
 cxI
 cxO
 cpH
-cep
+bPt
 fNn
 ecq
 gvq
@@ -141624,7 +141679,7 @@ cpR
 cpH
 cxO
 cep
-cep
+bPt
 jIO
 oau
 sGf
@@ -141881,7 +141936,7 @@ bIi
 cpI
 cxO
 cep
-hOA
+bPt
 lWA
 oau
 sGf
@@ -142137,8 +142192,8 @@ cuV
 bIi
 cxi
 cxT
-cBQ
-hOA
+cBP
+bPt
 dVg
 oau
 sGf
@@ -142394,8 +142449,8 @@ cvF
 bIi
 cxU
 cxT
-cBQ
-hOA
+cBP
+bPt
 mXU
 ewE
 esQ
@@ -142652,7 +142707,7 @@ bIi
 cxM
 cxT
 cBP
-hOA
+bPt
 kFl
 ljY
 fPG
