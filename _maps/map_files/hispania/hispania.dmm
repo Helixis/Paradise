@@ -54696,9 +54696,7 @@
 	},
 /obj/structure/reagent_dispensers/oil,
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "bWd" = (
 /turf/simulated/wall,
 /area/medical/genetics_cloning)
@@ -57261,11 +57259,6 @@
 	icon_state = "freezerfloor"
 	},
 /area/medical/genetics_cloning)
-"cab" = (
-/turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
 "cac" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -58517,9 +58510,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/wall,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "ccf" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -96703,9 +96694,7 @@
 /obj/machinery/recharge_station,
 /obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "hrT" = (
 /obj/item/radio/intercom{
 	dir = 1;
@@ -96749,9 +96738,7 @@
 	},
 /obj/machinery/cryopod/robot,
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "hQk" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -96828,9 +96815,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "jIO" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -96869,6 +96854,9 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
+"kSI" = (
+/turf/simulated/floor/bluegrid,
+/area/assembly/chargebay)
 "ljY" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -96987,9 +96975,7 @@
 	d2 = 2
 	},
 /turf/simulated/floor/plating,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "nMi" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
@@ -97143,9 +97129,7 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "sGf" = (
 /obj/structure/table,
 /turf/simulated/floor/plasteel{
@@ -97238,9 +97222,7 @@
 "vgM" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
+/area/assembly/chargebay)
 "viR" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -139856,8 +139838,8 @@ bLE
 bHX
 bLE
 bQK
-bHX
-bHX
+kSI
+kSI
 bWj
 vgM
 bWc
@@ -140116,7 +140098,7 @@ bQK
 bVz
 bHX
 bHX
-cab
+bHX
 stN
 cbd
 ceI
@@ -140373,7 +140355,7 @@ bQN
 bVC
 bRU
 viR
-cab
+bHX
 jwi
 cbd
 ccV
