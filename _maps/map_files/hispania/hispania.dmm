@@ -67724,7 +67724,10 @@
 /area/toxins/explab)
 "crj" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/area_atmos,
+/obj/machinery/computer/area_atmos{
+	range = 30;
+	zone = "This computer is working on a wireless range, the range is currently limited to 30 meters."
+	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
@@ -96753,6 +96756,18 @@
 	icon_state = "white"
 	},
 /area/toxins/xenobiology)
+"iwx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "izn" = (
 /obj/machinery/atmospherics/unary/passive_vent{
 	dir = 1
@@ -96921,6 +96936,9 @@
 /area/medical/research{
 	name = "Research Division"
 	})
+"moH" = (
+/turf/simulated/floor/bluegrid,
+/area/assembly/chargebay)
 "msG" = (
 /obj/machinery/light,
 /turf/simulated/floor/plasteel{
@@ -97095,18 +97113,6 @@
 	icon_state = "white"
 	},
 /area/assembly/robotics)
-"rlf" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
-/turf/simulated/floor/plasteel,
-/area/toxins/storage)
 "rlO" = (
 /obj/machinery/vending/cola,
 /turf/simulated/floor/plasteel{
@@ -97182,18 +97188,6 @@
 	dir = 1
 	},
 /area/assembly/robotics)
-"ueY" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8";
-	tag = ""
-	},
-/turf/simulated/floor/plasteel,
-/area/toxins/storage)
 "ugs" = (
 /obj/structure/chair/comfy/blue{
 	dir = 1
@@ -97237,9 +97231,6 @@
 	},
 /turf/space,
 /area/space)
-"vde" = (
-/turf/simulated/floor/bluegrid,
-/area/assembly/chargebay)
 "vgM" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -97285,6 +97276,18 @@
 /area/medical/research{
 	name = "Research Division"
 	})
+"wHT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "xAw" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
@@ -139860,8 +139863,8 @@ bLE
 bHX
 bLE
 bQK
-vde
-vde
+moH
+moH
 bWj
 vgM
 bWc
@@ -142184,10 +142187,10 @@ ceK
 cjL
 clg
 clW
-ueY
+iwx
 coA
-rlf
-rlf
+wHT
+wHT
 csB
 bYm
 cuV
