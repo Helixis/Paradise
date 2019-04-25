@@ -54695,6 +54695,7 @@
 	pixel_y = 0
 	},
 /obj/structure/reagent_dispensers/oil,
+/obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/assembly/chargebay)
 "bWd" = (
@@ -54730,6 +54731,7 @@
 /area/medical/genetics)
 "bWj" = (
 /obj/structure/reagent_dispensers/watertank,
+/obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/assembly/chargebay)
 "bWk" = (
@@ -55400,7 +55402,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/turf/simulated/wall,
+/turf/simulated/wall/r_wall,
 /area/medical/genetics)
 "bXt" = (
 /obj/item/radio/intercom{
@@ -60109,9 +60111,10 @@
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
 "ceL" = (
-/obj/machinery/computer/area_atmos,
-/obj/effect/decal/warning_stripes/yellow/hollow,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_switch{
+	pixel_y = 28
+	},
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
 "ceM" = (
@@ -65204,6 +65207,16 @@
 "cnv" = (
 /obj/item/cigbutt,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24;
+	shock_proof = 0
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
 "cnw" = (
@@ -65886,6 +65899,12 @@
 	dir = 4;
 	initialize_directions = 11;
 	level = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
 	},
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
@@ -67703,33 +67722,10 @@
 	dir = 9
 	},
 /area/toxins/explab)
-"cri" = (
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8";
-	tag = ""
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plasteel,
-/area/toxins/storage)
 "crj" = (
-/obj/machinery/light_switch{
-	pixel_y = -23
-	},
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
-	},
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24;
-	shock_proof = 0
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer/area_atmos,
+/obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/toxins/storage)
 "crk" = (
@@ -96737,6 +96733,7 @@
 	pixel_y = 0
 	},
 /obj/machinery/cryopod/robot,
+/obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/assembly/chargebay)
 "hQk" = (
@@ -96854,9 +96851,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"kSI" = (
-/turf/simulated/floor/bluegrid,
-/area/assembly/chargebay)
 "ljY" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -97101,6 +97095,18 @@
 	icon_state = "white"
 	},
 /area/assembly/robotics)
+"rlf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "rlO" = (
 /obj/machinery/vending/cola,
 /turf/simulated/floor/plasteel{
@@ -97176,6 +97182,18 @@
 	dir = 1
 	},
 /area/assembly/robotics)
+"ueY" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "ugs" = (
 /obj/structure/chair/comfy/blue{
 	dir = 1
@@ -97219,8 +97237,12 @@
 	},
 /turf/space,
 /area/space)
+"vde" = (
+/turf/simulated/floor/bluegrid,
+/area/assembly/chargebay)
 "vgM" = (
 /obj/structure/reagent_dispensers/fueltank,
+/obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plasteel,
 /area/assembly/chargebay)
 "viR" = (
@@ -139584,7 +139606,7 @@ bQK
 bLE
 bLE
 bWi
-bWg
+bWi
 bXs
 cbd
 cbd
@@ -139838,8 +139860,8 @@ bLE
 bHX
 bLE
 bQK
-kSI
-kSI
+vde
+vde
 bWj
 vgM
 bWc
@@ -142162,10 +142184,10 @@ ceK
 cjL
 clg
 clW
-ceK
+ueY
 coA
-ceK
-cri
+rlf
+rlf
 csB
 bYm
 cuV
