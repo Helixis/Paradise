@@ -683,8 +683,6 @@
 ///////////////////////////////////
 //////END POLARIS HAIRSTYLES///////
 //////////////////////////////////
-<<<<<<< HEAD
-
 
 ///////////////////////////////////
 //////START HISPANIA HAIRSTYLES///
@@ -842,10 +840,6 @@
 //////////////////////////////////
 
 /datum/sprite_accessory/hair/hispania/Jojo
-	icon = 'icons/hispania/mob/sprite_accessories/human/human_hair.dmi'
+	icon = 'icons/mob/sprite_accessories/human/human_hair.dmi'
 	name = "Jojonster"
 	icon_state = "gangs"
-
-	///Cendal was here uwu
-=======
->>>>>>> upstream/master
