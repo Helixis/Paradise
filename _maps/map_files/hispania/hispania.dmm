@@ -74833,10 +74833,6 @@
 /obj/item/lipstick/jade,
 /turf/simulated/floor/plating,
 /area/maintenance/genetics)
-"cDq" = (
-/obj/effect/spawner/window/reinforced,
-/turf/simulated/floor/plating,
-/area/toxins/xenobiology)
 "cDr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -96504,7 +96500,7 @@
 	dir = 10
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "dVg" = (
 /obj/structure/cable{
@@ -96526,7 +96522,7 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "ecq" = (
 /turf/simulated/floor/plasteel{
@@ -96535,7 +96531,7 @@
 	dir = 9
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "esQ" = (
 /obj/structure/chair/comfy/black{
@@ -96548,7 +96544,7 @@
 	dir = 4
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "etr" = (
 /obj/machinery/light{
@@ -96560,7 +96556,7 @@
 	dir = 8
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "ewE" = (
 /obj/structure/cable{
@@ -96579,7 +96575,7 @@
 	dir = 5
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "eQw" = (
 /obj/machinery/vending/snack,
@@ -96589,7 +96585,7 @@
 	dir = 9
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "fec" = (
 /obj/machinery/requests_console{
@@ -96604,8 +96600,20 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
+"fuJ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "fNn" = (
 /obj/machinery/camera{
 	c_tag = "Sciences sitting room";
@@ -96623,7 +96631,7 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "fPG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -96633,7 +96641,7 @@
 	dir = 4
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "gfB" = (
 /turf/simulated/floor/plasteel{
@@ -96653,7 +96661,7 @@
 	dir = 8
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "gHP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -96665,7 +96673,7 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "gMl" = (
 /obj/machinery/light/small,
@@ -96705,7 +96713,7 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "hsy" = (
 /obj/machinery/atmospherics/pipe/simple/insulated{
@@ -96756,18 +96764,6 @@
 	icon_state = "white"
 	},
 /area/toxins/xenobiology)
-"iwx" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8";
-	tag = ""
-	},
-/turf/simulated/floor/plasteel,
-/area/toxins/storage)
 "izn" = (
 /obj/machinery/atmospherics/unary/passive_vent{
 	dir = 1
@@ -96838,17 +96834,17 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "kFl" = (
-/obj/machinery/slot_machine,
+/obj/machinery/vending/cola,
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (NORTHEAST)";
 	icon_state = "whitepurple";
 	dir = 5
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "kLv" = (
 /turf/simulated/floor/plasteel{
@@ -96857,7 +96853,7 @@
 	dir = 8
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "kOE" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -96886,7 +96882,7 @@
 	dir = 4
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "lnq" = (
 /obj/machinery/light/small{
@@ -96896,6 +96892,18 @@
 	},
 /turf/simulated/floor/engine,
 /area/toxins/xenobiology)
+"lEy" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
+	},
+/turf/simulated/floor/plasteel,
+/area/toxins/storage)
 "lQi" = (
 /obj/structure/table,
 /obj/item/stack/sheet/plasteel{
@@ -96934,11 +96942,8 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
-"moH" = (
-/turf/simulated/floor/bluegrid,
-/area/assembly/chargebay)
 "msG" = (
 /obj/machinery/light,
 /turf/simulated/floor/plasteel{
@@ -96946,7 +96951,7 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "mXU" = (
 /obj/structure/cable{
@@ -96967,7 +96972,7 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "nfR" = (
 /obj/machinery/disposal,
@@ -97002,7 +97007,7 @@
 	dir = 1
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "owI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -97048,7 +97053,7 @@
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "pmV" = (
 /obj/structure/cable{
@@ -97071,7 +97076,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
+	})
+"psn" = (
+/turf/simulated/wall/r_wall,
+/area/medical/research{
+	name = "Sciences sitting room"
 	})
 "pFt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -97084,7 +97094,7 @@
 	dir = 6
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "pZO" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -97114,14 +97124,14 @@
 	},
 /area/assembly/robotics)
 "rlO" = (
-/obj/machinery/vending/cola,
+/obj/machinery/vending/cigarette,
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (SOUTHWEST)";
 	icon_state = "whitepurple";
 	dir = 10
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "rrG" = (
 /turf/simulated/floor/plasteel{
@@ -97130,7 +97140,7 @@
 	dir = 6
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "stN" = (
 /obj/structure/cable{
@@ -97150,7 +97160,7 @@
 	tag = "icon-whitepurple (WEST)"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "tNU" = (
 /obj/machinery/recharge_station,
@@ -97197,7 +97207,7 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
 "umw" = (
 /obj/machinery/door/poddoor{
@@ -97231,6 +97241,9 @@
 	},
 /turf/space,
 /area/space)
+"uJA" = (
+/turf/simulated/floor/bluegrid,
+/area/assembly/chargebay)
 "vgM" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -97274,20 +97287,8 @@
 	icon_state = "whitepurple"
 	},
 /area/medical/research{
-	name = "Research Division"
+	name = "Sciences sitting room"
 	})
-"wHT" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
-/turf/simulated/floor/plasteel,
-/area/toxins/storage)
 "xAw" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
@@ -139863,8 +139864,8 @@ bLE
 bHX
 bLE
 bQK
-moH
-moH
+uJA
+uJA
 bWj
 vgM
 bWc
@@ -140913,11 +140914,11 @@ crL
 cpR
 cxO
 cAe
-bPt
+psn
 oIe
-bPt
+psn
 oIe
-bPt
+psn
 oIe
 cep
 cep
@@ -141170,7 +141171,7 @@ cwm
 cpR
 cxR
 cAd
-bPt
+psn
 eQw
 etr
 kLv
@@ -141427,7 +141428,7 @@ cpR
 cxI
 cxO
 cpH
-bPt
+psn
 fNn
 ecq
 gvq
@@ -141684,7 +141685,7 @@ cpR
 cpH
 cxO
 cep
-bPt
+psn
 jIO
 oau
 sGf
@@ -141941,7 +141942,7 @@ bIi
 cpI
 cxO
 cep
-bPt
+psn
 lWA
 oau
 sGf
@@ -142187,10 +142188,10 @@ ceK
 cjL
 clg
 clW
-iwx
+fuJ
 coA
-wHT
-wHT
+lEy
+lEy
 csB
 bYm
 cuV
@@ -142198,7 +142199,7 @@ bIi
 cxi
 cxT
 cBP
-bPt
+psn
 dVg
 oau
 sGf
@@ -142455,7 +142456,7 @@ bIi
 cxU
 cxT
 cBP
-bPt
+psn
 mXU
 ewE
 esQ
@@ -142712,7 +142713,7 @@ bIi
 cxM
 cxT
 cBP
-bPt
+psn
 kFl
 ljY
 fPG
@@ -142970,9 +142971,9 @@ cxN
 cyu
 cBR
 cBR
-cDq
+oIe
 pmV
-cDq
+oIe
 cBS
 cBR
 cBR
