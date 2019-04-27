@@ -31400,7 +31400,7 @@
 /obj/machinery/door/airlock/command/glass{
 	name = "E.V.A.";
 	req_access_txt = "0";
-	req_one_access_txt = "18"
+	req_one_access_txt = "19"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -32455,7 +32455,7 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "E.V.A. Maintenance";
 	req_access_txt = "0";
-	req_one_access_txt = "18"
+	req_one_access_txt = "19"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -35399,7 +35399,7 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "E.V.A. Maintenance";
 	req_access_txt = "0";
-	req_one_access_txt = "18"
+	req_one_access_txt = "19"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -57140,7 +57140,7 @@
 	normaldoorcontrol = 1;
 	pixel_x = -4;
 	pixel_y = -4;
-	req_access_txt = "20"
+	req_access_txt = "30"
 	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
