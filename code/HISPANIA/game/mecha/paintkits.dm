@@ -14,7 +14,7 @@
 	icon_state = "paintkit_2"
 
 	new_name = "APLU \"Griffin\" kit"
-	new_desc = "This is Griffin mech!"
+	new_desc = "The mech of The Griffin, the ultimate supervillain! The station will tremble under your feet (or maybe not)."
 	new_icon2 = 'icons/hispania/mecha/ripley_griffin.dmi'
 	allowed_types = list("ripley","firefighter")
 
@@ -23,7 +23,7 @@
 	desc = "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
 
 	new_name = "APLU \"Death\" kit"
-	new_desc = "A recolorized ordinary APLU"
+	new_desc = "A APLU of a dubious red tone. Make your co-workers look at you with suspicion!"
 	new_icon2 = 'icons/hispania/mecha/ripley_death.dmi'
 	allowed_types = list("ripley","firefighter")
 
@@ -32,6 +32,6 @@
 	desc = "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
 
 	new_name = "APLU \"Black\" kit"
-	new_desc = "A recolorized ordinary APLU"
+	new_desc = "A darkest night-colored APLU. Make your co-workers, for a few seconds, think that you're related to sec in some way."
 	new_icon2 = 'icons/hispania/mecha/ripley_black.dmi'
 	allowed_types = list("ripley","firefighter")
