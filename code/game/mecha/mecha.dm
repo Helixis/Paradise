@@ -878,9 +878,9 @@
 
 		user.visible_message("[user] opens [P] and spends some quality time customising [src].")
 
-//		name = P.new_name
+//		name = P.new_name  //quito esto para que se puedan diferenciar entre ripleys y firefigthers
 		desc = P.new_desc
-		icon = P.new_icon2
+		icon = P.new_icon2   //esto redirecciona al dmi correspondiente
 		initial_icon = P.new_icon
 		reset_icon()
 		icon_state = initial(icon_state)+"-open"
