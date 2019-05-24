@@ -878,10 +878,12 @@
 
 		user.visible_message("[user] opens [P] and spends some quality time customising [src].")
 
-		name = P.new_name
+//		name = P.new_name
 		desc = P.new_desc
+		icon = P.new_icon2
 		initial_icon = P.new_icon
 		reset_icon()
+		icon_state = initial(icon_state)+"-open"
 
 		user.drop_item()
 		qdel(P)
