@@ -881,7 +881,7 @@
 //		name = P.new_name  //quito esto para que se puedan diferenciar entre ripleys y firefigthers
 		desc = P.new_desc
 		icon = P.new_icon2   //esto redirecciona al dmi correspondiente
-		initial_icon = P.new_icon
+//		initial_icon = P.new_icon //quito esto porque es lo más inutil de la vida y buguea los paintkit hispania
 		reset_icon()
 		icon_state = initial(icon_state)+"-open"
 
