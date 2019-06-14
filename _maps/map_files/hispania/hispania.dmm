@@ -42372,7 +42372,9 @@
 /turf/simulated/floor/plasteel,
 /area/crew_quarters/locker)
 "bAc" = (
-/obj/structure/displaycase/captains_laser,
+/obj/structure/displaycase/captains_laser{
+	desc = "A display case for the captain's spare id. Hooked up with an anti-theft system."
+	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/captain)
 "bAd" = (
@@ -43054,9 +43056,10 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/captain)
 "bBE" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+/obj/structure/displaycase/captains_laser{
+	name = "Spare id's display case";
+	req_access = list(19);
+	start_showpiece_type = /obj/item/card/id/captains_spare
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/captain)
@@ -46015,7 +46018,6 @@
 	pixel_y = 4
 	},
 /obj/item/melee/chainofcommand,
-/obj/item/card/id/captains_spare,
 /turf/simulated/floor/wood,
 /area/crew_quarters/captain)
 "bHy" = (
@@ -48408,11 +48410,6 @@
 	})
 "bLS" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/brute{
-	pixel_x = 5;
-	pixel_y = 5
-	},
-/obj/item/storage/firstaid/brute,
 /obj/machinery/light{
 	dir = 1;
 	in_use = 1
@@ -48421,6 +48418,11 @@
 	dir = 2;
 	pixel_y = 24
 	},
+/obj/item/storage/firstaid/brute{
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/item/storage/firstaid/brute,
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitebluefull";
 	icon_state = "whitebluefull"
@@ -48448,7 +48450,7 @@
 	normaldoorcontrol = 1;
 	pixel_x = -4;
 	pixel_y = -4;
-	req_access_txt = "20"
+	req_access_txt = "30"
 	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
@@ -49074,11 +49076,6 @@
 /area/medical/biostorage)
 "bMY" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
-	pixel_x = 5;
-	pixel_y = 5
-	},
-/obj/item/storage/firstaid/regular,
 /obj/machinery/alarm{
 	pixel_y = 25
 	},
@@ -49087,6 +49084,11 @@
 	dir = 2;
 	network = list("SS13")
 	},
+/obj/item/storage/firstaid/regular{
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitebluefull";
 	icon_state = "whitebluefull"
@@ -88110,7 +88112,7 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "blue"
