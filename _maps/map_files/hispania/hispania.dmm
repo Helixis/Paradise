@@ -43057,6 +43057,7 @@
 /area/crew_quarters/captain)
 "bBE" = (
 /obj/structure/displaycase/captains_laser{
+	desc = "A display case for the captain's spare id. Hooked up with an anti-theft system.";
 	name = "Spare id's display case";
 	req_access = list(19);
 	start_showpiece_type = /obj/item/card/id/captains_spare
