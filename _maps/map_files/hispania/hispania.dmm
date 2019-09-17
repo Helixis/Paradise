@@ -1462,7 +1462,7 @@
 "aCf" = (/turf/simulated/floor/carpet,/area/magistrateoffice)
 "aCg" = (/obj/structure/table/wood,/obj/machinery/computer/secure_data/laptop,/obj/machinery/light{dir = 1},/turf/simulated/floor/plasteel{tag = "icon-cult"; icon_state = "cult"; dir = 2},/area/magistrateoffice)
 "aCh" = (/obj/effect/spawner/lootdrop/maintenance,/turf/simulated/floor/plating,/area/maintenance/fsmaint)
-"aCi" = (/obj/structure/table/reinforced,/obj/item/paper_bin,/obj/item/stamp/magistrate,/turf/simulated/floor/carpet,/area/magistrateoffice)
+"aCi" = (/obj/structure/table/reinforced,/obj/item/stamp/magistrate,/obj/item/paper_bin,/turf/simulated/floor/carpet,/area/magistrateoffice)
 "aCj" = (/turf/simulated/floor/plating,/obj/structure/shuttle/engine/propulsion/burst{dir = 8},/turf/simulated/shuttle/wall{tag = "icon-swall_f5"; icon_state = "swall_f5"; dir = 2},/area/shuttle/pod_3)
 "aCk" = (/obj/effect/spawner/window/reinforced,/obj/machinery/door/poddoor/shutters{density = 0; dir = 4; icon_state = "open"; id_tag = "magistrate"; name = "Magistrate Privacy Shutters"; opacity = 0},/turf/simulated/floor/plating,/area/magistrateoffice)
 "aCl" = (/obj/structure/closet/secure_closet/magistrate,/turf/simulated/floor/plasteel{tag = "icon-cult"; icon_state = "cult"; dir = 2},/area/magistrateoffice)
