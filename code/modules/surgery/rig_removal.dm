@@ -20,7 +20,8 @@
 	allowed_tools = list(
 		/obj/item/weldingtool = 80,
 		/obj/item/circular_saw = 60,
-		/obj/item/gun/energy/plasmacutter = 100
+		/obj/item/gun/energy/plasmacutter = 100,
+		/obj/item/scalpel/laser/manager/omnimanager = 100
 		)
 
 	can_infect = 0

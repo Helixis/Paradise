@@ -29,6 +29,7 @@
 	/obj/item/claymore = 6, \
 	/obj/item/melee/energy/ = 6, \
 	/obj/item/pen/edagger = 6,  \
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 16
@@ -61,7 +62,8 @@
 	/obj/item/scalpel/laser = 100, \
 	/obj/item/hemostat = 100,	\
 	/obj/item/stack/cable_coil = 90, 	\
-	/obj/item/assembly/mousetrap = 25
+	/obj/item/assembly/mousetrap = 25,	\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 24
@@ -95,7 +97,8 @@
 	/obj/item/scalpel/laser/manager = 100, \
 	/obj/item/retractor = 100, 	\
 	/obj/item/crowbar = 90,	\
-	/obj/item/kitchen/utensil/fork = 60
+	/obj/item/kitchen/utensil/fork = 60,	\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 24
@@ -151,7 +154,8 @@
 	/obj/item/cautery = 100,			\
 	/obj/item/clothing/mask/cigarette = 90,	\
 	/obj/item/lighter = 60,			\
-	/obj/item/weldingtool = 30
+	/obj/item/weldingtool = 30,	\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 24
@@ -181,7 +185,7 @@
 //drill bone
 /datum/surgery_step/generic/drill
 	name = "drill bone"
-	allowed_tools = list(/obj/item/surgicaldrill = 100, /obj/item/pickaxe/drill = 60, /obj/item/mecha_parts/mecha_equipment/drill = 60, /obj/item/screwdriver = 20)
+	allowed_tools = list(/obj/item/surgicaldrill = 100, /obj/item/pickaxe/drill = 60, /obj/item/mecha_parts/mecha_equipment/drill = 60, /obj/item/screwdriver = 20, /obj/item/scalpel/laser/manager/omnimanager = 100)
 	time = 30
 
 /datum/surgery_step/generic/drill/begin_step(mob/living/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -200,7 +204,8 @@
 	/obj/item/circular_saw = 100, \
 	/obj/item/melee/energy/sword/cyborg/saw = 100, \
 	/obj/item/hatchet = 90, \
-	/obj/item/melee/arm_blade = 75
+	/obj/item/melee/arm_blade = 75, \
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 100
