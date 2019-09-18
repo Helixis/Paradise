@@ -366,7 +366,8 @@
 		/obj/item/extinguisher/mini = 1,
 		/obj/item/roller = 1,
 		/obj/item/healthanalyzer/advanced = 1,
-		/obj/item/handheld_defibrillator = 1
+		/obj/item/handheld_defibrillator = 1,
+		/obj/item/scalpel/laser/manager/omnimanager = 1
 
 		)
 
