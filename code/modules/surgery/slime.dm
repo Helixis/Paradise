@@ -20,6 +20,7 @@
 	/obj/item/scalpel = 100,		\
 	/obj/item/kitchen/knife = 90,	\
 	/obj/item/shard = 60, 		\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 16
@@ -48,6 +49,7 @@
 	/obj/item/scalpel = 100,		\
 	/obj/item/kitchen/knife = 90,	\
 	/obj/item/shard = 60, 		\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 16
@@ -73,7 +75,8 @@
 /datum/surgery_step/slime/saw_core
 	allowed_tools = list(
 	/obj/item/circular_saw = 100, \
-	/obj/item/hatchet = 90
+	/obj/item/hatchet = 90, \
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 16

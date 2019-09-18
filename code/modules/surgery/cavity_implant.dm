@@ -69,7 +69,8 @@
 	allowed_tools = list(
 	/obj/item/surgicaldrill = 100,	\
 	/obj/item/pen = 90,	\
-	/obj/item/stack/rods = 60
+	/obj/item/stack/rods = 60,	\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 54
@@ -95,7 +96,8 @@
 	/obj/item/cautery = 100,			\
 	/obj/item/clothing/mask/cigarette = 90,	\
 	/obj/item/lighter = 60,			\
-	/obj/item/weldingtool = 30
+	/obj/item/weldingtool = 30,	\
+	/obj/item/scalpel/laser/manager/omnimanager = 100
 	)
 
 	time = 24

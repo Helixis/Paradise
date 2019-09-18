@@ -16,7 +16,7 @@
 
 /datum/surgery_step/reshape_face
 	name = "reshape face"
-	allowed_tools = list(/obj/item/scalpel = 100, /obj/item/kitchen/knife = 50, /obj/item/wirecutters = 35)
+	allowed_tools = list(/obj/item/scalpel = 100, /obj/item/kitchen/knife = 50, /obj/item/wirecutters = 35, /obj/item/scalpel/laser/manager/omnimanager = 100)
 	time = 64
 
 /datum/surgery_step/reshape_face/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)

@@ -36,7 +36,7 @@
 
 /datum/surgery_step/extract_implant
 	name = "extract implant"
-	allowed_tools = list(/obj/item/hemostat = 100, /obj/item/crowbar = 65)
+	allowed_tools = list(/obj/item/hemostat = 100, /obj/item/crowbar = 65, /obj/item/scalpel/laser/manager/omnimanager = 100)
 	time = 64
 	var/obj/item/implant/I = null
 
