@@ -152,8 +152,8 @@
 		cell = C
 		return
 	cell = new(src)
-	cell.charge = 500
-	cell.maxcharge = 1000
+	cell.charge = 15000
+	cell.maxcharge = 15000
 
 /obj/mecha/proc/add_cabin()
 	cabin_air = new
