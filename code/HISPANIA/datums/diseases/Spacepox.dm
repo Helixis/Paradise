@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /datum/disease/spacepox
-=======
-/datum/disease/spaceviruela
->>>>>>> 9025269781551b8d2dbebd6f2547cdd4e40a6345
 	name = "Spacepox"
 	max_stages = 4
 	spread_text = "On contact"
@@ -34,11 +30,7 @@
 
 		if(3)
 			if(prob(5))
-<<<<<<< HEAD
 				if(head.receive_damage(6, 0))
-=======
-				if(head.receive_damage(5, 0))
->>>>>>> 9025269781551b8d2dbebd6f2547cdd4e40a6345
 					affected_mob.UpdateDamageIcon()
 			if(prob(10))
 				affected_mob.emote("cough")
@@ -47,7 +39,6 @@
 
 		if(4)
 			if(prob(5))
-<<<<<<< HEAD
 				if(r_leg.receive_damage(6, 0) && l_leg.receive_damage(6, 0))
 					affected_mob.UpdateDamageIcon()
 			if(prob(5))
@@ -57,13 +48,3 @@
 				to_chat(affected_mob, "<span class='danger'>You can feel pustules on your entire body!</span>")
 				affected_mob.take_organ_damage(0,5)
 	return
-=======
-				if(r_leg.receive_damage(5, 0) && l_leg.receive_damage(5, 0))
-					affected_mob.UpdateDamageIcon()
-			if(prob(5))
-				if(r_arm.receive_damage(5, 0) && l_arm.receive_damage(5, 0))
-					affected_mob.UpdateDamageIcon()
-			if(prob(3))
-				to_chat(affected_mob, "<span class='danger'>You can feel pustules on your entire body!</span>")
-	return
->>>>>>> 9025269781551b8d2dbebd6f2547cdd4e40a6345
