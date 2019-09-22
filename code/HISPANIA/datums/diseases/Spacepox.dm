@@ -11,7 +11,7 @@
 	desc = "In addition to flu-like symptoms, patients also experience  rashes that appear first on the faces and later on the trunk."
 	severity = DANGEROUS
 
-/datum/disease/spaceviruela/stage_act()
+/datum/disease/spacepox/stage_act()
 	..()
 	var/mob/living/carbon/human/H = affected_mob
 	var/obj/item/organ/external/head = H.get_organ("head")
