@@ -20,7 +20,7 @@
 	lefthand_file = 'icons/hispania/mob/inhands/items_lefthand.dmi'
 	righthand_file = 'icons/hispania/mob/inhands/items_righthand.dmi'
 	name = "xenobluespace power cell maker"
-	desc = "High-tech power cell shell capable of creating a power cell that combines Bluespace and Xenobiology technology. Requiered a bluespace power cell and a charged slime core. Has inscribed: -en Honor a Blob Bob, Maestro de la Teleciencia, Sticky Gum, Maestra de la Xenobiologia y a Baldric Chapman, Maestro de la Robotica-"
+	desc = "High-tech power cell shell capable of creating a power cell that combines Bluespace and Xenobiology technology. Requiered a bluespace power cell and a charged slime core."
 	origin_tech = "powerstorage=6;biotech=4"
 	materials = list(MAT_GLASS = 1000)
 	var/build_step = 0
