@@ -44,7 +44,14 @@
 		"is losing branches!",
 		"pulls out a secret stash of herbicide and takes a hearty swig!",
 		"is pulling themselves apart!")
-	allowed_consumed_mobs = list(/mob/living/simple_animal/hostile/poison/terror_spider)
+
+	allowed_consumed_mobs = list(
+	/mob/living/simple_animal/hostile/poison/terror_spider,
+	/mob/living/simple_animal/mouse,
+	/mob/living/simple_animal/lizard,
+	/mob/living/simple_animal/chick,
+	/mob/living/simple_animal/butterfly
+	)
 
 /datum/species/drylianthus/on_species_gain(mob/living/carbon/human/H)
 	..()

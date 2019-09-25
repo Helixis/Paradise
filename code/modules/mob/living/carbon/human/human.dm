@@ -155,12 +155,6 @@
 /mob/living/carbon/human/stok/Initialize(mapload)
 	..(mapload, /datum/species/monkey/unathi)
 
-/mob/living/carbon/human/murghal/Initialize(mapload)
-	..(mapload, "Murghal")
-
-/mob/living/carbon/human/drylianthus/Initialize(mapload)
-	..(mapload, "Drylianthus")
-
 
 /mob/living/carbon/human/Stat()
 	..()
