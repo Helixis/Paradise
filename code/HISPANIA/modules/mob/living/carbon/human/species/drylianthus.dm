@@ -27,7 +27,7 @@
 	blood_color = "#78f57e"
 	flesh_color = "#907E4A"
 	butt_sprite = "diona"
-
+	dietflags = DIET_CARN
 	reagent_tag = PROCESS_ORG
 
 	has_organ = list(
@@ -44,7 +44,7 @@
 		"is losing branches!",
 		"pulls out a secret stash of herbicide and takes a hearty swig!",
 		"is pulling themselves apart!")
-
+	allowed_consumed_mobs = list(/mob/living/simple_animal/hostile/poison/terror_spider)
 
 /datum/species/drylianthus/on_species_gain(mob/living/carbon/human/H)
 	..()
@@ -76,3 +76,5 @@
 	if(H.nutrition < NUTRITION_LEVEL_STARVING+50)
 		H.take_overall_damage(5,0)
 	..()
+
+
