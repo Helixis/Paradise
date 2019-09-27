@@ -13,6 +13,11 @@
 	self_recharge = 1 // Infused slime cores self-recharge, over time
 	chargerate = 600
 
+/obj/item/stock_parts/cell/xenoblue/empty/New()
+	..()
+	charge = 0
+	update_icon()
+
 /obj/item/xenobluecellmaker
 	icon = 'icons/hispania/obj/power.dmi'
 	icon_state = "xenobluecellmaker"
@@ -45,7 +50,14 @@
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the Xenobluespace power cell.</span>")
 				var/turf/T = get_turf(src)
-				new /obj/item/stock_parts/cell/xenoblue(T)
-				user.unEquip(src, 1)
+				usr.put_in_hands(new /obj/item/stock_parts/cell/xenoblue(T))
 				qdel(src)
+
+
+
+//fin de la xenoblue cell
+/obj/item/stock_parts/cell/high/plus/empty/New()
+	..()
+	charge = 0
+	update_icon()
 
