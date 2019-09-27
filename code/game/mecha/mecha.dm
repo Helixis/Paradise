@@ -151,9 +151,7 @@
 		C.forceMove(src)
 		cell = C
 		return
-	cell = new(src)
-	cell.charge = 15000
-	cell.maxcharge = 15000
+	cell = new/obj/item/stock_parts/cell/high(src)
 
 /obj/mecha/proc/add_cabin()
 	cabin_air = new
