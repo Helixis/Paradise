@@ -16152,10 +16152,6 @@
 /area/magistrateoffice)
 "aAN" = (
 /obj/structure/table/reinforced,
-/obj/item/taperecorder{
-	pixel_y = 0
-	},
-/obj/item/megaphone,
 /obj/item/radio/intercom/department/security{
 	pixel_x = 28;
 	pixel_y = -7
@@ -16166,6 +16162,9 @@
 	pixel_x = 28;
 	pixel_y = 5
 	},
+/obj/item/book/manual/security_space_law,
+/obj/item/stamp/magistrate,
+/obj/item/pen/multi/gold,
 /turf/simulated/floor/carpet,
 /area/magistrateoffice)
 "aAO" = (
@@ -16886,17 +16885,19 @@
 /area/maintenance/fsmaint)
 "aCi" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/security_space_law,
-/obj/item/pen/multi/gold,
+/obj/item/paper_bin,
+/obj/machinery/door_control{
+	id = "magistrate";
+	name = "Office Door";
+	normaldoorcontrol = 1;
+	pixel_x = -6;
+	pixel_y = 16;
+	req_access_txt = "57"
+	},
 /turf/simulated/floor/carpet,
 /area/magistrateoffice)
 "aCj" = (
 /obj/structure/table/reinforced,
-/obj/item/paper_bin{
-	pixel_x = -3;
-	pixel_y = 7
-	},
-/obj/item/stamp/magistrate,
 /turf/simulated/floor/carpet,
 /area/magistrateoffice)
 "aCk" = (
@@ -18454,6 +18455,7 @@
 	pixel_y = -24
 	},
 /obj/structure/cable,
+/obj/item/megaphone,
 /turf/simulated/floor/plasteel{
 	tag = "icon-cult";
 	icon_state = "cult";
@@ -20784,6 +20786,7 @@
 "aKx" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock{
+	id_tag = "magistrate";
 	name = "Magistrate's Office";
 	req_access_txt = "74"
 	},
@@ -96394,6 +96397,10 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space/nearstation)
+"xHU" = (
+/obj/item/flashlight/pen,
+/turf/simulated/wall/r_wall,
+/area/security/permabrig)
 "xWg" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	tag = "icon-intact (SOUTHEAST)";
@@ -117336,7 +117343,7 @@ abN
 anf
 akL
 aBL
-abN
+xHU
 aSu
 aSu
 aSu
@@ -117850,7 +117857,7 @@ abN
 azs
 akQ
 aBM
-abN
+xHU
 aab
 aaa
 aaa
