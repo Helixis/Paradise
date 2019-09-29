@@ -456,6 +456,7 @@
 
 /obj/structure/closet/secure_closet/magistrate/New()
 	..()
+	new /obj/item/gun/energy/gun/minimagistrate(src)
 	new /obj/item/book/manual/faxes(src)
 	new /obj/item/storage/secure/briefcase(src)
 	new /obj/item/flash(src)
