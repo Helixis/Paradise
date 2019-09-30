@@ -54,7 +54,7 @@
 	mix_message = "really?."
 	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
 
-/datum/chemical_reaction/hotline_bling
+/datum/chemical_reaction/hotline_bling // By reptile
 	name = "Hotline Bling"
 	id = "hotline_bling "
 	result = "hotline_bling "

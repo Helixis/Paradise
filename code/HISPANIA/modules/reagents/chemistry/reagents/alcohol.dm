@@ -82,7 +82,7 @@
 	drink_desc = "Bad enough to be served in a pretty glass."
 	taste_description ="strong and light at the same time."
 
-/datum/reagent/consumable/drink/hotline_bling
+/datum/reagent/consumable/drink/hotline_bling By reptile
 	name= "Hotline Bling"
 	id = "hotline_bling"
 	description = "You used to call me on my cell phone."
