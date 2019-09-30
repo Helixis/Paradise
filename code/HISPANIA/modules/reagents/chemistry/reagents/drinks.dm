@@ -8,7 +8,7 @@
 	drink_desc = "The raw essence of a Drake RAWR"
 	taste_description = "fresh blood."
 
-/datum/reagent/consumable/drink/banana/on_mob_life(mob/living/M)
+/datum/reagent/consumable/drink/drakeblood/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
 	if((ishuman(M) && COMIC in M.mutations) || issmall(M))
 		update_flags |= M.adjustBruteLoss(-1, FALSE)
