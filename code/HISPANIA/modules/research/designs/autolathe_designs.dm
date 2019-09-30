@@ -3,7 +3,7 @@
 	id = "titansfistpaintkit"
 	build_type = AUTOLATHE
 	materials = list(MAT_METAL = 1500, MAT_GLASS = 1000)
-	build_path = /obj/item/paintkit/hispania_hack
+	build_path = /obj/item/paintkit/hispania/hack
 	category = list("hacked","Miscellaneous")
 
 
