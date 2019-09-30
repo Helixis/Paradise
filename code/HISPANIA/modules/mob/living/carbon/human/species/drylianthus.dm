@@ -12,14 +12,15 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
-	blurb = "-Soon-"
+	blurb = "Commonly refered as 'plant people', Drylianthus are hybrids between humans and dionaea \
+	Created by the syndicate, they can survive with only light and water, and are immune to radiation. \
+	Rescued by NT, they now work along other species, assimilating into its society."
 
 	species_traits = list(RADIMMUNE, IS_PLANT)
 	dies_at_threshold = TRUE
 	clothing_flags = HAS_UNDERWEAR | HAS_UNDERSHIRT | HAS_SOCKS
 	default_hair_colour = "#000000"
 	has_gender = TRUE
-	dietflags = 0		//Drylianthus regenerate nutrition in light and water, no diet necessary
 	taste_sensitivity = TASTE_SENSITIVITY_NO_TASTE
 	skinned_type = /obj/item/stack/sheet/wood
 
@@ -43,14 +44,16 @@
 	suicide_messages = list(
 		"is losing branches!",
 		"pulls out a secret stash of herbicide and takes a hearty swig!",
-		"is pulling themselves apart!")
+		"is pulling themselves apart!",
+		"is peeling the bark off their skin!")
 
 	allowed_consumed_mobs = list(
 	/mob/living/simple_animal/hostile/poison/terror_spider,
 	/mob/living/simple_animal/mouse,
 	/mob/living/simple_animal/lizard,
 	/mob/living/simple_animal/chick,
-	/mob/living/simple_animal/butterfly
+	/mob/living/simple_animal/butterfly,
+	/mob/living/simple_animal/hostile/poison/bees
 	)
 
 /datum/species/drylianthus/on_species_gain(mob/living/carbon/human/H)
