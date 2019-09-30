@@ -7,7 +7,7 @@
 	icon_state = "drake_meat"
 
 	list_reagents = list("protein" = 5, "toxin" = 6)
-	tastes = list("Tender meat, like butter" = 1)
+	tastes = list("tender meat, like butter" = 1)
 ///////////////
 //Cooked Meat//
 ///////////////
