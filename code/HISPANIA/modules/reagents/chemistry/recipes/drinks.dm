@@ -54,6 +54,15 @@
 	mix_message = "really?."
 	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
 
+/datum/chemical_reaction/hotline_bling
+	name = "Hotline Bling"
+	id = "hotline_bling "
+	result = "hotline_bling "
+	required_reagents = list("bloodymary" = 1, "drake" = 1)
+	result_amount = 4
+	mix_message = "really?."
+	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
+
 /datum/chemical_reaction/fernetcola /// By Soulster
 	name = "Fernet with cola"
 	id = "fernetcola"
@@ -61,4 +70,13 @@
 	required_reagents = list("fernet" = 1, "cola" = 2)
 	result_amount = 5
 	mix_message = "You should be able to drink it now."
+	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
+
+/datum/chemical_reaction/hanky_panky /// By mazapan
+	name = "Hanky panky"
+	id = "hanky_panky"
+	result = "hanky_panky"
+	required_reagents = list("fernet" = 1, "vermouth" = 1, "gin" = 1, "orangejuice" = 1)
+	result_amount = 4
+	mix_message = "The ingredients mix into a dark brown substance."
 	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
