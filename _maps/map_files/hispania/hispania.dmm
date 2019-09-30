@@ -16892,7 +16892,7 @@
 	normaldoorcontrol = 1;
 	pixel_x = -6;
 	pixel_y = 16;
-	req_access_txt = "57"
+	req_access_txt = "74"
 	},
 /turf/simulated/floor/carpet,
 /area/magistrateoffice)
@@ -96199,6 +96199,10 @@
 /area/toxins/launch{
 	name = "Toxins Launch Room"
 	})
+"iSP" = (
+/obj/item/flashlight/pen,
+/turf/simulated/wall/r_wall,
+/area/security/permabrig)
 "jnJ" = (
 /obj/machinery/light/spot{
 	tag = "icon-tube1 (NORTH)";
@@ -96397,10 +96401,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space/nearstation)
-"xHU" = (
-/obj/item/flashlight/pen,
-/turf/simulated/wall/r_wall,
-/area/security/permabrig)
 "xWg" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	tag = "icon-intact (SOUTHEAST)";
@@ -117343,7 +117343,7 @@ abN
 anf
 akL
 aBL
-xHU
+iSP
 aSu
 aSu
 aSu
@@ -117857,7 +117857,7 @@ abN
 azs
 akQ
 aBM
-xHU
+iSP
 aab
 aaa
 aaa
