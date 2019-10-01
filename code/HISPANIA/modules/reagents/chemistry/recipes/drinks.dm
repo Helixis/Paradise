@@ -76,7 +76,7 @@
 	name = "Hotline Bling"
 	id = "hotline_bling "
 	result = "hotline_bling "
-	required_reagents = list("bloodymary" = 1, "drake" = 1)
+	required_reagents = list("bloodymary" = 1, "drakeblood" = 1)
 	result_amount = 4
 	mix_message = "You used to, you used to..."
 	mix_sound = 'sound/goonstation/misc/drinkfizz.ogg'
