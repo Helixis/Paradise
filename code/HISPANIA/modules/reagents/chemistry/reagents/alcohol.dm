@@ -82,3 +82,14 @@
 	drink_name = "hanky panky"
 	drink_desc = "Bad enough to be served in a pretty glass."
 	taste_description ="strong and light at the same time."
+
+/datum/reagent/consumable/ethanol/hotline_bling
+	name= "Hotline Bling"
+	id = "hotline_bling"
+	description = "You used to call me on my cell phone....."
+	color = "#E6502F"
+	alcohol_perc = 0.3
+	drink_icon = "hotline_bling"
+	drink_name = "hotline bling"
+	drink_desc = "You see Drake inside"
+	taste_description ="you feel like drake"

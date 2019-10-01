@@ -68,3 +68,9 @@
 		/obj/item/reagent_containers/food/snacks/arepa_ice
 	)
 	result = /obj/item/reagent_containers/food/snacks/arepa
+
+////Drake steak
+
+/datum/recipe/microwave/drakesteak
+	items = list(/obj/item/reagent_containers/food/snacks/drakemeat, /obj/item/organ/internal/regenerative_core/legion)
+	result = /obj/item/reagent_containers/food/snacks/drakesteak
