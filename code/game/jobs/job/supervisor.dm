@@ -167,7 +167,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 0)
 						access_research, access_heads_vault, access_hop, access_RC_announce, access_keycard_auth,
 						access_gateway, access_weapons, access_blueshield)
 	minimal_access = list(access_forensics_lockers, access_sec_doors, access_medical, access_construction, access_engine, access_maint_tunnels, access_research,
-			            access_RC_announce,access_brig, access_keycard_auth, access_heads, access_blueshield, access_weapons)
+			            access_RC_announce, access_keycard_auth, access_heads, access_blueshield, access_weapons)
 	outfit = /datum/outfit/job/blueshield
 
 /datum/outfit/job/blueshield
