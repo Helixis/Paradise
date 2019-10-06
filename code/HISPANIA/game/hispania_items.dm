@@ -344,3 +344,43 @@
 
 ///NANDA UMBRA SUCCUBUS ITEMS ENDS HERE///
 
+///HOS HOLSTER START///
+
+/obj/item/clothing/accessory/holster/hos
+	name = "antique gun shoulder holster"
+	desc = "A worn-out antique gun holster. Perfect for a faster draw."
+	icon_state = "hosholster"
+	item_color = "hosholster"
+	holster_allow = /obj/item/gun/energy
+	hispania_icon = TRUE
+
+/obj/item/clothing/accessory/holster/armpit/hos
+	name = "antique gun shoulder holster"
+	desc = "A worn-out antique gun holster. Perfect for a faster draw."
+	icon_state = "hosholster"
+	item_color = "hosholster"
+	holster_allow = /obj/item/gun/energy
+	hispania_icon = TRUE
+
+/obj/item/clothing/accessory/holster/waist/hos
+	name = "antique gun shoulder holster"
+	desc = "A worn-out antique gun holster. Perfect for a faster draw."
+	icon_state = "hosholster"
+	item_color = "hosholster"
+	hispania_icon = TRUE
+
+/obj/item/storage/belt/holster/hos
+	name = "antique gun shoulder holster"
+	desc = "A worn-out antique gun holster. Perfect for a faster draw."
+	icon_state = "hosholster"
+	item_state = "hosholster"
+	storage_slots = 1
+	max_w_class = WEIGHT_CLASS_NORMAL
+
+	can_hold = list(
+		/obj/item/gun/energy/gun/hos,
+		/obj/item/gun/energy/laser/captain
+		)
+	hispania_icon = TRUE
+
+///HOS HOLSTER END///
