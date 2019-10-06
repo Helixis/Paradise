@@ -8904,7 +8904,7 @@
 /obj/effect/decal/warning_stripes/north,
 /obj/machinery/mass_driver{
 	dir = 4;
-	id_tag = "toxinsdriver"
+	id_tag = "trash"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
@@ -8912,7 +8912,7 @@
 /obj/structure/fans/tiny,
 /obj/effect/decal/warning_stripes/west,
 /obj/machinery/door/poddoor{
-	id_tag = "disposal_door";
+	id_tag = "trash";
 	name = "disposals blast door"
 	},
 /turf/simulated/floor/plating,
@@ -15729,13 +15729,13 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aFt" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aFu" = (
 /obj/machinery/status_display{
 	pixel_y = 32
@@ -15745,7 +15745,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aFv" = (
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
@@ -16202,15 +16202,18 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aGp" = (
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
+/obj/effect/landmark/start{
+	name = "Clown"
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aGq" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 4;
@@ -16219,7 +16222,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aGr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -16228,7 +16231,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aGs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -16240,7 +16243,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aGt" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16871,14 +16874,14 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aHC" = (
 /obj/structure/closet/wardrobe/mixed,
 /obj/machinery/light,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aHD" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
 	dir = 4;
@@ -16887,7 +16890,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aHE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -16896,7 +16899,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/sleep)
+/area/clownoffice)
 "aHF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -18550,7 +18553,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aKj" = (
 /obj/machinery/status_display{
 	pixel_y = 32
@@ -18560,7 +18563,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aKk" = (
 /obj/structure/dresser,
 /turf/simulated/floor/plasteel{
@@ -18572,7 +18575,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aKm" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8;
@@ -19325,15 +19328,18 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aLF" = (
 /obj/structure/chair/office/dark{
 	dir = 1
 	},
+/obj/effect/landmark/start{
+	name = "Mime"
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aLG" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 4;
@@ -19342,7 +19348,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aLH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -19351,7 +19357,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aLI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -19363,7 +19369,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aLJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -20040,7 +20046,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aNb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
 	dir = 4;
@@ -20049,7 +20055,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aNc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20059,7 +20065,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aNd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20068,7 +20074,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aNe" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20076,7 +20082,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
-/area/crew_quarters/sleep)
+/area/mimeoffice)
 "aNf" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4;
@@ -20841,14 +20847,14 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aOB" = (
 /obj/structure/table/wood,
 /obj/item/soap/nanotrasen,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aOC" = (
 /obj/structure/cable{
 	d2 = 2;
@@ -20871,7 +20877,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aOD" = (
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
@@ -20888,7 +20894,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aOF" = (
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/plasteel{
@@ -21630,7 +21636,7 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aPV" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	on = 1
@@ -21638,10 +21644,10 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aPW" = (
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aPX" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -21650,7 +21656,7 @@
 	tag = ""
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aPY" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -21659,7 +21665,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aPZ" = (
 /obj/structure/table/wood,
 /turf/simulated/floor/plasteel{
@@ -22506,17 +22512,17 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aRx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aRy" = (
 /obj/structure/chair/wood/normal,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aRz" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -22524,7 +22530,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aRA" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
@@ -23396,7 +23402,7 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aTe" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -23411,11 +23417,11 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aTf" = (
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aTg" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -23426,7 +23432,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aTh" = (
 /obj/effect/landmark{
 	name = "lightsout"
@@ -24295,7 +24301,7 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aUG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -24303,13 +24309,13 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aUH" = (
 /obj/structure/chair/wood/normal{
 	dir = 1
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aUI" = (
 /obj/structure/table/wood,
 /turf/simulated/floor/plasteel{
@@ -25181,7 +25187,7 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aWf" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
 	dir = 1;
@@ -25190,7 +25196,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aWg" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/snacks/chips,
@@ -26154,7 +26160,7 @@
 	icon_state = "dark";
 	tag = "icon-vault (NORTHEAST)"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aXC" = (
 /obj/structure/table/wood,
 /obj/item/clothing/mask/fakemoustache,
@@ -26162,20 +26168,20 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aXD" = (
 /obj/structure/piano,
 /obj/machinery/light,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aXE" = (
 /obj/structure/chair/stool,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aXF" = (
 /obj/machinery/door/window/eastright{
 	name = "Theater Stage"
@@ -26188,7 +26194,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
-/area/crew_quarters/bar/atrium)
+/area/crew_quarters/theatre)
 "aXG" = (
 /turf/simulated/floor/plasteel{
 	dir = 5;
@@ -56158,6 +56164,10 @@
 	req_access_txt = "63"
 	},
 /obj/effect/decal/warning_stripes/west,
+/obj/effect/mapping_helpers/airlock/unres{
+	icon_state = "airlock_unres_helper";
+	dir = 4
+	},
 /turf/simulated/floor/plasteel,
 /area/security/brig)
 "bWf" = (
@@ -57779,6 +57789,10 @@
 	req_access_txt = "63"
 	},
 /obj/effect/decal/warning_stripes/west,
+/obj/effect/mapping_helpers/airlock/unres{
+	icon_state = "airlock_unres_helper";
+	dir = 4
+	},
 /turf/simulated/floor/plasteel,
 /area/security/brig)
 "bYT" = (
@@ -75325,6 +75339,7 @@
 	pixel_y = -32
 	},
 /obj/effect/decal/warning_stripes/southwest,
+/obj/structure/dispenser/oxygen,
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cDP" = (
@@ -75758,6 +75773,7 @@
 	pixel_y = -32
 	},
 /obj/effect/decal/warning_stripes/southeast,
+/obj/structure/dispenser/oxygen,
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cEO" = (
@@ -80704,6 +80720,10 @@
 	name = "Medbay Entrance";
 	req_access_txt = "5"
 	},
+/obj/effect/mapping_helpers/airlock/unres{
+	icon_state = "airlock_unres_helper";
+	dir = 4
+	},
 /turf/simulated/floor/plasteel{
 	tag = "icon-whiteblue (NORTH)";
 	icon_state = "whiteblue";
@@ -81875,6 +81895,10 @@
 	id_tag = "medbayfoyer";
 	name = "Medbay Entrance";
 	req_access_txt = "5"
+	},
+/obj/effect/mapping_helpers/airlock/unres{
+	icon_state = "airlock_unres_helper";
+	dir = 4
 	},
 /turf/simulated/floor/plasteel{
 	tag = "icon-whiteblue";
@@ -85160,6 +85184,8 @@
 /obj/structure/table/glass,
 /obj/item/clipboard,
 /obj/item/toy/figure/chemist,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "whitegreencorner"
@@ -86743,6 +86769,8 @@
 "cYH" = (
 /obj/structure/table/glass,
 /obj/machinery/reagentgrinder,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/plasteel{
@@ -91977,8 +92005,6 @@
 /area/assembly/chargebay)
 "dit" = (
 /obj/structure/table,
-/obj/item/paper_bin,
-/obj/item/pen,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 4
@@ -91987,6 +92013,11 @@
 	pixel_x = 32
 	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/item/storage/belt,
+/obj/item/storage/belt,
+/obj/item/storage/belt,
+/obj/item/paper_bin,
+/obj/item/pen,
 /turf/simulated/floor/plasteel,
 /area/assembly/chargebay)
 "diu" = (
@@ -94000,6 +94031,7 @@
 	pixel_x = -6;
 	pixel_y = -2
 	},
+/obj/item/clothing/glasses/welding/superior,
 /turf/simulated/floor/plasteel{
 	icon_state = "white"
 	},
@@ -95406,6 +95438,7 @@
 /obj/item/clipboard,
 /obj/item/toy/figure/rd,
 /obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/item/paper/monitorkey,
 /turf/simulated/floor/plasteel,
 /area/crew_quarters/hor)
 "doK" = (
@@ -100310,6 +100343,7 @@
 	network = list("Research","SS13")
 	},
 /obj/effect/decal/warning_stripes/yellow,
+/obj/structure/closet/radiation,
 /turf/simulated/floor/plasteel,
 /area/toxins/explab)
 "dxs" = (
@@ -103293,7 +103327,7 @@
 /area/toxins/mixing)
 "dCD" = (
 /obj/machinery/door/poddoor{
-	id_tag = "toxindriver";
+	id_tag = "toxinsdriver";
 	name = "Toxins Podlock"
 	},
 /obj/structure/fans/tiny,
@@ -103305,7 +103339,7 @@
 "dCF" = (
 /obj/machinery/mass_driver{
 	dir = 8;
-	id_tag = "toxindriver"
+	id_tag = "toxinsdriver"
 	},
 /obj/effect/decal/warning_stripes/west,
 /turf/simulated/floor/plating/airless,
@@ -104785,8 +104819,9 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/cautery,
 /obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/item/storage/firstaid/machine,
+/obj/item/cautery,
 /turf/simulated/floor/plasteel,
 /area/assembly/robotics)
 "dFx" = (
@@ -116003,12 +116038,69 @@
 	},
 /turf/space,
 /area/space)
+"edD" = (
+/obj/structure/dresser,
+/turf/simulated/floor/plasteel{
+	icon_state = "wood"
+	},
+/area/mimeoffice)
+"hwQ" = (
+/turf/simulated/wall,
+/area/mimeoffice)
+"iNH" = (
+/turf/simulated/floor/plasteel{
+	icon_state = "grimy"
+	},
+/area/clownoffice)
+"iYD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall,
+/area/clownoffice)
+"lhk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/wall,
+/area/mimeoffice)
+"ntm" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp,
+/turf/simulated/floor/plasteel{
+	icon_state = "grimy"
+	},
+/area/clownoffice)
+"pSQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/wall,
+/area/clownoffice)
+"trJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall,
+/area/mimeoffice)
+"tya" = (
+/obj/item/twohanded/required/kirbyplants,
+/turf/simulated/floor/plasteel{
+	icon_state = "grimy"
+	},
+/area/clownoffice)
 "udT" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
 	},
 /turf/simulated/shuttle/floor4/vox,
 /area/shuttle/vox)
+"vTL" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp,
+/turf/simulated/floor/plasteel{
+	icon_state = "wood"
+	},
+/area/mimeoffice)
+"yfG" = (
+/turf/simulated/wall,
+/area/clownoffice)
 
 (1,1,1) = {"
 aaa
@@ -149243,13 +149335,13 @@ alI
 aCn
 aDt
 awX
+iYD
+iYD
+iYD
 aFr
-aFr
-aFr
-aFr
-aFr
-aFr
-aFr
+trJ
+trJ
+trJ
 aOw
 aOw
 aOw
@@ -149502,9 +149594,9 @@ aDu
 alI
 aFs
 aGo
-aHA
+ntm
 aFx
-aKh
+vTL
 aLE
 aNa
 aOx
@@ -150271,11 +150363,11 @@ aqF
 alZ
 aDu
 alI
-aFv
+iNH
 aGr
 aHD
 aFx
-aKk
+edD
 aLH
 aNd
 aOx
@@ -150528,7 +150620,7 @@ aty
 ayi
 aDx
 alI
-aFw
+tya
 aGr
 aHE
 aFx
@@ -150785,13 +150877,13 @@ axb
 axb
 aDy
 alI
-aFx
+yfG
 aGs
-aHF
+pSQ
 aFx
-aFx
+hwQ
 aLI
-aHF
+lhk
 aOx
 aOx
 aRs
