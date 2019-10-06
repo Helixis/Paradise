@@ -39398,13 +39398,7 @@
 /turf/simulated/floor/plating,
 /area/storage/tech)
 "buP" = (
-/obj/structure/sink{
-	icon_state = "sink";
-	dir = 8;
-	pixel_x = -12;
-	pixel_y = 2
-	},
-/obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/machinery/smartfridge/disks,
 /turf/simulated/floor/plasteel,
 /area/hydroponics)
 "buQ" = (
@@ -52601,9 +52595,11 @@
 	dir = 1;
 	layer = 2.9
 	},
-/obj/item/flashlight/lamp/green,
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/photocopier/faxmachine/longrange{
+	department = "Captain's Office"
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/captain)
@@ -70791,11 +70787,11 @@
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cvz" = (
-/obj/item/twohanded/required/kirbyplants,
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/effect/decal/warning_stripes/northeast,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cvA" = (
@@ -74001,7 +73997,6 @@
 	},
 /area/hallway/primary/central)
 "cBi" = (
-/obj/item/twohanded/required/kirbyplants,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -74009,6 +74004,7 @@
 /obj/machinery/camera{
 	c_tag = "EVA West"
 	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cBj" = (
@@ -116038,52 +116034,54 @@
 	},
 /turf/space,
 /area/space)
-"edD" = (
-/obj/structure/dresser,
+"ipa" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
 /area/mimeoffice)
-"hwQ" = (
-/turf/simulated/wall,
-/area/mimeoffice)
-"iNH" = (
-/turf/simulated/floor/plasteel{
-	icon_state = "grimy"
+"iKq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
-/area/clownoffice)
-"iYD" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/wall,
 /area/clownoffice)
-"lhk" = (
+"jot" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall,
 /area/mimeoffice)
-"ntm" = (
+"jPG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall,
+/area/clownoffice)
+"mvN" = (
+/obj/item/twohanded/required/kirbyplants,
+/turf/simulated/floor/plasteel{
+	icon_state = "grimy"
+	},
+/area/clownoffice)
+"ntp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall,
+/area/mimeoffice)
+"quB" = (
+/obj/structure/dresser,
+/turf/simulated/floor/plasteel{
+	icon_state = "wood"
+	},
+/area/mimeoffice)
+"sft" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
 /area/clownoffice)
-"pSQ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
+"sJN" = (
 /turf/simulated/wall,
-/area/clownoffice)
-"trJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/wall,
-/area/mimeoffice)
-"tya" = (
-/obj/item/twohanded/required/kirbyplants,
-/turf/simulated/floor/plasteel{
-	icon_state = "grimy"
-	},
 /area/clownoffice)
 "udT" = (
 /obj/structure/chair/comfy/shuttle{
@@ -116091,15 +116089,13 @@
 	},
 /turf/simulated/shuttle/floor4/vox,
 /area/shuttle/vox)
-"vTL" = (
-/obj/structure/table/wood,
-/obj/item/flashlight/lamp,
-/turf/simulated/floor/plasteel{
-	icon_state = "wood"
-	},
-/area/mimeoffice)
-"yfG" = (
+"uph" = (
 /turf/simulated/wall,
+/area/mimeoffice)
+"vzt" = (
+/turf/simulated/floor/plasteel{
+	icon_state = "grimy"
+	},
 /area/clownoffice)
 
 (1,1,1) = {"
@@ -149335,13 +149331,13 @@ alI
 aCn
 aDt
 awX
-iYD
-iYD
-iYD
+jPG
+jPG
+jPG
 aFr
-trJ
-trJ
-trJ
+ntp
+ntp
+ntp
 aOw
 aOw
 aOw
@@ -149594,9 +149590,9 @@ aDu
 alI
 aFs
 aGo
-ntm
+sft
 aFx
-vTL
+ipa
 aLE
 aNa
 aOx
@@ -150363,11 +150359,11 @@ aqF
 alZ
 aDu
 alI
-iNH
+vzt
 aGr
 aHD
 aFx
-edD
+quB
 aLH
 aNd
 aOx
@@ -150620,7 +150616,7 @@ aty
 ayi
 aDx
 alI
-tya
+mvN
 aGr
 aHE
 aFx
@@ -150877,13 +150873,13 @@ axb
 axb
 aDy
 alI
-yfG
+sJN
 aGs
-pSQ
+iKq
 aFx
-hwQ
+uph
 aLI
-lhk
+jot
 aOx
 aOx
 aRs
