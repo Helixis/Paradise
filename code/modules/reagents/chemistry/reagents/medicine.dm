@@ -118,11 +118,11 @@
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
 	if(M.bodytemperature < TCRYO)
-		update_flags |= M.adjustCloneLoss(-4, FALSE)
-		update_flags |= M.adjustOxyLoss(-10, FALSE)
-		update_flags |= M.adjustToxLoss(-3, FALSE)
-		update_flags |= M.adjustBruteLoss(-12, FALSE)
-		update_flags |= M.adjustFireLoss(-12, FALSE)
+		update_flags |= M.adjustCloneLoss(-10, FALSE)
+		update_flags |= M.adjustOxyLoss(0, FALSE)
+		update_flags |= M.adjustToxLoss(0, FALSE)
+		update_flags |= M.adjustBruteLoss(0, FALSE)
+		update_flags |= M.adjustFireLoss(0, FALSE)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/external/head/head = H.get_organ("head")
