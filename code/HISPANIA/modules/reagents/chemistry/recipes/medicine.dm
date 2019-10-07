@@ -17,7 +17,7 @@
 	id = "dolutegravir"
 	result = "dolutegravir"
 	required_reagents = list("ampligen" = 3, "balavir" = 3)
-	result_amount = 3
+	result_amount = 1
 
 /datum/chemical_reaction/efavirenz
 	name = "Efavirenz"

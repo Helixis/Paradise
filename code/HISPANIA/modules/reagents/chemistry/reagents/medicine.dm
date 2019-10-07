@@ -40,7 +40,7 @@
 	description = "A high-level antiviral. Last resort if all else fails"
 	reagent_state = LIQUID
 	color = "#649a7f"
-	metabolization_rate = 0.2
+	metabolization_rate = 0.4
 	taste_description = "wish"
 
 /datum/reagent/medicine/fosamprenavir

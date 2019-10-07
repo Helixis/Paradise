@@ -2,7 +2,7 @@
 	name = "Pierrot's Throat"
 	max_stages = 4
 	spread_text = "Airborne"
-	cure_text = "Banana products, especially banana bread & Mannitol"
+	cure_text = "Banana products & Mannitol"
 	cures = list("banana", "mannitol")
 	cure_chance = 75
 	agent = "H0NI<42 Virus"
