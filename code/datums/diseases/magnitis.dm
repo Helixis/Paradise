@@ -2,8 +2,8 @@
 	name = "Magnitis"
 	max_stages = 4
 	spread_text = "Airborne"
-	cure_text = "Iron"
-	cures = list("iron")
+	cure_text = "Iron & Calomel"
+	cures = list("iron", "calomel")
 	agent = "Fukkos Miracos"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
