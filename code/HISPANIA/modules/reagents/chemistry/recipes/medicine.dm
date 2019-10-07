@@ -9,7 +9,7 @@
 /datum/chemical_reaction/balavir
 	name = "Balavir"
 	id = "balavir"
-	result = "ampligen"
+	result = "balavir"
 	required_reagents = list("phenol" = 1, "acetone" = 1)
 	result_amount = 3
 	mix_message = "The solution gently swirls with a metallic sheen."
