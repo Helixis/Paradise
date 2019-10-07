@@ -38,4 +38,9 @@
 	id = "fosamprenavir"
 	result = "fosamprenavir"
 	required_reagents = list("copper" = 1, "sugar" = 1, "ammonia" = 1, "iron" = 1)
+<<<<<<< HEAD
 	result_amount = 3
+=======
+	result_amount = 3
+	mix_message = "The solution gently swirls with a metallic sheen."
+>>>>>>> 26065c514e9946c79d3a0d6d0b20cfb5b184bfa4
