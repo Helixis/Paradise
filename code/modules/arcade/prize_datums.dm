@@ -324,6 +324,12 @@ var/global/datum/prizes/global_prizes = new
 	typepath = /obj/item/clothing/gloves/fingerless/rapid/headpat
 	cost = 150
 
+/datum/prize_item/laughbutton
+	name = "Laugh Button"
+	desc = "A button that provides you with sitcom laughs."
+	typepath = /obj/item/toy/redbutton/laughbutton
+	cost = 2000
+
 /datum/prize_item/bike
 	name = "Awesome Bike!"
 	desc = "WOAH."
