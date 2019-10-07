@@ -326,7 +326,7 @@ var/global/datum/prizes/global_prizes = new
 
 /datum/prize_item/laughbutton
 	name = "Laugh Button"
-	desc = "A button that provides you with sitcom laughs."
+	desc = "A button that provides you with silly sitcom laughs."
 	typepath = /obj/item/toy/redbutton/laughbutton
 	cost = 2000
 
