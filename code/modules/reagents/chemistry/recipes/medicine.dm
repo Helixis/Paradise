@@ -273,3 +273,11 @@
 	result_amount = 3
 	min_temp = T0C + 100
 	mix_message = "The solution gently swirls with a metallic sheen."
+
+/datum/chemical_reaction/ampligen
+	name = "Ampligen"
+	id = "ampligen"
+	result = "ampligen"
+	required_reagents = list("mutadone" = 1, "copper" = 1)
+	result_amount = 3
+	mix_message = "The solution gently swirls with a metallic sheen."

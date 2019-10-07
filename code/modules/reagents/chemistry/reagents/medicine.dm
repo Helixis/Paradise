@@ -1195,3 +1195,12 @@
 	update_flags |= M.adjustFireLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	update_flags |= M.adjustToxLoss(3*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
+
+/datum/reagent/medicine/ampligen
+	name = "Ampligen"
+	id = "ampligen"
+	description = "An all-purpose antiviral."
+	reagent_state = LIQUID
+	color = "#0AB478"
+	metabolization_rate = 0.2
+	taste_description = "antiviral"
