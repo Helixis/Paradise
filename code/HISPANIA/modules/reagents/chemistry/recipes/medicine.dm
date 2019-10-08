@@ -39,3 +39,17 @@
 	result = "fosamprenavir"
 	required_reagents = list("copper" = 1, "sugar" = 1, "ammonia" = 1, "iron" = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/fosamprenavir
+	name = "Fosamprenavir"
+	id = "fosamprenavir"
+	result = "fosamprenavir"
+	required_reagents = list("copper" = 1, "sugar" = 1, "ammonia" = 1, "iron" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/duloxetine
+	name = "Duloxetine"
+	id = "duloxetine"
+	result = "duloxetine"
+	required_reagents = list("haloperidol" = 1, "sugar" = 1)
+	result_amount = 3
