@@ -52,7 +52,7 @@
 /datum/reagent/duloxetine
 	name = "Duloxetine"
 	id = "duloxetine"
-	description = "Slightly reduces stun times. If overdosed it will deal toxin and oxygen damage."
+	description = "Antidepressant that will keep the patient in a state of happiness while in the body."
 	reagent_state = LIQUID
 	color = "#60A584"
 	overdose_threshold = 35
@@ -92,7 +92,7 @@
 		if(effect <= 2)
 			M.emote("gasp")
 			to_chat(M, "<span class='warning'>You can't breathe!</span>")
-			update_flags |= M.adjustOxyLoss(15, FALSE)
+			update_flags |= M.adjustOxyLoss(5, FALSE)
 			update_flags |= M.Stun(1, FALSE)
 		else if(effect <= 4)
 			to_chat(M, "<span class='warning'>You feel terrible!</span>")
