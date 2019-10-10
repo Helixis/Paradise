@@ -6046,6 +6046,9 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "Head of Security's Office"
 	},
+/obj/machinery/newscaster{
+	pixel_y = 30
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -6074,14 +6077,14 @@
 /turf/simulated/floor/plasteel,
 /area/security/permabrig)
 "akN" = (
-/obj/machinery/newscaster{
-	pixel_y = 30
-	},
 /obj/machinery/computer/security/telescreen/entertainment{
 	pixel_x = 32
 	},
 /obj/structure/closet/secure_closet/hos,
 /obj/item/reagent_containers/food/drinks/flask/barflask,
+/obj/machinery/vending/walldrobe/hos{
+	pixel_y = 26
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -61895,8 +61898,12 @@
 	department = "Chief Medical Officer's Desk";
 	departmentType = 5;
 	name = "Chief Medical Officer Requests Console";
-	pixel_x = 0;
-	pixel_y = -30
+	pixel_x = 30;
+	pixel_y = 0
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
 	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
@@ -61904,11 +61911,10 @@
 	},
 /area/medical/cmo)
 "chE" = (
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22
-	},
 /obj/machinery/photocopier,
+/obj/machinery/vending/walldrobe/cmo{
+	pixel_y = -26
+	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "darkblue"
@@ -82803,11 +82809,6 @@
 "cRJ" = (
 /obj/effect/spawner/window/reinforced,
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -84494,6 +84495,9 @@
 	},
 /obj/item/megaphone,
 /obj/item/lock_buster,
+/obj/machinery/vending/walldrobe/ce{
+	pixel_x = -30
+	},
 /mob/living/simple_animal/parrot/Poly,
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -124615,7 +124619,7 @@ cNK
 cKb
 cPj
 cRR
-cFC
+cRR
 cRJ
 cHk
 cRR
