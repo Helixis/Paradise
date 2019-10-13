@@ -1108,10 +1108,12 @@
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/storage/fancy/cigarettes = 5,/obj/item/storage/fancy/cigarettes/cigpack_uplift = 3,/obj/item/storage/fancy/cigarettes/cigpack_robust = 2,/obj/item/storage/fancy/cigarettes/cigpack_carp = 3,/obj/item/storage/fancy/cigarettes/cigpack_midori = 1,/obj/item/storage/fancy/cigarettes/cigpack_random = 2, /obj/item/reagent_containers/food/pill/patch/nicotine = 10, /obj/item/storage/box/matches = 10,/obj/item/lighter/random = 4,/obj/item/storage/fancy/rollingpapers = 5)
+	products = list(/obj/item/storage/fancy/cigarettes = 5,/obj/item/storage/fancy/cigarettes/cigpack_uplift = 3,/obj/item/storage/fancy/cigarettes/cigpack_robust = 2,/obj/item/storage/fancy/cigarettes/cigpack_carp = 3,/obj/item/storage/fancy/cigarettes/cigpack_midori = 1,/obj/item/storage/fancy/cigarettes/cigpack_random = 2, /obj/item/reagent_containers/food/pill/patch/nicotine = 10, /obj/item/storage/box/matches = 10,/obj/item/lighter/random = 4,/obj/item/storage/fancy/rollingpapers = 5,
+					/obj/item/clothing/mask/cigarette/ecig/util = 2,/obj/item/clothing/mask/cigarette/ecig/deluxe = 2,/obj/item/clothing/mask/cigarette/ecig/simple = 2,/obj/item/reagent_containers/ecig_cartridge/med_nicotine = 10,/obj/item/reagent_containers/ecig_cartridge/high_nicotine = 10,/obj/item/reagent_containers/ecig_cartridge/orange = 10,/obj/item/reagent_containers/ecig_cartridge/mint = 10,/obj/item/reagent_containers/ecig_cartridge/watermelon = 10,/obj/item/reagent_containers/ecig_cartridge/grape = 10)
 	contraband = list(/obj/item/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2,/obj/item/storage/fancy/cigarettes/cigpack_robustgold = 1)
-	prices = list(/obj/item/storage/fancy/cigarettes = 60,/obj/item/storage/fancy/cigarettes/cigpack_uplift = 60,/obj/item/storage/fancy/cigarettes/cigpack_robust = 60,/obj/item/storage/fancy/cigarettes/cigpack_carp = 60,/obj/item/storage/fancy/cigarettes/cigpack_midori = 60,/obj/item/storage/fancy/cigarettes/cigpack_random = 150, /obj/item/reagent_containers/food/pill/patch/nicotine = 15, /obj/item/storage/box/matches = 10,/obj/item/lighter/random = 60, /obj/item/storage/fancy/rollingpapers = 20)
+	prices = list(/obj/item/storage/fancy/cigarettes = 60,/obj/item/storage/fancy/cigarettes/cigpack_uplift = 60,/obj/item/storage/fancy/cigarettes/cigpack_robust = 60,/obj/item/storage/fancy/cigarettes/cigpack_carp = 60,/obj/item/storage/fancy/cigarettes/cigpack_midori = 60,/obj/item/storage/fancy/cigarettes/cigpack_random = 150, /obj/item/reagent_containers/food/pill/patch/nicotine = 15, /obj/item/storage/box/matches = 10,/obj/item/lighter/random = 60, /obj/item/storage/fancy/rollingpapers = 20,
+					/obj/item/clothing/mask/cigarette/ecig/util = 100,/obj/item/clothing/mask/cigarette/ecig/deluxe = 300,/obj/item/clothing/mask/cigarette/ecig/simple = 150,/obj/item/reagent_containers/ecig_cartridge/med_nicotine = 10,/obj/item/reagent_containers/ecig_cartridge/high_nicotine = 15,/obj/item/reagent_containers/ecig_cartridge/orange = 12,/obj/item/reagent_containers/ecig_cartridge/mint = 12,/obj/item/reagent_containers/ecig_cartridge/watermelon = 12,/obj/item/reagent_containers/ecig_cartridge/grape = 12)
 	refill_canister = /obj/item/vending_refill/cigarette
 
 /obj/machinery/vending/cigarette/free
@@ -1280,8 +1282,8 @@
 	icon_state = "seeds"
 	products = list(/obj/item/seeds/aloe =3,
 					/obj/item/seeds/ambrosia = 3,
-					/obj/item/seeds/apple = 3, 
-					/obj/item/seeds/banana = 3, 
+					/obj/item/seeds/apple = 3,
+					/obj/item/seeds/banana = 3,
 					/obj/item/seeds/berry = 3,
 					/obj/item/seeds/cabbage = 3,
 					/obj/item/seeds/carrot = 3,

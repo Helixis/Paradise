@@ -1158,6 +1158,7 @@
 #include "code\HISPANIA\game\mecha\equipament\tools\medical_tools.dm"
 #include "code\HISPANIA\game\objects\items\miscellaneous\bell.dm"
 #include "code\HISPANIA\game\objects\items\weapons\chronoeraser.dm"
+#include "code\HISPANIA\game\objects\items\weapons\ecigs.dm"
 #include "code\HISPANIA\game\objects\items\weapons\manuals.dm"
 #include "code\HISPANIA\game\objects\items\weapons\storage\bags.dm"
 #include "code\HISPANIA\game\objects\items\weapons\tanks\tank_types.dm"
