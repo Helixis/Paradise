@@ -69,7 +69,7 @@
 
 /obj/item/stock_parts/cell/device/standard
 	name = "standard device power cell"
-	maxcharge = 25
+	maxcharge = 50
 	chargerate = 2.5
 
 /obj/item/stock_parts/cell/device/high
@@ -77,4 +77,5 @@
 	desc = "A small power cell designed to power more energy-demanding devices."
 	icon_state = "hdevice"
 	maxcharge = 100
+	chargerate = 10
 	materials = list(MAT_METAL = 70, MAT_GLASS = 6)

@@ -15,7 +15,11 @@
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
 	item_state = "ecigoff"
 	var/icon_empty
-	var/power_usage = 2 //value for simple ecig, enough for about 1 cartridge, in JOULES!
+	var/power_usage = 0.25
+	var/idle = 0
+	var/idle_treshold = 30
+	var/idletaste = 10
+	var/idletaste_treshold = 10
 	hispania_icon = TRUE
 	sprite_sheets = list(
 		"Human" = 'icons/hispania/mob//mask.dmi',
@@ -95,6 +99,7 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 
 /obj/item/clothing/mask/cigarette/ecig/proc/Deactivate()
 	active = 0
+	idletaste = 10
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 
@@ -106,6 +111,14 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 		Deactivate()
 		return
 
+	if(idle >= idle_treshold) //idle too long -> automatic shut down
+		idle = 0
+		visible_message("<span class='notice'>\The [src] powers down automatically.</span>", null, 2)
+		Deactivate()
+		return
+
+	idle++
+
 	if(ishuman(loc))
 		var/mob/living/carbon/human/C = loc
 
@@ -116,15 +129,20 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 			return
 
 		if (src == C.wear_mask && C.check_has_mouth()) //transfer, but only when not disabled
+			idle = 0
 			//here we'll reduce battery by usage, and check powerlevel - you only use batery while smoking
 			if(cigcell.charge < power_usage) //if this passes, there's not enough power in the battery
 				Deactivate()
 				to_chat(C,"<span class='notice'>\The [src]'s power meter flashes a low battery warning and shuts down.</span>")
 				return
 			cigcell.use(power_usage)
+			idletaste++
 			for (var/datum/reagent/R in ec_cartridge.reagents.reagent_list)
-				ec_cartridge.reagents.trans_id_to(C, R.id, max(REAGENTS_METABOLISM / ec_cartridge.reagents.reagent_list.len, 0.1)) //transfer at least .1 of each chem
-
+				ec_cartridge.reagents.trans_id_to(C, R.id, max(REAGENTS_METABOLISM / (2 * ec_cartridge.reagents.reagent_list.len), 0.05)) //transfer at least .1 of each chem
+				if(idletaste >= idletaste_treshold)
+					to_chat(C, "<span class='notice'>You can taste [R.taste_description].</span>")
+			if(idletaste >= idletaste_treshold)
+				idletaste = 0
 
 /obj/item/clothing/mask/cigarette/ecig/update_icon()
 	if (active)
