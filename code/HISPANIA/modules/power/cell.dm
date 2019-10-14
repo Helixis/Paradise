@@ -69,7 +69,7 @@
 
 /obj/item/stock_parts/cell/device/standard
 	name = "standard device power cell"
-	maxcharge = 50
+	maxcharge = 25
 	chargerate = 2.5
 
 /obj/item/stock_parts/cell/device/high
