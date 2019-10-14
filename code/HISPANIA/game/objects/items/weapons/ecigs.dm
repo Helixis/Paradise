@@ -140,7 +140,8 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 			for (var/datum/reagent/R in ec_cartridge.reagents.reagent_list)
 				ec_cartridge.reagents.trans_id_to(C, R.id, max(REAGENTS_METABOLISM / (2 * ec_cartridge.reagents.reagent_list.len), 0.05)) //transfer at least .1 of each chem
 				if(idletaste >= idletaste_treshold)
-					to_chat(C, "<span class='notice'>You can taste [R.taste_description].</span>")
+					if(ec_cartridge.reagents.reagent_list.len > 1 && R.id != "water") //no saboreas el agua si hay más ingredientes
+						to_chat(C, "<span class='notice'>You can taste [R.taste_description].</span>")
 			if(idletaste >= idletaste_treshold)
 				idletaste = 0
 
