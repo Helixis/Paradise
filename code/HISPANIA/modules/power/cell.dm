@@ -49,3 +49,32 @@
 				user.unEquip(src, 1)
 				qdel(src)
 
+
+// SUBTYPES BELOW
+
+// Smaller variant, used by energy guns and similar small devices.
+/obj/item/stock_parts/cell/device
+	name = "device power cell"
+	desc = "A small power cell designed to power handheld devices."
+	icon = 'icons/HISPANIA/obj/power.dmi'
+	icon_state = "device"
+	w_class = WEIGHT_CLASS_TINY
+	force = 0
+	throw_speed = 5
+	throw_range = 7
+	maxcharge = 100
+	materials = list(MAT_STEEL = 70, MAT_GLASS = 5)
+	rating = 7
+	chargerate = 10
+
+/obj/item/stock_parts/cell/device/standard
+	name = "standard device power cell"
+	maxcharge = 25
+	chargerate = 2.5
+
+/obj/item/stock_parts/cell/device/high
+	name = "advanced device power cell"
+	desc = "A small power cell designed to power more energy-demanding devices."
+	icon_state = "hdevice"
+	maxcharge = 100
+	materials = list(MAT_METAL = 70, MAT_GLASS = 6)
