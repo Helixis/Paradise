@@ -63,7 +63,7 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	materials = list(MAT_STEEL = 70, MAT_GLASS = 5)
+	materials = list(MAT_STEEL = 40, MAT_GLASS = 5)
 	rating = 7
 	chargerate = 10
 
@@ -78,4 +78,4 @@
 	icon_state = "hdevice"
 	maxcharge = 100
 	chargerate = 10
-	materials = list(MAT_METAL = 70, MAT_GLASS = 6)
+	materials = list(MAT_METAL = 50, MAT_GLASS = 10)
