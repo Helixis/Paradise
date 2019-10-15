@@ -193,3 +193,18 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/effect/extraction_holder/singularity_pull()
 	return
+
+	if(upgraded)
+		var/uses_left = 10
+	else
+/obj/item/fultonupgrape
+	name = "Fulton upgrape"
+	icon = 'icons/obj/fulton.dmi'
+	icon_state = "fultonupgrape"
+	desc = "An upgrade unit that can be installed on a fulton pack for a eficient functionality."
+	w_class = WEIGHT_CLASS_TINY
+	origin_tech = "engineering=4;bluespace=5"
+	usesound = 'sound/items/deconstruct.ogg'
+
+/obj/item/fulton/wormhole/New()
+	overlays += "wormhole"
