@@ -29,6 +29,7 @@
 /obj/item/paintkit/hispania/black
 	name = "Black paint kit"
 	desc = "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
+	w_class = WEIGHT_CLASS_NORMAL
 
 	new_name = "APLU \"Black\""
 	new_desc = "A darkest night-colored APLU. Make your co-workers, for a few seconds, think that you're related to sec in some way."
