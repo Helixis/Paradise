@@ -196,7 +196,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 	if(upgraded)
 		var/uses_left = 10
-	else
+	
 /obj/item/fultonupgrape
 	name = "Fulton upgrape"
 	icon = 'icons/obj/fulton.dmi'
