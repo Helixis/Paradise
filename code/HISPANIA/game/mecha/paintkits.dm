@@ -1,11 +1,10 @@
 /obj/item/paintkit/hispania                 // estos son los paintkit de recolor
 	name = "aplu paint kit"
 	desc =  "A kit that contains all the necessary tools and pieces to recolor an APLU mech"
-	var/list/colored = list("black", "death")
 	w_class = WEIGHT_CLASS_SMALL
 	//aca la lista de paintkits de recolores.
-	var/list/paintkit_type = list( BlackandRed = /obj/item/paintkit/hispania/death,
-								Black = /obj/item/paintkit/hispania/black)
+	var/list/paintkit_type = list( "black and red" = /obj/item/paintkit/hispania/death,
+								"black" = /obj/item/paintkit/hispania/black)
 
 /obj/item/paintkit/hispania/attack_self(mob/user as mob)
 	var/paintkit
@@ -42,8 +41,8 @@
 	desc = "A generic kit containing all the needed tools and parts to turn a mech into another mech."
 	icon_state = "paintkit_2"
 	//esto es la lista de paintkits de alta personalización.
-	paintkit_type = list(Titan = /obj/item/paintkit/hispania/hack/titansfist,
-						Griffin =/obj/item/paintkit/hispania/hack/griffin)
+	paintkit_type = list("Titan" = /obj/item/paintkit/hispania/hack/titansfist,
+						"Griffin" =/obj/item/paintkit/hispania/hack/griffin)
 
 //paintkit de alta personalización//
 /obj/item/paintkit/hispania/hack/titansfist
