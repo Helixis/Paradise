@@ -926,8 +926,8 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/assembly/prox_sensor,
 					/obj/item/storage/toolbox/electrical,
 					/obj/item/storage/box/flashes,
-					/obj/item/stock_parts/cell/high,
-					/obj/item/stock_parts/cell/high)
+					/obj/item/stock_parts/cell/high/plus,
+					/obj/item/stock_parts/cell/high/plus)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/scisec
 	containername = "robotics assembly crate"
