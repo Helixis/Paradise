@@ -338,44 +338,38 @@
 		if(..()) //successful attack
 			attacked += 10
 
-/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/M)
-	if(..()) //if harm or disarm intent.
-		attacked += 10
-		discipline_slime(M)
-
-
-/mob/living/simple_animal/slime/attackby(obj/item/I, mob/living/user, params)
+/mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
 	if(stat == DEAD && surgeries.len)
 		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
-				if(S.next_step(user, src))
+				if(S.next_step(user,user.a_intent))
 					return 1
-	if(istype(I, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
-		if(user in Friends)
+	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
+		if (user in Friends)
 			++Friends[user]
 		else
 			Friends[user] = 1
 		to_chat(user, "<span class='notice'>You feed the slime the plasma. It chirps happily.</span>")
-		var/obj/item/stack/sheet/mineral/plasma/S = I
+		var/obj/item/stack/sheet/mineral/plasma/S = W
 		S.use(1)
 		return
-	if(I.force > 0)
+	if(W.force > 0)
 		attacked += 10
 		if(prob(25))
 			user.do_attack_animation(src)
 			user.changeNext_move(CLICK_CD_MELEE)
-			to_chat(user, "<span class='danger'>[I] passes right through [src]!</span>")
+			to_chat(user, "<span class='danger'>[W] passes right through [src]!</span>")
 			return
 		if(Discipline && prob(50)) // wow, buddy, why am I getting attacked??
 			Discipline = 0
-	if(I.force >= 3)
-		var/force_effect = 2 * I.force
+	if(W.force >= 3)
+		var/force_effect = 2 * W.force
 		if(is_adult)
-			force_effect = round(I.force / 2)
+			force_effect = round(W.force/2)
 		if(prob(10 + force_effect))
 			discipline_slime(user)
-/*	if(istype(I, /obj/item/storage/bag/bio))
-		var/obj/item/storage/P = I
+	if(istype(W, /obj/item/storage/bag/bio))
+		var/obj/item/storage/P = W
 		if(!effectmod)
 			to_chat(user, "<span class='warning'>The slime is not currently being mutated.</span>")
 			return
@@ -399,9 +393,9 @@
 			else
 				to_chat(user, "<span class='notice'>You feed the slime some extracts from the bag.</span>")
 				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
-		return */
+		return
 	..()
-/*
+
 /mob/living/simple_animal/slime/proc/spawn_corecross()
 	var/static/list/crossbreeds = subtypesof(/obj/item/slimecross)
 	visible_message("<span class='danger'>[src] shudders, its mutated core consuming the rest of its body!</span>")
@@ -417,7 +411,7 @@
 	else
 		visible_message("<span class='warning'>The mutated core shudders, and collapses into a puddle, unable to maintain its form.</span>")
 	qdel(src)
-*/
+
 /mob/living/simple_animal/slime/water_act(volume, temperature, source, method = TOUCH)
 	. = ..()
 	var/water_damage = rand(10, 15) * volume
