@@ -6,7 +6,7 @@
 	desc = "Goo extracted from a slime. Legends claim these to have \"magical powers\"."
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey slime extract"
-	force = 1
+	force = 0
 	w_class = WEIGHT_CLASS_TINY
 	container_type = INJECTABLE | DRAWABLE
 	throwforce = 0
@@ -15,16 +15,49 @@
 	origin_tech = "biotech=3"
 	var/Uses = 1 // uses before it goes inert
 	var/effectmod
+	var/list/activate_reagents = list() //Reagents required for activation
+	var/recurring = FALSE
+
+/obj/item/slime_extract/examine(mob/user)
+	. = ..()
+	if(Uses > 1)
+		. += "It has [Uses] uses remaining."
 
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/slimepotion/enhancer))
-		if(Uses >= 5)
+		if(Uses >= 5 || recurring)
 			to_chat(user, "<span class='warning'>You cannot enhance this extract further!</span>")
 			return ..()
-		to_chat(user, "<span class='notice'>You apply the enhancer to the slime extract. It may now be reused one more time.</span>")
-		Uses++
+		if(O.type == /obj/item/slimepotion/enhancer) //Seriously, why is this defined here...?
+			to_chat(user, "<span class='notice'>You apply the enhancer to the slime extract. It may now be reused one more time.</span>")
+			Uses++
 		qdel(O)
 	..()
+
+//Core-crossing: Feeding adult slimes extracts to obtain a much more powerful, single extract.
+/obj/item/slime_extract/attack(mob/living/simple_animal/slime/M, mob/user)
+	if(!isslime(M))
+		return ..()
+	if(M.stat)
+		to_chat(user, "<span class='warning'>The slime is dead!</span>")
+		return
+	if(!M.is_adult)
+		to_chat(user, "<span class='warning'>The slime must be an adult to cross its core!</span>")
+		return
+	if(M.effectmod && M.effectmod != effectmod)
+		to_chat(user, "<span class='warning'>The slime is already being crossed with a different extract!</span>")
+		return
+
+	if(!M.effectmod)
+		M.effectmod = effectmod
+
+	M.applied++
+	qdel(src)
+	to_chat(user, "<span class='notice'>You feed the slime [src], [M.applied == 1 ? "starting to mutate its core." : "further mutating its core."]</span>")
+	playsound(M, 'sound/effects/attackblob.ogg', 50, TRUE)
+
+	if(M.applied >= SLIME_EXTRACT_CROSSING_REQUIRED)
+		M.spawn_corecross()
 
 /obj/item/slime_extract/New()
 	..()
@@ -33,6 +66,8 @@
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
 	icon_state = "grey slime extract"
+	effectmod = "reproductive"
+	activate_reagents = list("blood","plasma","water")
 
 /obj/item/slime_extract/gold
 	name = "gold slime extract"
