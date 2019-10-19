@@ -8,9 +8,4 @@
 
 /datum/reagent/medicine/moa_complement/on_mob_life(mob/living/M)
 		var/update_flags = STATUS_UPDATE_NONE
-		update_flags |= M.adjustCloneLoss(0, FALSE)
-		update_flags |= M.adjustOxyLoss(-17, FALSE)
-		update_flags |= M.adjustToxLoss(0, FALSE)
-		update_flags |= M.adjustBruteLoss(0, FALSE)
-		update_flags |= M.adjustFireLoss(0, FALSE)
-		update_flags |= M.AdjustWeakened(-1, FALSE)
+		update_flags |= M.adjustOxyLoss(-16, FALSE)

@@ -3,11 +3,11 @@
 	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
 	icon = 'icons/hispania/obj/moa.dmi'
 	icon_state = "moa_shutdown"
-	list_reagents = list("moa_complement" = 50)
-	volume = 1000
+	list_reagents = list("moa_complement" = 10000)
+	volume = 10000
 	w_class = WEIGHT_CLASS_HUGE
 	var/status = 3
-	var/hitcost = 1000
+	var/hitcost = 25
 	var/obj/item/stock_parts/cell/high/bcell = null
 
 /obj/item/reagent_containers/iv_bag/moa/process()
@@ -15,14 +15,9 @@
 		end_processing()
 		return
 
-	if(amount_per_transfer_from_this > 10) // Prevents people from switching to illegal transfer values while the IV is already in someone, i.e. anything over 10
-		visible_message("<span class='danger'>The IV bag's needle pops out of [injection_target]'s arm. The transfer amount is too high!</span>")
-		end_processing()
-		return
-
 	if(get_dist(get_turf(src), get_turf(injection_target)) > 1)
 		to_chat(injection_target, "<span class='userdanger'>The [src]'s' needle is ripped out of you!</span>")
-		injection_target.apply_damage(3, BRUTE, pick("r_arm", "l_arm"))
+		injection_target.apply_damage(10, BRUTE, pick("r_arm", "l_arm"))
 		end_processing()
 		return
 
@@ -34,12 +29,12 @@
 			var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1) 	//The amount of reagents we'll transfer to the person
 			reagents.reaction(injection_target, INGEST, fraction) 	//React the amount we're transfering.
 			reagents.trans_to(injection_target, amount_per_transfer_from_this)
+			deductcharge(hitcost)
+			bcell.use(hitcost)
 			update_icon()
 
 /obj/item/reagent_containers/iv_bag/attack_self(mob/user)
 	..()
-	mode = !mode
-	update_icon()
 
 /obj/item/reagent_containers/iv_bag/moa/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/stock_parts/cell))
@@ -72,7 +67,7 @@
 /obj/item/reagent_containers/iv_bag/moa/loaded/New() //this one starts with a cell pre-installed.
 	..()
 	status = 1
-	bcell = new(src)
+	bcell = new/obj/item/stock_parts/cell/high(src)
 	update_icon()
 	return
 
@@ -106,5 +101,6 @@
 
 /obj/item/reagent_containers/iv_bag/moa/emp_act(severity)
 	if(bcell)
-		deductcharge(1000 / severity)
+		deductcharge(100000 / severity)
+		playsound(loc, "sparks", 75, 1, -1)
 	..()
