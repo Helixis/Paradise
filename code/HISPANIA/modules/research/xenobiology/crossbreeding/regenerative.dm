@@ -78,3 +78,66 @@ Regenerative extracts:
 		var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
 		ToCharge.charge = ToCharge.maxcharge
 		to_chat(target, "<span class='notice'>You feel a strange electrical pulse, and one of your electrical items was recharged.</span>")
+
+/obj/item/slimecross/regenerative/silver
+	colour = "silver"
+	effect_desc = "Fully heals the target and makes their belly feel round and full."
+
+/obj/item/slimecross/regenerative/silver/core_effect(mob/living/target, mob/user)
+	target.set_nutrition(NUTRITION_LEVEL_FULL - 1)
+	to_chat(target, "<span class='notice'>You feel satiated.</span>")
+
+obj/item/slimecross/regenerative/cerulean
+	colour = "cerulean"
+	effect_desc = "Fully heals the target and makes a second regenerative core with no special effects."
+
+/obj/item/slimecross/regenerative/cerulean/core_effect(mob/living/target, mob/user)
+	src.forceMove(user.loc)
+	var/obj/item/slimecross/X = new /obj/item/slimecross/regenerative(user.loc)
+	X.name = name
+	X.desc = desc
+	user.put_in_active_hand(X)
+	to_chat(user, "<span class='notice'>Some of the milky goo congeals in your hand!</span>")
+
+/obj/item/slimecross/regenerative/pyrite
+	colour = "pyrite"
+	effect_desc = "Fully heals and randomly colors the target."
+
+/obj/item/slimecross/regenerative/pyrite/core_effect(mob/living/target, mob/user)
+	target.visible_message("<span class='warning'>The milky goo coating [target] leaves [target.p_them()] a different color!</span>")
+	target.add_atom_colour(rgb(rand(0,255),rand(0,255),rand(0,255)),WASHABLE_COLOUR_PRIORITY)
+
+/obj/item/slimecross/regenerative/red
+	colour = "red"
+	effect_desc = "Fully heals the target and injects them with some ephedrine."
+
+/obj/item/slimecross/regenerative/red/core_effect(mob/living/target, mob/user)
+	to_chat(target, "<span class='notice'>You feel... <i>faster.</i></span>")
+	target.reagents.add_reagent(/datum/reagent/medicine/ephedrine,3)
+
+/obj/item/slimecross/regenerative/green
+	colour = "green"
+	effect_desc = "Fully heals the target and changes the spieces or color of a slime or jellyperson."
+
+/obj/item/slimecross/regenerative/green/core_effect(mob/living/target, mob/user)
+	if(isslime(target))
+		target.visible_message("<span class='warning'>The [target] suddenly changes color!</span>")
+		var/mob/living/simple_animal/slime/S = target
+		S.random_colour()
+
+/obj/item/slimecross/regenerative/pink
+	colour = "pink"
+	effect_desc = "Fully heals the target and injects them with some krokodil."
+
+/obj/item/slimecross/regenerative/pink/core_effect(mob/living/target, mob/user)
+	to_chat(target, "<span class='notice'>You feel more calm.</span>")
+	target.reagents.add_reagent(/datum/reagent/krokodil,4)
+
+/obj/item/slimecross/regenerative/gold
+	colour = "gold"
+	effect_desc = "Fully heals the target and produces a random coin."
+
+/obj/item/slimecross/regenerative/gold/core_effect(mob/living/target, mob/user)
+	var/newcoin = pick(/obj/item/coin/silver, /obj/item/coin/iron, /obj/item/coin/gold, /obj/item/coin/diamond, /obj/item/coin/plasma, /obj/item/coin/uranium)
+	var/obj/item/coin/C = new newcoin(target.loc)
+	playsound(C, 'sound/items/coinflip.ogg', 50, TRUE)
