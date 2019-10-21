@@ -8,7 +8,7 @@
 	w_class = WEIGHT_CLASS_HUGE
 	var/status = 3
 	var/hitcost = 64
-	var/obj/item/stock_parts/cell/high = null
+	var/obj/item/stock_parts/cell/bcell = null
 
 /obj/item/reagent_containers/iv_bag/moa/process()
 	if(!injection_target)
