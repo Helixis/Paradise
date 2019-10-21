@@ -84,14 +84,20 @@
 /obj/item/slime_extract/purple
 	name = "purple slime extract"
 	icon_state = "purple slime extract"
+	effectmod = "regenerative"
+	activate_reagents = list("blood","plasma")
 
 /obj/item/slime_extract/darkpurple
 	name = "dark purple slime extract"
 	icon_state = "dark purple slime extract"
+	effectmod = "self-sustaining"
+	activate_reagents = list("plasma")
 
 /obj/item/slime_extract/orange
 	name = "orange slime extract"
 	icon_state = "orange slime extract"
+	effectmod = "burning"
+	activate_reagents = list("blood","plasma","water")
 
 /obj/item/slime_extract/yellow
 	name = "yellow slime extract"
@@ -140,10 +146,14 @@
 /obj/item/slime_extract/pyrite
 	name = "pyrite slime extract"
 	icon_state = "pyrite slime extract"
+	effectmod = "prismatic"
+	activate_reagents = list("blood","plasma")
 
 /obj/item/slime_extract/cerulean
 	name = "cerulean slime extract"
 	icon_state = "cerulean slime extract"
+	effectmod = "recurring"
+	activate_reagents = list("blood","plasma")
 
 /obj/item/slime_extract/sepia
 	name = "sepia slime extract"
