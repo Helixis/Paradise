@@ -1206,6 +1206,7 @@
 #include "code\HISPANIA\modules\research\designs\power_designs.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\__corecross.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\burning.dm"
+#include "code\HISPANIA\modules\research\xenobiology\crossbreeding\recurring.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\regenerative.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\reproductive.dm"
 #include "code\HISPANIA\modules\surgery\organs\subtypes\murghal.dm"
