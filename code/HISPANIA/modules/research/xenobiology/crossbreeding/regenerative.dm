@@ -141,3 +141,29 @@ obj/item/slimecross/regenerative/cerulean
 	var/newcoin = pick(/obj/item/coin/silver, /obj/item/coin/iron, /obj/item/coin/gold, /obj/item/coin/diamond, /obj/item/coin/plasma, /obj/item/coin/uranium)
 	var/obj/item/coin/C = new newcoin(target.loc)
 	playsound(C, 'sound/items/coinflip.ogg', 50, TRUE)
+
+/obj/item/slimecross/regenerative/lightpink
+	colour = "light pink"
+	effect_desc = "Fully heals the target and also heals the user."
+
+/obj/item/slimecross/regenerative/lightpink/core_effect(mob/living/target, mob/user)
+	if(!isliving(user))
+		return
+	if(target == user)
+		return
+	var/mob/living/U = user
+	U.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
+	to_chat(U, "<span class='notice'>Some of the milky goo sprays onto you, as well!</span>")
+
+/obj/item/slimecross/regenerative/darkpurple
+	colour = "dark purple"
+	effect_desc = "Fully heals the target and gives them purple clothing if they are naked."
+
+/obj/item/slimecross/regenerative/darkpurple/core_effect(mob/living/target, mob/user)
+	var/equipped = 0
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/shoes/purple(null), SLOT_FEET)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(null), SLOT_ICLOTHING)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/gloves/color/purple(null), SLOT_GLOVES)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/head/soft/purple(null), SLOT_HEAD)
+	if(equipped > 0)
+		target.visible_message("<span class='notice'>The milky goo congeals into clothing!</span>")
