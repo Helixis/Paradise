@@ -158,3 +158,9 @@ Industrial extracts:
 /obj/item/slimecross/industrial/rainbow/process()
 	itempath = pick(subtypesof(/obj/item/slime_extract))
 	..()
+
+/obj/item/slimecross/industrial/red
+	colour = "red"
+	effect_desc = "Produces blood orbs."
+	plasmarequired = 5
+	itempath = /obj/item/slimecrossbeaker/bloodpack

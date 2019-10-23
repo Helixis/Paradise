@@ -120,13 +120,14 @@ To add a crossbreed:
 	name = "blood extract"
 	desc = "A sphere of liquid blood, somehow managing to stay together."
 	color = "#FF0000"
-	list_reagents = list(/datum/reagent/blood = 50)
+	list_reagents = list("blood" = 50)
+	container_type = DRAWABLE
 
 /obj/item/slimecrossbeaker/omnizine //15u omnizine.
 	name = "healing extract"
 	desc = "A gelatinous extract of pure omnizine."
 	color = "#FF00FF"
-	list_reagents = list(/datum/reagent/medicine/omnizine = 15)
+	list_reagents = list("omnizine" = 15)
 
 /obj/item/slimecrossbeaker/autoinjector //As with the above, but automatically injects whomever it is used on with contents.
 	var/ignore_flags = FALSE
@@ -154,3 +155,17 @@ To add a crossbreed:
 			to_chat(user, "<span class='notice'>You press [src] against yourself, and it flattens against you!</span>")
 	else
 		to_chat(user, "<span class='warning'>There's no place to stick [src]!</span>")
+
+/obj/item/slimecrossbeaker/autoinjector/slimejelly //Primarily for slimepeople, but you do you.
+	self_use_only = TRUE
+	ignore_flags = TRUE
+	name = "slime jelly bubble"
+	desc = "A sphere of slime jelly. It seems to stick to your skin, but avoids other surfaces."
+	color = "#00FF00"
+	list_reagents = list("slimejelly" = 50)
+
+/obj/item/slimecrossbeaker/autoinjector/slimestimulant
+	name = "invigorating gel"
+	desc = "A bubbling purple mixture, designed to heal and boost movement."
+	color = "#FF00FF"
+	list_reagents = list("regen_jelly" = 30, "methamphetamine" = 9)

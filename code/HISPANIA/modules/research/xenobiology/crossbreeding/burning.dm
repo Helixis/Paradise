@@ -50,7 +50,7 @@ Burning extracts:
 	R.add_reagent("condensedcapsaicin", 100)
 
 	var/datum/effect_system/smoke_spread/chem/smoke = new
-	smoke.set_up(R, 7, get_turf(user))
+	smoke.set_up(R,  get_turf(user), TRUE)
 	smoke.start(3)
 	..()
 
@@ -81,7 +81,7 @@ Burning extracts:
 	R.add_reagent("frostoil", 40)
 	user.reagents.add_reagent("cryoxadone",10)
 	var/datum/effect_system/smoke_spread/chem/smoke = new
-	smoke.set_up(R, 7, get_turf(user))
+	smoke.set_up(R,  get_turf(user), TRUE)
 	smoke.start(3)
 	..()
 
