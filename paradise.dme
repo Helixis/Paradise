@@ -1208,6 +1208,7 @@
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\_status_effect.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\_weapons.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\burning.dm"
+#include "code\HISPANIA\modules\research\xenobiology\crossbreeding\industrial.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\prismatic.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\recurring.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\regenerative.dm"
