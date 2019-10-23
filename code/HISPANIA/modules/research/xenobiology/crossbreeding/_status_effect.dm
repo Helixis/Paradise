@@ -127,3 +127,4 @@
 
 /datum/status_effect/stabilized/pyrite/on_remove()
 	owner.color = originalcolor
+
