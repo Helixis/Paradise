@@ -112,3 +112,16 @@ Stabilized extracts:
 	colour = "pink"
 	effect_desc = "As long as no creatures are harmed in the owner's presense, they will not attack you. If the peace is broken it takes two minutes to restore."
 
+/obj/item/slimecross/stabilized/rainbow
+	colour = "rainbow"
+	effect_desc = "Accepts a regenerative extract and automatically uses it if the owner enters a critical condition."
+	var/obj/item/slimecross/regenerative/regencore
+
+/obj/item/slimecross/stabilized/rainbow/attackby(obj/item/O, mob/user)
+	var/obj/item/slimecross/regenerative/regen = O
+	if(istype(regen) && !regencore)
+		to_chat(user, "<span class='notice'>You place [O] in [src], prepping the extract for automatic application!</span>")
+		regencore = regen
+		regen.forceMove(src)
+		return
+	return ..()

@@ -164,3 +164,9 @@ Industrial extracts:
 	effect_desc = "Produces blood orbs."
 	plasmarequired = 5
 	itempath = /obj/item/slimecrossbeaker/bloodpack
+
+/obj/item/slimecross/industrial/orange
+	colour = "orange"
+	effect_desc = "Produces slime zippo lighters."
+	plasmarequired = 6
+	itempath = /obj/item/lighter/zippo/slime

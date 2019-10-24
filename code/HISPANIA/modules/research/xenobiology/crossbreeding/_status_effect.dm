@@ -128,3 +128,18 @@
 /datum/status_effect/stabilized/pyrite/on_remove()
 	owner.color = originalcolor
 
+/datum/status_effect/stabilized/rainbow
+	id = "stabilizedrainbow"
+	colour = "rainbow"
+
+/datum/status_effect/stabilized/rainbow/tick()
+	if(owner.health <= 0)
+		var/obj/item/slimecross/stabilized/rainbow/X = linked_extract
+		if(istype(X))
+			if(X.regencore)
+				X.regencore.afterattack(owner,owner,TRUE)
+				X.regencore = null
+				owner.visible_message("<span class='warning'>[owner] flashes a rainbow of colors, and [owner.p_their()] skin is coated in a milky regenerative goo!</span>")
+				qdel(src)
+				qdel(linked_extract)
+	return ..()

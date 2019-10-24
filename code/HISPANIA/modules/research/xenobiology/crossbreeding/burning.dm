@@ -54,6 +54,15 @@ Burning extracts:
 	smoke.start(3)
 	..()
 
+/obj/item/slimecross/burning/purple
+	colour = "purple"
+	effect_desc = "Creates a clump of invigorating gel, it has healing properties and makes you feel good."
+
+/obj/item/slimecross/burning/purple/do_effect(mob/user)
+	user.visible_message("<span class='notice'>[src] fills with a bubbling liquid!</span>")
+	new /obj/item/slimecrossbeaker/autoinjector/slimestimulant(get_turf(user))
+	..()
+
 /obj/item/slimecross/burning/yellow
 	colour = "yellow"
 	effect_desc = "Electrocutes people near you."
@@ -117,3 +126,30 @@ Burning extracts:
 		new /obj/effect/temp_visual/explosion(get_turf(M))
 		M.ex_act(EXPLODE_HEAVY)
 	qdel(src)
+
+/obj/item/slimecross/burning/cerulean
+	colour = "cerulean"
+	effect_desc = "Produces an extract cloning potion, which copies an extract, as well as its extra uses."
+
+/obj/item/slimecross/burning/cerulean/do_effect(mob/user)
+	user.visible_message("<span class='notice'>[src] produces a potion!</span>")
+	new /obj/item/slimepotion/extract_cloner(get_turf(user))
+	..()
+
+/obj/item/slimecross/burning/adamantine
+	colour = "adamantine"
+	effect_desc = "Creates a mighty adamantine shield."
+
+/obj/item/slimecross/burning/adamantine/do_effect(mob/user)
+	user.visible_message("<span class='notice'>[src] crystallizes into a large shield!</span>")
+	new /obj/item/twohanded/required/adamantineshield(get_turf(user))
+	..()
+
+/obj/item/slimecross/burning/rainbow
+	colour = "rainbow"
+	effect_desc = "Creates the Rainbow Knife, a kitchen knife that deals random types of damage."
+
+/obj/item/slimecross/burning/rainbow/do_effect(mob/user)
+	user.visible_message("<span class='notice'>[src] flattens into a glowing rainbow blade.</span>")
+	new /obj/item/kitchen/knife/rainbowknife(get_turf(user))
+	..()
