@@ -45,7 +45,7 @@
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the Xenobluespace power cell.</span>")
 				qdel(src)
-        usr.put_in_hands(new /obj/item/stock_parts/cell/xenoblue)
+				usr.put_in_hands(new /obj/item/stock_parts/cell/xenoblue)
 
 // SUBTYPES BELOW
 
