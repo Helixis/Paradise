@@ -8,9 +8,9 @@
 
 	list_reagents = list("protein" = 5, "toxin" = 6)
 	tastes = list("tender meat, like butter" = 1)
-///////////////
+
 //Cooked Meat//
-///////////////
+
 
 ///Drake steak///
 /obj/item/reagent_containers/food/snacks/drakesteak

@@ -74,8 +74,8 @@
 
 /datum/chemical_reaction/hotline_bling // By reptile
 	name = "Hotline Bling"
-	id = "hotline_bling "
-	result = "hotline_bling "
+	id = "hotline_bling"
+	result = "hotline_bling"
 	required_reagents = list("bloodymary" = 1, "drakeblood" = 1)
 	result_amount = 4
 	mix_message = "You used to, you used to..."
