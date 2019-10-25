@@ -98,19 +98,22 @@
 	examine_text = "<span class='warning'>Nearby electronics seem just a little more charged wherever SUBJECTPRONOUN goes.</span>"
 
 /datum/status_effect/stabilized/yellow/tick()
-	if(cooldown > 0)
-		cooldown--
-		return ..()
-	cooldown = max_cooldown
-	var/list/batteries = list()
-	for(var/obj/item/stock_parts/cell/C in owner.GetAllContents())
-		if(C.charge < C.maxcharge)
-			batteries += C
-	if(batteries.len)
-		var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
-		ToCharge.charge += min(ToCharge.maxcharge - ToCharge.charge, ToCharge.maxcharge/10) //10% of the cell, or to maximum.
-		to_chat(owner, "<span class='notice'>[linked_extract] discharges some energy into a device you have.</span>")
-	return ..()
+    if(cooldown > 0)
+        cooldown--
+        return ..()
+    cooldown = max_cooldown
+    var/list/batteries = list()
+    for(var/obj/item/stock_parts/cell/C in owner.GetAllContents())
+        if(C.charge < C.maxcharge)
+            batteries += C
+    if(batteries.len)
+        var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
+        ToCharge.charge += min(ToCharge.maxcharge - ToCharge.charge, ToCharge.maxcharge/10) //10% of the cell, or to maximum.
+        for(var/obj/item/gun/energy/G in owner.GetAllContents())
+            G.on_recharge()
+            G.update_icon()
+        to_chat(owner, "<span class='notice'>[linked_extract] discharges some energy into a device you have.</span>")
+    return ..()
 
 /datum/status_effect/stabilized/pyrite
 	id = "stabilizedpyrite"
