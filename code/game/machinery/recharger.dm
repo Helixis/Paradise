@@ -116,8 +116,8 @@
 		if(istype(charging, /obj/item/melee/baton))
 			var/obj/item/melee/baton/B = charging
 			if(B.bcell)
-				if(B.bcell.give(B.bcell.chargerate/2.5))
-					use_power(B.bcell.chargerate * 100)
+				if(B.bcell.give(B.bcell.chargerate))
+					use_power(B.bcell.chargerate * 2)
 					using_power = TRUE
 
 		if(istype(charging, /obj/item/modular_computer))
