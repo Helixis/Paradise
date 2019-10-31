@@ -51,7 +51,7 @@
 
 // Smaller variant, used by energy guns and similar small devices.
 /obj/item/stock_parts/cell/device
-	name = "device power cell"
+	name = "standard device power cell"
 	desc = "A small power cell designed to power handheld devices."
 	icon = 'icons/HISPANIA/obj/power.dmi'
 	icon_state = "device"
@@ -59,14 +59,9 @@
 	force = 0
 	throw_speed = 5
 	throw_range = 7
-	maxcharge = 100
-	materials = list(MAT_STEEL = 40, MAT_GLASS = 5)
-	rating = 7
-	chargerate = 10
-
-/obj/item/stock_parts/cell/device/standard
-	name = "standard device power cell"
 	maxcharge = 25
+	materials = list(MAT_STEEL = 40, MAT_GLASS = 5)
+	rating = 1
 	chargerate = 2.5
 
 /obj/item/stock_parts/cell/device/high

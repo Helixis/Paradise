@@ -3,10 +3,10 @@
 	desc = "Device with modern approach to smoking."
 	icon = 'icons/hispania/obj/clothing/masks.dmi'
 	var/active = 0
-	var/obj/item/stock_parts/cell/cigcell
+	var/obj/item/stock_parts/cell/cell
 	var/cartridge_type = /obj/item/reagent_containers/ecig_cartridge/med_nicotine
 	var/obj/item/reagent_containers/ecig_cartridge/ec_cartridge
-	var/cell_type = /obj/item/stock_parts/cell/device/standard
+	var/cell_type = /obj/item/stock_parts/cell/device
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	attack_verb = list("attacked", "poked", "battered")
@@ -36,11 +36,12 @@
 /obj/item/clothing/mask/cigarette/ecig/New()
 	..()
 	if(ispath(cell_type))
-		cigcell = new cell_type
+		cell = new cell_type
 	ec_cartridge = new cartridge_type(src)
+	update_icon()
 
 /obj/item/clothing/mask/cigarette/ecig/get_cell()
-	return cigcell
+	return cell
 
 /obj/item/clothing/mask/cigarette/ecig/simple
 	name = "cheap electronic cigarette"
@@ -72,8 +73,8 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 		to_chat(user,"<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>")
 	else
 		to_chat(user,"<span class='notice'>There's no cartridge connected.</span>")
-	if(cigcell)
-		to_chat(user,"<span class='notice'>The power meter shows that there's about [round(cigcell.percent(), 25)]% power remaining.</span>")
+	if(cell)
+		to_chat(user,"<span class='notice'>The power meter shows that there's about [round(cell.percent(), 25)]% power remaining.</span>")
 	else
 		to_chat(user,"<span class='notice'>There's no cartridge connected.</span>")
 
@@ -92,8 +93,8 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 		to_chat(user,"<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>")
 	else
 		to_chat(user,"<span class='notice'>There's no cartridge connected.</span>")
-	if(cigcell)
-		to_chat(user,"<span class='notice'>The power meter shows that there's about [round(cigcell.percent(), 1)]% power remaining.</span>")
+	if(cell)
+		to_chat(user,"<span class='notice'>The power meter shows that there's about [round(cell.percent(), 1)]% power remaining.</span>")
 	else
 		to_chat(user,"<span class='notice'>There's no cartridge connected.</span>")
 
@@ -104,7 +105,7 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 	update_icon()
 
 /obj/item/clothing/mask/cigarette/ecig/process()
-	if(!cigcell)
+	if(!cell)
 		Deactivate()
 		return
 	if(!ec_cartridge)
@@ -131,11 +132,11 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 		if (src == C.wear_mask && C.check_has_mouth()) //transfer, but only when not disabled
 			idle = 0
 			//here we'll reduce battery by usage, and check powerlevel - you only use batery while smoking
-			if(cigcell.charge < power_usage) //if this passes, there's not enough power in the battery
+			if(cell.charge < power_usage) //if this passes, there's not enough power in the battery
 				Deactivate()
 				to_chat(C,"<span class='notice'>\The [src]'s power meter flashes a low battery warning and shuts down.</span>")
 				return
-			cigcell.use(power_usage)
+			cell.use(power_usage)
 			idletaste++
 			for (var/datum/reagent/R in ec_cartridge.reagents.reagent_list)
 				ec_cartridge.reagents.trans_id_to(C, R.id, max(REAGENTS_METABOLISM / (2 * ec_cartridge.reagents.reagent_list.len), 0.05)) //transfer at least .1 of each chem
@@ -177,19 +178,19 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 			to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span> ")
 
 	if(istype(I, /obj/item/screwdriver))
-		if(cigcell) //if contains powercell
-			cigcell.update_icon()
-			cigcell.loc = get_turf(src.loc)
-			cigcell = null
-			to_chat(user, "<span class='notice'>You remove \the [cigcell] from \the [src].</span>")
+		if(cell) //if contains powercell
+			cell.update_icon()
+			cell.loc = get_turf(src.loc)
+			cell = null
+			to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
 		else //does not contains cell
 			to_chat(user, "<span class='notice'>There's no battery in \the [src].</span>")
 
 	if(istype(I, /obj/item/stock_parts/cell/device))
-		if(!cigcell && user.unEquip(I))
+		if(!cell && user.unEquip(I))
 			I.forceMove(src)
-			cigcell = I
-			to_chat(user, "<span class='notice'>You install \the [cigcell] into \the [src].</span>")
+			cell = I
+			to_chat(user, "<span class='notice'>You install \the [cell] into \the [src].</span>")
 			update_icon()
 		else
 			to_chat(user, "<span class='notice'>\The [src] already has a battery installed.</span>")
@@ -200,14 +201,14 @@ obj/item/clothing/mask/cigarette/ecig/util/examine(mob/user)
 		Deactivate()
 		to_chat(user, "<span class='notice'>You turn off \the [src].</span> ")
 	else
-		if(cigcell)
+		if(cell)
 			if (!ec_cartridge)
 				to_chat(user, "<span class='notice'>You can't use \the [src] with no cartridge installed!</span> ")
 				return
 			else if(!ec_cartridge.reagents.total_volume)
 				to_chat(user, "<span class='notice'>You can't use \the [src] with no liquid left!</span> ")
 				return
-			else if(cigcell.charge < power_usage)
+			else if(cell.charge < power_usage)
 				to_chat(user, "<span class='notice'>\The [src]'s power meter flashes a low battery warning and refuses to operate.</span> ")
 				return
 			active=1
