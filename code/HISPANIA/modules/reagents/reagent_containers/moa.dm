@@ -1,4 +1,4 @@
-/obj/item/reagent_containers/iv_bag/moa
+f/obj/item/reagent_containers/iv_bag/moa
 	name = "m.o.a"
 	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
 	icon = 'icons/hispania/obj/moa.dmi'
@@ -33,7 +33,7 @@
 			bcell.use(hitcost)
 			update_icon()
 
-/obj/item/reagent_containers/iv_bag/attack_self(mob/user)
+/obj/item/reagent_containers/iv_bag/moa/attack_self(mob/user)
 	..()
 
 /obj/item/reagent_containers/iv_bag/moa/attackby(obj/item/W, mob/user, params)
