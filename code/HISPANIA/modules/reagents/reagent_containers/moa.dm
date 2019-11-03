@@ -1,4 +1,4 @@
-f/obj/item/reagent_containers/iv_bag/moa
+/obj/item/reagent_containers/iv_bag/moa
 	name = "m.o.a"
 	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
 	icon = 'icons/hispania/obj/moa.dmi'
