@@ -47,7 +47,7 @@ Difficulty: Medium
 	loot = list(/obj/structure/closet/crate/necropolis/dragon)
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/animalhide/ashdrake = 10, /obj/item/stack/sheet/bone = 30, /obj/item/reagent_containers/food/snacks/drakemeat = 3)
 	var/swooping = NONE
-	var/swoop_cooldown = 0
+	var/player_cooldown = 0
 	internal_type = /obj/item/gps/internal/dragon
 	medal_type = BOSS_MEDAL_DRAKE
 	score_type = DRAKE_SCORE
