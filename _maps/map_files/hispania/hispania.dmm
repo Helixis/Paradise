@@ -96319,28 +96319,18 @@
 	},
 /turf/space,
 /area/space/nearstation)
-"dzd" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "cafeteria";
-	tag = "icon-cafeteria (NORTHEAST)"
-	},
-/area/crew_quarters/hor)
-"edZ" = (
+"dTN" = (
 /turf/simulated/floor/plasteel,
 /area/medical/research{
 	name = "Research Division"
 	})
-"eho" = (
-/obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/wood,
-/area/crew_quarters/bar)
+"eoO" = (
+/obj/machinery/recharge_station,
+/obj/effect/decal/warning_stripes/yellow/hollow,
+/turf/simulated/floor/plasteel,
+/area/medical/research{
+	name = "Research Division"
+	})
 "gMZ" = (
 /obj/machinery/atmospherics/pipe/simple/insulated{
 	dir = 6
@@ -96386,14 +96376,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/toxins/mixing)
-"hZi" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/plasteel{
-	icon_state = "dark"
-	},
-/area/construction)
 "izn" = (
 /obj/machinery/atmospherics/unary/passive_vent{
 	dir = 1
@@ -96456,6 +96438,16 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/administration)
+"juD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/plasteel{
+	dir = 2;
+	icon_state = "cafeteria";
+	tag = "icon-cafeteria (NORTHEAST)"
+	},
+/area/crew_quarters/hor)
 "kOE" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 4
@@ -96471,6 +96463,13 @@
 	},
 /turf/simulated/floor/plasteel,
 /area/atmos)
+"mCd" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/wood,
+/area/crew_quarters/bar)
 "mMw" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
@@ -96483,13 +96482,6 @@
 	},
 /turf/space,
 /area/space/nearstation)
-"nSg" = (
-/obj/machinery/recharge_station,
-/obj/effect/decal/warning_stripes/yellow/hollow,
-/turf/simulated/floor/plasteel,
-/area/medical/research{
-	name = "Research Division"
-	})
 "oZV" = (
 /obj/machinery/door/airlock/centcom{
 	id_tag = "adminshuttle";
@@ -96501,6 +96493,10 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/administration)
+"pdQ" = (
+/obj/structure/chair/stool,
+/turf/simulated/floor/wood,
+/area/crew_quarters/bar)
 "pwN" = (
 /obj/machinery/door_control{
 	id = "adminshuttleblast";
@@ -96512,10 +96508,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/administration)
-"pTl" = (
-/obj/structure/chair/stool,
-/turf/simulated/floor/wood,
-/area/crew_quarters/bar)
 "pZO" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
@@ -96537,13 +96529,6 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/space,
 /area/space/nearstation)
-"rDo" = (
-/obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/grass,
-/area/hydroponics)
 "rEw" = (
 /obj/machinery/computer/shuttle/admin{
 	name = "NTV Argos shuttle console"
@@ -96571,6 +96556,14 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/administration)
+"ssp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "dark"
+	},
+/area/construction)
 "sUK" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
@@ -96579,12 +96572,25 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/syndicate_sit)
+"utg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/wood,
+/area/civilian/pet_store)
 "uxy" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
 /turf/space,
 /area/space/nearstation)
+"uBh" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/grass,
+/area/hydroponics)
 "uBM" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8;
@@ -96608,12 +96614,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space/nearstation)
-"vyJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/wood,
-/area/civilian/pet_store)
 "vUm" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
@@ -118905,7 +118905,7 @@ bmf
 bkr
 blV
 brC
-vyJ
+utg
 bqE
 bsn
 blT
@@ -128970,7 +128970,7 @@ cyD
 cyD
 cAp
 cAW
-hZi
+ssp
 cFn
 cGK
 cGv
@@ -130726,7 +130726,7 @@ dkE
 aZR
 bkM
 bmr
-pTl
+pdQ
 btf
 btf
 bmq
@@ -131233,7 +131233,7 @@ bfb
 aUS
 bjc
 baJ
-eho
+mCd
 bwl
 bft
 aYd
@@ -135092,7 +135092,7 @@ aGY
 beb
 djw
 bfz
-rDo
+uBh
 bpH
 bqH
 bro
@@ -139486,7 +139486,7 @@ bQK
 bVz
 bHX
 caZ
-edZ
+dTN
 cav
 cbd
 ceI
@@ -139743,8 +139743,8 @@ bQN
 beB
 bSJ
 clb
-edZ
-edZ
+dTN
+dTN
 cbd
 ccV
 chb
@@ -140000,7 +140000,7 @@ bPn
 cvG
 bnk
 bRU
-nSg
+eoO
 cax
 cbf
 ccU
@@ -144630,7 +144630,7 @@ bYj
 bZW
 cdO
 ceQ
-dzd
+juD
 cgq
 bYj
 cmB
