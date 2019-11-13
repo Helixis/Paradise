@@ -39,9 +39,6 @@
 			bcell.use(hitcost)
 			update_icon()
 
-/obj/item/reagent_containers/moa/attack_self(mob/user)
-	..()
-
 /obj/item/reagent_containers/moa/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/stock_parts/cell))
 		var/obj/item/stock_parts/cell/C = W
@@ -100,7 +97,7 @@
 
 /obj/item/reagent_containers/moa/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
-		if(bcell.charge < (hitcost+chrgdeductamt)) // If after the deduction the baton doesn't have enough charge for a stun hit it turns off.
+		if(bcell.charge < (hitcost+chrgdeductamt))
 			status = 3
 			playsound(loc, "sparks", 75, 1, -1)
 			update_icon()
