@@ -43,6 +43,22 @@
 /obj/item/clothing/mask/cigarette/ecig/get_cell()
 	return cell
 
+/obj/item/clothing/mask/cigarette/ecig/pickup(mob/user)
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/mask/cigarette/ecig/dropped(mob/user)
+	..()
+	update_icon()
+
+/obj/item/clothing/mask/cigarette/ecig/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/rig/emp_act(severity)
+	if(cell)
+		cell.emp_act(severity)
+
 /obj/item/clothing/mask/cigarette/ecig/simple
 	name = "cheap electronic cigarette"
 	desc = "A cheap Lucky 1337 electronic cigarette, styled like a traditional cigarette."
