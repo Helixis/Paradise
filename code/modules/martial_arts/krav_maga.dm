@@ -45,6 +45,9 @@
 
 /datum/martial_art/krav_maga/teach(var/mob/living/carbon/human/H,var/make_temporary=0)
 	..()
+	if(H.mind.assigned_role == "Head of Security")
+		to_chat(H, "<span class='danger'>You would never lower yourself to a pathetic Warden martial art!</span>")
+		return
 	to_chat(H, "<span class = 'userdanger'>You know the arts of Krav Maga!</span>")
 	to_chat(H, "<span class = 'danger'>Place your cursor over a move at the top of the screen to see what it does.</span>")
 	neckchop.Grant(H)
@@ -53,6 +56,8 @@
 
 /datum/martial_art/krav_maga/remove(var/mob/living/carbon/human/H)
 	..()
+	if(H.mind.assigned_role == "Head of Security")
+		return
 	to_chat(H, "<span class = 'userdanger'>You suddenly forget the arts of Krav Maga...</span>")
 	neckchop.Remove(H)
 	legsweep.Remove(H)
