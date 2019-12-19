@@ -67,7 +67,7 @@
 			result = "Big Winner! You win a hundred thousand credits!"
 			resultlvl = "good"
 			win_money(100000, 'sound/goonstation/misc/klaxon.ogg')
-		if(5 to 50) // 0.44%
+		if(5 to 50) // 0.46%
 			atom_say("Big Winner! [userName] has won ten thousand credits!")
 			result = "You win ten thousand credits!"
 			resultlvl = "good"
@@ -92,7 +92,7 @@
 			result = "You win ten credits!"
 			resultlvl = "good"
 			win_money(10)
-		else // 86.01%
+		else // 85.99%
 			result = "<span class='warning'>No luck!</span>"
 			resultlvl = "average"
 	working = 0
