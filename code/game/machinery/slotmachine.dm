@@ -61,38 +61,38 @@
 			result = "JACKPOT! You win one million credits!"
 			resultlvl = "highlight"
 			win_money(1000000, 'sound/goonstation/misc/airraid_loop.ogg')
-		if(2 to 4) // 0.02%
+		if(2 to 4) // 0.03%
 			atom_say("Big Winner! [userName] has won a hundred thousand credits!")
 			event_announcement.Announce("Congratulations to [userName] on winning a hundred thousand credits!", "Big Winner")
 			result = "Big Winner! You win a hundred thousand credits!"
 			resultlvl = "good"
 			win_money(100000, 'sound/goonstation/misc/klaxon.ogg')
-		if(6 to 50) // 0.44%
+		if(5 to 50) // 0.44%
 			atom_say("Big Winner! [userName] has won ten thousand credits!")
 			result = "You win ten thousand credits!"
 			resultlvl = "good"
 			win_money(10000, 'sound/goonstation/misc/klaxon.ogg')
-		if(51 to 100) // 0.49%
+		if(51 to 100) // 0.5%
 			atom_say("Winner! [userName] has won a thousand credits!")
 			result = "You win a thousand credits!"
 			resultlvl = "good"
 			win_money(1000, 'sound/goonstation/misc/bell.ogg')
-		if(101 to 200) // 0,99%
+		if(101 to 300) // 2%
 			atom_say("Winner! [userName] has won a hundred credits!")
 			result = "You win a hundred credits!"
 			resultlvl = "good"
 			win_money(100, 'sound/goonstation/misc/bell.ogg')
-		if(201 to 300) // 0,99%
+		if(201 to 400) // 2%
 			atom_say("Winner! [userName] has won fifty credits!")
 			result = "You win fifty credits!"
 			resultlvl = "good"
 			win_money(50)
-		if(301 to 700) // 3.99%
+		if(301 to 1200) // 9%
 			atom_say("Winner! [userName] has won ten credits!")
 			result = "You win ten credits!"
 			resultlvl = "good"
 			win_money(10)
-		else // 93%
+		else // 86.01%
 			result = "<span class='warning'>No luck!</span>"
 			resultlvl = "average"
 	working = 0
