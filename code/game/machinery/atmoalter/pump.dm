@@ -95,16 +95,6 @@
 /obj/machinery/portable_atmospherics/pump/return_air()
 	return air_contents
 
-/obj/machinery/portable_atmospherics/pump/replace_tank(mob/living/user, close_valve)
-	. = ..()
-	if(.)
-		if(close_valve)
-			if(on)
-				on = FALSE
-				update_icon()
-		else if(on && holding && direction_out)
-			investigate_log("[key_name(user)] started a transfer into [holding].<br>", "atmos")
-
 /obj/machinery/portable_atmospherics/pump/attack_ai(var/mob/user as mob)
 	src.add_hiddenprint(user)
 	return src.attack_hand(user)
@@ -160,7 +150,6 @@
 
 	if(href_list["remove_tank"])
 		if(holding)
-			on = FALSE
 			holding.loc = loc
 			holding = null
 		update_icon()
