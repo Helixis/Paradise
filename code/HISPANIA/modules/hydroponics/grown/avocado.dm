@@ -1,26 +1,23 @@
-//These are the seeds
 /obj/item/seeds/avocado
 	name = "pack of avocado seeds"
-	desc = "These seeds grow into avocado trees."
+	desc = "These seeds grow into avocado trees. Watery"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "seed-avocado"
 	species = "avocado"
 	plantname = "Avocado Tree"
-	product = /obj/item/reagent_containers/food/snacks/grown/avocado/
+	product = /obj/item/reagent_containers/food/snacks/grown/avocado
 	lifespan = 50
 	endurance = 35
-	yield = 3
-	maturation = 6
-	production = 4
+	production = 5
 	potency = 30
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	icon_grow = "avocado-grow"
 	icon_dead = "avocado-dead"
+	mutatelist = list(/obj/item/seeds/avocado/aircado, /obj/item/seeds/avocado/firecado, /obj/item/seeds/avocado/earthcado)
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	reagents_add = list("vitamin" = 0.05, "plantmatter" = 0.1)
+	reagents_add = list( "water" = 0.05, "vitamin" = 0.05, "plantmatter" = 0.1)
 
-//When it grows
-/obj/item/reagent_containers/food/snacks/grown/avocado/
+/obj/item/reagent_containers/food/snacks/grown/avocado
 	seed = /obj/item/seeds/avocado
 	name = "avocado"
 	desc = "An unusually fatty fruit containing a single large seed."
@@ -28,8 +25,8 @@
 	icon_state = "avocado"
 	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice
 	slices_num = 2
+	var/fail_rate = 5
 
-//Can be cut!
 /obj/item/reagent_containers/food/snacks/avocadoslice
 	name = "avocado slice"
 	desc = "A slice of green goodness."
@@ -39,7 +36,7 @@
 /obj/item/reagent_containers/food/snacks/grown/avocado/attackby(obj/item/W as obj, mob/user, params)
 	if(is_sharp(W))
 		var/mob/living/carbon/human/H = user
-		if(prob(5))
+		if(prob(fail_rate))
 			var/picked_hand = pick("l_hand", "r_hand")
 			var/obj/item/organ/external/M = H.get_organ(picked_hand)
 			if (prob(99))
@@ -55,3 +52,63 @@
 				return
 		else
 			return ..()
+
+/obj/item/seeds/avocado/aircado
+	name = "pack of avocado seeds"
+	desc = "These seeds grow into aircado trees. Airy"
+	icon_state = "seed-aircado"
+	species = "aircado"
+	plantname = "Aircado Tree"
+	product = /obj/item/reagent_containers/food/snacks/grown/avocado/aircado
+	mutatelist = list(/obj/item/seeds/avocado, /obj/item/seeds/avocado/firecado, /obj/item/seeds/avocado/earthcado)
+	reagents_add = list( "oxygen" = 0.05)
+	rarity = 20
+
+/obj/item/seeds/avocado/firecado
+	name = "pack of firecado seeds"
+	desc = "These seeds grow into firecado trees. Fiery"
+	icon_state = "seed-firecado"
+	species = "firecado"
+	plantname = "Firecado Tree"
+	product = /obj/item/reagent_containers/food/snacks/grown/avocado/firecado
+	mutatelist = list(/obj/item/seeds/avocado, /obj/item/seeds/avocado/aircado, /obj/item/seeds/avocado/earthcado)
+	reagents_add = list( "oil" = 0.05, "plantmatter" = 0.1)
+	rarity = 20
+
+/obj/item/seeds/avocado/earthcado
+	name = "pack of earthcado seeds"
+	desc = "These seeds grow into earthcado trees. Earthy"
+	icon_state = "seed-earthcado"
+	species = "earthcado"
+	plantname = "Earthcado Tree"
+	product = /obj/item/reagent_containers/food/snacks/grown/avocado/earthcado
+	mutatelist = list(/obj/item/seeds/avocado, /obj/item/seeds/avocado/firecado, /obj/item/seeds/avocado/aircado)
+	reagents_add = list( "carbon" = 0.05, "plantmatter" = 0.1)
+	rarity = 20
+
+/obj/item/reagent_containers/food/snacks/grown/avocado/aircado
+	seed = /obj/item/seeds/avocado
+	name = "aircado"
+	desc = "An unusually airly fruit containing a single large seed."
+	icon_state = "aircado"
+	slice_path = null
+	slices_num = null
+	fail_rate = 0
+
+/obj/item/reagent_containers/food/snacks/grown/avocado/firecado
+	seed = /obj/item/seeds/avocado
+	name = "firecado"
+	desc = "An unusually fiery fruit containing a single large seed."
+	icon_state = "firecado"
+	slice_path = null
+	slices_num = null
+	fail_rate = 0
+
+/obj/item/reagent_containers/food/snacks/grown/avocado/earthcado
+	seed = /obj/item/seeds/avocado
+	name = "earthcado"
+	desc = "An unusually earthy fruit containing a single large seed."
+	icon_state = "earthcado"
+	slice_path = null
+	slices_num = null
+	fail_rate = 0
