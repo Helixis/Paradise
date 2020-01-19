@@ -33,7 +33,7 @@
 /datum/gear/suit/coat/job/sci
 	display_name = "winter coat, science"
 	path = /obj/item/clothing/suit/hooded/wintercoat/science
-	allowed_roles = list("Scientist", "Research Director")
+	allowed_roles = list("Scientist", "Research Director", "Roboticist")
 
 /datum/gear/suit/coat/job/engi
 	display_name = "winter coat, engineering"
@@ -99,12 +99,12 @@
 /datum/gear/suit/labcoat_sciencelarge
 	display_name = "long labcoat, Scientist"
 	path = /obj/item/clothing/suit/storage/labcoat/sciencelarge
-	allowed_roles = list("Scientist", "Research Director")
+	allowed_roles = list("Scientist", "Research Director", "Roboticist")
 
 /datum/gear/suit/labcoat_scienceroundlarge
 	display_name = "long labcoat roundcut, Scientist"
 	path = /obj/item/clothing/suit/storage/labcoat/scienceroundlarge
-	allowed_roles = list("Scientist", "Research Director")
+	allowed_roles = list("Scientist", "Research Director", "Roboticist")
 
 //JACKETS
 /datum/gear/suit/leather_jacket
