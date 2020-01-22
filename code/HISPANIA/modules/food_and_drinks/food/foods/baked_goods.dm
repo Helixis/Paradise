@@ -290,3 +290,14 @@
 	icon_state = "honeybreadslice"
 	trash = /obj/item/trash/plate
 	filling_color = "#EFD8A7"
+
+///        Pancakes     ///
+/obj/item/reagent_containers/food/snacks/pancake_1
+    name = "pancake"
+    desc = "A fluffy pancake. The softer, superior relative of the waffle."
+    icon = 'icons/hispania/obj/food/food.dmi'
+    icon_state = "pancake_1"
+    trash = /obj/item/trash/plate
+    filling_color = "#D2691E"
+    bitesize = 3
+    list_reagents = list("nutriment" = 4, "vitamin" = 1)

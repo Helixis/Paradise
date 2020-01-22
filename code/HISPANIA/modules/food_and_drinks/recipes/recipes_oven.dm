@@ -27,3 +27,11 @@
 		/obj/item/reagent_containers/food/snacks/dough,
     )
     result = /obj/item/reagent_containers/food/snacks/sliceable/honeybread
+
+//Pancake by Nothing
+/datum/recipe/oven/pancake
+    reagents = list("sugar" = 5)
+    items = list(
+        /obj/item/reagent_containers/food/snacks/sliceable/flatdough,
+    )
+    result = /obj/item/reagent_containers/food/snacks/pancake_1
