@@ -23,3 +23,13 @@
 	drink_desc = "It is sticky and has a strong chlorine smell."
 	taste_description = "someone else's child"
 
+/datum/reagent/consumable/drink/drakeblood
+	name = "Drake Blood"
+	id = "drakeblood"
+	description = "The raw essence of a Drake."
+	color = "#E6502F"
+	drink_icon = "drakeblood"
+	drink_name = "Glass of drake blood"
+	drink_desc = "The raw essence of a Drake RAWR"
+	taste_description = "fresh blood."
+
