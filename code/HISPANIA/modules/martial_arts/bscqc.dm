@@ -95,7 +95,6 @@
 	add_attack_logs(A, D, "Melee attacked with martial-art [src]", ATKLOG_ALL)
 	A.do_attack_animation(D)
 	var/picked_hit_type = pick("CQC'd", "neck chopped", "gut punched", "Big Bossed")
-	var/bonus_damage = 6
 	if(D.weakened || D.resting || D.lying)
 		bonus_damage += 2
 		picked_hit_type = "stomps on"
