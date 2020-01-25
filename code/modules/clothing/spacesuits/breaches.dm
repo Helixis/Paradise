@@ -215,7 +215,7 @@ var/global/list/breach_burn_descriptors = list(
 	..()
 
 /obj/item/clothing/suit/space/examine(mob/user)
-	. = ..()
+	..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
-			. += "<span class='danger'>It has \a [B.descriptor].</span>"
+			to_chat(user, "<span class='danger'>It has \a [B.descriptor].</span>")

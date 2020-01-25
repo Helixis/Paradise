@@ -8,8 +8,7 @@
 
 	var/obj/machinery/atmospherics/pipe/target = null
 	anchored = TRUE
-	max_integrity = 150
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 40, "acid" = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 100, bomb = 0, bio = 100, rad = 100)
 	power_channel = ENVIRON
 	var/frequency = ATMOS_DISTRO_FREQ
 	var/id
@@ -114,7 +113,7 @@
 	else
 		t += "The connect error light is blinking."
 
-	. = list(t)
+	to_chat(user, t)
 
 /obj/machinery/meter/Click()
 	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
@@ -137,17 +136,8 @@
 			"[user] unfastens \the [src].", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
-		deconstruct(TRUE)
-
-/obj/machinery/meter/deconstruct(disassembled = TRUE)
-	if(!(flags & NODECONSTRUCT))
-		new /obj/item/pipe_meter(loc)
-	qdel(src)
-
-/obj/machinery/meter/singularity_pull(S, current_size)
-	..()
-	if(current_size >= STAGE_FIVE)
-		deconstruct()
+		new /obj/item/pipe_meter(src.loc)
+		qdel(src)
 
 // TURF METER - REPORTS A TILE'S AIR CONTENTS
 

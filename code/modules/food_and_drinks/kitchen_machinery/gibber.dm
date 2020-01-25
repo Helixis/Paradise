@@ -108,9 +108,7 @@
 	if(default_unfasten_wrench(user, P))
 		return
 
-	if(default_deconstruction_crowbar(P))
-		return
-	return ..()
+	default_deconstruction_crowbar(P)
 
 /obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
 	if(user.incapacitated() || !ishuman(user))

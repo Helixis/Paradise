@@ -30,21 +30,17 @@
 	if(id_tag == "s_docking_airlock")
 		INVOKE_ASYNC(src, .proc/lock)
 
-/mob/onShuttleMove(turf/oldT, turf/T1, rotation)
+/mob/onShuttleMove()
     if(!move_on_shuttle)
         return 0
     . = ..()
     if(!.)
         return
-    if(!client)
-        return
-
-    if(buckled)
-        shake_camera(src, 2, 1) // turn it down a bit come on
-    else
-        shake_camera(src, 7, 1)
-
-    update_parallax_contents()
+    if(client)
+        if(buckled)
+            shake_camera(src, 2, 1) // turn it down a bit come on
+        else
+            shake_camera(src, 7, 1)
 
 /mob/living/carbon/onShuttleMove()
     . = ..()
@@ -58,18 +54,8 @@
 	if(smooth)
 		queue_smooth(src)
 
-/mob/postDock()
-	update_parallax_contents()
-
 /obj/machinery/door/airlock/postDock(obj/docking_port/stationary/S1)
 	. = ..()
 	if(!S1.lock_shuttle_doors && id_tag == "s_docking_airlock")
 		INVOKE_ASYNC(src, .proc/unlock)
 
-/obj/structure/ladder/onShuttleMove()
-	if(resistance_flags & INDESTRUCTIBLE)
-		// simply don't be moved
-		return FALSE
-	disconnect()
-	LateInitialize()
-	return ..()

@@ -6,12 +6,12 @@
 	icon_state = "rock"
 	var/smooth_icon = 'icons/turf/smoothrocks.dmi'
 	smooth = SMOOTH_MORE | SMOOTH_BORDER
-	canSmoothWith = null
+	canSmoothWith
 	baseturf = /turf/simulated/floor/plating/asteroid/airless
 	temperature = 2.7
 	opacity = 1
-	density = TRUE
-	blocks_air = TRUE
+	density = 1
+	blocks_air = 1
 	layer = EDGED_TURF_LAYER
 	temperature = TCMB
 	var/environment_type = "asteroid"
@@ -21,18 +21,20 @@
 	var/spread = 0 //will the seam spread?
 	var/spreadChance = 0 //the percentual chance of an ore spreading to the neighbouring tiles
 	var/last_act = 0
-	var/scan_state = "" //Holder for the image we display when we're pinged by a mining scanner
-	var/defer_change = 0
+	var/scan_state = null //Holder for the image we display when we're pinged by a mining scanner
+	var/defer_change = FALSE
 
-/turf/simulated/mineral/Initialize(mapload)
-	if(!canSmoothWith)
+/turf/simulated/mineral/New()
+	if (!canSmoothWith)
 		canSmoothWith = list(/turf/simulated/mineral)
-	var/matrix/M = new
-	M.Translate(-4, -4)
-	transform = M
+	pixel_y = -4
+	pixel_x = -4
 	icon = smooth_icon
-	. = ..()
-	if(mineralType && mineralAmt && spread && spreadChance)
+
+	..()
+	GLOB.mineral_turfs += src
+
+	if (mineralType && mineralAmt && spread && spreadChance)
 		for(var/dir in cardinal)
 			if(prob(spreadChance))
 				var/turf/T = get_step(src, dir)
@@ -46,62 +48,62 @@
 	setDir(angle2dir(rotation + dir2angle(dir)))
 	queue_smooth(src)
 
-/turf/simulated/mineral/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
-	if(turf_type)
-		underlay_appearance.icon = initial(turf_type.icon)
-		underlay_appearance.icon_state = initial(turf_type.icon_state)
-		return TRUE
-	return ..()
-
-/turf/simulated/mineral/attackby(obj/item/I, mob/user, params)
+/turf/simulated/mineral/attackby(var/obj/item/pickaxe/P as obj, mob/user as mob, params)
 	if(!user.IsAdvancedToolUser())
 		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 
-	if(istype(I, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = I
+	if(istype(P, /obj/item/pickaxe))
 		var/turf/T = user.loc
 		if(!isturf(T))
 			return
 
 		if(last_act + (40 * P.toolspeed) > world.time) // Prevents message spam
 			return
+
 		last_act = world.time
 		to_chat(user, "<span class='notice'>You start picking...</span>")
 		P.playDigSound()
 
 		if(do_after(user, 40 * P.toolspeed, target = src))
-			if(ismineralturf(src)) //sanity check against turf being deleted during digspeed delay
+			if(istype(src, /turf/simulated/mineral)) //sanity check against turf being deleted during digspeed delay
 				to_chat(user, "<span class='notice'>You finish cutting into the rock.</span>")
+				P.update_icon()
 				gets_drilled(user)
 				feedback_add_details("pick_used_mining","[P.name]")
 	else
 		return attack_hand(user)
 
 /turf/simulated/mineral/proc/gets_drilled()
-	if(mineralType && (mineralAmt > 0))
-		new mineralType(src, mineralAmt)
+	if(mineralType && (mineralAmt > 0) && (mineralAmt < 11))
+		var/i
+		for(i=0; i < mineralAmt; i++)
+			new mineralType(src)
 		feedback_add_details("ore_mined","[mineralType]|[mineralAmt]")
-	for(var/obj/effect/temp_visual/mining_overlay/M in src)
-		qdel(M)
 	ChangeTurf(turf_type, defer_change)
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
 	playsound(src, 'sound/effects/break_stone.ogg', 50, 1) //beautiful destruction
 
-/turf/simulated/mineral/attack_animal(mob/living/simple_animal/user)
+	if(rand(1, 750) == 1)
+		visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
+		new /obj/structure/closet/crate/secure/loot(src)
+
+	return
+
+/turf/simulated/mineral/attack_animal(mob/living/simple_animal/user as mob)
 	if((user.environment_smash & ENVIRONMENT_SMASH_WALLS) || (user.environment_smash & ENVIRONMENT_SMASH_RWALLS))
 		gets_drilled()
 	..()
 
-/turf/simulated/mineral/attack_alien(mob/living/carbon/alien/M)
+/turf/simulated/mineral/attack_alien(var/mob/living/carbon/alien/M)
 	to_chat(M, "<span class='notice'>You start digging into the rock...</span>")
-	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE)
+	playsound(src, 'sound/effects/break_stone.ogg', 50, 1)
 	if(do_after(M, 40, target = src))
 		to_chat(M, "<span class='notice'>You tunnel into the rock.</span>")
-		gets_drilled(M)
+		gets_drilled()
 
-/turf/simulated/mineral/Bumped(atom/movable/AM)
-	..()
+/turf/simulated/mineral/Bumped(AM as mob|obj)
+	. = ..()
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		if((istype(H.l_hand,/obj/item/pickaxe)) && (!H.hand))
@@ -112,19 +114,15 @@
 
 	else if(isrobot(AM))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active, /obj/item/pickaxe))
-			attackby(R.module_active, R)
+		if(istype(R.module_active,/obj/item/pickaxe))
+			attackby(R.module_active,R)
 
 	else if(ismecha(AM))
 		var/obj/mecha/M = AM
-		if(istype(M.selected, /obj/item/mecha_parts/mecha_equipment/drill))
+		if(istype(M.selected,/obj/item/mecha_parts/mecha_equipment/drill))
 			M.selected.action(src)
 
-
-/turf/simulated/mineral/acid_melt()
-	ChangeTurf(baseturf)
-
-/turf/simulated/mineral/ex_act(severity)
+/turf/simulated/mineral/ex_act(severity, target)
 	..()
 	switch(severity)
 		if(3)
@@ -137,23 +135,22 @@
 			gets_drilled(null, 1)
 
 /turf/simulated/mineral/random
-	var/mineralSpawnChanceList = list(/turf/simulated/mineral/uranium = 5, /turf/simulated/mineral/diamond = 1, /turf/simulated/mineral/gold = 10,
-		/turf/simulated/mineral/silver = 12, /turf/simulated/mineral/plasma = 20, /turf/simulated/mineral/iron = 40, /turf/simulated/mineral/titanium = 11,
-		/turf/simulated/mineral/gibtonite = 4, /turf/simulated/floor/plating/asteroid/airless/cave = 2, /turf/simulated/mineral/bscrystal = 1)
-		//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList
 	var/mineralChance = 13
 	var/display_icon_state = "rock"
 
-/turf/simulated/mineral/random/Initialize(mapload)
-
-	mineralSpawnChanceList = typelist("mineralSpawnChanceList", mineralSpawnChanceList)
-
-	if(display_icon_state)
+/turf/simulated/mineral/random/New()
+	if (!mineralSpawnChanceList)
+		mineralSpawnChanceList = list(
+			/turf/simulated/mineral/uranium = 5, /turf/simulated/mineral/diamond = 1, /turf/simulated/mineral/gold = 10,
+			/turf/simulated/mineral/silver = 12, /turf/simulated/mineral/plasma = 20, /turf/simulated/mineral/iron = 40, /turf/simulated/mineral/titanium = 11,
+			/turf/simulated/mineral/gibtonite = 4, /turf/simulated/floor/plating/asteroid/airless/cave = 2, /turf/simulated/mineral/bscrystal = 1)
+	if (display_icon_state)
 		icon_state = display_icon_state
-	. = ..()
+	..()
 	if (prob(mineralChance))
 		var/path = pickweight(mineralSpawnChanceList)
-		var/turf/T = ChangeTurf(path, FALSE, TRUE)
+		var/turf/T = ChangeTurf(path,FALSE,TRUE)
 
 		if(T && ismineralturf(T))
 			var/turf/simulated/mineral/M = T
@@ -184,6 +181,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 	mineralSpawnChanceList = list(
 		/turf/simulated/mineral/uranium/volcanic = 35, /turf/simulated/mineral/diamond/volcanic = 30, /turf/simulated/mineral/gold/volcanic = 45, /turf/simulated/mineral/titanium/volcanic = 45,
@@ -204,6 +202,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 	mineralChance = 10
@@ -214,9 +213,9 @@
 
 /turf/simulated/mineral/random/labormineral
 	mineralSpawnChanceList = list(
-		/turf/simulated/mineral/uranium = 3, /turf/simulated/mineral/diamond = 1, /turf/simulated/mineral/gold = 8, /turf/simulated/mineral/titanium = 8,
-		/turf/simulated/mineral/silver = 20, /turf/simulated/mineral/plasma = 30, /turf/simulated/mineral/iron = 95,
-		/turf/simulated/mineral/gibtonite = 2)
+		/turf/simulated/mineral/uranium = 2, /turf/simulated/mineral/diamond = 1, /turf/simulated/mineral/gold = 3, /turf/simulated/mineral/titanium = 4,
+		/turf/simulated/mineral/silver = 6, /turf/simulated/mineral/plasma = 15, /turf/simulated/mineral/iron = 80,
+		/turf/simulated/mineral/gibtonite = 3)
 	icon_state = "rock_labor"
 
 /turf/simulated/mineral/random/labormineral/volcanic
@@ -226,11 +225,12 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 	mineralSpawnChanceList = list(
-		/turf/simulated/mineral/uranium/volcanic = 3, /turf/simulated/mineral/diamond/volcanic = 1, /turf/simulated/mineral/gold/volcanic = 8, /turf/simulated/mineral/titanium/volcanic = 8,
-		/turf/simulated/mineral/silver/volcanic = 20, /turf/simulated/mineral/plasma/volcanic = 30, /turf/simulated/mineral/bscrystal/volcanic = 1, /turf/simulated/mineral/gibtonite/volcanic = 2,
-		/turf/simulated/mineral/iron/volcanic = 95)
+		/turf/simulated/mineral/uranium/volcanic = 2, /turf/simulated/mineral/diamond/volcanic = 1, /turf/simulated/mineral/gold/volcanic = 3, /turf/simulated/mineral/titanium/volcanic = 4,
+		/turf/simulated/mineral/silver/volcanic = 6, /turf/simulated/mineral/plasma/volcanic = 15, /turf/simulated/mineral/iron/volcanic = 80,
+		/turf/simulated/mineral/gibtonite/volcanic = 3)
 
 // Actual minerals
 /turf/simulated/mineral/iron
@@ -246,6 +246,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/uranium
@@ -261,6 +262,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/diamond
@@ -276,6 +278,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/gold
@@ -291,6 +294,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/silver
@@ -306,6 +310,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/titanium
@@ -321,6 +326,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/plasma
@@ -336,6 +342,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/clown
@@ -352,6 +359,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/mime
@@ -367,6 +375,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/bscrystal
@@ -383,6 +392,7 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 	defer_change = 1
 
 /turf/simulated/mineral/volcanic
@@ -392,18 +402,13 @@
 	oxygen = 14
 	nitrogen = 23
 	temperature = 300
+	planetary_atmos = TRUE
 
 /turf/simulated/mineral/volcanic/lava_land_surface
 	environment_type = "basalt"
 	turf_type = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
 	baseturf = /turf/simulated/floor/plating/lava/smooth/lava_land_surface
 	defer_change = 1
-
-//gibtonite state defines
-#define GIBTONITE_UNSTRUCK 0
-#define GIBTONITE_ACTIVE 1
-#define GIBTONITE_STABLE 2
-#define GIBTONITE_DETONATE 3
 
 // Gibtonite
 /turf/simulated/mineral/gibtonite
@@ -412,29 +417,39 @@
 	spread = 0
 	scan_state = "rock_Gibtonite"
 	var/det_time = 8 //Countdown till explosion, but also rewards the player for how close you were to detonation when you defuse it
-	var/stage = GIBTONITE_UNSTRUCK //How far into the lifecycle of gibtonite we are
+	var/stage = 0 //How far into the lifecycle of gibtonite we are, 0 is untouched, 1 is active and attempting to detonate, 2 is benign and ready for extraction
 	var/activated_ckey = null //These are to track who triggered the gibtonite deposit for logging purposes
 	var/activated_name = null
-	var/mutable_appearance/activated_overlay
+	var/activated_image = null
 
-/turf/simulated/mineral/gibtonite/Initialize(mapload)
+/turf/simulated/mineral/gibtonite/volcanic
+	environment_type = "basalt"
+	turf_type = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
+	baseturf = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
+	oxygen = 14
+	nitrogen = 23
+	temperature = 300
+	planetary_atmos = TRUE
+	defer_change = 1
+
+/turf/simulated/mineral/gibtonite/New()
 	det_time = rand(8,10) //So you don't know exactly when the hot potato will explode
-	. = ..()
+	..()
 
 /turf/simulated/mineral/gibtonite/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/mining_scanner) || istype(I, /obj/item/t_scanner/adv_mining_scanner) && stage == 1)
-		user.visible_message("<span class='notice'>[user] holds [I] to [src]...</span>", "<span class='notice'>You use [I] to locate where to cut off the chain reaction and attempt to stop it...</span>")
+		user.visible_message("<span class='notice'>You use [I] to locate where to cut off the chain reaction and attempt to stop it...</span>")
 		defuse()
-	else
-		return ..()
+	..()
 
-/turf/simulated/mineral/gibtonite/proc/explosive_reaction(mob/user = null, triggered_by_explosion = 0)
-	if(stage == GIBTONITE_UNSTRUCK)
-		activated_overlay = mutable_appearance('icons/turf/smoothrocks.dmi', "rock_Gibtonite_active", ON_EDGED_TURF_LAYER)
-		add_overlay(activated_overlay)
+/turf/simulated/mineral/gibtonite/proc/explosive_reaction(var/mob/user = null, triggered_by_explosion = 0)
+	if(stage == 0)
+		var/image/I = image('icons/turf/smoothrocks.dmi', loc = src, icon_state = "rock_Gibtonite_active", layer = ON_EDGED_TURF_LAYER)
+		add_overlay(I)
+		activated_image = I
 		name = "gibtonite deposit"
 		desc = "An active gibtonite reserve. Run!"
-		stage = GIBTONITE_ACTIVE
+		stage = 1
 		visible_message("<span class='danger'>There was gibtonite inside! It's going to explode!</span>")
 		var/turf/bombturf = get_turf(src)
 		var/area/A = get_area(bombturf)
@@ -456,39 +471,39 @@
 
 /turf/simulated/mineral/gibtonite/proc/countdown(notify_admins = 0)
 	set waitfor = 0
-	while(istype(src, /turf/simulated/mineral/gibtonite) && stage == GIBTONITE_ACTIVE && det_time > 0 && mineralAmt >= 1)
+	while(istype(src, /turf/simulated/mineral/gibtonite) && stage == 1 && det_time > 0 && mineralAmt >= 1)
 		det_time--
 		sleep(5)
 	if(istype(src, /turf/simulated/mineral/gibtonite))
-		if(stage == GIBTONITE_ACTIVE && det_time <= 0 && mineralAmt >= 1)
+		if(stage == 1 && det_time <= 0 && mineralAmt >= 1)
 			var/turf/bombturf = get_turf(src)
 			mineralAmt = 0
-			stage = GIBTONITE_DETONATE
+			stage = 3
 			explosion(bombturf,1,3,5, adminlog = notify_admins)
 
 /turf/simulated/mineral/gibtonite/proc/defuse()
-	if(stage == GIBTONITE_ACTIVE)
-		cut_overlay(activated_overlay)
-		activated_overlay.icon_state = "rock_Gibtonite_inactive"
-		add_overlay(activated_overlay)
+	if(stage == 1)
+		overlays -= activated_image
+		var/image/I = image('icons/turf/smoothrocks.dmi', loc = src, icon_state = "rock_Gibtonite_inactive", layer = ON_EDGED_TURF_LAYER)
+		add_overlay(I)
 		desc = "An inactive gibtonite reserve. The ore can be extracted."
-		stage = GIBTONITE_STABLE
+		stage = 2
 		if(det_time < 0)
 			det_time = 0
-		visible_message("<span class='notice'>The chain reaction was stopped! The gibtonite had [det_time] reactions left till the explosion!</span>")
+		visible_message("<span class='notice'>The chain reaction was stopped! The gibtonite had [src.det_time] reactions left till the explosion!</span>")
 
 /turf/simulated/mineral/gibtonite/gets_drilled(var/mob/user, triggered_by_explosion = 0)
-	if(stage == GIBTONITE_UNSTRUCK && mineralAmt >= 1) //Gibtonite deposit is activated
-		playsound(src,'sound/effects/hit_on_shattered_glass.ogg', 50, TRUE)
+	if(stage == 0 && mineralAmt >= 1) //Gibtonite deposit is activated
+		playsound(src, 'sound/effects/hit_on_shattered_glass.ogg',50,1)
 		explosive_reaction(user, triggered_by_explosion)
 		return
-	if(stage == GIBTONITE_ACTIVE && mineralAmt >= 1) //Gibtonite deposit goes kaboom
+	if(stage == 1 && mineralAmt >= 1) //Gibtonite deposit goes kaboom
 		var/turf/bombturf = get_turf(src)
 		mineralAmt = 0
-		stage = GIBTONITE_DETONATE
-		explosion(bombturf,1,2,5, adminlog = 0)
-	if(stage == GIBTONITE_STABLE) //Gibtonite deposit is now benign and extractable. Depending on how close you were to it blowing up before defusing, you get better quality ore.
-		var/obj/item/twohanded/required/gibtonite/G = new(src)
+		stage = 3
+		explosion(bombturf, 1, 2, 5, adminlog = 0)
+	if(stage == 2) //Gibtonite deposit is now benign and extractable. Depending on how close you were to it blowing up before defusing, you get better quality ore.
+		var/obj/item/twohanded/required/gibtonite/G = new /obj/item/twohanded/required/gibtonite/(src)
 		if(det_time <= 0)
 			G.quality = 3
 			G.icon_state = "Gibtonite ore 3"
@@ -498,18 +513,3 @@
 
 	ChangeTurf(turf_type, defer_change)
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
-
-
-/turf/simulated/mineral/gibtonite/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
-	baseturf = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
-	oxygen = 14
-	nitrogen = 23
-	temperature = 300
-	defer_change = 1
-
-#undef GIBTONITE_UNSTRUCK
-#undef GIBTONITE_ACTIVE
-#undef GIBTONITE_STABLE
-#undef GIBTONITE_DETONATE

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/wallets.dmi'
 	icon_state = "wallet"
 	w_class = WEIGHT_CLASS_SMALL
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 	can_hold = list(
 		/obj/item/stack/spacecash,
 		/obj/item/card,

@@ -75,14 +75,18 @@
 
 	return TRUE // Good to go.
 
+// Handles damage checks
+/obj/item/computer_hardware/take_damage(damage_amount)
+	obj_integrity = max(obj_integrity - damage_amount, 0)
+
 /obj/item/computer_hardware/examine(var/mob/user)
 	. = ..()
 	if(damage > damage_failure)
-		. += "<span class='danger'>It seems to be severely damaged!</span>"
+		to_chat(user, "<span class='danger'>It seems to be severely damaged!</span>")
 	else if(damage > damage_malfunction)
-		. += "<span class='warning'>It seems to be damaged!</span>"
+		to_chat(user, "<span class='warning'>It seems to be damaged!</span>")
 	else if(damage)
-		. += "<span class='notice'>It seems to be slightly damaged.</span>"
+		to_chat(user, "<span class='notice'>It seems to be slightly damaged.</span>")
 
 // Component-side compatibility check.
 /obj/item/computer_hardware/proc/can_install(obj/item/modular_computer/M, mob/living/user = null)

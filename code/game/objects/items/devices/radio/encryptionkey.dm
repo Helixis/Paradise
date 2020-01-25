@@ -17,8 +17,7 @@
 /obj/item/encryptionkey/attackby(obj/item/W as obj, mob/user as mob, params)
 
 /obj/item/encryptionkey/syndicate
-	name = "syndicate encryption key"
-	icon_state = "syn_cypherkey"
+	icon_state = "cypherkey"
 	channels = list("Syndicate" = 1)
 	origin_tech = "syndicate=1;engineering=3;bluespace=2"
 	syndie = TRUE //Signifies that it de-crypts Syndicate transmissions
@@ -37,8 +36,7 @@
 	change_voice = FALSE
 
 /obj/item/encryptionkey/syndteam
-	name = "syndicate encryption key"
-	icon_state = "syn_cypherkey"
+	icon_state = "cypherkey"
 	channels = list("SyndTeam" = 1, "Syndicate" = 1)
 	origin_tech = "syndicate=4"
 	syndie = TRUE //Signifies that it de-crypts Syndicate transmissions
@@ -46,7 +44,7 @@
 /obj/item/encryptionkey/binary
 	name = "binary translator key"
 	desc = "An encryption key for a radio headset. To access the binary channel, use :+."
-	icon_state = "bin_cypherkey"
+	icon_state = "cypherkey"
 	translate_binary = TRUE
 	origin_tech = "syndicate=3;engineering=4;bluespace=3"
 

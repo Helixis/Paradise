@@ -12,20 +12,25 @@
 
 /datum/sprite_accessory/body_markings/tail/vulpkanin/vulp_bushy_fluff
 	name = "Vulpkanin Bushy Tail Fluff"
-	tails_allowed = list("Bushy Tail")
+	tails_allowed = list("Vulpkanin Alt 1 (Bushy)")
 	icon_state = "bushfluff"
+
+/datum/sprite_accessory/body_markings/tail/vulpkanin/vulp_short_tip
+	name = "Vulpkanin Short Tail Tip"
+	tails_allowed = list("Vulpkanin Alt 4 (Short)")
+	icon_state = "short"
 
 /datum/sprite_accessory/body_markings/tail/vulpkanin/vulp_hybrid_tip
 	name = "Vulpkanin Bushy Straight Tail Tip"
-	tails_allowed = list("Straight Bushy Tail")
+	tails_allowed = list("Vulpkanin Alt 5 (Straight Bushy)")
 	icon_state = "sbtip"
 
 /datum/sprite_accessory/body_markings/tail/vulpkanin/vulp_hybrid_fade
 	name = "Vulpkanin Bushy Straight Tail Fade"
-	tails_allowed = list("Straight Bushy Tail")
+	tails_allowed = list("Vulpkanin Alt 5 (Straight Bushy)")
 	icon_state = "sbfade"
 
 /datum/sprite_accessory/body_markings/tail/vulpkanin/vulp_hybrid_silverf
 	name = "Vulpkanin Bushy Straight Tail Black Fade White Tip"
-	tails_allowed = list("Straight Bushy Tail")
+	tails_allowed = list("Vulpkanin Alt 5 (Straight Bushy)")
 	icon_state = "sbsilverfade"

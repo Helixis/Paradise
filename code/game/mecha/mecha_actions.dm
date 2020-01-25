@@ -113,6 +113,7 @@
 	chassis.log_message("Toggled defence mode.")
 	UpdateButtonIcon()
 
+
 /datum/action/innate/mecha/mech_overload_mode
 	name = "Toggle leg actuators overload"
 	button_icon_state = "mech_overload_off"
@@ -120,7 +121,7 @@
 /datum/action/innate/mecha/mech_overload_mode/Activate(forced_state = null)
 	if(!owner || !chassis || chassis.occupant != owner)
 		return
-	if(chassis.obj_integrity < chassis.max_integrity - chassis.max_integrity / 3)
+	if(chassis.health < initial(chassis.health) - initial(chassis.health) / 3)
 		chassis.occupant_message("<span class='danger'>The leg actuators are too damaged to overload!</span>")
 		return // Can't activate them if the mech is too damaged
 	if(!isnull(forced_state))

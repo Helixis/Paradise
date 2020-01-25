@@ -12,7 +12,7 @@
 	volume = 750
 
 	var/minrate = 0//probably useless, but whatever
-	var/maxrate = 10 * ONE_ATMOSPHERE
+	var/maxrate = 10 * ONE_ATMOSPHERE / 4
 
 /obj/machinery/portable_atmospherics/scrubber/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -206,10 +206,8 @@
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 		return
 
-	if((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
+	else if((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
 		atmosanalyzer_scan(air_contents, user)
-		return
-	return ..()
 
 /obj/machinery/portable_atmospherics/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"

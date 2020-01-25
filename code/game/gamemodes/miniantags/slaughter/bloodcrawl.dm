@@ -35,6 +35,8 @@
 		animation.dir = dir
 
 		ExtinguishMob()
+		if(buckled)
+			buckled.unbuckle_mob()
 		if(pulling && bloodcrawl == BLOODCRAWL_EAT)
 			if(istype(pulling, /mob/living/))
 				var/mob/living/victim = pulling
@@ -48,9 +50,8 @@
 					kidnapped = victim
 					stop_pulling()
 		flick("jaunt",animation)
-
-		src.holder = holder
-		forceMove(holder)
+		loc = holder
+		holder = holder
 
 		if(kidnapped)
 			to_chat(src, "<B>You begin to feast on [kidnapped]. You can not move while you are doing this.</B>")
@@ -156,7 +157,7 @@
 	density = 0
 	anchored = 1
 	invisibility = 60
-	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	burn_state = LAVA_PROOF
 
 /obj/effect/dummy/slaughter/relaymove(mob/user, direction)
 	forceMove(get_step(src,direction))

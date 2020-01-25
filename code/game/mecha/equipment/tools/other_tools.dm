@@ -10,7 +10,7 @@
 	origin_tech = "bluespace=7"
 	equip_cooldown = 150
 	energy_drain = 8000
-	range = MECHA_RANGED
+	range = RANGED
 	var/tele_precision = 4
 
 /obj/item/mecha_parts/mecha_equipment/teleporter/action(atom/target)
@@ -39,7 +39,7 @@
 	origin_tech = "bluespace=4;magnets=4;plasmatech=2"
 	equip_cooldown = 50
 	energy_drain = 300
-	range = MECHA_RANGED
+	range = RANGED
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator/action(atom/target)
 	if(!action_checks(target) || !is_teleport_allowed(loc.z))
@@ -85,7 +85,7 @@
 	origin_tech = "bluespace=3;magnets=3;engineering=4"
 	equip_cooldown = 10
 	energy_drain = 100
-	range = MECHA_MELEE | MECHA_RANGED
+	range = MELEE|RANGED
 	var/atom/movable/locked
 	var/mode = 1 //1 - gravsling 2 - gravpush
 
@@ -118,7 +118,7 @@
 			else
 				atoms = orange(3, target)
 			for(var/atom/movable/A in atoms)
-				if(A.anchored || A.move_resist == INFINITY) continue
+				if(A.anchored) continue
 				spawn(0)
 					var/iter = 5-get_dist(A,target)
 					for(var/i=0 to iter)
@@ -245,8 +245,8 @@
 				chassis.clearInternalDamage(int_dam_flag)
 				repaired = 1
 				break
-	if(h_boost<0 || chassis.obj_integrity < chassis.max_integrity)
-		chassis.obj_integrity += min(h_boost, chassis.max_integrity-chassis.obj_integrity)
+	if(health_boost<0 || chassis.health < initial(chassis.health))
+		chassis.health += min(health_boost, initial(chassis.health)-chassis.health)
 		repaired = 1
 	if(repaired)
 		if(!chassis.use_power(energy_drain))
@@ -268,7 +268,7 @@
 	origin_tech = "magnets=4;powerstorage=4;engineering=4"
 	energy_drain = 0
 	range = 0
-	var/coeff = 20
+	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
 	selectable = 0
 
@@ -346,7 +346,7 @@
 	desc = "An exosuit module that generates power using solid plasma as fuel. Pollutes the environment."
 	icon_state = "tesla"
 	origin_tech = "plasmatech=2;powerstorage=2;engineering=2"
-	range = MECHA_MELEE
+	range = MELEE
 	var/coeff = 100
 	var/fuel_type = MAT_PLASMA
 	var/max_fuel = 150000

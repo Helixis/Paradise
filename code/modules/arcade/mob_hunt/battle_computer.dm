@@ -54,8 +54,6 @@
 /obj/machinery/computer/mob_battle_terminal/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/nanomob_card))
 		insert_card(O, user)
-		return
-	return ..()
 
 /obj/machinery/computer/mob_battle_terminal/proc/insert_card(obj/item/nanomob_card/new_card, mob/user)
 	if(!new_card)
@@ -289,8 +287,6 @@
 /obj/machinery/computer/mob_healer_terminal/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/nanomob_card))
 		heal_card(O, user)
-		return
-	return ..()
 
 /obj/machinery/computer/mob_healer_terminal/proc/heal_card(obj/item/nanomob_card/patient, mob/user)
 	if(!patient)

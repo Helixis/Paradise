@@ -1867,7 +1867,7 @@
 	icon_state = "tube1";
 	dir = 1
 	},
-/obj/machinery/computer/syndicate_depot/teleporter,
+/obj/machinery/computer/syndicate_depot/teleporter/targeted,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -3226,7 +3226,7 @@
 	},
 /area/syndicate_mothership)
 "is" = (
-/mob/living/simple_animal/pet/dog/fox/Syndifox,
+/mob/living/simple_animal/pet/fox/Syndifox,
 /turf/unsimulated/floor{
 	icon_state = "bar";
 	dir = 2
@@ -3248,6 +3248,8 @@
 /area/shuttle/assault_pod)
 "iw" = (
 /obj/structure/rack,
+/obj/item/clothing/suit/space/eva/plasmaman/wizard,
+/obj/item/clothing/head/helmet/space/eva/plasmaman/wizard,
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/mask/breath/vox,
 /obj/item/tank/plasma/plasmaman,
@@ -3641,13 +3643,13 @@
 	},
 /area/syndicate_mothership)
 "jt" = (
+/obj/structure/chair{
+	dir = 8
+	},
 /obj/machinery/light/small{
 	tag = "icon-bulb1 (EAST)";
 	icon_state = "bulb1";
 	dir = 4
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
 	},
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
@@ -3662,13 +3664,13 @@
 /turf/simulated/floor/plating/airless,
 /area/syndicate_mothership)
 "jw" = (
+/obj/structure/chair{
+	dir = 4
+	},
 /obj/machinery/light/small{
 	tag = "icon-bulb1 (WEST)";
 	icon_state = "bulb1";
 	dir = 8
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
 	},
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
@@ -4300,9 +4302,6 @@
 /obj/structure/table/abductor,
 /obj/item/surgicaldrill/alien,
 /obj/item/circular_saw/alien,
-/obj/item/FixOVein/alien,
-/obj/item/bonesetter/alien,
-/obj/item/bonegel/alien,
 /turf/unsimulated/floor/abductor,
 /area/abductor_ship)
 "ll" = (
@@ -7329,7 +7328,7 @@
 	},
 /area/centcom/specops)
 "sg" = (
-/obj/machinery/vending/wallmed{
+/obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = -30;
 	pixel_y = 0;
@@ -7345,7 +7344,7 @@
 	},
 /area/centcom/evac)
 "si" = (
-/obj/machinery/vending/wallmed{
+/obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = 30;
 	pixel_y = 0;
@@ -7381,8 +7380,9 @@
 	},
 /area/centcom/evac)
 "sn" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
+/obj/structure/chair{
+	dir = 4;
+	name = "Defense"
 	},
 /turf/simulated/shuttle/floor,
 /area/centcom/evac)
@@ -7636,7 +7636,7 @@
 	},
 /area/centcom/evac)
 "sS" = (
-/obj/machinery/vending/wallmed{
+/obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = -30;
 	pixel_y = 0;
@@ -7790,7 +7790,7 @@
 	},
 /area/centcom/evac)
 "tk" = (
-/obj/machinery/vending/wallmed{
+/obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = 30;
 	pixel_y = 0;
@@ -8556,6 +8556,11 @@
 /area/admin)
 "uJ" = (
 /obj/structure/rack,
+/obj/item/clothing/head/helmet/space/hardsuit/wizard{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/clothing/head/helmet/space/hardsuit/syndi,
 /obj/item/clothing/head/helmet/space/santahat{
 	pixel_x = 3;
 	pixel_y = -3
@@ -8745,7 +8750,7 @@
 	pixel_x = -3;
 	pixel_y = 3
 	},
-/obj/item/clothing/glasses/hud/health/sunglasses,
+/obj/item/clothing/glasses/hud/health/health_advanced,
 /obj/item/clothing/glasses/hud/security/sunglasses,
 /turf/unsimulated/floor{
 	tag = "icon-floor";
@@ -9056,7 +9061,7 @@
 	pixel_x = -3;
 	pixel_y = 3
 	},
-/obj/item/clothing/suit/space/hardsuit/shielded/wizard,
+/obj/item/clothing/suit/space/hardsuit/wizard,
 /obj/item/clothing/suit/space/santa{
 	pixel_x = 3;
 	pixel_y = -3
@@ -9138,7 +9143,7 @@
 	},
 /area/admin)
 "vH" = (
-/obj/structure/mecha_wreckage/phazon,
+/obj/effect/decal/mecha_wreckage/phazon,
 /turf/unsimulated/floor{
 	tag = "icon-floor";
 	icon_state = "floor"
@@ -11640,8 +11645,8 @@
 /area/admin)
 "AL" = (
 /obj/structure/rack,
-/obj/item/clothing/suit/space/hardsuit/syndi,
-/obj/item/clothing/suit/space/hardsuit/syndi/elite{
+/obj/item/storage/box/syndie_kit/hardsuit,
+/obj/item/storage/box/syndie_kit/elite_hardsuit{
 	pixel_x = -6;
 	pixel_y = 6
 	},
@@ -12226,12 +12231,6 @@
 "FL" = (
 /turf/simulated/wall/r_wall,
 /area/adminconstruction)
-"Ga" = (
-/obj/machinery/computer/shuttle/ert,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/centcom/specops)
 "GP" = (
 /turf/unsimulated/floor{
 	icon_state = "gcircuit"
@@ -12455,32 +12454,26 @@
 	},
 /turf/unsimulated/floor/vox,
 /area/vox_station)
-"KA" = (
-/obj/structure/chair/sofa/left,
-/turf/simulated/shuttle/floor{
-	icon_state = "floor4"
-	},
-/area/shuttle/escape)
 "KR" = (
-/obj/machinery/light/small,
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 1
 	},
+/obj/machinery/light/small,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
 	},
 /area/shuttle/assault_pod)
 "KW" = (
+/obj/structure/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/chair/comfy/shuttle,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
 	},
 /area/shuttle/assault_pod)
 "KX" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/simulated/shuttle/floor{
@@ -12488,7 +12481,7 @@
 	},
 /area/shuttle/assault_pod)
 "KY" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/simulated/shuttle/floor{
@@ -12585,6 +12578,12 @@
 /area/shuttle/escape)
 "QI" = (
 /obj/structure/chair/sofa,
+/turf/simulated/shuttle/floor{
+	icon_state = "floor4"
+	},
+/area/shuttle/escape)
+"QJ" = (
+/obj/structure/chair/sofa/corner,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
 	},
@@ -12741,7 +12740,7 @@
 /turf/simulated/shuttle/floor,
 /area/centcom/evac)
 "Wk" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/simulated/shuttle/floor{
@@ -12749,7 +12748,7 @@
 	},
 /area/centcom/evac)
 "Wl" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/simulated/shuttle/floor{
@@ -12757,13 +12756,13 @@
 	},
 /area/centcom/evac)
 "WI" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/simulated/shuttle/floor,
 /area/centcom/evac)
 "WU" = (
-/obj/structure/chair/comfy/shuttle,
+/obj/structure/chair,
 /turf/simulated/shuttle/floor,
 /area/centcom/evac)
 "Xj" = (
@@ -31703,7 +31702,7 @@ pb
 uj
 uj
 uj
-Ga
+uj
 sX
 we
 we
@@ -41461,7 +41460,7 @@ sq
 aN
 aN
 nV
-KA
+QI
 og
 og
 og
@@ -41718,7 +41717,7 @@ sq
 aN
 aN
 nV
-og
+QJ
 og
 og
 og

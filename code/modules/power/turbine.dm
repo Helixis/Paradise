@@ -29,7 +29,6 @@
 	icon_state = "compressor"
 	anchored = 1
 	density = 1
-	resistance_flags = FIRE_PROOF
 	var/obj/machinery/power/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf
@@ -48,7 +47,6 @@
 	icon_state = "turbine"
 	anchored = 1
 	density = 1
-	resistance_flags = FIRE_PROOF
 	var/opened = 0
 	var/obj/machinery/power/compressor/compressor
 	var/turf/simulated/outturf
@@ -128,9 +126,7 @@
 	if(exchange_parts(user, I))
 		return
 
-	if(default_deconstruction_crowbar(I))
-		return
-	return ..()
+	default_deconstruction_crowbar(I)
 
 /obj/machinery/power/compressor/CanAtmosPass(turf/T)
 	return !density
@@ -285,9 +281,7 @@
 	if(exchange_parts(user, I))
 		return
 
-	if(default_deconstruction_crowbar(I))
-		return
-	return ..()
+	default_deconstruction_crowbar(I)
 
 /obj/machinery/power/turbine/interact(mob/user)
 

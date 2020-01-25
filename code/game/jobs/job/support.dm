@@ -65,13 +65,10 @@
 	head = /obj/item/clothing/head/chefhat
 	l_ear = /obj/item/radio/headset/headset_service
 	pda = /obj/item/pda/chef
-
-/datum/outfit/job/chef/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
-	if(visualsOnly)
-		return
-	var/datum/martial_art/cqc/under_siege/justacook = new
-	justacook.teach(H)
+	backpack_contents = list(
+		/obj/item/book/manual/hispania_recipes = 1,
+		/obj/item/storage/box/survival = 1
+	)
 
 
 /datum/job/hydro
@@ -87,9 +84,6 @@
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
 	minimal_access = list(access_hydroponics, access_morgue, access_maint_tunnels)
 	alt_titles = list("Hydroponicist", "Botanical Researcher")
-	required_objectives = list(
-		/datum/job_objective/further_plants
-	)
 	outfit = /datum/outfit/job/hydro
 
 /datum/outfit/job/hydro
@@ -186,54 +180,25 @@
 	name = "Shaft Miner"
 	jobtype = /datum/job/mining
 
-	l_ear = /obj/item/radio/headset/headset_cargo/mining
-	shoes = /obj/item/clothing/shoes/workboots/mining
-	gloves = /obj/item/clothing/gloves/color/black
 	uniform = /obj/item/clothing/under/rank/miner/lavaland
-	l_pocket = /obj/item/reagent_containers/hypospray/autoinjector/survival
-	r_pocket = /obj/item/storage/bag/ore
+	gloves = /obj/item/clothing/gloves/color/black
+	shoes = /obj/item/clothing/shoes/workboots/mining
+	l_ear = /obj/item/radio/headset/headset_cargo/mining
 	id = /obj/item/card/id/supply
+	l_pocket = /obj/item/reagent_containers/hypospray/autoinjector/survival
+	r_pocket = /obj/item/flashlight/seclite
 	pda = /obj/item/pda/shaftminer
 	backpack_contents = list(
-		/obj/item/flashlight/seclite=1,\
+		/obj/item/storage/bag/ore=1,\
 		/obj/item/kitchen/knife/combat/survival=1,\
 		/obj/item/mining_voucher=1,\
 		/obj/item/stack/marker_beacon/ten=1
 	)
-
+	
 	backpack = /obj/item/storage/backpack/explorer
-	satchel = /obj/item/storage/backpack/satchel/explorer
-	box = /obj/item/storage/box/survival_mining
+	satchel = /obj/item/storage/backpack/explorer
 
-/datum/outfit/job/mining/equipped
-	name = "Shaft Miner"
 
-	suit = /obj/item/clothing/suit/hooded/explorer
-	mask = /obj/item/clothing/mask/gas/explorer
-	glasses = /obj/item/clothing/glasses/meson
-	suit_store = /obj/item/tank/emergency_oxygen
-	internals_slot = slot_s_store
-	backpack_contents = list(
-		/obj/item/flashlight/seclite=1,\
-		/obj/item/kitchen/knife/combat/survival=1,
-		/obj/item/mining_voucher=1,
-		/obj/item/t_scanner/adv_mining_scanner/lesser=1,
-		/obj/item/gun/energy/kinetic_accelerator=1,\
-		/obj/item/stack/marker_beacon/ten=1
-	)
-
-/datum/outfit/job/miner/equipped/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
-	if(visualsOnly)
-		return
-	if(istype(H.wear_suit, /obj/item/clothing/suit/hooded))
-		var/obj/item/clothing/suit/hooded/S = H.wear_suit
-		S.ToggleHood()
-
-/datum/outfit/job/miner/equipped/hardsuit
-	name = "Shaft Miner (Equipment + Hardsuit)"
-	suit = /obj/item/clothing/suit/space/hardsuit/mining
-	mask = /obj/item/clothing/mask/breath
 
 //Griff //BS12 EDIT
 
@@ -291,14 +256,9 @@
 		var/obj/item/organ/internal/cyberimp/brain/clown_voice/implant = new
 		implant.insert(H)
 
-	H.dna.SetSEState(CLUMSYBLOCK, TRUE)
-	genemutcheck(H, CLUMSYBLOCK, null, MUTCHK_FORCED)
-	H.dna.default_blocks.Add(CLUMSYBLOCK)
+	H.mutations.Add(CLUMSY)
 	if(!ismachine(H))
-		H.dna.SetSEState(COMICBLOCK, TRUE)
-		genemutcheck(H, COMICBLOCK, null, MUTCHK_FORCED)
-		H.dna.default_blocks.Add(COMICBLOCK)
-	H.check_mutations = TRUE
+		H.mutations.Add(COMIC)
 
 //action given to antag clowns
 /datum/action/innate/toggle_clumsy

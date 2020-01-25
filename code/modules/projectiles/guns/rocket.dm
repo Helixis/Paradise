@@ -16,8 +16,8 @@
 	var/list/rockets = new/list()
 
 /obj/item/gun/rocketlauncher/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>"
+	..()
+	to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 
 /obj/item/gun/rocketlauncher/Destroy()
 	QDEL_LIST(rockets)
@@ -37,8 +37,6 @@
 			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 		else
 			to_chat(usr, "<span class='notice'>[src] cannot hold more rockets.</span>")
-	else
-		return ..()
 
 /obj/item/gun/rocketlauncher/can_shoot()
 	return rockets.len

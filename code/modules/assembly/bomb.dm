@@ -13,8 +13,8 @@
 	origin_tech = "materials=1;engineering=1"
 
 /obj/item/onetankbomb/examine(mob/user)
-	. = ..()
-	. += bombtank.examine(user)
+	..(user)
+	user.examinate(bombtank)
 
 /obj/item/onetankbomb/update_icon()
 	if(bombtank)
@@ -77,9 +77,9 @@
 	if(bombassembly)
 		bombassembly.HasProximity(AM)
 
-/obj/item/onetankbomb/Crossed(atom/movable/AM, oldloc) //for mousetraps
+/obj/item/onetankbomb/Crossed(atom/movable/AM) //for mousetraps
 	if(bombassembly)
-		bombassembly.Crossed(AM, oldloc)
+		bombassembly.Crossed(AM)
 
 /obj/item/onetankbomb/on_found(mob/finder) //for mousetraps
 	if(bombassembly)

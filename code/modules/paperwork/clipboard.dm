@@ -12,7 +12,7 @@
 	var/obj/item/pen/containedpen
 	var/obj/item/toppaper
 	slot_flags = SLOT_BELT
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/clipboard/New()
 	..()
@@ -38,9 +38,8 @@
 			toppaper = locate(/obj/item/paper_bundle) in src
 
 /obj/item/clipboard/examine(mob/user)
-	. = ..()
-	if(in_range(user, src) && toppaper)
-		. += toppaper.examine(user)
+	if(..(user, 1) && toppaper)
+		toppaper.examine(user)
 
 obj/item/clipboard/proc/penPlacement(mob/user, obj/item/pen/P, placing)
 	if(placing)

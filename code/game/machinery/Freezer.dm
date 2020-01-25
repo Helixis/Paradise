@@ -8,8 +8,7 @@
 	use_power = IDLE_POWER_USE
 	current_heat_capacity = 1000
 	layer = 3
-	max_integrity = 300
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 30)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 100, bomb = 0, bio = 100, rad = 100)
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/New()
 	..()
@@ -20,7 +19,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/stock_parts/micro_laser(null)
 	component_parts += new /obj/item/stock_parts/micro_laser(null)
-	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stock_parts/console_screen(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	RefreshParts()
 
@@ -32,7 +31,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin/super(null)
 	component_parts += new /obj/item/stock_parts/micro_laser/ultra(null)
 	component_parts += new /obj/item/stock_parts/micro_laser/ultra(null)
-	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stock_parts/console_screen(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	RefreshParts()
 
@@ -77,8 +76,8 @@
 				break
 		build_network()
 		update_icon()
-		return
-	return ..()
+	else
+		return ..()
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/update_icon()
 	if(panel_open)
@@ -169,8 +168,7 @@
 	anchored = 1.0
 	layer = 3
 	current_heat_capacity = 1000
-	max_integrity = 300
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 30)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 100, bomb = 0, bio = 100, rad = 100)
 
 /obj/machinery/atmospherics/unary/heat_reservoir/heater/New()
 	..()
@@ -184,7 +182,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/stock_parts/micro_laser(src)
 	component_parts += new /obj/item/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/stack/sheet/glass(src)
+	component_parts += new /obj/item/stock_parts/console_screen(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 1)
 	RefreshParts()
 
@@ -199,7 +197,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin/super(src)
 	component_parts += new /obj/item/stock_parts/micro_laser/ultra(src)
 	component_parts += new /obj/item/stock_parts/micro_laser/ultra(src)
-	component_parts += new /obj/item/stack/sheet/glass(src)
+	component_parts += new /obj/item/stock_parts/console_screen(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 1)
 	RefreshParts()
 
@@ -244,8 +242,8 @@
 				break
 		build_network()
 		update_icon()
-		return
-	return ..()
+	else
+		return ..()
 
 /obj/machinery/atmospherics/unary/heat_reservoir/heater/update_icon()
 	if(panel_open)

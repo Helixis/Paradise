@@ -49,8 +49,7 @@ GLOBAL_LIST_INIT(rcd_door_types, list(
 	usesound = 'sound/items/deconstruct.ogg'
 	flags_2 = NO_MAT_REDEMPTION_2
 	req_access = list(access_engine)
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 50)
-	resistance_flags = FIRE_PROOF
+
 	// Important shit
 	var/datum/effect_system/spark_spread/spark_system
 	var/matter = 0
@@ -83,8 +82,8 @@ GLOBAL_LIST_INIT(rcd_door_types, list(
 
 /obj/item/rcd/examine(mob/user)
 	. = ..()
-	. += "MATTER: [matter]/[max_matter] matter-units."
-	. += "MODE: [mode]."
+	to_chat(user, "MATTER: [matter]/[max_matter] matter-units.")
+	to_chat(user, "MODE: [mode].")
 
 /obj/item/rcd/Destroy()
 	QDEL_NULL(spark_system)

@@ -49,7 +49,6 @@ GLOBAL_LIST(labor_sheet_values)
 			return
 		else
 			to_chat(user, "<span class='notice'>There's an ID inserted already.</span>")
-		return
 	return ..()
 
 /obj/machinery/mineral/labor_claim_console/attack_hand(mob/user)
@@ -92,7 +91,7 @@ GLOBAL_LIST(labor_sheet_values)
 	if(href_list["handle_id"])
 		if(inserted_id)
 			if(!usr.put_in_hands(inserted_id))
-				inserted_id.forceMove(get_turf(src))
+				inserted_id.forceMove(get_turf(src))		
 			inserted_id = null
 		else
 			var/obj/item/I = usr.get_active_hand()
@@ -144,7 +143,6 @@ GLOBAL_LIST(labor_sheet_values)
 
 /**********************Prisoner Collection Unit**************************/
 /obj/machinery/mineral/stacking_machine/laborstacker
-	damage_deflection = 21
 	var/points = 0 //The unclaimed value of ore stacked.
 
 /obj/machinery/mineral/stacking_machine/laborstacker/process_sheet(obj/item/stack/sheet/inp)
@@ -155,7 +153,6 @@ GLOBAL_LIST(labor_sheet_values)
 	if(istype(I, /obj/item/stack/sheet) && user.canUnEquip(I))
 		var/obj/item/stack/sheet/inp = I
 		points += inp.point_value * inp.amount
-		return
 	return ..()
 
 /**********************Point Lookup Console**************************/
@@ -182,5 +179,5 @@ GLOBAL_LIST(labor_sheet_values)
 			to_chat(user, "<span class='notice'>Collect points by bringing smelted minerals to the Labor Shuttle stacking machine. Reach your quota to earn your release.</span>")
 		else
 			to_chat(user, "<span class='warning'>Error: Invalid ID</span>")
-		return
-	return ..()
+	else
+		return ..()

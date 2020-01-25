@@ -18,7 +18,6 @@
 	minbodytemp = 0
 	faction = list("cult")
 	flying = 1
-	pressure_resistance = 100
 	universal_speak = 1
 	AIStatus = AI_OFF //normal constructs don't have AI
 	var/const_type = "shade"
@@ -29,7 +28,7 @@
 	deathmessage = "collapses in a shattered heap."
 
 /mob/living/simple_animal/hostile/construct/New()
-	. = ..()
+	..()
 	if(!SSticker.mode)//work around for maps with runes and cultdat is not loaded all the way
 		name = "[const_type] ([rand(1, 1000)])"
 		real_name = const_type
@@ -44,15 +43,12 @@
 	for(var/spell in construct_spells)
 		AddSpell(new spell(null))
 
-	if(SSticker.cultdat?.theme == "blood")
+	if(SSticker.cultdat.theme == "blood")
 		updateglow()
 
-/mob/living/simple_animal/hostile/construct/death(gibbed)
-	. = ..()
-	SSticker.mode.remove_cultist(src.mind, FALSE)
-
 /mob/living/simple_animal/hostile/construct/examine(mob/user)
-	. = ..()
+	to_chat(user, "<span class='info'>*---------*</span>")
+	..(user)
 
 	var/msg = ""
 	if(src.health < src.maxHealth)
@@ -64,7 +60,7 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	. += msg
+	to_chat(user, msg)
 
 /mob/living/simple_animal/hostile/construct/attack_animal(mob/living/simple_animal/M)
 	if(istype(M, /mob/living/simple_animal/hostile/construct/builder))
@@ -83,7 +79,7 @@
 			else
 				to_chat(M, "<span class='cult'>You cannot repair your own dents, as you have none!</span>")
 	else if(src != M)
-		return ..()
+		..()
 
 
 /mob/living/simple_animal/hostile/construct/narsie_act()
@@ -136,7 +132,19 @@
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
-			P.reflect_back(src, list(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3))
+			// Find a turf near or on the original location to bounce to
+			if(P.starting)
+				var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/turf/curloc = get_turf(src)
+
+				// redirect the projectile
+				P.original = locate(new_x, new_y, P.z)
+				P.starting = curloc
+				P.current = curloc
+				P.firer = src
+				P.yo = new_y - curloc.y
+				P.xo = new_x - curloc.x
 
 			return -1 // complete projectile permutation
 
@@ -209,7 +217,7 @@
 
 
 /mob/living/simple_animal/hostile/construct/builder/Found(atom/A) //what have we found here?
-	if(isconstruct(A)) //is it a construct?
+	if(istype(A, /mob/living/simple_animal/hostile/construct)) //is it a construct?
 		var/mob/living/simple_animal/hostile/construct/C = A
 		if(C.health < C.maxHealth) //is it hurt? let's go heal it if it is
 			return 1
@@ -228,7 +236,7 @@
 	..()
 	if(isliving(target))
 		var/mob/living/L = target
-		if(isconstruct(L) && L.health >= L.maxHealth) //is this target an unhurt construct? stop trying to heal it
+		if(istype(L, /mob/living/simple_animal/hostile/construct) && L.health >= L.maxHealth) //is this target an unhurt construct? stop trying to heal it
 			LoseTarget()
 			return 0
 		if(L.health <= melee_damage_lower+melee_damage_upper) //ey bucko you're hurt as fuck let's go hit you
@@ -237,7 +245,7 @@
 
 /mob/living/simple_animal/hostile/construct/builder/Aggro()
 	..()
-	if(isconstruct(target)) //oh the target is a construct no need to flee
+	if(istype(target, /mob/living/simple_animal/hostile/construct)) //oh the target is a construct no need to flee
 		retreat_distance = null
 		minimum_distance = 1
 
@@ -248,7 +256,7 @@
 
 /mob/living/simple_animal/hostile/construct/builder/hostile //actually hostile, will move around, hit things, heal other constructs
 	AIStatus = AI_ON
-	environment_smash = ENVIRONMENT_SMASH_STRUCTURES //only token destruction, don't smash the cult wall NO STOP
+	environment_smash = 1 //only token destruction, don't smash the cult wall NO STOP
 
 
 /////////////////////////////Behemoth/////////////////////////

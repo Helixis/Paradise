@@ -9,7 +9,6 @@
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	list_reagents = list("plantmatter" = 3)
-	tastes = list("raw potatoes" = 1)
 
 
 //////////////////////
@@ -23,7 +22,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#EDDD00"
 	list_reagents = list("nutriment" = 4)
-	tastes = list("fries" = 3, "salt" = 1)
 
 /obj/item/reagent_containers/food/snacks/cheesyfries
 	name = "cheesy fries"
@@ -32,7 +30,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#EDDD00"
 	list_reagents = list("nutriment" = 6)
-	tastes = list("fries" = 3, "cheese" = 1)
 
 /obj/item/reagent_containers/food/snacks/tatortot
 	name = "tator tot"
@@ -40,7 +37,6 @@
 	icon_state = "tatortot"
 	list_reagents = list("nutriment" = 4)
 	filling_color = "FFD700"
-	tastes = list("fried potato" = 3, "valids" = 1)
 
 /obj/item/reagent_containers/food/snacks/onionrings
 	name = "onion rings"
@@ -49,7 +45,6 @@
 	list_reagents = list("nutriment" = 3)
 	filling_color = "#C0C9A0"
 	gender = PLURAL
-	tastes = list("onion" = 3, "batter" = 1)
 
 /obj/item/reagent_containers/food/snacks/carrotfries
 	name = "carrot fries"
@@ -58,7 +53,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#FAA005"
 	list_reagents = list("plantmatter" = 3, "oculine" = 3, "vitamin" = 2)
-	tastes = list("carrots" = 3, "salt" = 1)
 
 
 //////////////////////
@@ -70,7 +64,6 @@
 	desc = "Musical fruit in a slightly less musical container."
 	icon_state = "beans"
 	list_reagents = list("nutriment" = 10, "beans" = 10, "vitamin" = 3)
-	tastes = list("beans" = 1)
 
 /obj/item/reagent_containers/food/snacks/mashed_potatoes //mashed taters
 	name = "mashed potatoes"
@@ -79,7 +72,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#D6D9C1"
 	list_reagents = list("nutriment" = 5, "gravy" = 5, "mashedpotatoes" = 10, "vitamin" = 2)
-	tastes = list("mashed potato" = 3, "gravy" = 1)
 
 /obj/item/reagent_containers/food/snacks/stuffing
 	name = "stuffing"
@@ -87,7 +79,6 @@
 	icon_state = "stuffing"
 	filling_color = "#C9AC83"
 	list_reagents = list("nutriment" = 3)
-	tastes = list("bread crumbs" = 1, "herbs" = 1)
 
 /obj/item/reagent_containers/food/snacks/loadedbakedpotato
 	name = "loaded baked potato"
@@ -95,7 +86,6 @@
 	icon_state = "loadedbakedpotato"
 	filling_color = "#9C7A68"
 	list_reagents = list("nutriment" = 6)
-	tastes = list("potato" = 1, "cheese" = 1, "herbs" = 1)
 
 /obj/item/reagent_containers/food/snacks/boiledrice
 	name = "boiled rice"
@@ -104,7 +94,6 @@
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#FFFBDB"
 	list_reagents = list("nutriment" = 5, "vitamin" = 1)
-	tastes = list("rice" = 1)
 
 
 /obj/item/reagent_containers/food/snacks/roastparsnip
@@ -114,5 +103,3 @@
 	trash = /obj/item/trash/plate
 	list_reagents = list("nutriment" = 3, "vitamin" = 4)
 	filling_color = "#FF5500"
-	tastes = list("parsnip" = 1)
-

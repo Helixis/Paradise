@@ -78,6 +78,7 @@
 
 	suit = /obj/item/clothing/suit/space/hardsuit/syndi
 	belt = /obj/item/storage/belt/military
+	head = /obj/item/clothing/head/helmet/space/hardsuit/syndi
 	mask = /obj/item/clothing/mask/gas/syndicate
 	l_ear = /obj/item/radio/headset/syndicate/alt
 	glasses = /obj/item/clothing/glasses/night
@@ -109,6 +110,7 @@
 /datum/outfit/admin/syndicate/operative/freedom
 	name = "Syndicate Freedom Operative"
 	suit = /obj/item/clothing/suit/space/hardsuit/syndi/freedom
+	head = /obj/item/clothing/head/helmet/space/hardsuit/syndi/freedom
 
 
 /datum/outfit/admin/syndicate_strike_team
@@ -792,34 +794,41 @@
 
 /datum/outfit/admin/hardsuit/engineer
 	name = "Engineer Hardsuit"
-	suit = /obj/item/clothing/suit/space/hardsuit/engine
+	suit = /obj/item/clothing/suit/space/hardsuit
+	head = /obj/item/clothing/head/helmet/space/hardsuit
 
 /datum/outfit/admin/hardsuit/ce
 	name = "CE Hardsuit"
-	suit = /obj/item/clothing/suit/space/hardsuit/engine/elite
+	suit = /obj/item/clothing/suit/space/hardsuit/elite
+	head = /obj/item/clothing/head/helmet/space/hardsuit/elite
 	shoes = /obj/item/clothing/shoes/magboots/advance
 
 /datum/outfit/admin/hardsuit/mining
 	name = "Mining Hardsuit"
 	suit = /obj/item/clothing/suit/space/hardsuit/mining
+	head = /obj/item/clothing/head/helmet/space/hardsuit/mining
 
 /datum/outfit/admin/hardsuit/syndi
 	name = "Syndi Hardsuit"
 	suit = /obj/item/clothing/suit/space/hardsuit/syndi
+	head = /obj/item/clothing/head/helmet/space/hardsuit/syndi
 	shoes = /obj/item/clothing/shoes/magboots/syndie
 
 /datum/outfit/admin/hardsuit/wizard
 	name = "Wizard Hardsuit"
-	suit = /obj/item/clothing/suit/space/hardsuit/shielded/wizard
+	suit = /obj/item/clothing/suit/space/hardsuit/wizard
+	head = /obj/item/clothing/head/helmet/space/hardsuit/wizard
 	shoes = /obj/item/clothing/shoes/magboots
 
 /datum/outfit/admin/hardsuit/medical
 	name = "Medical Hardsuit"
 	suit = /obj/item/clothing/suit/space/hardsuit/medical
+	head = /obj/item/clothing/head/helmet/space/hardsuit/medical
 
 /datum/outfit/admin/hardsuit/atmos
 	name = "Atmos Hardsuit"
-	suit = /obj/item/clothing/suit/space/hardsuit/engine/atmos
+	suit = /obj/item/clothing/suit/space/hardsuit/atmos
+	head = /obj/item/clothing/head/helmet/space/hardsuit/atmos
 
 
 /datum/outfit/admin/tournament
@@ -954,6 +963,7 @@
 	belt = /obj/item/claymore/ceremonial
 	gloves = /obj/item/clothing/gloves/combat
 	shoes = /obj/item/clothing/shoes/magboots
+	head = /obj/item/clothing/head/helmet/space/hardsuit/singuloth
 	mask = /obj/item/clothing/mask/breath
 	l_ear = /obj/item/radio/headset/ert
 	glasses = /obj/item/clothing/glasses/meson/cyber
@@ -1100,7 +1110,8 @@
 	l_hand = null
 	backpack_contents = list(
 		/obj/item/storage/box/engineer = 1,
-		/obj/item/clothing/suit/space/hardsuit/shielded/wizard = 1,
+		/obj/item/clothing/suit/space/hardsuit/wizard = 1,
+		/obj/item/clothing/head/helmet/space/hardsuit/wizard = 1,
 		/obj/item/clothing/shoes/magboots = 1,
 		/obj/item/kitchen/knife/ritual  = 1,
 		/obj/item/clothing/suit/wizrobe/red = 1,
@@ -1127,7 +1138,7 @@
 	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/hooded/chaplain_hoodie
 	back = /obj/item/storage/backpack
-	head = /obj/item/clothing/head/hooded/chaplain_hood
+	head = /obj/item/clothing/head/chaplain_hood
 	gloves = /obj/item/clothing/gloves/color/black
 	shoes = /obj/item/clothing/shoes/black
 	l_ear = /obj/item/radio/headset/syndicate

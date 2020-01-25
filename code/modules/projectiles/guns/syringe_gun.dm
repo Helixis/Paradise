@@ -46,8 +46,8 @@
 	..()
 
 /obj/item/gun/syringe/examine(mob/user)
-	. = ..()
-	. += "Can hold [max_syringes] syringe\s. Has [syringes.len] syringe\s remaining."
+	..()
+	to_chat(user, "Can hold [max_syringes] syringe\s. Has [syringes.len] syringe\s remaining.")
 
 /obj/item/gun/syringe/attack_self(mob/living/user as mob)
 	if(!syringes.len)
@@ -76,8 +76,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='notice'>[src] cannot hold more syringes.</span>")
-	else
-		return ..()
+	return 0
 
 /obj/item/gun/syringe/rapidsyringe
 	name = "rapid syringe gun"

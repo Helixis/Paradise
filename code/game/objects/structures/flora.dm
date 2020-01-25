@@ -1,6 +1,6 @@
 /obj/structure/flora
-	resistance_flags = FLAMMABLE
-	max_integrity = 150
+	burn_state = FLAMMABLE
+	burntime = 30
 
 //trees
 /obj/structure/flora/tree
@@ -244,7 +244,7 @@
 	desc = "a rock"
 	icon_state = "rock1"
 	icon = 'icons/obj/flora/rocks.dmi'
-	resistance_flags = FIRE_PROOF
+	burn_state = FIRE_PROOF
 	anchored = 1
 
 /obj/structure/flora/rock/New()
@@ -259,14 +259,6 @@
 /obj/structure/flora/rock/pile/New()
 	..()
 	icon_state = "rockpile[rand(1,5)]"
-
-/obj/structure/flora/rock/icy
-	name = "icy rock"
-	color = "#cce9eb"
-
-/obj/structure/flora/rock/pile/icy
-	name = "icy rocks"
-	color = "#cce9eb"
 
 /obj/structure/flora/corn_stalk
 	name = "corn stalk"

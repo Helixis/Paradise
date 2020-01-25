@@ -11,6 +11,9 @@
 	anchored = 1
 	density = 1
 
+	attackby(obj/item/W as obj, mob/user as mob, params)
+		return attack_hand(user)
+
 	attack_hand(mob/user as mob)
 		to_chat(user, "Civilians: NT is recruiting! Please head SOUTH to the NT Recruitment office to join the station's crew!")
 
@@ -22,6 +25,11 @@
 	icon_state = "teleconsole"
 	anchored = 1
 	density = 0
+
+	attackby(obj/item/W as obj, mob/user as mob, params)
+
+		return attack_hand(user)
+
 
 	attack_hand(mob/user as mob)
 

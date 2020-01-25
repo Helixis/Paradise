@@ -41,7 +41,6 @@
 	damage = 20
 	damage_type = CLONE
 	irradiate = 10
-	impact_effect_type = /obj/effect/temp_visual/impact_effect/green_laser
 
 /obj/item/projectile/energy/dart
 	name = "dart"
@@ -74,7 +73,6 @@
 /obj/item/projectile/energy/shock_revolver
 	name = "shock bolt"
 	icon_state = "purple_laser"
-	impact_effect_type = /obj/effect/temp_visual/impact_effect/purple_laser
 	var/chain
 
 /obj/item/ammo_casing/energy/shock_revolver/ready_proj(atom/target, mob/living/user, quiet, zone_override = "")

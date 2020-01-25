@@ -6,12 +6,6 @@
 	icon_state = "void-red"
 	item_state = "void"
 	flags_inv = HIDEMASK|HIDEEARS
-	sprite_sheets = list(
-		"Grey" = 'icons/mob/species/grey/helmet.dmi',
-		"Tajaran" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
-		"Vulpkanin" = 'icons/mob/species/vulpkanin/helmet.dmi',
-		"Vox" = 'icons/mob/species/vox/helmet.dmi')
 
 /obj/item/clothing/suit/space/nasavoid
 	name = "NASA Void Suit"
@@ -19,11 +13,6 @@
 	item_state = "void"
 	desc = "A high tech, NASA Centcom branch designed space suit. Used for AI satellite maintenance."
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/multitool)
-	sprite_sheets = list(
-		"Tajaran" = 'icons/mob/species/tajaran/suit.dmi',
-		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
-		"Vulpkanin" = 'icons/mob/species/vulpkanin/suit.dmi',
-		"Vox" = 'icons/mob/species/vox/suit.dmi')
 
 //Colors!!!
 /obj/item/clothing/head/helmet/space/nasavoid/green
@@ -75,7 +64,7 @@
 	icon_state = "void-syndi"
 	desc = "A high tech, NASA Centcom branch designed space suit helmet. This one looks rather suspicious."
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
-	armor = list("melee" = 40, "bullet" = 50, "laser" = 30,"energy" = 15, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 80, "acid" = 85)
+	armor = list(melee = 40, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 
 /obj/item/clothing/suit/space/nasavoid/syndi
 	name = "Blood Red NASA Void Suit"
@@ -83,7 +72,7 @@
 	desc = "A high tech, NASA Centcom branch designed space suit. This one looks rather suspicious."
 	w_class = WEIGHT_CLASS_NORMAL
 	allowed = list(/obj/item/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword/saber,/obj/item/restraints/handcuffs,/obj/item/tank)
-	armor = list("melee" = 40, "bullet" = 50, "laser" = 30,"energy" = 15, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 80, "acid" = 85)
+	armor = list(melee = 40, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 
 //random spawner
 

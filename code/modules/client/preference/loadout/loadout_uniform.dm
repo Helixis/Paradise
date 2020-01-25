@@ -2,6 +2,7 @@
 /datum/gear/uniform
 	subtype_path = /datum/gear/uniform
 	slot = slot_w_uniform
+	cost = 2
 	sort_category = "Uniforms and Casual Dress"
 
 /datum/gear/uniform/skirt

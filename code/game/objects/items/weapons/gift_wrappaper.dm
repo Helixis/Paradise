@@ -13,7 +13,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift1"
 	item_state = "gift1"
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/a_gift/New()
 	..()
@@ -33,6 +33,11 @@
 	else
 		to_chat(user, "<span class='notice'>The gift was empty!</span>")
 	qdel(src)
+	return
+
+/obj/item/a_gift/ex_act()
+	qdel(src)
+	return
 
 /obj/effect/spresent/relaymove(mob/user as mob)
 	if(user.stat)
@@ -134,7 +139,7 @@
 	flags = NOBLUDGEON
 	amount = 25
 	max_amount = 25
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/stack/wrapping_paper/attack_self(mob/user)
 	to_chat(user, "<span class='notice'>You need to use it on a package that has already been wrapped!</span>")

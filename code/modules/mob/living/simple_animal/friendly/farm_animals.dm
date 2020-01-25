@@ -34,11 +34,12 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/retaliate/goat/Destroy()
-	QDEL_NULL(udder)
+	qdel(udder)
+	udder = null
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/goat/handle_automated_movement()
-	. = ..()
+	..()
 	//chance to go crazy and start wacking stuff
 	if(!enemies.len && prob(1))
 		Retaliate()
@@ -48,13 +49,14 @@
 		LoseTarget()
 		visible_message("<span class='notice'>[src] calms down.</span>")
 
-	eat_plants()
-	if(!pulledby)
-		for(var/direction in shuffle(list(1, 2, 4, 8, 5, 6, 9, 10)))
-			var/step = get_step(src, direction)
-			if(step)
-				if(locate(/obj/structure/spacevine) in step || locate(/obj/structure/glowshroom) in step)
-					Move(step, get_dir(src, step))
+	if(stat == CONSCIOUS)
+		eat_plants()
+		if(!pulledby)
+			for(var/direction in shuffle(list(1,2,4,8,5,6,9,10)))
+				var/step = get_step(src, direction)
+				if(step)
+					if(locate(/obj/structure/spacevine) in step || locate(/obj/structure/glowshroom) in step)
+						Move(step, get_dir(src, step))
 
 /mob/living/simple_animal/hostile/retaliate/goat/Life(seconds, times_fired)
 	. = ..()
@@ -92,8 +94,8 @@
 		say("Nom")
 
 /mob/living/simple_animal/hostile/retaliate/goat/AttackingTarget()
-	. = ..()
-	if(. && isdiona(target))
+	..()
+	if(isdiona(target))
 		var/mob/living/carbon/human/H = target
 		var/obj/item/organ/external/NB = pick(H.bodyparts)
 		H.visible_message("<span class='warning'>[src] takes a big chomp out of [H]!</span>", "<span class='userdanger'>[src] takes a big chomp out of your [NB.name]!</span>")
@@ -123,7 +125,7 @@
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 	blood_volume = BLOOD_VOLUME_NORMAL
 	var/obj/item/udder/udder = null
 
@@ -192,7 +194,7 @@
 	mob_size = MOB_SIZE_TINY
 	can_hide = 1
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -247,7 +249,7 @@ var/global/chicken_count = 0
 	var/list/feedMessages = list("It clucks happily.","It clucks happily.")
 	var/list/layMessage = EGG_LAYING_MESSAGES
 	var/list/validColors = list("brown","black","white")
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 /mob/living/simple_animal/chicken/New()
 	..()
@@ -327,7 +329,7 @@ var/global/chicken_count = 0
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 	blood_volume = BLOOD_VOLUME_NORMAL
 
 /mob/living/simple_animal/turkey
@@ -351,7 +353,7 @@ var/global/chicken_count = 0
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 /mob/living/simple_animal/goose
 	name = "goose"
@@ -374,7 +376,7 @@ var/global/chicken_count = 0
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 /mob/living/simple_animal/seal
 	name = "seal"
@@ -397,7 +399,7 @@ var/global/chicken_count = 0
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 	blood_volume = BLOOD_VOLUME_NORMAL
 
 /mob/living/simple_animal/walrus
@@ -421,7 +423,7 @@ var/global/chicken_count = 0
 	health = 50
 	maxHealth = 50
 	can_collar = 1
-	gold_core_spawnable = FRIENDLY_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 	blood_volume = BLOOD_VOLUME_NORMAL
 
 /obj/item/udder

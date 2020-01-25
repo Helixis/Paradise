@@ -9,10 +9,9 @@
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
 	actions_types = list(/datum/action/item_action/adjust)
-	resistance_flags = NONE
+	burn_state = FIRE_PROOF
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/mask.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi',
 		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
 		"Tajaran" = 'icons/mob/species/tajaran/mask.dmi',
 		"Vulpkanin" = 'icons/mob/species/vulpkanin/mask.dmi',
@@ -44,7 +43,7 @@
 	icon_state = "voxmask"
 	item_state = "voxmask"
 	permeability_coefficient = 0.01
-	species_restricted = list("Vox", "Vox Armalis") //These should fit the "Mega Vox" just fine.
+	species_restricted = list("Vox")
 	actions_types = list()
 
 /obj/item/clothing/mask/breath/vox/attack_self(var/mob/user)

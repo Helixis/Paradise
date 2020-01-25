@@ -16,7 +16,6 @@
 	icon_state = "ash"
 	anchored = TRUE
 	scoop_reagents = list("ash" = 10)
-	mergeable_decal = FALSE
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"
@@ -31,8 +30,8 @@
 	smooth = SMOOTH_MORE
 	mouse_opacity = FALSE
 
-/obj/effect/decal/cleanable/dirt/Initialize(mapload)
-	. = ..()
+/obj/effect/decal/cleanable/dirt/Initialize()
+	..()
 	icon_state = ""
 
 /obj/effect/decal/cleanable/dirt/blackpowder
@@ -56,7 +55,7 @@
 	desc = "It's foam."
 	color = "#EBEBEB"
 
-/obj/effect/decal/cleanable/flour/foam/Initialize(mapload)
+/obj/effect/decal/cleanable/flour/foam/Initialize()
 	. = ..()
 	QDEL_IN(src, 15 SECONDS)
 
@@ -75,9 +74,6 @@
 	. = ..()
 	QDEL_IN(src, 2 MINUTES)
 
-/obj/effect/decal/cleanable/greenglow/ex_act()
-	return
-
 /obj/effect/decal/cleanable/cobweb
 	name = "cobweb"
 	desc = "Somebody should remove that."
@@ -86,7 +82,11 @@
 	layer = OBJ_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
-	resistance_flags = FLAMMABLE
+	burntime = 1
+
+/obj/effect/decal/cleanable/cobweb/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume, global_overlay = TRUE)
+	..()
+	qdel(src)
 
 /obj/effect/decal/cleanable/molten_object
 	name = "gooey grey mass"
@@ -97,7 +97,6 @@
 	gender = NEUTER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "molten"
-	mergeable_decal = FALSE
 
 /obj/effect/decal/cleanable/molten_object/large
 	name = "big gooey grey mass"
@@ -131,22 +130,6 @@
 	icon_state = "gvomit_1"
 	random_icon_states = list("gvomit_1", "gvomit_2", "gvomit_3", "gvomit_4")
 	scoop_reagents = list("green_vomit" = 5)
-
-/obj/effect/decal/cleanable/shreds
-	name = "shreds"
-	desc = "The shredded remains of what appears to be clothing."
-	icon_state = "shreds"
-	gender = PLURAL
-	mergeable_decal = FALSE
-
-/obj/effect/decal/cleanable/shreds/ex_act(severity, target)
-	if(severity == 1) //so shreds created during an explosion aren't deleted by the explosion.
-		qdel(src)
-
-/obj/effect/decal/cleanable/shreds/Initialize(mapload)
-	pixel_x = rand(-10, 10)
-	pixel_y = rand(-10, 10)
-	. = ..()
 
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"
@@ -190,7 +173,6 @@
 	density = FALSE
 	anchored = TRUE
 	layer = TURF_LAYER
-	plane = GAME_PLANE
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "flour"
 	color = "#D5820B"

@@ -30,28 +30,28 @@
 	return ..()
 
 /obj/structure/door_assembly/examine(mob/user)
-	. = ..()
+	..()
 	var/doorname = ""
 	if(created_name)
 		doorname = ", written on it is '[created_name]'"
 	switch(state)
 		if(AIRLOCK_ASSEMBLY_NEEDS_WIRES)
 			if(anchored)
-				. += "<span class='notice'>The anchoring bolts are <b>wrenched</b> in place, but the maintenance panel lacks <i>wiring</i>.</span>"
+				to_chat(user, "<span class='notice'>The anchoring bolts are <b>wrenched</b> in place, but the maintenance panel lacks <i>wiring</i>.</span>")
 			else
-				. += "<span class='notice'>The assembly is <b>welded together</b>, but the anchoring bolts are <i>unwrenched</i>.</span>"
+				to_chat(user, "<span class='notice'>The assembly is <b>welded together</b>, but the anchoring bolts are <i>unwrenched</i>.</span>")
 		if(AIRLOCK_ASSEMBLY_NEEDS_ELECTRONICS)
-			. += "<span class='notice'>The maintenance panel is <b>wired</b>, but the circuit slot is <i>empty</i>.</span>"
+			to_chat(user, "<span class='notice'>The maintenance panel is <b>wired</b>, but the circuit slot is <i>empty</i>.</span>")
 		if(AIRLOCK_ASSEMBLY_NEEDS_SCREWDRIVER)
-			. += "<span class='notice'>The circuit is <b>connected loosely</b> to its slot, but the maintenance panel is <i>unscrewed and open</i>.</span>"
+			to_chat(user, "<span class='notice'>The circuit is <b>connected loosely</b> to its slot, but the maintenance panel is <i>unscrewed and open</i>.</span>")
 	if(!mineral && !glass && !noglass)
-		. += "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for glass windows and mineral covers.</span>"
+		to_chat(user, "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for glass windows and mineral covers.</span>")
 	else if(!mineral && glass && !noglass)
-		. += "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for mineral covers.</span>"
+		to_chat(user, "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for mineral covers.</span>")
 	else if(mineral && !glass && !noglass)
-		. += "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for glass windows.</span>"
+		to_chat(user, "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname]. There are <i>empty</i> slots for glass windows.</span>")
 	else
-		. += "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname].</span>"
+		to_chat(user, "<span class='notice'>There is a small <i>paper</i> placard on the assembly[doorname].</span>")
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/pen))
@@ -226,7 +226,6 @@
 					door = new airlock_type(loc)
 				door.setDir(dir)
 				door.electronics = electronics
-				door.unres_sides = electronics.unres_sides
 				door.heat_proof = heat_proof_finished
 				if(electronics.one_access)
 					door.req_access = null
@@ -281,7 +280,7 @@
 	qdel(source)
 
 /obj/structure/door_assembly/deconstruct(disassembled = TRUE)
-	if(!(flags & NODECONSTRUCT))
+	if(can_deconstruct)
 		var/turf/T = get_turf(src)
 		if(!disassembled)
 			material_amt = rand(2,4)

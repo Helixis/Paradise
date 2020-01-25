@@ -242,7 +242,7 @@
 
 	return
 
-/mob/living/silicon/robot/unEquip(obj/item/I, force)
+/mob/living/silicon/robot/unEquip(obj/item/I)
 	if(I == module_active)
 		uneq_active(I)
 	return ..()

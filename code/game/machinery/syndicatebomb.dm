@@ -10,7 +10,7 @@
 	anchored = 0
 	density = 0
 	layer = BELOW_MOB_LAYER //so people can't hide it and it's REALLY OBVIOUS
-	resistance_flags = FIRE_PROOF | ACID_PROOF
+	unacidable = 1
 
 	var/datum/wires/syndicatebomb/wires = null
 	var/minimum_timer = 90
@@ -36,14 +36,6 @@
 	. = (payload in src) && (active || ignore_active) && !defused
 	if(.)
 		payload.detonate()
-
-/obj/machinery/syndicatebomb/obj_break()
-	if(!try_detonate())
-		..()
-
-/obj/machinery/syndicatebomb/obj_destruction()
-	if(!try_detonate())
-		..()
 
 /obj/machinery/syndicatebomb/process()
 	if(!active)
@@ -98,8 +90,8 @@
 	return ..()
 
 /obj/machinery/syndicatebomb/examine(mob/user)
-	. = ..()
-	. += "A digital display on it reads \"[seconds_remaining()]\"."
+	..(user)
+	to_chat(user, "A digital display on it reads \"[seconds_remaining()]\".")
 
 /obj/machinery/syndicatebomb/update_icon()
 	icon_state = "[initial(icon_state)][active ? "-active" : "-inactive"][open_panel ? "-wires" : ""]"
@@ -209,9 +201,6 @@
 		return FALSE
 	if(!Adjacent(user))
 		return FALSE
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access denied!</span>")
-		return FALSE
 	return TRUE
 
 /obj/machinery/syndicatebomb/proc/activate()
@@ -284,7 +273,6 @@
 /obj/machinery/syndicatebomb/self_destruct
 	name = "self destruct device"
 	desc = "Do not taunt. Warranty invalid if exposed to high temperature. Not suitable for agents under 3 years of age."
-	req_access = list(access_syndicate)
 	payload = /obj/item/bombcore/large
 	can_unanchor = FALSE
 	var/explosive_wall_group = EXPLOSIVE_WALL_GROUP_SYNDICATE_BASE // If set, this bomb will also cause explosive walls in the same group to explode
@@ -308,7 +296,7 @@
 	item_state = "eshield0"
 	w_class = WEIGHT_CLASS_NORMAL
 	origin_tech = "syndicate=5;combat=6"
-	resistance_flags = FLAMMABLE //Burnable (but the casing isn't)
+	burn_state = FLAMMABLE //Burnable (but the casing isn't)
 	var/adminlog = null
 	var/range_heavy = 3
 	var/range_medium = 9

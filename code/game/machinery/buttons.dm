@@ -12,20 +12,15 @@
 	var/active = 0
 	settagwhitelist = list("id_tag", "logic_id_tag")
 	anchored = 1.0
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 10, bio = 100, rad = 100, fire = 90, acid = 70)
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	active_power_usage = 4
-	resistance_flags = LAVA_PROOF | FIRE_PROOF
 	var/range = 7
 
 	var/datum/radio_frequency/radio_connection
 	var/frequency = 0
 	var/logic_id_tag = "default"					//Defines the ID tag to send logic signals to, so you don't have to unlink from doors and stuff
 	var/logic_connect = 0							//Set this to allow the button to send out logic signals when pressed in addition to normal stuff
-
-/obj/machinery/button/indestructible
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/machinery/driver_button/New(turf/loc, var/w_dir=null)
 	..()
@@ -82,7 +77,7 @@
 			qdel(src)
 		return 1
 
-	return ..()
+	return attack_hand(user)
 
 /obj/machinery/driver_button/multitool_menu(var/mob/user, var/obj/item/multitool/P)
 	return {"
@@ -177,6 +172,9 @@
 /obj/machinery/ignition_switch/attack_ghost(mob/user)
 	if(user.can_advanced_admin_interact())
 		return attack_hand(user)
+
+/obj/machinery/ignition_switch/attackby(obj/item/W, mob/user, params)
+	return attack_hand(user)
 
 /obj/machinery/ignition_switch/attack_hand(mob/user)
 	if(stat & (NOPOWER|BROKEN))

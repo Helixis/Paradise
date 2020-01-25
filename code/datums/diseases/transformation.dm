@@ -33,7 +33,8 @@
 			if(prob(stage_prob*2) && stage4)
 				to_chat(affected_mob, pick(stage4))
 		if(5)
-			do_disease_transformation(affected_mob)
+			if(prob(stage_prob*2) && stage5)
+				to_chat(affected_mob, pick(stage5))
 
 /datum/disease/transformation/proc/do_disease_transformation(mob/living/affected_mob)
 	if(istype(affected_mob, /mob/living/carbon) && affected_mob.stat != DEAD)
@@ -41,8 +42,6 @@
 			to_chat(affected_mob, pick(stage5))
 		if(jobban_isbanned(affected_mob, new_form))
 			affected_mob.death(1)
-			return
-		if(affected_mob.notransform)
 			return
 		affected_mob.notransform = 1
 		affected_mob.canmove = 0
@@ -109,7 +108,6 @@
 		if(4)
 			if(prob(3))
 				affected_mob.say(pick("Eeek, ook ook!", "Eee-eeek!", "Eeee!", "Ungh, ungh."))
-
 
 /datum/disease/transformation/robot
 
@@ -186,7 +184,7 @@
 	stage3	= list("<span class='danger'>Your appendages are melting away.</span>", "<span class='danger'>Your limbs begin to lose their shape.</span>")
 	stage4	= list("<span class='danger'>You are turning into a slime.</span>")
 	stage5	= list("<span class='danger'>You have become a slime.</span>")
-	new_form = /mob/living/simple_animal/slime/random
+	new_form = /mob/living/carbon/slime/random
 
 /datum/disease/transformation/slime/stage_act()
 	..()
@@ -214,7 +212,7 @@
 	stage3	= list("<span class='danger'>Must... eat... chocolate....</span>", "<span class='danger'>YAP</span>")
 	stage4	= list("<span class='danger'>Visions of washing machines assail your mind!</span>")
 	stage5	= list("<span class='danger'>AUUUUUU!!!</span>")
-	new_form = /mob/living/simple_animal/pet/dog/corgi
+	new_form = /mob/living/simple_animal/pet/corgi
 
 /datum/disease/transformation/corgi/stage_act()
 	..()

@@ -7,8 +7,8 @@
 	icon_opened = "cabinetdetective_open"
 	icon_broken = "cabinetdetective_broken"
 	icon_off = "cabinetdetective_broken"
-	resistance_flags = FLAMMABLE
-	max_integrity = 70
+	burn_state = FLAMMABLE
+	burntime = 20
 
 /obj/structure/closet/secure_closet/bar/New()
 	..()

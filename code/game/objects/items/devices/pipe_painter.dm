@@ -29,5 +29,5 @@
 	mode = input("Which colour do you want to use?", "Pipe Painter", mode) in modes
 
 /obj/item/pipe_painter/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>It is in [mode] mode.</span>"
+	..(user)
+	to_chat(user, "It is in [mode] mode.")

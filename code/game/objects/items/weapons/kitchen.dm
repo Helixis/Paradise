@@ -31,7 +31,6 @@
 	flags = CONDUCT
 	attack_verb = list("attacked", "stabbed", "poked")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 30)
 	sharp = 0
 	var/max_contents = 1
 
@@ -47,7 +46,7 @@
 		return ..()
 
 	if(user.a_intent != INTENT_HELP)
-		if(user.zone_selected == "head" || user.zone_selected == "eyes")
+		if(user.zone_sel.selecting == "head" || user.zone_sel.selecting == "eyes")
 			if((CLUMSY in user.mutations) && prob(50))
 				M = user
 			return eyestab(M,user)
@@ -116,9 +115,7 @@
 	throw_range = 6
 	materials = list(MAT_METAL=12000)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	sharp = TRUE
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
-	var/bayonet = FALSE	//Can this be attached to a gun?
+	sharp = 1
 
 /obj/item/kitchen/knife/suicide_act(mob/user)
 	user.visible_message(pick("<span class='suicide'>[user] is slitting [user.p_their()] wrists with the [src.name]! It looks like [user.p_theyre()] trying to commit suicide.</span>", \
@@ -151,11 +148,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/kitchen/knife/butcher/meatcleaver
-	name = "meat cleaver"
+	name = "Meat Cleaver"
 	icon_state = "mcleaver"
 	item_state = "butch"
-	force = 25
-	throwforce = 15
+	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
+	force = 25.0
+	throwforce = 15.0
 
 /obj/item/kitchen/knife/combat
 	name = "combat knife"
@@ -166,7 +164,6 @@
 	throwforce = 20
 	origin_tech = "materials=3;combat=4"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cut")
-	bayonet = TRUE
 
 /obj/item/kitchen/knife/combat/survival
 	name = "survival knife"
@@ -201,7 +198,6 @@
 	materials = list()
 	origin_tech = "biotech=3;combat=2"
 	attack_verb = list("shanked", "shivved")
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 
 /*

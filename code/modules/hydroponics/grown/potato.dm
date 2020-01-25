@@ -24,7 +24,6 @@
 	desc = "Boil 'em! Mash 'em! Stick 'em in a stew!"
 	icon_state = "potato"
 	filling_color = "#E9967A"
-	tastes = list("potato" = 1)
 	bitesize = 100
 	distill_reagent = "vodka"
 
@@ -34,7 +33,6 @@
 	desc = "Slices of neatly cut potato."
 	icon_state = "potato_wedges"
 	filling_color = "#E9967A"
-	tastes = list("potato" = 1)
 	bitesize = 100
 	distill_reagent = "sbiten"
 
@@ -66,5 +64,4 @@
 	seed = /obj/item/seeds/potato/sweet
 	name = "sweet potato"
 	desc = "It's sweet."
-	tastes = list("sweet potato" = 1)
 	icon_state = "sweetpotato"

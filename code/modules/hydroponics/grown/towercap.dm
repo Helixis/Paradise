@@ -44,11 +44,15 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	var/plank_type = /obj/item/stack/sheet/wood
 	var/plank_name = "wooden planks"
-	var/static/list/accepted = typecacheof(list(/obj/item/reagent_containers/food/snacks/grown/tobacco,
+	var/list/accepted = list(/obj/item/reagent_containers/food/snacks/grown/tobacco,
 	/obj/item/reagent_containers/food/snacks/grown/tea,
 	/obj/item/reagent_containers/food/snacks/grown/ambrosia/vulgaris,
 	/obj/item/reagent_containers/food/snacks/grown/ambrosia/deus,
-	/obj/item/reagent_containers/food/snacks/grown/wheat))
+	/obj/item/reagent_containers/food/snacks/grown/wheat)
+
+/obj/item/grown/log/New()
+	..()
+	accepted = typecacheof(accepted)
 
 /obj/item/grown/log/attackby(obj/item/W, mob/user, params)
 	if(is_sharp(W))
@@ -65,7 +69,7 @@
 			to_chat(user, "<span class='notice'>You add the newly-formed [plank_name] to the stack. It now contains [plank.amount] [plank_name].</span>")
 		qdel(src)
 
-	if(CheckAccepted(W))
+	if(is_type_in_typecache(W, accepted))
 		var/obj/item/reagent_containers/food/snacks/grown/leaf = W
 		if(leaf.dry)
 			user.show_message("<span class='notice'>You wrap \the [W] around the log, turning it into a torch!</span>")
@@ -80,9 +84,6 @@
 	else
 		return ..()
 
-/obj/item/grown/log/proc/CheckAccepted(obj/item/I)
-	return is_type_in_typecache(I, accepted)
-
 /obj/item/grown/log/tree
 	seed = null
 	name = "wood log"
@@ -93,11 +94,10 @@
 	name = "steel-cap log"
 	desc = "It's made of metal."
 	icon_state = "steellogs"
+	accepted = list()
 	plank_type = /obj/item/stack/rods
 	plank_name = "rods"
 
-/obj/item/grown/log/steel/CheckAccepted(obj/item/I)
-	return FALSE
 
 /////////BONFIRES//////////
 
@@ -108,7 +108,7 @@
 	icon_state = "bonfire"
 	density = FALSE
 	anchored = TRUE
-	buckle_lying = FALSE
+	buckle_lying = 0
 	var/burning = 0
 	var/fire_stack_strength = 5
 
@@ -119,8 +119,8 @@
 	if(istype(W, /obj/item/stack/rods) && !can_buckle)
 		var/obj/item/stack/rods/R = W
 		R.use(1)
-		can_buckle = TRUE
-		buckle_requires_restraints = TRUE
+		can_buckle = 1
+		buckle_requires_restraints = 1
 		to_chat(user, "<span class='italics'>You add a rod to [src].")
 		var/image/U = image(icon='icons/obj/hydroponics/equipment.dmi',icon_state="bonfire_rod",pixel_y=16)
 		underlays += U
@@ -160,7 +160,7 @@
 	..()
 	StartBurning()
 
-/obj/structure/bonfire/Crossed(atom/movable/AM, oldloc)
+/obj/structure/bonfire/Crossed(atom/movable/AM)
 	if(burning)
 		Burn()
 
@@ -191,10 +191,11 @@
 		set_light(0)
 		STOP_PROCESSING(SSobj, src)
 
-/obj/structure/bonfire/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
+/obj/structure/bonfire/buckle_mob(mob/living/M, force = 0)
 	if(..())
 		M.pixel_y += 13
 
-/obj/structure/bonfire/unbuckle_mob(mob/living/buckled_mob, force = FALSE)
-	if(..())
+/obj/structure/bonfire/unbuckle_mob(force=0)
+	if(buckled_mob)
 		buckled_mob.pixel_y -= 13
+	. = ..()

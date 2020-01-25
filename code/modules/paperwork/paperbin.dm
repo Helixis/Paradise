@@ -8,13 +8,13 @@
 	throw_speed = 3
 	throw_range = 7
 	pressure_resistance = 8
+	burn_state = FLAMMABLE
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = list()	//List of papers put in the bin for reference.
 
 /obj/item/paper_bin/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume, global_overlay = TRUE)
-	if(amount)
-		amount = 0
-		update_icon()
+	if(!amount)
+		return
 	..()
 
 /obj/item/paper_bin/Destroy()
@@ -100,12 +100,11 @@
 
 
 /obj/item/paper_bin/examine(mob/user)
-	. = ..()
-	if(in_range(user, src))
+	if(..(user, 1))
 		if(amount)
-			. += "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+			to_chat(usr, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
-			. += "<span class='notice'>There are no papers in the bin.</span>"
+			to_chat(usr, "<span class='notice'>There are no papers in the bin.</span>")
 
 
 /obj/item/paper_bin/update_icon()

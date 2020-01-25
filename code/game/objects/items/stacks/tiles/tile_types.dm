@@ -81,7 +81,7 @@
 	icon_state = "tile_grass"
 	origin_tech = "biotech=1"
 	turf_type = /turf/simulated/floor/grass
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 //Wood
 /obj/item/stack/tile/wood
@@ -92,7 +92,7 @@
 	icon_state = "tile-wood"
 	origin_tech = "biotech=1"
 	turf_type = /turf/simulated/floor/wood
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 //Carpets
 /obj/item/stack/tile/carpet
@@ -101,7 +101,7 @@
 	desc = "A piece of carpet. It is the same size as a floor tile"
 	icon_state = "tile-carpet"
 	turf_type = /turf/simulated/floor/carpet
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/stack/tile/carpet/black
 	name = "black carpet"
@@ -123,8 +123,6 @@
 	flags = CONDUCT
 	turf_type = /turf/simulated/floor/plasteel
 	mineralType = "metal"
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 70)
-	resistance_flags = FIRE_PROOF
 
 //Light
 /obj/item/stack/tile/light
@@ -145,7 +143,7 @@
 	desc = "A piece of carpet with a convincing star pattern."
 	icon_state = "tile_space"
 	turf_type = /turf/simulated/floor/fakespace
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 	merge_type = /obj/item/stack/tile/fakespace
 
 /obj/item/stack/tile/fakespace/loaded
@@ -193,7 +191,7 @@
 	icon_state = "tile_space"
 	turf_type = /turf/simulated/floor/carpet/arcade
 	merge_type = /obj/item/stack/tile/arcade_carpet
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/stack/tile/arcade_carpet/loaded
 	amount = 20

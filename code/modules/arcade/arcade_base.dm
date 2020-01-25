@@ -22,18 +22,18 @@
 		qdel(src)
 
 /obj/machinery/arcade/examine(mob/user)
-	. = ..()
+	..(user)
 	if(freeplay)
-		. += "Someone enabled freeplay on this machine!"
+		to_chat(user, "Someone enabled freeplay on this machine!")
 	else
 		if(token_price)
-			. += "\The [src.name] costs [token_price] credits per play."
+			to_chat(user, "\The [src.name] costs [token_price] credits per play.")
 		if(!tokens)
-			. += "\The [src.name] has no available play credits. Better feed the machine!"
+			to_chat(user, "\The [src.name] has no available play credits. Better feed the machine!")
 		else if(tokens == 1)
-			. += "\The [src.name] has only 1 play credit left!"
+			to_chat(user, "\The [src.name] has only 1 play credit left!")
 		else
-			. += "\The [src.name] has [tokens] play credits!"
+			to_chat(user, "\The [src.name] has [tokens] play credits!")
 
 /obj/machinery/arcade/attack_hand(mob/user as mob)
 	if(..())
@@ -76,11 +76,9 @@
 			var/obj/item/stack/spacecash/C = O
 			if(pay_with_cash(C, user))
 				tokens += 1
-		return
+			return
 	if(panel_open && component_parts && istype(O, /obj/item/crowbar))
 		default_deconstruction_crowbar(O)
-		return
-	return ..()
 
 /obj/machinery/arcade/update_icon()
 	return

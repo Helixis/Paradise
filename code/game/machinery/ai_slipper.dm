@@ -5,8 +5,7 @@
 	layer = 3
 	plane = FLOOR_PLANE
 	anchored = 1.0
-	max_integrity = 200
-	armor = list(melee = 50, bullet = 20, laser = 20, energy = 20, bomb = 0, bio = 0, rad = 0, fire = 50, acid = 30)
+	armor = list(melee = 50, bullet = 20, laser = 20, energy = 20, bomb = 0, bio = 0, rad = 0)
 	var/uses = 20
 	var/disabled = TRUE
 	var/lethal = 0
@@ -37,18 +36,21 @@
 		return
 	if(istype(user, /mob/living/silicon))
 		return attack_hand(user)
-	if(allowed(usr)) // trying to unlock the interface
-		locked = !locked
-		to_chat(user, "You [locked ? "lock" : "unlock"] the device.")
-		if(locked)
-			if(user.machine == src)
-				user.unset_machine()
-				user << browse(null, "window=ai_slipper")
+	else // trying to unlock the interface
+		if(allowed(usr))
+			locked = !locked
+			to_chat(user, "You [locked ? "lock" : "unlock"] the device.")
+			if(locked)
+				if(user.machine == src)
+					user.unset_machine()
+					user << browse(null, "window=ai_slipper")
+			else
+				if(user.machine == src)
+					attack_hand(usr)
 		else
-			if(user.machine == src)
-				attack_hand(usr)
-		return
-	return ..()
+			to_chat(user, "<span class='warning'>Access denied.</span>")
+			return
+	return
 
 /obj/machinery/ai_slipper/proc/ToggleOn()
 	if(stat & (NOPOWER|BROKEN))

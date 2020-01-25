@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(all_objectives)
+var/global/list/all_objectives = list()
 
 var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datum/theft_objective/steal - /datum/theft_objective/number - /datum/theft_objective/unique
 
@@ -10,13 +10,13 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 	var/completed = 0					//currently only used for custom objectives.
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 
-/datum/objective/New(text)
-	GLOB.all_objectives += src
+/datum/objective/New(var/text)
+	all_objectives |= src
 	if(text)
 		explanation_text = text
 
 /datum/objective/Destroy()
-	GLOB.all_objectives -= src
+	all_objectives -= src
 	return ..()
 
 /datum/objective/proc/check_completion()
@@ -25,8 +25,6 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 /datum/objective/proc/is_invalid_target(datum/mind/possible_target)
 	if(possible_target == owner)
 		return TARGET_INVALID_IS_OWNER
-	if(possible_target in owner.targets)
-		return TARGET_INVALID_IS_TARGET
 	if(!ishuman(possible_target.current))
 		return TARGET_INVALID_NOT_HUMAN
 	if(!possible_target.current.stat == DEAD)
@@ -54,6 +52,7 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 	if(possible_targets.len > 0)
 		target = pick(possible_targets)
 
+
 /datum/objective/assassinate
 	martyr_compatible = 1
 
@@ -63,11 +62,10 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 		explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 	else
 		explanation_text = "Free Objective"
-	return target
 
 /datum/objective/assassinate/check_completion()
 	if(target && target.current)
-		if(target.current.stat == DEAD || iszombie(target))
+		if(target.current.stat == DEAD)
 			return 1
 		if(issilicon(target.current) || isbrain(target.current)) //Borgs/brains/AIs count as dead for traitor objectives. --NeoFite
 			return 1
@@ -111,7 +109,7 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 
 /datum/objective/maroon/check_completion()
 	if(target && target.current)
-		if(target.current.stat == DEAD || iszombie(target))
+		if(target.current.stat == DEAD)
 			return 1
 		if(!target.current.ckey)
 			return 1
@@ -168,7 +166,7 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 	if(!target) //If it's a free objective.
 		return 1
 	if(target.current)
-		if(target.current.stat == DEAD || iszombie(target))
+		if(target.current.stat == DEAD)
 			return 0
 		if(issilicon(target.current))
 			return 0
@@ -263,7 +261,7 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 		return 0
 	if(isbrain(owner.current))
 		return 0
-	if(!owner.current || owner.current.stat == DEAD || iszombie(owner))
+	if(!owner.current || owner.current.stat == DEAD)
 		return 0
 	if(SSticker.force_ending) //This one isn't their fault, so lets just assume good faith
 		return 1
@@ -318,7 +316,7 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 	explanation_text = "Die a glorious death."
 
 /datum/objective/die/check_completion()
-	if(!owner.current || owner.current.stat == DEAD || isbrain(owner.current) || iszombie(owner))
+	if(!owner.current || owner.current.stat == DEAD || isbrain(owner.current))
 		return 1
 	if(issilicon(owner.current) && owner.current != owner.original)
 		return 1
@@ -363,12 +361,9 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 		var/datum/theft_objective/O = new thefttype
 		if(owner.assigned_role in O.protected_jobs)
 			continue
-		if(O in owner.targets)
-			continue
 		if(O.flags & 2)
 			continue
-		steal_target = O
-
+		steal_target=O
 		explanation_text = "Steal [steal_target]. One was last seen in [get_location()]. "
 		if(islist(O.protected_jobs) && O.protected_jobs.len)
 			explanation_text += "It may also be in the possession of the [jointext(O.protected_jobs, ", ")]."
@@ -506,54 +501,6 @@ var/list/potential_theft_objectives = subtypesof(/datum/theft_objective) - /datu
 			return 1
 		return 0
 	return 1
-
-/datum/objective/steal_five_of_type
-	explanation_text = "Steal at least five items!"
-	var/list/wanted_items = list()
-
-/datum/objective/steal_five_of_type/New()
-	..()
-	wanted_items = typecacheof(wanted_items)
-
-/datum/objective/steal_five_of_type/check_completion()
-	var/stolen_count = 0
-	if(!isliving(owner.current))
-		return FALSE
-	var/list/all_items = owner.current.GetAllContents()	//this should get things in cheesewheels, books, etc.
-	for(var/obj/I in all_items) //Check for wanted items
-		if(is_type_in_typecache(I, wanted_items))
-			stolen_count++
-	return stolen_count >= 5
-
-/datum/objective/steal_five_of_type/summon_guns
-	explanation_text = "Steal at least five guns!"
-	wanted_items = list(/obj/item/gun)
-
-/datum/objective/steal_five_of_type/summon_magic
-	explanation_text = "Steal at least five magical artefacts!"
-	wanted_items = list()
-
-/datum/objective/steal_five_of_type/summon_magic/New()
-	wanted_items = GLOB.summoned_magic_objectives
-	..()
-
-/datum/objective/steal_five_of_type/summon_magic/check_completion()
-	var/stolen_count = 0
-	if(!isliving(owner.current))
-		return FALSE
-	var/list/all_items = owner.current.GetAllContents()	//this should get things in cheesewheels, books, etc.
-	for(var/obj/I in all_items) //Check for wanted items
-		if(istype(I, /obj/item/spellbook) && !istype(I, /obj/item/spellbook/oneuse))
-			var/obj/item/spellbook/spellbook = I
-			if(spellbook.uses) //if the book still has powers...
-				stolen_count++ //it counts. nice.
-		if(istype(I, /obj/item/spellbook/oneuse))
-			var/obj/item/spellbook/oneuse/oneuse = I
-			if(!oneuse.used)
-				stolen_count++
-		else if(is_type_in_typecache(I, wanted_items))
-			stolen_count++
-	return stolen_count >= 5
 
 /datum/objective/blood
 /datum/objective/blood/proc/gen_amount_goal(low = 150, high = 400)

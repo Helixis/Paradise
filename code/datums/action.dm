@@ -72,7 +72,7 @@
 		if(owner.restrained())
 			return 0
 	if(check_flags & AB_CHECK_STUNNED)
-		if(owner.stunned || owner.IsWeakened())
+		if(owner.stunned || owner.weakened)
 			return 0
 	if(check_flags & AB_CHECK_LYING)
 		if(owner.lying)
@@ -196,14 +196,6 @@
 /datum/action/item_action/toggle_helmet_light
 	name = "Toggle Helmet Light"
 
-/datum/action/item_action/toggle_welding_screen/plasmaman
-	name = "Toggle Welding Screen"
-
-/datum/action/item_action/toggle_welding_screen/plasmaman/Trigger()
-	var/obj/item/clothing/head/helmet/space/plasmaman/H = target
-	if(istype(H))
-		H.toggle_welding_screen(owner)
-
 /datum/action/item_action/toggle_helmet_mode
 	name = "Toggle Helmet Mode"
 
@@ -212,7 +204,7 @@
 
 /datum/action/item_action/toggle_unfriendly_fire
 	name = "Toggle Friendly Fire \[ON\]"
-	desc = "Toggles if the club's blasts cause friendly fire."
+	desc = "Toggles if the staff causes friendly fire."
 	button_icon_state = "vortex_ff_on"
 
 /datum/action/item_action/toggle_unfriendly_fire/Trigger()
@@ -220,8 +212,8 @@
 		UpdateButtonIcon()
 
 /datum/action/item_action/toggle_unfriendly_fire/UpdateButtonIcon()
-	if(istype(target, /obj/item/hierophant_club))
-		var/obj/item/hierophant_club/H = target
+	if(istype(target, /obj/item/hierophant_staff))
+		var/obj/item/hierophant_staff/H = target
 		if(H.friendly_fire_check)
 			button_icon_state = "vortex_ff_off"
 			name = "Toggle Friendly Fire \[OFF\]"
@@ -247,12 +239,12 @@
 
 /datum/action/item_action/vortex_recall
 	name = "Vortex Recall"
-	desc = "Recall yourself, and anyone nearby, to an attuned hierophant beacon at any time.<br>If the beacon is still attached, will detach it."
+	desc = "Recall yourself, and anyone nearby, to an attuned hierophant rune at any time.<br>If no such rune exists, will produce a rune at your location."
 	button_icon_state = "vortex_recall"
 
 /datum/action/item_action/vortex_recall/IsAvailable()
-	if(istype(target, /obj/item/hierophant_club))
-		var/obj/item/hierophant_club/H = target
+	if(istype(target, /obj/item/hierophant_staff))
+		var/obj/item/hierophant_staff/H = target
 		if(H.teleporting)
 			return 0
 	return ..()

@@ -22,10 +22,7 @@
 	if(newAnomaly.loc)
 		explosion(get_turf(newAnomaly), -1,0,3, flame_range = 4)
 
-		var/turf/T = get_turf(src)
-		var/new_colour = pick("red", "orange")
-		var/mob/living/simple_animal/slime/S = new(T, new_colour)
-		S.rabid = TRUE
-		S.amount_grown = SLIME_EVOLUTION_THRESHOLD
-		S.Evolve()
+		var/mob/living/carbon/slime/S = new/mob/living/carbon/slime(get_turf(newAnomaly))
+		S.colour = pick("red", "orange")
+
 		qdel(newAnomaly)

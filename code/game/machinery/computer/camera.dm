@@ -79,6 +79,14 @@
 
 	ui_interact(user)
 
+/obj/machinery/computer/security/attackby(obj/item/I, user as mob, params)
+	if(isscrewdriver(I))
+		..()
+	else if(I.GetAccess()) // If hit by something with access.
+		attack_hand(user)
+	else
+		..()
+
 /obj/machinery/computer/security/telescreen/attackby(obj/item/I, mob/user, params)
 	if(ismultitool(I))
 		var/direction = input(user, "Which direction?", "Select direction!") as null|anything in list("North", "East", "South", "West", "Centre")
@@ -96,7 +104,7 @@
 			if("West")
 				pixel_x = -32
 	else
-		return ..()
+		..()
 
 /obj/machinery/computer/security/emag_act(user as mob)
 	if(!emagged)
@@ -108,7 +116,7 @@
 
 /obj/machinery/computer/security/proc/get_user_access(mob/user)
 	var/list/access = list()
-
+	
 	if(emagged)
 		access = get_all_accesses() // Assume captain level access when emagged
 	else if(ishuman(user))

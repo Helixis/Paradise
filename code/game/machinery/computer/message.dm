@@ -42,7 +42,9 @@
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		to_chat(user, "<span class='warning'>It is too hot to mess with!</span>")
 		return
-	return ..()
+
+	..()
+	return
 
 /obj/machinery/computer/message_monitor/emag_act(user as mob)
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
@@ -279,7 +281,7 @@
 				auth = 0
 				screen = 0
 			else
-				var/dkey = trim(clean_input("Please enter the decryption key."))
+				var/dkey = trim(input(usr, "Please enter the decryption key.") as text|null)
 				if(dkey && dkey != "")
 					if(src.linkedServer.decryptkey == dkey)
 						auth = 1
@@ -330,7 +332,7 @@
 				message = noserver
 			else
 				if(auth)
-					var/dkey = trim(clean_input("Please enter the decryption key."))
+					var/dkey = trim(input(usr, "Please enter the decryption key.") as text|null)
 					if(dkey && dkey != "")
 						if(src.linkedServer.decryptkey == dkey)
 							var/newkey = trim(input(usr,"Please enter the new key (3 - 16 characters max):"))
@@ -393,7 +395,7 @@
 
 					//Select Your Name
 					if("Sender")
-						customsender 	= clean_input("Please enter the sender's name.")
+						customsender 	= input(usr, "Please enter the sender's name.") as text|null
 
 					//Select Receiver
 					if("Recepient")
@@ -412,11 +414,11 @@
 
 					//Enter custom job
 					if("RecJob")
-						customjob	 	= clean_input("Please enter the sender's job.")
+						customjob	 	= input(usr, "Please enter the sender's job.") as text|null
 
 					//Enter message
 					if("Message")
-						custommessage	= clean_input("Please enter your message.")
+						custommessage	= input(usr, "Please enter your message.") as text|null
 						custommessage	= sanitize(copytext(custommessage, 1, MAX_MESSAGE_LEN))
 
 					//Send message

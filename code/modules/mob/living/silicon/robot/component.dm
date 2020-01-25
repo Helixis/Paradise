@@ -235,12 +235,6 @@
 		to_chat(user, "<span class='notice'>Body Temperature: ???</span>")
 		return
 
-	user.visible_message("<span class='notice'>[user] has analyzed [M]'s components.</span>","<span class='notice'>You have analyzed [M]'s components.</span>")
-	robot_healthscan(user, M)
-	add_fingerprint(user)
-
-
-proc/robot_healthscan(mob/user, mob/living/M)
 	var/scan_type
 	if(istype(M, /mob/living/silicon/robot))
 		scan_type = "robot"
@@ -250,7 +244,7 @@ proc/robot_healthscan(mob/user, mob/living/M)
 		to_chat(user, "<span class='warning'>You can't analyze non-robotic things!</span>")
 		return
 
-	
+	user.visible_message("<span class='notice'>[user] has analyzed [M]'s components.</span>","<span class='notice'>You have analyzed [M]'s components.</span>")
 	switch(scan_type)
 		if("robot")
 			var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
@@ -314,3 +308,5 @@ proc/robot_healthscan(mob/user, mob/living/M)
 				to_chat(user, "<span class='notice'>Internal Fluid Level:[H.blood_volume]/[H.max_blood]</span>")
 				if(H.bleed_rate)
 					to_chat(user, "<span class='warning'>Warning:External component leak detected!</span>")
+
+	src.add_fingerprint(user)

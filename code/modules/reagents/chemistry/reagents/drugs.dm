@@ -1,10 +1,25 @@
+/datum/reagent/serotrotium
+	name = "Serotrotium"
+	id = "serotrotium"
+	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
+	reagent_state = LIQUID
+	color = "#202040" // rgb: 20, 20, 40
+	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+
+/datum/reagent/serotrotium/on_mob_life(mob/living/M)
+	if(ishuman(M))
+		if(prob(7))
+			M.emote(pick("twitch","drool","moan","gasp"))
+	return ..()
+
+
 /datum/reagent/lithium
 	name = "Lithium"
 	id = "lithium"
 	description = "A chemical element."
 	reagent_state = SOLID
 	color = "#808080" // rgb: 128, 128, 128
-	taste_description = "metal"
+	taste_message = "metal"
 
 /datum/reagent/lithium/on_mob_life(mob/living/M)
 	if(isturf(M.loc) && !istype(M.loc, /turf/space))
@@ -20,7 +35,7 @@
 	description = "A highly potent hallucinogenic substance. Far out, maaaan."
 	reagent_state = LIQUID
 	color = "#0000D8"
-	taste_description = "a magical journey"
+	taste_message = "a magical journey"
 
 /datum/reagent/lsd/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -37,7 +52,7 @@
 	metabolization_rate = 0.2
 	addiction_chance = 65
 	heart_rate_decrease = 1
-	taste_description = "a synthetic high"
+	taste_message = "a synthetic high"
 
 /datum/reagent/space_drugs/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -54,7 +69,7 @@
 	id = "psilocybin"
 	description = "A strong psycotropic derived from certain species of mushroom."
 	color = "#E700E7" // rgb: 231, 0, 231
-	taste_description = "visions"
+	taste_message = "visions"
 
 /datum/reagent/psilocybin/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -90,7 +105,7 @@
 	overdose_threshold = 35
 	addiction_chance = 70
 	heart_rate_increase = 1
-	taste_description = "calm"
+	taste_message = "calm"
 
 /datum/reagent/nicotine/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -155,7 +170,6 @@
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 20
 	addiction_chance = 50
-	taste_description = "bitterness"
 
 /datum/reagent/crank/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -228,7 +242,7 @@
 	color = "#0264B4"
 	overdose_threshold = 20
 	addiction_chance = 50
-	taste_description = "very poor life choices"
+	taste_message = "very poor life choices"
 
 
 /datum/reagent/krokodil/on_mob_life(mob/living/M)
@@ -302,7 +316,7 @@
 	addiction_chance = 60
 	metabolization_rate = 0.6
 	heart_rate_increase = 1
-	taste_description = "speed"
+	taste_message = "speed"
 
 /datum/reagent/methamphetamine/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -362,7 +376,7 @@
 	overdose_threshold = 20
 	addiction_chance = 80
 	metabolization_rate = 0.6
-	taste_description = "WAAAAGH"
+	taste_message = "WAAAAGH"
 
 /datum/reagent/bath_salts/on_mob_life(mob/living/M)
 	var/check = rand(0,100)
@@ -461,7 +475,7 @@
 	reagent_state = LIQUID
 	color = "#644600"
 	addiction_chance = 30
-	taste_description = "the inside of a toilet... or worse"
+	taste_message = "puke... or worse"
 
 /datum/reagent/jenkem/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -477,7 +491,6 @@
 	description = "An illegal performance enhancing drug. Side effects might include chest pain, seizures, swelling, headache, fever... ... ..."
 	reagent_state = LIQUID
 	color = "#60A584" // rgb: 96, 165, 132
-	taste_description = "bitterness"
 
 /datum/reagent/aranesp/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -502,7 +515,6 @@
 	description = "A mild psychoactive chemical extracted from the cannabis plant."
 	reagent_state = LIQUID
 	color = "#0FBE0F"
-	taste_description = "man like, totally the best like, thing ever dude"
 
 /datum/reagent/thc/on_mob_life(mob/living/M)
 	M.stuttering += rand(0,2)
@@ -527,7 +539,7 @@
 	overdose_threshold = 15
 	process_flags = ORGANIC | SYNTHETIC		//Flipping for everyone!
 	addiction_chance = 10
-	taste_description = "flips"
+	taste_message = "flips"
 
 /datum/reagent/fliptonium/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -599,7 +611,7 @@
 	reagent_state = LIQUID
 	color = "#AC88CA" //RGB: 172, 136, 202
 	metabolization_rate = 0.6 * REAGENTS_METABOLISM
-	taste_description = "spinning"
+	taste_message = "spinning"
 
 /datum/reagent/rotatium/on_mob_life(mob/living/carbon/M)
 	if(M.hud_used)
@@ -633,7 +645,7 @@
 	overdose_threshold = 20
 	addiction_chance = 60
 	metabolization_rate = 0.6
-	taste_description = "wiper fluid"
+	taste_message = "wiper fluid"
 
 /datum/reagent/lube/ultra/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -685,7 +697,7 @@
 	process_flags = SYNTHETIC
 	overdose_threshold = 20
 	addiction_chance = 50
-	taste_description = "silicon"
+	taste_message = "silicone"
 
 
 /datum/reagent/surge/on_mob_life(mob/living/M)

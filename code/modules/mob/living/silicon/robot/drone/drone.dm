@@ -13,7 +13,7 @@
 	braintype = "Robot"
 	lawupdate = 0
 	density = 0
-	req_one_access = list(access_engine, access_robotics)
+	req_access = list(access_engine, access_robotics)
 	ventcrawler = 2
 	magpulse = 1
 	mob_size = MOB_SIZE_SMALL
@@ -53,7 +53,8 @@
 		camera.network.Add("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
-	cell = new /obj/item/stock_parts/cell/high(src)
+	cell.maxcharge = 10000
+	cell.charge = 10000
 
 	// NO BRAIN.
 	mmi = null
@@ -348,6 +349,6 @@
 		return
 	density = 0 //this is reset every canmove update otherwise
 
-/mob/living/simple_animal/drone/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
+/mob/living/simple_animal/drone/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
 	if(affect_silicon)
 		return ..()

@@ -11,7 +11,6 @@
 	slices_num = 5
 	filling_color = "#FF7575"
 	list_reagents = list("protein" = 20, "nutriment" = 10, "vitamin" = 5)
-	tastes = list("bread" = 10, "meat" = 10)
 
 /obj/item/reagent_containers/food/snacks/meatbreadslice
 	name = "meatbread slice"
@@ -28,7 +27,6 @@
 	slices_num = 5
 	filling_color = "#8AFF75"
 	list_reagents = list("protein" = 20, "nutriment" = 10, "vitamin" = 5)
-	tastes = list("bread" = 10, "acid" = 10)
 
 /obj/item/reagent_containers/food/snacks/xenomeatbreadslice
 	name = "xenomeatbread slice"
@@ -44,7 +42,6 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/spidermeatbreadslice
 	slices_num = 5
 	list_reagents = list("protein" = 20, "nutriment" = 10, "toxin" = 15, "vitamin" = 5)
-	tastes = list("bread" = 10, "cobwebs" = 5)
 
 /obj/item/reagent_containers/food/snacks/spidermeatbreadslice
 	name = "spider meat bread slice"
@@ -61,7 +58,6 @@
 	slices_num = 5
 	filling_color = "#EDE5AD"
 	list_reagents = list("banana" = 20, "nutriment" = 20)
-	tastes = list("bread" = 10)
 
 /obj/item/reagent_containers/food/snacks/bananabreadslice
 	name = "Banana-nut bread slice"
@@ -69,7 +65,6 @@
 	icon_state = "bananabreadslice"
 	trash = /obj/item/trash/plate
 	filling_color = "#EDE5AD"
-	tastes = list("bread" = 10)
 
 /obj/item/reagent_containers/food/snacks/sliceable/tofubread
 	name = "Tofubread"
@@ -79,7 +74,6 @@
 	slices_num = 5
 	filling_color = "#F7FFE0"
 	list_reagents = list("nutriment" = 20, "vitamin" = 5)
-	tastes = list("bread" = 10, "tofu" = 10)
 
 /obj/item/reagent_containers/food/snacks/tofubreadslice
 	name = "Tofubread slice"
@@ -96,7 +90,6 @@
 	slices_num = 6
 	filling_color = "#FFE396"
 	list_reagents = list("nutriment" = 10)
-	tastes = list("bread" = 10)
 
 /obj/item/reagent_containers/food/snacks/breadslice
 	name = "Bread slice"
@@ -105,7 +98,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#D27332"
 	list_reagents = list("nutriment" = 2, "bread" = 5)
-	tastes = list("bread" = 10)
 
 /obj/item/reagent_containers/food/snacks/sliceable/creamcheesebread
 	name = "Cream Cheese Bread"
@@ -115,7 +107,6 @@
 	slices_num = 5
 	filling_color = "#FFF896"
 	list_reagents = list("nutriment" = 20, "vitamin" = 5)
-	tastes = list("bread" = 10, "cheese" = 10)
 
 /obj/item/reagent_containers/food/snacks/creamcheesebreadslice
 	name = "Cream Cheese Bread slice"
@@ -124,7 +115,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#FFF896"
 	list_reagents = list("nutriment" = 4, "vitamin" = 1)
-	tastes = list("bread" = 10, "cheese" = 10)
 
 
 //////////////////////
@@ -137,8 +127,6 @@
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "bun"
 	list_reagents = list("nutriment" = 1)
-	tastes = list("bun" = 1)
-
 
 /obj/item/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
@@ -146,7 +134,6 @@
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "flatbread"
 	list_reagents = list("nutriment" = 6, "vitamin" = 1)
-	tastes = list("bread" = 2)
 
 /obj/item/reagent_containers/food/snacks/baguette
 	name = "baguette"
@@ -155,7 +142,6 @@
 	filling_color = "#E3D796"
 	bitesize = 3
 	list_reagents = list("nutriment" = 6, "vitamin" = 1)
-	tastes = list("bread" = 2)
 
 /obj/item/reagent_containers/food/snacks/twobread
 	name = "Two Bread"
@@ -164,7 +150,6 @@
 	filling_color = "#DBCC9A"
 	bitesize = 3
 	list_reagents = list("nutriment" = 2, "vitamin" = 2)
-	tastes = list("bread" = 2)
 
 /obj/item/reagent_containers/food/snacks/jelliedtoast
 	name = "Jellied Toast"
@@ -173,7 +158,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#B572AB"
 	bitesize = 3
-	tastes = list("toast" = 1, "jelly" = 1)
 
 /obj/item/reagent_containers/food/snacks/jelliedtoast/cherry
 	list_reagents = list("nutriment" = 1, "cherryjelly" = 5, "vitamin" = 2)
@@ -189,7 +173,6 @@
 	filling_color = "#FF00F7"
 	bitesize = 4
 	list_reagents = list("nutriment" = 8, "psilocybin" = 2, "vitamin" = 2)
-	tastes = list("waffle" = 1, "mushrooms" = 1)
 
 /obj/item/reagent_containers/food/snacks/waffles
 	name = "waffles"

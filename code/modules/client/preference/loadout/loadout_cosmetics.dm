@@ -22,3 +22,11 @@
 /datum/gear/lipstick/lime
 	display_name = "lipstick, lime"
 	path = /obj/item/lipstick/lime
+
+/datum/gear/monocle
+	display_name = "monocle"
+	path = /obj/item/clothing/glasses/monocle
+
+/datum/gear/sunglasses
+	display_name = "cheap sunglasses"
+	path = /obj/item/clothing/glasses/sunglasses/fake

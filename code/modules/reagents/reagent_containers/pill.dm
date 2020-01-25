@@ -10,7 +10,7 @@
 	possible_transfer_amounts = null
 	volume = 100
 	consume_sound = null
-	can_taste = FALSE
+	taste = FALSE
 	antable = FALSE
 
 /obj/item/reagent_containers/food/pill/New()

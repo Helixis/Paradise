@@ -298,7 +298,7 @@
 /obj/item/ammo_casing/caseless
 	desc = "A caseless bullet casing."
 
-/obj/item/ammo_casing/caseless/fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, params, distro, quiet, zone_override = "", spread)
+/obj/item/ammo_casing/caseless/fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, params, distro, quiet)
 	if(..())
 		loc = null
 		return 1
@@ -325,7 +325,6 @@
 	icon = 'icons/obj/guns/toy.dmi'
 	icon_state = "foamdart"
 	var/modified = 0
-	harmful = FALSE
 
 /obj/item/ammo_casing/caseless/foam_dart/update_icon()
 	..()
@@ -349,7 +348,6 @@
 	else if((istype(A, /obj/item/pen)) && modified && !FD.pen)
 		if(!user.unEquip(A))
 			return
-		harmful = TRUE
 		A.loc = FD
 		FD.log_override = FALSE
 		FD.pen = A

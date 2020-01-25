@@ -37,9 +37,23 @@
 		to_chat(user, "Error, no route to host.")
 
 /obj/machinery/door_control/attackby(obj/item/W, mob/user as mob, params)
+	/* For later implementation
+	if(istype(W, /obj/item/screwdriver))
+	{
+		if(wiresexposed)
+			icon_state = "doorctrl0"
+			wiresexposed = 0
+
+		else
+			icon_state = "doorctrl-open"
+			wiresexposed = 1
+
+		return
+	}
+	*/
 	if(istype(W, /obj/item/detective_scanner))
 		return
-	return ..()
+	return attack_hand(user)
 
 /obj/machinery/door_control/emag_act(user as mob)
 	if(!emagged)

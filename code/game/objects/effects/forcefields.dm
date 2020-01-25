@@ -6,6 +6,7 @@
 	anchored = 1
 	opacity = 0
 	density = 1
+	unacidable = 1
 	var/lifetime = 30 SECONDS
 
 /obj/effect/forcefield/New()

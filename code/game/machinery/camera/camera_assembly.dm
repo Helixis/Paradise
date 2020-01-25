@@ -12,6 +12,8 @@
 	w_class = WEIGHT_CLASS_SMALL
 	anchored = FALSE
 	materials = list(MAT_METAL=400, MAT_GLASS=250)
+	max_integrity = 150
+	can_be_hit = TRUE
 	//	Motion, EMP-Proof, X-Ray
 	var/list/obj/item/possible_upgrades = list(/obj/item/assembly/prox_sensor, /obj/item/stack/sheet/mineral/plasma, /obj/item/analyzer)
 	var/list/upgrades = list()
@@ -174,8 +176,7 @@
 	return FALSE
 
 /obj/item/camera_assembly/deconstruct(disassembled = TRUE)
-	if(!(flags & NODECONSTRUCT))
-		new /obj/item/stack/sheet/metal(loc)
+	new /obj/item/stack/sheet/metal(loc)
 	qdel(src)
 
 

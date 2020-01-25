@@ -192,9 +192,9 @@
 	emergencyShutdown()
 	..()
 
-/obj/machinery/computer/HolodeckControl/blob_act(obj/structure/blob/B)
+/obj/machinery/computer/HolodeckControl/blob_act()
 	emergencyShutdown()
-	return ..()
+	..()
 
 /obj/machinery/computer/HolodeckControl/process()
 	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
@@ -347,7 +347,7 @@
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
 /obj/structure/table/holotable
-	flags = NODECONSTRUCT
+	can_deconstruct = FALSE
 	canSmoothWith = list(/obj/structure/table/holotable)
 
 /obj/structure/table/holotable/wood
@@ -375,7 +375,7 @@
 	flags = ON_BORDER
 
 /obj/structure/rack/holorack
-	flags = NODECONSTRUCT
+	can_deconstruct = FALSE
 
 /obj/item/holo
 	damtype = STAMINA
@@ -420,7 +420,7 @@
 /obj/item/holo/esword/red/New()
 	item_color = "red"
 
-/obj/item/holo/esword/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
+/obj/item/holo/esword/hit_reaction(mob/living/carbon/human/owner, attack_text, final_block_chance)
 	if(active)
 		return ..()
 	return 0
@@ -460,12 +460,6 @@
 	desc = "Here's your chance, do your dance at the Space Jam."
 	w_class = WEIGHT_CLASS_BULKY //Stops people from hiding it in their bags/pockets
 
-/obj/item/beach_ball/holoball/baseball
-	icon_state = "baseball"
-	name = "baseball"
-	item_state = "baseball"
-	desc = "Take me out to the ball game."
-
 /obj/structure/holohoop
 	name = "basketball hoop"
 	desc = "Boom, Shakalaka!"
@@ -504,18 +498,6 @@
 		return 0
 	else
 		return ..(mover, target, height)
-
-/obj/structure/holohoop/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
-	if(isitem(AM) && !istype(AM,/obj/item/projectile))
-		if(prob(50))
-			AM.forceMove(get_turf(src))
-			visible_message("<span class='warning'>Swish! [AM] lands in [src].</span>")
-			return
-		else
-			visible_message("<span class='danger'>[AM] bounces off of [src]'s rim!</span>")
-			return ..()
-	else
-		return ..()
 
 /obj/machinery/readybutton
 	name = "Ready Declaration Device"

@@ -30,10 +30,13 @@
 		rating_speed = M.rating
 
 /obj/machinery/processor/process()
+	..()
+	// The irony
+	// To be clear, if it's grinding, then it can't suck them up
 	if(processing)
 		return
-	var/mob/living/simple_animal/slime/picked_slime
-	for(var/mob/living/simple_animal/slime/slime in range(1, src))
+	var/mob/living/carbon/slime/picked_slime
+	for(var/mob/living/carbon/slime/slime in range(1, src))
 		if(slime.loc == src)
 			continue
 		if(slime.stat)
@@ -45,7 +48,7 @@
 	if(!P)
 		return
 
-	visible_message("<span class='notice'>[picked_slime] is sucked into [src].</span>")
+	visible_message("[picked_slime] is sucked into \the [src].")
 	picked_slime.forceMove(src)
 
 //RECIPE DATUMS
@@ -107,18 +110,18 @@
 /////MOB RECIPIES/////
 //////////////////////
 /datum/food_processor_process/mob/slime
-	input = /mob/living/simple_animal/slime
+	input = /mob/living/carbon/slime
 	output = null
 
 /datum/food_processor_process/mob/slime/process_food(loc, what, obj/machinery/processor/processor)
-	var/mob/living/simple_animal/slime/S = what
+	var/mob/living/carbon/slime/S = what
 	var/C = S.cores
 	if(S.stat != DEAD)
-		S.forceMove(processor.drop_location())
+		S.loc = loc
 		S.visible_message("<span class='notice'>[S] crawls free of the processor!</span>")
 		return
 	for(var/i in 1 to (C+processor.rating_amount-1))
-		new S.coretype(processor.drop_location())
+		new S.coretype(loc)
 		feedback_add_details("slime_core_harvested","[replacetext(S.colour," ","_")]")
 	..()
 

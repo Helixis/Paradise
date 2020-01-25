@@ -1,6 +1,7 @@
 /datum/gear/suit
 	subtype_path = /datum/gear/suit
 	slot = slot_wear_suit
+	cost = 2
 	sort_category = "External Wear"
 
 //WINTER COATS
@@ -143,10 +144,6 @@
 	display_name = "security jacket"
 	path = /obj/item/clothing/suit/armor/secjacket
 	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer", "Security Pod Pilot")
-
-/datum/gear/suit/ianshirt
-	display_name = "Ian Shirt"
-	path = /obj/item/clothing/suit/ianshirt
 
 /datum/gear/suit/poncho
 	display_name = "poncho, classic"

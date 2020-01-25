@@ -6,7 +6,7 @@
 	force = 5
 	w_class = WEIGHT_CLASS_BULKY
 	attack_verb = list("bashed","smacked")
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 	var/delayed = 0 //used to do delays
 

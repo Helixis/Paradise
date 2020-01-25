@@ -36,6 +36,7 @@
 	see_in_dark = 8
 	vision_range = 12
 	aggro_vision_range = 12
+	idle_vision_range = 12
 
 	search_objects = 1 // So that it can see through walls
 
@@ -86,11 +87,11 @@
 	if(can_be_seen(get_turf(loc)))
 		if(client)
 			to_chat(src, "<span class='warning'>You cannot attack, there are eyes on you!</span>")
-		return FALSE
+			return
 	else
-		return ..()
+		..()
 
-/mob/living/simple_animal/hostile/statue/DestroyPathToTarget()
+/mob/living/simple_animal/hostile/statue/DestroySurroundings()
 	if(!can_be_seen(get_turf(loc)))
 		..()
 

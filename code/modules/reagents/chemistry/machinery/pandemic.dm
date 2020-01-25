@@ -8,7 +8,6 @@
 	circuit = /obj/item/circuitboard/pandemic
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 20
-	resistance_flags = ACID_PROOF
 	var/temp_html = ""
 	var/printing = null
 	var/wait = null
@@ -136,11 +135,12 @@
 		return
 	else if(href_list["empty_beaker"])
 		beaker.reagents.clear_reagents()
-		eject_beaker()
 		updateUsrDialog()
 		return
 	else if(href_list["eject"])
-		eject_beaker()
+		beaker:loc = loc
+		beaker = null
+		icon_state = "mixer0"
 		updateUsrDialog()
 		return
 	else if(href_list["clear"])
@@ -172,11 +172,6 @@
 		return
 
 	add_fingerprint(usr)
-
-/obj/machinery/computer/pandemic/proc/eject_beaker()
-	beaker.forceMove(loc)
-	beaker = null
-	icon_state = "mixer0"
 
 //Prints a nice virus release form. Props to Urbanliner for the layout
 /obj/machinery/computer/pandemic/proc/print_form(var/datum/disease/advance/D, mob/living/user)
@@ -313,7 +308,7 @@
 					dat += "nothing<BR>"
 			else
 				dat += "nothing<BR>"
-		dat += "<BR><A href='?src=[UID()];eject=1'>Eject beaker</A>[((R.total_volume&&R.reagent_list.len) ? "-- <A href='?src=[UID()];empty_beaker=1'>Empty and eject beaker</A>":"")]<BR>"
+		dat += "<BR><A href='?src=[UID()];eject=1'>Eject beaker</A>[((R.total_volume&&R.reagent_list.len) ? "-- <A href='?src=[UID()];empty_beaker=1'>Empty beaker</A>":"")]<BR>"
 		dat += "<A href='?src=[user.UID()];mach_close=pandemic'>Close</A>"
 
 	var/datum/browser/popup = new(user, "pandemic", name, 575, 400)
@@ -343,6 +338,8 @@
 
 	else if(istype(I, /obj/item/screwdriver))
 		if(beaker)
-			beaker.forceMove(get_turf(src))
+			beaker.loc = get_turf(src)
+		..()
+		return
 	else
-		return ..()
+		..()

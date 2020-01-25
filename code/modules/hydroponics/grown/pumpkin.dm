@@ -23,7 +23,6 @@
 	icon_state = "pumpkin"
 	filling_color = "#FFA500"
 	bitesize_mod = 2
-	tastes = list("pumpkin" = 1)
 	wine_power = 0.2
 
 /obj/item/reagent_containers/food/snacks/grown/pumpkin/attackby(obj/item/W as obj, mob/user as mob, params)
@@ -54,5 +53,4 @@
 	icon_state = "blumpkin"
 	filling_color = "#87CEFA"
 	bitesize_mod = 2
-	tastes = list("blumpkin" = 1)
 	wine_power = 0.5

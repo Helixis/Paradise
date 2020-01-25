@@ -190,9 +190,6 @@
 	return
 
 
-/mob/proc/IsWeakened()
-	return weakened
-
 /mob/proc/Weaken()
 	return
 

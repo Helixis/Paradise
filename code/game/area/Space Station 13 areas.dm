@@ -50,7 +50,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "start"
 	requires_power = FALSE
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	hide_attacklogs = TRUE
 
 
 /area/adminconstruction
@@ -58,7 +57,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "start"
 	requires_power = FALSE
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	hide_attacklogs = TRUE
 
 /area/space
 	icon_state = "space"
@@ -100,11 +98,9 @@ var/list/ghostteleportlocs = list()
 	requires_power = FALSE
 	valid_territory = FALSE
 	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
-	parallax_movedir = NORTH
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
-	parallax_movedir = EAST
 
 /area/shuttle/arrival/pre_game
 	icon_state = "shuttle2"
@@ -138,14 +134,12 @@ var/list/ghostteleportlocs = list()
 	music = "music/escape.ogg"
 	icon_state = "shuttle"
 	nad_allowed = TRUE
-	parallax_movedir = EAST
 
 /area/shuttle/pod_4
 	name = "\improper Escape Pod Four"
 	music = "music/escape.ogg"
 	icon_state = "shuttle"
 	nad_allowed = TRUE
-	parallax_movedir = EAST
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -211,7 +205,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/transport
 	icon_state = "shuttle"
 	name = "\improper Transport Shuttle"
-	parallax_movedir = EAST
 
 /area/shuttle/transport1
 	icon_state = "shuttle"
@@ -252,7 +245,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/specops
 	name = "\improper Special Ops Shuttle"
 	icon_state = "shuttlered"
-	parallax_movedir = EAST
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
@@ -266,7 +258,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Elite Shuttle"
 	icon_state = "shuttlered"
 	nad_allowed = TRUE
-	parallax_movedir = SOUTH
 
 /area/shuttle/syndicate_elite/mothership
 	name = "\improper Syndicate Elite Shuttle"
@@ -280,7 +271,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate SIT Shuttle"
 	icon_state = "shuttlered"
 	nad_allowed = TRUE
-	parallax_movedir = SOUTH
 
 /area/shuttle/assault_pod
 	name = "Steel Rain"
@@ -289,7 +279,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/administration
 	name = "\improper Nanotrasen Vessel"
 	icon_state = "shuttlered"
-	parallax_movedir = EAST
 
 /area/shuttle/administration/centcom
 	name = "\improper Nanotrasen Vessel Centcom"
@@ -389,7 +378,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/salvage/abandoned_ship
 	name = "\improper Abandoned Ship"
 	icon_state = "yellow"
-	parallax_movedir = WEST
 
 /area/shuttle/salvage/clown_asteroid
 	name = "\improper Clown Asteroid"
@@ -422,7 +410,6 @@ var/list/ghostteleportlocs = list()
 
 /area/shuttle/trade/sol
 	name = "Sol Freighter"
-	parallax_movedir = EAST
 
 /area/shuttle/freegolem
 	name = "Free Golem Ship"
@@ -535,7 +522,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "thunder"
 	requires_power = FALSE
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	hide_attacklogs = TRUE
 
 
 /area/tdome/arena_source
@@ -1882,7 +1868,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/constructionsite
 	name = "\improper Construction Site Shuttle"
 	icon_state = "yellow"
-	parallax_movedir = EAST
 
 /area/shuttle/constructionsite/station
 	name = "\improper Construction Site Shuttle"
@@ -2289,6 +2274,21 @@ var/list/ghostteleportlocs = list()
 
 /area/awaycontent/a30
 	icon_state = "awaycontent30"
+
+////////////////////////VR AREAS///////////////////////////////////
+
+/area/vr
+	name = "VR"
+	requires_power = FALSE
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	no_teleportlocs = TRUE
+
+/area/vr/lobby
+	name = "VR Lobby"
+
+/area/vr/roman
+	name = "Roman Arena"
+
 
 /////////////////////////////////////////////////////////////////////
 /*

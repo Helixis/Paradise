@@ -39,8 +39,8 @@
 	..()
 
 /obj/item/deck/examine(mob/user)
-	. = ..()
-	. +="<span class='notice'>It contains [cards.len ? cards.len : "no"] cards</span>"
+	..()
+	to_chat(user,"<span class='notice'>It contains [cards.len ? cards.len : "no"] cards</span>")
 
 /obj/item/deck/attack_hand(mob/user as mob)
 	draw_card(user)
@@ -313,11 +313,11 @@
 	user.visible_message("<span class='notice'>[user] [concealed ? "conceals" : "reveals"] their hand.</span>")
 
 /obj/item/cardhand/examine(mob/user)
-	. = ..()
+	..(user)
 	if((!concealed) && cards.len)
-		. +="<span class='notice'>It contains:</span>"
+		to_chat(user,"<span class='notice'>It contains:</span>")
 		for(var/datum/playingcard/P in cards)
-			. +="<span class='notice'>the [P.name].</span>"
+			to_chat(user,"<span class='notice'>the [P.name].</span>")
 
 // Datum action here
 

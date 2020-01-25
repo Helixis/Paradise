@@ -20,7 +20,7 @@
 
 /obj/effect/countdown/examine(mob/user)
 	. = ..()
-	. += "This countdown is displaying: [displayed_text]"
+	to_chat(user, "This countdown is displaying: [displayed_text]")
 
 /obj/effect/countdown/proc/attach(atom/A)
 	attached_to = A
@@ -61,12 +61,6 @@
 	return ..()
 
 /obj/effect/countdown/ex_act(severity) //immune to explosions
-	return
-
-/obj/effect/countdown/singularity_pull()
-	return
-
-/obj/effect/countdown/singularity_act()
 	return
 
 /obj/effect/countdown/syndicatebomb

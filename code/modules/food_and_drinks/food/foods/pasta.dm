@@ -10,7 +10,6 @@
 	icon_state = "spaghetti"
 	filling_color = "#EDDD00"
 	list_reagents = list("nutriment" = 1, "vitamin" = 1)
-	tastes = list("raw pasta" = 1)
 
 /obj/item/reagent_containers/food/snacks/macaroni
 	name = "macaroni twists"
@@ -19,7 +18,6 @@
 	icon_state = "macaroni"
 	filling_color = "#EDDD00"
 	list_reagents = list("nutriment" = 1, "vitamin" = 1)
-	tastes = list("raw pasta" = 1)
 
 
 //////////////////////
@@ -34,7 +32,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#FCEE81"
 	list_reagents = list("nutriment" = 2, "vitamin" = 1)
-	tastes = list("pasta" = 1)
 
 /obj/item/reagent_containers/food/snacks/pastatomato
 	name = "spaghetti"
@@ -45,7 +42,6 @@
 	filling_color = "#DE4545"
 	bitesize = 4
 	list_reagents = list("nutriment" = 6, "tomatojuice" = 10, "vitamin" = 4)
-	tastes = list("pasta" = 1, "tomato" = 1)
 
 /obj/item/reagent_containers/food/snacks/meatballspaghetti
 	name = "spaghetti & meatballs"
@@ -55,7 +51,6 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#DE4545"
 	list_reagents = list("nutriment" = 8, "synaptizine" = 5, "vitamin" = 4)
-	tastes = list("pasta" = 1, "tomato" = 1, "meat" = 1)
 
 /obj/item/reagent_containers/food/snacks/spesslaw
 	name = "Spesslaw"
@@ -64,7 +59,6 @@
 	icon_state = "spesslaw"
 	filling_color = "#DE4545"
 	list_reagents = list("nutriment" = 8, "synaptizine" = 10, "vitamin" = 6)
-	tastes = list("pasta" = 1, "tomato" = 1, "meat" = 2)
 
 /obj/item/reagent_containers/food/snacks/macncheese
 	name = "mac n cheese"
@@ -74,13 +68,3 @@
 	icon_state = "macncheese"
 	filling_color = "#ffe45d"
 	list_reagents = list("nutriment" = 5, "vitamin" = 2, "cheese" = 4)
-	tastes = list("pasta" = 1, "cheese" = 1, "comfort" = 1)
-
-/obj/item/reagent_containers/food/snacks/lasagna
-	name = "Lasagna"
-	desc = "Tajara love to eat this, for some reason."
-	icon = 'icons/obj/food/pasta.dmi'
-	icon_state = "lasagna"
-	filling_color = "#E18712"
-	list_reagents = list("nutriment" = 10, "msg" = 3, "vitamin" = 4, "tomatojuice" = 10)
-	tastes = list("pasta" = 1, "cheese" = 1, "tomato" = 1, "meat" = 1)

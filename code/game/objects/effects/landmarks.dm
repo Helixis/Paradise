@@ -3,7 +3,7 @@
 	icon = 'icons/mob/screen_gen.dmi'
 	icon_state = "x2"
 	anchored = 1.0
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	unacidable = 1
 
 /obj/effect/landmark/New()
 
@@ -19,6 +19,9 @@
 		if("wizard")
 			wizardstart += loc
 			qdel(src)
+
+		if("avatarspawn")
+			avatarspawn += loc
 
 		if("JoinLate")
 			latejoin += loc
@@ -100,16 +103,6 @@
 /obj/effect/landmark/proc/set_tag()
 	tag = text("landmark*[]", name)
 
-
-/obj/effect/landmark/singularity_act()
-	return
-
-// Please stop bombing the Observer-Start landmark.
-/obj/effect/landmark/ex_act()
-	return
-
-/obj/effect/landmark/singularity_pull()
-	return
 
 /obj/effect/landmark/start
 	name = "start"

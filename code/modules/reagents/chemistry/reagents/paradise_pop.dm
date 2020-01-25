@@ -15,7 +15,7 @@
 	description = "Tastes just how you'd think Paradise would if you could bottle it."
 	reagent_state = LIQUID
 	color = "#cc0044"
-	taste_description = "paradise"
+	taste_message = "paradise"
 
 //Apple-pocalypse: Low chance to cause a goonchem vortex that pulls things within a very small radius (2 tiles?) towards the drinker
 /datum/reagent/consumable/drink/apple_pocalypse
@@ -24,7 +24,7 @@
 	description = "If doomsday came in fruit form, it'd probably be apples."
 	reagent_state = LIQUID
 	color = "#44FF44"
-	taste_description = "doomsday"
+	taste_message = "doomsday"
 
 /datum/reagent/consumable/drink/apple_pocalypse/on_mob_life(mob/living/M)
 	if(prob(1))
@@ -40,7 +40,7 @@
 	description = "Reason for ban: Excessive Flavor."
 	reagent_state = LIQUID
 	color = "#FF44FF"
-	taste_description = "a permaban"
+	taste_message = "a permaban"
 
 /datum/reagent/consumable/drink/berry_banned/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -69,7 +69,7 @@
 	description = "Reason for ban: Excessive Flavor."
 	reagent_state = LIQUID
 	color = "#FF44FF"
-	taste_description = "a permaban"
+	taste_message = "a permaban"
 
 /datum/reagent/consumable/drink/berry_banned2/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
@@ -91,7 +91,7 @@
 	description = "Creamy, smooth flavor, just like the bald heads of the masses. Supposedly aged for 30 years."
 	reagent_state = LIQUID
 	color = "#4d2600"
-	taste_description = "greytide"
+	taste_message = "greytide"
 
 /datum/reagent/consumable/drink/blackeye_brew/on_mob_life(mob/living/M)
 	if(prob(25))
@@ -114,7 +114,7 @@
 	description = "Exploding with grape flavor and a favorite among ERT members system-wide."
 	reagent_state = LIQUID
 	color = "#9933ff"
-	taste_description = "old people"
+	taste_message = "old people"
 
 /datum/reagent/consumable/drink/grape_granade/on_mob_life(mob/living/M)
 	if(prob(1))
@@ -133,7 +133,7 @@
 	description = "Soft drinks have been detected on collision course with your tastebuds."
 	reagent_state = LIQUID
 	color = "#cc9900"
-	taste_description = "flying space rocks"
+	taste_message = "flying space rocks"
 
 /datum/reagent/consumable/drink/meteor_malt/on_mob_life(mob/living/M)
 	if(prob(25))

@@ -10,9 +10,8 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 
 	color = "#404040"
-	buckle_lying = TRUE
+	buckle_lying = 1
 	var/icon_temperature = T20C //stop small changes in temperature causing icon refresh
-	resistance_flags = LAVA_PROOF | FIRE_PROOF
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/process_atmos()
 	var/environment_temperature = 0
@@ -51,12 +50,10 @@
 			animate(src, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
 
 	//burn any mobs buckled based on temperature
-	if(has_buckled_mobs())
+	if(buckled_mob)
 		var/heat_limit = 1000
 		if(pipe_air.temperature > heat_limit + 1)
-			for(var/m in buckled_mobs)
-				var/mob/living/buckled_mob = m
-				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, "chest")
+			buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, "chest")
 
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/New()

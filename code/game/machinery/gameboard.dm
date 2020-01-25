@@ -99,4 +99,5 @@
 
 	if(default_deconstruction_crowbar(I, ignore_panel = TRUE))
 		return
-	return ..()
+	else
+		return ..()

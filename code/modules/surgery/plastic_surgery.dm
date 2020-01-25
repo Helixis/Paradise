@@ -6,7 +6,7 @@
 /datum/surgery/plastic_surgery/can_start(mob/user, mob/living/carbon/target)
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		var/obj/item/organ/external/head/head = H.get_organ(user.zone_selected)
+		var/obj/item/organ/external/head/head = H.get_organ(user.zone_sel.selecting)
 		if(!head)
 			return FALSE
 		if(head.is_robotic())

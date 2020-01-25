@@ -154,9 +154,9 @@
 	mymob.pullin.screen_loc = ui_borg_pull
 	hotkeybuttons += mymob.pullin
 
-	zone_select = new /obj/screen/zone_sel/robot()
-	zone_select.update_icon(mymob)
-	static_inventory += zone_select
+	mymob.zone_sel = new /obj/screen/zone_sel/robot()
+	mymob.zone_sel.update_icon(mymob)
+	static_inventory += mymob.zone_sel
 
 //Headlamp
 	mymobR.lamp_button = new /obj/screen/robot/lamp()

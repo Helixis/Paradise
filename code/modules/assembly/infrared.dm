@@ -29,8 +29,8 @@
 	return "The assembly is [secured ? "secure" : "not secure"]. The infrared trigger is [on ? "on" : "off"]."
 
 /obj/item/assembly/infra/examine(mob/user)
-	. = ..()
-	. += describe()
+	..()
+	to_chat(user, describe())
 
 /obj/item/assembly/infra/activate()
 	if(!..())
@@ -269,7 +269,7 @@
 /obj/effect/beam/i_beam/Bumped()
 	hit()
 
-/obj/effect/beam/i_beam/Crossed(atom/movable/AM, oldloc)
+/obj/effect/beam/i_beam/Crossed(atom/movable/AM)
 	if(!isobj(AM) && !isliving(AM))
 		return
 	if(istype(AM, /obj/effect))

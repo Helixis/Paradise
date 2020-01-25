@@ -16,7 +16,7 @@
 /datum/surgery/bone_repair/can_start(mob/user, mob/living/carbon/target)
 	if(istype(target,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
-		var/obj/item/organ/external/affected = H.get_organ(user.zone_selected)
+		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 		if(!affected)
 			return 0
 		if(affected.is_robotic())
@@ -165,8 +165,11 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'> [user] has mended the damaged bones in [target]'s [affected.name] with \the [tool].</span>"  , \
 		"<span class='notice'> You have mended the damaged bones in [target]'s [affected.name] with \the [tool].</span>" )
-	affected.mend_fracture()
-	return TRUE
+	affected.status &= ~ORGAN_BROKEN
+	affected.status &= ~ORGAN_SPLINTED
+	affected.perma_injury = 0
+	target.handle_splints()
+	return 1
 
 /datum/surgery_step/finish_bone/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

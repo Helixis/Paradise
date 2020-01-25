@@ -18,8 +18,8 @@
 /obj/effect/decal/cleanable/random
 	name = "Random Mess"
 
-/obj/effect/decal/cleanable/random/Initialize(mapload)
-	. = ..()
+/obj/effect/decal/cleanable/random/New()
+	..()
 	var/list/list = subtypesof(/obj/effect/decal/cleanable) - list(/obj/effect/decal/cleanable/random,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/cobweb2)
 	var/T = pick(list)
 	new T(loc)
@@ -123,7 +123,6 @@
 /obj/item/storage/pill_bottle/random_meds
 	name = "unlabelled pillbottle"
 	desc = "The sheer recklessness of this bottle's existence astounds you."
-	allow_wrap = FALSE
 	var/labelled = FALSE
 
 /obj/item/storage/pill_bottle/random_meds/New()

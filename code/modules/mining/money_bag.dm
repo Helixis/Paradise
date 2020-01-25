@@ -5,7 +5,8 @@
 	icon_state = "moneybag"
 	force = 10
 	throwforce = 0
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
+	burntime = 20
 	max_integrity = 100
 	w_class = WEIGHT_CLASS_BULKY
 	max_w_class = WEIGHT_CLASS_NORMAL

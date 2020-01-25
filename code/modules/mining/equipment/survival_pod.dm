@@ -27,8 +27,8 @@
 /obj/item/survivalcapsule/examine(mob/user)
 	. = ..()
 	get_template()
-	. += "This capsule has the [template.name] stored."
-	. += template.description
+	to_chat(user, "This capsule has the [template.name] stored.")
+	to_chat(user, template.description)
 
 /obj/item/survivalcapsule/attack_self()
 	// Can't grab when capsule is New() because templates aren't loaded then
@@ -77,10 +77,9 @@
 	dir = FULLTILE_WINDOW_DIR
 	max_integrity = 100
 	fulltile = TRUE
-	flags = PREVENT_CLICK_UNDER
 	reinf = TRUE
 	heat_resistance = 1600
-	armor = list("melee" = 50, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 100)
+	armor = list("melee" = 50, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 50, "bio" = 100, "rad" = 100)
 	smooth = SMOOTH_MORE
 	canSmoothWith = list(/turf/simulated/wall/mineral/titanium/survival, /obj/machinery/door/airlock/survival_pod, /obj/structure/window/shuttle/survival_pod)
 	explosion_block = 3
@@ -154,19 +153,27 @@
 	B.rating = initial_bin_rating
 	component_parts += B
 	component_parts += new /obj/item/stock_parts/manipulator(null)
-	component_parts += new /obj/item/stack/sheet/glass(null)
-	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stock_parts/console_screen(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	RefreshParts()
 
 //NanoMed
-/obj/machinery/vending/wallmed/survival_pod
+/obj/machinery/vending/wallmed1/survival_pod
 	name = "survival pod medical supply"
 	desc = "Wall-mounted Medical Equipment dispenser. This one seems just a tiny bit smaller."
 	req_access = list()
+	refill_canister = null
 
-	products = list(/obj/item/stack/medical/splint = 2)
-	contraband = list()
+	products = list(/obj/item/reagent_containers/food/pill/patch/styptic = 5,
+					/obj/item/reagent_containers/food/pill/patch/silver_sulf = 5,
+					/obj/item/reagent_containers/food/pill/charcoal = 2,
+					/obj/item/stack/medical/bruise_pack/advanced = 1,
+					/obj/item/stack/medical/ointment/advanced = 1,
+					/obj/item/reagent_containers/hypospray/autoinjector = 2,
+					/obj/item/stack/medical/splint = 1)
+	contraband = list(/obj/item/reagent_containers/food/pill/tox = 2,
+	                  /obj/item/reagent_containers/food/pill/morphine = 2)
 
 //Computer
 /obj/item/gps/computer
@@ -206,7 +213,7 @@
 	light_color = "#DDFFD3"
 	max_n_of_items = 10
 	pixel_y = -4
-	flags = NODECONSTRUCT
+	can_deconstruct = FALSE
 	var/empty = FALSE
 
 /obj/machinery/smartfridge/survival_pod/Initialize(mapload)
@@ -264,9 +271,8 @@
 	return !arbitraryatmosblockingvar
 
 /obj/structure/fans/deconstruct()
-	if(!(flags & NODECONSTRUCT))
-		if(buildstacktype)
-			new buildstacktype(loc, buildstackamount)
+	if(buildstacktype)
+		new buildstacktype(loc, buildstackamount)
 	qdel(src)
 
 /obj/structure/fans/attackby(obj/item/W, mob/user, params)
@@ -288,8 +294,10 @@
 
 /obj/structure/fans/tiny/invisible
 	name = "air flow blocker"
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	invisibility = INVISIBILITY_ABSTRACT
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF
+	unacidable = TRUE
+	invisibility = INVISIBILITY_ABSTRACT	
+
 //Signs
 /obj/structure/sign/mining
 	name = "nanotrasen mining corps sign"
@@ -332,7 +340,7 @@
 						/obj/item/shield/changeling,
 						/obj/item/lava_staff,
 						/obj/item/katana/energy,
-						/obj/item/hierophant_club,
+						/obj/item/hierophant_staff,
 						/obj/item/storage/toolbox/green/memetic,
 						/obj/item/gun/projectile/automatic/l6_saw,
 						/obj/item/gun/magic/staff/chaos,

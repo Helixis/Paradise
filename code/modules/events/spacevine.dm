@@ -137,7 +137,7 @@
 		if(prob(50))
 			ChangeTurf(baseturf)
 
-/turf/simulated/floor/vines/ChangeTurf(turf/simulated/floor/T, defer_change = FALSE, keep_icon = TRUE, ignore_air = FALSE)
+/turf/simulated/floor/vines/ChangeTurf(turf/open/floor/T)
 	. = ..()
 	//Do this *after* the turf has changed as qdel in spacevines will call changeturf again if it hasn't
 	for(var/obj/structure/spacevine/SV in src)
@@ -423,7 +423,7 @@
 	color = "#ffffff"
 
 /obj/structure/spacevine/examine(mob/user)
-	. = ..()
+	..()
 	var/text = "This one is a"
 	if(mutations.len)
 		for(var/A in mutations)
@@ -432,7 +432,7 @@
 	else
 		text += " normal"
 	text += " vine."
-	. += text
+	to_chat(user, text)
 
 /obj/structure/spacevine/proc/wither()
 	for(var/datum/spacevine_mutation/SM in mutations)
@@ -455,8 +455,8 @@
 	master = null
 	mutations.Cut()
 	set_opacity(0)
-	if(has_buckled_mobs())
-		unbuckle_all_mobs(force = TRUE)
+	if(buckled_mob)
+		unbuckle_mob()
 	return ..()
 
 /obj/structure/spacevine/proc/add_mutation(datum/spacevine_mutation/mutation)
@@ -505,16 +505,16 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src, 'sound/weapons/slash.ogg', 50, TRUE)
+				playsound(src, 'sound/weapons/slash.ogg', 50, 1)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/weapons/tap.ogg', 50, 1)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src, 'sound/items/welder.ogg', 100, 1)
 
 /obj/structure/spacevine/obj_destruction()
 	wither()
 
-/obj/structure/spacevine/Crossed(mob/crosser, oldloc)
+/obj/structure/spacevine/Crossed(mob/crosser)
 	if(isliving(crosser))
 		for(var/datum/spacevine_mutation/SM in mutations)
 			SM.on_cross(src, crosser)
@@ -639,7 +639,7 @@
 		SM.on_grow(src)
 
 /obj/structure/spacevine/proc/entangle_mob()
-	if(!has_buckled_mobs() && prob(25))
+	if(!buckled_mob && prob(25))
 		for(var/mob/living/V in loc)
 			entangle(V)
 			if(has_buckled_mobs())

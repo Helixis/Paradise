@@ -9,7 +9,7 @@
 	blood_color = "#555555"
 	flesh_color = "#222222"
 
-	species_traits = list(NO_BLOOD, NO_BREATHE, RADIMMUNE, NOGUNS, NO_HUNGER, NO_EXAMINE) //Can't use guns due to muzzle flash
+	species_traits = list(NO_BLOOD, NO_BREATHE, RADIMMUNE, NOGUNS, NO_EXAMINE) //Can't use guns due to muzzle flash
 	burn_mod = 1.5 //1.5x burn damage, 2x is excessive
 	heatmod = 1.5
 
@@ -24,6 +24,7 @@
 	if(!H.weakeyes)
 		H.weakeyes = 1 //Makes them more vulnerable to flashes and flashbangs
 	var/light_amount = 0
+	H.nutrition = NUTRITION_LEVEL_WELL_FED //i aint never get hongry
 	if(isturf(H.loc))
 		var/turf/T = H.loc
 		light_amount = T.get_lumcount() * 10
@@ -59,7 +60,7 @@
 	blood_color = "#CCCCCC"
 	flesh_color = "#AAAAAA"
 
-	species_traits = list(NO_BLOOD, NO_BREATHE, RADIMMUNE, NO_HUNGER, NO_EXAMINE)
+	species_traits = list(NO_BLOOD, NO_BREATHE, RADIMMUNE, NO_EXAMINE)
 	burn_mod = 1.1
 	heatmod = 1.1
 
@@ -67,6 +68,7 @@
 	if(!H.weakeyes)
 		H.weakeyes = 1 //Makes them more vulnerable to flashes and flashbangs
 	var/light_amount = 0
+	H.nutrition = NUTRITION_LEVEL_WELL_FED //i aint never get hongry
 	if(isturf(H.loc))
 		var/turf/T = H.loc
 		light_amount = T.get_lumcount() * 10

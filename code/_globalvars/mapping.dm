@@ -40,6 +40,7 @@ var/list/prisonwarped = list()	//list of players already warped
 var/list/blobstart = list()
 var/list/ninjastart = list()
 var/list/carplist = list() //list of all carp-spawn landmarks
+var/list/avatarspawn = list()
 var/list/syndicateofficer = list()
 
 //away missions
@@ -53,3 +54,4 @@ var/list/datum/map_template/space_ruins_templates = list()
 var/list/datum/map_template/lava_ruins_templates = list()
 var/list/datum/map_template/shelter_templates = list()
 var/list/datum/map_template/shuttle_templates = list()
+var/list/datum/map_template/vr_templates = list()

@@ -5,7 +5,7 @@
 GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 // Custom Implementations for NTTC
 /* NTTC Configuration Datum
- * This is an abstract handler for the configuration loadout. It's set up like this both for ease of transfering in and out of the UI
+ * This is an abstract handler for the configuration loadout. It's set up like this both for ease of transfering in and out of the UI 
  * as well as allowing users to save and load configurations.
  */
 /datum/nttc_configuration
@@ -64,7 +64,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 		"Anomalist" = "sciradio",
 		"Biomechanical Engineer" = "sciradio",
 		"Chemical Researcher" = "sciradio",
-		"Geneticist" = "medradio", //El genetista es de med, no de ciencias. esto lo arregla.
+		"Geneticist" = "sciradio",
 		"Mechatronic Engineer" = "sciradio",
 		"Plasma Researcher" = "sciradio",
 		"Research Director" = "sciradio",
@@ -109,7 +109,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 		"Mime" = "srvradio",
 	)
 	// Just command members
-	var/heads = list("Captain", "Head of Personnel", "Nanotrasen Representative", "Blueshield", "Chief Engineer", "Chief Medical Officer", "Research Director", "Head of Security", "Magistrate", "AI")
+	var/heads = list("Captain", "Head of Personnel", "Nanotrasen Representative", "Blueshield", "Chief Engineer", "Chief Medical Officer", "Research Director", "Head of Security")
 	// Just ERT
 	var/ert_jobs = list("Emergency Response Team Officer", "Emergency Response Team Engineer", "Emergency Response Team Medic", "Emergency Response Team Leader", "Emergency Response Team Member")
 	// Defined so code compiles and incase someone has a non-standard job
@@ -206,7 +206,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 	/* Tables */
 	// regex = list()
 
-	/* Arrays */
+	/* Arrays */ 
 	firewall = list()
 
 
@@ -223,7 +223,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 	for(var/variable in to_serialize)
 		.[variable] = vars[variable]
 	. = json_encode(.)
-
+	
 // This loads a configuration from a JSON string.
 // Fucking broken as shit, someone help me fix this.
 /datum/nttc_configuration/proc/nttc_deserialize(text, obj/machinery/computer/telecomms/traffic/source, var/ckey)
@@ -272,17 +272,17 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 		signal.data["reject"] = TRUE
 		return
 
-	// Firewall
+	// Firewall 
 	// This must happen before anything else modifies the signal ["name"].
 	if(islist(firewall) && firewall.len > 0)
 		if(firewall.Find(signal.data["name"]))
 			signal.data["reject"] = 1
 
-	// All job and coloring shit
+	// All job and coloring shit 
 	if(toggle_job_color || toggle_name_color)
 		var/job = signal.data["job"]
 		job_class = all_jobs[job]
-
+		
 	if(toggle_name_color)
 		var/new_name = "<span class=\"[job_class]\">" + signal.data["name"] + "</span>"
 		signal.data["name"] = new_name
@@ -331,7 +331,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 		var/job = signal.data["job"]
 		if((job in ert_jobs) || (job in heads))
 			for(var/datum/multilingual_say_piece/S in message_pieces)
-				S.message = "<b>[capitalize(S.message)]</b>" // This only capitalizes the first word
+				S.message = "<b>[S.message]</b>"
 
 	// Hacks!
 	// Censor dat shit like nobody's business
@@ -409,10 +409,10 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 	// 	if(href_list["table"] && href_list["table"] in tables)
 	// 		if(requires_unlock[href_list["table"]] && !source.unlocked)
 	// 			return
-	// 		var/new_key = clean_input(user, "Provide a key for the new row.", "New Row")
+	// 		var/new_key = input(user, "Provide a key for the new row.", "New Row") as text|null
 	// 		if(!new_key)
 	// 			return
-	// 		var/new_value = clean_input(user, "Provide a new value for the key [new_key]", "New Row")
+	// 		var/new_value = input(user, "Provide a new value for the key [new_key]", "New Row") as text|null
 	// 		if(new_value == null)
 	// 			return
 	// 		if(word_blacklist.Find(new_value)) //uh oh, they tried to be naughty
@@ -439,8 +439,8 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 		if(href_list["array"] && href_list["array"] in arrays)
 			if(requires_unlock[href_list["array"]] && !source.unlocked)
 				return
-			var/new_value = clean_input(user, "Provide a value for the new index.", "New Index")
-			if(new_value == null)
+			var/new_value = input(user, "Provide a value for the new index.", "New Index") as text|null
+			if(new_value == null) 
 				return
 			var/list/array = vars[href_list["array"]]
 			array.Add(new_value)

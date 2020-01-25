@@ -9,31 +9,27 @@ var/global/list/all_cults = list()
 
 /proc/is_convertable_to_cult(datum/mind/mind)
 	if(!mind)
-		return FALSE
+		return 0
 	if(!mind.current)
-		return FALSE
+		return 0
 	if(iscultist(mind.current))
-		return TRUE //If they're already in the cult, assume they are convertable
+		return 1 //If they're already in the cult, assume they are convertable
 	if(ishuman(mind.current) && (mind.assigned_role in list("Captain", "Chaplain")))
-		return FALSE
+		return 0
 	if(ishuman(mind.current))
 		var/mob/living/carbon/human/H = mind.current
-		if(ismindshielded(H)) //mindshield protects against conversions unless removed
-			return FALSE
-//	if(mind.offstation_role) cant convert offstation roles such as ghost spawns
-//		return FALSE Commented out until we can figure out why offstation_role is getting set to TRUE on normal crew
+		if(ismindshielded(H))
+			return 0
 	if(issilicon(mind.current))
-		return FALSE //can't convert machines, that's ratvar's thing
+		return 0 //can't convert machines, that's ratvar's thing
 	if(isguardian(mind.current))
 		var/mob/living/simple_animal/hostile/guardian/G = mind.current
 		if(!iscultist(G.summoner))
-			return FALSE //can't convert it unless the owner is converted
-	if(isgolem(mind.current))
-		return FALSE
-	return TRUE
+			return 0 //can't convert it unless the owner is converted
+	return 1
 
 /proc/is_sacrifice_target(datum/mind/mind)
-	if(SSticker.mode.name == "cult")
+	if(istype(SSticker.mode.name, "cult"))
 		var/datum/game_mode/cult/cult_mode = SSticker.mode
 		if(mind == cult_mode.sacrifice_target)
 			return 1
@@ -44,9 +40,10 @@ var/global/list/all_cults = list()
 	config_tag = "cult"
 	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Security Officer", "Warden", "Detective", "Security Pod Pilot", "Head of Security", "Captain", "Head of Personnel", "Blueshield", "Nanotrasen Representative", "Magistrate", "Brig Physician", "Nanotrasen Navy Officer", "Special Operations Officer", "Syndicate Officer")
 	protected_jobs = list()
-	required_players = 30
-	required_enemies = 3
-	recommended_enemies = 4
+	required_players = 15
+	required_enemies = 2
+	recommended_enemies = 2
+	free_golems_disabled = TRUE
 
 	var/datum/mind/sacrifice_target = null
 	var/finished = 0
@@ -130,8 +127,8 @@ var/global/list/all_cults = list()
 	..()
 
 
-/datum/game_mode/cult/proc/memorize_cult_objectives(datum/mind/cult_mind)
-	for(var/obj_count in 1 to objectives.len)
+/datum/game_mode/cult/proc/memorize_cult_objectives(var/datum/mind/cult_mind)
+	for(var/obj_count = 1,obj_count <= objectives.len,obj_count++)
 		var/explanation
 		switch(objectives[obj_count])
 			if("survive")

@@ -21,11 +21,10 @@
 	materials = list(MAT_METAL=1750, MAT_GLASS=400)
 	flash_protect = 2
 	tint = 2
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 60)
+	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 	actions_types = list(/datum/action/item_action/toggle)
-	visor_flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
-	resistance_flags = FIRE_PROOF
+	burn_state = FIRE_PROOF
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/head.dmi',
@@ -34,9 +33,6 @@
 		"Vulpkanin" = 'icons/mob/species/vulpkanin/helmet.dmi',
 		"Grey" = 'icons/mob/species/grey/helmet.dmi'
 		)
-
-/obj/item/clothing/head/welding/attack_self(mob/user)
-	weldingvisortoggle(user)
 
 /obj/item/clothing/head/welding/flamedecal
 	name = "flame decal welding helmet"
@@ -91,7 +87,6 @@
 	desc = "It's tasty looking!"
 	icon_state = "cake0"
 	flags_cover = HEADCOVERSEYES
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	var/onfire = 0.0
 	var/status = 0
 	var/fire_resist = T0C+1300	//this is the max temp it can stand before you start to cook. although it might not burn away, you take damage
@@ -137,7 +132,7 @@
 	flags_inv = HIDEEARS
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_HELM_MIN_TEMP_PROTECT
-	dog_fashion = /datum/dog_fashion/head/ushanka
+
 	sprite_sheets = list(
 	"Grey" = 'icons/mob/species/grey/head.dmi'
 	)
@@ -165,12 +160,11 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 
-
 	sprite_sheets = list(
 		"Grey" = 'icons/mob/species/grey/head.dmi'
 	)
 
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	brightness_on = 2 //luminosity when on
 
 
@@ -181,9 +175,8 @@
 	item_state = "hardhat0_reindeer"
 	item_color = "reindeer"
 	flags_inv = 0
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	brightness_on = 1 //luminosity when on
-	dog_fashion = /datum/dog_fashion/head/reindeer
 
 
 /*
@@ -194,7 +187,6 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
 	var/icon/mob
-	dog_fashion = /datum/dog_fashion/head/kitty
 
 /obj/item/clothing/head/kitty/update_icon(var/mob/living/carbon/human/user)
 	if(!istype(user)) return
@@ -238,7 +230,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	species_disguise = "High-tech robot"
-	dog_fashion = /datum/dog_fashion/head/cardborg
+
 	sprite_sheets = list(
 	"Grey" = 'icons/mob/species/grey/head.dmi'
 	)

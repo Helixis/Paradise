@@ -93,7 +93,6 @@
 	icon_state = "cannabis"
 	filling_color = "#00FF00"
 	bitesize_mod = 2
-	tastes = list("cannabis" = 1)
 	wine_power = 0.2
 
 

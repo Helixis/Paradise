@@ -94,7 +94,7 @@
 		spawn(5)
 			qdel(src)
 
-/obj/effect/particle_effect/foam/Crossed(atom/movable/AM, oldloc)
+/obj/effect/particle_effect/foam/Crossed(atom/movable/AM)
 	if(metal)
 		return
 
@@ -170,7 +170,6 @@
 	desc = "A lightweight foamed metal wall."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "metalfoam"
-	resistance_flags = FIRE_PROOF | ACID_PROOF
 	density = TRUE
 	opacity = TRUE	// changed in New()
 	anchored = TRUE
@@ -192,7 +191,7 @@
 	move_update_air(T)
 
 /obj/structure/foamedmetal/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
-	playsound(src.loc, 'sound/weapons/tap.ogg', 100, TRUE)
+	playsound(loc, 'sound/weapons/tap.ogg', 100, 1)
 
 /obj/structure/foamedmetal/proc/updateicon()
 	if(metal == MFOAM_ALUMINUM)

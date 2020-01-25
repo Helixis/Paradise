@@ -4,8 +4,6 @@
 	use_power = IDLE_POWER_USE
 	layer = GAS_SCRUBBER_LAYER
 
-	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF //really helpful in building gas chambers for xenomorphs
-
 	can_unwrench = 1
 
 	name = "air injector"
@@ -41,7 +39,7 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector/update_icon()
 	..()
-
+	
 	if(!powered())
 		icon_state = "off"
 	else

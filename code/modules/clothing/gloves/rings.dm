@@ -21,11 +21,11 @@
 		icon_state = initial(icon_state)
 
 /obj/item/clothing/gloves/ring/examine(mob/user)
-	. = ..()
+	..(user)
 	if(!fluff_material)
-		. += "This one is made of [material]."
+		to_chat(user, "This one is made of [material].")
 	if(stud)
-		. += "It is adorned with a single gem."
+		to_chat(user, "It is adorned with a single gem.")
 
 /obj/item/clothing/gloves/ring/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I, /obj/item/stack/sheet/mineral/diamond))

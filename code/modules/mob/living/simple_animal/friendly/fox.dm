@@ -1,5 +1,5 @@
 //Foxxy
-/mob/living/simple_animal/pet/dog/fox
+/mob/living/simple_animal/pet/fox
 	name = "fox"
 	desc = "It's a fox. I wonder what it says?"
 	icon_state = "fox"
@@ -17,16 +17,16 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "kicks"
+	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 //Captain fox
-/mob/living/simple_animal/pet/dog/fox/Renault
+/mob/living/simple_animal/pet/fox/Renault
 	name = "Renault"
 	desc = "Renault, the Captain's trustworthy fox. I wonder what it says?"
-	unique_pet = TRUE
-	gold_core_spawnable = NO_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_INVALID
 
 //Syndi fox
-/mob/living/simple_animal/pet/dog/fox/Syndifox
+/mob/living/simple_animal/pet/fox/Syndifox
 	name = "Syndifox"
 	desc = "Syndifox, the Syndicate's most respected mascot. I wonder what it says?"
 	icon_state = "Syndifox"
@@ -35,8 +35,7 @@
 	icon_resting = "Syndifox_rest"
 	mutations = list(BREATHLESS)
 	faction = list("syndicate")
-	unique_pet = TRUE
-	gold_core_spawnable = NO_SPAWN
+	gold_core_spawnable = CHEM_MOB_SPAWN_INVALID
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	melee_damage_lower = 10

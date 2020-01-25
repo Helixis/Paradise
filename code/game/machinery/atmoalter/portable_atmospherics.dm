@@ -1,8 +1,7 @@
 /obj/machinery/portable_atmospherics
 	name = "atmoalter"
 	use_power = NO_POWER_USE
-	max_integrity = 250
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 60, "acid" = 30)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 100, bomb = 0, bio = 100, rad = 100)
 	var/datum/gas_mixture/air_contents = new
 
 	var/obj/machinery/atmospherics/unary/portables_connector/connected_port
@@ -96,9 +95,9 @@
 		replace_tank(user, TRUE)
 
 /obj/machinery/portable_atmospherics/examine(mob/user)
-	. = ..()
+	..()
 	if(holding)
-		. += "<span class='notice'>\The [src] contains [holding]. Alt-click [src] to remove it.</span>"
+		to_chat(user, "<span class='notice'>\The [src] contains [holding]. Alt-click [src] to remove it.</span>")
 
 /obj/machinery/portable_atmospherics/proc/replace_tank(mob/living/user, close_valve, obj/item/tank/new_tank)
 	if(holding)
@@ -125,7 +124,8 @@
 			T.loc = src
 			src.holding = T
 			update_icon()
-		return
+			return
+
 	else if(istype(W, /obj/item/wrench))
 		if(connected_port)
 			disconnect()
@@ -144,15 +144,9 @@
 					return
 			else
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
-		return
-	if((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
-		atmosanalyzer_scan(air_contents, user)
-		return
-	return ..()
+				return
 
-/obj/machinery/portable_atmospherics/attacked_by(obj/item/I, mob/user)
-	if(I.force < 10 && !(stat & BROKEN))
-		take_damage(0)
-	else
-		add_fingerprint(user)
-		..()
+	else if((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
+		atmosanalyzer_scan(air_contents, user)
+
+	return

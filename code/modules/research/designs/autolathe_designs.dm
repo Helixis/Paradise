@@ -123,6 +123,14 @@
 	build_path = /obj/item/storage/toolbox
 	category = list("initial","Tools")
 
+/datum/design/console_screen
+	name = "Console Screen"
+	id = "console_screen"
+	build_type = AUTOLATHE
+	materials = list(MAT_GLASS = 200)
+	build_path = /obj/item/stock_parts/console_screen
+	category = list("initial", "Electronics")
+
 /datum/design/apc_board
 	name = "APC module"
 	id = "power control"
@@ -232,7 +240,7 @@
 	maxstack = 50
 
 /datum/design/rcd_ammo
-	name = "Compressed Matter Cartridge"
+	name = "Compressed Matter Cardridge"
 	id = "rcd_ammo"
 	build_type = AUTOLATHE
 	materials = list(MAT_METAL = 16000, MAT_GLASS=8000)

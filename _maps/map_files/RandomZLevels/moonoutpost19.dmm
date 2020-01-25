@@ -2195,7 +2195,7 @@
 	name = "Syndicate Outpost"
 	})
 "dh" = (
-/obj/structure/chair/wood,
+/obj/structure/chair/wood/normal,
 /obj/machinery/alarm/monitor{
 	dir = 4;
 	frequency = 1439;
@@ -3053,7 +3053,8 @@
 	id = "awayxenobio";
 	name = "Acid-Proof mounted igniter";
 	pixel_x = 0;
-	pixel_y = 25
+	pixel_y = 25;
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -3188,7 +3189,8 @@
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/structure/cable,
 /obj/structure/grille,
@@ -3323,7 +3325,8 @@
 /obj/machinery/door/poddoor{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaybiohazard";
-	name = "Acid-Proof biohazard containment door"
+	name = "Acid-Proof biohazard containment door";
+	unacidable = 1
 	},
 /obj/structure/window/full/reinforced,
 /turf/simulated/floor/plating,
@@ -3677,7 +3680,8 @@
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/structure/grille,
 /obj/structure/window/full/reinforced,
@@ -3925,7 +3929,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/item/stack/rods,
 /obj/item/stack/cable_coil{
@@ -3946,12 +3951,14 @@
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/item/stack/rods,
 /obj/item/stack/cable_coil{
@@ -3976,7 +3983,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -3990,7 +3998,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -4007,7 +4016,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -4022,7 +4032,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	desc = "A one meter section of pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof Pipe"
+	name = "Acid-Proof Pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds,
 /obj/structure/alien/resin/wall,
@@ -4037,7 +4048,8 @@
 	dir = 8;
 	icon_state = "on";
 	name = "Acid-Proof Air Injector";
-	on = 1
+	on = 1;
+	unacidable = 1
 	},
 /obj/structure/alien/weeds,
 /turf/simulated/floor/engine,
@@ -4246,7 +4258,8 @@
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/item/stack/cable_coil/cut{
 	amount = 1;
@@ -4554,12 +4567,14 @@
 /obj/structure/disposalpipe/segment{
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/structure/cable,
 /obj/structure/grille,
@@ -4573,7 +4588,8 @@
 /obj/structure/disposalpipe/segment{
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds,
 /obj/structure/alien/resin/wall,
@@ -4587,7 +4603,8 @@
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
 	dir = 2;
 	icon_state = "pipe-c";
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds2"
@@ -4655,7 +4672,8 @@
 /obj/structure/disposalpipe/trunk{
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
 	dir = 4;
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds,
 /obj/effect/decal/warning_stripes/west,
@@ -4813,7 +4831,8 @@
 "gN" = (
 /obj/structure/disposalpipe/segment{
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -4828,7 +4847,8 @@
 /obj/machinery/door/poddoor/preopen{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaylab";
-	name = "Acid-Proof containment chamber blast door"
+	name = "Acid-Proof containment chamber blast door";
+	unacidable = 1
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -5010,12 +5030,14 @@
 /obj/structure/disposaloutlet{
 	desc = "An outlet for the pneumatic disposal system. This one has been applied with an acid-proof coating.";
 	dir = 1;
-	name = "Acid-Proof disposal outlet"
+	name = "Acid-Proof disposal outlet";
+	unacidable = 1
 	},
 /obj/structure/disposalpipe/trunk{
 	desc = "An underfloor disposal pipe. This one has been applied with an acid-proof coating.";
 	dir = 1;
-	name = "Acid-Proof disposal pipe"
+	name = "Acid-Proof disposal pipe";
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds1"
@@ -5051,7 +5073,8 @@
 	id = "awayxenobio";
 	name = "Acid-Proof mounted igniter";
 	pixel_x = 0;
-	pixel_y = -25
+	pixel_y = -25;
+	unacidable = 1
 	},
 /obj/structure/alien/weeds{
 	icon_state = "weeds2"
@@ -5566,7 +5589,8 @@
 /obj/machinery/door/poddoor{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaybiohazard";
-	name = "Acid-Proof biohazard containment door"
+	name = "Acid-Proof biohazard containment door";
+	unacidable = 1
 	},
 /obj/effect/decal/warning_stripes/yellow,
 /turf/simulated/floor/plasteel{
@@ -5768,7 +5792,8 @@
 /obj/machinery/door/poddoor{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaybiohazard";
-	name = "Acid-Proof biohazard containment door"
+	name = "Acid-Proof biohazard containment door";
+	unacidable = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/decal/warning_stripes/yellow,
@@ -5784,7 +5809,8 @@
 /obj/machinery/door/poddoor{
 	desc = "A heavy duty blast door that opens mechanically. This one has been applied with an acid-proof coating.";
 	id_tag = "Awaybiohazard";
-	name = "Acid-Proof biohazard containment door"
+	name = "Acid-Proof biohazard containment door";
+	unacidable = 1
 	},
 /obj/effect/decal/warning_stripes/yellow,
 /turf/simulated/floor/plasteel{
@@ -5901,7 +5927,7 @@
 	desc = "Oh no, seven years of bad luck!";
 	icon_state = "mirror_broke";
 	pixel_x = 28;
-	broken = 1
+	shattered = 1
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
@@ -7955,7 +7981,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/chair/wood,
+/obj/structure/chair/wood/normal,
 /obj/machinery/alarm/monitor{
 	dir = 8;
 	frequency = 1439;
@@ -8387,11 +8413,11 @@
 	name = "MO19 Arrivals"
 	})
 "mb" = (
+/obj/structure/chair{
+	dir = 8
+	},
 /obj/machinery/light/small{
 	dir = 1
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
 	},
 /turf/simulated/shuttle/floor,
 /area/awaycontent/a1{
@@ -8405,7 +8431,7 @@
 	name = "MO19 Arrivals"
 	})
 "md" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/simulated/shuttle/floor,
@@ -8566,11 +8592,11 @@
 	name = "MO19 Arrivals"
 	})
 "mr" = (
+/obj/structure/chair{
+	dir = 1
+	},
 /obj/machinery/light/small{
 	dir = 4
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 1
 	},
 /turf/simulated/shuttle/floor{
 	icon_state = "floor2"
@@ -8597,11 +8623,11 @@
 	name = "MO19 Arrivals"
 	})
 "mu" = (
+/obj/structure/chair{
+	dir = 8
+	},
 /obj/effect/landmark{
 	name = "awaystart"
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
 	},
 /turf/simulated/shuttle/floor,
 /area/awaycontent/a1{
@@ -8691,7 +8717,7 @@
 	name = "MO19 Arrivals"
 	})
 "mB" = (
-/obj/structure/chair/wood{
+/obj/structure/chair/wood/normal{
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
@@ -8939,10 +8965,10 @@
 	name = "MO19 Arrivals"
 	})
 "mX" = (
+/obj/structure/chair,
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/chair/comfy/shuttle,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor2"
 	},
@@ -9044,10 +9070,10 @@
 	name = "MO19 Arrivals"
 	})
 "nh" = (
-/obj/machinery/light/small,
-/obj/structure/chair/comfy/shuttle{
+/obj/structure/chair{
 	dir = 8
 	},
+/obj/machinery/light/small,
 /turf/simulated/shuttle/floor,
 /area/awaycontent/a1{
 	has_gravity = 1;

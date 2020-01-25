@@ -2,9 +2,10 @@
 	name = "blob node"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blank_blob"
-	max_integrity = 200
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 65, "acid" = 90)
+	health = 100
+	fire_resist = 2
 	point_return = 18
+	var/mob/camera/blob/overmind
 
 /obj/structure/blob/node/New(loc, var/h = 100)
 	blob_nodes += src
@@ -20,6 +21,9 @@
 	var/image/C = new('icons/mob/blob.dmi', "blob_node_overlay")
 	src.overlays += C
 
+/obj/structure/blob/node/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume, global_overlay = TRUE)
+	return
+
 /obj/structure/blob/node/Destroy()
 	blob_nodes -= src
 	STOP_PROCESSING(SSobj, src)
@@ -32,5 +36,11 @@
 	else
 		for(var/i = 1; i < 8; i += i)
 			Pulse(5, i, color)
-	obj_integrity = min(max_integrity, obj_integrity + 1)
+	health = min(initial(health), health + 1)
 	color = null
+
+/obj/structure/blob/node/update_icon()
+	if(health <= 0)
+		qdel(src)
+		return
+	return

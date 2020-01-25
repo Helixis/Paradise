@@ -10,7 +10,6 @@
 	if(default_unfasten_wrench(user, W))
 		power_change()
 		return
-	return ..()
 
 /obj/machinery/computer/library/public/interact(var/mob/user)
 	if(interact_check(user))

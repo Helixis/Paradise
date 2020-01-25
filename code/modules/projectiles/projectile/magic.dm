@@ -184,10 +184,8 @@
 		var/randomize = pick("robot", "slime", "xeno", "human", "animal")
 		switch(randomize)
 			if("robot")
-				var/path
 				if(prob(30))
-					path = pick(typesof(/mob/living/silicon/robot/syndicate))
-					new_mob = new path(M.loc)
+					new_mob = new /mob/living/silicon/robot/syndicate(M.loc)
 				else
 					new_mob = new /mob/living/silicon/robot(M.loc)
 				new_mob.gender = M.gender
@@ -195,14 +193,10 @@
 				new_mob.job = "Cyborg"
 				var/mob/living/silicon/robot/Robot = new_mob
 				Robot.mmi = new /obj/item/mmi(new_mob)
-				Robot.lawupdate = FALSE
-				Robot.connected_ai = null
-				Robot.clear_inherent_laws()
-				Robot.clear_zeroth_law()
 				if(ishuman(M))
 					Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
-				new_mob = new /mob/living/simple_animal/slime/random(M.loc)
+				new_mob = new /mob/living/carbon/slime/random(M.loc)
 				new_mob.universal_speak = TRUE
 			if("xeno")
 				if(prob(50))
@@ -234,7 +228,7 @@
 						if("parrot")
 							new_mob = new /mob/living/simple_animal/parrot(M.loc)
 						if("corgi")
-							new_mob = new /mob/living/simple_animal/pet/dog/corgi(M.loc)
+							new_mob = new /mob/living/simple_animal/pet/corgi(M.loc)
 						if("crab")
 							new_mob = new /mob/living/simple_animal/crab(M.loc)
 						if("cat")
@@ -248,7 +242,7 @@
 						if("lizard")
 							new_mob = new /mob/living/simple_animal/lizard(M.loc)
 						if("fox")
-							new_mob = new /mob/living/simple_animal/pet/dog/fox(M.loc)
+							new_mob = new /mob/living/simple_animal/pet/fox(M.loc)
 						else
 							new_mob = new /mob/living/simple_animal/chick(M.loc)
 				new_mob.universal_speak = TRUE

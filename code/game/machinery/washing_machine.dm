@@ -208,11 +208,10 @@
 				user.drop_item()
 				crayon = W
 				crayon.loc = src
-				update_icon()
 			else
-				return ..()
+				..()
 		else
-			return ..()
+			..()
 	else if(istype(W,/obj/item/grab))
 		if( (state == 1) && hacked)
 			var/obj/item/grab/G = W
@@ -220,9 +219,8 @@
 				G.affecting.loc = src
 				qdel(G)
 				state = 3
-			update_icon()
 		else
-			return ..()
+			..()
 	else if(istype(W,/obj/item/stack/sheet/hairlesshide) || \
 		istype(W,/obj/item/clothing/under) || \
 		istype(W,/obj/item/clothing/mask) || \
@@ -285,9 +283,9 @@
 				to_chat(user, "<span class='notice'>You can't put the item in right now.</span>")
 		else
 			to_chat(user, "<span class='notice'>The washing machine is full.</span>")
-		update_icon()
 	else
-		return ..()
+		..()
+	update_icon()
 
 /obj/machinery/washing_machine/attack_hand(mob/user as mob)
 	switch(state)
@@ -322,7 +320,3 @@
 
 
 	update_icon()
-
-/obj/machinery/washing_machine/deconstruct(disassembled = TRUE)
-	new /obj/item/stack/sheet/metal(drop_location(), 2)
-	qdel(src)

@@ -30,7 +30,7 @@
 	desc = "It's so sour, your face will twist."
 	icon_state = "lime"
 	filling_color = "#00FF00"
-	tastes = list("lime" = 1)
+	distill_reagent = "triple_sec"
 
 // Orange
 /obj/item/seeds/orange
@@ -56,9 +56,7 @@
 	name = "orange"
 	desc = "It's an tangy fruit."
 	icon_state = "orange"
-	tastes = list("orange" = 1)
 	filling_color = "#FFA500"
-	distill_reagent = "triple_sec"
 
 // Lemon
 /obj/item/seeds/lemon
@@ -83,7 +81,6 @@
 	name = "lemon"
 	desc = "When life gives you lemons, make lemonade."
 	icon_state = "lemon"
-	tastes = list("lemonade" = 1)
 	filling_color = "#FFD700"
 
 // Combustible lemon
@@ -110,7 +107,6 @@
 	icon_state = "firelemon"
 	bitesize_mod = 2
 	wine_power = 0.7
-	tastes = list("burning lemon" = 1)
 	wine_flavor = "fire"
 
 /obj/item/reagent_containers/food/snacks/grown/firelemon/attack_self(mob/living/user)

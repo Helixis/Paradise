@@ -136,7 +136,7 @@
 /atom/movable/lighting_object/singularity_pull()
 	return
 
-/atom/movable/lighting_object/blob_act(obj/structure/blob/B)
+/atom/movable/lighting_object/blob_act()
 	return
 
 /atom/movable/lighting_object/onTransitZ()

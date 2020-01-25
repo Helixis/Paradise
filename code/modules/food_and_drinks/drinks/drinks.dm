@@ -10,7 +10,7 @@
 	consume_sound = 'sound/items/drink.ogg'
 	possible_transfer_amounts = list(5,10,15,20,25,30,50)
 	volume = 50
-	resistance_flags = NONE
+	burn_state = FIRE_PROOF
 	antable = FALSE
 
 /obj/item/reagent_containers/food/drinks/New()
@@ -108,19 +108,19 @@
 	return FALSE
 
 /obj/item/reagent_containers/food/drinks/examine(mob/user)
-	. = ..()
-	if(in_range(user, src))
-		if(!reagents || reagents.total_volume == 0)
-			. += "<span class='notice'> \The [src] is empty!</span>"
-		else if(reagents.total_volume <= volume/4)
-			. += "<span class='notice'> \The [src] is almost empty!</span>"
-		else if(reagents.total_volume <= volume*0.66)
-			. += "<span class='notice'> \The [src] is half full!</span>"// We're all optimistic, right?!
+	if(!..(user, 1))
+		return
+	if(!reagents || reagents.total_volume == 0)
+		to_chat(user, "<span class='notice'> \The [src] is empty!</span>")
+	else if(reagents.total_volume <= volume/4)
+		to_chat(user, "<span class='notice'> \The [src] is almost empty!</span>")
+	else if(reagents.total_volume <= volume*0.66)
+		to_chat(user, "<span class='notice'> \The [src] is half full!</span>")// We're all optimistic, right?!
 
-		else if(reagents.total_volume <= volume*0.90)
-			. += "<span class='notice'> \The [src] is almost full!</span>"
-		else
-			. += "<span class='notice'> \The [src] is full!</span>"
+	else if(reagents.total_volume <= volume*0.90)
+		to_chat(user, "<span class='notice'> \The [src] is almost full!</span>")
+	else
+		to_chat(user, "<span class='notice'> \The [src] is full!</span>")
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
@@ -139,7 +139,6 @@
 	volume = 5
 	flags = CONDUCT
 	container_type = OPENCONTAINER
-	resistance_flags = FIRE_PROOF
 
 /obj/item/reagent_containers/food/drinks/trophy/gold_cup
 	name = "gold cup"
@@ -186,7 +185,6 @@
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	list_reagents = list("coffee" = 30)
-	resistance_flags = FREEZE_PROOF
 
 /obj/item/reagent_containers/food/drinks/ice
 	name = "ice cup"
@@ -218,16 +216,14 @@
 	desc = "Made in Space South America."
 	icon_state = "hot_coco"
 	item_state = "coffee"
-	list_reagents = list("hot_coco" = 30, "sugar" = 5)
-	resistance_flags = FREEZE_PROOF
+	list_reagents = list("chocolate" = 30)
 
 /obj/item/reagent_containers/food/drinks/chocolate
 	name = "hot chocolate"
 	desc = "Made in Space Switzerland."
 	icon_state = "hot_coco"
 	item_state = "coffee"
-	list_reagents = list("chocolate" = 30)
-	resistance_flags = FREEZE_PROOF
+	list_reagents = list("hot_coco" = 30)
 
 /obj/item/reagent_containers/food/drinks/weightloss
 	name = "weight-loss shake"
@@ -337,6 +333,14 @@
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+
+/obj/item/reagent_containers/food/drinks/mushroom_bowl
+	name = "mushroom bowl"
+	desc = "A bowl made out of mushrooms. Not food, though it might have contained some at some point."
+	icon = 'icons/obj/lavaland/ash_flora.dmi'
+	icon_state = "mushroom_bowl"
+	w_class = WEIGHT_CLASS_SMALL
+
 
 /obj/item/reagent_containers/food/drinks/bag
 	name = "drink bag"

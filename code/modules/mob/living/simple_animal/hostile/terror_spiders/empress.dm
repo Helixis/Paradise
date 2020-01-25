@@ -5,7 +5,7 @@
 // -------------: AI: none - this is strictly adminspawn-only and intended for RP events, coder testing, and teaching people 'how to queen'
 // -------------: SPECIAL: Lay Eggs ability that allows laying queen-level eggs.
 // -------------: TO FIGHT IT: run away screaming?
-// -------------: SPRITES FROM: FoS, https://www.paradisestation.org/forum/profile/335-fos
+// -------------: SPRITES FROM: FoS, http://nanotrasen.se/phpBB3/memberlist.php?mode=viewprofile&u=386
 
 /mob/living/simple_animal/hostile/poison/terror_spider/queen/empress
 	name = "Empress of Terror"
@@ -19,7 +19,8 @@
 	ventcrawler = 1
 	idle_ventcrawl_chance = 0
 	ai_playercontrol_allowtype = 0
-	rapid = 3
+	ai_type = TS_AI_AGGRESSIVE
+	rapid = 1
 	canlay = 1000
 	spider_tier = TS_TIER_5
 	projectiletype = /obj/item/projectile/terrorqueenspit/empress
@@ -38,7 +39,7 @@
 	empresserase_action = new()
 	empresserase_action.Grant(src)
 
-/mob/living/simple_animal/hostile/poison/terror_spider/queen/empress/spider_special_action()
+/mob/living/simple_animal/hostile/poison/terror_spider/queen/empress/handle_automated_action()
 	return
 
 /mob/living/simple_animal/hostile/poison/terror_spider/queen/empress/NestMode()

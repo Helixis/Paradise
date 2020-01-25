@@ -28,8 +28,8 @@
 	var/state = "01"	//How far the door assembly has progressed
 
 /obj/structure/windoor_assembly/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>Alt-click to rotate it clockwise.</span>"
+	..()
+	to_chat(user, "<span class='notice'>Alt-click to rotate it clockwise.</span>")
 
 obj/structure/windoor_assembly/New(loc, set_dir)
 	..()

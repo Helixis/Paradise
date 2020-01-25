@@ -137,7 +137,7 @@
 	action_background_icon_state = "bg_cult"
 	panel = "Demon"
 
-/obj/effect/proc_holder/spell/targeted/sense_victims/cast(list/targets, mob/user)
+/obj/effect/proc_holder/spell/targeted/sense_victims/cast(list/targets)
 	var/list/victims = targets
 	for(var/mob/living/L in GLOB.living_mob_list)
 		if(!L.stat && !iscultist(L) && L.key && L != usr)
@@ -290,10 +290,10 @@
 	emote_hear = list("gaffaws", "laughs")
 	response_help  = "hugs"
 	attacktext = "wildly tickles"
-	maxHealth = 175
-	health = 175
-	melee_damage_lower = 25
-	melee_damage_upper = 25
+	maxHealth = 150
+	health = 150
+	melee_damage_lower = 20
+	melee_damage_upper = 20
 
 	attack_sound = 'sound/items/bikehorn.ogg'
 	feast_sound = 'sound/spookoween/scary_horn2.ogg'

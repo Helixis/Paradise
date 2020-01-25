@@ -30,14 +30,14 @@
 	path = /obj/item/clothing/suit/storage/labcoat/RDlargeroundcut
 	allowed_roles = list("Research Director")
 
-/datum/gear/suit/labcoat_rdlargeroundcutdark
+/datum/gear/suit/labcoat_RDlargeroundcutdark
 	display_name = "long and dark labcoat, RD"
-	path = /obj/item/clothing/suit/storage/labcoat/rdlargedark
+	path = /obj/item/clothing/suit/storage/labcoat/RDlargedark
 	allowed_roles = list("Research Director")
 
-/datum/gear/suit/labcoat_rdlargedark
+/datum/gear/suit/labcoat_RDlargedark
 	display_name = "long and dark labcoat roundcut, RD"
-	path = /obj/item/clothing/suit/storage/labcoat/rdlargeroundcutdark
+	path = /obj/item/clothing/suit/storage/labcoat/RDlargeroundcutdark
 	allowed_roles = list("Research Director")
 
 /datum/gear/suit/labcoat_sciencelarge

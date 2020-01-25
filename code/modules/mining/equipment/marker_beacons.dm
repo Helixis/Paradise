@@ -20,8 +20,6 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	desc = "Prism-brand path illumination devices. Used by miners to mark paths and warn of danger."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "marker"
-	armor = list("melee" = 50, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 25, "bio" = 100, "rad" = 100, "fire" = 25, "acid" = 0)
-	max_integrity = 50
 	merge_type = /obj/item/stack/marker_beacon
 	max_amount = 100
 	var/picked_color = "random"
@@ -37,9 +35,9 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	update_icon()
 
 /obj/item/stack/marker_beacon/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>Use in-hand to place a [singular_name].</span>"
-	. += "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>"
+	..()
+	to_chat(user, "<span class='notice'>Use in-hand to place a [singular_name].</span>")
+	to_chat(user, "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>")
 
 /obj/item/stack/marker_beacon/update_icon()
 	icon_state = "[initial(icon_state)][lowertext(picked_color)]"
@@ -87,15 +85,15 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	update_icon()
 
 /obj/structure/marker_beacon/deconstruct(disassembled = TRUE)
-	if(!(flags & NODECONSTRUCT))
+	if(can_deconstruct)
 		var/obj/item/stack/marker_beacon/M = new(loc)
 		M.picked_color = picked_color
 		M.update_icon()
 	qdel(src)
 
 /obj/structure/marker_beacon/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>"
+	..()
+	to_chat(user, "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>")
 
 /obj/structure/marker_beacon/update_icon()
 	while(!picked_color || !GLOB.marker_beacon_colors[picked_color])

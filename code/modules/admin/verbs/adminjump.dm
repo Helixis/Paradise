@@ -30,7 +30,7 @@
 
 /client/proc/jumptoturf(var/turf/T in world)
 	set name = "Jump to Turf"
-	set category = null
+	set category = "Admin"
 
 	if(!check_rights(R_ADMIN))
 		return

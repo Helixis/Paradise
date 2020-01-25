@@ -56,14 +56,13 @@
 	update_icon()
 
 /obj/item/gun/dartgun/examine(mob/user)
-	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(..(user, 2))
 		if(beakers.len)
-			. += "<span class='notice'>[src] contains:</span>"
+			to_chat(user, "<span class='notice'>[src] contains:</span>")
 			for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
 				if(B.reagents && B.reagents.reagent_list.len)
 					for(var/datum/reagent/R in B.reagents.reagent_list)
-						. += "<span class='notice'>[R.volume] units of [R.name]</span>"
+						to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 
 /obj/item/gun/dartgun/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I, /obj/item/dart_cartridge))
@@ -102,8 +101,6 @@
 		beakers += B
 		to_chat(user, "<span class='notice'>You slot [B] into [src].</span>")
 		src.updateUsrDialog()
-	else
-		return ..()
 
 /obj/item/gun/dartgun/can_shoot()
 	if(!cartridge)

@@ -6,7 +6,7 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	desc = "This is rubbish."
-	resistance_flags = FLAMMABLE
+	burn_state = FLAMMABLE
 
 /obj/item/trash/raisins
 	name = "4no raisins"
@@ -43,7 +43,7 @@
 /obj/item/trash/plate
 	name = "Plate"
 	icon_state = "plate"
-	resistance_flags = NONE
+	burn_state = FIRE_PROOF
 
 /obj/item/trash/snack_bowl
 	name = "Snack bowl"
@@ -60,7 +60,7 @@
 /obj/item/trash/tray
 	name = "Tray"
 	icon_state = "tray"
-	resistance_flags = NONE
+	burn_state = FIRE_PROOF
 
 /obj/item/trash/candle
 	name = "candle"
@@ -76,7 +76,7 @@
 	icon_state = "cola"
 	var/is_glass = 0
 	var/is_plastic = 0
-	resistance_flags = NONE
+	burn_state = FIRE_PROOF
 
 /obj/item/trash/gum
 	name = "chewed gum"

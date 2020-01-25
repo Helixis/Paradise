@@ -45,10 +45,8 @@
 							 "<span class='notice'>You pry open \the [src].</span>", \
 							 "<span class='notice'>You hear splitting wood.</span>")
 		qdel(src)
-	else if(user.a_intent != INTENT_HARM)
-		attack_hand(user)
 	else
-		return ..()
+		return attack_hand(user)
 
 /obj/structure/largecrate/mule
 
@@ -57,8 +55,8 @@
 
 /obj/structure/largecrate/lisa/attackby(obj/item/W as obj, mob/user as mob)	//ugly but oh well
 	if(istype(W, /obj/item/crowbar))
-		new /mob/living/simple_animal/pet/dog/corgi/Lisa(loc)
-	return ..()
+		new /mob/living/simple_animal/pet/corgi/Lisa(loc)
+	..()
 
 /obj/structure/largecrate/cow
 	name = "cow crate"
@@ -67,7 +65,7 @@
 /obj/structure/largecrate/cow/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/crowbar))
 		new /mob/living/simple_animal/cow(loc)
-	return ..()
+	..()
 
 /obj/structure/largecrate/goat
 	name = "goat crate"
@@ -76,7 +74,7 @@
 /obj/structure/largecrate/goat/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/crowbar))
 		new /mob/living/simple_animal/hostile/retaliate/goat(loc)
-	return ..()
+	..()
 
 /obj/structure/largecrate/chick
 	name = "chicken crate"
@@ -87,7 +85,7 @@
 		var/num = rand(4, 6)
 		for(var/i = 0, i < num, i++)
 			new /mob/living/simple_animal/chick(loc)
-	return ..()
+	..()
 
 /obj/structure/largecrate/cat
 	name = "cat crate"
@@ -96,4 +94,4 @@
 /obj/structure/largecrate/cat/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/crowbar))
 		new /mob/living/simple_animal/pet/cat(loc)
-	return ..()
+	..()

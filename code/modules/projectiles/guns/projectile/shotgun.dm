@@ -11,7 +11,6 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot
 	fire_sound = 'sound/weapons/gunshots/gunshot_shotgun.ogg'
 	var/recentpump = 0 // to prevent spammage
-	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/projectile/shotgun/attackby(obj/item/A, mob/user, params)
 	. = ..()
@@ -66,9 +65,9 @@
 	chambered = AC
 
 /obj/item/gun/projectile/shotgun/examine(mob/user)
-	. = ..()
+	..()
 	if(chambered)
-		. += "A [chambered.BB ? "live" : "spent"] one is in the chamber."
+		to_chat(user, "A [chambered.BB ? "live" : "spent"] one is in the chamber.")
 
 /obj/item/gun/projectile/shotgun/isHandgun() //You cannot, in fact, holster a shotgun.
 	return 0
@@ -87,6 +86,7 @@
 	sawn_state = SAWN_INTACT
 
 /obj/item/gun/projectile/shotgun/riot/attackby(obj/item/A, mob/user, params)
+	..()
 	if(istype(A, /obj/item/circular_saw) || istype(A, /obj/item/gun/energy/plasmacutter))
 		sawoff(user)
 	if(istype(A, /obj/item/melee/energy))
@@ -95,8 +95,6 @@
 			sawoff(user)
 	if(istype(A, /obj/item/pipe))
 		unsaw(A, user)
-	else
-		return ..()
 
 /obj/item/gun/projectile/shotgun/riot/sawoff(mob/user)
 	if(sawn_state == SAWN_OFF)
@@ -212,9 +210,6 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
 	fire_sound = 'sound/weapons/gunshots/gunshot_rifle.ogg'
 	var/bolt_open = 0
-	can_bayonet = TRUE
-	knife_x_offset = 27
-	knife_y_offset = 13
 
 /obj/item/gun/projectile/shotgun/boltaction/pump(mob/M)
 	playsound(M, 'sound/weapons/gun_interactions/rifle_load.ogg', 60, 1)
@@ -239,15 +234,14 @@
 	. = ..()
 
 /obj/item/gun/projectile/shotgun/boltaction/examine(mob/user)
-	. = ..()
-	. += "The bolt is [bolt_open ? "open" : "closed"]."
+	..()
+	to_chat(user, "The bolt is [bolt_open ? "open" : "closed"].")
 
 /obj/item/gun/projectile/shotgun/boltaction/enchanted
 	name = "enchanted bolt action rifle"
 	desc = "Careful not to lose your head."
 	var/guns_left = 30
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/enchanted
-	can_bayonet = FALSE
 
 /obj/item/gun/projectile/shotgun/boltaction/enchanted/New()
 	..()

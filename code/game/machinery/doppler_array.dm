@@ -29,7 +29,7 @@ var/list/doppler_arrays = list()
 /obj/machinery/doppler_array/New()
 	..()
 	doppler_arrays += src
-	explosion_target = rand(10, 50)
+	explosion_target = rand(8, 20)
 	toxins_tech = new /datum/tech/toxins(src)
 
 /obj/machinery/doppler_array/Destroy()
@@ -51,13 +51,12 @@ var/list/doppler_arrays = list()
 			power_change()
 			to_chat(user, "<span class='notice'>You unfasten [src].</span>")
 		playsound(loc, I.usesound, 50, 1)
-		return
 	if(istype(I, /obj/item/disk/tech_disk))
 		var/obj/item/disk/tech_disk/disk = I
 		disk.load_tech(toxins_tech)
 		to_chat(user, "<span class='notice'>You swipe the disk into [src].</span>")
-		return
-	return ..()
+	else
+		return ..()
 
 /obj/machinery/doppler_array/attack_hand(mob/user)
 	if(..())
@@ -144,7 +143,7 @@ var/list/doppler_arrays = list()
 
 	var/list/messages = list("Explosive disturbance detected.", \
 							 "Epicenter at: grid ([x0],[y0]). Temporal displacement of tachyons: [took] seconds.", \
-							 "Actual: Epicenter radius: [devastation_range]. Outer radius: [heavy_impact_range]. Shockwave radius: [light_impact_range].")
+							 "Factual: Epicenter radius: [devastation_range]. Outer radius: [heavy_impact_range]. Shockwave radius: [light_impact_range].")
 
 	// If the bomb was capped, say its theoretical size.
 	if(devastation_range < orig_dev_range || heavy_impact_range < orig_heavy_range || light_impact_range < orig_light_range)

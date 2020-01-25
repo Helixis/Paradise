@@ -1,7 +1,6 @@
 //Common
 
 /obj/machinery/abductor
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/team = 0
 
 /obj/machinery/abductor/New()

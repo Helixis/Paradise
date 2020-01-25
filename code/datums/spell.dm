@@ -5,13 +5,6 @@
 	var/panel = "Debug"//What panel the proc holder needs to go on.
 	var/active = FALSE //Used by toggle based abilities.
 	var/ranged_mousepointer
-	var/mob/living/ranged_ability_user
-
-/obj/effect/proc_holder/singularity_act()
-	return
-
-/obj/effect/proc_holder/singularity_pull()
-	return
 
 var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin verb for now
 
@@ -31,7 +24,6 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 		to_chat(user, "<span class='warning'><b>[user.ranged_ability.name]</b> has been replaced by <b>[name]</b>.")
 		user.ranged_ability.remove_ranged_ability(user)
 	user.ranged_ability = src
-	ranged_ability_user = user
 	user.client.click_intercept = user.ranged_ability
 	add_mousepointer(user.client)
 	active = TRUE
@@ -51,7 +43,6 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	if(!user || !user.client || (user.ranged_ability && user.ranged_ability != src)) //To avoid removing the wrong ability
 		return
 	user.ranged_ability = null
-	ranged_ability_user = null
 	user.client.click_intercept = null
 	remove_mousepointer(user.client)
 	active = FALSE

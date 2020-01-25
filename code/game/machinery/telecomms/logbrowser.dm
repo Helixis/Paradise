@@ -208,9 +208,8 @@
 					A.icon_state = "4"
 					A.anchored = 1
 					qdel(src)
-			updateUsrDialog()
-			return
-		return ..()
+		src.updateUsrDialog()
+		return
 
 	emag_act(user as mob)
 		if(!emagged)

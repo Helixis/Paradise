@@ -10,9 +10,6 @@
 	icon = 'icons/obj/chempuff.dmi'
 	pass_flags = PASSTABLE | PASSGRILLE
 
-/obj/effect/decal/chempuff/blob_act(obj/structure/blob/B)
-	return
-
 /obj/effect/decal/snow
 	name = "snow"
 	density = FALSE

@@ -1,15 +1,13 @@
 /obj/structure/closet/secure_closet
 	name = "secure locker"
 	desc = "It's an immobile card-locked storage unit."
-	icon = 'icons/hispania/obj/closet.dmi'
+	icon = 'icons/obj/closet.dmi'
 	icon_state = "secure1"
 	density = 1
 	opened = 0
 	locked = 1
 	broken = 0
-	max_integrity = 250
-	armor = list("melee" = 30, "bullet" = 50, "laser" = 50, "energy" = 100, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 80)
-	damage_deflection = 20
+	armor = list(melee = 30, bullet = 50, laser = 50, energy = 100, bomb = 0, bio = 0, rad = 0)
 	var/large = 1
 	icon_closed = "secure"
 	var/icon_locked = "secure1"
@@ -17,6 +15,7 @@
 	var/icon_broken = "securebroken"
 	var/icon_off = "secureoff"
 	wall_mounted = 0 //never solid (You can always pass over it)
+	health = 200
 
 /obj/structure/closet/secure_closet/can_open()
 	if(!..())
@@ -86,11 +85,9 @@
 	else if((istype(W, /obj/item/card/emag)||istype(W, /obj/item/melee/energy/blade)) && !broken)
 		emag_act(user)
 	else if(istype(W,/obj/item/stack/packageWrap) || istype(W,/obj/item/weldingtool))
-		return ..(W, user)
-	else if(user.a_intent != INTENT_HARM)
-		togglelock(user)
+		return ..(W,user)
 	else
-		return ..()
+		togglelock(user)
 
 /obj/structure/closet/secure_closet/emag_act(mob/user)
 	if(!broken)
