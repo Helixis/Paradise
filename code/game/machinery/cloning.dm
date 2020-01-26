@@ -48,7 +48,7 @@
 		set_light(0)
 
 /obj/machinery/clonepod/biomass
-	biomass = CLONE_BIOMASS
+	biomass = CLONE_BIOMASS * 2
 
 /obj/machinery/clonepod/New()
 	..()
@@ -81,7 +81,7 @@
 	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
-	biomass = CLONE_BIOMASS
+	biomass = CLONE_BIOMASS * efficiency
 	RefreshParts()
 
 /obj/machinery/clonepod/Destroy()
@@ -235,8 +235,8 @@
  		return -1 // so that the record gets flushed out
 	*/
 
-	if(biomass >= CLONE_BIOMASS)
-		biomass -= CLONE_BIOMASS
+	if(biomass >= CLONE_BIOMASS * efficiency)
+		biomass -= CLONE_BIOMASS * efficiency
 	else
 		return 0
 
@@ -325,7 +325,7 @@
 			occupant.Paralyse(4)
 
 			 //Slowly get that clone healed and finished.
-			occupant.adjustCloneLoss(-((speed_coeff/2)))
+			occupant.adjustCloneLoss(-((speed_coeff/4)))
 
 			// For human species that lack non-vital parts for some weird reason
 			if(organs_number)

@@ -180,7 +180,7 @@
 			data["realname"] = sanitize(src.active_record.dna.real_name)
 			data["unidentity"] = src.active_record.dna.uni_identity
 			data["strucenzymes"] = src.active_record.dna.struc_enzymes
-		if(selected_pod && (selected_pod in pods) && selected_pod.biomass >= CLONE_BIOMASS)
+		if(selected_pod && (selected_pod in pods) && selected_pod.biomass >= CLONE_BIOMASS * selected_pod.efficiency)
 			data["podready"] = 1
 		else
 			data["podready"] = 0
@@ -317,7 +317,7 @@
 					temp = "<span class=\"bad\">Error: No cloning pod selected.</span>"
 				else if(pod.occupant)
 					temp = "<span class=\"bad\">Error: The cloning pod is currently occupied.</span>"
-				else if(pod.biomass < CLONE_BIOMASS)
+				else if(pod.biomass < CLONE_BIOMASS * pod.efficiency)
 					temp = "<span class=\"bad\">Error: Not enough biomass.</span>"
 				else if(pod.mess)
 					temp = "<span class=\"bad\">Error: The cloning pod is malfunctioning.</span>"
