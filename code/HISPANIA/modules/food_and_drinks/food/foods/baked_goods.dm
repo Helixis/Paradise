@@ -291,8 +291,10 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#EFD8A7"
 
-///        Pancakes     ///
-/obj/item/reagent_containers/food/snacks/pancake_1
+///        Pancakes    (Coughthanksumeandevancough) ///
+
+
+/obj/item/reagent_containers/food/snacks/pancake
     name = "pancake"
     desc = "A fluffy pancake. The softer, superior relative of the waffle."
     icon = 'icons/hispania/obj/food/food.dmi'
@@ -300,4 +302,30 @@
     trash = /obj/item/trash/plate
     filling_color = "#D2691E"
     bitesize = 3
-    list_reagents = list("nutriment" = 4, "vitamin" = 1)
+    list_reagents = list("nutriment" = 4, "vitamin" = 1, "sugar" = 4)
+    var/list/pancakes = list()// If the pancakes are stacked, they come here
+
+
+obj/item/reagent_containers/food/snacks/pancake/update_icon()
+    overlays = list()
+    if(pancakes.len > 0)
+        desc = "A pile of delicious pancakes. There appears to be [pancakes.len+1] pancakes in the pile."
+    icon_state = "pancake_[pancakes.len+1]"
+
+/obj/item/reagent_containers/food/snacks/pancake/attackby(obj/item/reagent_containers/food/snacks/pancake/I, mob/user, params)
+    if(istype(I, /obj/item/reagent_containers/food/snacks/pancake/))
+        var/obj/item/reagent_containers/food/snacks/pancake = I
+
+        var/list/pancakestoadd = list()
+        pancakestoadd += pancake
+        for(var/obj/item/reagent_containers/food/snacks/pancake/i in I.pancakes)
+            pancakestoadd += i
+        if((pancakes.len) + pancakestoadd.len <= 2)
+            user.drop_item()
+            pancake.loc = src
+            pancakes.Add(pancakestoadd)
+            pancake.update_icon()
+            update_icon()
+            to_chat(user, "<span class='warning'>You put the [pancake] ontop of the [src]!</span>")
+        else
+            to_chat(user, "<span class='warning'>The stack is too high!</span>")
