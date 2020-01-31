@@ -106,7 +106,7 @@ datum/theft_objective/ai/check_special_completion(var/obj/item/aicard/C)
 
 /datum/theft_objective/reactive
 	name = "the reactive teleport armor"
-	typepath = /obj/item/clothing/suit/armor/reactive/teleport
+	typepath = /obj/item/clothing/suit/armor/reactive/teleport/rd
 	protected_jobs = list("Research Director")
 
 /datum/theft_objective/steal/documents
@@ -117,6 +117,11 @@ datum/theft_objective/ai/check_special_completion(var/obj/item/aicard/C)
 	name = "the Chief Medical Officer's hypospray"
 	typepath = /obj/item/reagent_containers/hypospray/CMO
 	protected_jobs = list("Chief Medical Officer")
+
+/datum/theft_objective/magistrategun
+	name = "the magistrate's personal disabler"
+	typepath = /obj/item/gun/energy/disabler/magistrate
+	protected_jobs = list("Magistrate")
 
 /datum/theft_objective/ablative
 	name = "an ablative armor vest"
