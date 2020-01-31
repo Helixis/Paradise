@@ -20,6 +20,6 @@
 	icon_state = "drake_steak"
 	trash = /obj/item/trash/plate
 	filling_color = "#7A3D11"
-	bitesize = 5
-	list_reagents = list("nutriment" = 10, "miracledrops" = 1)
+	bitesize = 3
+	list_reagents = list("nutriment" = 10, "miracledrops" = 2)
 	tastes = list("HEAVEN" = 1)
