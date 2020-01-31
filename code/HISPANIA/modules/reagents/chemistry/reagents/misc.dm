@@ -11,13 +11,10 @@
 	taste_description = "health"
 
 /datum/reagent/medicine/miracledrops/on_mob_life(mob/living/carbon/M)
-	M.setCloneLoss(0, FALSE)
-	M.setOxyLoss(0, FALSE)
-	M.radiation = 0
+	M.setOxyLoss(-5, FALSE)
 	M.adjustBruteLoss(-5, FALSE)
 	M.adjustFireLoss(-5, FALSE)
 	M.adjustToxLoss(-5, FALSE)
-	M.setBrainLoss(0, FALSE)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/thing in H.internal_organs)
@@ -25,33 +22,5 @@
 			I.receive_damage(-5, FALSE)
 		for(var/obj/item/organ/external/E in H.bodyparts)
 			E.mend_fracture()
-	M.SetEyeBlind(0, FALSE)
-	M.CureNearsighted(FALSE)
-	M.CureBlind(FALSE)
-	M.CureMute()
-	M.CureDeaf()
-	M.CureEpilepsy()
-	M.CureTourettes()
-	M.CureCoughing()
-	M.CureNervous()
-	M.SetEyeBlurry(0, FALSE)
-	M.SetWeakened(0, FALSE)
-	M.SetStunned(0, FALSE)
-	M.SetParalysis(0, FALSE)
-	M.SetSilence(0, FALSE)
-	M.SetHallucinate(0)
-	REMOVE_TRAITS_NOT_IN(M, list(ROUNDSTART_TRAIT))
-	M.SetDizzy(0)
-	M.SetDrowsy(0)
-	M.SetStuttering(0)
-	M.SetSlur(0)
-	M.SetConfused(0)
-	M.SetSleeping(0, FALSE)
-	M.SetJitter(0)
-	for(var/thing in M.viruses)
-		var/datum/disease/D = thing
-		if(D.severity == NONTHREAT)
-			continue
-		D.cure(0)
 	..()
 	return STATUS_UPDATE_ALL
