@@ -30,3 +30,32 @@
 		qdel(I)
 	else
 		return ..()
+
+
+      //////////////////
+      ////Tortafrita////
+      /////////////////
+
+
+/obj/item/reagent_containers/food/snacks/raw_tortafrita
+	name = "raw tortafrita"
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "rawtortafrita"
+	desc = "Delicious raw dough!"
+	bitesize = 3
+	list_reagents = list("butter" = 5, "nutriment" = 2 ,"sodiumchloride" = 1)
+	tastes = list("dough" = 1)
+
+
+// Flat Dough + Circular Cutter = x3 raw tortafritas
+/obj/item/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/I, mob/user, params)
+    if(istype(I, /obj/item/kitchen/cutter))
+        if(isturf(loc))
+            for(var/i=1 to 3)
+                new /obj/item/reagent_containers/food/snacks/raw_tortafrita(loc)
+            to_chat(user, "<span class='notice'>You cut [src] into tortafritas.</span>")
+            qdel(src)
+        else
+            to_chat(user, "<span class='notice'>You need to put [src] on a surface to cut it!</span>")
+    else
+        ..()
