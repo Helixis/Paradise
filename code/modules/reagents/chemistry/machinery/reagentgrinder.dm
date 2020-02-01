@@ -77,7 +77,8 @@
 			/obj/item/reagent_containers/food/snacks/grown/apple = list("applejuice" = 0),
 			/obj/item/reagent_containers/food/snacks/grown/grapes = list("grapejuice" = 0),
 			/obj/item/reagent_containers/food/snacks/grown/grapes/green = list("grapejuice" = 0),
-			/obj/item/reagent_containers/food/snacks/grown/pineapple = list("pineapplejuice" = 0)
+			/obj/item/reagent_containers/food/snacks/grown/pineapple = list("pineapplejuice" = 0),
+						/obj/item/reagent_containers/food/snacks/drakemeat = list("drakeblood" = 10)
 	)
 
 	var/list/dried_items = list(
