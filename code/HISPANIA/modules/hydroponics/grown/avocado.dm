@@ -51,7 +51,7 @@
 				H.regenerate_icons()
 				return
 		else
-			return ..()
+			..()
 
 /obj/item/seeds/avocado/aircado
 	name = "pack of avocado seeds"
@@ -87,7 +87,7 @@
 	rarity = 20
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/aircado
-	seed = /obj/item/seeds/avocado
+	seed = /obj/item/seeds/aircado
 	name = "aircado"
 	desc = "An unusually airly fruit containing a single large seed."
 	icon_state = "aircado"
@@ -96,7 +96,7 @@
 	fail_rate = 0
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/firecado
-	seed = /obj/item/seeds/avocado
+	seed = /obj/item/seeds/firecado
 	name = "firecado"
 	desc = "An unusually fiery fruit containing a single large seed."
 	icon_state = "firecado"
@@ -105,7 +105,7 @@
 	fail_rate = 0
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/earthcado
-	seed = /obj/item/seeds/avocado
+	seed = /obj/item/seeds/earthcado
 	name = "earthcado"
 	desc = "An unusually earthy fruit containing a single large seed."
 	icon_state = "earthcado"
