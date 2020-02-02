@@ -30,7 +30,7 @@
 
 //Pancake by Nothing (Con ayuda de Ume, gracias!)
 /datum/recipe/oven/pancake
-    reagents = list("sugar" = 5)
+    reagents = list("sugar" = 5, "sodiumchloride" = 1)
     items = list(
         /obj/item/reagent_containers/food/snacks/sliceable/flatdough,
     )
