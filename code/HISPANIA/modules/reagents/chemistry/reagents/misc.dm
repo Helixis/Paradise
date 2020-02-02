@@ -1,7 +1,7 @@
 //Reagent for the drake steak//
 
 /datum/reagent/medicine/miracledrops
-	name = "miracle_drops"
+	name = "miracle drops"
 	id = "miracledrops"
 	description = "It's magic. We don't have to explain it."
 	reagent_state = LIQUID
