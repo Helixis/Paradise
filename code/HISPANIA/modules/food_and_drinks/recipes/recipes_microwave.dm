@@ -91,3 +91,5 @@
 		/obj/item/reagent_containers/food/snacks/bun
 	)
 	result = /obj/item/reagent_containers/food/snacks/hot_dog/butter
+
+

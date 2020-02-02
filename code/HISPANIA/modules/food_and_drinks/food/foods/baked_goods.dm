@@ -295,7 +295,7 @@
 
 
 /obj/item/reagent_containers/food/snacks/pancake
-    name = "pancake"
+    name = "Pancake"
     desc = "A fluffy pancake. The softer, superior relative of the waffle."
     icon = 'icons/hispania/obj/food/food.dmi'
     icon_state = "pancake_1"
@@ -329,3 +329,29 @@ obj/item/reagent_containers/food/snacks/pancake/update_icon()
             to_chat(user, "<span class='warning'>You put the [pancake] ontop of the [src]!</span>")
         else
             to_chat(user, "<span class='warning'>The stack is too high!</span>")
+
+
+
+//Toast//
+/obj/item/reagent_containers/food/snacks/toast
+	name = "Toast"
+	desc = "Is a slice of bread but toasted."
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "butter_toast"
+	filling_color = "#D2691E"
+	list_reagents = list("nutriment" = 2, "vitamin" = 1)
+	tastes = list("toast" = 1)
+	bitesize = 3
+
+
+//ButterToast//
+
+/obj/item/reagent_containers/food/snacks/butter_toast
+	name = "Buttered toast"
+	desc = "Butter lightly spread over a piece of toast."
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "toast"
+	filling_color = "#D2691E"
+	list_reagents = list("nutriment" = 4, "vitamin" = 1)
+	tastes = list("butter" = 1,"toast" = 1)
+	bitesize = 5
