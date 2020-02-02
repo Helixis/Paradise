@@ -41,7 +41,7 @@ obj/item/gun/throw/crossbow/update_icon()
 		. += "<span class='notice'>It has an empty mount for a battery cell.</span>"
 
 /obj/item/gun/throw/crossbow/modify_projectile(obj/I,)
-	if( tension && (cell.charge >= 1999))
+	if(tension && Cell.use(2000))
 		var/obj/item/arrow/rod/R = I
 		visible_message("<span class='danger'>[R] plinks and crackles as it begins to glow red-hot.</span>")
 		R.throwforce = 40
@@ -86,7 +86,7 @@ obj/item/gun/throw/crossbow/update_icon()
 		to_chat(user, "<span class='warning'>You can't draw [src] without a bolt nocked.</span>")
 		return
 	if(!cell)
-		to_chat(user, "<Span Class='warning'> Baterry Cell is missing.</span>")
+		to_chat(user, "<span class='warning'> Baterry Cell is missing.</span>")
 		return
 
 	user.visible_message("[user] begins to draw back the string of [src].","You begin to draw back the string of [src].")
@@ -114,11 +114,6 @@ obj/item/gun/throw/crossbow/update_icon()
 			to_chat(user, "<span class='notice'>[src] doesn't have a cell installed.</span>")
 	else
 		..()
-
-/obj/item/gun/throw/crossbow/verb/set_tension()
-	set name = "Adjust Tension"
-	set category = "Object"
-	set src in range(0)
 
 	var/mob/user = usr
 	if(user.incapacitated())
