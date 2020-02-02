@@ -295,7 +295,7 @@
 
 
 /obj/item/reagent_containers/food/snacks/pancake
-    name = "Pancake"
+    name = "pancake"
     desc = "A fluffy pancake. The softer, superior relative of the waffle."
     icon = 'icons/hispania/obj/food/food.dmi'
     icon_state = "pancake_1"
@@ -334,7 +334,7 @@ obj/item/reagent_containers/food/snacks/pancake/update_icon()
 
 //Toast//
 /obj/item/reagent_containers/food/snacks/toast
-	name = "Toast"
+	name = "toast"
 	desc = "Is a slice of bread but toasted."
 	icon = 'icons/hispania/obj/food/food.dmi'
 	icon_state = "butter_toast"
@@ -347,7 +347,7 @@ obj/item/reagent_containers/food/snacks/pancake/update_icon()
 //ButterToast//
 
 /obj/item/reagent_containers/food/snacks/butter_toast
-	name = "Buttered toast"
+	name = "buttered toast"
 	desc = "Butter lightly spread over a piece of toast."
 	icon = 'icons/hispania/obj/food/food.dmi'
 	icon_state = "toast"

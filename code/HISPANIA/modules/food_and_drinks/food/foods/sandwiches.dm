@@ -1,5 +1,5 @@
 /obj/item/reagent_containers/food/snacks/hot_dog
-	name = "Hot dog"
+	name = "hot dog"
 	desc = "Not made of real dogs."
 	icon = 'icons/hispania/obj/food/food.dmi'
 	icon_state = "hot_dog"
@@ -10,7 +10,7 @@
 
 
 /obj/item/reagent_containers/food/snacks/hot_dog/butter
-	name = "Butter dog"
+	name = "butter dog"
 	desc = "Made of butter instead of real dogs."
 	icon_state = "butter_dog"
 	filling_color = "#fff98f"
