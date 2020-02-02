@@ -40,8 +40,8 @@ obj/item/gun/throw/crossbow/update_icon()
 	else
 		. += "<span class='notice'>It has an empty mount for a battery cell.</span>"
 
-/obj/item/gun/throw/crossbow/modify_projectile(obj/I,)
-	if(tension && Cell.use(2000))
+/obj/item/gun/throw/crossbow/modify_projectile(obj/I)
+	if(tension && cell.use(2000))
 		var/obj/item/arrow/rod/R = I
 		visible_message("<span class='danger'>[R] plinks and crackles as it begins to glow red-hot.</span>")
 		R.throwforce = 40
@@ -86,7 +86,7 @@ obj/item/gun/throw/crossbow/update_icon()
 		to_chat(user, "<span class='warning'>You can't draw [src] without a bolt nocked.</span>")
 		return
 	if(!cell)
-		to_chat(user, "<span class='warning'> Baterry Cell is missing.</span>")
+		to_chat(user, "<span class='warning'> Battery Cell is missing.</span>")
 		return
 
 	user.visible_message("[user] begins to draw back the string of [src].","You begin to draw back the string of [src].")
