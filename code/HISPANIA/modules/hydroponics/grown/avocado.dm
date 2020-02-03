@@ -25,7 +25,6 @@
 	icon_state = "avocado"
 	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice
 	slices_num = 2
-	var/fail_rate = 5
 
 /obj/item/reagent_containers/food/snacks/avocadoslice
 	name = "avocado slice"
@@ -36,7 +35,7 @@
 /obj/item/reagent_containers/food/snacks/grown/avocado/attackby(obj/item/W as obj, mob/user, params)
 	if(is_sharp(W))
 		var/mob/living/carbon/human/H = user
-		if(prob(fail_rate))
+		if(prob(5))
 			var/picked_hand = pick("l_hand", "r_hand")
 			var/obj/item/organ/external/M = H.get_organ(picked_hand)
 			if (prob(99))
@@ -89,26 +88,35 @@
 /obj/item/reagent_containers/food/snacks/grown/avocado/aircado
 	seed = /obj/item/seeds/aircado
 	name = "aircado"
-	desc = "An unusually airly fruit containing a single large seed."
+	desc = "An unusually airy fruit containing a single large seed."
 	icon_state = "aircado"
-	slice_path = null
-	slices_num = null
-	fail_rate = 0
+	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice/aircado
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/firecado
 	seed = /obj/item/seeds/firecado
 	name = "firecado"
 	desc = "An unusually fiery fruit containing a single large seed."
 	icon_state = "firecado"
-	slice_path = null
-	slices_num = null
-	fail_rate = 0
+	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice/firecado
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/earthcado
 	seed = /obj/item/seeds/earthcado
 	name = "earthcado"
 	desc = "An unusually earthy fruit containing a single large seed."
 	icon_state = "earthcado"
-	slice_path = null
-	slices_num = null
-	fail_rate = 0
+	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice/earthcado
+
+/obj/item/reagent_containers/food/snacks/avocadoslice/aircado
+	name = "aircado slice"
+	desc = "A slice of green goodness."
+	icon_state = "aircado_cut"
+
+/obj/item/reagent_containers/food/snacks/avocadoslice/firecado
+	name = "firecado slice"
+	desc = "A slice of green goodness."
+	icon_state = "firecadoo_cut"
+
+/obj/item/reagent_containers/food/snacks/avocadoslice/earthcado
+	name = "earthcado slice"
+	desc = "A slice of green goodness."
+	icon_state = "earthcado_cut"
