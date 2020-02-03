@@ -14,7 +14,7 @@
 	production = 7
 	potency = 30
 	weed_chance = 15 //Percentage chance per tray update to grow weeds
-	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
+	growing_icon = 'icons/hispania/obj/hydroponics/growing.dmi'
 
 //When it grows
 /obj/item/reagent_containers/food/snacks/grown/money
@@ -23,7 +23,7 @@
 	desc = "A nicely arranged wad of bills. Open to reveal its contents."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "wad"
-	burn_state = FLAMMABLE
+	resistance_flags = FLAMMABLE
 
 /obj/item/reagent_containers/food/snacks/grown/money/attack_self(mob/user)
 	new /obj/item/stack/spacecash/c10(get_turf(user))
