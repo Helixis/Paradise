@@ -114,7 +114,7 @@
 /obj/item/reagent_containers/food/snacks/avocadoslice/firecado
 	name = "firecado slice"
 	desc = "A slice of green goodness."
-	icon_state = "firecadoo_cut"
+	icon_state = "firecado_cut"
 
 /obj/item/reagent_containers/food/snacks/avocadoslice/earthcado
 	name = "earthcado slice"
