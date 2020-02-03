@@ -86,21 +86,21 @@
 	rarity = 20
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/aircado
-	seed = /obj/item/seeds/aircado
+	seed = /obj/item/seeds/avocado/aircado
 	name = "aircado"
 	desc = "An unusually airy fruit containing a single large seed."
 	icon_state = "aircado"
 	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice/aircado
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/firecado
-	seed = /obj/item/seeds/firecado
+	seed = /obj/item/seeds/avocado/firecado
 	name = "firecado"
 	desc = "An unusually fiery fruit containing a single large seed."
 	icon_state = "firecado"
 	slice_path = /obj/item/reagent_containers/food/snacks/avocadoslice/firecado
 
 /obj/item/reagent_containers/food/snacks/grown/avocado/earthcado
-	seed = /obj/item/seeds/earthcado
+	seed = /obj/item/seeds/avocado/earthcado
 	name = "earthcado"
 	desc = "An unusually earthy fruit containing a single large seed."
 	icon_state = "earthcado"
