@@ -1272,6 +1272,7 @@
 	products = list(/obj/item/seeds/aloe =3,
 					/obj/item/seeds/ambrosia = 3,
 					/obj/item/seeds/apple = 3,
+					/obj/item/seeds/avocado = 3,
 					/obj/item/seeds/banana = 3,
 					/obj/item/seeds/berry = 3,
 					/obj/item/seeds/cabbage = 3,
