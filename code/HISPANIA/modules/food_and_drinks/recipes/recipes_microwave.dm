@@ -91,3 +91,8 @@
 		/obj/item/reagent_containers/food/snacks/bun
 	)
 	result = /obj/item/reagent_containers/food/snacks/hot_dog/butter
+
+/datum/recipe/microwave/bianfusoup
+	reagents = list("water" = 10, "sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(/obj/item/reagent_containers/food/snacks/grown/garlic, /obj/item/reagent_containers/food/snacks/grown/onion, /obj/item/reagent_containers/food/snacks/batmeat)
+	result = /obj/item/reagent_containers/food/snacks/bianfusoup
