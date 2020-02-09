@@ -1217,6 +1217,7 @@
 #include "code\HISPANIA\modules\hydroponics\grown\coconut.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\money.dm"
 #include "code\HISPANIA\modules\martial_arts\bscqc.dm"
+#include "code\HISPANIA\modules\medfur\med_fur_items.dm"
 #include "code\HISPANIA\modules\mob\language.dm"
 #include "code\HISPANIA\modules\mob\living\carbon\human\human.dm"
 #include "code\HISPANIA\modules\mob\living\carbon\human\species\murghal.dm"
