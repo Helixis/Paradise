@@ -88,8 +88,6 @@
 					/mob/living/simple_animal/hostile/poison/bees/,
 					/mob/living/simple_animal/butterfly,
 					/mob/living/simple_animal/cockroach,
-					/mob/living/simple_animal/hostile/cucaracha,
-					/mob/living/simple_animal/hostile/cucaracha/reflective,
 					/obj/item/queen_bee
 	))
 

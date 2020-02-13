@@ -35,11 +35,9 @@
 /mob/living/simple_animal/hostile/cucaracha/ex_act() //No intentes matar una cucaracha con explosivos
 	return
 
-/mob/living/simple_animal/hostile/cucaracha/attackby(obj/item/C, mob/user)
-	if(target && isliving(target))
-		var/mob/living/L = target
-		if(L.stat != CONSCIOUS)
-			target = user
+/mob/living/simple_animal/hostile/cucaracha/attackby(obj/item/C, mob/user, mob/living/simple_animal/hostile/M)
+	if(istype(C, /obj/item/melee/flyswatter))
+		M.death()
 
 /mob/living/simple_animal/hostile/cucaracha/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum) //No meta throw
     if(istype(AM, /obj/item))
@@ -51,7 +49,7 @@
             return
     ..()
 
-/mob/living/simple_animal/hostile/cucaracha/reflective/handle_ricochet(obj/item/projectile/P)   ///Funciones complejas de reflejar
+/mob/living/simple_animal/hostile/cucaracha/handle_ricochet(obj/item/projectile/P)   ///Funciones complejas de reflejar
 	var/turf/p_turf = get_turf(P)
 	var/face_direction = get_dir(src, p_turf)
 	var/face_angle = dir2angle(face_direction)
