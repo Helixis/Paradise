@@ -37,7 +37,7 @@
 
 /mob/living/simple_animal/hostile/cucaracha/attackby(obj/item/C, mob/user, mob/living/simple_animal/hostile/M)
 	if(istype(C, /obj/item/melee/flyswatter))
-		M.death()
+		death()
 
 /mob/living/simple_animal/hostile/cucaracha/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum) //No meta throw
     if(istype(AM, /obj/item))
