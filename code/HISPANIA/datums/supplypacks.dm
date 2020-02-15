@@ -28,3 +28,11 @@ datum/supply_packs/security/spacesuit
                     /obj/item/clothing/mask/breath)
     cost = 70
     containername = "security space suit crate"
+
+datum/supply_packs/security/armory/ablativetrenchcoat
+	name = "Ablative Trenchcoat Crate"
+	contains = list(/obj/item/clothing/suit/hooded/ablative,
+					/obj/item/clothing/suit/hooded/ablative)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure/plasma
+	containername = "ablative trenchcoat crate"
