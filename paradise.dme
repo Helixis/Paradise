@@ -1157,11 +1157,23 @@
 #include "code\HISPANIA\game\machinery\vending.dm"
 #include "code\HISPANIA\game\mecha\equipament\tools\medical_tools.dm"
 #include "code\HISPANIA\game\objects\items\miscellaneous\bell.dm"
+<<<<<<< Updated upstream
+=======
+#include "code\HISPANIA\game\objects\items\robot\robot_upgrades.dm"
+#include "code\HISPANIA\game\objects\items\toys\balloon.dm"
+#include "code\HISPANIA\game\objects\items\toys\uno.dm"
+>>>>>>> Stashed changes
 #include "code\HISPANIA\game\objects\items\weapons\chronoeraser.dm"
 #include "code\HISPANIA\game\objects\items\weapons\manuals.dm"
 #include "code\HISPANIA\game\objects\items\weapons\storage\bags.dm"
 #include "code\HISPANIA\game\objects\items\weapons\tanks\tank_types.dm"
+<<<<<<< Updated upstream
+=======
+#include "code\HISPANIA\game\objects\structures\femur_breaker.dm"
+#include "code\HISPANIA\game\objects\structures\spawner.dm"
+>>>>>>> Stashed changes
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\cardboardcham.dm"
+#include "code\HISPANIA\game\objects\structures\crates_lockers\closets\hydroponics.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\cargo.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\engineering.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\scientist.dm"
