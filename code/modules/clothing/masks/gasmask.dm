@@ -48,6 +48,7 @@
 	actions_types = list(/datum/action/item_action/adjust)
 	armor = list("melee" = 10, "bullet" = 5, "laser" = 5, "energy" = 5, "bomb" = 0, "bio" = 50, "rad" = 0, "fire" = 20, "acid" = 40)
 	resistance_flags = FIRE_PROOF
+	flags_cover = MASKCOVERSMOUTH | MASKCOVERSEYES
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/mask.dmi',

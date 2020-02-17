@@ -1023,7 +1023,7 @@
 	for(var/mob/living/carbon/human/H in range(decaylevel, src))
 		if(prob(2))
 			var/obj/item/clothing/mask/M = H.wear_mask
-			if(M && (M.flags_cover & MASKCOVERSMOUTH))
+			if(M && (M.flags_cover & MASKCOVERSMOUTH) || M.flags_cover & MASKCOVERSMOUTH | MASKCOVERSEYES)
 				continue
 			if(NO_BREATHE in H.dna.species.species_traits)
 				continue //no puking if you can't smell!
