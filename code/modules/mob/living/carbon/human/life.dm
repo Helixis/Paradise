@@ -1025,7 +1025,7 @@
 			var/obj/item/clothing/mask/M = H.wear_mask
 			if(M && (M.flags_cover & MASKCOVERSMOUTH))
 				continue
-			if(istype(wear_mask, /obj/item/clothing/mask/gas) ||istype(wear_mask, /obj/item/clothing/mask/gas/explorer))
+			if(istype(wear_mask, /obj/item/clothing/mask/gas) || istype(wear_mask, /obj/item/clothing/mask/gas/explorer))
 				continue
 			if(NO_BREATHE in H.dna.species.species_traits)
 				continue //no puking if you can't smell!
