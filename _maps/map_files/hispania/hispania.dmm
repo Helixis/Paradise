@@ -6618,9 +6618,8 @@
 /turf/simulated/floor/plasteel,
 /area/security/main)
 "alH" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
+/obj/machinery/vending/walldrobe/hos{
+	pixel_x = 28
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -9204,9 +9203,12 @@
 	pixel_x = -5;
 	pixel_y = 0
 	},
-/obj/machinery/light,
 /obj/item/radio{
 	pixel_x = 5
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -61865,17 +61867,21 @@
 	pixel_x = 0;
 	pixel_y = -30
 	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24;
+	pixel_y = 0
+	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "darkblue"
 	},
 /area/medical/cmo)
 "chE" = (
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22
-	},
 /obj/machinery/photocopier,
+/obj/machinery/vending/walldrobe/cmo{
+	pixel_y = -28
+	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "darkblue"
@@ -82177,6 +82183,10 @@
 	scrub_N2O = 1;
 	scrub_Toxins = 1
 	},
+/obj/machinery/keycard_auth{
+	pixel_x = 0;
+	pixel_y = 24
+	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
 	icon_state = "neutralfull"
@@ -84560,10 +84570,6 @@
 /turf/simulated/floor/plasteel,
 /area/engine/equipmentstorage)
 "cUu" = (
-/obj/machinery/keycard_auth{
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/structure/table/reinforced,
 /obj/item/rcd,
 /obj/item/rcd_ammo,
@@ -84579,6 +84585,10 @@
 	},
 /obj/item/megaphone,
 /obj/item/lock_buster,
+/obj/machinery/vending/walldrobe/ce{
+	pixel_x = 0;
+	pixel_y = 28
+	},
 /mob/living/simple_animal/parrot/Poly,
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -96798,6 +96808,12 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/space,
 /area/space/nearstation)
+"rfW" = (
+/obj/machinery/light,
+/turf/simulated/floor/plasteel{
+	icon_state = "dark"
+	},
+/area/security/hos)
 "rEw" = (
 /obj/machinery/computer/shuttle/admin{
 	name = "NTV Argos shuttle console"
@@ -132040,7 +132056,7 @@ amv
 amS
 ajV
 aiY
-aiY
+rfW
 aqG
 ajJ
 asy
