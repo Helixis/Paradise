@@ -1,0 +1,62 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+"c" = (/turf/simulated/wall/r_wall/rust,/area/lavaland/surface/outdoors/unexplored)
+"d" = (/obj/structure/loom,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"e" = (/obj/structure/dresser,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"f" = (/obj/structure/fermenting_barrel,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"g" = (/obj/structure/fermenting_barrel,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"h" = (/obj/structure/reagent_dispensers/beerkeg,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"i" = (/obj/structure/reagent_dispensers/beerkeg,/obj/structure/spider/stickyweb,/obj/item/grown/cotton/durathread,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"j" = (/obj/structure/spider/stickyweb,/obj/effect/decal/cleanable/blood,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"k" = (/obj/effect/decal/cleanable/blood,/mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"l" = (/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"m" = (/obj/item/guardiancreator/biological/choose,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"n" = (/mob/living/simple_animal/hostile/mimic/copy/ranged,/mob/living/simple_animal/hostile/poison/giant_spider,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"o" = (/obj/effect/decal/cleanable/blood,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"p" = (/obj/structure/table/wood,/obj/item/coin/antagtoken,/obj/item/flashlight/flare/torch,/obj/item/flashlight/flare/torch,/obj/item/flashlight/flare/torch,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"q" = (/obj/effect/decal/remains/human{desc = "This guy seemed to have died in terrible way! Half his remains are dust."; icon_state = "remains"; name = "Human remains"},/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"r" = (/obj/structure/table/wood,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"s" = (/obj/structure/fluff/empty_sleeper,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"t" = (/obj/machinery/computer{desc = "A computer long since rendered non-functional due to lack of maintenance. Spitting out error messages."; name = "Broken Computer"},/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"u" = (/obj/item/flag/cargo,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"v" = (/obj/structure/table/wood,/obj/item/clothing/shoes/combat,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"w" = (/obj/structure/spider/stickyweb,/mob/living/simple_animal/hostile/poison/giant_spider,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"x" = (/obj/structure/table/wood,/obj/machinery/cell_charger,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"y" = (/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"z" = (/obj/effect/decal/remains/human{desc = "This guy seemed to have died in terrible way! Half his remains are dust."; icon_state = "remains"; name = "Human remains"},/mob/living/simple_animal/hostile/asteroid/basilisk,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"A" = (/obj/structure/rack,/obj/structure/spider/stickyweb,/obj/item/flashlight/flare,/obj/item/flashlight/flare,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"B" = (/obj/structure/barricade/wooden/crude,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"C" = (/obj/structure/rack,/obj/item/emptysandbag,/obj/item/flashlight/flare,/obj/item/flashlight/flare,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"D" = (/obj/structure/table/wood,/obj/item/coin/mythril,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"E" = (/obj/structure/table/wood,/obj/structure/decorative_structures/metal/statue/metal_angel,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"F" = (/obj/item/broken_bottle,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"G" = (/obj/effect/decal/cleanable/blood,/mob/living/simple_animal/hostile/asteroid/basilisk,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"H" = (/obj/structure/bed/pod,/obj/structure/spider/cocoon,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"I" = (/obj/structure/bed/pod,/obj/structure/spider/cocoon,/mob/living/simple_animal/hostile/poison/giant_spider,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"J" = (/obj/structure/bed/pod,/obj/structure/spider/cocoon,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"K" = (/obj/structure/barricade/wooden,/obj/structure/spider/stickyweb,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/lavaland/surface/outdoors/unexplored)
+"L" = (/obj/structure/barricade/sandbags,/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+"M" = (/obj/item/clothing/head/helmet/skull,/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+"N" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+"O" = (/obj/item/broken_bottle,/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+
+(1,1,1) = {"
+abbbaabbbbbbbbbaaa
+abccccccbbbccccbba
+bbcdefgcbbbchicbba
+bbcjklmcbbbcnlcbba
+abcclocccccclpcbbb
+abbcqrcssstuovcbbb
+bbbcwxcyzyoyovcbbb
+bbbcoAcccccBcccbbb
+bbbclCrDElyycbbbbb
+bbbcylqoloFocbbbbb
+bbbclGocccllcbbbbb
+bbbcHIJcbcKKcbLbbb
+bbbcccccbMNbbbLbba
+bbbbbbbbbLLbbLLbba
+abbbbbLObbbbbbbbba
+abbbbbLLbLLLLLLbaa
+aabbbbbbbbbbbbbbaa
+aaaabbbbbbbbaaaaaa
+"}

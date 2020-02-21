@@ -27,9 +27,9 @@
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_blooddrunk2.dmm"
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_blooddrunk3.dmm"
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_cube.dmm"
-	#include "map_files\hispania\RandomRuins\LavaRuins\lavaland_surface_dwarf.dmm"   //No intente crear un archivo alterno a este pero me temo que no se pueda.
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_cultaltar.dmm"
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_dead_ratvar.dmm"
+	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_dwarf.dmm"   //No intente crear un archivo alterno a este pero me temo que no se pueda.
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_envy.dmm"
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_fountain_hall.dmm"
 	#include "map_files\RandomRuins\LavaRuins\lavaland_surface_gluttony.dmm"
