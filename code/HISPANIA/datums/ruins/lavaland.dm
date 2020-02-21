@@ -3,4 +3,5 @@
 	id = "dwarf"
 	description = "Old Mysterious Storage"
 	suffix = "lavaland_surface_dwarf.dmm"
-	cost = 5
+	allow_duplicates = FALSE
+	cost = 10
