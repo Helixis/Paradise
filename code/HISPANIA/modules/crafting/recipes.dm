@@ -64,5 +64,17 @@
 	category = CAT_DECORATIONS
 	subcategory = CAT_HOLIDAY
 
+///Wooden Sword///
+
+/datum/crafting_recipe/woodensword
+	name = "wooden sword"
+	result = /obj/item/spear/woodensword
+	time = 15
+	reqs = list(/obj/item/stack/sheet/wood = 3,
+				/obj/item/stack/tape_roll = 1)
+	tools = list(TOOL_SCREWDRIVER,
+				TOOL_WIRECUTTER)
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
 
 
