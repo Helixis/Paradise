@@ -1,6 +1,6 @@
 ///Melee Weapons of Hispania///
 
-/obj/item/spear/woodensword
+/obj/item/melee/woodensword
 	name = "wooden sword"
 	desc = "A wooden sword made with wood and duct tape"
 	icon = 'icons/hispania/obj/items.dmi'

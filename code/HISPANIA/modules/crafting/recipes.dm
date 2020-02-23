@@ -68,7 +68,7 @@
 
 /datum/crafting_recipe/woodensword
 	name = "wooden sword"
-	result = /obj/item/spear/woodensword
+	result = /obj/item/melee/woodensword
 	time = 15
 	reqs = list(/obj/item/stack/sheet/wood = 3,
 				/obj/item/stack/tape_roll = 1)
