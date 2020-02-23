@@ -729,6 +729,7 @@
 ///Solamente pruebas reubico posteriormente
 	var/fuel = 0
 	var/travel_cost = 150
+	var/fuel_limit = 500
 
 /obj/machinery/computer/shuttle/New(location, obj/item/circuitboard/shuttle/C)
 	..()
@@ -772,13 +773,13 @@
 
 ///Solo para prueba, reubico posteriormente
 /obj/machinery/computer/shuttle/attackby(obj/item/I, mob/user, params)
-	var/show_message = 0
 	if(istype(I, /obj/item/stack/sheet/mineral/plasma))
-		qdel(I)
-		fuel = fuel + 50
-		show_message = 1
-		if(show_message)
+		if(fuel < fuel_limit)
+			qdel(I)
+			fuel = fuel + 50
 			visible_message("[src] converts the plasma into fuel")
+		else
+			visible_message("[src] the fuel system its full")
 
 
 /obj/machinery/computer/shuttle/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -823,7 +824,7 @@
 			// Seriously, though, NEVER trust a Topic with something like this. Ever.
 			message_admins("move HREF ([src] attempted to move to: [href_list["move"]]) exploit attempted by [key_name_admin(usr)] on [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 			return
-		if(fuel == travel_cost)
+		if(fuel >= travel_cost)
 			switch(SSshuttle.moveShuttle(shuttleId, href_list["move"], 1))
 				if(0)
 					atom_say("Shuttle departing! Please stand away from the doors.")
