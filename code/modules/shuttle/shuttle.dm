@@ -726,6 +726,9 @@
 	var/admin_controlled
 	var/max_connect_range = 7
 	var/docking_request = 0
+///Solamente pruebas reubico posteriormente
+	var/fuel = 0
+	var/travel_cost = 150
 
 /obj/machinery/computer/shuttle/New(location, obj/item/circuitboard/shuttle/C)
 	..()
@@ -766,6 +769,17 @@
 	connect()
 	add_fingerprint(user)
 	ui_interact(user)
+
+///Solo para prueba, reubico posteriormente
+/obj/machinery/computer/shuttle/attackby(obj/item/I, mob/user, params)
+	var/show_message = 0
+	if(istype(I, /obj/item/stack/sheet/mineral/plasma))
+		qdel(I)
+		fuel = fuel + 50
+		show_message = 1
+		if(show_message)
+			visible_message("[src] converts the plasma into fuel")
+
 
 /obj/machinery/computer/shuttle/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/obj/docking_port/mobile/M = SSshuttle.getShuttle(shuttleId)
@@ -809,14 +823,18 @@
 			// Seriously, though, NEVER trust a Topic with something like this. Ever.
 			message_admins("move HREF ([src] attempted to move to: [href_list["move"]]) exploit attempted by [key_name_admin(usr)] on [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 			return
-		switch(SSshuttle.moveShuttle(shuttleId, href_list["move"], 1))
-			if(0)
-				atom_say("Shuttle departing! Please stand away from the doors.")
-			if(1)
-				to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
-			else
-				to_chat(usr, "<span class='notice'>Unable to comply.</span>")
-		return 1
+		if(fuel == travel_cost)
+			switch(SSshuttle.moveShuttle(shuttleId, href_list["move"], 1))
+				if(0)
+					atom_say("Shuttle departing! Please stand away from the doors.")
+					fuel = fuel-150
+				if(1)
+					to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
+				else
+					to_chat(usr, "<span class='notice'>Unable to comply.</span>")
+			return 1
+		to_chat(usr, "<span class='warning'>You dont have enough fuel!.</span>")
+		return 0
 
 /obj/machinery/computer/shuttle/emag_act(mob/user)
 	if(!emagged)
