@@ -1,5 +1,5 @@
 /mob/living/simple_animal/friendly/owl
-	name = 'Garronte'
+	name = "Garronte"
 	desc = "When you sleep, he is awake!. In the eyes you can look the future."
 	gender = MALE
 	health = 40
