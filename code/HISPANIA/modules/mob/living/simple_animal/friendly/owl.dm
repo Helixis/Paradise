@@ -5,7 +5,7 @@
 	health = 40
 	maxHealth = 40
 	unique_pet = TRUE
-	density = 0
+	density = 1
 	icon = 'icons/hispania/mob/animals.dmi'
 	icon_state = "owl"
 	icon_living = "owl"
