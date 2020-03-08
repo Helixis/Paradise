@@ -14,5 +14,6 @@
 	emote_hear = list("sighs")
 	emote_see = list("sighs")
 	turns_per_move = 10
+	can_collar = 0
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
