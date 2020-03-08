@@ -2,8 +2,8 @@
 	name = "Garronte"
 	desc = "When you sleep, he is awake!. In the eyes you can look the future."
 	gender = MALE
-	health = 40
-	maxHealth = 40
+	health = 25
+	maxHealth = 25
 	unique_pet = TRUE
 	density = 1
 	icon = 'icons/hispania/mob/animals.dmi'
@@ -15,3 +15,4 @@
 	emote_see = list("sighs")
 	turns_per_move = 10
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
