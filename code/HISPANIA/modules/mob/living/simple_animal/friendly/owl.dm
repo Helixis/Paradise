@@ -9,7 +9,7 @@
 	icon_state = "owl"
 	icon_living = "owl"
 	icon_dead = "owl_dead"
-	speak = list("Hoot.","Hoot?","Hoot!.","Cough")
+	speak = list("Hoot.","Hoot?","Hoot!","Cough.")
 	speak_emote = list("hoot")
 	emote_hear = list("hoot")
 	emote_see = list("hoot")
