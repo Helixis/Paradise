@@ -4,12 +4,12 @@
 	gender = MALE
 	health = 25
 	maxHealth = 25
-	unique_pet = TRUE
 	density = 1
 	icon = 'icons/hispania/mob/animals.dmi'
 	icon_state = "owl"
 	icon_living = "owl"
 	icon_dead = "owl_dead"
+	speak = list("Hoot.","Hoot?","Hoot!.","Cough"
 	speak_emote = list("hoot")
 	emote_hear = list("hoot")
 	emote_see = list("hoot")
