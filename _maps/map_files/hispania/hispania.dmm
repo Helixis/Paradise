@@ -96995,6 +96995,11 @@
 /obj/structure/ore_box,
 /turf/simulated/shuttle/floor,
 /area/shuttle/mining)
+"rlU" = (
+/obj/structure/bed/dogbed/garronte,
+/mob/living/simple_animal/friendly/owl,
+/turf/simulated/floor/carpet/black,
+/area/chapel/office)
 "rnE" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack{
@@ -143390,7 +143395,7 @@ aXd
 baz
 bcw
 bet
-bcx
+rlU
 biw
 baz
 aYP
