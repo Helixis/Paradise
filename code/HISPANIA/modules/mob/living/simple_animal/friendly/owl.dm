@@ -10,9 +10,9 @@
 	icon_state = "owl"
 	icon_living = "owl"
 	icon_dead = "owl_dead"
-	speak_emote = list("sighs")
-	emote_hear = list("sighs")
-	emote_see = list("sighs")
+	speak_emote = list("hoot")
+	emote_hear = list("hoot")
+	emote_see = list("hoot")
 	turns_per_move = 10
 	can_collar = 0
 	gold_core_spawnable = NO_SPAWN
