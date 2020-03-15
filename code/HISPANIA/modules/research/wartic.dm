@@ -8,6 +8,8 @@
 	max_integrity = 500
 	var/delay = 60
 	var/warticst = TRUE
+	var/on_icon = "ar134_active"
+	var/off_icon = "ar134"
 	light_range = 6
 	light_power = 6.5
 	light_color = LIGHT_COLOR_ORANGE
