@@ -1312,7 +1312,7 @@
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\reproductive.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\selfsustaining.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\stabilized.dm"
-#include "code\HISPANIA\modules\station_goals\wartic.dm"
+#include "code\HISPANIA\modules\station_goals\wartic_obj.dm"
 #include "code\HISPANIA\modules\surgery\organs\subtypes\murghal.dm"
 #include "code\HISPANIA\modules\telesci\bscrystal.dm"
 #include "code\HISPANIA\modules\telesci\telesci_computer.dm"
