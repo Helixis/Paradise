@@ -97,7 +97,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 
 /obj/machinery/vending/walldrobe/sec
 	name = "\improper Security's Walldrobe"
-	req_access = list(access_security)
+	req_access = list(ACCESS_SECURITY)
 	products = list(/obj/item/clothing/under/rank/security/private = 4,
 					/obj/item/clothing/under/rank/security/private/red = 4,
 					/obj/item/clothing/head/beret/sec/private = 3,
@@ -110,7 +110,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 
 /obj/machinery/vending/walldrobe/sec/podpilot
 	name = "\improper Security Pod Pilot's Walldrobe"
-	req_access = list(access_pilot)
+	req_access = list(ACCESS_PILOT)
 	products = list(/obj/item/clothing/head/beret/sec/private = 1,
 					/obj/item/clothing/head/beret/sec/private/red = 1,
 					/obj/item/clothing/under/rank/security/pod_pilot/formal = 1,
