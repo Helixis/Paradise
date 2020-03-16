@@ -8,7 +8,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 
 /obj/item/clothing/under/rank/security/private
 	name = "formal blue security officer's uniform"
-	desc = "A formal security officer's uniform , it have a logo says Security Department"
+	desc = "A formal security officer's uniform, it have a logo says Security Department"
 	icon_state = "privateblue"
 	item_color = "privateblue"
 	hispania_icon = TRUE
