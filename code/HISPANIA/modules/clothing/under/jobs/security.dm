@@ -21,6 +21,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 
 /obj/item/clothing/under/rank/security/pod_pilot/formal
 	name = "formal pod pilot's jumpsuit"
+	desc = "A formal security pod pilot's jumpsuit, it have a medal says Security Air Force"
 	icon_state = "podpilot_formal"
 	item_color = "podpilot_formal"
 	hispania_icon = TRUE
