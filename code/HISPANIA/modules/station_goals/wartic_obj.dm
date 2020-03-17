@@ -4,9 +4,13 @@
 
 /datum/station_goal/wartic
 	name = "Ancient Unknown Artifact"
+	weight = 0
 
 /datum/station_goal/wartic/get_report()
-	return {"<b>Ancient Unknown Artifact</b><br>
+	return {"<div style='text-align:center;'><img src='ntlogo.png'>
+	<h3>[command_name()] Orders</h3></div><hr>
+	<b>Special Orders for [station_name()]:</b><br><br>
+	<b>Ancient Unknown Artifact</b><br>
 	We lost contact with a research team trying to find and ancient artifact from an unknown race, asamble a team and bring the artifact back to the station.
 	<br><br>
 		Protocol:
@@ -26,4 +30,3 @@
 		if(B && !B.stat && is_station_contact(B.z))
 			return TRUE
 	return FALSE
-
