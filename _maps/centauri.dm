@@ -16,7 +16,7 @@ Lovingly ported by Purpose2 to Paradise
 */
 
 #if !defined(USING_MAP_DATUM)
-	#include "map_files\centauri\centauri.dmm"
+	#include "map_files\centauri\Centauri_Reborn.dmm"
 	#include "map_files\cyberiad\z2.dmm"
 	#include "map_files\cyberiad\z3.dmm"
 	#include "map_files\cyberiad\z4.dmm"
@@ -24,7 +24,7 @@ Lovingly ported by Purpose2 to Paradise
 	#include "map_files\hispania\z6.dmm"
 	#include "map_files\generic\z7.dmm"
 
-	#define MAP_FILE "centauri.dmm"
+	#define MAP_FILE "Centauri_Reborn.dmm.dmm"
 	#define MAP_NAME "Centauri"
 	#define MAP_TRANSITION_CONFIG list(\
 DECLARE_LEVEL(MAIN_STATION, CROSSLINKED, list(STATION_LEVEL, STATION_CONTACT, REACHABLE, AI_OK)),\
