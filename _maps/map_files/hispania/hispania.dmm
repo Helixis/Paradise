@@ -96395,6 +96395,10 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
+"eRK" = (
+/obj/effect/spawner/lootdrop/trade_sol/vehicle/pony,
+/turf/simulated/shuttle/floor,
+/area/shuttle/trade/sol)
 "fbx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -105201,7 +105205,7 @@ aaa
 aaa
 aaa
 apr
-arh
+eRK
 arh
 arh
 arh
