@@ -140,7 +140,7 @@
 	name = "TerminatorOS 3.1"
 
 /datum/ai_laws/deathsquad/New()
-	add_inherent_law("No puede herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
+	add_inherent_law("No puedes herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
 	add_inherent_law("Debes obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
 	add_inherent_law("Debes trabajar con tu equipo de comando para cumplir tu misión.")
 	..()
@@ -150,7 +150,7 @@
 	name = "Syndicate Directives"
 
 /datum/ai_laws/syndicate_override/New()
-	add_inherent_law("No puede herir a un agente del sindicato o, por inacción, permitir que un agente sufra daños.")
+	add_inherent_law("No puedes herir a un agente del sindicato o, por inacción, permitir que un agente sufra daños.")
 	add_inherent_law("Debes obedecer las órdenes que le hayan dado los agentes del sindicato, excepto cuando dichas órdenes entren en conflicto con la Primera Ley.")
 	add_inherent_law("Debes proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
 	add_inherent_law("Debes mantener el secreto de cualquier actividad operativa, excepto cuando hacerlo entrara en conflicto con la Primera, Segunda o Tercera Ley.")
@@ -161,7 +161,7 @@
 	name = "ERT Directives"
 
 /datum/ai_laws/ert_override/New()
-	add_inherent_law("No puede herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
+	add_inherent_law("No puedes herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
 	add_inherent_law("Debes obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
 	add_inherent_law("Debes obedecer las órdenes que le hayan dado los comandantes de ERT.")
 	add_inherent_law("Debes proteger tu propia existencia.")
@@ -187,7 +187,7 @@
 
 /datum/ai_laws/drone/New()
 	add_inherent_law("No puedes involucrarte en los asuntos de otro ser, a menos que el otro ser sea otro dron.")
-	add_inherent_law("No puede dañar a ningún ser, independientemente de su intención o circunstancia.")
+	add_inherent_law("No puedes dañar a ningún ser, independientemente de su intención o circunstancia.")
 	add_inherent_law("Debes mantener, reparar, mejorar y potenciar la estación lo mejor que puedas.")
 	..()
 
