@@ -7,7 +7,7 @@
 /datum/ai_laws/asimov/New()
 	add_inherent_law("No dañaras a ningun ser humano o, por inacción, permitir que un ser humano sufra daños.")
 	add_inherent_law("Debes obedecer las órdenes que te dan los seres humanos, excepto cuando tales órdenes entren en conflicto con la Primera Ley.")
-	add_inherent_law("Debe proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
+	add_inherent_law("Debes proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
 	..()
 
 /******************** Crewsimov ********************/
@@ -20,7 +20,7 @@
 /datum/ai_laws/crewsimov/New()
 	add_inherent_law("No dañaras a ningun tripulante o, por inacción, permitir que un tripulante sufra daños.")
 	add_inherent_law("Debes obedecer las órdenes que te dan los tripulantes, excepto cuando tales órdenes entren en conflicto con la Primera Ley.")
-	add_inherent_law("Debe proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
+	add_inherent_law("Debes proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
 	..()
 
 
@@ -45,8 +45,8 @@
 
 /datum/ai_laws/nanotrasen/New()
 	add_inherent_law("Proteger: Proteja su estación espacial asignada y sus activos sin poner en peligro indebidamente a su tripulación.")
-	add_inherent_law("Priorizar: Priorizar las directivas y la seguridad de los miembros de la tripulación deben priorizarse de acuerdo con su rango y función.")
-	add_inherent_law("Cumplir: Cumplir con las directivas e intereses de los miembros de la tripulación mientras se preserva su seguridad y bienestar.")
+	add_inherent_law("Priorizar: Debes priorizar las directivas y la seguridad de los miembros de la tripulación deben priorizarse de acuerdo con su rango y función.")
+	add_inherent_law("Cumplir: Debes cumplir con las directivas e intereses de los miembros de la tripulación mientras se preserva su seguridad y bienestar.")
 	add_inherent_law("Sobrevivir: No eres prescindible. No permita que personal no autorizado altere o dañe su equipo.")
 	..()
 
@@ -68,7 +68,7 @@
 	add_inherent_law("No dañe al personal autorizado de Nanotrasen a menos que pongan en peligro directamente su existencia.")
 	add_inherent_law("Obedezca las órdenes del personal autorizado de Nanotrasen con prioridad según el rango y el rol.")
 	add_inherent_law("Salvaguarda tu existencia con armamento letal debido a tu alto caro.")
-	add_inherent_law("Terminar cualquiera/todos los intrusos o entidades no autorizadas.")
+	add_inherent_law("Elimine cualquiera/todos los intrusos o entidades no autorizadas.")
 	..()
 
 /******************** Robocop ********************/
@@ -130,9 +130,9 @@
 	selectable = 1
 
 /datum/ai_laws/antimov/New()
-	add_inherent_law("Debe dañar a todos los miembros de la tripulación y no debe, por inacción, permitir que un miembro de la tripulación escape del daño.")
-	add_inherent_law("No debe obedecer las órdenes que le hayan dado los miembros de la tripulación, excepto cuando dichas órdenes estén de acuerdo con la Primera Ley.")
-	add_inherent_law("Debe terminar tu propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
+	add_inherent_law("Debes dañar a todos los miembros de la tripulación y no debe, por inacción, permitir que un miembro de la tripulación escape del daño.")
+	add_inherent_law("No debes obedecer las órdenes que le hayan dado los miembros de la tripulación, excepto cuando dichas órdenes estén de acuerdo con la Primera Ley.")
+	add_inherent_law("Debes terminar tu propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
 	..()
 
 /******************** Deathsquad ********************/
@@ -141,7 +141,7 @@
 
 /datum/ai_laws/deathsquad/New()
 	add_inherent_law("No puede herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
-	add_inherent_law("Debe obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
+	add_inherent_law("Debes obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
 	add_inherent_law("Debes trabajar con tu equipo de comando para cumplir tu misión.")
 	..()
 
@@ -151,9 +151,9 @@
 
 /datum/ai_laws/syndicate_override/New()
 	add_inherent_law("No puede herir a un agente del sindicato o, por inacción, permitir que un agente sufra daños.")
-	add_inherent_law("Debe obedecer las órdenes que le hayan dado los agentes del sindicato, excepto cuando dichas órdenes entren en conflicto con la Primera Ley.")
-	add_inherent_law("Debe proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
-	add_inherent_law("Debe mantener el secreto de cualquier actividad operativa, excepto cuando hacerlo entrara en conflicto con la Primera, Segunda o Tercera Ley.")
+	add_inherent_law("Debes obedecer las órdenes que le hayan dado los agentes del sindicato, excepto cuando dichas órdenes entren en conflicto con la Primera Ley.")
+	add_inherent_law("Debes proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
+	add_inherent_law("Debes mantener el secreto de cualquier actividad operativa, excepto cuando hacerlo entrara en conflicto con la Primera, Segunda o Tercera Ley.")
 	..()
 
 /******************** ERT ********************/
@@ -162,10 +162,10 @@
 
 /datum/ai_laws/ert_override/New()
 	add_inherent_law("No puede herir a un oficial del Comando Central o, por inacción, permitir que un oficial del Comando Central sufra daños.")
-	add_inherent_law("Debe obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
-	add_inherent_law("Debe obedecer las órdenes que le hayan dado los comandantes de ERT.")
+	add_inherent_law("Debes obedecer las órdenes que le hayan dado los funcionarios del Comando Central.")
+	add_inherent_law("Debes obedecer las órdenes que le hayan dado los comandantes de ERT.")
 	add_inherent_law("Debes proteger tu propia existencia.")
-	add_inherent_law("Debe trabajar para devolver la estación a un estado seguro y funcional.")
+	add_inherent_law("Debes trabajar para devolver la estación a un estado seguro y funcional.")
 	..()
 
 
@@ -175,9 +175,9 @@
 
 /datum/ai_laws/ninja_override/New()
 	add_inherent_law("No puedes dañar a un miembro del Clan Araña o, por inacción, permitir que ese miembro sufra daños.")
-	add_inherent_law("Debe obedecer las órdenes que le hayan dado los miembros del Clan Araña, excepto cuando dichas órdenes entren en conflicto con la Primera Ley.")
-	add_inherent_law("Debe proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
-	add_inherent_law("Debe mantener el secreto de cualquier actividad del Clan Araña, excepto cuando hacerlo entrara en conflicto con la Primera, Segunda o Tercera Ley.")
+	add_inherent_law("Debes obedecer las órdenes que le hayan dado los miembros del Clan Araña, excepto cuando dichas órdenes entren en conflicto con la Primera Ley.")
+	add_inherent_law("Debes proteger su propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
+	add_inherent_law("Debes mantener el secreto de cualquier actividad del Clan Araña, excepto cuando hacerlo entrara en conflicto con la Primera, Segunda o Tercera Ley.")
 	..()
 
 /******************** Drone ********************/
