@@ -3,7 +3,7 @@
 	name = "pack of coconut seeds"
 	desc = "These seeds grow into coconut palms."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "seed-coconut"
+	icon_state = "coconut_seeds"
 	species = "coconut"
 	plantname = "Coconut palm"
 	product = /obj/item/grown/coconut
@@ -11,8 +11,8 @@
 	endurance = 35
 	yield = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "coconut-grow"
-	icon_dead = "coconut-dead"
+	icon_grow = "coco_harvest"
+	icon_dead = "coco_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/coconut/bombonut)
 	reagents_add = list("vitamin" = 0.04, "plantmatter" = 0.1, "sugar" =0.01)
@@ -24,7 +24,7 @@
 	name = "Coconut"
 	desc = "A seed? A nut? A fruit?"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
-	icon_state = "coconut"
+	icon_state = "coconut_bet"
 	force = 5
 	throwforce = 5
 	w_class = WEIGHT_CLASS_NORMAL
@@ -69,8 +69,8 @@
 obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	name = "sliced coconut"
 	desc = "A coconut split in half"
-	icon = 'icons/hispania/obj/food/food.dmi'
-	icon_state = "coconut-slice"
+	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
+	icon_state = "coconut_slice"
 	filling_color = "#FF4500"
 	bitesize = 2
 
@@ -82,16 +82,45 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	name = "pack of bombonut seeds"
 	desc = "The explosive variety of coconuts."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "seed-bombonut"
-	species = "coconut"
-	plantname = "Coconut palm"
-	product = /obj/item/grown/coconut
-	lifespan = 55
+	icon_state = "bombonut_seeds"
+	species = "bombonut"
+	plantname = "bombonout palm"
+	mutatelist = list()
+	product = /obj/item/reagent_containers/food/snacks/grown/bombonut
+	lifespan = 35
 	endurance = 35
 	yield = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "coconut-grow"
-	icon_dead = "coconut-dead"
+	icon_grow = "bombo_harvest"
+	icon_dead = "bombo_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/coconut/bombonut)
-	reagents_add = list("vitamin" = 0.04, "plantmatter" = 0.1, "sugar" =0.01)
+	reagents_add = list("plantmatter" = 0.1, "sorium" = 0.7)
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut
+	name = "bombonut"
+	desc = "The explosive variety of coconuts."
+	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
+	icon_state = "bombonut"
+	volume = 150 //big boom boom
+	seed = /obj/item/seeds/coconut/bombonut
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/ex_act(severity)
+	qdel(src) //Lo borramos para evitar explosiones repetidas en misma tile
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/attack_self(mob/living/user) //Avisamos a un admin y se guarda en log que el usuario detonara esto
+	var/area/A = get_area(user)
+	user.visible_message("<span class='warning'>[user] plucks the stem from [src]!</span>", "<span class='userdanger'>You pluck the stem from [src], which begins to hiss loudly!</span>")
+	message_admins("[user] ([user.key ? user.key : "no key"]) primed a bombonout for detonation at [A] ([user.x], [user.y], [user.z]) <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>(JMP)</a>")
+	log_game("[user] ([user.key ? user.key : "no key"]) primed a bombonout for detonation at [A] ([user.x],[user.y],[user.z]).")
+	prime()
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/deconstruct(disassembled = TRUE)
+	if(!disassembled)
+		prime()
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/proc/prime()
+	icon_state = "cherry_bomb_lit"
+	playsound(src, 'sound/goonstation/misc/fuse.ogg', seed.potency, 0)
+	reagents.set_reagent_temp(1000) //Sets off the black powder

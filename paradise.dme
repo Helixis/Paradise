@@ -1253,6 +1253,7 @@
 #include "code\HISPANIA\modules\food_and_drinks\recipes\recipes_oven.dm"
 #include "code\HISPANIA\modules\holiday\holiday.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\coconut.dm"
+#include "code\HISPANIA\modules\hydroponics\grown\kiwii.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\money.dm"
 #include "code\HISPANIA\modules\martial_arts\bscqc.dm"
 #include "code\HISPANIA\modules\mob\language.dm"
