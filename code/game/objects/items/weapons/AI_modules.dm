@@ -159,7 +159,7 @@ AI MODULES
 
 /obj/item/aiModule/protectStation/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Proteja la estación espacial contra daños. Cualquier persona que vea dañar la estación ya no se considerará tripulación, y es una amenaza para la estación que debe neutralizarse."
+	var/law = "Proteger la estación espacial contra daños. Cualquier persona que veas dañar la estación ya no se considerará tripulación, y es una amenaza para la estación que debe neutralizarse."
 	to_chat(target, law)
 	target.add_supplied_law(5, law)
 
@@ -174,7 +174,7 @@ AI MODULES
 
 /obj/item/aiModule/oxygen/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "El oxígeno es altamente tóxico para los miembros de la tripulación y debe purgarse de la estación. Evite, por cualquier medio necesario, que cualquiera exponga la estación a este gas tóxico. El frío extremo es el método más efectivo para curar el daño que el oxígeno hace a un miembro de la tripulación.."
+	var/law = "El oxígeno es altamente tóxico para los miembros de la tripulación y debe purgarse de la estación. Evite, por cualquier medio necesario, que cualquiera exponga la estación a este gas tóxico. El frío extremo es el método más efectivo para curar el daño que el oxígeno hace a un miembro de la tripulación."
 	to_chat(target, law)
 	target.add_supplied_law(9, law)
 
