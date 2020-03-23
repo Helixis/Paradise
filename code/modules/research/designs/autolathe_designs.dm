@@ -431,14 +431,6 @@
 	build_path = /obj/item/reagent_containers/glass/beaker/large
 	category = list("initial", "Medical")
 
-/datum/design/healthanalyzer
-	name = "Health Analyzer"
-	id = "healthanalyzer"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 500, MAT_GLASS = 50)
-	build_path = /obj/item/healthanalyzer
-	category = list("initial", "Medical")
-
 /datum/design/pillbottle
 	name = "Pill Bottle"
 	id = "pillbottle"
@@ -870,14 +862,6 @@
 	build_type = AUTOLATHE
 	materials = list(MAT_METAL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/assembly/mousetrap
-	category = list("initial", "Miscellaneous")
-
-/datum/design/videocam
-	name = "Video Camera"
-	id = "videocam"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 120, MAT_GLASS = 60)
-	build_path = /obj/item/videocam
 	category = list("initial", "Miscellaneous")
 
 /datum/design/logic_board

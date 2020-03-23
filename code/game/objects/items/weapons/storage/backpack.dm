@@ -61,10 +61,6 @@
 	cant_hold = list(/obj/item/storage/backpack/holding)
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 50)
 
-/obj/item/storage/backpack/holding/New()
-	..()
-	return
-
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/storage/backpack/holding))
 		var/response = alert(user, "This creates a singularity, destroying you and much of the station. Are you SURE?","IMMINENT DEATH!", "No", "Yes")
@@ -197,6 +193,12 @@
 	icon_state = "viropack"
 	item_state = "viropack"
 
+/obj/item/storage/backpack/blueshield
+	name = "blueshield backpack"
+	desc = "A robust backpack issued to Nanotrasen's finest."
+	icon_state = "blueshieldpack"
+	item_state = "blueshieldpack"
+
 /*
  * Satchel Types
  */
@@ -207,6 +209,8 @@
 	icon_state = "satchel"
 	resistance_flags = FIRE_PROOF
 	var/strap_side_straight = FALSE
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel/verb/switch_strap()
 	set name = "Switch Strap Side"
@@ -236,60 +240,87 @@
 	name = "satchel"
 	desc = "A deluxe NT Satchel, made of the highest quality leather."
 	icon_state = "satchel-norm"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_eng
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	resistance_flags = FIRE_PROOF
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel/explorer
 	name = "explorer satchel"
 	desc = "A robust satchel for stashing your loot."
 	icon_state = "satchel-explorer"
 	item_state = "securitypack"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_vir
 	name = "virologist satchel"
 	desc = "A sterile satchel with virologist colours."
 	icon_state = "satchel-vir"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_chem
 	name = "chemist satchel"
 	desc = "A sterile satchel with chemist colours."
 	icon_state = "satchel-chem"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_gen
 	name = "geneticist satchel"
 	desc = "A sterile satchel with geneticist colours."
 	icon_state = "satchel-gen"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_tox
 	name = "scientist satchel"
 	desc = "Useful for holding research materials."
 	icon_state = "satchel-tox"
 	resistance_flags = FIRE_PROOF
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_sec
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_hyd
 	name = "hydroponics satchel"
 	desc = "A green satchel for plant related work."
 	icon_state = "satchel-hyd"
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_cap
 	name = "captain's satchel"
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	resistance_flags = FIRE_PROOF
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
+
+/obj/item/storage/backpack/satchel_blueshield
+	name = "blueshield satchel"
+	desc = "A robust satchel issued to Nanotrasen's finest."
+	icon_state = "satchel-blueshield"
 
 /obj/item/storage/backpack/satchel_flat
 	name = "smuggler's satchel"
@@ -299,6 +330,8 @@
 	max_combined_w_class = 15
 	level = 1
 	cant_hold = list(/obj/item/storage/backpack/satchel_flat) //muh recursive backpacks
+	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
 /obj/item/storage/backpack/satchel_flat/hide(var/intact)
 	if(intact)
@@ -373,6 +406,10 @@
 	new /obj/item/clothing/under/rank/miner/lavaland(src)
 	new /obj/item/encryptionkey/headset_cargo(src)
 	new /obj/item/clothing/mask/gas/explorer(src)
+	new /obj/item/gun/energy/kinetic_accelerator(src)
+	new /obj/item/kitchen/knife/combat/survival(src)
+	new /obj/item/flashlight/seclite(src)
+	new /obj/item/clothing/suit/hooded/explorer(src)
 
 
 /obj/item/storage/backpack/duffel/syndie/ammo/smg
@@ -531,12 +568,19 @@
 	icon_state = "duffel-clown"
 	item_state = "duffel-clown"
 
+obj/item/storage/backpack/duffel/blueshield
+	name = "blueshield duffelbag"
+	desc = "A robust duffelbag issued to Nanotrasen's finest."
+	icon_state = "duffel-blueshield"
+	item_state = "duffel-blueshield"
+
 //ERT backpacks.
 /obj/item/storage/backpack/ert
 	name = "emergency response team backpack"
 	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state = "backpack"
+	max_combined_w_class = 30
 	resistance_flags = FIRE_PROOF
 
 //Commander

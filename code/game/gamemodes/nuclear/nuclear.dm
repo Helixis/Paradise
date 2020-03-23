@@ -9,7 +9,7 @@ proc/issyndicate(mob/living/M as mob)
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 30	// 30 players - 5 players to be the nuke ops = 25 players remaining
+	required_players = 20	// 30 players - 5 players to be the nuke ops = 25 players remaining
 	required_enemies = 5
 	recommended_enemies = 5
 
@@ -226,7 +226,7 @@ proc/issyndicate(mob/living/M as mob)
 			ID.name = "[synd_mind.current.real_name] ID card"
 			ID.registered_name = synd_mind.current.real_name
 			if(is_leader)
-				ID.access += access_syndicate_leader
+				ID.access += ACCESS_SYNDICATE_LEADER
 	else
 		message_admins("Warning: Operative [key_name_admin(synd_mind.current)] spawned without an ID card!")
 

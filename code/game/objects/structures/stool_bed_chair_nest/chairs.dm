@@ -54,11 +54,16 @@
 		SK.master = E
 		qdel(src)
 		return
-	if(iswrench(W) && !(flags & NODECONSTRUCT))
-		playsound(loc, W.usesound, 50, 1)
-		deconstruct(TRUE)
-		return
 	return ..()
+
+/obj/structure/chair/wrench_act(mob/user, obj/item/I)
+	. = TRUE
+	if(flags & NODECONSTRUCT)
+		to_chat(user, "<span class='warning'>Try as you might, you can't figure out how to deconstruct [src].</span>")
+		return
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	deconstruct(TRUE)
 
 /obj/structure/chair/deconstruct()
 	// If we have materials, and don't have the NOCONSTRUCT flag
@@ -288,7 +293,7 @@
 	name = "stool"
 	desc = "Apply butt."
 	icon_state = "stool"
-	can_buckle = FALSE
+	//can_buckle = TRUE
 	item_chair = /obj/item/chair/stool
 
 /obj/structure/chair/stool/bar
