@@ -2170,7 +2170,7 @@
 				var/obj/pageobj = B.contents[page]
 				data += "<A href='?src=[UID()];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
-			usr << browse(data, "window=[B.name]")
+			usr << browse(data, "window=PaperBundle[B.UID()]")
 		else
 			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]</span>")
 
@@ -2673,7 +2673,7 @@
 					if(H.wear_id)
 						var/obj/item/card/id/id = H.get_idcard()
 						for(var/A in id.access)
-							if(A == access_security)
+							if(A == ACCESS_SECURITY)
 								security++
 					if(!security)
 						//strip their stuff before they teleport into a cell :downs:
@@ -2729,15 +2729,15 @@
 				if(newBombCap > 128)
 					newBombCap = 128
 
-				MAX_EX_DEVESTATION_RANGE = round(newBombCap/4)
+				MAX_EX_DEVASTATION_RANGE = round(newBombCap/4)
 				MAX_EX_HEAVY_RANGE = round(newBombCap/2)
 				MAX_EX_LIGHT_RANGE = newBombCap
 				//I don't know why these are their own variables, but fuck it, they are.
 				MAX_EX_FLASH_RANGE = newBombCap
 				MAX_EX_FLAME_RANGE = newBombCap
 
-				message_admins("<span class='boldannounce'>[key_name_admin(usr)] changed the bomb cap to [MAX_EX_DEVESTATION_RANGE], [MAX_EX_HEAVY_RANGE], [MAX_EX_LIGHT_RANGE]</span>")
-				log_admin("[key_name(usr)] changed the bomb cap to [MAX_EX_DEVESTATION_RANGE], [MAX_EX_HEAVY_RANGE], [MAX_EX_LIGHT_RANGE]")
+				message_admins("<span class='boldannounce'>[key_name_admin(usr)] changed the bomb cap to [MAX_EX_DEVASTATION_RANGE], [MAX_EX_HEAVY_RANGE], [MAX_EX_LIGHT_RANGE]</span>")
+				log_admin("[key_name(usr)] changed the bomb cap to [MAX_EX_DEVASTATION_RANGE], [MAX_EX_HEAVY_RANGE], [MAX_EX_LIGHT_RANGE]")
 
 			if("flicklights")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2825,7 +2825,7 @@
 				for(var/obj/item/W in world)
 					if(istype(W, /obj/item/clothing) || istype(W, /obj/item/card/id) || istype(W, /obj/item/disk) || istype(W, /obj/item/tank))
 						continue
-					W.icon = 'icons/obj/guns/projectile.dmi'
+					W.icon = 'icons/hispania/obj/guns/projectile.dmi'
 					W.icon_state = "revolver"
 					W.item_state = "gun"
 				message_admins("[key_name_admin(usr)] made every item look like a gun")
@@ -3112,16 +3112,16 @@
 				if(!admin_log.len)
 					dat += "No-one has done anything this round!"
 				usr << browse(dat, "window=admin_log")
-			if("maint_access_brig")
+			if("maint_ACCESS_BRIG")
 				for(var/obj/machinery/door/airlock/maintenance/M in GLOB.airlocks)
-					if(access_maint_tunnels in M.req_access)
-						M.req_access = list(access_brig)
+					if(ACCESS_MAINT_TUNNELS in M.req_access)
+						M.req_access = list(ACCESS_BRIG)
 				message_admins("[key_name_admin(usr)] made all maint doors brig access-only.")
 			if("maint_access_engiebrig")
 				for(var/obj/machinery/door/airlock/maintenance/M in GLOB.airlocks)
-					if(access_maint_tunnels in M.req_access)
+					if(ACCESS_MAINT_TUNNELS in M.req_access)
 						M.req_access = list()
-						M.req_one_access = list(access_brig,access_engine)
+						M.req_one_access = list(ACCESS_BRIG,ACCESS_ENGINE)
 				message_admins("[key_name_admin(usr)] made all maint doors engineering and brig access-only.")
 			if("infinite_sec")
 				var/datum/job/J = SSjobs.GetJob("Security Officer")

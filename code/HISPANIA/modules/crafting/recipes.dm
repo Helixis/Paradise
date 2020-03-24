@@ -25,5 +25,55 @@
 				/obj/item/stack/rods = 20,
 				/obj/item/stack/sheet/metal = 10,
 		        /obj/item/stack/cable_coil = 30)
-	tools = list(/obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool)
+	tools = list(TOOL_SCREWDRIVER, TOOL_WRENCH, TOOL_WELDER)
 	category = CAT_MISC
+
+ ////////////////
+//////Globos//////
+ ////////////////
+
+/datum/crafting_recipe/balloon
+	name = "White balloon"
+	time = 10
+	result = /obj/item/toy/balloon_h
+	reqs = list(/obj/item/stack/sheet/plastic = 5,
+		        /obj/item/stack/cable_coil = 5)
+	category = CAT_DECORATIONS
+	subcategory = CAT_HOLIDAY
+
+/datum/crafting_recipe/balloonm
+	name = "Macdonalds balloon"
+	result = /obj/item/toy/balloon_h/m
+	time = 15
+	reqs = list(/obj/item/stack/sheet/plastic = 5,
+		        /obj/item/stack/cable_coil = 5,
+		        /obj/item/reagent_containers/food/snacks/monkeyburger = 1)
+	category = CAT_DECORATIONS
+	subcategory = CAT_HOLIDAY
+
+/datum/crafting_recipe/ballooncorgi
+	name = "Corgi balloon"
+	result = /obj/item/toy/balloon_h/corgi
+
+	parts = list(/mob/living/simple_animal/pet/dog/corgi = 1)
+	time = 10
+	reqs = list(/obj/item/stack/sheet/plastic = 5,
+		        /obj/item/stack/cable_coil = 5,
+		        /obj/item/reagent_containers/food/snacks/meat/corgi = 1)
+
+	category = CAT_DECORATIONS
+	subcategory = CAT_HOLIDAY
+
+///Wooden Sword///
+
+/datum/crafting_recipe/woodensword
+	name = "wooden sword"
+	result = /obj/item/melee/woodensword
+	time = 15
+	reqs = list(/obj/item/stack/sheet/wood = 3,
+				/obj/item/stack/tape_roll = 1)
+	tools = list(TOOL_SCREWDRIVER,
+				TOOL_WIRECUTTER)
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
+

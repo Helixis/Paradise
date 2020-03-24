@@ -38,6 +38,7 @@
 	item_state = "balloon-empty"
 
 /obj/item/toy/balloon/New()
+	..()
 	create_reagents(10)
 
 /obj/item/toy/balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
@@ -799,6 +800,7 @@ obj/item/toy/cards/deck/syndicate/black
 	resistance_flags = FLAMMABLE
 
 /obj/item/toy/therapy/New()
+	..()
 	if(item_color)
 		name = "[item_color] therapy doll"
 		desc += " This one is [item_color]."
@@ -1401,11 +1403,11 @@ obj/item/toy/cards/deck/syndicate/black
 /obj/item/toy/russian_revolver
 	name = "russian revolver"
 	desc = "for fun and games!"
-	icon = 'icons/obj/guns/projectile.dmi'
+	icon = 'icons/hispania/obj/guns/projectile.dmi'
 	icon_state = "detective_gold"
 	item_state = "gun"
-	lefthand_file = 'icons/mob/inhands/guns_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/guns_righthand.dmi'
+	lefthand_file = 'icons/hispania/mob/inhands/guns_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/guns_righthand.dmi'
 	hitsound = "swing_hit"
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT

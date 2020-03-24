@@ -2,7 +2,7 @@
 	icon_state = "energy"
 	name = "energy gun"
 	desc = "A basic energy-based gun."
-	icon = 'icons/obj/guns/energy.dmi'
+	icon = 'icons/hispania/obj/guns/energy.dmi'
 	fire_sound_text = "laser blast"
 
 	var/obj/item/stock_parts/cell/cell //What type of power cell this uses
@@ -98,7 +98,7 @@
 		return
 	if(!chambered)
 		var/obj/item/ammo_casing/energy/shot = ammo_type[select]
-		if(cell.charge >= shot.e_cost) //if there's enough power in the cell cell...
+		if(cell.charge >= shot.e_cost) //if there's enough power in the WEAPON'S cell...
 			chambered = shot //...prepare a new shot based on the current ammo type selected
 			if(!chambered.BB)
 				chambered.newshot()
@@ -110,6 +110,11 @@
 		robocharge()
 	chambered = null //either way, released the prepared shot
 	newshot()
+
+/obj/item/gun/energy/process_fire(atom/target, mob/living/user, message = 1, params, zone_override, bonus_spread = 0)
+	if(!chambered && can_shoot())
+		process_chamber()
+	return ..()
 
 /obj/item/gun/energy/proc/select_fire(mob/living/user)
 	select++
@@ -193,6 +198,9 @@
 	. = ..()
 
 /obj/item/gun/energy/proc/robocharge()
+	if(cell.charge == cell.maxcharge)
+		// No point in recharging a weapon's cell that is already at 100%. That would just waste borg cell power for no reason.
+		return
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
 		if(R && R.cell)
