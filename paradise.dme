@@ -1189,10 +1189,7 @@
 #include "code\HISPANIA\game\mecha\mecha_control_console.dm"
 #include "code\HISPANIA\game\mecha\equipament\tools\medical_tools.dm"
 #include "code\HISPANIA\game\objects\items\inducer.dm"
-<<<<<<< HEAD
-=======
 #include "code\HISPANIA\game\objects\items\policetape.dm"
->>>>>>> origin/master
 #include "code\HISPANIA\game\objects\items\divices\radio\radio.dm"
 #include "code\HISPANIA\game\objects\items\miscellaneous\bell.dm"
 #include "code\HISPANIA\game\objects\items\miscellaneous\noose.dm"
@@ -1244,12 +1241,9 @@
 #include "code\HISPANIA\modules\food_and_drinks\drinks\drinks\bottle.dm"
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\baked_goods.dm"
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\ingredients.dm"
-<<<<<<< HEAD
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\junkfood.dm"
-=======
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\meat.dm"
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\other_snacks.dm"
->>>>>>> origin/master
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\sandwiches.dm"
 #include "code\HISPANIA\modules\food_and_drinks\food\foods\soups.dm"
 #include "code\HISPANIA\modules\food_and_drinks\kitchen_machinery\mixer.dm"
