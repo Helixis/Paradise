@@ -8,7 +8,7 @@
 	var/loot = rand(1,3)
 	switch(loot)
 		if(1)
-			new /obj/item/mayhem(src)
+			new /obj/item/organ/internal/heart/demon(src)
 		if(2)
 			new /obj/item/blood_contract(src)
 		if(3)
