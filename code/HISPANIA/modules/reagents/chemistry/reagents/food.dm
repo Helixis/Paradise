@@ -17,3 +17,11 @@
 	color = "#FEFEFE"
 	taste_description = "Bland"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/anonna
+	name = "Anonna Juice"
+	id = "anonna"
+	description = "Magic juice with lovely taste"
+	color = "#FEFEFE"
+	taste_description = "Sugary"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
