@@ -49,3 +49,11 @@
 	color = "#FEFEFE"
 	taste_description = "hipster"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/nispero
+	name = "Nispero Juice"
+	id = "nispero"
+	description = "Weird stuff no idea what is this"
+	color = "#FEFEFE"
+	taste_description = "sour sweet"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
