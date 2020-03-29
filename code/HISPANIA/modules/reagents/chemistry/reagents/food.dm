@@ -33,3 +33,11 @@
 	color = "#FEFEFE"
 	taste_description = "Sour Sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/kiwi
+	name = "Mango Juice"
+	id = "mango"
+	description = "Sweat and pulpy"
+	color = "#FEFEFE"
+	taste_description = "pulpy"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
