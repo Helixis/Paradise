@@ -41,7 +41,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/anonna/reticulata
 	seed = /obj/item/seeds/anonna/anonna_reticulata
-	name = "Anonna"
+	name = "Anonna Reticulata"
 	desc = "The edgy sister of the anonna."
 	icon_state = "annonareticulata"
 	tastes = list("sugary" = 1, "edgy" = 1)
