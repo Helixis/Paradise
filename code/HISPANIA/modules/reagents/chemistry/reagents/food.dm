@@ -25,3 +25,11 @@
 	color = "#FEFEFE"
 	taste_description = "Sugary"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/kiwi
+	name = "Kiwi Juice"
+	id = "kiwi"
+	description = "For some reasons kinda tastes like feathers"
+	color = "#FEFEFE"
+	taste_description = "Sour Sweet"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
