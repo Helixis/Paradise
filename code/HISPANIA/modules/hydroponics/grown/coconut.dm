@@ -74,8 +74,6 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	filling_color = "#FF4500"
 	bitesize = 2
 
-
-
 //BOMBONUT HERE//
 
 /obj/item/seeds/coconut/bombonut
@@ -90,6 +88,7 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	lifespan = 35
 	endurance = 35
 	yield = 5
+	potency = 30
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	icon_grow = "bombo_harvest"
 	icon_dead = "bombo_dead"
@@ -97,6 +96,7 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	reagents_add = list("plantmatter" = 0.1, "sorium" = 0.7)
 
 /obj/item/reagent_containers/food/snacks/grown/bombonut
+	seed = /obj/item/seeds/coconut/bombonut
 	name = "bombonut"
 	desc = "The explosive variety of coconuts."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
@@ -104,23 +104,50 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	volume = 150 //big boom boom
 	seed = /obj/item/seeds/coconut/bombonut
 
-/obj/item/reagent_containers/food/snacks/grown/bombonut/ex_act(severity)
-	qdel(src) //Lo borramos para evitar explosiones repetidas en misma tile
-
 /obj/item/reagent_containers/food/snacks/grown/bombonut/attack_self(mob/living/user) //Avisamos a un admin y se guarda en log que el usuario detonara esto
 	var/area/A = get_area(user)
-	user.visible_message("<span class='warning'>[user] plucks the stem from [src]!</span>", "<span class='userdanger'>You pluck the stem from [src], which begins to hiss loudly!</span>")
-	message_admins("[user] ([user.key ? user.key : "no key"]) primed a bombonout for detonation at [A] ([user.x], [user.y], [user.z]) <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>(JMP)</a>")
-	log_game("[user] ([user.key ? user.key : "no key"]) primed a bombonout for detonation at [A] ([user.x],[user.y],[user.z]).")
-	prime()
+	user.visible_message("<span class='warning'>[user] primes the [src]!</span>", "<span class='userdanger'>You prime the [src]!</span>")
+	var/message = "[ADMIN_LOOKUPFLW(user)] primed a bombonut for detonation at [A] [ADMIN_COORDJMP(user)]"
+	investigate_log("[key_name(user)] primed a bombonut for detonation at [A] [COORD(user)].", INVESTIGATE_BOMB)
+	message_admins(message)
+	log_game("[key_name(user)] primed a bombonut for detonation at [A] [COORD(user)].")
+	if(iscarbon(user))
+		var/mob/living/carbon/C = user
+		C.throw_mode_on()
+	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+	addtimer(CALLBACK(src, .proc/prime), rand(10, 60))
 
-/obj/item/reagent_containers/food/snacks/grown/bombonut/deconstruct(disassembled = TRUE)
-	if(!disassembled)
-		prime()
-	if(!QDELETED(src))
-		qdel(src)
+/obj/item/reagent_containers/food/snacks/grown/bombonut/burn()
+	prime()
+	..()
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/proc/update_mob()
+	if(ismob(loc))
+		var/mob/M = loc
+		M.unEquip(src)
+
+/obj/item/reagent_containers/food/snacks/grown/bombonut/ex_act(severity)
+	qdel(src) //Ensuring that it's deleted by its own explosion
 
 /obj/item/reagent_containers/food/snacks/grown/bombonut/proc/prime()
-	icon_state = "cherry_bomb_lit"
-	playsound(src, 'sound/goonstation/misc/fuse.ogg', seed.potency, 0)
-	reagents.set_reagent_temp(1000) //Sets off the black powder
+	switch(seed.potency) //Bombonaut are alot like IEDs, lots of flame, very little bang.
+		if(0 to 30)
+			update_mob()
+			explosion(loc,-1,-1,2, flame_range = 1)
+			qdel(src)
+		if(31 to 50)
+			update_mob()
+			explosion(loc,-1,-1,2, flame_range = 2)
+			qdel(src)
+		if(51 to 70)
+			update_mob()
+			explosion(loc,-1,-1,2, flame_range = 3)
+			qdel(src)
+		if(71 to 90)
+			update_mob()
+			explosion(loc,-1,-1,2, flame_range = 4)
+			qdel(src)
+		else
+			update_mob()
+			explosion(loc,-1,-1,2, flame_range = 5)
+			qdel(src)
