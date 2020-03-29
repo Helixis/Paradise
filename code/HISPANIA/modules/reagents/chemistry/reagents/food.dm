@@ -34,10 +34,18 @@
 	taste_description = "Sour Sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
-/datum/reagent/consumable/kiwi
+/datum/reagent/consumable/mango
 	name = "Mango Juice"
 	id = "mango"
 	description = "Sweat and pulpy"
 	color = "#FEFEFE"
 	taste_description = "pulpy"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/mate
+	name = "Mate"
+	id = "mate"
+	description = "Hipster stuff"
+	color = "#FEFEFE"
+	taste_description = "hipster"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
