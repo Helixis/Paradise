@@ -24,6 +24,8 @@
 	icon_state = "annonareticulata_seeds"
 	species = "anonna reticulata"
 	plantname = "anonna reticulata tree"
+	icon_grow = "annonar_harvest"
+	icon_dead = "annonar_dead"
 	product = /obj/item/reagent_containers/food/snacks/grown/anonna/reticulata
 	reagents_add = list("anonna" = 0.15, "mutagen" = 0.05)
 	rarity = 40
@@ -41,6 +43,5 @@
 	seed = /obj/item/seeds/anonna/anonna_reticulata
 	name = "Anonna"
 	desc = "The edgy sister of the anonna."
-	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "annonareticulata"
 	tastes = list("sugary" = 1, "edgy" = 1)
