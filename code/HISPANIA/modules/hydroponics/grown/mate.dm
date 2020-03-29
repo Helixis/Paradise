@@ -1,7 +1,7 @@
 //These are the seeds
 /obj/item/seeds/mate
 	name = "pack of mate"
-	desc = "These seeds will grow into a mate plant, grow it before it's cool"
+	desc = "These seeds will grow into a mate plant, grow it before it's cool."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "mate_seed"
 	species = "mate"

@@ -1,7 +1,7 @@
 //Semillas
 /obj/item/seeds/prickly_pear
 	name = "pack of prickly pear cactus"
-	desc = "The red fruit or pear of this cactus are also known as tuna."
+	desc = "These seeds will grow into a prickly pear cactus, it's fruit can be eaten."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "pricklypearlcactus_seed"
 	species = "prickly cactus"
@@ -20,7 +20,7 @@
 
 /obj/item/seeds/prickly_pear/san_pedro
 	name = "pack of san pedro cactus"
-	desc = "I can see colors now"
+	desc = "These seeds will grow into a San Pedro cactus."
 	icon_state = "sanpedrocactus_seed"
 	species = "san pedro cactus"
 	plantname = "san pedro cactus"
@@ -32,7 +32,7 @@
 
 /obj/item/seeds/prickly_pear/san_pedro/peyote
 	name = "pack of peyote"
-	desc = "Now i can see the future, the past and all the true."
+	desc = "These seeds grow into a useless decorative peyote cactus."
 	icon_state = "peyote_seed"
 	species = "peyote cactus"
 	plantname = "peyote cactus"

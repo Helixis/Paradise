@@ -57,3 +57,33 @@
 	color = "#FEFEFE"
 	taste_description = "sour sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/peach
+	name = "Peach Juice"
+	id = "peach"
+	description = "Coloured, juicy fruit"
+	color = "#FEFEFE"
+	taste_description = "deliciously sweet"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/castor
+	name = "Castor Oil"
+	id = "castor_oil"
+	description = "smells like beans"
+	color = "#FEFEFE"
+	taste_description = "beans"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+
+/datum/reagent/consumable/castor/on_mob_life(mob/living/carbon/M)
+	var/update_flags = STATUS_UPDATE_NONE
+	update_flags |= M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustFireLoss(-1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	return ..() | update_flags
+
+/datum/reagent/consumable/strawberry
+	name = "Strawberry Juice"
+	id = "strawberry"
+	description = "Acidic and sweet"
+	color = "#FEFEFE"
+	taste_description = "sweet citric"
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM

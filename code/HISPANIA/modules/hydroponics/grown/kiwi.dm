@@ -1,7 +1,7 @@
 //Semillas
 /obj/item/seeds/kiwi
 	name = "pack of kiwi seeds"
-	desc = "Is a fruit of ovoid shape, of variable size and covered with a brown fuzzy thin skin"
+	desc = "These seeds grow into kiwi bushes"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "kiwi_seeds"
 	species = "kiwi"
@@ -21,7 +21,7 @@
 
 /obj/item/seeds/kiwi/actual_kiwi
 	name = "pack of actual kiwi seeds"
-	desc = "Is a fruit of a ovoid shape but this one seems to be moving..."
+	desc = "These seeds grow into kiwi bushes but this one seems to be moving..."
 	icon_state = "kiwi_seeds"
 	species = "actual kiwi"
 	plantname = "Actual Kiwi Tree"

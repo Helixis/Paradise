@@ -1,7 +1,7 @@
 //Semilla
 /obj/item/seeds/agave
 	name = "pack of agave"
-	desc = "These seeds grow into agave, used to create tequila"
+	desc = "These seeds grow into agave, used to create tequila."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "agave_seed"
 	species = "agave"
@@ -21,7 +21,7 @@
 /obj/item/reagent_containers/food/snacks/grown/agave
 	seed = /obj/item/seeds/agave
 	name = "Agave"
-	desc = "Used to create tequila"
+	desc = "Used to create tequila."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "agave"
 	wine_power = 0.5

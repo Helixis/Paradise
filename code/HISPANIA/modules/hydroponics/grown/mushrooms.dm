@@ -1,6 +1,6 @@
 /obj/item/seeds/chanter/champignon
 	name = "pack of champignon"
-	desc = "An edible mushroom, especially the much cultivated species Agaricus bisporus."
+	desc = "A pack of delicious champignons, perfect for pizza."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "champignon_seed"
 	species = "champignon mushroom"

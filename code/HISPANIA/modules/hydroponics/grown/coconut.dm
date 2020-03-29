@@ -1,7 +1,7 @@
 //These are the seeds
 /obj/item/seeds/coconut
 	name = "pack of coconut seeds"
-	desc = "These seeds grow into coconut palms."
+	desc = "These seeds grow into cocount palms"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "coconut_seeds"
 	species = "coconut"
@@ -78,7 +78,7 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 
 /obj/item/seeds/coconut/bombonut
 	name = "pack of bombonut seeds"
-	desc = "The explosive variety of coconuts."
+	desc = "These seeds grow bombonuts, the explosively refreshing cousing of the coconut"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "bombonut_seeds"
 	species = "bombonut"

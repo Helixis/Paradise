@@ -1,7 +1,7 @@
 //Semillas
 /obj/item/seeds/anonna
 	name = "pack of anonna"
-	desc = "Annona species are taprooted, evergreen or semideciduous, tropical trees or shrubs."
+	desc = "These seeds grow intoan anonna plant."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "annona_seeds"
 	species = "anonna"
