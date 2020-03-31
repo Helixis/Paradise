@@ -10,8 +10,6 @@
 	potency = 25
 	growthstages = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
-	icon_grow = "garlic-harvest"
-	icon_dead = "garlic-dead"
 	reagents_add = list("garlic" = 0.15, "plantmatter" = 0.1)
 
 /obj/item/reagent_containers/food/snacks/grown/garlic
