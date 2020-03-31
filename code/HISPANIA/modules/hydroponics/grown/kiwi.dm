@@ -30,8 +30,6 @@
 	yield = 5
 	potency = 5
 	weed_chance = 60
-	icon_grow = "kiwi-harvest"
-	icon_dead = "kiwi-dead"
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("kiwi" = 0.19, "nutriment" = 0.12)
 
