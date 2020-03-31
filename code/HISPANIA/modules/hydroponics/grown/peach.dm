@@ -3,17 +3,17 @@
 	name = "pack of peach"
 	desc = "These seeds grow into thicc juicy bouncy peaches."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "peach_seed"
+	icon_state = "peach-seed"
 	species = "peach"
-	plantname = "peach tree"
+	plantname = "Peach Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/peach
-	lifespan = 55
-	endurance = 35
-	yield = 5
-	potency = 5
+	lifespan = 20
+	endurance = 25
+	yield = 9
+	potency = 9
+	maturation = 7
+	weed_chance = 45
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "peach_harvest"
-	icon_dead = "peach_dead"
 	reagents_add = list("peach" = 0.14, "sugar" = 0.12)
 
 //Fruta

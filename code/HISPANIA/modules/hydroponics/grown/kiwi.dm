@@ -3,27 +3,26 @@
 	name = "pack of kiwi seeds"
 	desc = "These seeds grow into kiwi bushes"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "kiwi_seeds"
+	icon_state = "kiwi-seeds"
 	species = "kiwi"
 	plantname = "Kiwi Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/kiwi
-	lifespan = 50
-	endurance = 40
-	yield = 5
-	potency = 5
+	lifespan = 20
+	maturation = 5
+	production = 5
+	yield = 2
 	weed_chance = 15
+	maturation = 7
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/kiwi/actual_kiwi)
-	icon_grow = "kiwi_harvest"
-	icon_dead = "kiwi_dead"
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("kiwi" = 0.19, "sugar" = 0.12)
 
 /obj/item/seeds/kiwi/actual_kiwi
 	name = "pack of actual kiwi seeds"
 	desc = "These seeds grow into kiwi bushes but this one seems to be moving..."
-	icon_state = "kiwi_seeds"
-	species = "actual kiwi"
+	icon_state = "akiwi-seed"
+	species = "kiwi"
 	plantname = "Actual Kiwi Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/kiwi/actual_kiwi
 	lifespan = 50
@@ -31,8 +30,8 @@
 	yield = 5
 	potency = 5
 	weed_chance = 60
-	icon_grow = "kiwi_harvest"
-	icon_dead = "kiwi_dead"
+	icon_grow = "kiwi-harvest"
+	icon_dead = "kiwi-dead"
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("kiwi" = 0.19, "nutriment" = 0.12)
 
@@ -50,7 +49,7 @@
 	seed = /obj/item/seeds/kiwi/actual_kiwi
 	name = "Actual Kiwi"
 	desc = "Is a fruit of a ovoid shape but this one seems to be moving..."
-	icon_state = "kiwi"
+	icon_state = "actual_kiwi"
 	var/awakening = 0
 	tastes = list("funny life" = 1)
 

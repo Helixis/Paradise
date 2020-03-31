@@ -3,17 +3,17 @@
 	name = "pack of bell pepper"
 	desc = "These seeds grow into bell peppers."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "bellpepper_seeds"
-	species = "bell_pepper"
-	plantname = "bell pepper tree"
+	icon_state = "bellpepper-seeds"
+	species = "bellp"
+	plantname = "Bell Pepper Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/bell_pepper
-	lifespan = 55
-	endurance = 35
-	yield = 5
-	potency = 5
+	lifespan = 25
+	endurance = 20
+	yield = 4
+	potency = 3
+	maturation = 7
+	weed_chance = 35
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "bellp_harvest"
-	icon_dead = "bellp_dead"
 	reagents_add = list("nutriment" = 0.14, "sugar" = 0.12)
 
 //Fruta

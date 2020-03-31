@@ -3,17 +3,16 @@
 	name = "pack of ricinu"
 	desc = "These seeds will grow into a castor oil plant, used for extracting castor oil... And nothing else."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "ricinus_seeds"
+	icon_state = "ricinus-seeds"
 	species = "ricinus"
-	plantname = "ricinus bush"
+	plantname = "Ricinus Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/ricinus
-	lifespan = 55
-	endurance = 35
+	lifespan = 30
+	endurance = 25
 	yield = 5
-	potency = 5
-	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "ricinus_harvest"
-	icon_dead = "ricinus_dead"
+	potency = 8
+	maturation = 7
+	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("castor_oil" = 0.30, "sugar" = 0.12)
 

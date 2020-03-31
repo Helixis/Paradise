@@ -3,16 +3,14 @@
 	name = "pack of coconut seeds"
 	desc = "These seeds grow into cocount palms"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "coconut_seeds"
-	species = "coconut"
-	plantname = "Coconut palm"
+	icon_state = "coconut-seeds"
+	species = "coco"
+	plantname = "Coconut Palm"
 	product = /obj/item/grown/coconut
 	lifespan = 55
 	endurance = 35
 	yield = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "coco_harvest"
-	icon_dead = "coco_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/coconut/bombonut)
 	reagents_add = list("vitamin" = 0.04, "plantmatter" = 0.1, "sugar" =0.01)
@@ -24,7 +22,7 @@
 	name = "Coconut"
 	desc = "A seed? A nut? A fruit?"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
-	icon_state = "coconut_bet"
+	icon_state = "coconut-bet"
 	force = 5
 	throwforce = 5
 	w_class = WEIGHT_CLASS_NORMAL
@@ -48,9 +46,9 @@
 /obj/item/reagent_containers/food/drinks/grown/coconut
 	name = "Coconut drink"
 	desc = "Full of juice"
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "coconutdrink"
-	item_state = "coconutdrink"
+	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
+	icon_state = "coconut-slice"
+	item_state = "coconut-slice"
 	list_reagents = list("ale" = 30)
 	var/coconut_sliced = /obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	var/sliced_name = "sliced coconut"
@@ -80,9 +78,9 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	name = "pack of bombonut seeds"
 	desc = "These seeds grow bombonuts, the explosively refreshing cousing of the coconut"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "bombonut_seeds"
-	species = "bombonut"
-	plantname = "bombonout palm"
+	icon_state = "bombonut-seeds"
+	species = "bombo"
+	plantname = "Bombonout Palm"
 	mutatelist = list()
 	product = /obj/item/reagent_containers/food/snacks/grown/bombonut
 	lifespan = 35
@@ -90,8 +88,6 @@ obj/item/reagent_containers/food/snacks/grown/coconutsliced
 	yield = 5
 	potency = 30
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "bombo_harvest"
-	icon_dead = "bombo_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("plantmatter" = 0.1, "sorium" = 0.7)
 

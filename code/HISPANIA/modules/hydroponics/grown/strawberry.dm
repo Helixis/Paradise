@@ -3,19 +3,18 @@
 	name = "pack of strawberry"
 	desc = "These seeds grow into strawberries."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "strawberry_seeds"
-	species = "strawberry"
-	plantname = "strawberry bush"
+	icon_state = "strawberry-seeds"
+	species = "straw"
+	plantname = "Strawberry Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/strawberry
-	lifespan = 55
-	endurance = 35
+	lifespan = 20
+	endurance = 25
 	yield = 5
 	potency = 5
+	maturation = 7
+	weed_chance = 25
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "straw_harvest"
-	icon_dead = "straw_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	//mutatelist = list(/obj/item/seeds/strawberry/silicon)   //Tengo unas dudas respecto a esto
 	reagents_add = list("strawberry" = 1)
 
 /obj/item/reagent_containers/food/snacks/grown/strawberry

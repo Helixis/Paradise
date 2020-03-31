@@ -3,17 +3,16 @@
 	name = "pack of anonna"
 	desc = "These seeds grow intoan anonna plant."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "annona_seeds"
-	species = "anonna"
-	plantname = "anonna tree"
+	icon_state = "annona-seeds"
+	species = "annona"
+	plantname = "Anonna Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/anonna
-	lifespan = 55
-	endurance = 35
+	maturation = 8
+	potency = 20
 	yield = 5
-	potency = 5
+	potency = 4
+	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "annona_harvest"
-	icon_dead = "annona_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/anonna/anonna_reticulata)
 	reagents_add = list("anonna" = 0.14, "sugar" = 0.12)
@@ -21,11 +20,9 @@
 /obj/item/seeds/anonna/anonna_reticulata
 	name = "pack of anonna reticulata"
 	desc = "These seeds grow into an anonna reticulata plant, the edgy sister of the anonna."
-	icon_state = "annonareticulata_seeds"
-	species = "anonna reticulata"
-	plantname = "anonna reticulata tree"
-	icon_grow = "annonar_harvest"
-	icon_dead = "annonar_dead"
+	icon_state = "annonareticulata-seeds"
+	species = "annonar"
+	plantname = "Anonna Reticulata Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/anonna/reticulata
 	reagents_add = list("anonna" = 0.15, "mutagen" = 0.05)
 	rarity = 40

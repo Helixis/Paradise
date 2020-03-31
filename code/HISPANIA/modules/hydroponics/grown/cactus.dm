@@ -3,17 +3,16 @@
 	name = "pack of prickly pear cactus"
 	desc = "These seeds will grow into a prickly pear cactus, it's fruit can be eaten."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "pricklypearlcactus_seed"
-	species = "prickly cactus"
-	plantname = "prickly cactus"
+	icon_state = "pricklypearlcactus-seed"
+	species = "prickly"
+	plantname = "Prickly Cactus"
 	product = /obj/item/reagent_containers/food/snacks/grown/prickly_pear
-	lifespan = 55
-	endurance = 35
-	yield = 5
+	lifespan = 60
+	endurance = 25
+	yield = 6
 	potency = 5
+	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "prickly_harvest"
-	icon_dead = "prickly_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/prickly_pear/san_pedro)
 	reagents_add = list("nutriment" = 0.06, "sugar" = 0.02)
@@ -21,11 +20,9 @@
 /obj/item/seeds/prickly_pear/san_pedro
 	name = "pack of san pedro cactus"
 	desc = "These seeds will grow into a San Pedro cactus."
-	icon_state = "sanpedrocactus_seed"
-	species = "san pedro cactus"
-	plantname = "san pedro cactus"
-	icon_grow = "pedro_harvest"
-	icon_dead = "pedro_dead"
+	icon_state = "sanpedrocactus-seed"
+	species = "pedro"
+	plantname = "San Pedro Cactus"
 	product = /obj/item/reagent_containers/food/snacks/grown/prickly_pear/san_pedro
 	mutatelist = list(/obj/item/seeds/prickly_pear/san_pedro/peyote)
 	reagents_add = list("nutriment" = 0.06, "sugar" = 0.02, "lsd" = 0.02)
@@ -33,11 +30,9 @@
 /obj/item/seeds/prickly_pear/san_pedro/peyote
 	name = "pack of peyote"
 	desc = "These seeds grow into a useless decorative peyote cactus."
-	icon_state = "peyote_seed"
-	species = "peyote cactus"
-	plantname = "peyote cactus"
-	icon_grow = "peyote_harvest"
-	icon_dead = "peyote_dead"
+	icon_state = "peyote-seed"
+	species = "peyote"
+	plantname = "Peyote Cactus"
 	product = /obj/item/reagent_containers/food/snacks/grown/prickly_pear/san_pedro/peyote
 	mutatelist = list(/obj/item/seeds/prickly_pear/san_pedro/peyote)
 	reagents_add = list("lsd" = 1)

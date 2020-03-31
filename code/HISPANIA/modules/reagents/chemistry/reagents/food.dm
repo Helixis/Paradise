@@ -14,7 +14,7 @@
 	name = "Agave Juice"
 	id = "agave"
 	description = "Principal reagent to make tequila."
-	color = "#FEFEFE"
+	color = "#C9B25D"
 	taste_description = "Bland"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -22,7 +22,7 @@
 	name = "Anonna Juice"
 	id = "anonna"
 	description = "Magic juice with lovely taste"
-	color = "#FEFEFE"
+	color = "#C1AA8D"
 	taste_description = "Sugary"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -30,7 +30,7 @@
 	name = "Kiwi Juice"
 	id = "kiwi"
 	description = "For some reasons kinda tastes like feathers"
-	color = "#FEFEFE"
+	color = "#C5CA4C"
 	taste_description = "Sour Sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -38,7 +38,7 @@
 	name = "Mango Juice"
 	id = "mango"
 	description = "Sweat and pulpy"
-	color = "#FEFEFE"
+	color = "#FF9903"
 	taste_description = "pulpy"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -46,7 +46,7 @@
 	name = "Mate"
 	id = "mate"
 	description = "Hipster stuff"
-	color = "#FEFEFE"
+	color = "#948870"
 	taste_description = "hipster"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -54,7 +54,7 @@
 	name = "Nispero Juice"
 	id = "nispero"
 	description = "Weird stuff no idea what is this"
-	color = "#FEFEFE"
+	color = "#9B723C"
 	taste_description = "sour sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -62,7 +62,7 @@
 	name = "Peach Juice"
 	id = "peach"
 	description = "Coloured, juicy fruit"
-	color = "#FEFEFE"
+	color = "#FFB5B6"
 	taste_description = "deliciously sweet"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
@@ -70,20 +70,20 @@
 	name = "Castor Oil"
 	id = "castor_oil"
 	description = "smells like beans"
-	color = "#FEFEFE"
+	color = "#9D8F62"
 	taste_description = "beans"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
 /datum/reagent/consumable/castor/on_mob_life(mob/living/carbon/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-	update_flags |= M.adjustFireLoss(-1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustBruteLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	update_flags |= M.adjustFireLoss(-2*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/consumable/strawberry
 	name = "Strawberry Juice"
 	id = "strawberry"
 	description = "Acidic and sweet"
-	color = "#FEFEFE"
+	color = "#FF292E"
 	taste_description = "sweet citric"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM

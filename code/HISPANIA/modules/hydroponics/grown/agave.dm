@@ -3,18 +3,16 @@
 	name = "pack of agave"
 	desc = "These seeds grow into agave, used to create tequila."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "agave_seed"
+	icon_state = "agave-seed"
 	species = "agave"
-	plantname = "agave bush"
+	plantname = "Agave Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/agave
-	lifespan = 55
-	endurance = 35
+	lifespan = 30
+	endurance = 40
 	yield = 5
 	potency = 5
+	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "agave_harvest"
-	icon_dead = "agave_dead"
-	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("agave" = 0.04)
 
 //Fruta

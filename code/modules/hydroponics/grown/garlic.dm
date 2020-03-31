@@ -2,14 +2,16 @@
 	name = "pack of garlic seeds"
 	desc = "A packet of extremely pungent seeds."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "garlic_seeds"
+	icon_state = "garlic-seeds"
 	species = "garlic"
 	plantname = "Garlic Sprouts"
 	product = /obj/item/reagent_containers/food/snacks/grown/garlic
 	yield = 6
 	potency = 25
-	growthstages = 3
-	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+	growthstages = 7
+	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
+	icon_grow = "garlic-harvest"
+	icon_dead = "garlic-dead"
 	reagents_add = list("garlic" = 0.15, "plantmatter" = 0.1)
 
 /obj/item/reagent_containers/food/snacks/grown/garlic

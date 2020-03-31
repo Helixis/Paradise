@@ -3,17 +3,17 @@
 	name = "pack of mango"
 	desc = "These seeds grow into a miniature mango tree."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
-	icon_state = "mango_seed"
+	icon_state = "mango-seed"
 	species = "mango"
-	plantname = "mango tree"
+	plantname = "Mango Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/mango
-	lifespan = 55
-	endurance = 35
-	yield = 5
-	potency = 5
+	lifespan = 20
+	maturation = 5
+	production = 5
+	yield = 2
+	weed_chance = 15
+	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
-	icon_grow = "mango_harvest"
-	icon_dead = "mango_dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("mango" = 0.14, "sugar" = 0.12)
 
