@@ -1113,6 +1113,36 @@ obj/item/toy/cards/deck/syndicate/black
 	icon_state = "plushie_slime"
 	item_state = "plushie_slime"
 
+/obj/item/toy/plushie/slimeplushiepink
+	name = "slime plushie pink"
+	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	icon_state = "plushie_slime_pink"
+	item_state = "plushie_slime_pink"
+
+/obj/item/toy/plushie/slimeplushiegreen
+	name = "slime plushie green"
+	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	icon_state = "plushie_slime_green"
+	item_state = "plushie_slime_green"
+
+/obj/item/toy/plushie/slimeplushiered
+	name = "slime plushie red"
+	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	icon_state = "plushie_slime_red"
+	item_state = "plushie_slime_red"
+
+/obj/item/toy/plushie/slimeplushiecyan
+	name = "slime plushie cyan"
+	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	icon_state = "plushie_slime_cyan"
+	item_state = "plushie_slime_cyan"
+
+/obj/item/toy/plushie/slimeplushiepurple
+	name = "slime plushie purple"
+	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	icon_state = "plushie_slime_purple"
+	item_state = "plushie_slime_purple"
+
 /*
  * Foam Armblade
  */
