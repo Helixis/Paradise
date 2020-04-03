@@ -10,7 +10,7 @@
 	lifespan = 55
 	endurance = 35
 	yield = 5
-	potency = 5
+	potency = 30
 	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
 	reagents_add = list("mate" = 1)

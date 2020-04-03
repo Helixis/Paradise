@@ -11,6 +11,7 @@
 	maturation = 5
 	production = 5
 	yield = 2
+	potency = 30
 	weed_chance = 15
 	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'

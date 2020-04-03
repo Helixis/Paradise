@@ -10,7 +10,7 @@
 	lifespan = 20
 	endurance = 25
 	yield = 9
-	potency = 9
+	potency = 60
 	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("nispero" = 0.14, "sugar" = 0.12, "nutriment" = 0.10)

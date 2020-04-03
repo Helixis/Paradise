@@ -8,7 +8,7 @@
 	plantname = "Anonna Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/anonna
 	maturation = 8
-	potency = 20
+	potency = 50
 	yield = 5
 	potency = 4
 	maturation = 7

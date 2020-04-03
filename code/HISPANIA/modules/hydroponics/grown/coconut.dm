@@ -1,7 +1,7 @@
 //These are the seeds
 /obj/item/seeds/coconut
 	name = "pack of coconut seeds"
-	desc = "These seeds grow into cocount palms."
+	desc = "These seeds grow into coconut palms."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "coconut-seeds"
 	species = "coco"

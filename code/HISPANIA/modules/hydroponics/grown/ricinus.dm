@@ -10,7 +10,7 @@
 	lifespan = 30
 	endurance = 25
 	yield = 5
-	potency = 8
+	potency = 37
 	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
