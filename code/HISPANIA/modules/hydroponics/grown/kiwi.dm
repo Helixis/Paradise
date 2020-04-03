@@ -25,6 +25,7 @@
 	species = "kiwi"
 	plantname = "Actual Kiwi Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/kiwi/actual_kiwi
+	mutatelist = list()
 	lifespan = 50
 	endurance = 40
 	yield = 5

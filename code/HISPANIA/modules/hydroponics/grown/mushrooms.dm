@@ -6,6 +6,7 @@
 	species = "champ"
 	plantname = "Champignon Mushrooms"
 	product = /obj/item/reagent_containers/food/snacks/grown/chanter/champignon
+	mutatelist = list()
 	lifespan = 55
 	endurance = 35
 	yield = 5

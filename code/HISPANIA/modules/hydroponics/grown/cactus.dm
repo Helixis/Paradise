@@ -34,7 +34,7 @@
 	species = "peyote"
 	plantname = "Peyote Cactus"
 	product = /obj/item/reagent_containers/food/snacks/grown/prickly_pear/san_pedro/peyote
-	mutatelist = list(/obj/item/seeds/prickly_pear/san_pedro/peyote)
+	mutatelist = list()
 	reagents_add = list("lsd" = 1)
 
 //Fruta
