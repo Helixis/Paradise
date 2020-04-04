@@ -11,7 +11,7 @@
 	var/cell_type = /obj/item/stock_parts/cell/high
 	var/obj/item/stock_parts/cell/cell
 	var/powerefficiency = 0.1
-	var/amount = 15
+	var/amount = 10
 	var/recharge_amount = 5
 	var/recharge_counter = 0
 	var/hackedcheck = FALSE
