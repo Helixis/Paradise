@@ -37,7 +37,7 @@
  <b><i> 1- Find a place with vents and no people </b></i><br>
  <b><i> 2- Use the eggs on your hand and they will start to shake </b></i><br>
  <b><i> 3- Leave them on the ground and RUN, OH GOD OH FUCK, RUN!</b></i><br>
- <b><i>	4- After 30 seconds a princess of terror spiders will hatch from the egg </b></i><br>
+ <b><i> 4- After 30 seconds a princess of terror spiders will hatch from the egg </b></i><br>
  <b><i> 5- Survive and watch hell on earth </b></i><br>
  <br>
  <b><i>REMEMBER THEY ARE NOT YOUR FRIENDS</b></i>
