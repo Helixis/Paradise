@@ -12,7 +12,7 @@
 	var/obj/item/stock_parts/cell/cell
 	var/powerefficiency = 0.1
 	var/amount = 10
-	var/recharge_amount = 5
+	var/recharge_amount = 20
 	var/recharge_counter = 0
 	var/hackedcheck = FALSE
 	var/obj/item/reagent_containers/beaker = null
