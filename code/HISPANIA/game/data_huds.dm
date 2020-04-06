@@ -10,7 +10,7 @@
 	else	//Empty AI shell
 		holder.icon_state = "hudtracking"
 
-//AI side tracking of AI shell control
+//AI side tracking of AI shell control Test
 /mob/living/silicon/ai/proc/diag_hud_set_deployed() //Shows tracking beacons on the mech
 	var/image/holder = hud_list[DIAG_TRACK_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
