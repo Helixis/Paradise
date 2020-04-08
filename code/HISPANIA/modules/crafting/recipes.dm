@@ -77,3 +77,45 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
+///Lavaland Stuff///
+/datum/crafting_recipe/plaz_lamp
+	name = "Plazmite Lamp"
+	time = 60
+	reqs = list(/obj/item/stack/sheet/bone = 4,
+				 /obj/item/stack/sheet/sinew = 3,
+				 /obj/item/stack/sheet/cartiplaz = 7)
+	result = /obj/item/flashlight/lamp/plazlamp
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/salgel
+	name = "Water of Life"
+	time = 60
+	reqs = list(/obj/item/plaz_cat = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 7,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 2,
+				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
+	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/salgel
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/seltup
+	name = "Peaceful Home"
+	time = 60
+	reqs = list(/obj/item/plaz_cat = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 7,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 2,
+				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
+	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltup
+	category = CAT_PRIMAL
+
+/datum/crafting_recipe/seltox
+	name = "Purification Brew"
+	time = 60
+	reqs = list(/obj/item/plaz_cat = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_stem = 5,
+				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
+	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltox
+	category = CAT_PRIMAL
