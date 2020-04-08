@@ -66,7 +66,7 @@
 /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltup
 	name = "peaceful home"
 	desc = "Contains healing properties for the badly wounded."
-	list_reagents = list("hydrocodone" = 3, "mitocholide" = 2, "spaceacillin"= 4, "salglu_solution" = 23, "omnizine" = 1, "salbutamol" = 10, "ephedrine" = 2, "atropine" = 5)
+	list_reagents = list("hydrocodone" = 3, "mitocholide" = 2, "salglu_solution" = 25, "omnizine" = 1, "salbutamol" = 10, "ephedrine" = 2, "atropine" = 5)
 
 /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltox
 	name = "purification brew"

@@ -91,9 +91,9 @@
 	name = "Water of Life"
 	time = 60
 	reqs = list(/obj/item/plaz_cat = 2,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 7,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 10,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 7,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 4,
 				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
 	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/salgel
 	category = CAT_PRIMAL
@@ -102,9 +102,9 @@
 	name = "Peaceful Home"
 	time = 60
 	reqs = list(/obj/item/plaz_cat = 2,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 7,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 2,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 10,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 7,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap = 4,
 				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
 	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltup
 	category = CAT_PRIMAL
@@ -113,9 +113,9 @@
 	name = "Purification Brew"
 	time = 60
 	reqs = list(/obj/item/plaz_cat = 2,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 2,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 5,
-				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_stem = 5,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit = 4,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_leaf = 8,
+				 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_stem = 10,
 				 /obj/item/reagent_containers/food/drinks/mushroom_bowl = 1)
 	result = /obj/item/reagent_containers/food/drinks/mushroom_bowl/seltox
 	category = CAT_PRIMAL
