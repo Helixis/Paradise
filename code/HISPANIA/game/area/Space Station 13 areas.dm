@@ -46,3 +46,32 @@ area/shuttle/tsf
 	outdoors = TRUE
 	ambientsounds = list('sound/ambience/ambimine.ogg')
 	flags = NONE
+
+/area/TSF_Outpost
+	name = "TSF Outpost"
+	icon_state = "mining"
+	has_gravity = TRUE
+
+/area/TSF_Outpost/Docking
+	name = "TSF Outpost Docking Area"
+
+/area/TSF_Outpost/Kitchen
+	name = "TSF Outpost Kitchen"
+
+/area/TSF_Outpost/Chapel
+	name = "TSF Outpost Chapel"
+
+/area/TSF_Outpost/Hallway
+	name = "TSF Outpost Central Hallway"
+
+/area/TSF_Outpost/Medbay
+	name = "TSF Outpost Medbay"
+
+/area/TSF_Outpost/Exterior
+	name = "TSF Outpost Exterior Access"
+
+/area/TSF_Outpost/CrewDorms
+	name = "TSF Outpost Crew Dorms"
+
+/area/TSF_Outpost/CrewShower
+	name = "TSF Outpost Crew Showers"
