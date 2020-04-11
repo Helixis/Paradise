@@ -1263,6 +1263,7 @@
 #include "code\HISPANIA\modules\hydroponics\fermenting_barrel.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\agave.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\anonna.dm"
+#include "code\HISPANIA\modules\hydroponics\grown\avocado.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\cactus.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\coconut.dm"
 #include "code\HISPANIA\modules\hydroponics\grown\kiwi.dm"
