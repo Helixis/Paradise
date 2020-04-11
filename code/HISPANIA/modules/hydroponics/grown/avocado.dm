@@ -108,15 +108,15 @@
 
 /obj/item/reagent_containers/food/snacks/avocadoslice/aircado
 	name = "aircado slice"
-	desc = "A slice of green goodness."
+	desc = "A slice of white goodness."
 	icon_state = "aircado_cut"
 
 /obj/item/reagent_containers/food/snacks/avocadoslice/firecado
 	name = "firecado slice"
-	desc = "A slice of green goodness."
+	desc = "A slice of red goodness."
 	icon_state = "firecado_cut"
 
 /obj/item/reagent_containers/food/snacks/avocadoslice/earthcado
 	name = "earthcado slice"
-	desc = "A slice of green goodness."
+	desc = "A slice of brown goodness."
 	icon_state = "earthcado_cut"
