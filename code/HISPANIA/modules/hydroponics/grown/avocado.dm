@@ -1,6 +1,6 @@
 /obj/item/seeds/avocado
 	name = "pack of avocado seeds"
-	desc = "These seeds grow into avocado trees. Watery"
+	desc = "These seeds grow into avocado trees. Watery."
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "seed-avocado"
 	species = "avocado"
@@ -54,7 +54,7 @@
 
 /obj/item/seeds/avocado/aircado
 	name = "pack of avocado seeds"
-	desc = "These seeds grow into aircado trees. Airy"
+	desc = "These seeds grow into aircado trees. Airy."
 	icon_state = "seed-aircado"
 	species = "aircado"
 	plantname = "Aircado Tree"
@@ -65,7 +65,7 @@
 
 /obj/item/seeds/avocado/firecado
 	name = "pack of firecado seeds"
-	desc = "These seeds grow into firecado trees. Fiery"
+	desc = "These seeds grow into firecado trees. Fiery."
 	icon_state = "seed-firecado"
 	species = "firecado"
 	plantname = "Firecado Tree"
@@ -76,7 +76,7 @@
 
 /obj/item/seeds/avocado/earthcado
 	name = "pack of earthcado seeds"
-	desc = "These seeds grow into earthcado trees. Earthy"
+	desc = "These seeds grow into earthcado trees. Earthy."
 	icon_state = "seed-earthcado"
 	species = "earthcado"
 	plantname = "Earthcado Tree"
