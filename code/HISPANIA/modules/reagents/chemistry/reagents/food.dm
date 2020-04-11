@@ -2,7 +2,7 @@
 
 
 /datum/reagent/consumable/butter
-	name = "Butter"
+	name = "butter"
 	id = "butter"
 	description = "Delicious milk fat."
 	reagent_state = LIQUID
@@ -87,3 +87,12 @@
 	color = "#FF292E"
 	taste_description = "sweet citric"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
+/datum/reagent/consumable/mayonnaise
+	name = "mayonnaise"
+	id = "mayonnaise"
+	description = "Tasty and beauty mayonnaise!"
+	reagent_state = LIQUID
+	color = "#FFFEF4" // rgb: 255, 254, 244
+	nutriment_factor = 5 * REAGENTS_METABOLISM
+	taste_description = "mayonnaise"
+
