@@ -11,7 +11,7 @@
 	endurance = 20
 	yield = 4
 	potency = 3
-	maturation = 80
+	maturation = 40
 	weed_chance = 35
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("nutriment" = 0.14, "sugar" = 0.12)

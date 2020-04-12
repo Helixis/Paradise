@@ -10,7 +10,7 @@
 	maturation = 8
 	potency = 50
 	yield = 5
-	potency = 4
+	potency = 40
 	maturation = 7
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)

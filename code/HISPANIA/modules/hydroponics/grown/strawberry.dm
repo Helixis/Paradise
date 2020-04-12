@@ -10,7 +10,7 @@
 	lifespan = 20
 	endurance = 25
 	yield = 5
-	potency = 50
+	potency = 46
 	maturation = 7
 	weed_chance = 25
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'

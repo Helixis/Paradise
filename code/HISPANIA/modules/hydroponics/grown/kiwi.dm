@@ -13,6 +13,7 @@
 	yield = 2
 	weed_chance = 15
 	maturation = 7
+	potency = 30
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/kiwi/actual_kiwi)
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
@@ -29,7 +30,7 @@
 	lifespan = 50
 	endurance = 40
 	yield = 5
-	potency = 50
+	potency = 40
 	weed_chance = 60
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("kiwi" = 0.19, "nutriment" = 0.12)
