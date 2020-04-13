@@ -14,7 +14,6 @@
 /obj/item/princesa_eggs/attack_self(mob/user)
 	if(awakening || istype(user.loc, /turf/space))
 		return
-	playsound(src, 'sound/hispania/effects/princesa.ogg', 50, 3)   ///Si alguien pasa cerca lo escucha
 	to_chat(user, "<span class='notice'>You begin to awaken the Princess of Terror Spiders...</span>")
 	awakening = 1
 	spawn(300)
