@@ -7,6 +7,7 @@
 	description = "A colorful mixture of fruit juices."
 	color = "#FF8EC8"
 	nutriment_factor = 2 * REAGENTS_METABOLISM
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "rainbowjuice"
 	drink_name = "Rainbow Juice"
 	drink_desc = "A colorful mixture of fruit juices."
@@ -18,6 +19,7 @@
 	description = "It is sticky and has a strong chlorine smell."
 	color = "#FFFEC6"
 	nutriment_factor = 2 * REAGENTS_METABOLISM
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "unclegits_specialmilk"
 	drink_name = "Uncle Git's Special Milk"
 	drink_desc = "It is sticky and has a strong chlorine smell."
@@ -28,6 +30,7 @@
 	id = "agave"
 	description = "Principal reagent to make tequila."
 	color = "#C9B25D"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "agave_juice"
 	drink_name = "Glass of Agave Juice"
 	drink_desc = "Principal reagent to make tequila, are you sure about this?"
@@ -39,6 +42,7 @@
 	id = "anonna"
 	description = "Magic juice with lovely taste"
 	color = "#C1AA8D"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "anonna_juice"
 	drink_name = "Glass of Anonna Juice"
 	drink_desc = "Magic juice with lovely taste."
@@ -50,6 +54,7 @@
 	id = "kiwi"
 	description = "For some reasons kinda tastes like feathers"
 	color = "#C5CA4C"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "kiwi_juice"
 	drink_name = "Glass of Kiwi Juice"
 	drink_desc = "For some reasons kinda tastes like feathers."
@@ -61,6 +66,7 @@
 	id = "mango"
 	description = "Sweat and pulpy"
 	color = "#FF9903"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "mango_juice"
 	drink_name = "Glass of Mango Juice"
 	drink_desc = "For some reasons kinda tastes like feathers."
@@ -72,6 +78,7 @@
 	id = "mate"
 	description = "Hipster stuff"
 	color = "#948870"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "glass_mate"
 	drink_name = "Glass of Mate"
 	drink_desc = "Hipster stuff"
@@ -83,6 +90,7 @@
 	id = "nispero"
 	description = "Weird stuff no idea what is this"
 	color = "#9B723C"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "nispero_juice"
 	drink_name = "Glass of Nispero Juice"
 	drink_desc = "Weird stuff no idea what is this"
@@ -94,6 +102,7 @@
 	id = "peach"
 	description = "Coloured, juicy fruit"
 	color = "#FFB5B6"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "peach_juice"
 	drink_name = "Glass of Peach Juice"
 	drink_desc = "Coloured, juicy fruit"
@@ -105,6 +114,7 @@
 	id = "castor_oil"
 	description = "smells like beans"
 	color = "#9D8F62"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "castor_oil"
 	drink_name = "Glass of Castor Oil"
 	drink_desc = "smells like beans"
@@ -122,6 +132,7 @@
 	id = "strawberry"
 	description = "Acidic and sweet"
 	color = "#FF292E"
+	icon = 'icons/hispania/obj/drinks.dmi'
 	drink_icon = "straw_juice"
 	drink_name = "Glass of Strawberry Juice"
 	drink_desc = "Acidic and sweet"
