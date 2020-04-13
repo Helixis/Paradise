@@ -27,12 +27,15 @@
 	item_state = "jwig"
 
 /obj/item/clothing/head/beret/blue
+	name = "blue beret"
 	icon_state = "beret_blue"
 
 /obj/item/clothing/head/beret/black
+	name = "black beret"
 	icon_state = "beret_black"
 
 /obj/item/clothing/head/beret/purple_normal
+	name = "purple beret"
 	icon_state = "beret_purple_normal"
 
 /obj/item/clothing/head/that
