@@ -31,7 +31,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/anonna
 	seed = /obj/item/seeds/anonna
-	name = "Anonna"
+	name = "anonna"
 	desc = "Annona species are taprooted, evergreen or semideciduous, tropical trees or shrubs."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "annona"
@@ -39,7 +39,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/anonna/reticulata
 	seed = /obj/item/seeds/anonna/anonna_reticulata
-	name = "Anonna Reticulata"
+	name = "anonna reticulata"
 	desc = "The edgy sister of the anonna."
 	icon_state = "annonareticulata"
 	tastes = list("sugary" = 1, "edgy" = 1)

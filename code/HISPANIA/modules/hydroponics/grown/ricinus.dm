@@ -19,7 +19,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/ricinus
 	seed = /obj/item/seeds/ricinus
-	name = "Ricinus"
+	name = "ricinus"
 	desc = "Ricinus communis, the castor bean or castor oil plant, is a species of perennial flowering plant"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "ricinus"

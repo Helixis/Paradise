@@ -19,7 +19,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/strawberry
 	seed = /obj/item/seeds/strawberry
-	name = "Strawberry"
+	name = "strawberry"
 	desc = " The fruit of passion is widely appreciated for its characteristic aroma, bright red color, juicy texture, and sweetness."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "strawberry"

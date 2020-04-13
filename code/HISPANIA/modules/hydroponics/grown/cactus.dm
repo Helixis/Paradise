@@ -40,7 +40,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/prickly_pear
 	seed = /obj/item/seeds/prickly_pear
-	name = "Prickly Pear"
+	name = "prickly pear"
 	desc = "The red fruit or pear of this cactus are also known as tuna."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "pricklypearlcactus"
@@ -48,7 +48,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/prickly_pear/san_pedro
 	seed = /obj/item/seeds/prickly_pear/san_pedro
-	name = "San Pedro Cactus"
+	name = "san pedro cactus"
 	desc = "I can see colors now"
 	icon_state = "sanpedrocactus"
 	force = 7
@@ -61,7 +61,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/prickly_pear/san_pedro/peyote
 	seed = /obj/item/seeds/prickly_pear/san_pedro/peyote
-	name = "Peyote"
+	name = "peyote"
 	desc = "Now i can see the future, the past and all the true."
 	icon_state = "peyote"
 	tastes = list("fun" = 1)

@@ -17,7 +17,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/nispero
 	seed = /obj/item/seeds/nispero
-	name = "Nispero"
+	name = "nispero"
 	desc = "A small sour-sweet fruit that can also be used to make an alcoholic beverage"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "nispero"

@@ -16,7 +16,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/chanter/champignon
 	seed = /obj/item/seeds/chanter/champignon
-	name = "Champignon"
+	name = "champignon"
 	desc = "An edible mushroom, especially the much cultivated species Agaricus bisporus."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "champignon"

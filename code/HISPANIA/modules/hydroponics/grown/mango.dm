@@ -20,7 +20,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/mango
 	seed = /obj/item/seeds/mango
-	name = "Mango"
+	name = "mango"
 	desc = "It has an ovoid shape, non-edible rind and variable colour, from of pale yellow to dark red."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "mango"

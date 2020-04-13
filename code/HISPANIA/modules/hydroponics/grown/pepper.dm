@@ -19,7 +19,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/bell_pepper
 	seed = /obj/item/seeds/bell_pepper
-	name = "Bell Pepper"
+	name = "bell pepper"
 	desc = "The bell pepper is the fruit of plants in the Grossum cultivar group of the species Capsicum annuum."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "bellpepper"

@@ -18,7 +18,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/agave
 	seed = /obj/item/seeds/agave
-	name = "Agave"
+	name = "agave"
 	desc = "Used to create tequila."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "agave"

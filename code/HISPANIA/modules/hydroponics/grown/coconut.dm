@@ -19,7 +19,7 @@
 //When it grows
 /obj/item/grown/coconut
 	seed = /obj/item/seeds/coconut
-	name = "Coconut"
+	name = "coconut"
 	desc = "A seed? A nut? A fruit?"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "coconut-bet"
@@ -44,7 +44,7 @@
 
 //Here's the drink
 /obj/item/reagent_containers/food/drinks/grown/coconut
-	name = "Coconut drink"
+	name = "coconut drink"
 	desc = "Full of juice"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "coconut-slice"

@@ -17,7 +17,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/mate
 	seed = /obj/item/seeds/mate
-	name = "Mate"
+	name = "mate"
 	desc = "Very hipster"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "mate"

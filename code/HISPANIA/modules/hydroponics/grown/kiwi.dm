@@ -39,7 +39,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/kiwi
 	seed = /obj/item/seeds/kiwi
-	name = "Kiwi"
+	name = "kiwi"
 	desc = "Is a fruit of ovoid shape, of variable size and covered with a brown fuzzy thin skin"
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "kiwi"
@@ -47,7 +47,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/kiwi/actual_kiwi
 	seed = /obj/item/seeds/kiwi/actual_kiwi
-	name = "Actual Kiwi"
+	name = "actual kiwi"
 	desc = "Is a fruit of a ovoid shape but this one seems to be moving..."
 	icon_state = "actual_kiwi"
 	var/awakening = 0

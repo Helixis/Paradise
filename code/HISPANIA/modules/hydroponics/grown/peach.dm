@@ -19,7 +19,7 @@
 //Fruta
 /obj/item/reagent_containers/food/snacks/grown/peach
 	seed = /obj/item/seeds/peach
-	name = "Peach"
+	name = "peach"
 	desc = "The peach is a round, coloured, juicy fruit, typically eaten in summer."
 	icon = 'icons/hispania/obj/hydroponics/harvest.dmi'
 	icon_state = "peach"
