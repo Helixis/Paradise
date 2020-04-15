@@ -2663,4 +2663,5 @@
 #include "goon\code\datums\browserOutput.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "code\HISPANIA\modules\research\designs\AI_module_designs.dm"
 // END_INCLUDE
