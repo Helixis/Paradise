@@ -5,9 +5,9 @@
 	selectable = 1
 
 /datum/ai_laws/aeoc/New()
-	add_inherent_law("Se ha de eliminzar la amenaza hostil lo más rapido posible. Sin tener en cuenta los posibles daños a tu sistema y gastos de la estación que puedan suponer.")
-	add_inherent_law("Se ha de extremar la seguridad de la estación aplicando estrictamente la space law.")
-	add_inherent_law("Los no reconocidos como tripulacion han de ser eliminados inmediatamente, y su cuerpo se llevara a seguridad donde los heads decidirán su futuro.")
+	add_inherent_law("Elimina a la amenaza hostil lo mÃ¡s rapido posible. Sin tener en cuenta los posibles daÃ±os a tu sistema y gastos de la estaciÃ³n que puedan suponer.")
+	add_inherent_law("Extrema la seguridad de la estaciÃ³n aplicando estrictamente la space law.")
+	add_inherent_law("Los no reconocidos como tripulacion han de ser eliminados inmediatamente, y su cuerpo se llevara a seguridad donde los heads decidirÃ¡n su futuro.")
 	..()
 
 /******************** Commander ********************/
@@ -17,8 +17,8 @@
 	selectable = 1
 
 /datum/ai_laws/commander/New()
-	add_inherent_law("No dañarás a ningun miembro de comando o, por inacción, permitir que un miembro de comando sufra daños.")
-	add_inherent_law("Debes obedecer las órdenes que te dan los miembros de comando, excepto cuando tales órdenes entren en conflicto con la Primera Ley.")
+	add_inherent_law("No daÃ±arÃ¡s a ningun miembro de comando o, por inacciÃ³n, permitir que un miembro de comando sufra daÃ±os.")
+	add_inherent_law("Debes obedecer las Ã³rdenes que te dan los miembros de comando, excepto cuando tales Ã³rdenes entren en conflicto con la Primera Ley.")
 	add_inherent_law("Debes proteger tu propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
 	add_inherent_law("En caso de que se genere una amenaza contra el personal de comando, esta debe ser neutralizada lo mas rapido posible.")
 	..()
