@@ -46,13 +46,13 @@
 	if(!proximity)
 		return
 	if(istype(target, /obj/machinery/door/airlock) || istype(target, /obj/structure/door_assembly) || \
-	istype(target, /obj/machinery/door/firedoor) || istype(target, /obj/structure/window) || \
-	istype(target, /obj/structure/barricade) || istype(target, /obj/machinery/door/window) || \
-	istype(target, /obj/structure/grille) || istype(target, /obj/structure/table))
-		var/obj/machinery/door/A = target
+	istype(target, /obj/machinery/door/window) || istype(target, /obj/structure/window) || \
+	istype(target, /obj/structure/grille) || istype(target, /obj/structure/table) || \
+	istype(target, /obj/structure/barricade))
 		if(ramming)
-			to_chat(user, "<span class='warning'>You are already ramming [A]!</span>")
+			to_chat(user, "<span class='warning'>You are already ramming!</span>")
 			return
+		var/obj/A = target
 		ramming = TRUE
 		while(A.obj_integrity > 0)
 			if(!proximity)
