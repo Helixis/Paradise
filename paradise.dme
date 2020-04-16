@@ -1170,7 +1170,6 @@
 #include "code\HISPANIA\datums\uplink_item.dm"
 #include "code\HISPANIA\datums\diseases\black_death.dm"
 #include "code\HISPANIA\datums\diseases\spacepox.dm"
-#include "code\HISPANIA\datums\diseases\stoneman_disease.dm"
 #include "code\HISPANIA\defines\procs\discord.dm"
 #include "code\HISPANIA\defines\procs\newsounds.dm"
 #include "code\HISPANIA\game\data_huds.dm"
