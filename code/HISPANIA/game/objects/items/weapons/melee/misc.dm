@@ -27,12 +27,13 @@
 
 /obj/item/twohanded/required/ram
 	name = "ram"
-	desc = "A heavy ram used to take down those pesky doors. "
+	desc = "A heavy ram used to take down those annoying doors or other structures in you way."
 	icon = 'icons/hispania/obj/items.dmi'
 	icon_state = "ram"
 	item_state = "ram"
 	force = 10
 	throwforce = 12
+	throw_range = 3
 	force_wielded = 10
 	attack_verb = list("rammed")
 	hitsound = 'sound/hispania/weapons/ram.ogg'
@@ -44,15 +45,20 @@
 /obj/item/twohanded/required/ram/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
-	if(istype(target, /obj/machinery/door/airlock) || istype(target, /obj/structure/door_assembly))
+	if(istype(target, /obj/machinery/door/airlock) || istype(target, /obj/structure/door_assembly) || \
+	istype(target, /obj/machinery/door/firedoor) || istype(target, /obj/structure/window) || \
+	istype(target, /obj/structure/barricade) || istype(target, /obj/machinery/door/window) || \
+	istype(target, /obj/structure/grille) || istype(target, /obj/structure/table))
 		var/obj/machinery/door/A = target
 		if(ramming)
-			to_chat(user, "<span class='warning'>You are already ramming the airlock!</span>")
+			to_chat(user, "<span class='warning'>You are already ramming [A]!</span>")
 			return
 		ramming = TRUE
 		while(A.obj_integrity > 0)
+			if(!proximity)
+				return
 			playsound(get_turf(A), 'sound/hispania/weapons/ram.ogg', 150, 1, -1)
-			if(!do_after(user, 10, target = A))
+			if(!do_after(usr, 10, target = A))
 				ramming = FALSE
 				return
 			to_chat(viewers(user), "<span class='danger'>[user] rams [A]!</span>")
