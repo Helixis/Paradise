@@ -11,10 +11,10 @@ var/list/archive_diseases = list()
 
 // The order goes from easy to cure to hard to cure.
 var/list/advance_cures = 	list(
-									"sodiumchloride", "sugar", "orangejuice",
-									"spaceacillin", "salglu_solution", "ethanol",
-									"teporone", "diphenhydramine", "lipolicide",
-									"silver", "gold"
+									"spaceacillin", "mannitol", "ampligen",
+									"dolutegravir", "mitocholide", "pen_acid",
+									"teporone", "hydrocodone", "gold",
+									"perfluorodecalin", "famciclovir"
 								)
 
 /*
