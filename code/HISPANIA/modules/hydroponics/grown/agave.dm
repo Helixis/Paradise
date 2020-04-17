@@ -11,7 +11,7 @@
 	endurance = 40
 	yield = 5
 	potency = 30
-	maturation = 7
+	maturation = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("agave" = 0.04)
 

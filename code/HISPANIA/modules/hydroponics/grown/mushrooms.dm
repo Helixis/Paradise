@@ -11,7 +11,7 @@
 	endurance = 35
 	yield = 5
 	potency = 30
-	maturation = 7
+	maturation = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_mushrooms.dmi'
 
 /obj/item/reagent_containers/food/snacks/grown/chanter/champignon

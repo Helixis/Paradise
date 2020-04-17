@@ -11,7 +11,7 @@
 	endurance = 25
 	yield = 9
 	potency = 45
-	maturation = 7
+	maturation = 4
 	weed_chance = 45
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	reagents_add = list("peach" = 0.14, "sugar" = 0.12)

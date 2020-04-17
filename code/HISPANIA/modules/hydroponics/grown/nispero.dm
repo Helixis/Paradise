@@ -1,7 +1,7 @@
 //These are the seeds
 /obj/item/seeds/nispero
 	name = "pack of nispero"
-	desc = "These seeds will grow into a small níspero tree, a small sour-sweet fruit that can also be used to make an alcoholic beverage"
+	desc = "These seeds will grow into a small nï¿½spero tree, a small sour-sweet fruit that can also be used to make an alcoholic beverage"
 	icon = 'icons/hispania/obj/hydroponics/seeds.dmi'
 	icon_state = "nispero-seed"
 	species = "nispero"
@@ -11,8 +11,9 @@
 	endurance = 25
 	yield = 9
 	potency = 25
-	maturation = 7
+	maturation = 5
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
+	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("nispero" = 0.14, "sugar" = 0.12, "nutriment" = 0.10)
 
 /obj/item/reagent_containers/food/snacks/grown/nispero

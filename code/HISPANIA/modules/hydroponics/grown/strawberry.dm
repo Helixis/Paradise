@@ -11,7 +11,7 @@
 	endurance = 25
 	yield = 5
 	potency = 46
-	maturation = 7
+	maturation = 5
 	weed_chance = 25
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)

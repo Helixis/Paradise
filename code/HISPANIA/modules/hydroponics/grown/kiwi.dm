@@ -8,11 +8,10 @@
 	plantname = "Kiwi Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/kiwi
 	lifespan = 20
-	maturation = 5
 	production = 5
 	yield = 2
 	weed_chance = 15
-	maturation = 7
+	maturation = 4
 	potency = 30
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/kiwi/actual_kiwi)

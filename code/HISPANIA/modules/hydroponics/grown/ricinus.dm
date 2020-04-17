@@ -11,7 +11,7 @@
 	endurance = 25
 	yield = 5
 	potency = 37
-	maturation = 7
+	maturation = 4
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_flowers.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list("castor_oil" = 0.30, "sugar" = 0.12)

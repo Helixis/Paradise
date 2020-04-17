@@ -11,7 +11,7 @@
 	potency = 50
 	yield = 5
 	potency = 40
-	maturation = 7
+	maturation = 4
 	growing_icon = 'icons/hispania/obj/hydroponics/growing_fruits.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/anonna/anonna_reticulata)

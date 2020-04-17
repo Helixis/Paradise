@@ -9,7 +9,7 @@
 	product = /obj/item/reagent_containers/food/snacks/grown/mango
 	lifespan = 20
 	maturation = 5
-	production = 5
+	production = 3
 	yield = 2
 	potency = 30
 	weed_chance = 15
