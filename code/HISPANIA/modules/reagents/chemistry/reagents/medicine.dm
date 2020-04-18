@@ -25,6 +25,7 @@
 	reagent_state = LIQUID
 	color = "#149995"
 	metabolization_rate = 0.2
+	taste_description = "water"
 
 /datum/reagent/medicine/balavir
 	name = "Balavir"
@@ -32,7 +33,16 @@
 	description = "A basic compound in antiviral preparation"
 	reagent_state = LIQUID
 	color = "#6e0e0e"
-	metabolization_rate = 0.2
+	metabolization_rate = 0.4
+	
+/datum/reagent/medicine/boceprevir
+	name = "Boceprevir"
+	id = "boceprevirr"
+	description = "A high-level antiviral"
+	reagent_state = LIQUID
+	color = "#6e0e0e"
+	metabolization_rate = 0.5
+	taste_description = "life"
 
 /datum/reagent/medicine/dolutegravir
 	name = "Dolutegravir"
@@ -40,7 +50,7 @@
 	description = "An universal antiviral. Very effective against the vast majority of viruses"
 	reagent_state = LIQUID
 	color = "#415351"
-	metabolization_rate = 0.2
+	metabolization_rate = 0.3
 
 /datum/reagent/medicine/famciclovir
 	name = "Famciclovir"
@@ -48,7 +58,7 @@
 	description = "A high-level antiviral. Last resort if all else fails"
 	reagent_state = LIQUID
 	color = "#649a7f"
-	metabolization_rate = 0.4
+	metabolization_rate = 0.5
 	taste_description = "wish"
 
 /datum/reagent/medicine/fosamprenavir
