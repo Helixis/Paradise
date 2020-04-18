@@ -13,6 +13,7 @@
 	volume = 50
 	container_type = OPENCONTAINER
 	has_lid = TRUE
+	resistance_flags = ACID_PROOF
 
 	var/label_text = ""
 	// the fucking asshole who designed this can go die in a fire - Iamgoofball
@@ -78,7 +79,7 @@
 			else
 				M.LAssailant = user
 
-			reagents.reaction(M, TOUCH)
+			reagents.reaction(M, REAGENT_TOUCH)
 			reagents.clear_reagents()
 		else
 			if(M != user)
@@ -94,7 +95,7 @@
 				to_chat(user, "<span class='notice'>You swallow a gulp of [src].</span>")
 
 			var/fraction = min(5 / reagents.total_volume, 1)
-			reagents.reaction(M, INGEST, fraction)
+			reagents.reaction(M, REAGENT_INGEST, fraction)
 			addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, M, 5), 5)
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 	else
@@ -145,7 +146,7 @@
 	else if(reagents.total_volume && user.a_intent == INTENT_HARM)
 		user.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
 							"<span class='notice'>You splash the contents of [src] onto [target].</span>")
-		reagents.reaction(target, TOUCH)
+		reagents.reaction(target, REAGENT_TOUCH)
 		reagents.clear_reagents()
 
 /obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, params)
@@ -343,8 +344,9 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(5,10,15,20,25,30,50,80,100,120)
 	volume = 120
-	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list("melee" = 10, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 50) //Weak melee protection, because you can wear it on your head
 	slot_flags = SLOT_HEAD
+	resistance_flags = NONE
 	container_type = OPENCONTAINER
 
 /obj/item/reagent_containers/glass/bucket/wooden
@@ -352,13 +354,14 @@
 	icon_state = "woodbucket"
 	item_state = "woodbucket"
 	materials = null
-	burn_state = FLAMMABLE
+	armor = list("melee" = 10, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 50)
+	resistance_flags = FLAMMABLE
 
 /obj/item/reagent_containers/glass/bucket/equipped(mob/user, slot)
     ..()
     if(slot == slot_head && reagents.total_volume)
         to_chat(user, "<span class='userdanger'>[src]'s contents spill all over you!</span>")
-        reagents.reaction(user, TOUCH)
+        reagents.reaction(user, REAGENT_TOUCH)
         reagents.clear_reagents()
 
 /obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user, params)

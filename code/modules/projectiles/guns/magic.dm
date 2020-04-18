@@ -1,7 +1,7 @@
 /obj/item/gun/magic
 	name = "staff of nothing"
 	desc = "This staff is boring to watch because even though it came first you've seen everything it can do in other staves for years."
-	icon = 'icons/obj/guns/magic.dmi'
+	icon = 'icons/hispania/obj/guns/magic.dmi'
 	icon_state = "staffofnothing"
 	item_state = "staff"
 	fire_sound = 'sound/weapons/emitter.ogg'
@@ -40,7 +40,7 @@
 		chambered.newshot(params)
 	return
 
-/obj/item/gun/magic/process_fire()
+/obj/item/gun/magic/process_fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override, bonus_spread = 0)
 	newshot()
 	return ..()
 

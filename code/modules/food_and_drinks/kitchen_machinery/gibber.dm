@@ -108,7 +108,9 @@
 	if(default_unfasten_wrench(user, P))
 		return
 
-	default_deconstruction_crowbar(P)
+	if(default_deconstruction_crowbar(user, P))
+		return
+	return ..()
 
 /obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
 	if(user.incapacitated() || !ishuman(user))
@@ -283,6 +285,7 @@
 
 	else //this looks ugly but it's better than a copy-pasted startgibbing proc override
 		occupant.create_attack_log("Was gibbed by <b>an autogibber (\the [src])</b>")
+		add_attack_logs(src, occupant, "gibbed")
 
 	occupant.emote("scream")
 	playsound(get_turf(src), 'sound/goonstation/effects/gib.ogg', 50, 1)

@@ -11,9 +11,7 @@
 	icon = 'icons/mob/screen_gen.dmi'
 	layer = HUD_LAYER
 	plane = HUD_PLANE
-	resistance_flags = INDESTRUCTIBLE
-	burn_state = LAVA_PROOF
-	unacidable = TRUE
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/obj/master = null	//A reference to the object in the slot. Grabs or items, generally.
 	var/datum/hud/hud = null
 	appearance_flags = NO_CLIENT_COLOR
@@ -171,7 +169,7 @@
 /obj/screen/storage/Click(location, control, params)
 	if(world.time <= usr.next_move)
 		return 1
-	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
+	if(usr.stat || usr.paralysis || usr.stunned || usr.IsWeakened())
 		return 1
 	if(istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 		return 1
@@ -293,9 +291,10 @@
 		update_icon(usr)
 	return 1
 
-/obj/screen/zone_sel/update_icon()
+/obj/screen/zone_sel/update_icon(mob/user)
 	overlays.Cut()
 	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
+	user.zone_selected = selecting
 
 /obj/screen/zone_sel/alien
 	icon = 'icons/mob/screen_alien.dmi'
@@ -303,6 +302,7 @@
 /obj/screen/zone_sel/alien/update_icon(mob/user)
 	overlays.Cut()
 	overlays += image('icons/mob/screen_alien.dmi', "[selecting]")
+	user.zone_selected = selecting
 
 /obj/screen/zone_sel/robot
 	icon = 'icons/mob/screen_robot.dmi'
@@ -362,7 +362,7 @@
 		object_overlays += item_overlay
 		add_overlay(object_overlays)
 
-/obj/screen/inventory/Click()
+/obj/screen/inventory/Click(location, control, params)
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(world.time <= usr.next_move)
@@ -371,6 +371,12 @@
 		return 1
 	if(istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 		return 1
+	
+	if(hud?.mymob && slot_id)
+		var/obj/item/inv_item = hud.mymob.get_item_by_slot(slot_id)
+		if(inv_item)
+			return inv_item.Click(location, control, params)
+
 	if(usr.attack_ui(slot_id))
 		usr.update_inv_l_hand(0)
 		usr.update_inv_r_hand(0)

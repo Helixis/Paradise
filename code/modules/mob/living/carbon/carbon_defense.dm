@@ -1,4 +1,4 @@
-/mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = 1, blocked = 0)
+/mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	if(!skipcatch)
 		if(in_throw_mode && canmove && !restrained())  //Makes sure player is in throw mode
 			if(!istype(AM,/obj/item) || !isturf(AM.loc))
@@ -14,7 +14,7 @@
 			return TRUE
 	..()
 
-/mob/living/carbon/water_act(volume, temperature, source, method = TOUCH)
+/mob/living/carbon/water_act(volume, temperature, source, method = REAGENT_TOUCH)
 	. = ..()
 	if(volume > 10) // Anything over 10 volume will make the mob wetter.
 		wetlevel = min(wetlevel + 1,5)

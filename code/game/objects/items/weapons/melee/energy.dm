@@ -10,6 +10,9 @@
 	var/list/attack_verb_on = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg' // Probably more appropriate than the previous hitsound. -- Dave
 	usesound = 'sound/weapons/blade1.ogg'
+	max_integrity = 200
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
+	resistance_flags = FIRE_PROOF
 	toolspeed = 1
 	light_power = 2
 	var/brightness_on = 2
@@ -116,6 +119,7 @@
 	var/hacked = 0
 
 /obj/item/melee/energy/sword/New()
+	..()
 	if(item_color == null)
 		item_color = pick("red", "blue", "green", "purple")
 
@@ -215,9 +219,6 @@
 	icon_state = "cutlass0"
 	icon_state_on = "cutlass1"
 	light_color = LIGHT_COLOR_RED
-
-/obj/item/melee/energy/sword/pirate/New()
-	return
 
 /obj/item/melee/energy/blade
 	name = "energy blade"

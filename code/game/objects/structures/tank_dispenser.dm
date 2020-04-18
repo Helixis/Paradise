@@ -38,7 +38,7 @@
 /obj/structure/dispenser/attack_ghost(mob/user)
 	ui_interact(user)
 
-/obj/structure/dispenser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = default_state)
+/obj/structure/dispenser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	user.set_machine(src)
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
@@ -63,6 +63,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] is full.</span>")
 		SSnanoui.update_uis(src)
+		return
 	if(istype(I, /obj/item/tank/plasma))
 		if(plasmatanks < 10)
 			user.drop_item()
@@ -74,6 +75,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] is full.</span>")
 		SSnanoui.update_uis(src)
+		return
 	if(istype(I, /obj/item/wrench))
 		if(anchored)
 			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
@@ -81,6 +83,8 @@
 		else
 			to_chat(user, "<span class='notice'>You wrench [src] into place.</span>")
 			anchored = 1
+		return
+	return ..()
 
 /obj/structure/dispenser/Topic(href, href_list)
 	if(..())
@@ -118,3 +122,11 @@
 	else
 		SSnanoui.close_user_uis(usr,src)
 	return 1
+
+/obj/structure/tank_dispenser/deconstruct(disassembled = TRUE)
+	if(!(flags & NODECONSTRUCT))
+		for(var/X in src)
+			var/obj/item/I = X
+			I.forceMove(loc)
+		new /obj/item/stack/sheet/metal(loc, 2)
+	qdel(src)

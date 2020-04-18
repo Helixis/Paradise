@@ -48,6 +48,7 @@
 	name = "lipstick"
 
 /obj/item/lipstick/random/New()
+	..()
 	var/lscolor = pick(lipstick_colors)//A random color is picked from the var defined initially in a new var.
 	colour = lipstick_colors[lscolor]//The color of the lipstick is pulled from the new variable (right hand side, HTML & Hex RGB)
 	name = "[lscolor] lipstick"//The new variable is also used to match the name to the color of the lipstick. Kudos to Desolate & Lemon
@@ -107,8 +108,8 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/head/C = H.get_organ("head")
-		var/datum/robolimb/robohead = all_robolimbs[C.model]
-		if(user.zone_sel.selecting == "mouth")
+		var/datum/robolimb/robohead = GLOB.all_robolimbs[C.model]
+		if(user.zone_selected == "mouth")
 			if(!get_location_accessible(H, "mouth"))
 				to_chat(user, "<span class='warning'>The mask is in the way.</span>")
 				return
@@ -139,7 +140,7 @@
 						C.f_style = "Shaved"
 						H.update_fhair()
 						playsound(src.loc, usesound, 20, 1)
-		if(user.zone_sel.selecting == "head")
+		if(user.zone_selected == "head")
 			if(!get_location_accessible(H, "head"))
 				to_chat(user, "<span class='warning'>The headgear is in the way.</span>")
 				return

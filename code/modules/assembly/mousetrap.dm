@@ -89,7 +89,7 @@
 
 /obj/item/assembly/mousetrap/attack_hand(mob/living/user)
 	if(armed)
-		if((user.getBrainLoss() >= 60 || CLUMSY in user.mutations) && prob(50))
+		if((user.getBrainLoss() >= 60 || (CLUMSY in user.mutations)) && prob(50))
 			var/which_hand = "l_hand"
 			if(!user.hand)
 				which_hand = "r_hand"
@@ -121,10 +121,10 @@
 		return TRUE	//end the search!
 	return FALSE
 
-/obj/item/assembly/mousetrap/hitby(atom/movable/A)
+/obj/item/assembly/mousetrap/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(!armed)
 		return ..()
-	visible_message("<span class='warning'>[src] is triggered by [A].</span>")
+	visible_message("<span class='warning'>[src] is triggered by [AM].</span>")
 	triggered(null)
 
 /obj/item/assembly/mousetrap/armed

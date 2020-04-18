@@ -8,7 +8,8 @@
 	layer = ABOVE_WINDOW_LAYER
 	plane = GAME_PLANE
 	interact_offline = 1
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 100, bomb = 0, bio = 100, rad = 100)
+	max_integrity = 350
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 30, "acid" = 30)
 	var/on = 0
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
@@ -35,10 +36,10 @@
 	component_parts = list()
 	component_parts += new /obj/item/circuitboard/cryo_tube(null)
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	RefreshParts()
 
@@ -47,10 +48,10 @@
 	component_parts = list()
 	component_parts += new /obj/item/circuitboard/cryo_tube(null)
 	component_parts += new /obj/item/stock_parts/matter_bin/super(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 	RefreshParts()
 
@@ -67,20 +68,36 @@
 /obj/machinery/atmospherics/unary/cryo_cell/atmos_init()
 	..()
 	if(node) return
-	for(var/cdir in cardinal)
+	for(var/cdir in GLOB.cardinal)
 		node = findConnecting(cdir)
 		if(node)
 			break
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	var/turf/T = get_turf(src)
-	if(istype(T))
-		T.contents += contents
-		var/obj/item/reagent_containers/glass/B = beaker
-		if(beaker)
-			B.forceMove(get_step(T, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
-			beaker = null
+	QDEL_NULL(beaker)
 	return ..()
+
+/obj/machinery/atmospherics/unary/cryo_cell/ex_act(severity)
+	if(occupant)
+		occupant.ex_act(severity)
+	if(beaker)
+		beaker.ex_act(severity)
+	..()
+
+/obj/machinery/atmospherics/unary/cryo_cell/handle_atom_del(atom/A)
+	..()
+	if(A == beaker)
+		beaker = null
+		updateUsrDialog()
+	if(A == occupant)
+		occupant = null
+		updateUsrDialog()
+		update_icon()
+
+/obj/machinery/atmospherics/unary/cryo_cell/on_deconstruction()
+	if(beaker)
+		beaker.forceMove(drop_location())
+		beaker = null
 
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(atom/movable/O as mob|obj, mob/living/user as mob)
 	if(O.loc == user) //no you can't pull things out of your ass
@@ -197,7 +214,7 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/atmospherics/unary/cryo_cell/ui_data(mob/user, ui_key = "main", datum/topic_state/state = default_state)
+/obj/machinery/atmospherics/unary/cryo_cell/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	data["isOperating"] = on
 	data["hasOccupant"] = occupant ? 1 : 0
@@ -283,19 +300,10 @@
 		beaker =  B
 		add_attack_logs(user, null, "Added [B] containing [B.reagents.log_list()] to a cryo cell at [COORD(src)]")
 		user.visible_message("[user] adds \a [B] to [src]!", "You add \a [B] to [src]!")
-
-
-	if(istype(G, /obj/item/screwdriver))
-		if(occupant || on)
-			to_chat(user, "<span class='notice'>The maintenance panel is locked.</span>")
-			return
-		default_deconstruction_screwdriver(user, "pod0-o", "pod0", G)
 		return
 
 	if(exchange_parts(user, G))
 		return
-
-	default_deconstruction_crowbar(G)
 
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/GG = G
@@ -310,7 +318,19 @@
 		var/mob/M = GG.affecting
 		if(put_mob(M))
 			qdel(GG)
-	return
+		return
+	return ..()
+
+/obj/machinery/atmospherics/unary/cryo_cell/crowbar_act(mob/user, obj/item/I)
+	if(default_deconstruction_crowbar(user, I))
+		return
+
+/obj/machinery/atmospherics/unary/cryo_cell/screwdriver_act(mob/user, obj/item/I)
+	if(occupant || on)
+		to_chat(user, "<span class='notice'>The maintenance panel is locked.</span>")
+		return TRUE
+	if(default_deconstruction_screwdriver(user, "pod0-o", "pod0", I))
+		return TRUE
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
 	handle_update_icon()
@@ -383,7 +403,7 @@
 			var/proportion = 10 * min(1/beaker.volume, 1)
 			// Yes, this means you can get more bang for your buck with a beaker of SF vs a patch
 			// But it also means a giant beaker of SF won't heal people ridiculously fast 4 cheap
-			beaker.reagents.reaction(occupant, TOUCH, proportion)
+			beaker.reagents.reaction(occupant, REAGENT_TOUCH, proportion)
 			beaker.reagents.trans_to(occupant, 1, 10)
 	next_trans++
 	if(next_trans == 17)

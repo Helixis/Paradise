@@ -2,8 +2,10 @@
 	var/gc_destroyed //Time when this object was destroyed.
 	var/list/active_timers  //for SStimer
 	var/list/datum_components //for /datum/components
+	/// Status traits attached to this datum
+	var/list/status_traits
 	var/list/comp_lookup
-	var/list/signal_procs
+	var/list/list/datum/callback/signal_procs
 	var/signal_enabled = FALSE
 	var/datum_flags = NONE
 	var/var_edited = FALSE //Warranty void if seal is broken

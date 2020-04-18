@@ -5,7 +5,7 @@
 	var/obj/effect/tear/TE
 
 /datum/event/tear/announce()
-	event_announcement.Announce("A tear in the fabric of space and time has opened. Expected location: [impact_area.name].", "Anomaly Alert")
+	GLOB.event_announcement.Announce("A tear in the fabric of space and time has opened. Expected location: [impact_area.name].", "Anomaly Alert")
 
 /datum/event/tear/start()
 	var/turf/T = pick(get_area_turfs(impact_area))
@@ -24,7 +24,6 @@
 	desc="A tear in the dimensional fabric of space and time."
 	icon='icons/effects/tear.dmi'
 	icon_state="tear"
-	unacidable = 1
 	density = 0
 	anchored = 1
 	light_range = 3

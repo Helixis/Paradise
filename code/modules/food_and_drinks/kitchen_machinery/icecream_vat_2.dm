@@ -10,7 +10,7 @@
 #define INGR_ICE 10
 #define MUCK 11
 
-var/list/ingredients_source = list(
+GLOBAL_LIST_INIT(ingredients_source, list(
 "berryjuice" = FLAVOUR_STRAWBERRY,\
 "cocoa" = FLAVOUR_CHOCOLATE,\
 "singulo" = FLAVOUR_BLUE,\
@@ -19,7 +19,7 @@ var/list/ingredients_source = list(
 "ice" = INGR_ICE,\
 "flour" = INGR_FLOUR,\
 "sugar" = INGR_SUGAR,\
-)
+))
 
 /proc/get_icecream_flavour_string(var/flavour_type)
 	switch(flavour_type)
@@ -53,6 +53,7 @@ var/list/ingredients_source = list(
 	icon_state = "icecream_vat"
 	density = 1
 	anchored = 0
+	max_integrity = 300
 	var/list/ingredients = list()
 	var/dispense_flavour = 1
 	var/obj/item/reagent_containers/glass/held_container
@@ -129,14 +130,14 @@ var/list/ingredients_source = list(
 			if(R.reagents)
 				visible_message("<span class='info'>[user] has emptied all of [R] into [src].</span>")
 				for(var/datum/reagent/current_reagent in R.reagents.reagent_list)
-					if(ingredients_source[current_reagent.id])
-						add(ingredients_source[current_reagent.id], current_reagent.volume / 2)
+					if(GLOB.ingredients_source[current_reagent.id])
+						add(GLOB.ingredients_source[current_reagent.id], current_reagent.volume / 2)
 					else
 						add(MUCK, current_reagent.volume / 5)
 				R.reagents.clear_reagents()
 		return 1
 	else
-		..()
+		return ..()
 
 /obj/machinery/icecream_vat/proc/add(var/add_type, var/amount)
 	if(add_type <= ingredients.len)
@@ -214,6 +215,12 @@ var/list/ingredients_source = list(
 		usr << browse(null,"window=icecreamvat")
 	return
 
+/obj/machinery/icecream_vat/deconstruct(disassembled = TRUE)
+	if(!(flags & NODECONSTRUCT))
+		new /obj/item/stack/sheet/metal(loc, 4)
+	qdel(src)
+
+
 /obj/item/reagent_containers/food/snacks/icecream
 	name = "ice cream cone"
 	desc = "Delicious waffle cone, but no ice cream."
@@ -225,6 +232,7 @@ var/list/ingredients_source = list(
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/icecream/New()
+	..()
 	create_reagents(20)
 	reagents.add_reagent("nutriment", 5)
 

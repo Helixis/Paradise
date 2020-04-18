@@ -184,7 +184,7 @@
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
 				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					var/anydir = pick(cardinal)
+					var/anydir = pick(GLOB.cardinal)
 					if(Process_Spacemove(anydir))
 						Move(get_step(src,anydir), anydir)
 						turns_since_move = 0
@@ -333,6 +333,10 @@
 	if(loot.len)
 		for(var/i in loot)
 			new i(loc)
+
+/mob/living/simple_animal/revive()
+	..()
+	density = initial(density)
 
 /mob/living/simple_animal/death(gibbed)
 	// Only execute the below if we successfully died
@@ -496,7 +500,7 @@
 		. |= pcollar.GetAccess()
 
 /mob/living/simple_animal/update_canmove(delay_action_updates = 0)
-	if(paralysis || stunned || weakened || stat || resting)
+	if(paralysis || stunned || IsWeakened() || stat || resting)
 		drop_r_hand()
 		drop_l_hand()
 		canmove = 0
@@ -605,7 +609,7 @@
 		real_name = P.tagname
 
 /mob/living/simple_animal/regenerate_icons()
+	cut_overlays()
 	if(pcollar && collar_type)
-		cut_overlays()
 		add_overlay("[collar_type]collar")
 		add_overlay("[collar_type]tag")

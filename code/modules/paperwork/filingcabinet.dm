@@ -50,9 +50,17 @@
 		playsound(loc, P.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
+	else if(user.a_intent != INTENT_HARM)
+		to_chat(user, "<span class='warning'>You can't put [P] in [src]!</span>")
 	else
-		to_chat(user, "<span class='notice'>You can't put [P] in [src]!</span>")
+		return ..()
 
+/obj/structure/filingcabinet/deconstruct(disassembled = TRUE)
+	if(!(flags & NODECONSTRUCT))
+		new /obj/item/stack/sheet/metal(loc, 2)
+		for(var/obj/item/I in src)
+			I.forceMove(loc)
+	qdel(src)
 
 /obj/structure/filingcabinet/attack_hand(mob/user as mob)
 	if(contents.len <= 0)
@@ -111,9 +119,9 @@
 
 /obj/structure/filingcabinet/security/proc/populate()
 	if(virgin)
-		for(var/datum/data/record/G in data_core.general)
+		for(var/datum/data/record/G in GLOB.data_core.general)
 			var/datum/data/record/S
-			for(var/datum/data/record/R in data_core.security)
+			for(var/datum/data/record/R in GLOB.data_core.security)
 				if(R.fields["name"] == G.fields["name"] || R.fields["id"] == G.fields["id"])
 					S = R
 					break
@@ -127,7 +135,6 @@
 			P.name = "paper - '[G.fields["name"]]'"
 			virgin = 0	//tabbing here is correct- it's possible for people to try and use it
 						//before the records have been generated, so we do this inside the loop.
-	..()
 
 /obj/structure/filingcabinet/security/attack_hand()
 	populate()
@@ -145,9 +152,9 @@
 
 /obj/structure/filingcabinet/medical/proc/populate()
 	if(virgin)
-		for(var/datum/data/record/G in data_core.general)
+		for(var/datum/data/record/G in GLOB.data_core.general)
 			var/datum/data/record/M
-			for(var/datum/data/record/R in data_core.medical)
+			for(var/datum/data/record/R in GLOB.data_core.medical)
 				if(R.fields["name"] == G.fields["name"] || R.fields["id"] == G.fields["id"])
 					M = R
 					break
@@ -161,7 +168,6 @@
 			P.name = "paper - '[G.fields["name"]]'"
 			virgin = 0	//tabbing here is correct- it's possible for people to try and use it
 						//before the records have been generated, so we do this inside the loop.
-	..()
 
 /obj/structure/filingcabinet/medical/attack_hand()
 	populate()
@@ -175,7 +181,7 @@
  * Employment contract Cabinets
  */
 
-var/list/employmentCabinets = list()
+GLOBAL_LIST_EMPTY(employmentCabinets)
 
 /obj/structure/filingcabinet/employment
 	var/cooldown = 0
@@ -183,16 +189,16 @@ var/list/employmentCabinets = list()
 	var/virgin = 1
 
 /obj/structure/filingcabinet/employment/New()
-	employmentCabinets += src
+	GLOB.employmentCabinets += src
 	return ..()
 
 /obj/structure/filingcabinet/employment/Destroy()
-	employmentCabinets -= src
+	GLOB.employmentCabinets -= src
 	return ..()
 
 /obj/structure/filingcabinet/employment/proc/fillCurrent()
 	//This proc fills the cabinet with the current crew.
-	for(var/record in data_core.locked)
+	for(var/record in GLOB.data_core.locked)
 		var/datum/data/record/G = record
 		if(!G)
 			continue

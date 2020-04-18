@@ -185,6 +185,8 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/thing in GLOB.shuttle_caller_list)
 		if(istype(thing, /mob/living/silicon/ai))
 			var/mob/living/silicon/ai/AI = thing
+			if(AI.deployed_shell && !AI.deployed_shell.client)
+				continue
 			if(AI.stat || !AI.client)
 				continue
 		else if(istype(thing, /obj/machinery/computer/communications))
@@ -223,11 +225,12 @@ SUBSYSTEM_DEF(shuttle)
 	return 0	//dock successful
 
 
-/datum/controller/subsystem/shuttle/proc/moveShuttle(shuttleId, dockId, timed)
+/datum/controller/subsystem/shuttle/proc/moveShuttle(shuttleId, dockId, timed, mob/user)
 	var/obj/docking_port/mobile/M = getShuttle(shuttleId)
 	var/obj/docking_port/stationary/D = getDock(dockId)
 	if(!M)
 		return 1
+	M.last_caller = user // Save the caller of the shuttle for later logging
 	if(timed)
 		if(M.request(D))
 			return 2

@@ -12,6 +12,7 @@
 	color = "#404040"
 	buckle_lying = TRUE
 	var/icon_temperature = T20C //stop small changes in temperature causing icon refresh
+	resistance_flags = LAVA_PROOF | FIRE_PROOF
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/process_atmos()
 	var/environment_temperature = 0
@@ -68,7 +69,7 @@
 	if(initPipe)
 		normalize_dir()
 		var/N = 2
-		for(var/D in cardinal)
+		for(var/D in GLOB.cardinal)
 			if(D & initialize_directions_he)
 				N--
 				for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src, D))

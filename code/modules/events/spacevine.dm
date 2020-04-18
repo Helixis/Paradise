@@ -505,11 +505,11 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src, 'sound/weapons/slash.ogg', 50, 1)
+				playsound(src, 'sound/weapons/slash.ogg', 50, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, 1)
+				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src, 'sound/items/welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
 
 /obj/structure/spacevine/obj_destruction()
 	wither()
@@ -656,7 +656,7 @@
 		buckle_mob(V, 1)
 
 /obj/structure/spacevine/proc/spread()
-	var/list/dir_list = cardinal.Copy()
+	var/list/dir_list = GLOB.cardinal.Copy()
 	var/spread_search = FALSE // Whether to exhaustive search all 4 cardinal dirs for an open direction
 	for(var/datum/spacevine_mutation/SM in mutations)
 		spread_search |= SM.on_search(src)

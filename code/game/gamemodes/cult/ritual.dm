@@ -217,8 +217,8 @@
 			if(!((CULT_ELDERGOD in cult_mode.objectives) || (CULT_SLAUGHTER in cult_mode.objectives)))
 				to_chat(user, "<span class='warning'>[SSticker.cultdat.entity_name]'s power does not wish to be unleashed!</span>")
 				return 0
-			if(!(A in summon_spots))
-				to_chat(user, "<span class='cultlarge'>[SSticker.cultdat.entity_name] can only be summoned where the veil is weak - in [english_list(summon_spots)]!</span>")
+			if(!(A in GLOB.summon_spots))
+				to_chat(user, "<span class='cultlarge'>[SSticker.cultdat.entity_name] can only be summoned where the veil is weak - in [english_list(GLOB.summon_spots)]!</span>")
 				return 0
 		var/confirm_final = alert(user, "This is the FINAL step to summon your deities power, it is a long, painful ritual and the crew will be alerted to your presence", "Are you prepared for the final battle?", "My life for [SSticker.cultdat.entity_name]!", "No")
 		if(confirm_final == "No" || confirm_final == null)
@@ -278,10 +278,10 @@
 	if(ispath(rune_to_scribe, /obj/effect/rune/narsie) || ispath(rune_to_scribe, /obj/effect/rune/slaughter))//may need to change this - Fethas
 		if(finale_runes_ok(user,rune_to_scribe))
 			A = get_area(src)
-			if(!(A in summon_spots))  // Check again to make sure they didn't move
-				to_chat(user, "<span class='cultlarge'>The ritual can only begin where the veil is weak - in [english_list(summon_spots)]!</span>")
+			if(!(A in GLOB.summon_spots))  // Check again to make sure they didn't move
+				to_chat(user, "<span class='cultlarge'>The ritual can only begin where the veil is weak - in [english_list(GLOB.summon_spots)]!</span>")
 				return
-			command_announcement.Announce("Figments from an eldritch god are being summoned somewhere on the station from an unknown dimension. Disrupt the ritual at all costs!","Central Command Higher Dimensional Affairs", 'sound/AI/spanomalies.ogg')
+			GLOB.command_announcement.Announce("Figments from an eldritch god are being summoned somewhere on the station from an unknown dimension. Disrupt the ritual at all costs!","Central Command Higher Dimensional Affairs", 'sound/AI/spanomalies.ogg')
 			for(var/B in spiral_range_turfs(1, user, 1))
 				var/turf/T = B
 				var/obj/machinery/shield/N = new(T)
@@ -315,6 +315,6 @@
 			qdel(S)
 	var/obj/effect/rune/R = new rune_to_scribe(runeturf, chosen_keyword)
 	R.blood_DNA = list()
-	R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
+	R.blood_DNA[H.dna.unique_enzymes] = H.dna.blood_type
 	R.add_hiddenprint(H)
 	to_chat(user, "<span class='cult'>The [lowertext(initial(rune_to_scribe.cultist_name))] rune [initial(rune_to_scribe.cultist_desc)]</span>")

@@ -76,13 +76,17 @@
 				adjustToxLoss(-1000)
 
 				if(istype(src, /mob/living/simple_animal/slaughter)) //rason, do not want humans to get this
-
 					var/mob/living/simple_animal/slaughter/demon = src
 					demon.devoured++
 					to_chat(kidnapped, "<span class='userdanger'>You feel teeth sink into your flesh, and the--</span>")
 					kidnapped.adjustBruteLoss(1000)
 					kidnapped.forceMove(src)
 					demon.consumed_mobs.Add(kidnapped)
+					if(ishuman(kidnapped))
+						var/mob/living/carbon/human/H = kidnapped
+						if(H.w_uniform && istype(H.w_uniform, /obj/item/clothing/under))
+							var/obj/item/clothing/under/U = H.w_uniform
+							U.sensor_mode = SENSOR_OFF
 				else
 					kidnapped.ghostize()
 					qdel(kidnapped)
@@ -156,7 +160,7 @@
 	density = 0
 	anchored = 1
 	invisibility = 60
-	burn_state = LAVA_PROOF
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/effect/dummy/slaughter/relaymove(mob/user, direction)
 	forceMove(get_step(src,direction))

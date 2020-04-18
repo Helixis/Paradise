@@ -70,14 +70,14 @@ Difficulty: Very Hard
 
 /datum/action/innate/megafauna_attack/shotgun
 	name = "Shotgun Fire"
-	icon_icon = 'icons/obj/guns/projectile.dmi'
+	icon_icon = 'icons/hispania/obj/guns/projectile.dmi'
 	button_icon_state = "shotgun"
 	chosen_message = "<span class='colossus'>You are now firing shotgun shots where you aim.</span>"
 	chosen_attack_num = 3
 
 /datum/action/innate/megafauna_attack/alternating_cardinals
 	name = "Alternating Shots"
-	icon_icon = 'icons/obj/guns/projectile.dmi'
+	icon_icon = 'icons/hispania/obj/guns/projectile.dmi'
 	button_icon_state = "pistol"
 	chosen_message = "<span class='colossus'>You are now firing in alternating cardinal directions.</span>"
 	chosen_attack_num = 4
@@ -103,7 +103,7 @@ Difficulty: Very Hard
 			visible_message("<span class='colossus'>\"<b>You can't dodge.</b>\"</span>")
 		ranged_cooldown = world.time + 30
 		telegraph()
-		dir_shots(alldirs)
+		dir_shots(GLOB.alldirs)
 		move_to_delay = 3
 		return
 	else
@@ -127,13 +127,13 @@ Difficulty: Very Hard
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/alternating_dir_shots()
 	ranged_cooldown = world.time + 40
-	dir_shots(diagonals)
+	dir_shots(GLOB.diagonals)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(cardinal)
+	dir_shots(GLOB.cardinal)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(diagonals)
+	dir_shots(GLOB.diagonals)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(cardinal)
+	dir_shots(GLOB.cardinal)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/select_spiral_attack()
 	telegraph()
@@ -150,7 +150,7 @@ Difficulty: Very Hard
 	INVOKE_ASYNC(src, .proc/spiral_shoot, TRUE)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/spiral_shoot(negative = pick(TRUE, FALSE), counter_start = 8)
-	var/turf/start_turf = get_step(src, pick(alldirs))
+	var/turf/start_turf = get_step(src, pick(GLOB.alldirs))
 	var/counter = counter_start
 	for(var/i in 1 to 80)
 		if(negative)
@@ -198,7 +198,7 @@ Difficulty: Very Hard
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/dir_shots(list/dirs)
 	if(!islist(dirs))
-		dirs = alldirs.Copy()
+		dirs = GLOB.alldirs.Copy()
 	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, TRUE, 2)
 	for(var/d in dirs)
 		var/turf/E = get_step(src, d)

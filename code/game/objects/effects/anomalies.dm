@@ -5,7 +5,6 @@
 	icon = 'icons/effects/effects.dmi'
 	desc = "A mysterious anomaly, seen commonly only in the region of space that the station orbits..."
 	icon_state = "bhole3"
-	unacidable = 1
 	density = 0
 	anchored = 1
 	luminosity = 3
@@ -15,6 +14,7 @@
 	set_light(initial(luminosity))
 	aSignal = new(src)
 	aSignal.code = rand(1,100)
+	aSignal.anomaly_type = type
 
 	var/new_frequency = sanitize_frequency(rand(PUBLIC_LOW_FREQ, PUBLIC_HIGH_FREQ))
 	aSignal.set_frequency(new_frequency)
@@ -27,7 +27,7 @@
 
 /obj/effect/anomaly/proc/anomalyEffect()
 	if(prob(50))
-		step(src,pick(alldirs))
+		step(src,pick(GLOB.alldirs))
 
 
 /obj/effect/anomaly/proc/anomalyNeutralize()
@@ -125,7 +125,7 @@
 	..()
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
-		T.atmos_spawn_air(SPAWN_HEAT | SPAWN_TOXINS, 3)
+		T.atmos_spawn_air(LINDA_SPAWN_HEAT | LINDA_SPAWN_TOXINS, 3)
 
 /////////////////////
 

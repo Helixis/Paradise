@@ -22,7 +22,7 @@
 	return 0
 
 /datum/martial_art/mimejutsu/proc/mimeChuck(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(!D.stat && !D.stunned && !D.weakened)
+	if(!D.stat && !D.stunned && !D.IsWeakened())
 		var/damage = rand(5, 8) + A.dna.species.punchdamagelow
 		if(!damage)
 			playsound(D.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
@@ -30,11 +30,11 @@
 			return 0
 
 
-		var/obj/item/organ/external/affecting = D.get_organ(ran_zone(A.zone_sel.selecting))
+		var/obj/item/organ/external/affecting = D.get_organ(ran_zone(A.zone_selected))
 		var/armor_block = D.run_armor_check(affecting, "melee")
 
-		D.visible_message("<span class='danger'>[A] has hit [D] with invisible nuncucks!</span>", \
-								"<span class='userdanger'>[A] has hit [D] with a with invisible nuncuck!</span>")
+		D.visible_message("<span class='danger'>[A] has hit [D] with invisible nunchucks!</span>", \
+								"<span class='userdanger'>[A] has hit [D] with a with invisible nunchuck!</span>")
 		playsound(get_turf(A), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 		D.apply_damage(damage, STAMINA, affecting, armor_block)
@@ -54,7 +54,7 @@
 	return basic_hit(A,D)
 
 /datum/martial_art/mimejutsu/proc/mimePalm(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(!D.stat && !D.stunned && !D.weakened)
+	if(!D.stat && !D.stunned && !D.IsWeakened())
 		D.visible_message("<span class='danger'>[A] has barely touched [D] with [A.p_their()] palm!</span>", \
 						"<span class='userdanger'>[A] hovers [A.p_their()] palm over your face!</span>")
 

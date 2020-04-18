@@ -9,6 +9,7 @@
 	throw_speed = 4
 	throw_range = 20
 	materials = list(MAT_METAL=500)
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/obj/item/disk/nuclear/the_disk = null
 	var/active = 0
 	var/shows_nuke_timer = TRUE
@@ -87,6 +88,7 @@
 	name = "advanced pinpointer"
 	desc = "A larger version of the normal pinpointer, this unit features a helpful quantum entanglement detection system to locate various objects that do not broadcast a locator signal."
 	var/mode = 0  // Mode 0 locates disk, mode 1 locates coordinates.
+	var/modelocked = FALSE // If true, user cannot change mode.
 	var/turf/location = null
 	var/obj/target = null
 
@@ -118,6 +120,10 @@
 	set src in usr
 
 	if(usr.stat || usr.restrained())
+		return
+
+	if(modelocked)
+		to_chat(usr, "<span class='warning'>[src] is locked. It can only track one specific target.</span>")
 		return
 
 	active = 0
@@ -155,7 +161,7 @@
 				if("Item")
 					var/list/item_names[0]
 					var/list/item_paths[0]
-					for(var/objective in potential_theft_objectives)
+					for(var/objective in GLOB.potential_theft_objectives)
 						var/datum/theft_objective/T = objective
 						var/name = initial(T.name)
 						item_names += name
@@ -163,13 +169,13 @@
 					var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in item_names
 					if(!targetitem)
 						return
-					
+
 					var/list/target_candidates = get_all_of_type(item_paths[targetitem], subtypes = TRUE)
 					for(var/obj/item/candidate in target_candidates)
 						if(!is_admin_level((get_turf(candidate)).z))
 							target = candidate
 							break
-					
+
 					if(!target)
 						to_chat(usr, "<span class='warning'>Failed to locate [targetitem]!</span>")
 						return
@@ -214,7 +220,7 @@
 	if(mode)		//Check in case the mode changes while operating
 		worklocation()
 		return
-	if(bomb_set)	//If the bomb is set, lead to the shuttle
+	if(GLOB.bomb_set)	//If the bomb is set, lead to the shuttle
 		mode = 1	//Ensures worklocation() continues to work
 		worklocation()
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)	//Plays a beep
@@ -243,7 +249,7 @@
 	if(!mode)
 		workdisk()
 		return
-	if(!bomb_set)
+	if(!GLOB.bomb_set)
 		mode = 0
 		workdisk()
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)

@@ -52,8 +52,8 @@
 						//its inherent color, the colored paint applied on it, special color effect etc...
 
 /atom/New(loc, ...)
-	if(use_preloader && (src.type == _preloader.target_path))//in case the instanciated atom is creating other atoms in New()
-		_preloader.load(src)
+	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+		GLOB._preloader.load(src)
 	. = ..()
 	attempt_init(arglist(args))
 
@@ -164,6 +164,10 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_DIR_CHANGE, dir, newdir)
 	dir = newdir
 
+///Handle melee attack by a mech
+/atom/proc/mech_melee_attack(obj/mecha/M)
+	return
+
 /atom/proc/attack_hulk(mob/living/carbon/human/user, does_attack_animation = FALSE)
 	SEND_SIGNAL(src, COMSIG_ATOM_HULK_ATTACK, user)
 	if(does_attack_animation)
@@ -209,19 +213,23 @@
 /atom/proc/Bumped(AM as mob|obj)
 	return
 
-// Convenience procs to see if a container is open for chemistry handling
+/// Convenience proc to see if a container is open for chemistry handling
 /atom/proc/is_open_container()
 	return is_refillable() && is_drainable()
 
-/atom/proc/is_injectable(allowmobs = TRUE)
+/// Is this atom injectable into other atoms
+/atom/proc/is_injectable(mob/user, allowmobs = TRUE)
 	return reagents && (container_type & (INJECTABLE | REFILLABLE))
 
-/atom/proc/is_drawable(allowmobs = TRUE)
+/// Can we draw from this atom with an injectable atom
+/atom/proc/is_drawable(mob/user, allowmobs = TRUE)
 	return reagents && (container_type & (DRAWABLE | DRAINABLE))
 
+/// Can this atoms reagents be refilled
 /atom/proc/is_refillable()
 	return reagents && (container_type & REFILLABLE)
 
+/// Is this atom drainable of reagents
 /atom/proc/is_drainable()
 	return reagents && (container_type & DRAINABLE)
 
@@ -235,6 +243,7 @@
 	return
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
+	SEND_SIGNAL(src, COMSIG_ATOM_BULLET_ACT, P, def_zone)
 	. = P.on_hit(src, 0, def_zone)
 
 /atom/proc/in_contents_of(container)//can take class or object instance as argument
@@ -319,8 +328,50 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_BLOB_ACT, B)
 
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume, global_overlay = TRUE)
+	SEND_SIGNAL(src, COMSIG_ATOM_FIRE_ACT, exposed_temperature, exposed_volume)
 	if(reagents)
 		reagents.temperature_reagents(exposed_temperature)
+
+/atom/proc/tool_act(mob/living/user, obj/item/I, tool_type)
+	switch(tool_type)
+		if(TOOL_CROWBAR)
+			return crowbar_act(user, I)
+		if(TOOL_MULTITOOL)
+			return multitool_act(user, I)
+		if(TOOL_SCREWDRIVER)
+			return screwdriver_act(user, I)
+		if(TOOL_WRENCH)
+			return wrench_act(user, I)
+		if(TOOL_WIRECUTTER)
+			return wirecutter_act(user, I)
+		if(TOOL_WELDER)
+			return welder_act(user, I)
+
+
+// Tool-specific behavior procs. To be overridden in subtypes.
+/atom/proc/crowbar_act(mob/living/user, obj/item/I)
+	return
+
+/atom/proc/multitool_act(mob/living/user, obj/item/I)
+	return
+
+//Check if the multitool has an item in its data buffer
+/atom/proc/multitool_check_buffer(user, silent = FALSE)
+	if(!silent)
+		to_chat(user, "<span class='warning'>[src] has no data buffer!</span>")
+	return FALSE
+
+/atom/proc/screwdriver_act(mob/living/user, obj/item/I)
+	return
+
+/atom/proc/wrench_act(mob/living/user, obj/item/I)
+	return
+
+/atom/proc/wirecutter_act(mob/living/user, obj/item/I)
+	return
+
+/atom/proc/welder_act(mob/living/user, obj/item/I)
+	return
 
 /atom/proc/emag_act()
 	return
@@ -465,7 +516,7 @@
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
 	A.fingerprintslast = fingerprintslast
 
-var/list/blood_splatter_icons = list()
+GLOBAL_LIST_EMPTY(blood_splatter_icons)
 
 /atom/proc/blood_splatter_index()
 	return "\ref[initial(icon)]-[initial(icon_state)]"
@@ -481,8 +532,7 @@ var/list/blood_splatter_icons = list()
 		return
 	var/list/blood_dna = list()
 	if(dna)
-		var/mob/living/carbon/human/H = src
-		blood_dna[dna.unique_enzymes] = H.b_type
+		blood_dna[dna.unique_enzymes] = dna.blood_type
 	else
 		blood_dna["UNKNOWN DNA"] = "X*"
 	return blood_dna
@@ -599,13 +649,13 @@ var/list/blood_splatter_icons = list()
 	if(initial(icon) && initial(icon_state))
 		//try to find a pre-processed blood-splatter. otherwise, make a new one
 		var/index = blood_splatter_index()
-		var/icon/blood_splatter_icon = blood_splatter_icons[index]
+		var/icon/blood_splatter_icon = GLOB.blood_splatter_icons[index]
 		if(!blood_splatter_icon)
 			blood_splatter_icon = icon(initial(icon), initial(icon_state), , 1)		//we only want to apply blood-splatters to the initial icon_state for each object
 			blood_splatter_icon.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 			blood_splatter_icon.Blend(icon('icons/effects/blood.dmi', "itemblood"), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 			blood_splatter_icon = fcopy_rsc(blood_splatter_icon)
-			blood_splatter_icons[index] = blood_splatter_icon
+			GLOB.blood_splatter_icons[index] = blood_splatter_icon
 
 		blood_overlay = image(blood_splatter_icon)
 		blood_overlay.color = color
@@ -672,12 +722,12 @@ var/list/blood_splatter_icons = list()
 			this.icon_state = "vomittox_[pick(1,4)]"
 
 /atom/proc/get_global_map_pos()
-	if(!islist(global_map) || isemptylist(global_map)) return
+	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=global_map.len,cur_x++)
-		y_arr = global_map[cur_x]
+	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
+		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
 			break
@@ -712,8 +762,16 @@ var/list/blood_splatter_icons = list()
 /atom/proc/singularity_act()
 	return
 
-/atom/proc/singularity_pull()
-	return
+/atom/proc/singularity_pull(obj/singularity/S, current_size)
+	SEND_SIGNAL(src, COMSIG_ATOM_SING_PULL, S, current_size)
+
+/**
+  * Respond to acid being used on our atom
+  *
+  * Default behaviour is to send COMSIG_ATOM_ACID_ACT and return
+  */
+/atom/proc/acid_act(acidpwr, acid_volume)
+	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
 
 /atom/proc/narsie_act()
 	return
@@ -737,7 +795,7 @@ var/list/blood_splatter_icons = list()
 	return
 
 /atom/vv_edit_var(var_name, var_value)
-	if(!Debug2)
+	if(!GLOB.debug2)
 		admin_spawned = TRUE
 	. = ..()
 	switch(var_name)

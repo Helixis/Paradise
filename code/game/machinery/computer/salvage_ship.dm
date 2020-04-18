@@ -6,7 +6,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "syndie_key"
 	icon_screen = "syndishuttle"
-	req_access = list(access_salvage_captain)
+	req_access = list(ACCESS_SALVAGE_CAPTAIN)
 	var/area/curr_location
 	var/moving = 0
 	var/lastMove = 0
@@ -35,10 +35,6 @@
 	curr_location = dest_location
 	moving = 0
 	return 1
-
-
-/obj/machinery/computer/salvage_ship/attackby(obj/item/I as obj, mob/user as mob, params)
-	return attack_hand(user)
 
 /obj/machinery/computer/salvage_ship/attack_ai(mob/user as mob)
 	src.add_hiddenprint(user)

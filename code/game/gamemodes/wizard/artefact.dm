@@ -99,7 +99,7 @@
 				new_objective:target = H:mind
 				new_objective.explanation_text = "Protect [H.real_name], the wizard."
 				M.mind.objectives += new_objective
-				SSticker.mode.traitors += M.mind
+				SSticker.mode.apprentices += M.mind
 				M.mind.special_role = SPECIAL_ROLE_WIZARD_APPRENTICE
 				SSticker.mode.update_wiz_icons_added(M.mind)
 				M.faction = list("wizard")
@@ -142,7 +142,6 @@
 	icon = 'icons/obj/biomass.dmi'
 	icon_state = "rift"
 	density = 1
-	unacidable = 1
 	anchored = 1.0
 	var/spawn_path = /mob/living/simple_animal/cow //defaulty cows to prevent unintentional narsies
 	var/spawn_amt_left = 20
@@ -173,7 +172,13 @@
 		user.visible_message("<span class='danger'>[user] seals \the [src] with \the [I].</span>")
 		qdel(src)
 		return
-	..()
+	return ..()
+
+/obj/effect/rend/singularity_pull()
+	return
+
+/obj/effect/rend/singularity_pull()
+	return
 
 /obj/item/veilrender/vealrender
 	name = "veal render"
@@ -221,7 +226,7 @@
 	user.ghostize(1)
 
 /////////////////////Multiverse Blade////////////////////
-var/global/list/multiverse = list()
+GLOBAL_LIST_EMPTY(multiverse)
 
 /obj/item/multisword
 	name = "multiverse sword"
@@ -247,11 +252,11 @@ var/global/list/multiverse = list()
 
 /obj/item/multisword/New()
 	..()
-	multiverse |= src
+	GLOB.multiverse |= src
 
 
 /obj/item/multisword/Destroy()
-	multiverse.Remove(src)
+	GLOB.multiverse.Remove(src)
 	return ..()
 
 /obj/item/multisword/attack(mob/living/M as mob, mob/living/user as mob)  //to prevent accidental friendly fire or out and out grief.
@@ -298,7 +303,7 @@ var/global/list/multiverse = list()
 					evil = FALSE
 		else
 			cooldown = world.time + cooldown_between_uses
-			for(var/obj/item/multisword/M in multiverse)
+			for(var/obj/item/multisword/M in GLOB.multiverse)
 				if(M.assigned == assigned)
 					M.cooldown = cooldown
 
@@ -577,10 +582,10 @@ var/global/list/multiverse = list()
 			W.access = duplicated_id.access
 			W.icon_state = duplicated_id.icon_state
 		else
-			W.access += access_maint_tunnels
+			W.access += ACCESS_MAINT_TUNNELS
 			W.icon_state = "centcom"
 	else
-		W.access += access_maint_tunnels
+		W.access += ACCESS_MAINT_TUNNELS
 		W.icon_state = "centcom"
 	W.assignment = "Multiverse Traveller"
 	W.registered_name = M.real_name
@@ -637,7 +642,7 @@ var/global/list/multiverse = list()
 	if(M.stat != DEAD)
 		to_chat(user, "<span class='warning'>This artifact can only affect the dead!</span>")
 		return
-		
+
 	if((!M.mind || !M.client) && !M.grab_ghost())
 		to_chat(user,"<span class='warning'>There is no soul connected to this body...</span>")
 		return
@@ -773,8 +778,8 @@ var/global/list/multiverse = list()
 	var/obj/item/link = null
 	var/cooldown_time = 30 //3s
 	var/cooldown = 0
-	burntime = 0
-	burn_state = FLAMMABLE
+	max_integrity = 10
+	resistance_flags = FLAMMABLE
 
 /obj/item/voodoo/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(target && cooldown < world.time)
@@ -783,7 +788,7 @@ var/global/list/multiverse = list()
 			target.bodytemperature += 50
 			GiveHint(target)
 		else if(is_pointed(I))
-			to_chat(target, "<span class='userdanger'>You feel a stabbing pain in [parse_zone(user.zone_sel.selecting)]!</span>")
+			to_chat(target, "<span class='userdanger'>You feel a stabbing pain in [parse_zone(user.zone_selected)]!</span>")
 			target.Weaken(2)
 			GiveHint(target)
 		else if(istype(I,/obj/item/bikehorn))
@@ -801,7 +806,8 @@ var/global/list/multiverse = list()
 			link = I
 			to_chat(user, "You attach [I] to the doll.")
 			update_targets()
-	..()
+		return
+	return ..()
 
 /obj/item/voodoo/check_eye(mob/user as mob)
 	if(loc != user)
@@ -813,7 +819,7 @@ var/global/list/multiverse = list()
 		target = input(user, "Select your victim!", "Voodoo") as null|anything in possible
 		return
 
-	if(user.zone_sel.selecting == "chest")
+	if(user.zone_selected == "chest")
 		if(link)
 			target = null
 			link.loc = get_turf(src)
@@ -823,7 +829,7 @@ var/global/list/multiverse = list()
 			return
 
 	if(target && cooldown < world.time)
-		switch(user.zone_sel.selecting)
+		switch(user.zone_selected)
 			if("mouth")
 				var/wgw =  sanitize(input(user, "What would you like the victim to say", "Voodoo", null)  as text)
 				target.say(wgw)
@@ -836,7 +842,7 @@ var/global/list/multiverse = list()
 					user.unset_machine()
 			if("r_leg","l_leg")
 				to_chat(user, "<span class='notice'>You move the doll's legs around.</span>")
-				var/turf/T = get_step(target,pick(cardinal))
+				var/turf/T = get_step(target,pick(GLOB.cardinal))
 				target.Move(T)
 			if("r_arm","l_arm")
 				//use active hand on random nearby mob

@@ -12,6 +12,8 @@
 #define isconstruct(A) (istype(A, /mob/living/simple_animal/hostile/construct))
 
 //Objects
+#define isobj(A) istype(A, /obj) //override the byond proc because it returns true on children of /atom/movable that aren't objs
+
 #define isitem(A) (istype(A, /obj/item))
 
 #define ismachinery(A) (istype(A, /obj/machinery))
@@ -26,13 +28,13 @@
 
 #define is_pen(W) (istype(W, /obj/item/pen))
 
-var/list/static/global/pointed_types = typecacheof(list(
+GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 	/obj/item/pen,
 	/obj/item/screwdriver,
 	/obj/item/reagent_containers/syringe,
-	/obj/item/kitchen/utensil/fork))
+	/obj/item/kitchen/utensil/fork)))
 
-#define is_pointed(W) (is_type_in_typecache(W, pointed_types))
+#define is_pointed(W) (is_type_in_typecache(W, GLOB.pointed_types))
 
 GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 	/obj/item/stack/sheet/glass,

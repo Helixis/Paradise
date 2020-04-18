@@ -13,7 +13,7 @@
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
-	armor = list(melee = 50, bullet = 30, laser = 30, energy = 30, bomb = 30, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 30, laser = 30, energy = 30, bomb = 30, bio = 0, rad = 0, fire = 90, acid = 90)
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
 	var/health = 80			//the turret's health
@@ -79,7 +79,7 @@
 	health = 200
 	enabled = 1
 	lethal = 1
-	req_access = list(access_cent_commander)
+	req_access = list(ACCESS_CENT_COMMANDER)
 	installation = /obj/item/gun/energy/pulse/turret
 
 /obj/machinery/porta_turret/stationary
@@ -87,11 +87,11 @@
 	lethal = 1
 	installation = /obj/item/gun/energy/laser
 
-/obj/machinery/porta_turret/New()
-	..()
+/obj/machinery/porta_turret/Initialize(mapload)
+	. = ..()
 	if(req_access && req_access.len)
 		req_access.Cut()
-	req_one_access = list(access_security, access_heads)
+	req_one_access = list(ACCESS_SECURITY, ACCESS_HEADS)
 	one_access = 1
 
 	//Sets up a spark system
@@ -105,11 +105,11 @@
 	QDEL_NULL(spark_system)
 	return ..()
 
-/obj/machinery/porta_turret/centcom/New()
-	..()
+/obj/machinery/porta_turret/centcom/Initialize(mapload)
+	. = ..()
 	if(req_one_access && req_one_access.len)
 		req_one_access.Cut()
-	req_access = list(access_cent_specops)
+	req_access = list(ACCESS_CENT_SPECOPS)
 	one_access = 0
 
 /obj/machinery/porta_turret/proc/setup()
@@ -161,14 +161,14 @@
 			eprojectile = /obj/item/projectile/beam/pulse
 			eshot_sound = 'sound/weapons/pulse.ogg'
 
-var/list/turret_icons
+GLOBAL_LIST_EMPTY(turret_icons)
 /obj/machinery/porta_turret/update_icon()
-	if(!turret_icons)
-		turret_icons = list()
-		turret_icons["open"] = image(icon, "openTurretCover")
+	if(!GLOB.turret_icons)
+		GLOB.turret_icons = list()
+		GLOB.turret_icons["open"] = image(icon, "openTurretCover")
 
 	underlays.Cut()
-	underlays += turret_icons["open"]
+	underlays += GLOB.turret_icons["open"]
 
 	if(stat & BROKEN)
 		icon_state = "destroyed_target_prism"
@@ -218,7 +218,7 @@ var/list/turret_icons
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/porta_turret/ui_data(mob/user, ui_key = "main", datum/topic_state/state = default_state)
+/obj/machinery/porta_turret/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	data["access"] = !isLocked(user)
 	data["screen"] = screen
@@ -353,7 +353,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
 					if(installation)
 						var/obj/item/gun/energy/Gun = new installation(loc)
-						Gun.power_supply.charge = gun_charge
+						Gun.cell.charge = gun_charge
 						Gun.update_icon()
 					if(prob(50))
 						new /obj/item/stack/sheet/metal(loc, rand(1,4))
@@ -830,23 +830,6 @@ var/list/turret_icons
 				build_step = 3
 				return
 
-			else if(istype(I, /obj/item/weldingtool))
-				var/obj/item/weldingtool/WT = I
-				if(!WT.isOn())
-					return
-				if(WT.get_fuel() < 5) //uses up 5 fuel.
-					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
-					return
-
-				playsound(loc, WT.usesound, 50, 1)
-				if(do_after(user, 20 * WT.toolspeed, target = src))
-					if(!src || !WT.remove_fuel(5, user)) return
-					build_step = 1
-					to_chat(user, "You remove the turret's interior metal armor.")
-					new /obj/item/stack/sheet/metal( loc, 2)
-					return
-
-
 		if(3)
 			if(istype(I, /obj/item/gun/energy)) //the gun installation part
 
@@ -857,7 +840,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>")
 					return
 				installation = I.type //installation becomes I.type
-				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
+				gun_charge = E.cell.charge //the gun's charge is stored in gun_charge
 				to_chat(user, "<span class='notice'>You add [I] to the turret.</span>")
 
 				if(istype(installation, /obj/item/gun/energy/laser/tag/blue) || istype(installation, /obj/item/gun/energy/laser/tag/red))
@@ -911,31 +894,6 @@ var/list/turret_icons
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")
 				return
-
-		if(7)
-			if(istype(I, /obj/item/weldingtool))
-				var/obj/item/weldingtool/WT = I
-				if(!WT.isOn()) return
-				if(WT.get_fuel() < 5)
-					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
-
-				playsound(loc, WT.usesound, 50, 1)
-				if(do_after(user, 30 * WT.toolspeed, target = src))
-					if(!src || !WT.remove_fuel(5, user))
-						return
-					build_step = 8
-					to_chat(user, "<span class='notice'>You weld the turret's armor down.</span>")
-
-					//The final step: create a full turret
-					var/obj/machinery/porta_turret/Turret = new target_type(loc)
-					Turret.name = finish_name
-					Turret.installation = installation
-					Turret.gun_charge = gun_charge
-					Turret.enabled = 0
-					Turret.setup()
-
-					qdel(src) // qdel
-
 			else if(istype(I, /obj/item/crowbar))
 				playsound(loc, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You pry off the turret's exterior armor.</span>")
@@ -955,6 +913,33 @@ var/list/turret_icons
 		return
 	..()
 
+/obj/machinery/porta_turret_construct/welder_act(mob/user, obj/item/I)
+	. = TRUE
+	if(build_step == 2)
+		if(!I.use_tool(src, user, 20, 5, volume = I.tool_volume))
+			return
+		if(build_step != 2)
+			return
+		build_step = 1
+		to_chat(user, "<span class='notice'>You remove the turret's interior metal armor.</span>")
+		new /obj/item/stack/sheet/metal(drop_location(), 2)
+	else if(build_step == 7)
+		if(!I.use_tool(src, user, 50, amount = 5, volume = I.tool_volume))
+			return
+		if(build_step != 7)
+			return
+		build_step = 8
+		to_chat(user, "<span class='notice'>You weld the turret's armor down.</span>")
+
+		//The final step: create a full turret
+		var/obj/machinery/porta_turret/Turret = new target_type(loc)
+		Turret.name = finish_name
+		Turret.installation = installation
+		Turret.gun_charge = gun_charge
+		Turret.enabled = 0
+		Turret.setup()
+
+		qdel(src)
 
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)
 	switch(build_step)
@@ -964,7 +949,7 @@ var/list/turret_icons
 			build_step = 3
 
 			var/obj/item/gun/energy/Gun = new installation(loc)
-			Gun.power_supply.charge = gun_charge
+			Gun.cell.charge = gun_charge
 			Gun.update_icon()
 			installation = null
 			gun_charge = 0
@@ -1030,11 +1015,11 @@ var/list/turret_icons
 		depotarea.declare_started()
 	return ..(target)
 
-/obj/machinery/porta_turret/syndicate/New()
-	..()
+/obj/machinery/porta_turret/syndicate/Initialize(mapload)
+	. = ..()
 	if(req_one_access && req_one_access.len)
 		req_one_access.Cut()
-	req_access = list(access_syndicate)
+	req_access = list(ACCESS_SYNDICATE)
 	one_access = 0
 
 /obj/machinery/porta_turret/syndicate/update_icon()

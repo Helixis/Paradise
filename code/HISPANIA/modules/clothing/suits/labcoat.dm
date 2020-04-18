@@ -13,6 +13,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlong_CMO_open"
 	item_state = "labcoatlong_CMO_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 /obj/item/clothing/suit/storage/labcoat/cmolargeroundcut
 	name = "chief medical officer's large labcoat"
@@ -21,6 +24,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlonground_CMO_open"
 	item_state = "labcoatlonground_CMO_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 /obj/item/clothing/suit/storage/labcoat/medicallarge
 	name = "Medical labcoat"
@@ -29,6 +35,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlong_medical_open"
 	item_state = "labcoatlong_medical_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 /obj/item/clothing/suit/storage/labcoat/medicalroundlarge
 	name = "Medical labcoat"
@@ -37,23 +46,32 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlonground_medical_open"
 	item_state = "labcoatlonground_medical_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
-/obj/item/clothing/suit/storage/labcoat/RDlarge
+/obj/item/clothing/suit/storage/labcoat/rdlarge
 	name = "Research Director's large labcoat"
 	desc = "One purple and long labcoat."
 	icon = 'icons/hispania/mob/suit.dmi'
 	icon_state = "labcoatlong_RD_open"
 	item_state = "labcoatlong_RD_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 
-/obj/item/clothing/suit/storage/labcoat/RDlargeroundcut
+/obj/item/clothing/suit/storage/labcoat/rdlargeroundcut
 	name = "Research Director's large labcoat"
 	desc = "One purple and long labcoat."
 	icon = 'icons/hispania/mob/suit.dmi'
 	icon_state = "labcoatlonground_RD_open"
 	item_state = "labcoatlonground_RD_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 
 /obj/item/clothing/suit/storage/labcoat/sciencelarge
@@ -63,6 +81,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlong_science_open"
 	item_state = "labcoatlong_science_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 /obj/item/clothing/suit/storage/labcoat/scienceroundlarge
 	name = "Scientist labcoat"
@@ -71,6 +92,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlonground_science_open"
 	item_state = "labcoatlonground_science_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 ///Code and Sprites by Danaleja2005
 
@@ -81,6 +105,9 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlonground_rd_dark_open"
 	item_state = "labcoatlonground_rd_dark_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')
 
 
 /obj/item/clothing/suit/storage/labcoat/rdlargedark
@@ -89,3 +116,6 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	icon_state = "labcoatlong_rd_dark_open"
 	item_state = "labcoatlong_rd_dark_open"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+        "Vox" = 'icons/hispania/mob/suit.dmi',
+        "Grey" = 'icons/hispania/mob/suit.dmi')

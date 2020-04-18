@@ -9,7 +9,7 @@
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = "bluespace=6"
-	burn_state = FLAMMABLE
+	resistance_flags = FLAMMABLE
 
 /obj/item/teleportation_scroll/apprentice
 	name = "lesser scroll of teleportation"
@@ -47,12 +47,12 @@
 
 	var/A
 
-	A = input(user, "Area to jump to", "BOOYEA", A) as null|anything in teleportlocs
+	A = input(user, "Area to jump to", "BOOYEA", A) as null|anything in GLOB.teleportlocs
 
 	if(!A)
 		return
 
-	var/area/thearea = teleportlocs[A]
+	var/area/thearea = GLOB.teleportlocs[A]
 
 	if(user.stat || user.restrained())
 		return

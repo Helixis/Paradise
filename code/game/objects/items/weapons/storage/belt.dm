@@ -8,6 +8,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/belt_righthand.dmi'
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
+	max_integrity = 300
 	var/use_item_overlays = 0 // Do we have overlays for items held inside the belt?
 
 /obj/item/storage/belt/update_icon()
@@ -47,6 +48,7 @@
 	item_state = "utility"
 	use_item_overlays = 1
 	can_hold = list(
+		/obj/item/taperoll,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
@@ -133,6 +135,7 @@
 		/obj/item/rad_laser,
 		/obj/item/sensor_device,
 		/obj/item/wrench/medical,
+		/obj/item/pinpointer/crew,
 		/obj/item/handheld_defibrillator
 	)
 
@@ -205,6 +208,7 @@
 		/obj/item/wrench,
 		/obj/item/reagent_containers/spray/pestspray,
 		/obj/item/reagent_containers/spray/plantbgone,
+		/obj/item/melee/flyswatter,
 	)
 
 /obj/item/storage/belt/security
@@ -212,10 +216,11 @@
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
-	storage_slots = 5
+	storage_slots = 6
 	max_w_class = WEIGHT_CLASS_NORMAL
 	use_item_overlays = 1
 	can_hold = list(
+		/obj/item/taperoll,
 		/obj/item/grenade/flashbang,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/reagent_containers/spray/pepper,
@@ -226,6 +231,7 @@
 		/obj/item/ammo_box,
 		/obj/item/reagent_containers/food/snacks/donut,
 		/obj/item/kitchen/knife/combat,
+		/obj/item/kitchen/knife/folding,
 		/obj/item/melee/baton,
 		/obj/item/melee/classic_baton,
 		/obj/item/flashlight/seclite,
@@ -295,6 +301,7 @@
 	icon_state = "militarybelt"
 	item_state = "military"
 	max_w_class = WEIGHT_CLASS_SMALL
+	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/belt/military/sst
 	icon_state = "assaultbelt"
@@ -396,7 +403,7 @@
 	..()
 	new /obj/item/lightreplacer(src)
 	new /obj/item/holosign_creator(src)
-	new /obj/item/reagent_containers/spray(src)
+	new /obj/item/reagent_containers/spray/cleaner(src)
 	new /obj/item/soap(src)
 	new /obj/item/grenade/chem_grenade/cleaner(src)
 	new /obj/item/grenade/chem_grenade/cleaner(src)
@@ -763,6 +770,7 @@
 		/obj/item/reagent_containers/food/drinks/bottle,
 		/obj/item/stack/medical,
 		/obj/item/kitchen/knife,
+		/obj/item/kitchen/knife/folding,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/gps,
 		/obj/item/storage/bag/ore,

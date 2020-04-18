@@ -55,7 +55,7 @@
 
 /obj/item/paper/contract/infernal
 	var/contractType = 0
-	burn_state = LAVA_PROOF
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/datum/mind/owner
 	icon_state = "evil_contract"
 
@@ -265,8 +265,8 @@
 /obj/item/paper/contract/infernal/power/FulfillContract(mob/living/carbon/human/user = target.current, blood = 0)
 	if(!user.dna)
 		return -1
-	user.dna.SetSEState(HULKBLOCK,1)
-	genemutcheck(user, HULKBLOCK,null,MUTCHK_FORCED)
+	user.dna.SetSEState(GLOB.hulkblock,1)
+	genemutcheck(user, GLOB.hulkblock,null,MUTCHK_FORCED)
 	// Demonic power gives you consequenceless hulk
 	user.gene_stability += GENE_INSTABILITY_MAJOR
 	if(ishuman(user))

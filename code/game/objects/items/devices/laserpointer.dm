@@ -98,7 +98,7 @@
 	//human/alien mobs
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
-		if(user.zone_sel.selecting == "eyes")
+		if(user.zone_selected == "eyes")
 			add_attack_logs(user, C, "Shone a laser in the eyes with [src]")
 
 			var/severity = 1
@@ -138,6 +138,7 @@
 
 			log_admin("[key_name(user)] EMPd a camera with a laser pointer")
 			user.create_attack_log("[key_name(user)] EMPd a camera with a laser pointer")
+			add_attack_logs(user, C, "EMPd with [src]", ATKLOG_ALL)
 		else
 			outmsg = "<span class='info'>You missed the lens of [C] with [src].</span>"
 

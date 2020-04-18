@@ -173,6 +173,9 @@
 /mob/proc/Stun()
 	return
 
+/mob/proc/IsStunned()
+	return stunned
+
 /mob/proc/SetStunned()
 	return
 
@@ -189,6 +192,9 @@
 /mob/proc/AdjustStuttering()
 	return
 
+
+/mob/proc/IsWeakened()
+	return weakened
 
 /mob/proc/Weaken()
 	return

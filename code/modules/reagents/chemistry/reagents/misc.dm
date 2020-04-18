@@ -117,7 +117,7 @@
 	color = "#D0D0D0" // rgb: 208, 208, 208
 	taste_description = "sub-par bling"
 
-/datum/reagent/silver/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/silver/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(M.has_bane(BANE_SILVER))
 		M.reagents.add_reagent("toxin", volume)
 	. = ..()
@@ -129,7 +129,6 @@
 	reagent_state = SOLID
 	color = "#A8A8A8" // rgb: 168, 168, 168
 	taste_description = "metal"
-
 
 /datum/reagent/silicon
 	name = "Silicon"
@@ -147,6 +146,12 @@
 	color = "#6E3B08" // rgb: 110, 59, 8
 	taste_description = "copper"
 
+/datum/reagent/chromium
+	name = "Chromium"
+	id = "chromium"
+	description = "A catalytic chemical element."
+	color = "#DCDCDC"
+	taste_description = "bitterness"
 
 /datum/reagent/iron
 	name = "Iron"
@@ -164,7 +169,7 @@
 				H.blood_volume += 0.8
 	return ..()
 
-/datum/reagent/iron/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/iron/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(M.has_bane(BANE_IRON) && holder && holder.chem_temp < 150) //If the target is weak to cold iron, then poison them.
 		M.reagents.add_reagent("toxin", volume)
 	..()
@@ -304,16 +309,16 @@
 			H.dna.species.blood_color = "#[num2hex(rand(0, 255))][num2hex(rand(0, 255))][num2hex(rand(0, 255))]"
 	return ..()
 
-/datum/reagent/colorful_reagent/reaction_mob(mob/living/simple_animal/M, method=TOUCH, volume)
+/datum/reagent/colorful_reagent/reaction_mob(mob/living/simple_animal/M, method=REAGENT_TOUCH, volume)
     if(isanimal(M))
-        M.color = pick(random_color_list)
+        M.color = pick(GLOB.random_color_list)
     ..()
 
 /datum/reagent/colorful_reagent/reaction_obj(obj/O, volume)
-	O.color = pick(random_color_list)
+	O.color = pick(GLOB.random_color_list)
 
 /datum/reagent/colorful_reagent/reaction_turf(turf/T, volume)
-	T.color = pick(random_color_list)
+	T.color = pick(GLOB.random_color_list)
 
 /datum/reagent/hair_dye
 	name = "Quantum Hair Dye"
@@ -405,11 +410,13 @@
 	process_flags = ORGANIC | SYNTHETIC // That's the power of love~
 	taste_description = "<font color='pink'><b>love</b></font>"
 
-/datum/reagent/love/on_mob_life(mob/living/M)
-	if(M.a_intent != INTENT_HELP)
-		M.a_intent_change(INTENT_HELP)
-	M.can_change_intents = 0 //Now you have no choice but to be helpful.
+/datum/reagent/love/on_mob_add(mob/living/L)
+	..()
+	if(L.a_intent != INTENT_HELP)
+		L.a_intent_change(INTENT_HELP)
+	L.can_change_intents = FALSE //Now you have no choice but to be helpful.
 
+/datum/reagent/love/on_mob_life(mob/living/M)
 	if(prob(8))
 		var/lovely_phrase = pick("appreciated", "loved", "pretty good", "really nice", "pretty happy with yourself, even though things haven't always gone as well as they could")
 		to_chat(M, "<span class='notice'>You feel [lovely_phrase].</span>")
@@ -426,10 +433,10 @@
 	return ..()
 
 /datum/reagent/love/on_mob_delete(mob/living/M)
-	M.can_change_intents = 1
+	M.can_change_intents = TRUE
 	..()
 
-/datum/reagent/love/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/love/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	to_chat(M, "<span class='notice'>You feel loved!</span>")
 
 /datum/reagent/jestosterone //Formerly known as Nitrogen tungstide hypochlorite before NT fired the chemists for trying to be funny
@@ -544,6 +551,22 @@
 	M.update_transform()
 	..()
 
+/datum/reagent/pax
+	name = "Pax"
+	id = "pax"
+	description = "A colorless liquid that suppresses violence in its subjects."
+	color = "#AAAAAA55"
+	taste_description = "water"
+	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+
+/datum/reagent/pax/on_mob_add(mob/living/M)
+	..()
+	ADD_TRAIT(M, TRAIT_PACIFISM, id)
+
+/datum/reagent/pax/on_mob_delete(mob/living/M)
+	REMOVE_TRAIT(M, TRAIT_PACIFISM, id)
+	..()
+
 /datum/reagent/toxin/coffeepowder
 	name = "Coffee Grounds"
 	id = "coffeepowder"
@@ -650,13 +673,13 @@
 	overdose_threshold = 11 //Slightly more than one un-nozzled spraybottle.
 	taste_description = "sour oranges"
 
-/datum/reagent/spraytan/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+/datum/reagent/spraytan/reaction_mob(mob/living/M, method=REAGENT_TOUCH, reac_volume, show_message = 1)
 	if(ishuman(M))
-		if(method == TOUCH)
+		if(method == REAGENT_TOUCH)
 			var/mob/living/carbon/human/N = M
 			set_skin_color(N)
 
-		if(method == INGEST)
+		if(method == REAGENT_INGEST)
 			if(show_message)
 				to_chat(M, "<span class='notice'>That tasted horrible.</span>")
 	..()

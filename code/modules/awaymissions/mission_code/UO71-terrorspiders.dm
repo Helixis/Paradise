@@ -205,7 +205,7 @@
 		if(inawaymission)
 			if(ismob(loc))
 				to_chat(loc, "<span class='danger'>Your [src] deactivates, as it is out of range from its power source.</span>")
-			power_supply.charge = 0
+			cell.charge = 0
 			inawaymission = 0
 			update_icon()
 
@@ -224,7 +224,7 @@
 	name = "ID Upgrade Machine"
 	icon_state = "guest"
 	icon_screen = "pass"
-	var/list/access_to_give = list(access_away01)
+	var/list/access_to_give = list(ACCESS_AWAY01)
 	var/beenused = 0
 	var/door_to_open = "UO71_Start"
 
@@ -256,4 +256,5 @@
 					to_chat(user, "<span class='danger'>Activating the machine has unlocked a way forward!</span>")
 		else
 			to_chat(user, "<span class='notice'>Your ID card already has all the access this machine can give.</span>")
-		. = 1
+		return
+	return ..()

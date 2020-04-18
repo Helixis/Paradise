@@ -37,7 +37,7 @@
 			user.visible_message("<span class='warning'>[src] slips out of the grip of [user] as they try to pick it up, bouncing upwards and smacking [user.p_them()] in the face!</span>", \
 			"<span class='warning'>[src] slips out of your grip as you pick it up, bouncing upwards and smacking you in the face!</span>")
 			playsound(get_turf(user), 'sound/effects/hit_punch.ogg', 50, 1, -1)
-			throw_at(get_edge_target_turf(user, pick(alldirs)), rand(1, 3), 5)
+			throw_at(get_edge_target_turf(user, pick(GLOB.alldirs)), rand(1, 3), 5)
 
 
 /obj/item/nullrod/attack_self(mob/user)
@@ -233,7 +233,7 @@
 /obj/item/nullrod/scythe/spellblade
 	icon_state = "spellblade"
 	item_state = "spellblade"
-	icon = 'icons/obj/guns/magic.dmi'
+	icon = 'icons/hispania/obj/guns/magic.dmi'
 	name = "dormant spellblade"
 	desc = "The blade grants the wielder nearly limitless power...if they can figure out how to turn it on, that is."
 	hitsound = 'sound/weapons/rapierhit.ogg'
@@ -556,6 +556,7 @@
 	var/faith = 99	//a conversion requires 100 faith to attempt. faith recharges over time while you are wearing missionary robes that have been linked to the staff.
 
 /obj/item/nullrod/missionary_staff/New()
+	..()
 	team_color = pick("red", "blue")
 	icon_state = "godstaff-[team_color]"
 	item_state = "godstaff-[team_color]"

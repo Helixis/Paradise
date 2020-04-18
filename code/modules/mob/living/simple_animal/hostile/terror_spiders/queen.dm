@@ -88,7 +88,7 @@
 		if(spider_uo71)
 			UnlockBlastDoors("UO71_Caves")
 		// When a queen dies, so do her player-controlled purple-type guardians. Intended as a motivator for purples to ensure they guard her.
-		for(var/mob/living/simple_animal/hostile/poison/terror_spider/purple/P in ts_spiderlist)
+		for(var/mob/living/simple_animal/hostile/poison/terror_spider/purple/P in GLOB.ts_spiderlist)
 			if(ckey)
 				P.visible_message("<span class='danger'>\The [src] writhes in pain!</span>")
 				to_chat(P,"<span class='userdanger'>\The [src] has died. Without her hivemind link, purple terrors like yourself cannot survive more than a few minutes!</span>")
@@ -97,7 +97,7 @@
 
 /mob/living/simple_animal/hostile/poison/terror_spider/queen/Retaliate()
 	..()
-	for(var/mob/living/simple_animal/hostile/poison/terror_spider/T in ts_spiderlist)
+	for(var/mob/living/simple_animal/hostile/poison/terror_spider/T in GLOB.ts_spiderlist)
 		T.enemies |= enemies
 
 /mob/living/simple_animal/hostile/poison/terror_spider/queen/proc/ai_nest_is_full()
@@ -306,7 +306,7 @@
 	visible_message("<span class='userdanger'>\The [src] emits a bone-chilling shriek!</span>")
 	for(var/obj/machinery/light/L in orange(light_range, src))
 		if(L.on && prob(light_chance))
-			L.broken()
+			L.break_light_tube()
 	for(var/obj/machinery/camera/C in orange(camera_range, src))
 		if(C.status && prob(camera_chance))
 			C.toggle_cam(src, 0)
@@ -335,11 +335,11 @@
 	damage_type = TOX
 	var/bonus_tox = 30
 
-/obj/item/projectile/terrorqueenspit/on_hit(mob/living/carbon/target)
-	if(ismob(target))
+/obj/item/projectile/terrorqueenspit/on_hit(mob/living/carbon/target, blocked = 0, hit_zone)
+	if(ismob(target) && blocked < 100)
 		var/mob/living/L = target
 		if(L.reagents)
-			if(L.can_inject(null, 0, "chest", 0))
+			if(L.can_inject(null, FALSE, "chest", FALSE))
 				L.Hallucinate(400)
 		if(!isterrorspider(L))
 			L.adjustToxLoss(bonus_tox)
@@ -351,6 +351,6 @@
 /obj/structure/spider/terrorweb/queen/web_special_ability(mob/living/carbon/C)
 	if(istype(C))
 		var/inject_target = pick("chest","head")
-		if(C.can_inject(null, 0, inject_target, 0))
+		if(C.can_inject(null, FALSE, inject_target, FALSE))
 			C.Hallucinate(400)
 			C.adjustToxLoss(30)

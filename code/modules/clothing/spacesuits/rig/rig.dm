@@ -22,7 +22,6 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
-	unacidable = 1
 
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
@@ -156,7 +155,6 @@
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
-		piece.unacidable = unacidable
 		if(islist(armor))
 			var/list/L = armor
 			piece.armor = L.Copy()
@@ -524,7 +522,7 @@
 	cell.use(cost*10)
 	return 1
 
-/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
+/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.inventory_state)
 	if(!user)
 		return
 
@@ -534,7 +532,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/rig/ui_data(mob/user, ui_key = "main", datum/topic_state/state = inventory_state)
+/obj/item/rig/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.inventory_state)
 	var/data[0]
 
 	data["primarysystem"] = null
@@ -984,7 +982,7 @@
 			return 0
 
 	if(malfunctioning)
-		direction = pick(cardinal)
+		direction = pick(GLOB.cardinal)
 
 	// Inside an object, tell it we moved.
 	if(isobj(wearer.loc) || ismob(wearer.loc))
@@ -1054,7 +1052,7 @@
 	if(user.restrained())
 		to_chat(user, "<span class='notice'>You need your hands free for this.</span>")
 		return 0
-	if(user.stat || user.paralysis || user.sleeping || user.lying || user.weakened)
+	if(user.stat || user.paralysis || user.sleeping || user.lying || user.IsWeakened())
 		return 0
 	return 1
 #undef ONLY_DEPLOY

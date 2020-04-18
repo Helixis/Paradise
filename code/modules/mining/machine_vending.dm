@@ -18,6 +18,7 @@
 		new /datum/data/mining_equipment("Soap",						/obj/item/soap/nanotrasen,											200),
 		new /datum/data/mining_equipment("Laser Pointer",				/obj/item/laser_pointer,											300),
 		new /datum/data/mining_equipment("Alien Toy",					/obj/item/clothing/mask/facehugger/toy,								300),
+		new /datum/data/mining_equipment("Mining Binoculars",			/obj/item/device/binoculars/mining,									500),
 		new /datum/data/mining_equipment("Stabilizing Serum",			/obj/item/hivelordstabilizer,										400),
 		new /datum/data/mining_equipment("Space Cash",    				/obj/item/stack/spacecash/c1000,                    				2000),
 		new /datum/data/mining_equipment("Point Transfer Card", 		/obj/item/card/mining_point_card,               			  		500),
@@ -71,7 +72,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
 	RefreshParts()
 
 /obj/machinery/mineral/equipment_vendor/golem/Initialize()
@@ -107,7 +108,7 @@
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stack/sheet/glass(null)
 	RefreshParts()
 
 /obj/machinery/mineral/equipment_vendor/power_change()
@@ -187,14 +188,14 @@
 		if(istype(I, /obj/item/crowbar))
 			if(inserted_id)
 				inserted_id.forceMove(loc) //Prevents deconstructing the ORM from deleting whatever ID was inside it.
-			default_deconstruction_crowbar(I)
+			default_deconstruction_crowbar(user, I)
 		return 1
 	if(istype(I, /obj/item/mining_voucher))
 		if(!powered())
 			return
 		else
 			RedeemVoucher(I, user)
-			return
+		return
 	if(istype(I,/obj/item/card/id))
 		if(!powered())
 			return
@@ -206,11 +207,11 @@
 				C.forceMove(src)
 				inserted_id = C
 				interact(user)
-			return
-	..()
+		return
+	return ..()
 
 /obj/machinery/mineral/equipment_vendor/proc/RedeemVoucher(obj/item/mining_voucher/voucher, mob/redeemer)
-	var/items = list("Survival Capsule and Explorer's Webbing", "Resonator Kit", "Minebot Kit", "Extraction and Rescue Kit", "Crusher Kit", "Mining Conscription Kit")
+	var/items = list("Survival Capsule and Explorer's Webbing", "Resonator Kit", "Minebot Kit", "Extraction and Rescue Kit", "Crusher Kit", "Mining Conscription Kit", "Spacepod Starter Kit")
 
 	var/selection = input(redeemer, "Pick your equipment", "Mining Voucher Redemption") as null|anything in items
 	if(!selection || !Adjacent(redeemer) || QDELETED(voucher) || voucher.loc != redeemer)
@@ -236,6 +237,11 @@
 			new /obj/item/twohanded/kinetic_crusher(drop_location)
 		if("Mining Conscription Kit")
 			new /obj/item/storage/backpack/duffel/mining_conscript/full(drop_location)
+		if("Spacepod Starter Kit")
+			new /obj/item/spacepod_equipment/weaponry/mining_laser_basic(drop_location)
+			new /obj/item/spacepod_equipment/cargo/ore(drop_location)
+			new /obj/item/spacepod_equipment/lock/keyed(drop_location)
+			new /obj/item/spacepod_key(drop_location)
 
 	qdel(voucher)
 
@@ -289,7 +295,7 @@
 	. = ..()
 	if(istype(AM, /obj/item/card/id) && proximity)
 		var/obj/item/card/id/I = AM
-		I.access |= list(access_mining, access_mining_station, access_mineral_storeroom, access_cargo)
+		I.access |= list(ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM, ACCESS_CARGO)
 		to_chat(user, "You upgrade [I] with mining access.")
 		qdel(src)
 
@@ -299,8 +305,4 @@
 
 /obj/item/storage/backpack/duffel/mining_conscript/full/New()
 	..()
-	new /obj/item/clothing/suit/hooded/explorer(src)
 	new /obj/item/card/id/mining_access_card(src)
-	new /obj/item/gun/energy/kinetic_accelerator(src)
-	new /obj/item/kitchen/knife/combat/survival(src)
-	new /obj/item/flashlight/seclite(src)

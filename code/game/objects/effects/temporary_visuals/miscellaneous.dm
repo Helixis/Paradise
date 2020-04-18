@@ -18,7 +18,7 @@
 /obj/effect/temp_visual/dir_setting/bloodsplatter/New(loc, set_dir, blood_color)
 	if(blood_color)
 		color = blood_color
-	if(set_dir in diagonals)
+	if(set_dir in GLOB.diagonals)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
 	else
 		icon_state = "[splatter_type][pick(3, 4, 5)]"
@@ -87,8 +87,16 @@
 	icon_state = "phase_shift2"
 	duration = 12
 
+/obj/effect/temp_visual/dir_setting/wraith/Initialize(mapload)
+	. = ..()
+	icon_state = SSticker.cultdat?.wraith_jaunt_in_animation
+
 /obj/effect/temp_visual/dir_setting/wraith/out
 	icon_state = "phase_shift"
+
+/obj/effect/temp_visual/dir_setting/wraith/out/Initialize(mapload)
+	. = ..()
+	icon_state = SSticker.cultdat?.wraith_jaunt_out_animation
 
 /obj/effect/temp_visual/dir_setting/tailsweep
 	icon_state = "tailsweep"

@@ -1,6 +1,6 @@
 /mob/living/Initialize()
 	. = ..()
-	var/datum/atom_hud/data/human/medical/advanced/medhud = huds[DATA_HUD_MEDICAL_ADVANCED]
+	var/datum/atom_hud/data/human/medical/advanced/medhud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medhud.add_to_hud(src)
 	faction += "\ref[src]"
 
@@ -9,7 +9,6 @@
 	prepare_data_huds()
 
 /mob/living/proc/prepare_data_huds()
-	..()
 	med_hud_set_health()
 	med_hud_set_status()
 
@@ -209,15 +208,7 @@
 	set category = "Object"
 
 	if(istype(AM) && Adjacent(AM))
-		if(ishuman(usr))
-			var/mob/living/carbon/human/MM = AM
-			if(isobj(AM) || ismob(AM) && !MM.incapacitated(TRUE))
-				start_pulling(AM)
-			else
-				to_chat(usr, "<span class='warning'>You need a better grap to pull them!</span>")
-				return
-		else
-			start_pulling(AM)
+		start_pulling(AM)
 	else
 		stop_pulling()
 
@@ -255,6 +246,7 @@
 	set hidden = 1
 	if(InCritical())
 		create_attack_log("[src] has ["succumbed to death"] with [round(health, 0.1)] points of health!")
+		create_log(MISC_LOG, "has succumbed to death with [round(health, 0.1)] points of health")
 		adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
 		// super check for weird mobs, including ones that adjust hp
 		// we don't want to go overboard and gib them, though
@@ -273,6 +265,17 @@
 /mob/living/ex_act(severity)
 	..()
 	flash_eyes()
+
+/mob/living/acid_act(acidpwr, acid_volume)
+	take_organ_damage(acidpwr * min(1, acid_volume * 0.1))
+	return 1
+
+/mob/living/welder_act(mob/user, obj/item/I)
+	if(!I.tool_use_check(null, 0)) //Don't need the message, just if it succeeded
+		return
+	if(IgniteMob())
+		message_admins("[key_name_admin(user)] set [key_name_admin(src)] on fire with [I]")
+		log_game("[key_name(user)] set [key_name(src)] on fire with [I]")
 
 /mob/living/proc/updatehealth(reason = "none given")
 	if(status_flags & GODMODE)
@@ -370,24 +373,15 @@
 			return 1
 	return 0
 
-
+// Living mobs use can_inject() to make sure that the mob is not syringe-proof in general.
 /mob/living/proc/can_inject()
 	return TRUE
 
-/mob/living/is_injectable(allowmobs = TRUE)
-	return (allowmobs && reagents && can_inject())
+/mob/living/is_injectable(mob/user, allowmobs = TRUE)
+	return (allowmobs && reagents && can_inject(user))
 
-/mob/living/is_drawable(allowmobs = TRUE)
-	return (allowmobs && reagents && can_inject())
-
-/mob/living/proc/get_organ_target()
-	var/mob/shooter = src
-	var/t = shooter:zone_sel.selecting
-	if((t in list( "eyes", "mouth" )))
-		t = "head"
-	var/obj/item/organ/external/def_zone = ran_zone(t)
-	return def_zone
-
+/mob/living/is_drawable(mob/user, allowmobs = TRUE)
+	return (allowmobs && reagents && can_inject(user))
 
 /mob/living/proc/restore_all_organs()
 	return
@@ -410,6 +404,7 @@
 		if(C.reagents)
 			C.reagents.clear_reagents()
 			QDEL_LIST(C.reagents.addiction_list)
+			C.reagents.addiction_threshold_accumulated.Cut()
 
 // rejuvenate: Called by `revive` to get the mob into a revivable state
 // the admin "rejuvenate" command calls `revive`, not this proc.
@@ -486,6 +481,16 @@
 		human_mob.update_eyes()
 		human_mob.update_dna()
 	return
+
+/mob/living/proc/remove_CC(should_update_canmove = TRUE)
+	SetWeakened(0, FALSE)
+	SetStunned(0, FALSE)
+	SetParalysis(0, FALSE)
+	SetSleeping(0, FALSE)
+	setStaminaLoss(0)
+	SetSlowed(0)
+	if(should_update_canmove)
+		update_canmove()
 
 /mob/living/proc/UpdateDamageIcon()
 	return
@@ -575,7 +580,7 @@
 						newdir = NORTH
 					else if(newdir == 12) //E + W
 						newdir = EAST
-				if((newdir in cardinal) && (prob(50)))
+				if((newdir in GLOB.cardinal) && (prob(50)))
 					newdir = turn(get_dir(T, loc), 180)
 				if(!blood_exists)
 					new /obj/effect/decal/cleanable/trail_holder(loc)
@@ -799,13 +804,16 @@
 				add_attack_logs(src, who, "Equipped [what]")
 
 /mob/living/singularity_act()
-	var/gain = 20
 	investigate_log("([key_name(src)]) has been consumed by the singularity.","singulo") //Oh that's where the clown ended up!
 	gib()
-	return(gain)
+	return 20
 
-/mob/living/singularity_pull(S)
-	step_towards(src,S)
+/mob/living/singularity_pull(S, current_size)
+	..()
+	if(current_size >= STAGE_SIX) //your puny magboots/wings/whatever will not save you against supermatter singularity
+		throw_at(S, 14, 3, src, TRUE)
+	else if(!mob_negates_gravity())
+		step_towards(src,S)
 
 /mob/living/narsie_act()
 	if(client)

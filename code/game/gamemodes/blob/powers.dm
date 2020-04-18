@@ -22,10 +22,10 @@
 	set name = "Jump to Node"
 	set desc = "Transport back to a selected node."
 
-	if(blob_nodes.len)
+	if(GLOB.blob_nodes.len)
 		var/list/nodes = list()
-		for(var/i = 1; i <= blob_nodes.len; i++)
-			var/obj/structure/blob/node/B = blob_nodes[i]
+		for(var/i = 1; i <= GLOB.blob_nodes.len; i++)
+			var/obj/structure/blob/node/B = GLOB.blob_nodes[i]
 			nodes["Blob Node #[i] ([get_location_name(B)])"] = B
 		var/node_name = input(src, "Choose a node to jump to.", "Node Jump") in nodes
 		var/obj/structure/blob/node/chosen_node = nodes[node_name]
@@ -76,7 +76,7 @@
 			return
 
 
-		else if(S.health < S.maxHealth * 0.5)
+		else if(S.obj_integrity < S.max_integrity * 0.5)
 			to_chat(src, "<span class='warning'>This shield blob is too damaged to be modified properly!</span>")
 			return
 
@@ -333,10 +333,10 @@
 	last_attack = world.time
 	OB.expand(T, 0, blob_reagent_datum.color)
 	for(var/mob/living/L in T)
-		if("blob" in L.faction) //no friendly fire
+		if(ROLE_BLOB in L.faction) //no friendly/dead fire
 			continue
 		var/mob_protection = L.get_permeability_protection()
-		blob_reagent_datum.reaction_mob(L, TOUCH, 25, 1, mob_protection)
+		blob_reagent_datum.reaction_mob(L, REAGENT_TOUCH, 25, 1, mob_protection)
 		blob_reagent_datum.send_message(L)
 	OB.color = blob_reagent_datum.color
 	return
@@ -463,7 +463,7 @@
 
 	color = blob_reagent_datum.complementary_color
 
-	for(var/obj/structure/blob/BL in blobs)
+	for(var/obj/structure/blob/BL in GLOB.blobs)
 		BL.adjustcolors(blob_reagent_datum.color)
 
 	for(var/mob/living/simple_animal/hostile/blob/BLO)

@@ -101,7 +101,7 @@
 	// due to `del_on_death`
 	return ..()
 
-var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window)
+GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/cable, /obj/structure/window))
 
 /mob/living/simple_animal/hostile/mimic/copy
 	health = 100
@@ -141,7 +141,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		faction |= "\ref[owner]"
 
 /mob/living/simple_animal/hostile/mimic/copy/proc/CheckObject(var/obj/O)
-	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
+	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, GLOB.protected_objects))
 		return 1
 	return 0
 
@@ -244,10 +244,10 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 
 /mob/living/simple_animal/hostile/mimic/copy/ranged/OpenFire(the_target)
 	if(Zapgun)
-		if(Zapgun.power_supply)
+		if(Zapgun.cell)
 			var/obj/item/ammo_casing/energy/shot = Zapgun.ammo_type[Zapgun.select]
-			if(Zapgun.power_supply.charge >= shot.e_cost)
-				Zapgun.power_supply.use(shot.e_cost)
+			if(Zapgun.cell.charge >= shot.e_cost)
+				Zapgun.cell.use(shot.e_cost)
 				Zapgun.update_icon()
 				..()
 	else if(Zapstick)

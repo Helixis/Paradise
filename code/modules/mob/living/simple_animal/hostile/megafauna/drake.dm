@@ -52,7 +52,7 @@ Difficulty: Medium
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/dragon/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/dragon)
-	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/animalhide/ashdrake = 10, /obj/item/stack/sheet/bone = 30)
+	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/animalhide/ashdrake = 10, /obj/item/stack/sheet/bone = 30, /obj/item/reagent_containers/food/snacks/drakemeat = 5)
 	var/swooping = NONE
 	var/player_cooldown = 0
 	internal_type = /obj/item/gps/internal/dragon
@@ -366,7 +366,7 @@ Difficulty: Medium
 			if(L && !QDELETED(L)) // Some mobs are deleted on death
 				var/throw_dir = get_dir(src, L)
 				if(L.loc == loc)
-					throw_dir = pick(alldirs)
+					throw_dir = pick(GLOB.alldirs)
 				var/throwtarget = get_edge_target_turf(src, throw_dir)
 				L.throw_at(throwtarget, 3)
 				visible_message("<span class='warning'>[L] is thrown clear of [src]!</span>")

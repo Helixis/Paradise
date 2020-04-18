@@ -71,7 +71,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = default_state)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key
@@ -176,7 +176,7 @@ nanoui is used to open and update nano browser uis
 	var/name = "[src_object]"
 	var/list/config_data = list(
 			"title" = title,
-			"map" = (using_map && using_map.name) ? using_map.name : "Unknown",
+			"map" = (GLOB.using_map && GLOB.using_map.name) ? GLOB.using_map.name : "Unknown",
 			"srcObject" = list("name" = name),
 			"stateKey" = state_key,
 			"status" = status,
@@ -415,6 +415,11 @@ nanoui is used to open and update nano browser uis
 
 	if(!initial_data)
 		set_initial_data(src_object.ui_data(user, ui_key, state)) // Get the UI data.
+
+	// Preset the can_rezie and titlebar values on uis if the user has fancy uis set
+	// Prevents the ui from flickering when opened
+	if(user.client.prefs.nanoui_fancy)
+		set_window_options("focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=0;titlebar=0;")
 
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map

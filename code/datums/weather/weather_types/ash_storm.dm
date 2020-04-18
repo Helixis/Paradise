@@ -36,7 +36,7 @@
 	var/list/outside_areas = list()
 	var/list/eligible_areas = list()
 	for(var/z in impacted_z_levels)
-		eligible_areas += space_manager.areas_in_z["[z]"]
+		eligible_areas += GLOB.space_manager.areas_in_z["[z]"]
 	for(var/i in 1 to eligible_areas.len)
 		var/area/place = eligible_areas[i]
 		if(place.outdoors)
@@ -77,6 +77,10 @@
 /datum/weather/ash_storm/proc/is_ash_immune(atom/L)
 	while(L && !isturf(L))
 		if(ismecha(L)) //Mechs are immune
+			return TRUE
+		if(isspacepod(L))
+			return TRUE
+		if(isashwalker(L))
 			return TRUE
 		if(ishuman(L)) //Are you immune?
 			var/mob/living/carbon/human/H = L

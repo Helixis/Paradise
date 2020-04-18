@@ -17,6 +17,7 @@
 	var/delay = 0								//Delay for energy weapons
 	var/randomspread = 0						//Randomspread for automatics
 	var/click_cooldown_override = 0				//Override this to make your gun have a faster fire rate, in tenths of a second. 4 is the default gun cooldown.
+	var/harmful = TRUE //pacifism check for boolet, set to FALSE if bullet is non-lethal
 
 /obj/item/ammo_casing/New()
 	..()
@@ -24,7 +25,7 @@
 		BB = new projectile_type(src)
 	pixel_x = rand(-10.0, 10)
 	pixel_y = rand(-10.0, 10)
-	dir = pick(alldirs)
+	dir = pick(GLOB.alldirs)
 	update_icon()
 
 /obj/item/ammo_casing/update_icon()
@@ -101,6 +102,7 @@
 	var/list/initial_mats //For calculating refund values.
 
 /obj/item/ammo_box/New()
+	..()
 	for(var/i in 1 to max_ammo)
 		stored_ammo += new ammo_type(src)
 	update_icon()

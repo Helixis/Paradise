@@ -1,6 +1,6 @@
 #define DRYING_TIME 5 * 60 * 10 //for 1 unit of depth in puddle (amount var)
 
-var/global/list/image/splatter_cache = list()
+GLOBAL_LIST_EMPTY(splatter_cache)
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
@@ -171,6 +171,9 @@ var/global/list/image/splatter_cache = list()
 	overlays.Cut()
 	overlays += giblets
 	. = ..()
+
+/obj/effect/decal/cleanable/blood/gibs/ex_act(severity)
+	return
 
 /obj/effect/decal/cleanable/blood/gibs/up
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gibup1", "gibup1", "gibup1")

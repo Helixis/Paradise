@@ -37,7 +37,7 @@
 	playsound(src, yelp_sound, 75, TRUE)
 
 /mob/living/simple_animal/pet/dog/emote(act, m_type = 1, message = null, force)
-	if(!incapacitated())
+	if(incapacitated())
 		return
 
 	var/on_CD = 0
@@ -727,6 +727,10 @@
 	//spark for no reason
 	if(prob(5))
 		do_sparks(3, 1, src)
+		if(prob(0.5))
+			if(prob(10))
+				var/turf/T = get_turf(src)
+				new /mob/living/simple_animal/hostile/poison/fleas/borg(T)
 
 /mob/living/simple_animal/pet/dog/corgi/borgi/handle_automated_action()
 	if(emagged && prob(25))

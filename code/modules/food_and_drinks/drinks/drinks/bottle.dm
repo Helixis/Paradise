@@ -50,9 +50,13 @@
 	if(user.a_intent != INTENT_HARM || !isGlass)
 		return ..()
 
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
+		return
+
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
+	var/obj/item/organ/external/affecting = user.zone_selected //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armor values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
@@ -117,7 +121,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/proc/SplashReagents(mob/M)
 	if(reagents && reagents.total_volume)
 		M.visible_message("<span class='danger'>The contents of \the [src] splashes all over [M]!</span>")
-		reagents.reaction(M, TOUCH)
+		reagents.reaction(M, REAGENT_TOUCH)
 		reagents.clear_reagents()
 
 //Keeping this here for now, I'll ask if I should keep it here.
@@ -338,7 +342,7 @@
 		log_game("[key_name(user)] has primed a [name] for detonation at [bombarea] ([bombturf.x],[bombturf.y],[bombturf.z]).")
 
 		to_chat(user, "<span class='info'>You light [src] on fire.</span>")
-		overlays += fire_overlay
+		overlays += GLOB.fire_overlay
 		if(!isGlass)
 			spawn(50)
 				if(active)
@@ -360,6 +364,6 @@
 			to_chat(user, "<span class='danger'>The flame's spread too far on it!</span>")
 			return
 		to_chat(user, "<span class='info'>You snuff out the flame on \the [src].</span>")
-		overlays -= fire_overlay
+		overlays -= GLOB.fire_overlay
 		active = 0
 

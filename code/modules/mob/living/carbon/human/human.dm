@@ -30,7 +30,7 @@
 
 	create_reagents(330)
 
-	martial_art = default_martial_art
+	martial_art = GLOB.default_martial_art
 
 	handcrafting = new()
 
@@ -155,9 +155,6 @@
 
 /mob/living/carbon/human/stok/Initialize(mapload)
 	..(mapload, /datum/species/monkey/unathi)
-
-/mob/living/carbon/human/murghal/Initialize(mapload)
-	..(mapload, "Murghal")
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -298,7 +295,7 @@
 
 	..()
 
-/mob/living/carbon/human/blob_act()
+/mob/living/carbon/human/blob_act(obj/structure/blob/B)
 	if(stat == DEAD)
 		return
 	show_message("<span class='userdanger'>The blob attacks you!</span>")
@@ -315,13 +312,10 @@
 			return 0
 	..()
 
-/mob/living/carbon/human/restrained()
-	if(handcuffed)
-		return 1
-	if(istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
-		return 1
-	return 0
-
+/mob/living/carbon/human/get_restraining_item()
+	. = ..()
+	if(!. && istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
+		. = wear_suit
 
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
 
@@ -459,12 +453,6 @@
 	var/datum/browser/popup = new(user, "mob\ref[src]", "[src]", 440, 540)
 	popup.set_content(dat)
 	popup.open()
-
-
-/mob/living/carbon/human/Crossed(atom/movable/AM, oldloc)
-	var/mob/living/simple_animal/bot/mulebot/MB = AM
-	if(istype(MB))
-		MB.RunOver(src)
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
@@ -671,7 +659,7 @@
 					if(place_item)
 						usr.unEquip(place_item)
 						equip_to_slot_if_possible(place_item, pocket_id, 0, 1)
-						add_attack_logs(usr, src, "Equipped with [pocket_item]", isLivingSSD(src) ? null : ATKLOG_ALL)
+						add_attack_logs(usr, src, "Equipped with [place_item]", isLivingSSD(src) ? null : ATKLOG_ALL)
 
 				// Update strip window
 				if(usr.machine == src && in_range(src, usr))
@@ -722,9 +710,9 @@
 			var/perpname = get_visible_name(TRUE)
 
 			if(perpname != "Unknown")
-				for(var/datum/data/record/E in data_core.general)
+				for(var/datum/data/record/E in GLOB.data_core.general)
 					if(E.fields["name"] == perpname)
-						for(var/datum/data/record/R in data_core.security)
+						for(var/datum/data/record/R in GLOB.data_core.security)
 							if(R.fields["id"] == E.fields["id"])
 
 								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
@@ -761,9 +749,9 @@
 			var/perpname = get_visible_name(TRUE)
 			var/read = 0
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.security)
+					for(var/datum/data/record/R in GLOB.data_core.security)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]")
@@ -785,9 +773,9 @@
 			var/perpname = get_visible_name(TRUE)
 			var/read = 0
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.security)
+					for(var/datum/data/record/R in GLOB.data_core.security)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								read = 1
@@ -807,9 +795,9 @@
 				return
 			var/perpname = get_visible_name(TRUE)
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.security)
+					for(var/datum/data/record/R in GLOB.data_core.security)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								var/t1 = copytext(trim(sanitize(input("Add Comment:", "Sec. records", null, null) as message)), 1, MAX_MESSAGE_LEN)
@@ -817,13 +805,13 @@
 									return
 								if(ishuman(usr))
 									var/mob/living/carbon/human/U = usr
-									R.fields["comments"] += "Made by [U.get_authentification_name()] ([U.get_assignment()]) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.get_authentification_name()] ([U.get_assignment()]) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 								if(isrobot(usr))
 									var/mob/living/silicon/robot/U = usr
-									R.fields["comments"] += "Made by [U.name] ([U.modtype] [U.braintype]) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.name] ([U.modtype] [U.braintype]) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 								if(isAI(usr))
 									var/mob/living/silicon/ai/U = usr
-									R.fields["comments"] += "Made by [U.name] (artificial intelligence) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.name] (artificial intelligence) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 
 	if(href_list["medical"])
 		if(hasHUD(usr,"medical"))
@@ -832,9 +820,9 @@
 			var/modified = 0
 			var/perpname = get_visible_name(TRUE)
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.general)
+					for(var/datum/data/record/R in GLOB.data_core.general)
 						if(R.fields["id"] == E.fields["id"])
 							var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*SSD*", "*Deceased*", "Physically Unfit", "Active", "Disabled", "Cancel")
 
@@ -842,8 +830,8 @@
 								if(setmedical != "Cancel")
 									R.fields["p_stat"] = setmedical
 									modified = 1
-									if(PDA_Manifest.len)
-										PDA_Manifest.Cut()
+									if(GLOB.PDA_Manifest.len)
+										GLOB.PDA_Manifest.Cut()
 
 									spawn()
 										sec_hud_set_security_status()
@@ -858,9 +846,9 @@
 			var/read = 0
 			var/perpname = get_visible_name(TRUE)
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.medical)
+					for(var/datum/data/record/R in GLOB.data_core.medical)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
 								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
@@ -883,9 +871,9 @@
 			var/perpname = get_visible_name(TRUE)
 			var/read = 0
 
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.medical)
+					for(var/datum/data/record/R in GLOB.data_core.medical)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
 								read = 1
@@ -904,9 +892,9 @@
 			if(usr.incapacitated())
 				return
 			var/perpname = get_visible_name(TRUE)
-			for(var/datum/data/record/E in data_core.general)
+			for(var/datum/data/record/E in GLOB.data_core.general)
 				if(E.fields["name"] == perpname)
-					for(var/datum/data/record/R in data_core.medical)
+					for(var/datum/data/record/R in GLOB.data_core.medical)
 						if(R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
 								var/t1 = copytext(trim(sanitize(input("Add Comment:", "Med. records", null, null) as message)), 1, MAX_MESSAGE_LEN)
@@ -914,13 +902,13 @@
 									return
 								if(ishuman(usr))
 									var/mob/living/carbon/human/U = usr
-									R.fields["comments"] += "Made by [U.get_authentification_name()] ([U.get_assignment()]) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.get_authentification_name()] ([U.get_assignment()]) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 								if(isrobot(usr))
 									var/mob/living/silicon/robot/U = usr
-									R.fields["comments"] += "Made by [U.name] ([U.modtype] [U.braintype]) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.name] ([U.modtype] [U.braintype]) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 								if(isAI(usr))
 									var/mob/living/silicon/ai/U = usr
-									R.fields["comments"] += "Made by [U.name] (artificial intelligence) on [current_date_string] [station_time_timestamp()]<BR>[t1]"
+									R.fields["comments"] += "Made by [U.name] (artificial intelligence) on [GLOB.current_date_string] [station_time_timestamp()]<BR>[t1]"
 
 	if(href_list["lookitem"])
 		var/obj/item/I = locate(href_list["lookitem"])
@@ -1009,14 +997,14 @@
 			xylophone=0
 	return
 
-/mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone, var/penetrate_thick = 0)
+/mob/living/carbon/human/can_inject(mob/user, error_msg, target_zone, penetrate_thick = FALSE)
 	. = 1
 
 	if(!target_zone)
 		if(!user)
 			target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
 		else
-			target_zone = user.zone_sel.selecting
+			target_zone = user.zone_selected
 
 
 	if(PIERCEIMMUNE in dna.species.species_traits)
@@ -1185,7 +1173,6 @@
 		return 1
 
 /mob/living/carbon/human/cuff_resist(obj/item/I)
-
 	if(HULK in mutations)
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		if(..(I, cuff_break = 1))
@@ -1553,7 +1540,7 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 
 	//Check for weapons
 	if(judgebot.weaponscheck)
-		if(!idcard || !(access_weapons in idcard.access))
+		if(!idcard || !(ACCESS_WEAPONS in idcard.access))
 			if(judgebot.check_for_weapons(l_hand))
 				threatcount += 4
 			if(judgebot.check_for_weapons(r_hand))
@@ -1564,7 +1551,7 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 	//Check for arrest warrant
 	if(judgebot.check_records)
 		var/perpname = get_visible_name(TRUE)
-		var/datum/data/record/R = find_record("name", perpname, data_core.security)
+		var/datum/data/record/R = find_record("name", perpname, GLOB.data_core.security)
 		if(R && R.fields["criminal"])
 			switch(R.fields["criminal"])
 				if("*Execute*")
@@ -1592,17 +1579,16 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 	return threatcount
 
 /mob/living/carbon/human/singularity_act()
-	var/gain = 20
+	. = 20
 	if(mind)
 		if((mind.assigned_role == "Station Engineer") || (mind.assigned_role == "Chief Engineer") )
-			gain = 100
+			. = 100
 		if(mind.assigned_role == "Clown")
-			gain = rand(-300, 300)
-	investigate_log("([key_name(src)]) has been consumed by the singularity.","singulo") //Oh that's where the clown ended up!
-	gib()
-	return(gain)
+			. = rand(-1000, 1000)
+	..() //Called afterwards because getting the mind after getting gibbed is sketchy
 
 /mob/living/carbon/human/singularity_pull(S, current_size)
+	..()
 	if(current_size >= STAGE_THREE)
 		var/list/handlist = list(l_hand, r_hand)
 		for(var/obj/item/hand in handlist)
@@ -1610,9 +1596,6 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 				step_towards(hand, src)
 				to_chat(src, "<span class='warning'>\The [S] pulls \the [hand] from your grip!</span>")
 	apply_effect(current_size * 3, IRRADIATE)
-	if(mob_negates_gravity())
-		return
-	..()
 
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/human/H)
 	if(H == src)

@@ -9,7 +9,7 @@
 	icon_state = "spiderling"
 	anchored = 0
 	layer = 2.75
-	health = 3
+	max_integrity = 3
 	var/stillborn = FALSE
 	var/spider_myqueen = null
 	var/spider_mymother = null
@@ -23,12 +23,12 @@
 
 /obj/structure/spider/spiderling/terror_spiderling/New()
 	..()
-	ts_spiderling_list += src
+	GLOB.ts_spiderling_list += src
 	if(is_away_level(z))
 		spider_awaymission = TRUE
 
 /obj/structure/spider/spiderling/terror_spiderling/Destroy()
-	ts_spiderling_list -= src
+	GLOB.ts_spiderling_list -= src
 	return ..()
 
 /obj/structure/spider/spiderling/terror_spiderling/Bump(obj/O)
@@ -39,10 +39,10 @@
 	. = ..()
 
 
-/obj/structure/spider/spiderling/terror_spiderling/die()
+/obj/structure/spider/spiderling/terror_spiderling/Destroy()
 	for(var/obj/structure/spider/spiderling/terror_spiderling/S in view(7, src))
 		S.immediate_ventcrawl = TRUE
-	. = ..()
+	return ..()
 
 /obj/structure/spider/spiderling/terror_spiderling/proc/score_surroundings(atom/A = src)
 	var/safety_score = 0
@@ -163,7 +163,7 @@
 			if(stillborn)
 				if(amount_grown >= 300)
 					// Fake spiderlings stick around for awhile, just to be spooky.
-					die()
+					qdel(src)
 			else
 				if(!grow_as)
 					grow_as = pick(/mob/living/simple_animal/hostile/poison/terror_spider/red, /mob/living/simple_animal/hostile/poison/terror_spider/gray, /mob/living/simple_animal/hostile/poison/terror_spider/green)
@@ -205,7 +205,7 @@
 
 /obj/structure/spider/eggcluster/terror_eggcluster/New()
 	..()
-	ts_egg_list += src
+	GLOB.ts_egg_list += src
 	spawn(50)
 		if(spiderling_type == /mob/living/simple_animal/hostile/poison/terror_spider/red)
 			name = "red terror eggs"
@@ -227,7 +227,7 @@
 			name = "queen of terror eggs"
 
 /obj/structure/spider/eggcluster/terror_eggcluster/Destroy()
-	ts_egg_list -= src
+	GLOB.ts_egg_list -= src
 	return ..()
 
 /obj/structure/spider/eggcluster/terror_eggcluster/process()

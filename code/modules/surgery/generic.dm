@@ -1,7 +1,7 @@
-//Procedures in this file: Gneric surgery steps
-//////////////////////////////////////////////////////////////////
+//Procedures in this file: Generic surgery steps
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //						COMMON STEPS							//
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/surgery_step/generic/
 	can_infect = 1
@@ -22,7 +22,7 @@
 
 	allowed_tools = list(
 	/obj/item/scalpel = 100,		\
-	/obj/item/kitchen/knife = 90,	\
+	/obj/item/kitchen/knife = 70,	\
 	/obj/item/shard = 60, 		\
 	/obj/item/scissors = 12,		\
 	/obj/item/twohanded/chainsaw = 1, \
@@ -60,7 +60,7 @@
 	allowed_tools = list(
 	/obj/item/scalpel/laser = 100, \
 	/obj/item/hemostat = 100,	\
-	/obj/item/stack/cable_coil = 90, 	\
+	/obj/item/stack/cable_coil = 70, 	\
 	/obj/item/assembly/mousetrap = 25
 	)
 
@@ -83,7 +83,7 @@
 
 /datum/surgery_step/generic/clamp_bleeders/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'> [user]'s hand slips, tearing blood vessals and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",	\
+	user.visible_message("<span class='warning'> [user]'s hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",	\
 	"<span class='warning'> Your hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",)
 	affected.receive_damage(10)
 	return 0
@@ -94,7 +94,7 @@
 	allowed_tools = list(
 	/obj/item/scalpel/laser/manager = 100, \
 	/obj/item/retractor = 100, 	\
-	/obj/item/crowbar = 90,	\
+	/obj/item/crowbar = 70,	\
 	/obj/item/kitchen/utensil/fork = 60
 	)
 
@@ -199,7 +199,7 @@
 	allowed_tools = list(
 	/obj/item/circular_saw = 100, \
 	/obj/item/melee/energy/sword/cyborg/saw = 100, \
-	/obj/item/hatchet = 90, \
+	/obj/item/hatchet = 70, \
 	/obj/item/melee/arm_blade = 75
 	)
 
@@ -237,7 +237,7 @@
 /datum/surgery_step/generic/amputate/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool,datum/surgery/surgery)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, sawing through the bone in [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'> Your hand slips, sawwing through the bone in [target]'s [affected.name] with \the [tool]!</span>")
+	"<span class='warning'> Your hand slips, sawing through the bone in [target]'s [affected.name] with \the [tool]!</span>")
 	affected.receive_damage(30)
 	affected.fracture()
 	return 0

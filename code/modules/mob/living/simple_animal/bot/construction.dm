@@ -1,5 +1,4 @@
 //Bot Construction
-var/robot_arm = /obj/item/robot_parts/l_arm
 
 //Cleanbot assembly
 /obj/item/bucket_sensor
@@ -13,6 +12,7 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
 	var/created_name = "Cleanbot"
+	var/robot_arm = /obj/item/robot_parts/l_arm
 
 /obj/item/bucket_sensor/attackby(obj/item/W, mob/user as mob, params)
 	..()
@@ -27,9 +27,6 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
 		user.unEquip(src, 1)
 		qdel(src)
-		var/datum/job_objective/make_bot/task = user.mind.findJobTask(/datum/job_objective/make_bot)
-		if(istype(task))
-			task.unit_completed()
 
 	else if(istype(W, /obj/item/pen))
 		var/t = stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN)
@@ -99,12 +96,10 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 				icon_state = "[lasercolor]ed209_shell"
 
 		if(3)
-			if(istype(W, /obj/item/weldingtool))
-				var/obj/item/weldingtool/WT = W
-				if(WT.remove_fuel(0,user))
-					build_step++
-					name = "shielded frame assembly"
-					to_chat(user, "<span class='notice'>You weld the vest to [src].</span>")
+			if(W.tool_behaviour == TOOL_WELDER && W.use_tool(src, user, volume = W.tool_volume))
+				build_step++
+				name = "shielded frame assembly"
+				to_chat(user, "<span class='notice'>You weld the vest to [src].</span>")
 		if(4)
 			switch(lasercolor)
 				if("b")
@@ -301,9 +296,6 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 		to_chat(user, "<span class='notice'>You add the robot arm to the odd looking toolbox assembly. Boop beep!</span>")
 		user.unEquip(src, 1)
 		qdel(src)
-		var/datum/job_objective/make_bot/task = user.mind.findJobTask(/datum/job_objective/make_bot)
-		if(istype(task))
-			task.unit_completed()
 	else if(istype(W, /obj/item/pen))
 		var/t = stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN)
 		if(!t)
@@ -348,7 +340,7 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "firstaid_arm"
 	w_class = WEIGHT_CLASS_NORMAL
-	req_one_access = list(access_medical, access_robotics)
+	req_one_access = list(ACCESS_MEDICAL, ACCESS_ROBOTICS)
 	var/build_step = 0
 	var/created_name = "Medibot" //To preserve the name if it's a unique medbot I guess
 	var/skin = null //Same as medbot, set to tox or ointment for the respective kits.
@@ -358,6 +350,7 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 	var/treatment_fire = "salglu_solution"
 	var/treatment_tox = "charcoal"
 	var/treatment_virus = "spaceacillin"
+	var/robot_arm = /obj/item/robot_parts/l_arm
 
 /obj/item/firstaid_arm_assembly/New(loc, new_skin)
 	..()
@@ -402,9 +395,6 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 					qdel(I)
 					build_step++
 					to_chat(user, "<span class='notice'>You complete the Medibot. Beep boop!</span>")
-					var/datum/job_objective/make_bot/task = user.mind.findJobTask(/datum/job_objective/make_bot)
-					if(istype(task))
-						task.unit_completed()
 					var/turf/T = get_turf(src)
 					if(!syndicate_aligned)
 						var/mob/living/simple_animal/bot/medbot/S = new /mob/living/simple_animal/bot/medbot(T, skin)
@@ -430,6 +420,7 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 	item_state = "helmet"
 	var/created_name = "Securitron" //To preserve the name if it's a unique securitron I guess
 	var/build_step = 0
+	var/robot_arm = /obj/item/robot_parts/l_arm
 
 /obj/item/clothing/head/helmet/attackby(obj/item/assembly/signaler/S, mob/user, params)
 	..()
@@ -449,19 +440,15 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 
 /obj/item/secbot_assembly/attackby(obj/item/I, mob/user, params)
 	..()
-	if(istype(I, /obj/item/weldingtool))
+	if(I.tool_behaviour == TOOL_WELDER && I.use_tool(src, user, volume = I.tool_volume))
 		if(!build_step)
-			var/obj/item/weldingtool/WT = I
-			if(WT.remove_fuel(0, user))
-				build_step++
-				overlays += "hs_hole"
-				to_chat(user, "<span class='notice'>You weld a hole in [src]!</span>")
+			build_step++
+			overlays += "hs_hole"
+			to_chat(user, "<span class='notice'>You weld a hole in [src]!</span>")
 		else if(build_step == 1)
-			var/obj/item/weldingtool/WT = I
-			if(WT.remove_fuel(0, user))
-				build_step--
-				overlays -= "hs_hole"
-				to_chat(user, "<span class='notice'>You weld the hole in [src] shut!</span>")
+			build_step--
+			overlays -= "hs_hole"
+			to_chat(user, "<span class='notice'>You weld the hole in [src] shut!</span>")
 
 	else if(isprox(I) && (build_step == 1))
 		if(!user.unEquip(I))
@@ -487,9 +474,6 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 			return
 		build_step++
 		to_chat(user, "<span class='notice'>You complete the Securitron! Beep boop.</span>")
-		var/datum/job_objective/make_bot/task = user.mind.findJobTask(/datum/job_objective/make_bot)
-		if(istype(task))
-			task.unit_completed()
 		var/mob/living/simple_animal/bot/secbot/S = new /mob/living/simple_animal/bot/secbot
 		S.forceMove(get_turf(src))
 		S.name = created_name
@@ -611,9 +595,10 @@ var/robot_arm = /obj/item/robot_parts/l_arm
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "honkbot_arm"
 	w_class = WEIGHT_CLASS_NORMAL
-	req_one_access = list(access_clown, access_robotics, access_mime)
+	req_one_access = list(ACCESS_CLOWN, ACCESS_ROBOTICS, ACCESS_MIME)
 	var/build_step = 0
 	var/created_name = "Honkbot" //To preserve the name if it's a unique medbot I guess
+	var/robot_arm = /obj/item/robot_parts/l_arm
 
 /obj/item/honkbot_arm_assembly/attackby(obj/item/W, mob/user, params)
 	..()

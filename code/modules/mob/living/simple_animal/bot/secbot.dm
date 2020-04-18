@@ -90,7 +90,7 @@
 		prev_access = access_card.access
 
 	//SECHUD
-	var/datum/atom_hud/secsensor = huds[DATA_HUD_SECURITY_ADVANCED]
+	var/datum/atom_hud/secsensor = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
 	secsensor.add_hud_to(src)
 	permanent_huds |= secsensor
 
@@ -217,7 +217,7 @@ Auto Patrol: []"},
 		..()
 
 
-/mob/living/simple_animal/bot/secbot/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0)
+/mob/living/simple_animal/bot/secbot/hitby(atom/movable/AM, skipcatch = FALSE, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
@@ -232,7 +232,7 @@ Auto Patrol: []"},
 	C.visible_message("<span class='danger'>[src] is trying to put zipties on [C]!</span>",\
 						"<span class='userdanger'>[src] is trying to put zipties on you!</span>")
 	INVOKE_ASYNC(src, .proc/cuff_callback, C)
-			
+
 /mob/living/simple_animal/bot/secbot/proc/cuff_callback(mob/living/carbon/C)
 	if(do_after(src, 60, target = C))
 		if(!C.handcuffed)
@@ -456,4 +456,4 @@ Auto Patrol: []"},
 	..()
 
 /obj/machinery/bot_core/secbot
-	req_access = list(access_security)
+	req_access = list(ACCESS_SECURITY)

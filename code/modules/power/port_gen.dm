@@ -306,7 +306,9 @@
 			exchange_parts(user, O)
 			return
 		else if(istype(O, /obj/item/crowbar) && panel_open)
-			default_deconstruction_crowbar(O)
+			default_deconstruction_crowbar(user, O)
+	else
+		return ..()
 
 /obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
 	..()
@@ -331,7 +333,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/power/port_gen/pacman/ui_data(mob/user, ui_key = "main", datum/topic_state/state = default_state)
+/obj/machinery/power/port_gen/pacman/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data["active"] = active

@@ -4,7 +4,7 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "ai-fixer"
 	circuit = /obj/item/circuitboard/aifixer
-	req_access = list(access_captain, access_robotics, access_heads)
+	req_access = list(ACCESS_CAPTAIN, ACCESS_ROBOTICS, ACCESS_HEADS)
 	var/mob/living/silicon/ai/occupant = null
 	var/active = 0
 
@@ -19,7 +19,7 @@
 		else
 			to_chat(user, "<span class='warning'>The screws on [name]'s screen won't budge and it emits a warning beep!.</span>")
 	else
-		..()
+		return ..()
 
 /obj/machinery/computer/aifixer/attack_ai(var/mob/user as mob)
 	ui_interact(user)
@@ -69,6 +69,7 @@
 			if(occupant.health >= 0 && occupant.stat == DEAD)
 				occupant.update_revive()
 				occupant.lying = 0
+				update_icon()
 			sleep(10)
 		active = 0
 		add_fingerprint(usr)

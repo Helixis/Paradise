@@ -49,6 +49,7 @@ GLOBAL_LIST(labor_sheet_values)
 			return
 		else
 			to_chat(user, "<span class='notice'>There's an ID inserted already.</span>")
+		return
 	return ..()
 
 /obj/machinery/mineral/labor_claim_console/attack_hand(mob/user)
@@ -57,7 +58,7 @@ GLOBAL_LIST(labor_sheet_values)
 /obj/machinery/mineral/labor_claim_console/attack_ghost(mob/user)
 	attack_hand(user)
 
-/obj/machinery/mineral/labor_claim_console/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = default_state)
+/obj/machinery/mineral/labor_claim_console/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "labor_claim_console.tmpl", name, 450, 625, state)
@@ -91,7 +92,7 @@ GLOBAL_LIST(labor_sheet_values)
 	if(href_list["handle_id"])
 		if(inserted_id)
 			if(!usr.put_in_hands(inserted_id))
-				inserted_id.forceMove(get_turf(src))		
+				inserted_id.forceMove(get_turf(src))
 			inserted_id = null
 		else
 			var/obj/item/I = usr.get_active_hand()
@@ -108,7 +109,7 @@ GLOBAL_LIST(labor_sheet_values)
 		if(!alone_in_area(get_area(src), usr))
 			to_chat(usr, "<span class='warning'>Prisoners are only allowed to be released while alone.</span>")
 		else
-			switch(SSshuttle.moveShuttle("laborcamp", "laborcamp_home", TRUE))
+			switch(SSshuttle.moveShuttle("laborcamp", "laborcamp_home", TRUE, usr))
 				if(1)
 					to_chat(usr, "<span class='notice'>Shuttle not found.</span>")
 				if(2)
@@ -120,6 +121,7 @@ GLOBAL_LIST(labor_sheet_values)
 						var/message = "[inserted_id.registered_name] has returned to the station. Minerals and Prisoner ID card ready for retrieval."
 						announcer.autosay(message, "Labor Camp Controller", "Security")
 					to_chat(usr, "<span class='notice'>Shuttle received message and will be sent shortly.</span>")
+					usr.create_log(MISC_LOG, "used [src] to call the laborcamp shuttle")
 
 	return TRUE
 
@@ -143,6 +145,7 @@ GLOBAL_LIST(labor_sheet_values)
 
 /**********************Prisoner Collection Unit**************************/
 /obj/machinery/mineral/stacking_machine/laborstacker
+	damage_deflection = 21
 	var/points = 0 //The unclaimed value of ore stacked.
 
 /obj/machinery/mineral/stacking_machine/laborstacker/process_sheet(obj/item/stack/sheet/inp)
@@ -153,6 +156,7 @@ GLOBAL_LIST(labor_sheet_values)
 	if(istype(I, /obj/item/stack/sheet) && user.canUnEquip(I))
 		var/obj/item/stack/sheet/inp = I
 		points += inp.point_value * inp.amount
+		return
 	return ..()
 
 /**********************Point Lookup Console**************************/
@@ -179,5 +183,5 @@ GLOBAL_LIST(labor_sheet_values)
 			to_chat(user, "<span class='notice'>Collect points by bringing smelted minerals to the Labor Shuttle stacking machine. Reach your quota to earn your release.</span>")
 		else
 			to_chat(user, "<span class='warning'>Error: Invalid ID</span>")
-	else
-		return ..()
+		return
+	return ..()

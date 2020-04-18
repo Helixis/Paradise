@@ -1,7 +1,7 @@
 /obj/structure/closet/secure_closet/personal
 	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	name = "personal closet"
-	req_access = list(access_all_personal_lockers)
+	req_access = list(ACCESS_ALL_PERSONAL_LOCKERS)
 	var/registered_name = null
 
 /obj/structure/closet/secure_closet/personal/New()
@@ -33,8 +33,8 @@
 	icon_opened = "cabinetdetective_open"
 	icon_broken = "cabinetdetective_broken"
 	icon_off = "cabinetdetective_broken"
-	burn_state = FLAMMABLE
-	burntime = 20
+	resistance_flags = FLAMMABLE
+	max_integrity = 70
 
 /obj/structure/closet/secure_closet/personal/cabinet/update_icon()
 	if(broken)
@@ -86,4 +86,4 @@
 	else if((istype(W, /obj/item/card/emag) || istype(W, /obj/item/melee/energy/blade)) && !broken)
 		emag_act(user)
 	else
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		return ..()

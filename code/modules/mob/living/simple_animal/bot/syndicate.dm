@@ -33,7 +33,7 @@
 
 /mob/living/simple_animal/bot/ed209/syndicate/setup_access()
 	if(access_card)
-		access_card.access = list(access_syndicate, access_syndicate_leader)
+		access_card.access = list(ACCESS_SYNDICATE, ACCESS_SYNDICATE_LEADER)
 		prev_access = access_card.access
 
 /mob/living/simple_animal/bot/ed209/syndicate/update_icon()
@@ -167,7 +167,7 @@
 		visible_message("<span class='userdanger'>[src] blows apart!</span>")
 		do_sparks(3, 1, src)
 		new /obj/effect/decal/cleanable/blood/oil(loc)
-		var/obj/effect/decal/mecha_wreckage/gygax/dark/wreck = new /obj/effect/decal/mecha_wreckage/gygax/dark(loc)
+		var/obj/structure/mecha_wreckage/gygax/dark/wreck = new /obj/structure/mecha_wreckage/gygax/dark(loc)
 		wreck.name = "sentry bot wreckage"
 
 		raise_alert("[src] destroyed.")

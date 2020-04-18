@@ -13,8 +13,7 @@
 	pass_flags = PASSTABLE | PASSMOB
 	mob_size = MOB_SIZE_SMALL
 	ventcrawler = 2
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	minbodytemp = 0
+	atmos_requirements = list("min_oxy" = 10, "max_oxy" = 999, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 
 	maxHealth = 50
 	health = 50
@@ -145,7 +144,7 @@
 	if((stat != CONSCIOUS) || !isdiona(loc))
 		return FALSE
 	var/mob/living/carbon/human/D = loc
-	T = get_turf(src)
+	var/turf/T = get_turf(src)
 	if(!T)
 		return FALSE
 	to_chat(loc, "You feel a pang of loss as [src] splits away from your biomass.")

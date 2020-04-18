@@ -46,7 +46,7 @@
 
 /obj/item/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
 	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == "eyes")
+	if(on && user.zone_selected == "eyes")
 
 		if(((CLUMSY in user.mutations) || user.getBrainLoss() >= 60) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
@@ -326,6 +326,7 @@
 	on = TRUE //Bio-luminesence has one setting, on.
 
 /obj/item/flashlight/slime/New()
+	..()
 	set_light(brightness_on)
 	spawn(1) //Might be sloppy, but seems to be necessary to prevent further runtimes and make these work as intended... don't judge me!
 		update_brightness()
@@ -362,7 +363,7 @@
 	return TRUE
 
 /obj/item/flashlight/emp/attack(mob/living/M as mob, mob/living/user as mob)
-	if(on && user.zone_sel.selecting == "eyes") // call original attack proc only if aiming at the eyes
+	if(on && user.zone_selected == "eyes") // call original attack proc only if aiming at the eyes
 		..()
 	return
 
@@ -394,5 +395,4 @@
 	on = TRUE
 	anchored = TRUE
 	var/range = null
-	unacidable = TRUE
-	burn_state = LAVA_PROOF
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF

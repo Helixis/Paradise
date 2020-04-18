@@ -27,10 +27,10 @@
 #define COM_ROLES list("Blueshield","NT Representative","Head of Personnel's Desk","Captain's Desk","Bridge")
 #define SCI_ROLES list("Robotics","Science","Research Director's Desk")
 
-var/req_console_assistance = list()
-var/req_console_supplies = list()
-var/req_console_information = list()
-var/list/obj/machinery/requests_console/allConsoles = list()
+GLOBAL_LIST_EMPTY(req_console_assistance)
+GLOBAL_LIST_EMPTY(req_console_supplies)
+GLOBAL_LIST_EMPTY(req_console_information)
+GLOBAL_LIST_EMPTY(allRequestConsoles)
 
 /obj/machinery/requests_console
 	name = "Requests Console"
@@ -38,7 +38,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	anchored = 1
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
-	armor = list(melee = 70, bullet = 30, laser = 30, energy = 30, bomb = 0, bio = 0, rad = 0)
+	max_integrity = 300
+	armor = list("melee" = 70, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/message_log = list() //List of all messages
 	var/departmentType = 0 		//Bitflag. Zero is reply-only. Map currently uses raw numbers instead of defines.
@@ -62,7 +63,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	var/recipient = ""; //the department which will be receiving the message
 	var/priority = -1 ; //Priority of the message being sent
 	light_range = 0
-	var/datum/announcement/announcement = new
+	var/datum/announcement/request/announcement = new(do_newscast = 0)
 	var/list/shipping_log = list()
 	var/ship_tag_name = ""
 	var/ship_tag_index = 0
@@ -92,30 +93,30 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	announcement.newscast = 0
 
 	name = "[department] Requests Console"
-	allConsoles += src
+	GLOB.allRequestConsoles += src
 	if(departmentType & RC_ASSIST)
-		req_console_assistance |= department
+		GLOB.req_console_assistance |= department
 	if(departmentType & RC_SUPPLY)
-		req_console_supplies |= department
+		GLOB.req_console_supplies |= department
 	if(departmentType & RC_INFO)
-		req_console_information |= department
+		GLOB.req_console_information |= department
 
 	set_light(1)
 
 /obj/machinery/requests_console/Destroy()
-	allConsoles -= src
+	GLOB.allRequestConsoles -= src
 	var/lastDeptRC = 1
-	for(var/obj/machinery/requests_console/Console in allConsoles)
+	for(var/obj/machinery/requests_console/Console in GLOB.allRequestConsoles)
 		if(Console.department == department)
 			lastDeptRC = 0
 			break
 	if(lastDeptRC)
 		if(departmentType & RC_ASSIST)
-			req_console_assistance -= department
+			GLOB.req_console_assistance -= department
 		if(departmentType & RC_SUPPLY)
-			req_console_supplies -= department
+			GLOB.req_console_supplies -= department
 		if(departmentType & RC_INFO)
-			req_console_information -= department
+			GLOB.req_console_information -= department
 	QDEL_NULL(Radio)
 	return ..()
 
@@ -137,7 +138,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/requests_console/ui_data(mob/user, ui_key = "main", datum/topic_state/state = default_state)
+/obj/machinery/requests_console/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data["department"] = department
@@ -147,9 +148,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	data["silent"] = silent
 	data["announcementConsole"] = announcementConsole
 
-	data["assist_dept"] = req_console_assistance
-	data["supply_dept"] = req_console_supplies
-	data["info_dept"]   = req_console_information
+	data["assist_dept"] = GLOB.req_console_assistance
+	data["supply_dept"] = GLOB.req_console_supplies
+	data["info_dept"]   = GLOB.req_console_information
 	data["ship_dept"]	= GLOB.TAGGERLOCATIONS
 
 	data["message"] = message
@@ -232,7 +233,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		if(tempScreen == RCS_ANNOUNCE && !announcementConsole)
 			return
 		if(tempScreen == RCS_VIEWMSGS)
-			for(var/obj/machinery/requests_console/Console in allConsoles)
+			for(var/obj/machinery/requests_console/Console in GLOB.allRequestConsoles)
 				if(Console.department == department)
 					Console.newmessagepriority = 0
 					Console.icon_state = "req_comp0"
@@ -301,7 +302,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			updateUsrDialog()
 		if(screen == RCS_ANNOUNCE)
 			var/obj/item/card/id/ID = I
-			if(access_RC_announce in ID.GetAccess())
+			if(ACCESS_RC_ANNOUNCE in ID.GetAccess())
 				announceAuth = 1
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
