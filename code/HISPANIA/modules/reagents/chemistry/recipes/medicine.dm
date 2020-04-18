@@ -10,7 +10,14 @@
 	id = "balavir"
 	result = "balavir"
 	required_reagents = list("phenol" = 1, "acetone" = 1)
-	result_amount = 3
+	result_amount = 2
+	
+/datum/chemical_reaction/boceprevir
+	name = "Boceprevir"
+	id = "boceprevir"
+	result = "bocreprevir"
+	required_reagents = list("hydrocodone" = 1, "strange_reagent" = 1)
+	result_amount = 2
 
 /datum/chemical_reaction/dolutegravir
 	name = "Dolutegravir"
@@ -23,8 +30,8 @@
 	name = "Famciclovir"
 	id = "famciclovir"
 	result = "famciclovir"
-	required_reagents = list("efavirenz" = 1, "fosamprenavir" = 1, "dolutegravir" = 1)
-	result_amount = 2
+	required_reagents = list("boceprevir" = 1, "fosamprenavir" = 1, "dolutegravir" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/fosamprenavir
 	name = "Fosamprenavir"
@@ -38,4 +45,4 @@
 	id = "duloxetine"
 	result = "duloxetine"
 	required_reagents = list("haloperidol" = 1, "sugar" = 1)
-	result_amount = 3
+	result_amount = 2
