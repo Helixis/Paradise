@@ -1,4 +1,4 @@
-/obj/item/storage/belt/medical/surgery/advanced
+/obj/item/storage/belt/medical/advanced
 	name = "advanced medical belt"
 	desc = "Can hold various medical and surgical equipment."
 	can_hold = list(
@@ -33,7 +33,7 @@
 		/obj/item/cautery
 	)
 
-/obj/item/storage/belt/medical/surgery/advanced/loaded/New()
+/obj/item/storage/belt/medical/advanced/loaded/New()
 	..()
 	new /obj/item/scalpel/advanced(src)
 	new /obj/item/hemostat/advanced(src)
