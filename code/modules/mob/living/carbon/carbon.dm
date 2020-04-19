@@ -1025,7 +1025,7 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 		var/covered = 0
 		var/snowflek = 0
 		if(wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH))
-			if(istype(head, /obj/item/clothing/head/helmet/space/plasmaman) || istype(head, /obj/item/clothing/mask/breath/vox)) //Asi los plamaman y vox no mueren de hambre
+			if(istype(head, /obj/item/clothing/head/helmet/space/plasmaman) || istype(wear_mask, /obj/item/clothing/mask/breath/vox)) //Asi los plamaman y vox no mueren de hambre
 				snowflek = 1
 			else
 				covered = 1
