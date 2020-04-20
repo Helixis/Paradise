@@ -1,6 +1,8 @@
 /obj/item/storage/belt/medical/advanced
 	name = "advanced medical belt"
 	desc = "Can hold various medical and surgical equipment."
+	icon = 'icons/hispania/obj/clothing/belts.dmi'
+	icon_state = "medicalbelt_cmo"
 	can_hold = list(
 		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
