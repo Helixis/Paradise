@@ -9,7 +9,7 @@
 /datum/reagent/lithium/on_mob_life(mob/living/M)
 	if(isturf(M.loc) && !istype(M.loc, /turf/space))
 		if(M.canmove && !M.restrained())
-			step(M, pick(cardinal))
+			step(M, pick(GLOB.cardinal))
 	if(prob(5))
 		M.emote(pick("twitch","drool","moan"))
 	return ..()
@@ -45,7 +45,7 @@
 	update_flags |= M.Druggy(15, FALSE)
 	if(isturf(M.loc) && !istype(M.loc, /turf/space))
 		if(M.canmove && !M.restrained())
-			step(M, pick(cardinal))
+			step(M, pick(GLOB.cardinal))
 	if(prob(7))
 		M.emote(pick("twitch","drool","moan","giggle"))
 	return ..() | update_flags
@@ -89,9 +89,10 @@
 	reagent_state = LIQUID
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 35
-	addiction_chance = 15
-	addiction_threshold = 10
-	minor_addiction = TRUE
+	addiction_chance = 1
+	addiction_chance_additional = 20
+	addiction_threshold = 8
+	//minor_addiction = TRUE
 	heart_rate_increase = 1
 	taste_description = "calm"
 
