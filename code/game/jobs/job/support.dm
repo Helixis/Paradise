@@ -171,7 +171,7 @@
 	title = "Shaft Miner"
 	flag = JOB_MINER
 	department_flag = JOBCAT_SUPPORT
-	total_positions = 6
+	total_positions = 4
 	spawn_positions = 8
 	is_supply = 1
 	supervisors = "the quartermaster"
