@@ -42,6 +42,7 @@
 "P" = (/obj/structure/barricade/wooden,/obj/structure/spider/stickyweb,/obj/structure/mineral_door/iron,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/ruin/powered/dwarf)
 "Q" = (/obj/effect/decal/remains/human{desc = "This guy seemed to have died in terrible way! Half his remains are dust."; icon_state = "remains"; name = "Human remains"},/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
 "R" = (/obj/effect/decal/cleanable/insectguts,/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
+"S" = (/obj/effect/baseturf_helper/lava_land/surface,/turf/simulated/shuttle/floor{icon = 'icons/turf/floors.dmi'; icon_state = "dark"},/area/ruin/powered/dwarf)
 
 (1,1,1) = {"
 abbbaabbbbbbbbbaaa
@@ -52,7 +53,7 @@ abccojccccccjpcbbb
 abbcqrcssstukvcbbb
 bbbcwxclyjjwjvcbbb
 bbbcjziiiiABiccbbb
-bbbclCDEFwwwcbbbbb
+bbbclCDEFSwwcbbbbb
 bbbcjoqjwjGjibbbbb
 bJbcqHjcicwwcbbbbb
 bbbcIIIcKcPPcbLbbb
