@@ -1,6 +1,6 @@
-var/list/robot_verbs_default = list(
+GLOBAL_LIST_INIT(robot_verbs_default, list(
 	/mob/living/silicon/robot/proc/sensor_mode,
-)
+))
 
 /mob/living/silicon/robot
 	name = "Cyborg"
@@ -70,7 +70,7 @@ var/list/robot_verbs_default = list(
 
 	var/wiresexposed = 0
 	var/locked = 1
-	var/list/req_one_access = list(access_robotics)
+	var/list/req_one_access = list(ACCESS_ROBOTICS)
 	var/list/req_access
 	var/ident = 0
 	//var/list/laws = list()
@@ -151,6 +151,9 @@ var/list/robot_verbs_default = list(
 		mmi = new /obj/item/mmi/robotic_brain(src)	//Give the borg an MMI if he spawns without for some reason. (probably not the correct way to spawn a robotic brain, but it works)
 		mmi.icon_state = "boris"
 
+	if(!cell) // Make sure a new cell gets created *before* executing initialize_components(). The cell component needs an existing cell for it to get set up properly
+		cell = new /obj/item/stock_parts/cell/high(src)
+
 	initialize_components()
 	//if(!unfinished)
 	// Create all the robot parts.
@@ -158,9 +161,6 @@ var/list/robot_verbs_default = list(
 		var/datum/robot_component/C = components[V]
 		C.installed = 1
 		C.wrapped = new C.external_type
-
-	if(!cell)
-		cell = new /obj/item/stock_parts/cell/high(src)
 
 	..()
 
@@ -304,7 +304,7 @@ var/list/robot_verbs_default = list(
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
 	if(islist(force_modules) && force_modules.len)
 		modules = force_modules.Copy()
-	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON) || crisis)
+	if(GLOB.security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON) || crisis)
 		to_chat(src, "<span class='warning'>Crisis mode active. The combat module is now available.</span>")
 		modules += "Combat"
 	if(mmi != null && mmi.alien)
@@ -356,7 +356,7 @@ var/list/robot_verbs_default = list(
 		if("Miner")
 			module = new /obj/item/robot_module/miner(src)
 			module.channels = list("Supply" = 1)
-			if(camera && "Robots" in camera.network)
+			if(camera && ("Robots" in camera.network))
 				camera.network.Add("Mining Outpost")
 			module_sprites["Basic"] = "Miner_old"
 			module_sprites["Advanced Droid"] = "droid-miner"
@@ -377,7 +377,7 @@ var/list/robot_verbs_default = list(
 		if("Medical")
 			module = new /obj/item/robot_module/medical(src)
 			module.channels = list("Medical" = 1)
-			if(camera && "Robots" in camera.network)
+			if(camera && ("Robots" in camera.network))
 				camera.network.Add("Medical")
 			module_sprites["Basic"] = "Medbot"
 			module_sprites["Surgeon"] = "surgeon"
@@ -408,14 +408,13 @@ var/list/robot_verbs_default = list(
 			module_sprites["Noble-SEC-Hulk"] = "Noble-SEC-H"
 			module_sprites["Woody"] = "woody"
 			module_sprites["Kodiak-SEC"] = "kodiak-sec"
-			module_sprites["Servbot-SEC"] = "servbot-sec"
 			module_sprites["Marina-SEC"] = "marinaSC"
 			status_flags &= ~CANPUSH
 
 		if("Engineering")
 			module = new /obj/item/robot_module/engineering(src)
 			module.channels = list("Engineering" = 1)
-			if(camera && "Robots" in camera.network)
+			if(camera && ("Robots" in camera.network))
 				camera.network.Add("Engineering")
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Antique"] = "engineerrobot"
@@ -576,11 +575,11 @@ var/list/robot_verbs_default = list(
 	toggle_sensor_mode()
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
-	src.verbs |= robot_verbs_default
+	src.verbs |= GLOB.robot_verbs_default
 	src.verbs |= silicon_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
-	src.verbs -= robot_verbs_default
+	src.verbs -= GLOB.robot_verbs_default
 	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/robot/proc/ionpulse()
@@ -666,7 +665,8 @@ var/list/robot_verbs_default = list(
 
 
 /mob/living/silicon/robot/attackby(obj/item/W, mob/user, params)
-	if(opened) // Are they trying to insert something?
+	// Check if the user is trying to insert another component like a radio, actuator, armor etc.
+	if(istype(W, /obj/item/robot_parts/robot_component) && opened)
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
 			if(!C.installed && istype(W, C.external_type))
@@ -701,7 +701,7 @@ var/list/robot_verbs_default = list(
 		user.visible_message("<span class='alert'>\The [user] fixes some of the burnt wires on \the [src] with \the [coil].</span>")
 
 	else if(istype(W, /obj/item/stock_parts/cell) && opened)	// trying to put a cell inside
-		var/datum/robot_component/C = components["power cell"]
+		var/datum/robot_component/cell/C = components["power cell"]
 		if(wiresexposed)
 			to_chat(user, "Close the panel first.")
 		else if(cell)
@@ -715,6 +715,7 @@ var/list/robot_verbs_default = list(
 			C.installed = 1
 			C.wrapped = W
 			C.install()
+			C.external_type = W.type // Update the cell component's `external_type` to the path of new cell
 			//This will mean that removing and replacing a power cell will repair the mount, but I don't care at this point. ~Z
 			C.brute_damage = 0
 			C.electronics_damage = 0
@@ -924,7 +925,7 @@ var/list/robot_verbs_default = list(
 			clear_inherent_laws()
 			laws = new /datum/ai_laws/syndicate_override
 			var/time = time2text(world.realtime,"hh:mm:ss")
-			lawchanges.Add("[time] <B>:</B> [M.name]([M.key]) emagged [name]([key])")
+			GLOB.lawchanges.Add("[time] <B>:</B> [M.name]([M.key]) emagged [name]([key])")
 			set_zeroth_law("Only [M.real_name] and people [M.p_they()] designate[M.p_s()] as being such are Syndicate Agents.")
 			to_chat(src, "<span class='warning'>ALERT: Foreign software detected.</span>")
 			sleep(5)
@@ -1206,7 +1207,7 @@ var/list/robot_verbs_default = list(
 				updating = 1
 				spawn(BORG_CAMERA_BUFFER)
 					if(oldLoc != src.loc)
-						cameranet.updatePortableCamera(src.camera)
+						GLOB.cameranet.updatePortableCamera(src.camera)
 					updating = 0
 	if(module)
 		if(module.type == /obj/item/robot_module/janitor)
@@ -1391,7 +1392,7 @@ var/list/robot_verbs_default = list(
 	icon = 'icons/mob/robots.dmi'
 	lawupdate = 0
 	scrambledcodes = 1
-	req_one_access = list(access_cent_specops)
+	req_one_access = list(ACCESS_CENT_SPECOPS)
 	ionpulse = 1
 	magpulse = 1
 	pdahide = 1
@@ -1440,7 +1441,7 @@ var/list/robot_verbs_default = list(
 	designation = "ERT"
 	lawupdate = 0
 	scrambledcodes = 1
-	req_one_access = list(access_cent_specops)
+	req_one_access = list(ACCESS_CENT_SPECOPS)
 	ionpulse = 1
 
 	force_modules = list("Engineering", "Medical", "Security")
@@ -1500,6 +1501,8 @@ var/list/robot_verbs_default = list(
 		burn = borked_part.electronics_damage
 		borked_part.installed = 1
 		borked_part.wrapped = new borked_part.external_type
+		if(ispath(borked_part.external_type, /obj/item/stock_parts/cell)) // is the broken part a cell?
+			cell = new borked_part.external_type // borgs that have their cell destroyed have their `cell` var set to null. we need create a new cell for them based on their old cell type.
 		borked_part.heal_damage(brute,burn)
 		borked_part.install()
 
@@ -1549,3 +1552,12 @@ var/list/robot_verbs_default = list(
 
 	SEND_SIGNAL(src, COMSIG_MOB_UPDATE_SIGHT)
 	sync_lighting_plane_alpha()
+
+/// Used in `robot_bindings.dm` when the user presses "A" if on AZERTY mode, or "Q" on QWERTY mode.
+/mob/living/silicon/robot/proc/on_drop_hotkey_press()
+	var/obj/item/gripper/G = get_active_hand()
+	if(istype(G) && G.gripped_item)
+		G.drop_gripped_item() // if the active module is a gripper, try to drop its held item.
+	else
+		uneq_active() // else unequip the module and put it back into the robot's inventory.
+		return

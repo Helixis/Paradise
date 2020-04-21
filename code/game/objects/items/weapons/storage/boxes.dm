@@ -1063,6 +1063,7 @@
 	name = "clown box"
 	desc = "A colorful cardboard box for the clown"
 	icon_state = "box_clown"
+	var/robot_arm // This exists for bot construction
 
 /obj/item/storage/box/emptysandbags
 	name = "box of empty sandbags"
@@ -1103,6 +1104,7 @@
 	desc = "Contains a variety of deluxe stock parts."
 
 /obj/item/storage/box/stockparts/deluxe/New()
+	..()
 	for(var/i in 1 to 3)
 		new /obj/item/stock_parts/capacitor/quadratic(src)
 		new /obj/item/stock_parts/scanning_module/triphasic(src)

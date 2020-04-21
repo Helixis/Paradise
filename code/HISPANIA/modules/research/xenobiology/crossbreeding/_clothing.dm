@@ -79,11 +79,11 @@
 /obj/item/clothing/head/peaceflower/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot == slot_head)
-		ADD_TRAIT(user, TRAIT_PACIFISM, "peaceflower_[ref(src)]")
+		ADD_TRAIT(user, TRAIT_PACIFISM, "peaceflower_[(src)]")
 
 /obj/item/clothing/head/peaceflower/dropped(mob/living/carbon/human/user)
 	..()
-	REMOVE_TRAIT(user, TRAIT_PACIFISM, "peaceflower_[ref(src)]")
+	REMOVE_TRAIT(user, TRAIT_PACIFISM, "peaceflower_[(src)]")
 
 /obj/item/clothing/head/peaceflower/attack_hand(mob/user)
 	if(iscarbon(user))
@@ -101,6 +101,7 @@
 	flags_inv = NONE
 	slowdown = 4
 	var/hit_reflect_chance = 40
+	hispania_icon = TRUE
 
 /obj/item/clothing/suit/armor/heavy/adamantine/IsReflect(def_zone)
 	if(def_zone in list(BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG) && prob(hit_reflect_chance))

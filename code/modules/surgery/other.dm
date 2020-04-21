@@ -62,7 +62,7 @@
 	name = "mend internal bleeding"
 	allowed_tools = list(
 	/obj/item/FixOVein = 100, \
-	/obj/item/stack/cable_coil = 90
+	/obj/item/stack/cable_coil = 70
 	)
 	can_infect = 1
 	blood_level = 1
@@ -107,7 +107,7 @@
 	name = "remove dead tissue"
 	allowed_tools = list(
 		/obj/item/scalpel = 100,		\
-		/obj/item/kitchen/knife = 90,	\
+		/obj/item/kitchen/knife = 70,	\
 		/obj/item/shard = 60, 		\
 	)
 
@@ -208,7 +208,7 @@
 
 	var/trans = container.reagents.trans_to(target, container.amount_per_transfer_from_this)
 	if(trans > 0)
-		container.reagents.reaction(target, INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
+		container.reagents.reaction(target, REAGENT_INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
 
 		if(mitocholide)
 			affected.status &= ~ORGAN_DEAD
@@ -228,7 +228,7 @@
 	var/obj/item/reagent_containers/container = tool
 
 	var/trans = container.reagents.trans_to(target, container.amount_per_transfer_from_this)
-	container.reagents.reaction(target, INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
+	container.reagents.reaction(target, REAGENT_INGEST)	//technically it's contact, but the reagents are being applied to internal tissue
 
 	user.visible_message("<span class='warning'> [user]'s hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!</span>" , \
 	"<span class='warning'> Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!</span>")
