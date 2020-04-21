@@ -67,7 +67,7 @@
 	toolspeed = 0.4
 
 /obj/item/surgicaldrill/advanced/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/weapons/tap.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/effects/pop.ogg', 50, TRUE)
 	var/obj/item/cautery/advanced/cautool = new /obj/item/cautery/advanced
 	to_chat(user, "<span class='notice'>You focus the lenses of [src], it is now in mending mode.</span>")
 	qdel(src)
@@ -82,7 +82,7 @@
 	toolspeed = 0.4
 
 /obj/item/cautery/advanced/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/weapons/tap.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/effects/pop.ogg', 50, TRUE)
 	var/obj/item/surgicaldrill/advanced/drilltool = new /obj/item/surgicaldrill/advanced
 	to_chat(user, "<span class='notice'>You dilate the lenses of [src], it is now in drilling mode.</span>")
 	qdel(src)
