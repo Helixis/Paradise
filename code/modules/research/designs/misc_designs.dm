@@ -9,7 +9,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(MAT_METAL = 300, MAT_GLASS = 100)
 	build_path = /obj/item/disk/design_disk
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/diskplantgene
 	name = "Plant data disk"
@@ -19,7 +19,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL=200, MAT_GLASS=100)
 	build_path = /obj/item/disk/plantgene
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/intellicard
 	name = "Intellicard"
@@ -29,7 +29,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_GLASS = 1000, MAT_GOLD = 200)
 	build_path = /obj/item/aicard
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/paicard
 	name = "Personal Artificial Intelligence Card"
@@ -39,7 +39,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_GLASS = 500, MAT_METAL = 500)
 	build_path = /obj/item/paicard
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/tech_disk
 	name = "Technology Data Storage Disk"
@@ -49,7 +49,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(MAT_METAL = 300, MAT_GLASS = 100)
 	build_path = /obj/item/disk/tech_disk
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/digital_camera
 	name = "Digital Camera"
@@ -59,7 +59,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 500, MAT_GLASS = 300)
 	build_path = /obj/item/camera/digital
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/safety_muzzle
 	name = "Safety Muzzle"
@@ -89,7 +89,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL=300, MAT_GLASS=100)
 	build_path = /obj/item/disk/data
-	category = list("Electronics")
+	category = list("Miscellaneous")
 
 /datum/design/emergency_oxygen
 	name = "Empty Emergency Oxygen Tank"

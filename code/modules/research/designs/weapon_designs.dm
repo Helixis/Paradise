@@ -152,7 +152,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 4000)
 	build_path = /obj/item/ammo_box/magazine/wt550m9
-	category = list("Weapons")
+	category = list("Miscellaneous")
 
 /datum/design/mag_oldsmg/ap_mag
 	name = "WT-550 Auto Gun Armour Piercing Magazine (4.6x30mm AP)"
@@ -193,7 +193,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 200)
 	build_path = /obj/item/ammo_casing/shotgun/stunslug
-	category = list("Weapons")
+	category = list("Miscellaneous")
 
 /datum/design/stunrevolver
 	name = "Tesla Revolver"
@@ -224,7 +224,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 500)
 	build_path = /obj/item/suppressor
-	category = list("Weapons")
+	category = list("Miscellaneous")
 
 /datum/design/techshell
 	name = "Unloaded Technological Shotshell"
@@ -234,7 +234,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 1000, MAT_GLASS = 200)
 	build_path = /obj/item/ammo_casing/shotgun/techshell
-	category = list("Weapons")
+	category = list("Miscellaneous")
 
 /datum/design/xray
 	name = "Xray Laser Gun"
@@ -245,7 +245,7 @@
 	materials = list(MAT_GOLD = 5000, MAT_URANIUM = 4000, MAT_METAL = 5000, MAT_TITANIUM = 2000, MAT_BLUESPACE = 2000)
 	build_path = /obj/item/gun/energy/xray
 	locked = 1
-	category = list("Weapons")
+	category = list("Miscellaneous")
 
 /datum/design/immolator
 	name = "Immolator Laser Gun"

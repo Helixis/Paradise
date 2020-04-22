@@ -29,7 +29,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 3000, MAT_GLASS = 200)
 	build_path = /obj/item/janiupgrade
-	category = list("Tools")
+	category = list("Miscellaneous")
 
 /datum/design/holosign
 	name = "Holographic Sign Projector"

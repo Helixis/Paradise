@@ -23,7 +23,7 @@ Note: Must be placed west/left of and R&D console to function.
 								"Equipment",
 								"Computer Parts",
 								"Tools",
-								"Electronics",
+								"Miscellaneous",
 								"Bluespace",
 								"Weapons"
 								)

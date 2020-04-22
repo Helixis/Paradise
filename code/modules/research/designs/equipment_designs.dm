@@ -129,7 +129,7 @@
 	req_tech = list("biotech" = 3, "engineering" = 2)
 	materials = list(MAT_METAL = 1000, MAT_GLASS = 400)
 	build_path = /obj/item/storage/bag/plants/portaseeder
-	category = list("Tools")
+	category = list("Equipment")
 
 /datum/design/sci_goggles
 	name = "Science Goggles"
