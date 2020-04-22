@@ -90,9 +90,9 @@
 	if(!A || !proximity)
 		return 0
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || !H.)
+	if(!istype(H) || !H)
 		return 0
-	var/obj/item/rig/suit = H.
+	var/obj/item/rig/suit = H
 	if(!suit || !istype(suit))
 		return 0
 	return 0

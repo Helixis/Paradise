@@ -410,25 +410,6 @@
 	cell.use(cost*10)
 	return 1
 
-/obj/item/b_rig/rig/ui_data(mob/user, ui_key = "main", datum/topic_state/state = inventory_state)
-	var/data[0]
-	var/is_sealed = (flags & NODROP)	//1 if NODROP, 0 if no-nodrop
-	data["seals"] =     "[!is_sealed]"	//1 if not NODROP (unsealed), 0 if NODROP (sealed)
-	data["sealing"] =   "[src.sealing]"
-	data["helmet"] =    (helmet ? "[helmet.name]" : "None.")
-	data["gauntlets"] = (gloves ? "[gloves.name]" : "None.")
-	data["boots"] =     (boots ?  "[boots.name]" :  "None.")
-	data["chest"] =     (chest ?  "[chest.name]" :  "None.")
-	data["charge"] =       cell ? round(cell.charge,1) : 0
-	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
-	data["emagged"] =       subverted
-	data["coverlock"] =     locked
-	data["interfacelock"] = interface_locked
-	data["securitycheck"] = security_check_enabled
-	data["malf"] =          malfunction_delay
-	return data
-
 /obj/item/b_rig/update_icon(var/update_mob_icon)
 	overlays.Cut()
 	if(!mob_icon || update_mob_icon)

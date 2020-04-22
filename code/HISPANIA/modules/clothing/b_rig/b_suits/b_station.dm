@@ -24,26 +24,6 @@
 	req_access = list()
 	req_one_access = list()
 
-/obj/item/b_rig/ce
-
-	name = "advanced voidsuit control module"
-	suit_type = "advanced voidsuit"
-	desc = "An advanced voidsuit that protects against hazardous, low pressure environments. Shines with a high polish."
-	icon_state = "ce_rig"
-	armor = list(melee = 40, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 90)
-	active_slowdown = 0
-	offline_slowdown = 0
-	offline_vision_restriction = 0
-	helm_type = /obj/item/clothing/head/helmet/space/new_rig/ce
-	req_access = list()
-	req_one_access = list()
-	boot_type =  null
-	glove_type = null
-
-/obj/item/clothing/suit/space/new_big/ce
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-
 /obj/item/b_rig/hazmat
 
 	name = "AMI control module"
