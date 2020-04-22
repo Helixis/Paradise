@@ -9,7 +9,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2500, MAT_GLASS = 200)
 	build_path = /obj/item/mop/advanced
-	category = list("Janitorial")
+	category = list("Tools")
 
 /datum/design/blutrash
 	name = "Trashbag of Holding"
@@ -19,7 +19,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_GOLD = 1500, MAT_URANIUM = 250, MAT_PLASMA = 1500)
 	build_path = /obj/item/storage/bag/trash/bluespace
-	category = list("Janitorial")
+	category = list("Equipment")
 
 /datum/design/buffer
 	name = "Floor Buffer Upgrade"
@@ -29,7 +29,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 3000, MAT_GLASS = 200)
 	build_path = /obj/item/janiupgrade
-	category = list("Janitorial")
+	category = list("Tools")
 
 /datum/design/holosign
 	name = "Holographic Sign Projector"
@@ -39,7 +39,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1000)
 	build_path = /obj/item/holosign_creator
-	category = list("Janitorial")
+	category = list("Tools")
 
 /datum/design/light_replacer
 	name = "Light Replacer"
@@ -49,4 +49,4 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 1500, MAT_SILVER = 150, MAT_GLASS = 3000)
 	build_path = /obj/item/lightreplacer
-	category = list("Janitorial")
+	category = list("Tools")

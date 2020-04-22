@@ -149,30 +149,30 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks basic and could be improved."
 	id = "scalpel_laser1"
 	req_tech = list("biotech" = 2, "materials" = 2, "magnets" = 2)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500)
 	build_path = /obj/item/scalpel/laser/laser1
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/item/scalpel_laser2
 	name = "Improved Laser Scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks somewhat advanced."
 	id = "scalpel_laser2"
 	req_tech = list("biotech" = 3, "materials" = 4, "magnets" = 4)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000)
 	build_path = /obj/item/scalpel/laser/laser2
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/item/scalpel_laser3
 	name = "Advanced Laser Scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks to be the pinnacle of precision energy cutlery!"
 	id = "scalpel_laser3"
 	req_tech = list("biotech" = 4, "materials" = 6, "magnets" = 5)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000)
 	build_path = /obj/item/scalpel/laser/laser3
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/item/scalpel_manager
 	name = "Incision Management System"
@@ -182,7 +182,7 @@
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000, MAT_DIAMOND = 1000)
 	build_path = /obj/item/scalpel/laser/manager
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienscalpel
 	name = "Alien Scalpel"
@@ -192,7 +192,7 @@
 	build_path = /obj/item/scalpel/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienhemostat
 	name = "Alien Hemostat"
@@ -202,7 +202,7 @@
 	build_path = /obj/item/hemostat/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienretractor
 	name = "Alien Retractor"
@@ -212,7 +212,7 @@
 	build_path = /obj/item/retractor/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/aliensaw
 	name = "Alien Circular Saw"
@@ -222,7 +222,7 @@
 	build_path = /obj/item/circular_saw/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 10000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/aliendrill
 	name = "Alien Drill"
@@ -232,7 +232,7 @@
 	build_path = /obj/item/surgicaldrill/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 10000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/aliencautery
 	name = "Alien Cautery"
@@ -242,7 +242,7 @@
 	build_path = /obj/item/cautery/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienbonegel
 	name = "Alien Bone Gel"
@@ -252,7 +252,7 @@
 	build_path = /obj/item/bonegel/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienbonesetter
 	name = "Alien Bone Setter"
@@ -262,7 +262,7 @@
 	build_path = /obj/item/bonesetter/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /datum/design/alienfixovein
 	name = "Alien FixOVein"
@@ -272,7 +272,7 @@
 	build_path = /obj/item/FixOVein/alien
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 1500, MAT_PLASMA = 500, MAT_TITANIUM = 1500)
-	category = list("Medical")
+	category = list("Tools")
 
 /////////////////////////////////////////
 //////////Cybernetic Implants////////////

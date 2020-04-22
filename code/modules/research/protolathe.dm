@@ -16,15 +16,15 @@ Note: Must be placed west/left of and R&D console to function.
 	var/efficiency_coeff
 
 	var/list/categories = list(
-								"Bluespace",
-								"Computer Parts",
-								"Equipment",
-								"Janitorial",
-								"Medical",
-								"Mining",
-								"Miscellaneous",
-								"Power",
 								"Stock Parts",
+								"Medical",
+								"Power",
+								"Mining",
+								"Equipment",
+								"Computer Parts",
+								"Tools",
+								"Electronics",
+								"Bluespace",
 								"Weapons"
 								)
 

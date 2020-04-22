@@ -9,7 +9,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 1000, MAT_GLASS = 500, MAT_PLASMA = 1500, MAT_URANIUM = 200)
 	build_path = /obj/item/weldingtool/experimental
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/health_hud
 	name = "Health Scanner HUD"
@@ -99,7 +99,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 4000, MAT_BANANIUM = 1000)
 	build_path = /obj/item/bikehorn/airhorn
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/breath_mask
 	name = "Breath mask"
@@ -129,7 +129,7 @@
 	req_tech = list("biotech" = 3, "engineering" = 2)
 	materials = list(MAT_METAL = 1000, MAT_GLASS = 400)
 	build_path = /obj/item/storage/bag/plants/portaseeder
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/sci_goggles
 	name = "Science Goggles"
@@ -199,7 +199,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 3500, MAT_SILVER = 1500, MAT_TITANIUM = 2500)
 	build_path = /obj/item/screwdriver/power
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/jawsoflife
 	name = "Jaws of Life"
@@ -209,7 +209,7 @@
 	build_path = /obj/item/crowbar/power
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 4500, MAT_SILVER = 2500, MAT_TITANIUM = 3500)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/alienwrench
 	name = "Alien Wrench"
@@ -219,7 +219,7 @@
 	build_path = /obj/item/wrench/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/alienwirecutters
 	name = "Alien Wirecutters"
@@ -229,7 +229,7 @@
 	build_path = /obj/item/wirecutters/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/alienscrewdriver
 	name = "Alien Screwdriver"
@@ -239,7 +239,7 @@
 	build_path = /obj/item/screwdriver/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/aliencrowbar
 	name = "Alien Crowbar"
@@ -249,7 +249,7 @@
 	build_path = /obj/item/crowbar/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 1000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/alienwelder
 	name = "Alien Welding Tool"
@@ -259,7 +259,7 @@
 	build_path = /obj/item/weldingtool/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 5000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/alienmultitool
 	name = "Alien Multitool"
@@ -269,7 +269,7 @@
 	build_path = /obj/item/multitool/abductor
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 5000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
-	category = list("Equipment")
+	category = list("Tools")
 
 /datum/design/bluespace_closet
 	name = "Bluespace Closet"
@@ -279,4 +279,4 @@
 	build_path = /obj/structure/closet/bluespace
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_PLASMA = 2500, MAT_TITANIUM = 500, MAT_BLUESPACE = 500)
-	category = list("Equipment")
+	category = list("Bluespace")
