@@ -12,31 +12,6 @@
 	req_access = list()
 	req_one_access = list()
 
-/obj/item/b_rig/eva
-	name = "EVA suit control module"
-	suit_type = "EVA hardsuit"
-	desc = "A light rig for repairs and maintenance to the outside of habitats and vessels."
-	icon_state = "eva_rig"
-	active_slowdown = 0
-	offline_slowdown = 1
-	offline_vision_restriction = 1
-	helm_type = /obj/item/clothing/head/helmet/space/new_rig/eva
-	req_access = list()
-	req_one_access = list()
-
-/obj/item/b_rig/hazmat
-
-	name = "AMI control module"
-	suit_type = "hazmat hardsuit"
-	desc = "An Anomalous Material Interaction hardsuit that protects against the strangest energies the universe can throw at it."
-	icon_state = "science_rig"
-	active_slowdown = 1
-	offline_vision_restriction = 1
-	helm_type = /obj/item/clothing/head/helmet/space/new_rig/hazmat
-	helm_type = /obj/item/clothing/head/helmet/space/new_rig/ert
-	req_access = list()
-	req_one_access = list()
-
 /obj/item/b_rig/medical
 	name = "rescue suit control module"
 	suit_type = "rescue hardsuit"

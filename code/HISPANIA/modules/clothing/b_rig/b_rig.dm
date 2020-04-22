@@ -7,40 +7,24 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A belt-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BELT
-	req_one_access = list()
-	req_access = list()
 	w_class = WEIGHT_CLASS_BULKY
 	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 75)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
-	var/interface_title = "Hardsuit Controller"
 	var/suit_type = "hardsuit"
 	var/chest_type = /obj/item/clothing/suit/space/new_b_rig
 	var/helm_type =  /obj/item/clothing/head/helmet/space/new_b_rig
 	var/boot_type =  /obj/item/clothing/shoes/magboots/b_rig
 	var/glove_type = /obj/item/clothing/gloves/b_rig
-	var/cell_type =  /obj/item/stock_parts/cell/high
-	var/air_type =   /obj/item/tank/oxygen
-	var/obj/item/tank/air_supply                       // Air tank, if any.
 	var/obj/item/clothing/shoes/magboots/boots = null             // Deployable boots, if any.
 	var/obj/item/clothing/shoes/under_boots = null					//Boots that are between the feet and the rig boots, if any.
 	var/obj/item/clothing/suit/space/new_b_rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/new_b_rig/helmet = null // Deployable helmet, if any.
 	var/obj/item/clothing/gloves/b_rig/gloves = null            // Deployable gauntlets, if any.
-	var/obj/item/stock_parts/cell/cell                             // Power supply, if any.
 	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
 	var/image/mob_icon                                        // Holder for on-mob icon.
-	var/open = 0                                              // Access panel status.
-	var/locked = 1                                            // Lock status.
-	var/subverted = 0
-	var/interface_locked = 0
-	var/control_overridden = 0
-	var/security_check_enabled = 1
-	var/malfunctioning = 0
-	var/malfunction_delay = 0
-	var/electrified = 0
 	var/locked_down = 0
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of NODROP.
@@ -48,7 +32,6 @@
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/active_slowdown = 3																		// How much the deployed suit slows down if powered.
 	var/vision_restriction
-	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
 	var/airtight = 1 //If set, will adjust AIRTIGHT and STOPSPRESSUREDMAGE flags on components. Otherwise it should leave them untouched.
 
 /obj/item/b_rig/examine(mob/user)
@@ -64,20 +47,10 @@
 		. += "The maintenance panel is [open ? "open" : "closed"]."
 		. += "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"]."
 
-/obj/item/b_rig/get_cell()
-	return cell
-
 /obj/item/b_rig/New()
 	..()
 	item_state = icon_state
-	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
-		locked = 0
 	START_PROCESSING(SSobj, src)
-	// Create and initialize our various segments.
-	if(cell_type)
-		cell = new cell_type(src)
-	if(air_type)
-		air_supply = new air_type(src)
 	if(glove_type)
 		gloves = new glove_type(src)
 		verbs |= /obj/item/rig/proc/toggle_gauntlets
