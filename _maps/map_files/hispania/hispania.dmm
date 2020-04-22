@@ -62127,6 +62127,10 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "brown"
@@ -97098,27 +97102,6 @@
 	dir = 4
 	},
 /area/quartermaster/storage)
-"jXI" = (
-/obj/structure/table,
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/obj/item/cartridge/quartermaster{
-	pixel_x = -4;
-	pixel_y = 7
-	},
-/obj/item/cartridge/quartermaster,
-/obj/item/cartridge/quartermaster{
-	pixel_x = -4;
-	pixel_y = 7
-	},
-/obj/item/megaphone,
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "brown"
-	},
-/area/quartermaster/qm)
 "jXY" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/shuttle/floor{
@@ -97484,6 +97467,23 @@
 /obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel/dark,
 /area/crew_quarters/dorms)
+"nad" = (
+/obj/structure/table,
+/obj/item/cartridge/quartermaster{
+	pixel_x = -4;
+	pixel_y = 7
+	},
+/obj/item/cartridge/quartermaster,
+/obj/item/cartridge/quartermaster{
+	pixel_x = -4;
+	pixel_y = 7
+	},
+/obj/item/megaphone,
+/turf/simulated/floor/plasteel{
+	dir = 2;
+	icon_state = "brown"
+	},
+/area/quartermaster/qm)
 "nal" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/shuttle/floor{
@@ -122801,7 +122801,7 @@ cdR
 cfe
 civ
 ckG
-jXI
+nad
 bYM
 cnX
 cnp
