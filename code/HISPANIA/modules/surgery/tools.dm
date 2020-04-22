@@ -4,7 +4,6 @@
 	icon = 'icons/hispania/obj/surgery.dmi'
 	icon_state = "scalpel_a"
 	hitsound = 'sound/weapons/blade1.ogg'
-	force = 16
 	toolspeed = 0.4
 
 /obj/item/scalpel/advanced/attack_self(mob/user)
@@ -20,7 +19,6 @@
 	icon = 'icons/hispania/obj/surgery.dmi'
 	icon_state = "saw_a"
 	hitsound = 'sound/weapons/blade1.ogg'
-	force = 17
 	toolspeed = 0.7
 
 /obj/item/circular_saw/advanced/attack_self(mob/user)
