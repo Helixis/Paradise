@@ -57,7 +57,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 
 /datum/job/hop
 	title = "Head of Personnel"
-	//flag = JOB_HOP
+	flag = JOB_HOP
 	department_flag = JOBCAT_SUPPORT
 	total_positions = 1
 	spawn_positions = 1
