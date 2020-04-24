@@ -24,11 +24,11 @@
 			message_admins("[key_name_admin(user)] released a Princess of Terror Spiders at [ADMIN_COORDJMP(T)]")
 			log_game("[key_name(user)] released a Princess of Terror Spiders at [COORD(T)]")
 			playsound(src, 'sound/hispania/effects/princesa.ogg', 70, 7)
+			spawn(1500) ///2.5 Minutos despues
+				GLOB.command_announcement.Announce("Confirmed outbreak of level 3 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", 'sound/effects/siren-spooky.ogg')
 			if(user)
 				user.unEquip(src)
 			qdel(src)
-		spawn(1500) ///2.5 Minutos despues
-			GLOB.command_announcement.Announce("Confirmed outbreak of level 3 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", 'sound/effects/siren-spooky.ogg')
 
 /obj/item/paper/princesa
 	name = "Princess of Terror Spider Egg Guide"
