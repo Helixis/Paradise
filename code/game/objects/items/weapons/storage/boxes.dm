@@ -74,6 +74,7 @@
 		new /obj/item/reagent_containers/hypospray/autoinjector( src )
 		new /obj/item/flashlight/flare/glowstick/emergency( src )
 		new /obj/item/crowbar/red(src)
+		new /obj/item/reagent_containers/food/snacks/proteinbar(src)
 		return
 
 /obj/item/storage/box/survival_vox
@@ -87,6 +88,7 @@
 	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 	new /obj/item/flashlight/flare/glowstick/emergency(src)
 	new /obj/item/crowbar/red(src)
+	new /obj/item/reagent_containers/food/snacks/proteinbar(src)
 
 /obj/item/storage/box/survival_plasmaman
 	icon_state = "box_plasma"
@@ -99,6 +101,7 @@
 	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 	new /obj/item/flashlight/flare/glowstick/emergency(src)
 	new /obj/item/crowbar/red(src)
+	new /obj/item/reagent_containers/food/snacks/proteinbar(src)
 
 /obj/item/storage/box/engineer
 	icon_state = "box_eng"
@@ -109,6 +112,7 @@
 		new /obj/item/tank/emergency_oxygen/engi( src )
 		new /obj/item/reagent_containers/hypospray/autoinjector( src )
 		new /obj/item/flashlight/flare/glowstick/emergency( src )
+		new /obj/item/reagent_containers/food/snacks/proteinbar(src)
 		return
 
 /obj/item/storage/box/survival_mining
@@ -121,6 +125,7 @@
 		new /obj/item/crowbar/red(src)
 		new /obj/item/reagent_containers/hypospray/autoinjector(src)
 		new /obj/item/flashlight/flare/glowstick/emergency(src)
+		new /obj/item/reagent_containers/food/snacks/proteinbar(src)
 
 /obj/item/storage/box/survival_syndi
 	icon_state = "box_syndi"
@@ -133,6 +138,7 @@
 		new /obj/item/reagent_containers/food/pill/initropidril(src)
 		new /obj/item/flashlight/flare/glowstick/red(src)
 		new /obj/item/crowbar/red(src) //Syndicate lives matter
+		new /obj/item/reagent_containers/food/snacks/proteinbar(src) //Syndicate lives matter
 
 /obj/item/storage/box/gloves
 	name = "box of latex gloves"
