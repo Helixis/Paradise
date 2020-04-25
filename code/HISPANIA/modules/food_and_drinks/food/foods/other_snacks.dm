@@ -16,4 +16,4 @@
 	filling_color = "#631212"
 	junkiness = 25
 	list_reagents = list("protein" = 5, "sugar" = 2, "nutriment" = 5)
-	tastes = list("chewy beef" = 1)
+	tastes = list("protein" = 1)
