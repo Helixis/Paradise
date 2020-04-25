@@ -1021,6 +1021,9 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 	var/skip_check = 0
 	if(istype(toEat, /obj/item/reagent_containers/food/pill/patch)) //Permite aplicar parches, por alguna razon son comida
 		skip_check = 1
+	if(istype(toEat, /obj/item/reagent_containers/food/pill)) //Permite aplicar pildoras pero envia un mensaje
+		to_chat(user, "<span class='notice'>You push the pill through a small place between the mask and the mouth.</span>")
+		skip_check = 1
 	if(!skip_check)
 		var/covered = 0
 		var/snowflek = 0
