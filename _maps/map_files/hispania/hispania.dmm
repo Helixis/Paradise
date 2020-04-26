@@ -27348,6 +27348,12 @@
 /obj/item/stack/sheet/glass{
 	amount = 50
 	},
+/obj/item/stack/sheet/metal{
+	amount = 38
+	},
+/obj/item/stack/sheet/glass{
+	amount = 13
+	},
 /obj/item/multitool,
 /obj/item/multitool,
 /turf/simulated/floor/plasteel,
@@ -45980,7 +45986,6 @@
 /obj/item/stack/sheet/metal{
 	amount = 50
 	},
-/obj/item/clothing/glasses/welding,
 /obj/machinery/door_control{
 	id = "rdlab";
 	name = "Research and Development Lab Shutters Control";
@@ -45988,6 +45993,15 @@
 	pixel_y = 0;
 	req_access_txt = "47"
 	},
+/obj/item/stack/sheet/glass{
+	amount = 13;
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/stack/sheet/metal{
+	amount = 13
+	},
+/obj/item/clothing/glasses/welding,
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (NORTH)";
 	icon_state = "whitepurple";
@@ -79172,6 +79186,14 @@
 	},
 /obj/item/stack/sheet/mineral/plasma{
 	amount = 30
+	},
+/obj/item/stack/sheet/metal{
+	amount = 13;
+	step_x = 0;
+	step_y = 0
+	},
+/obj/item/stack/sheet/glass{
+	amount = 13
 	},
 /obj/item/pod_paint_bucket,
 /turf/simulated/floor/plasteel,
