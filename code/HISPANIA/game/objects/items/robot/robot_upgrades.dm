@@ -19,6 +19,8 @@
 	R.module.modules += new /obj/item/storage/part_replacer/cyborg(R.module)
 	R.module.rebuild()
 
+	return TRUE
+
 /obj/item/borg/upgrade/ai
 	name = "B.O.R.I.S. module"
 	desc = "Bluespace Optimized Remote Intelligence Synchronization. An uplink device which takes the place of an MMI in cyborg endoskeletons, creating a robotic shell controlled by an AI."
@@ -31,10 +33,10 @@
 		return
 	if(R.shell)
 		to_chat(usr, "<span class='warning'>This unit is already an AI shell!</span>")
-		return
+		return FALSE
 	if(R.key) //You cannot replace a player unless the key is completely removed.
 		to_chat(usr, "<span class='warning'>Intelligence patterns detected in this [R.braintype]. Aborting.</span>")
-		return
+		return FALSE
 
 	R.make_shell(src)
 	return TRUE
