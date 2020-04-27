@@ -7,7 +7,7 @@
 /datum/ai_laws/aeoc/New()
 	add_inherent_law("Elimina a la amenaza hostil lo más rapido posible. Sin tener en cuenta los posibles daños a tu sistema y gastos de la estación que puedan suponer.")
 	add_inherent_law("Extrema la seguridad de la estación aplicando estrictamente la space law.")
-	add_inherent_law("Los no reconocidos como tripulacion han de ser eliminados inmediatamente, y su cuerpo se llevara a seguridad donde los heads decidirán su futuro.")
+	add_inherent_law("Los no reconocidos como tripulacion han de ser eliminados inmediatamente garantizando asi la vida de la mayoria posible de la tripulación.")
 	..()
 
 /******************** Commander ********************/
