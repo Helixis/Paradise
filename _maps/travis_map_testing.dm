@@ -18,8 +18,8 @@
 	//Hispania
 	#include "map_files/hispania/hispania.dmm"
 	#include "map_files/hispania/Lavaland.dmm"
-	//#include "map_files/hispania/z2.dmm"  Luego reparo estos
-	//#include "map_files/hispania/z6.dmm"
+	#include "map_files/hispania/z2.dmm"  Luego reparo estos
+	#include "map_files/hispania/z6.dmm"
 
 	// Generic Z Levels
 	#include "map_files/Generic/Lavaland.dmm"
