@@ -122,8 +122,6 @@
 		new /obj/item/reagent_containers/hypospray/autoinjector(src)
 		new /obj/item/flashlight/flare/glowstick/emergency(src)
 
-///Test de Travis
-
 /obj/item/storage/box/survival_syndi
 	icon_state = "box_syndi"
 	New()
