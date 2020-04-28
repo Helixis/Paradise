@@ -36,7 +36,7 @@ before_script:
   - tools/travis/install_byond.sh
 script:
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - bash dm.sh -M${DM_MAPFILE} paradise.dme
+  - bash tools/travis/dm.sh -M${DM_MAPFILE} paradise.dme
 
 jobs:
   include:
