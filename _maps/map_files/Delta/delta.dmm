@@ -24504,6 +24504,11 @@
 	pixel_x = -27;
 	pixel_y = 0
 	},
+/obj/item/stack/sheet/glass/fifty{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/item/stack/sheet/metal/fifty,
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "brown"
@@ -30932,6 +30937,8 @@
 	icon_state = "tube1";
 	dir = 8
 	},
+/obj/item/reagent_containers/iv_bag/salglu,
+/obj/item/reagent_containers/iv_bag/salglu,
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "whitered"
@@ -56084,7 +56091,7 @@
 "bVG" = (
 /obj/structure/rack,
 /obj/item/gun/energy/ionrifle,
-/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/hooded/ablative,
 /turf/simulated/floor/plasteel{
 	icon_state = "vault";
 	dir = 8
@@ -61053,6 +61060,7 @@
 "ceb" = (
 /obj/structure/table,
 /obj/item/storage/box/donkpockets,
+/obj/item/storage/fancy/donut_box,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -65606,6 +65614,7 @@
 /obj/machinery/camera{
 	c_tag = "Central Ring Hallway Center"
 	},
+/obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "clV" = (
@@ -68639,7 +68648,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "bluecorner"
@@ -68653,7 +68661,6 @@
 	tag = ""
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/structure/chair/comfy/black,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "bluecorner"
@@ -68701,27 +68708,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/chair/comfy/black,
 /obj/effect/landmark/start{
 	name = "Civilian"
 	},
-/turf/simulated/floor/plasteel{
-	dir = 1;
-	icon_state = "bluecorner"
-	},
-/area/hallway/primary/central)
-"crH" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	tag = ""
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/table/wood,
-/obj/item/storage/fancy/donut_box,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "bluecorner"
@@ -69370,9 +69359,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/chair/comfy/black{
-	dir = 4
-	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "bluecorner"
@@ -69415,9 +69401,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
 	level = 1
-	},
-/obj/structure/chair/comfy/black{
-	dir = 8
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
@@ -70046,8 +70029,6 @@
 	icon_state = "4-8";
 	tag = ""
 	},
-/obj/structure/table/wood,
-/obj/item/paper_bin,
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "bluecorner"
@@ -70059,9 +70040,6 @@
 	d2 = 8;
 	icon_state = "4-8";
 	tag = ""
-	},
-/obj/structure/chair/comfy/black{
-	dir = 1
 	},
 /obj/effect/landmark/start{
 	name = "Civilian"
@@ -70083,34 +70061,6 @@
 	icon_state = "4-8";
 	tag = ""
 	},
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "bluecorner"
-	},
-/area/hallway/primary/central)
-"cue" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	tag = ""
-	},
-/obj/structure/chair/comfy/black{
-	dir = 1
-	},
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "bluecorner"
-	},
-/area/hallway/primary/central)
-"cuf" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	tag = ""
-	},
-/obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "bluecorner"
@@ -70951,6 +70901,9 @@
 	},
 /area/hallway/primary/central)
 "cvF" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "neutral"
 	},
@@ -83382,11 +83335,6 @@
 "cSv" = (
 /obj/structure/table,
 /obj/machinery/light,
-/obj/item/stack/sheet/metal/fifty,
-/obj/item/stack/sheet/glass/fifty{
-	pixel_x = -5;
-	pixel_y = 5
-	},
 /obj/item/stack/packageWrap,
 /turf/simulated/floor/plasteel{
 	dir = 2;
@@ -86797,6 +86745,11 @@
 /obj/item/stock_parts/manipulator,
 /obj/item/stock_parts/manipulator,
 /obj/effect/decal/warning_stripes/east,
+/obj/item/stack/sheet/metal/fifty,
+/obj/item/stack/sheet/glass/fifty{
+	pixel_x = -5;
+	pixel_y = 5
+	},
 /turf/simulated/floor/plasteel,
 /area/toxins/lab)
 "cYn" = (
@@ -92475,7 +92428,8 @@
 	},
 /turf/simulated/floor/plasteel{
 	dir = 4;
-	icon_state = "whitepurplecorner"
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics_cloning)
 "diG" = (
@@ -92503,8 +92457,9 @@
 	req_access_txt = "5"
 	},
 /turf/simulated/floor/plasteel{
-	dir = 1;
-	icon_state = "whitepurple"
+	tag = "icon-whiteblue (NORTH)";
+	icon_state = "whiteblue";
+	dir = 1
 	},
 /area/medical/genetics_cloning)
 "diI" = (
@@ -92544,7 +92499,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel{
 	dir = 1;
-	icon_state = "whitepurplecorner"
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/medbay)
 "diK" = (
@@ -93313,8 +93269,9 @@
 	level = 2
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	dir = 1;
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics_cloning)
 "djZ" = (
@@ -93940,8 +93897,9 @@
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics_cloning)
 "dlj" = (
@@ -93981,13 +93939,6 @@
 	icon_state = "whitepurplecorner"
 	},
 /area/medical/genetics_cloning)
-"dln" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
-	},
-/area/medical/medbay)
 "dlo" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -95103,14 +95054,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel,
 /area/hallway/primary/aft)
-"dnE" = (
-/obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "purplecorner"
-	},
-/area/hallway/primary/aft)
 "dnF" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -95126,8 +95069,9 @@
 	pixel_y = 30
 	},
 /turf/simulated/floor/plasteel{
-	dir = 1;
-	icon_state = "whitepurplecorner"
+	dir = 10;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dnH" = (
@@ -95962,7 +95906,7 @@
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
-	icon_state = "purplecorner"
+	icon_state = "orangecorner"
 	},
 /area/hallway/primary/aft)
 "dpb" = (
@@ -95991,8 +95935,9 @@
 	dir = 4
 	},
 /turf/simulated/floor/plasteel{
-	dir = 1;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics)
 "dpe" = (
@@ -96071,9 +96016,9 @@
 	name = "Geneticist"
 	},
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (NORTHWEST)";
-	icon_state = "whitepurple";
-	dir = 9
+	dir = 1;
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics)
 "dpk" = (
@@ -96092,7 +96037,8 @@
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
-	icon_state = "whitepurplecorner"
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics)
 "dpm" = (
@@ -96117,9 +96063,9 @@
 	level = 1
 	},
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (EAST)";
-	icon_state = "whitepurple";
-	dir = 4
+	dir = 4;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dpo" = (
@@ -96152,8 +96098,9 @@
 	level = 1
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/medbay)
 "dpr" = (
@@ -96765,9 +96712,9 @@
 	},
 /obj/item/storage/box/disks,
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (WEST)";
-	icon_state = "whitepurple";
-	dir = 8
+	dir = 1;
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics)
 "dqs" = (
@@ -96982,8 +96929,9 @@
 	level = 1
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/medbay)
 "dqF" = (
@@ -97594,7 +97542,7 @@
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
-	icon_state = "purplecorner"
+	icon_state = "orangecorner"
 	},
 /area/hallway/primary/aft)
 "drN" = (
@@ -97622,8 +97570,9 @@
 	dir = 8
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics)
 "drP" = (
@@ -97654,8 +97603,9 @@
 "drR" = (
 /obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "whitepurplecorner"
+	dir = 4;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "drS" = (
@@ -97687,9 +97637,9 @@
 	name = "Geneticist"
 	},
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (SOUTHWEST)";
-	icon_state = "whitepurple";
-	dir = 10
+	dir = 1;
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics)
 "drV" = (
@@ -97704,8 +97654,9 @@
 /area/medical/genetics)
 "drW" = (
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics)
 "drX" = (
@@ -97716,9 +97667,9 @@
 "drY" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (EAST)";
-	icon_state = "whitepurple";
-	dir = 4
+	dir = 4;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "drZ" = (
@@ -97747,8 +97698,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/medbay)
 "dsc" = (
@@ -98116,6 +98068,9 @@
 	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
 /obj/item/storage/belt/utility/full,
+/obj/item/stack/sheet/metal{
+	amount = 50
+	},
 /turf/simulated/floor/plasteel,
 /area/assembly/robotics)
 "dsK" = (
@@ -98176,8 +98131,9 @@
 	pixel_y = -26
 	},
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	dir = 10;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dsP" = (
@@ -98195,8 +98151,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics)
 "dsQ" = (
@@ -98206,14 +98163,16 @@
 	pixel_y = -29
 	},
 /turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "whitepurplecorner"
+	tag = "icon-whitebluecorner (WEST)";
+	icon_state = "whitebluecorner";
+	dir = 8
 	},
 /area/medical/genetics)
 "dsR" = (
 /turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "whitepurplecorner"
+	dir = 4;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dsS" = (
@@ -115545,7 +115504,8 @@
 /obj/item/toy/figure/geneticist,
 /turf/simulated/floor/plasteel{
 	dir = 1;
-	icon_state = "whitepurplecorner"
+	icon_state = "whitebluecorner";
+	tag = "icon-whitebluecorner"
 	},
 /area/medical/genetics)
 "dYc" = (
@@ -115566,8 +115526,9 @@
 "dYd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plasteel{
-	dir = 4;
-	icon_state = "whitepurplecorner"
+	dir = 5;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dYe" = (
@@ -115641,7 +115602,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plasteel{
 	dir = 4;
-	icon_state = "whitepurplecorner"
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dYk" = (
@@ -115678,9 +115640,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (EAST)";
-	icon_state = "whitepurple";
-	dir = 4
+	dir = 4;
+	icon_state = "whiteblue";
+	tag = "icon-whitehall (WEST)"
 	},
 /area/medical/genetics)
 "dYm" = (
@@ -117926,6 +117888,15 @@
 	icon_state = "neutralcorner"
 	},
 /area/medical/medbay3)
+"kRL" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "neutralcorner";
+	dir = 2
+	},
+/area/hallway/primary/central)
 "kSv" = (
 /obj/structure/punching_bag,
 /turf/simulated/floor/plasteel{
@@ -118838,6 +118809,21 @@
 	dir = 1
 	},
 /area/crew_quarters/fitness)
+"pLO" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/simulated/floor/plasteel{
+	dir = 8;
+	icon_state = "neutralcorner"
+	},
+/area/hallway/primary/central)
+"pNj" = (
+/turf/simulated/floor/plasteel{
+	tag = "icon-whitebluefull";
+	icon_state = "whitebluefull"
+	},
+/area/hallway/primary/aft)
 "pOX" = (
 /obj/structure/table,
 /obj/item/roller,
@@ -119133,6 +119119,15 @@
 	icon_state = "wall3"
 	},
 /area/shuttle/tsf)
+"rNV" = (
+/obj/structure/table/reinforced,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/simulated/floor/plasteel{
+	tag = "icon-whitebluefull";
+	icon_state = "whitebluefull"
+	},
+/area/hallway/primary/aft)
 "rPF" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -119642,6 +119637,16 @@
 	icon_plating = "plating"
 	},
 /area/mimeoffice)
+"ugg" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	tag = ""
+	},
+/obj/item/twohanded/required/kirbyplants,
+/turf/simulated/floor/plasteel,
+/area/hallway/primary/central)
 "ugI" = (
 /mob/living/simple_animal/hostile/retaliate/carp/koi{
 	name = "Jeremy"
@@ -159497,7 +159502,7 @@ bYv
 bYv
 ciJ
 bYv
-tZM
+ugg
 cnv
 iLP
 cpZ
@@ -159761,7 +159766,7 @@ cqn
 crE
 csQ
 cuc
-cvE
+pLO
 cxa
 cyl
 czO
@@ -160274,8 +160279,8 @@ vQe
 cqc
 crG
 csS
-cue
-cvG
+cub
+kRL
 cxa
 cyn
 czQ
@@ -160306,11 +160311,11 @@ diw
 dle
 cSw
 dmh
-dnE
+cYC
 dpa
 dsI
 drM
-dnE
+cYC
 cSw
 cTW
 dwu
@@ -160529,9 +160534,9 @@ clU
 wkc
 xwF
 cqc
-crH
+crD
 csT
-cuf
+cub
 cvG
 cwZ
 cyk
@@ -160566,8 +160571,8 @@ dfv
 dmi
 drG
 dmi
-dce
-drK
+pNj
+rNV
 duk
 duk
 duk
@@ -164416,9 +164421,9 @@ dgx
 dgP
 diJ
 dkf
-dln
+dgP
 dmp
-dln
+dgP
 dpq
 dqE
 dsb
