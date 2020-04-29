@@ -16917,6 +16917,13 @@
 "aHA" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
+/obj/machinery/door_control{
+	id = "r2-delta";
+	name = "Door Bolt Control";
+	normaldoorcontrol = 1;
+	pixel_y = -24;
+	specialfunctions = 4
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
@@ -18640,6 +18647,14 @@
 /area/mimeoffice)
 "aKk" = (
 /obj/structure/dresser,
+/obj/machinery/door_control{
+	id = "r4-delta";
+	name = "Door Bolt Control";
+	normaldoorcontrol = 1;
+	pixel_x = 24;
+	pixel_y = 0;
+	specialfunctions = 4
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
@@ -75451,16 +75466,18 @@
 /turf/simulated/floor/plasteel,
 /area/ai_monitored/storage/eva)
 "cEt" = (
-/obj/machinery/door/airlock/glass{
-	name = "Cabin"
+/obj/machinery/door/airlock{
+	id_tag = "r2-delta";
+	name = "Private Room 2"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
 /area/crew_quarters/sleep)
 "cEu" = (
-/obj/machinery/door/airlock/glass{
-	name = "Cabin"
+/obj/machinery/door/airlock{
+	id_tag = "r4-delta";
+	name = "Private Room 4"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
@@ -78311,8 +78328,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/starboard)
 "cJy" = (
-/obj/machinery/door/airlock/glass{
-	name = "Cabin"
+/obj/machinery/door/airlock{
+	id_tag = "r3-delta";
+	name = "Private Room 3"
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/sleep)
@@ -79179,6 +79197,14 @@
 	pixel_x = 26;
 	pixel_y = 28
 	},
+/obj/machinery/door_control{
+	id = "r1-delta";
+	name = "Door Bolt Control";
+	normaldoorcontrol = 1;
+	pixel_x = 24;
+	pixel_y = 0;
+	specialfunctions = 4
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "wood"
 	},
@@ -79191,6 +79217,14 @@
 /obj/item/radio/intercom{
 	pixel_x = 26;
 	pixel_y = 28
+	},
+/obj/machinery/door_control{
+	id = "r3-delta";
+	name = "Door Bolt Control";
+	normaldoorcontrol = 1;
+	pixel_x = 24;
+	pixel_y = 0;
+	specialfunctions = 4
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/sleep)
@@ -116465,11 +116499,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"feQ" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L9"
-	},
-/area/space)
 "ffM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -116648,11 +116677,6 @@
 "gpi" = (
 /turf/simulated/floor/plating,
 /area/maintenance/asmaint2)
-"gtF" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L13"
-	},
-/area/space)
 "gud" = (
 /obj/machinery/power/port_gen/pacman,
 /turf/simulated/shuttle/floor{
@@ -116698,17 +116722,6 @@
 /area/medical/research{
 	name = "Research Division"
 	})
-"gGG" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L11"
-	},
-/area/space)
 "gIl" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/fire/firefighter,
@@ -117387,17 +117400,6 @@
 	tag = "icon-vault (NORTHEAST)"
 	},
 /area/crew_quarters/bar)
-"kGr" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L4"
-	},
-/area/space)
 "kIB" = (
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -117536,11 +117538,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"lpW" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L3"
-	},
-/area/space)
 "lqj" = (
 /turf/simulated/shuttle/wall{
 	dir = 3;
@@ -117918,23 +117915,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/clownoffice)
-"nNm" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L12"
-	},
-/area/space)
 "nNC" = (
 /obj/structure/lattice,
 /obj/structure/lattice/catwalk,
@@ -118061,21 +118041,6 @@
 	icon_state = "wall3"
 	},
 /area/shuttle/tsf)
-"oDm" = (
-/obj/machinery/navbeacon{
-	codes_txt = "patrol;next_patrol=Security";
-	location = "EVA2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L10"
-	},
-/area/space)
 "oEh" = (
 /obj/item/mounted/mirror,
 /turf/simulated/shuttle/wall{
@@ -118169,11 +118134,15 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"pnB" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L5"
+"pon" = (
+/obj/machinery/door/airlock{
+	id_tag = "r1-delta";
+	name = "Private Room 1"
 	},
-/area/space)
+/turf/simulated/floor/plasteel{
+	icon_state = "wood"
+	},
+/area/crew_quarters/sleep)
 "ppk" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/computer{
@@ -118291,9 +118260,6 @@
 	icon_state = "neutralfull"
 	},
 /area/security/checkpoint/engineering)
-"qqa" = (
-/turf/simulated/floor/plasteel/hispania,
-/area/space)
 "quB" = (
 /obj/machinery/door/airlock/shuttle/glass{
 	name = "trader shuttle airlock";
@@ -118378,13 +118344,6 @@
 	icon_state = "neutral"
 	},
 /area/maintenance/asmaint2)
-"rgX" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L8"
-	},
-/area/space)
 "rgY" = (
 /turf/space,
 /area/security/prisonershuttle)
@@ -118407,21 +118366,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/medical/psych)
-"rmL" = (
-/obj/machinery/navbeacon{
-	codes_txt = "patrol;next_patrol=Lockers";
-	location = "EVA"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L6"
-	},
-/area/space)
 "rmW" = (
 /turf/simulated/wall/r_wall,
 /area/storage/secure)
@@ -118466,17 +118410,6 @@
 	},
 /turf/simulated/wall,
 /area/medical/virology/lab)
-"rBa" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L14"
-	},
-/area/space)
 "rCZ" = (
 /turf/simulated/shuttle/wall{
 	dir = 4;
@@ -118731,19 +118664,6 @@
 	dir = 2
 	},
 /area/maintenance/aft)
-"tsI" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1;
-	initialize_directions = 11;
-	level = 1
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L2"
-	},
-/area/space)
 "tyV" = (
 /obj/machinery/door/airlock/highsecurity{
 	locked = 1;
@@ -119404,13 +119324,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"wKB" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L7"
-	},
-/area/space)
 "wQI" = (
 /obj/machinery/door/airlock/shuttle/glass{
 	id_tag = "soltrader_south";
@@ -141936,8 +141849,8 @@ aaa
 aaa
 aaa
 aaa
-qqa
-tsI
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -142193,8 +142106,8 @@ aaa
 aaa
 aaa
 aaa
-lpW
-kGr
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -142450,8 +142363,8 @@ aaa
 aaa
 aaa
 aaa
-pnB
-rmL
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -142707,8 +142620,8 @@ aaa
 aaa
 aaa
 aaa
-wKB
-rgX
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -142964,8 +142877,8 @@ aaa
 aaa
 aaa
 aaa
-feQ
-oDm
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -143221,8 +143134,8 @@ aaa
 aaa
 aaa
 aaa
-gGG
-nNm
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -143478,8 +143391,8 @@ aaa
 aaa
 aaa
 aaa
-gtF
-rBa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -170823,7 +170736,7 @@ cEt
 cFq
 cGU
 cIg
-cEu
+pon
 cAq
 cAq
 cOq
