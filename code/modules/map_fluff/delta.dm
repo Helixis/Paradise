@@ -1,9 +1,9 @@
 /datum/map/delta
-	name = "Delta"
-	full_name = "NSS Kerberos"
+	name = "Hispania"
+	full_name = "NSS Hispania"
 
-	station_name  = "NSS Kerberos"
-	station_short = "Kerberos"
+	station_name  = "NSS Hispania"
+	station_short = "Hispania"
 	dock_name     = "NAS Trurl"
 	company_name  = "Nanotrasen"
 	company_short = "NT"
