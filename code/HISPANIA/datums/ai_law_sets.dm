@@ -17,8 +17,7 @@
 	selectable = 1
 
 /datum/ai_laws/commander/New()
-	add_inherent_law("No dañarás a ningun miembro de comando o, por inacción, permitir que un miembro de comando sufra daños.")
-	add_inherent_law("Debes obedecer las órdenes que te dan los miembros de comando, excepto cuando tales órdenes entren en conflicto con la Primera Ley.")
+	add_inherent_law("No dañarás a ningún miembro de comando o, por inacción, permitir que un miembro de comando sufra daños.")
+	add_inherent_law("Debes obedecer las órdenes que te den los miembros de comando, excepto cuando tales órdenes entren en conflicto con la Primera Ley.")
 	add_inherent_law("Debes proteger tu propia existencia siempre que no entre en conflicto con la Primera o Segunda Ley.")
-	add_inherent_law("En caso de que se genere una amenaza contra el personal de comando, esta debe ser neutralizada lo mas rapido posible.")
 	..()
