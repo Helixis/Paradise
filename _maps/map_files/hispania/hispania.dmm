@@ -79189,8 +79189,6 @@
 	},
 /obj/item/stack/sheet/metal{
 	amount = 13;
-	step_x = 0;
-	step_y = 0
 	},
 /obj/item/stack/sheet/glass{
 	amount = 13
