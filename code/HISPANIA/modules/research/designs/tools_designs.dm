@@ -6,7 +6,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 500, MAT_GLASS = 50)
 	build_path = /obj/item/healthanalyzer
-	category = list("Tool Designs")
+	category = list("Tools")
 
 /datum/design/laserscalpel
 	name = "Laser Scalpel"
@@ -16,7 +16,7 @@
 	build_path = /obj/item/scalpel/advanced
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 4000, MAT_GLASS = 2000, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 250, MAT_TITANIUM = 1500)
-	category = list("Tool Designs")
+	category = list("Tools")
 
 /datum/design/mechanicalpinches
 	name = "Mechanical Pinches"
@@ -26,7 +26,7 @@
 	build_path = /obj/item/retractor/advanced
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 4000, MAT_GLASS = 2000, MAT_SILVER = 1500, MAT_TITANIUM = 1500)
-	category = list("Tool Designs")
+	category = list("Tools")
 
 /datum/design/searingtool
 	name = "Searing Tool"
@@ -36,4 +36,4 @@
 	build_path = /obj/item/surgicaldrill/advanced
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 4000, MAT_GLASS = 2000, MAT_PLASMA = 1500, MAT_URANIUM = 1500, MAT_TITANIUM = 1500)
-	category = list("Tool Designs")
+	category = list("Tools")
