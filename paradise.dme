@@ -1342,7 +1342,6 @@
 #include "code\HISPANIA\modules\research\designs\equipment_designs.dm"
 #include "code\HISPANIA\modules\research\designs\machine_designs.dm"
 #include "code\HISPANIA\modules\research\designs\mechfabricator_designs.dm"
-#include "code\HISPANIA\modules\research\designs\misc_designs.dm"
 #include "code\HISPANIA\modules\research\designs\power_designs.dm"
 #include "code\HISPANIA\modules\research\designs\tools_designs.dm"
 #include "code\HISPANIA\modules\research\xenobiology\crossbreeding\__corecross.dm"

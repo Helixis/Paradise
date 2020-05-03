@@ -17,4 +17,3 @@
 	materials = list(MAT_GLASS = 1000)
 	build_path = /obj/item/circuitboard/telesci_console/proto
 	category = list("Computer Boards")
-
