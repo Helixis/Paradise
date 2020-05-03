@@ -126,3 +126,4 @@
 			to_chat(M, "<span class='warning'>Your heart is pounding!</span>")
 			M << 'sound/effects/singlebeat.ogg'
 	return list(effect, update_flags)
+
