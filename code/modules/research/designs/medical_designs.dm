@@ -40,7 +40,7 @@
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 30, MAT_GLASS = 20)
 	build_path = /obj/item/robotanalyzer
-	category = list("Medical")
+	category = list("Tools", "Misc")
 
 /datum/design/healthanalyzer_upgrade
 	name = "Health Analyzer Upgrade"

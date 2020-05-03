@@ -245,7 +245,7 @@
 	materials = list(MAT_GOLD = 5000, MAT_URANIUM = 4000, MAT_METAL = 5000, MAT_TITANIUM = 2000, MAT_BLUESPACE = 2000)
 	build_path = /obj/item/gun/energy/xray
 	locked = 1
-	category = list("Miscellaneous")
+	category = list("Weapons")
 
 /datum/design/immolator
 	name = "Immolator Laser Gun"
