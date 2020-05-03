@@ -68,7 +68,7 @@
 	build_path = /obj/item/gun/energy/wormhole_projector
 	locked = 1
 	access_requirement = list(ACCESS_RD) //screw you, HoS, this aint yours; this is only for a man of science---and trouble.
-	category = list("Weapons")
+	category = list("Bluespace")
 
 /datum/design/large_grenade
 	name = "Large Grenade"

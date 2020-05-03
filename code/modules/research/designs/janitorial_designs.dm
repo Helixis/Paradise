@@ -19,7 +19,7 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_GOLD = 1500, MAT_URANIUM = 250, MAT_PLASMA = 1500)
 	build_path = /obj/item/storage/bag/trash/bluespace
-	category = list("Equipment")
+	category = list("Bluespace")
 
 /datum/design/buffer
 	name = "Floor Buffer Upgrade"
