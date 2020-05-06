@@ -245,21 +245,6 @@ datum/status_effect/stabilized/blue/on_remove()
         to_chat(owner, "<span class='notice'>[linked_extract] discharges some energy into a device you have.</span>")
     return ..()
 
-/datum/status_effect/stabilized/silver
-	id = "stabilizedsilver"
-	colour = "silver"
-
-/datum/status_effect/stabilized/silver/on_apply()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.dna.species.hunger_mod *= 0.8 //20% buff
-	return ..()
-
-/datum/status_effect/stabilized/silver/on_remove()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.dna.species.hunger_mod /= 0.8
-
 /datum/status_effect/stabilized/pyrite
 	id = "stabilizedpyrite"
 	colour = "pyrite"
