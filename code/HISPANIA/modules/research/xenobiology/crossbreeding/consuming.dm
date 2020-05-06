@@ -127,6 +127,23 @@ Consuming extracts:
 /obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
 	M.apply_status_effect(/datum/status_effect/watercookie)
 
+/obj/item/slimecross/consuming/metal
+	colour = "metal"
+	effect_desc = "Creates a slime cookie that increases the target's resistance to brute damage."
+	cookietype = /obj/item/slime_cookie/metal
+
+/obj/item/slime_cookie/metal
+	name = "metallic cookie"
+	desc = "A shiny grey cookie. Hard to the touch."
+	icon_state = "metal"
+	taste = /datum/reagent/copper
+
+/obj/item/slime_cookie/metal/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/metalcookie)
+
+/obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/watercookie)
+
 /obj/item/slimecross/consuming/yellow
 	colour = "yellow"
 	effect_desc = "Creates a slime cookie that makes the target immune to electricity for a short time."
@@ -247,3 +264,17 @@ Consuming extracts:
 
 /obj/item/slime_cookie/lightpink/do_effect(mob/living/M, mob/user)
 	M.apply_status_effect(/datum/status_effect/peacecookie)
+
+/obj/item/slimecross/consuming/adamantine
+	colour = "adamantine"
+	effect_desc = "Creates a slime cookie that increases the target's resistance to burn damage."
+	cookietype = /obj/item/slime_cookie/adamantine
+
+/obj/item/slime_cookie/adamantine
+	name = "crystal cookie"
+	desc = "A translucent rock candy in the shape of a cookie. Surprisingly chewy."
+	icon_state = "adamantine"
+	taste = "crystalline sugar and metal"
+
+/obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/adamantinecookie)
