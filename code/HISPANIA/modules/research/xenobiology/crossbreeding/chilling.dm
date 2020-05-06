@@ -72,7 +72,8 @@ Chilling extracts:
 	user.visible_message("<span class='notice'>[src] shatters, and a the air suddenly feels charged for a moment.</span>")
 	for(var/obj/machinery/power/apc/C in A)
 		if(C.cell)
-			C.cell.charge = min(C.cell.charge + C.cell.maxcharge/5, C.cell.maxcharge)
+			C.cell.give(C.cell.maxcharge/5)
+			C.update_icon
 	..()
 
 /obj/item/slimecross/chilling/red

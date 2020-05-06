@@ -1005,6 +1005,8 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 			var/mob/living/carbon/human/H = src
 			if(isobj(H.shoes) && H.shoes.flags & NOSLIP)
 				return 0
+		if(HAS_TRAIT(src, TRAIT_NOSLIPWATER))
+			return FALSE
 	if(tilesSlipped)
 		for(var/t = 0, t<=tilesSlipped, t++)
 			spawn (t) step(src, src.dir)

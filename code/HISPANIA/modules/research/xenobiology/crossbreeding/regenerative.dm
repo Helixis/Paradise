@@ -77,6 +77,7 @@ Regenerative extracts:
 	if(batteries.len)
 		var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
 		ToCharge.charge = ToCharge.maxcharge
+		ToCharge.update_icon()
 		to_chat(target, "<span class='notice'>You feel a strange electrical pulse, and one of your electrical items was recharged.</span>")
 
 /obj/item/slimecross/regenerative/silver

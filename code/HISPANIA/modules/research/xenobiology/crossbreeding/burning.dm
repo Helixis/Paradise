@@ -101,7 +101,7 @@ Burning extracts:
 /obj/item/slimecross/burning/silver/do_effect(mob/user)
 	var/amount = rand(3,6)
 	var/list/turfs = list()
-	for(var/turf/T in range(1,get_turf(user)))
+	for(var/turf/simulated/T in range(1,get_turf(user)))
 		turfs += T
 	for(var/i = 0, i < amount, i++)
 		var/path = get_random_food()

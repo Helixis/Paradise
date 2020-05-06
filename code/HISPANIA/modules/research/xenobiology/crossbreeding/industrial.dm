@@ -85,7 +85,8 @@ Industrial extracts:
 /obj/item/slimecross/industrial/yellow/do_after_spawn(obj/item/spawned)
 	var/obj/item/stock_parts/cell/high/C = spawned
 	if(istype(C))
-		C.charge = rand(0,C.maxcharge/2)
+		C.use(rand(C.maxcharge/2, C.maxcharge))
+		C.update_icon()
 
 /obj/item/slimecross/industrial/darkpurple
 	colour = "dark purple"

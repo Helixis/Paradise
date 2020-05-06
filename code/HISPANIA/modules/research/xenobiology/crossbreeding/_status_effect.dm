@@ -120,6 +120,34 @@
 /datum/status_effect/plur/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_PACIFISM, "peacecookie")
 
+/datum/status_effect/stabilized/blue
+	id = "stabilizedblue"
+	colour = "blue"
+
+/datum/status_effect/stabilized/blue/on_apply()
+	ADD_TRAIT(owner, TRAIT_NOSLIPWATER, "slimestatus")
+	return ..()
+
+datum/status_effect/stabilized/blue/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER, "slimestatus")
+
+/datum/status_effect/watercookie
+	id = "watercookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 100
+
+/datum/status_effect/watercookie/on_apply()
+	ADD_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+	return ..()
+
+/datum/status_effect/watercookie/tick()
+	for(var/turf/simulated/T in range(get_turf(owner),1))
+		T.MakeSlippery(TURF_WET_WATER, min_wet_time = 10, wet_time_to_add = 5)
+
+/datum/status_effect/watercookie/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+
 /datum/status_effect/stabilized/metal
 	id = "stabilizedmetal"
 	colour = "metal"
@@ -160,7 +188,7 @@
             batteries += C
     if(batteries.len)
         var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
-        ToCharge.charge += min(ToCharge.maxcharge - ToCharge.charge, ToCharge.maxcharge/10) //10% of the cell, or to maximum.
+        ToCharge.give(ToCharge.maxcharge/10) //10% of the cell, or to maximum.//puto jaunt, no sabe nada de baterias
         for(var/obj/item/gun/energy/G in owner.GetAllContents())
             G.on_recharge()
             G.update_icon()

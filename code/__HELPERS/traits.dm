@@ -64,5 +64,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PACIFISM			"pacifism"
 #define TRAIT_WATERBREATH       "waterbreathing"
 
+//HISPATRAITS
+#define TRAIT_NOSLIPWATER			"noslip_water"
+
 // common trait sources
 #define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention
