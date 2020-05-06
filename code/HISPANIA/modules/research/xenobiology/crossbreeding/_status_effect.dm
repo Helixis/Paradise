@@ -36,7 +36,7 @@
 
 /datum/status_effect/watercookie/tick()
 	for(var/turf/simulated/T in range(get_turf(owner),1))
-		T.MakeSlippery(TURF_WET_WATER, time = 10)
+		T.MakeSlippery(TURF_WET_WATER, 10)
 
 /datum/status_effect/watercookie/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
