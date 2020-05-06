@@ -41,6 +41,23 @@
 /datum/status_effect/watercookie/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
 
+/datum/status_effect/metalcookie
+	id = "metalcookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 100
+
+/datum/status_effect/metalcookie/on_apply()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.brute_mod *= 0.9
+	return ..()
+
+/datum/status_effect/metalcookie/on_remove()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.brute_mod /= 0.9
+
 /datum/status_effect/sparkcookie
 	id = "sparkcookie"
 	status_type = STATUS_EFFECT_REPLACE
@@ -258,22 +275,6 @@ datum/status_effect/stabilized/blue/on_remove()
 
 /datum/status_effect/stabilized/pyrite/on_remove()
 	owner.color = originalcolor
-
-/datum/status_effect/stabilized/adamantine
-	id = "stabilizedadamantine"
-	colour = "adamantine"
-	examine_text = "<span class='warning'>SUBJECTPRONOUN has a strange metallic coating on their skin.</span>"
-
-/datum/status_effect/stabilized/adamantine/on_apply()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.dna.species.damage_resistance += 5
-	return ..()
-
-/datum/status_effect/stabilized/adamantine/on_remove()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.dna.species.damage_resistance -= 5
 
 /datum/status_effect/stabilized/rainbow
 	id = "stabilizedrainbow"
