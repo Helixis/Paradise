@@ -127,6 +127,20 @@ Consuming extracts:
 /obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
 	M.apply_status_effect(/datum/status_effect/watercookie)
 
+/obj/item/slimecross/consuming/yellow
+	colour = "yellow"
+	effect_desc = "Creates a slime cookie that makes the target immune to electricity for a short time."
+	cookietype = /obj/item/slime_cookie/yellow
+
+/obj/item/slime_cookie/yellow
+	name = "sparking cookie"
+	desc = "A yellow cookie with a lightning pattern. Has a rubbery texture."
+	icon_state = "yellow"
+	taste = "lemon cake and rubber gloves"
+
+/obj/item/slime_cookie/yellow/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/sparkcookie)
+
 /obj/item/slimecross/consuming/darkblue
 	colour = "dark blue"
 	effect_desc = "Creates a slime cookie that chills the target and extinguishes them."

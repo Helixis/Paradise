@@ -1,3 +1,76 @@
+///////////////////////////////////////
+///////////    GALLETAS     //////////
+/////////////////////////////////////
+/datum/status_effect/peacecookie
+	id = "peacecookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 100
+
+/datum/status_effect/peacecookie/tick()
+	for(var/mob/living/L in range(get_turf(owner),1))
+		L.apply_status_effect(/datum/status_effect/plur)
+
+/datum/status_effect/plur
+	id = "plur"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 30
+
+/datum/status_effect/plur/on_apply()
+	ADD_TRAIT(owner, TRAIT_PACIFISM, "peacecookie")
+	return ..()
+
+/datum/status_effect/plur/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, "peacecookie")
+
+/datum/status_effect/watercookie
+	id = "watercookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 100
+
+/datum/status_effect/watercookie/on_apply()
+	ADD_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+	return ..()
+
+/datum/status_effect/watercookie/tick()
+	for(var/turf/simulated/T in range(get_turf(owner),1))
+		T.MakeSlippery(TURF_WET_WATER, time = 10)
+
+/datum/status_effect/watercookie/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+
+/datum/status_effect/sparkcookie
+	id = "sparkcookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 300
+	var/original_coeff
+
+/datum/status_effect/sparkcookie/on_apply()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		original_coeff = H.dna.species.siemens_coeff
+		H.dna.species.siemens_coeff = 0
+	return ..()
+
+/datum/status_effect/sparkcookie/on_remove()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.siemens_coeff = original_coeff
+
+/datum/status_effect/adamantinecookie/on_apply()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.burn_mod *= 0.9
+	return ..()
+
+/datum/status_effect/adamantinecookie/on_remove()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.burn_mod /= 0.9
+
 ///////////////////////////////////////////////////////
 //////////////////STABILIZED EXTRACTS//////////////////
 ///////////////////////////////////////////////////////
@@ -97,29 +170,6 @@
 		examine_text = null
 	..()
 
-/datum/status_effect/peacecookie
-	id = "peacecookie"
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = null
-	duration = 100
-
-/datum/status_effect/peacecookie/tick()
-	for(var/mob/living/L in range(get_turf(owner),1))
-		L.apply_status_effect(/datum/status_effect/plur)
-
-/datum/status_effect/plur
-	id = "plur"
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = null
-	duration = 30
-
-/datum/status_effect/plur/on_apply()
-	ADD_TRAIT(owner, TRAIT_PACIFISM, "peacecookie")
-	return ..()
-
-/datum/status_effect/plur/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, "peacecookie")
-
 /datum/status_effect/stabilized/blue
 	id = "stabilizedblue"
 	colour = "blue"
@@ -130,23 +180,6 @@
 
 datum/status_effect/stabilized/blue/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER, "slimestatus")
-
-/datum/status_effect/watercookie
-	id = "watercookie"
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = null
-	duration = 100
-
-/datum/status_effect/watercookie/on_apply()
-	ADD_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
-	return ..()
-
-/datum/status_effect/watercookie/tick()
-	for(var/turf/simulated/T in range(get_turf(owner),1))
-		T.MakeSlippery(TURF_WET_WATER, min_wet_time = 10, wet_time_to_add = 5)
-
-/datum/status_effect/watercookie/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
 
 /datum/status_effect/stabilized/metal
 	id = "stabilizedmetal"
@@ -195,6 +228,21 @@ datum/status_effect/stabilized/blue/on_remove()
         to_chat(owner, "<span class='notice'>[linked_extract] discharges some energy into a device you have.</span>")
     return ..()
 
+/datum/status_effect/stabilized/silver
+	id = "stabilizedsilver"
+	colour = "silver"
+
+/datum/status_effect/stabilized/silver/on_apply()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.hunger_mod *= 0.8 //20% buff
+	return ..()
+
+/datum/status_effect/stabilized/silver/on_remove()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.hunger_mod /= 0.8
+
 /datum/status_effect/stabilized/pyrite
 	id = "stabilizedpyrite"
 	colour = "pyrite"
@@ -210,6 +258,22 @@ datum/status_effect/stabilized/blue/on_remove()
 
 /datum/status_effect/stabilized/pyrite/on_remove()
 	owner.color = originalcolor
+
+/datum/status_effect/stabilized/adamantine
+	id = "stabilizedadamantine"
+	colour = "adamantine"
+	examine_text = "<span class='warning'>SUBJECTPRONOUN has a strange metallic coating on their skin.</span>"
+
+/datum/status_effect/stabilized/adamantine/on_apply()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.damage_resistance += 5
+	return ..()
+
+/datum/status_effect/stabilized/adamantine/on_remove()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		H.dna.species.damage_resistance -= 5
 
 /datum/status_effect/stabilized/rainbow
 	id = "stabilizedrainbow"
