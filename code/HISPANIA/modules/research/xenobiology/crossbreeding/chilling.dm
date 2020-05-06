@@ -73,7 +73,7 @@ Chilling extracts:
 	for(var/obj/machinery/power/apc/C in A)
 		if(C.cell)
 			C.cell.give(C.cell.maxcharge/5)
-			C.update_icon
+			C.update_icon()
 	..()
 
 /obj/item/slimecross/chilling/red

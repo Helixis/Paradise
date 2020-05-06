@@ -99,16 +99,16 @@ Burning extracts:
 	effect_desc = "Creates a few pieces of slime jelly laced food."
 
 /obj/item/slimecross/burning/silver/do_effect(mob/user)
+	var/turf/T = get_turf(src)
 	var/amount = rand(3,6)
-	var/list/turfs = list()
-	for(var/turf/simulated/T in range(1,get_turf(user)))
-		turfs += T
 	for(var/i = 0, i < amount, i++)
 		var/path = get_random_food()
-		var/obj/item/O = new path(pick(turfs))
+		var/obj/item/O = new path(T)
 		O.reagents.add_reagent("slimejelly", 5) //Oh god it burns
 		if(prob(50))
 			O.desc += " It smells strange..."
+			for(var/j = 1, j < rand(1, 4), j++)
+				step(O, pick(NORTH,SOUTH,EAST,WEST))
 	user.visible_message("<span class='danger'>[src] produces a few pieces of food!</span>")
 	..()
 
