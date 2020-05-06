@@ -113,6 +113,20 @@ Consuming extracts:
 	M.adjustCloneLoss(-5)
 	M.adjustBrainLoss(-5)
 
+/obj/item/slimecross/consuming/blue
+	colour = "blue"
+	effect_desc = "Creates a slime cookie that wets the floor around you and makes you immune to water based slipping for a short time."
+	cookietype = /obj/item/slime_cookie/blue
+
+/obj/item/slime_cookie/blue
+	name = "water cookie"
+	desc = "A transparent blue cookie. Constantly dripping wet."
+	icon_state = "blue"
+	taste = /datum/reagent/water
+
+/obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/watercookie)
+
 /obj/item/slimecross/consuming/darkblue
 	colour = "dark blue"
 	effect_desc = "Creates a slime cookie that chills the target and extinguishes them."
