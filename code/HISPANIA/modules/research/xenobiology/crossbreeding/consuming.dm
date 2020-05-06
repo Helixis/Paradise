@@ -76,7 +76,7 @@ Consuming extracts:
 			to_chat(M, "<span class='notice'>Tastes like [taste].</span>")
 		playsound(get_turf(M), 'sound/items/eatfood.ogg', 20, TRUE)
 		if(nutrition)
-			M.reagents.add_reagent("nutriment")
+			M.reagents.add_reagent("nutriment", nutrition)
 		do_effect(M, user)
 		qdel(src)
 		return
@@ -183,7 +183,7 @@ Consuming extracts:
 	nutrition = 0 //We don't want normal nutriment
 
 /obj/item/slime_cookie/silver/do_effect(mob/living/M, mob/user)
-	M.reagents.add_reagent(/datum/reagent/consumable/nutriment/stabilized,10)
+	M.reagents.add_reagent("nutriestable", 10)
 
 /obj/item/slimecross/consuming/cerulean
 	colour = "cerulean"
