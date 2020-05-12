@@ -16,7 +16,8 @@
 		new /obj/item/storage/backpack/satchel_eng(src)
 	new /obj/item/clothing/glasses/welding/superior(src)
 	new /obj/item/storage/backpack/duffel/engineering(src)
-	new /obj/item/areaeditor/blueprints(src)
+	new /obj/item/clothing/head/beret/ce(src)
+	new /obj/item/areaeditor/blueprints/ce(src)
 	new /obj/item/storage/box/permits(src)
 	new /obj/item/tank/jetpack/suit(src)
 	new /obj/item/cartridge/ce(src)
@@ -33,6 +34,17 @@
 	new /obj/item/organ/internal/cyberimp/eyes/meson(src)
 	new /obj/item/clothing/accessory/medal/engineering(src)
 	new /obj/item/holosign_creator/atmos(src)
+/*	new /obj/item/clothing/under/rank/chief_engineer(src)
+	new /obj/item/clothing/under/rank/chief_engineer/skirt(src)
+	new /obj/item/clothing/suit/mantle/chief_engineer(src)
+	new /obj/item/clothing/gloves/color/yellow(src)
+	new /obj/item/clothing/head/hardhat/white(src)
+	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/suit/storage/hazardvest(src)
+	new /obj/item/clothing/head/beret/ce(src)*/
+
+/*Toda la ropa comentada de los ce se encuentra en su walldrobe de hispania
+"code\HISPANIA\game\machinery\vending.dm".*/
 
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies locker"
