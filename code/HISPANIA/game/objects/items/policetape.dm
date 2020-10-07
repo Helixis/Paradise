@@ -1,15 +1,19 @@
+var/list/image/hazard_overlays
+var/list/tape_roll_applications = list()
+
 /obj/item/taperoll
-	name = "tape roll"
+	name = "police tape"
 	icon = 'icons/hispania/obj/policetape.dmi'
 	icon_state = "tape"
+	desc = "A roll of police tape used to block off crime scenes from the public."
 	w_class = WEIGHT_CLASS_SMALL
 	var/turf/start
 	var/turf/end
 	var/tape_type = /obj/item/taper
 	var/icon_base = "tape"
 	var/maxlengths = 7
-
 	var/apply_tape = FALSE
+	color = COLOR_YELLOW
 
 /obj/item/taperoll/Initialize()
 	. = ..()
@@ -21,78 +25,6 @@
 		if(airlock)
 			afterattack(airlock, null, TRUE)
 		return INITIALIZE_HINT_QDEL
-
-
-var/list/image/hazard_overlays
-var/list/tape_roll_applications = list()
-
-/obj/item/taper
-	name = "tape"
-	icon = 'icons/hispania/obj/policetape.dmi'
-	icon_state = "tape"
-	layer = ABOVE_DOOR_LAYER
-	anchored = TRUE
-	var/lifted = 0
-	var/crumpled = 0
-	var/tape_dir = 0
-	var/icon_base = "stripetape"
-	var/detail_overlay
-	var/detail_color
-
-/obj/item/taper/update_icon()
-	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
-	overlays.Cut()
-	var/new_state
-	switch (tape_dir)
-		if(0)  // AIRLOCK
-			new_state = "[icon_base]_door"
-		if(3)  // VERTICAL
-			new_state = "[icon_base]_v"
-		if(12) // HORIZONTAL
-			new_state = "[icon_base]_h"
-		else   // END POINT (1|2|4|8)
-			new_state = "[icon_base]_dir"
-			dir = tape_dir
-	icon_state = "[new_state]_[crumpled]"
-	if(detail_overlay)
-		var/image/I = image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
-		I.color = detail_color
-		overlays |= I
-
-/obj/item/taper/New()
-	..()
-	if(!hazard_overlays)
-		hazard_overlays = list()
-		hazard_overlays["[NORTH]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "N")
-		hazard_overlays["[EAST]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "E")
-		hazard_overlays["[SOUTH]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "S")
-		hazard_overlays["[WEST]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "W")
-
-/obj/item/taperoll/police
-	name = "police tape"
-	desc = "A roll of police tape used to block off crime scenes from the public."
-	tape_type = /obj/item/taper/police
-	color = COLOR_YELLOW
-
-/obj/item/taper/police
-	name = "police tape"
-	desc = "A length of police tape.  Do not cross."
-	max_integrity = 10
-	req_access = list(ACCESS_CENT_SPECOPS)
-	color = COLOR_YELLOW
-
-/obj/item/taperoll/engineering
-	name = "engineering tape"
-	desc = "A roll of engineering tape used to block off working areas from the public."
-	tape_type = /obj/item/taper/engineering
-	color = COLOR_ORANGE
-
-/obj/item/taper/engineering
-	name = "engineering tape"
-	desc = "A length of engineering tape. Better not cross it."
-	max_integrity = 10
-	req_access = list(ACCESS_CENT_SPECOPS)
-	color = COLOR_ORANGE
 
 /obj/item/taperoll/update_icon()
 	overlays.Cut()
@@ -116,6 +48,68 @@ var/list/tape_roll_applications = list()
 /obj/item/taperoll/attack_hand()
 	update_icon()
 	return ..()
+
+/obj/item/taper
+	name = "police tape"
+	icon = 'icons/hispania/obj/policetape.dmi'
+	icon_state = "tape"
+	desc = "A length of police tape.  Do not cross."
+	max_integrity = 10
+	layer = ABOVE_DOOR_LAYER
+	anchored = TRUE
+	var/lifted = 0
+	var/crumpled = 0
+	var/tape_dir = 0
+	var/icon_base = "stripetape"
+	var/detail_overlay
+	var/detail_color
+	color = COLOR_YELLOW
+
+/obj/item/taper/update_icon()
+	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
+	overlays.Cut()
+	var/new_state
+	switch (tape_dir)
+		if(0)  // AIRLOCK
+			new_state = "[icon_base]_door"
+		if(3)  // VERTICAL
+			new_state = "[icon_base]_v"
+		if(12) // HORIZONTAL
+			new_state = "[icon_base]_h"
+		else   // END POINT (1|2|4|8)
+			new_state = "[icon_base]_dir"
+			dir = tape_dir
+	icon_state = "[new_state]_[crumpled]"
+	if(detail_overlay)
+		var/image/I = image(icon, "[new_state]_[detail_overlay]")
+		I.appearance_flags = RESET_COLOR
+		I.color = detail_color
+		overlays |= I
+
+/obj/item/taper/New()
+	..()
+	if(!hazard_overlays)
+		hazard_overlays = list()
+		hazard_overlays["[NORTH]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "N")
+		hazard_overlays["[EAST]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "E")
+		hazard_overlays["[SOUTH]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "S")
+		hazard_overlays["[WEST]"]	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "W")
+
+/obj/item/taper/proc/crumple()
+	playsound(src,'sound/effects/pageturn1.ogg', 100, 1)
+	crumpled = 1
+	update_icon()
+
+/obj/item/taperoll/engi
+	name = "engineering tape"
+	desc = "A roll of engineering tape used to block off working areas from the public."
+	tape_type = /obj/item/taper/engi
+	color = COLOR_ORANGE
+
+/obj/item/taper/engi
+	name = "engineering tape"
+	desc = "A length of engineering tape. Better not cross it."
+	color = COLOR_ORANGE
 
 /obj/item/taperoll/attack_self(mob/user as mob)
 	if(!start)
@@ -267,11 +261,6 @@ var/list/tape_roll_applications = list()
 			tape_roll_applications[F] |= direction
 		return
 
-/obj/item/taper/proc/crumple()
-	playsound(src,'sound/effects/pageturn1.ogg', 100, 1)
-	crumpled = 1
-	update_icon()
-
 /obj/item/taper/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(!lifted && ismob(mover))
 		var/mob/M = mover
@@ -283,7 +272,7 @@ var/list/tape_roll_applications = list()
 	else
 		return ..(mover)
 
-/obj/item/taper/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/taper/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.a_intent == INTENT_HARM)
 		breaktape(user)
 

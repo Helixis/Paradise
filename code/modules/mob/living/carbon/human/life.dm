@@ -899,7 +899,7 @@
 
 			// Not on the station or mining?
 			var/turf/temp_turf = get_turf(remoteview_target)
-			if(!temp_turf in config.contact_levels)
+			if(!(temp_turf in config.contact_levels))
 				to_chat(src, "<span class='alert'>Your psy-connection grows too faint to maintain!</span>")
 				isRemoteObserve = 0
 
@@ -1032,7 +1032,7 @@
 			if(NO_BREATHE in H.dna.species.species_traits)
 				continue //no puking if you can't smell!
 			// Humans can lack a mind datum, y'know
-			if(H.mind && (H.mind.assigned_role == "Detective" || H.mind.assigned_role == "Coroner"))
+			if(HAS_TRAIT(H, TRAIT_ESTOMAGO_FUERTE))
 				continue //too cool for puke
 			to_chat(H, "<span class='warning'>You smell something foul...</span>")
 			H.fakevomit()

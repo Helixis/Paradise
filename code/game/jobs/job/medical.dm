@@ -5,6 +5,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_medical = 1
+	minimal_captain_character_age = 1
 	supervisors = "the captain"
 	department_head = list("Captain")
 	selection_color = "#ffddf0"
@@ -25,12 +26,13 @@
 	jobtype = /datum/job/cmo
 
 	uniform = /obj/item/clothing/under/rank/chief_medical_officer
+	belt = /obj/item/storage/belt/medical/advanced/loaded
 	suit = /obj/item/clothing/suit/storage/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/brown
 	l_ear = /obj/item/radio/headset/heads/cmo
 	id = /obj/item/card/id/cmo
 	suit_store = /obj/item/flashlight/pen
-	l_hand = /obj/item/storage/firstaid/adv
+	l_hand = /obj/item/storage/firstaid/doctor
 	pda = /obj/item/pda/heads/cmo
 	backpack_contents = list(
 		/obj/item/melee/classic_baton/telescopic = 1
@@ -47,6 +49,8 @@
 	total_positions = 5
 	spawn_positions = 3
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
@@ -68,7 +72,7 @@
 	l_ear = /obj/item/radio/headset/headset_med
 	id = /obj/item/card/id/medical
 	suit_store = /obj/item/flashlight/pen
-	l_hand = /obj/item/storage/firstaid/adv
+	l_hand = /obj/item/storage/firstaid/doctor
 	pda = /obj/item/pda/medical
 
 	backpack = /obj/item/storage/backpack/medic
@@ -82,6 +86,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
@@ -143,6 +149,8 @@
 	total_positions = 1
 	spawn_positions = 2
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
@@ -177,13 +185,15 @@
 	total_positions = 1
 	spawn_positions = 2
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
-	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_GENETICS, ACCESS_RESEARCH, ACCESS_MINERAL_STOREROOM)
-	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_GENETICS, ACCESS_RESEARCH, ACCESS_MAINT_TUNNELS)
+	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_GENETICS, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_MEDICAL, ACCESS_CHEMISTRY, ACCESS_MAINT_TUNNELS, ACCESS_MINERAL_STOREROOM)
 	minimal_player_age = 3
-	exp_requirements = 180
+	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
 	outfit = /datum/outfit/job/geneticist
 
@@ -210,6 +220,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
@@ -245,6 +257,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"
@@ -283,6 +297,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_medical = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the chief medical officer"
 	department_head = list("Chief Medical Officer")
 	selection_color = "#ffeef0"

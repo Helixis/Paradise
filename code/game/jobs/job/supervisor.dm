@@ -5,6 +5,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
+	minimal_player_age = 30
 	supervisors = "Nanotrasen officials"
 	department_head = list("Nanotrasen Navy Officer")
 	selection_color = "#ccccff"
@@ -12,7 +13,6 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	is_command = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	minimal_player_age = 30
 	exp_requirements = 4320
 	exp_type = EXP_TYPE_COMMAND
 	disabilities_allowed = 0
@@ -61,23 +61,24 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	department_flag = JOBCAT_SUPPORT
 	total_positions = 1
 	spawn_positions = 1
+	minimal_player_age = 25
 	supervisors = "the captain"
 	department_head = list("Captain")
 	selection_color = "#ddddff"
 	req_admin_notify = 1
 	is_command = 1
-	minimal_player_age = 21
+	minimal_captain_character_age = 1
 	exp_requirements = 1440
 	exp_type = EXP_TYPE_COMMAND
 	access = list(ACCESS_SEC_DOORS, ACCESS_COURT, ACCESS_CHANGE_IDS, ACCESS_EVA, ACCESS_HEADS,
 			            ACCESS_ALL_PERSONAL_LOCKERS, ACCESS_MAINT_TUNNELS, ACCESS_BAR, ACCESS_JANITOR,
 			            ACCESS_CREMATORIUM, ACCESS_KITCHEN, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MAILSORTING, ACCESS_QM, ACCESS_HYDROPONICS, ACCESS_LAWYER,
-			            ACCESS_THEATRE, ACCESS_CHAPEL_OFFICE, ACCESS_LIBRARY, ACCESS_RESEARCH, ACCESS_MINING, ACCESS_HEADS_VAULT, ACCESS_MINING_STATION,
+			            ACCESS_THEATRE, ACCESS_CHAPEL_OFFICE, ACCESS_LIBRARY, ACCESS_MINING, ACCESS_HEADS_VAULT, ACCESS_MINING_STATION,
 			            ACCESS_CLOWN, ACCESS_MIME, ACCESS_HOP, ACCESS_RC_ANNOUNCE, ACCESS_KEYCARD_AUTH, ACCESS_GATEWAY, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM)
 	minimal_access = list(ACCESS_SEC_DOORS, ACCESS_COURT, ACCESS_CHANGE_IDS, ACCESS_EVA, ACCESS_HEADS,
 			            ACCESS_ALL_PERSONAL_LOCKERS, ACCESS_MAINT_TUNNELS, ACCESS_BAR, ACCESS_JANITOR,
 			            ACCESS_CREMATORIUM, ACCESS_KITCHEN, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MAILSORTING, ACCESS_QM, ACCESS_HYDROPONICS, ACCESS_LAWYER,
-			            ACCESS_THEATRE, ACCESS_CHAPEL_OFFICE, ACCESS_LIBRARY, ACCESS_RESEARCH, ACCESS_MINING, ACCESS_HEADS_VAULT, ACCESS_MINING_STATION,
+			            ACCESS_THEATRE, ACCESS_CHAPEL_OFFICE, ACCESS_LIBRARY, ACCESS_MINING, ACCESS_HEADS_VAULT, ACCESS_MINING_STATION,
 			            ACCESS_CLOWN, ACCESS_MIME, ACCESS_HOP, ACCESS_RC_ANNOUNCE, ACCESS_KEYCARD_AUTH, ACCESS_GATEWAY, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM)
 	outfit = /datum/outfit/job/hop
 
@@ -111,7 +112,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	req_admin_notify = 1
 	is_command = 1
 	transfer_allowed = FALSE
-	minimal_player_age = 21
+	minimal_captain_character_age = 1
 	exp_requirements = 2880
 	exp_type = EXP_TYPE_COMMAND
 	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_FORENSICS_LOCKERS,
@@ -151,6 +152,8 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	department_flag = JOBCAT_KARMA
 	total_positions = 1
 	spawn_positions = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the Nanotrasen representative"
 	department_head = list("Captain")
 	selection_color = "#ddddff"
@@ -197,6 +200,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	department_flag = JOBCAT_KARMA
 	total_positions = 1
 	spawn_positions = 1
+	minimal_captain_character_age = 1
 	supervisors = "the Nanotrasen Supreme Court"
 	department_head = list("Captain")
 	selection_color = "#ddddff"
@@ -245,6 +249,8 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	total_positions = 2
 	spawn_positions = 2
 	is_legal = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the magistrate"
 	department_head = list("Captain")
 	selection_color = "#ddddff"

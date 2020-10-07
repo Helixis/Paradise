@@ -190,7 +190,7 @@
 				L.adjustBrainLoss(-3.5)
 				L.adjustCloneLoss(-1) //Becasue apparently clone damage is the bastion of all health
 				if(ishuman(L))
-					var/var/mob/living/carbon/human/H = L
+					var/mob/living/carbon/human/H = L
 					for(var/obj/item/organ/external/E in H.bodyparts)
 						if(prob(10))
 							E.mend_fracture()
@@ -215,7 +215,7 @@
 	alert_type = /obj/screen/alert/status_effect/regenerative_core
 
 /datum/status_effect/regenerative_core/on_apply()
-	owner.status_flags |= IGNORESLOWDOWN
+	owner.status_flags |= IGNORE_SPEED_CHANGES
 	owner.adjustBruteLoss(-25)
 	owner.adjustFireLoss(-25)
 	owner.remove_CC()
@@ -229,4 +229,4 @@
 	return TRUE
 
 /datum/status_effect/regenerative_core/on_remove()
-	owner.status_flags &= ~IGNORESLOWDOWN
+	owner.status_flags &= ~IGNORE_SPEED_CHANGES

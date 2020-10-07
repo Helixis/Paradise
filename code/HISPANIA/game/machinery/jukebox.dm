@@ -16,28 +16,28 @@
 	var/list/spotlights = list()
 	var/list/sparkles = list()
 	var/static/list/songs = list(
-		new /datum/track("Generic",		"Fighter - Jack Strauber",						'sound/hispania/hispaniabox/fighter.ogg',	2450,	5),
-		new /datum/track("Generic",		"Los Marcianos Llegaron Ya - Tito Rodriguez",	'sound/music/title5.ogg',					1740,	5),
-		new /datum/track("Generic",		"Better Off Alone - SALEM Remix",				'sound/music/title12.ogg',					1750,	5),
+		new /datum/track("Pop",		"Los Marcianos Llegaron Ya - Tito Rodriguez",	'sound/music/title5.ogg',					1740,	5),
+		new /datum/track("Eurodance Trance",		"Better Off Alone - SALEM Remix",				'sound/music/title12.ogg',					1750,	5),
 		new /datum/track("Cyberpunk",	"Dance With The Dead - Andromeda",				'sound/music/title1.ogg',					3010,	5),
-		new /datum/track("Lo-Fi Chill",	"Long Day - Guru Griff",						'sound/hispania/hispaniabox/longday.ogg',	1040,	5),
 		new /datum/track("Lo-Fi Chill",	"Fly me to the moon - Frank Sinatra",	        'sound/hispania/hispaniabox/Fly_Me_To_The_Moon.ogg',	1340,	5),
 		new /datum/track("Pop",			"Space Jam",									'sound/music/title3.ogg',					1930,	5),
 		new /datum/track("Pop",			"Europa VII - La Oreja de Van Gogh",			'sound/music/title10.ogg',					2390,	5),
 		new /datum/track("Pop-Rock",	"Space Oddity - David Bowie",					'sound/music/title4.ogg',					3300,	5),
-		new /datum/track("Megalovania",	"Megalovania - Toby Fox",				        'sound/hispania/hispaniabox/Megalovania.ogg',		3310,	5),
-		new /datum/track("Generic",	    "Star Wars Cantina - Meco",				        'sound/hispania/hispaniabox/star_wars_cantina.ogg',		2532,	5),
+		new /datum/track("Pop",	    "Star Wars Cantina - Meco",				        'sound/hispania/hispaniabox/star_wars_cantina.ogg',		2532,	5),
 		new /datum/track("Pop",	        "Never Gonna Give You Up - Rick Astley",	    'sound/hispania/hispaniabox/Give_You_Up.ogg',		2120,	5),
-		new /datum/track("Generic",	    "Golden Wind - Yugo Kanno.",                    'sound/hispania/hispaniabox/Golden_Wind.ogg',		2920,	5),
 		new /datum/track("Electro",	    "Tripaloski",									'sound/hispania/hispaniabox/Tripaloski.ogg',		1040,	5),
-		new /datum/track("Ss13",		"Space Ambience Song - Nanostrasen",			'sound/music/space.ogg',		2130,	5),
+		new /datum/track("Ambient",		"Space Ambient Song - Nanostrasen",			'sound/music/space.ogg',		2130,	5),
 		new /datum/track("Lo-Fi Chill",	"Interstellar Main Theme - Hans Zimmer",		'sound/music/title11.ogg',		2540,	5),
 		new /datum/track("Electro",		"Paradise Theme - Nanostrasen",        			'sound/music/title2.ogg',		2080,	5),
 		new /datum/track("For Science",	"Still Alive - GLaDOS",        					'sound/music/title7.ogg',		1840,	5),
 		new /datum/track("Pop",			"Children Of The Sun - Billy Thorpe",        	'sound/music/title8.ogg',		3470,	5),
 		new /datum/track("Electro",		"Spoiler - DJ Hyper",        					'sound/music/title9.ogg',		3500,	5),
-		new /datum/track("Ss13",		"Tension Music - Nanostrasen",        			'sound/music/traitor.ogg',		3500,	5),
-		new /datum/track("Ss13",		"Thunderdome Song - Nanostrasen",        		'sound/music/thunderdome.ogg',	2020,	5),
+		new /datum/track("Ambient",		"Tension Music - Nanostrasen",        			'sound/music/traitor.ogg',		3500,	5),
+		new /datum/track("Ambient",		"Thunderdome Song - Nanostrasen",        		'sound/music/thunderdome.ogg',	2020,	5),
+		new /datum/track("Spanish Rock",		"Lamento boliviano - Enanitos Verdes",        		'sound/hispania/hispaniabox/rock.ogg',	2220,	5),
+		new /datum/track("Salsa",		"Por que sera - Alvaro Ricardo",        		'sound/hispania/hispaniabox/salsa.ogg',	2560,	5),
+		new /datum/track("Cumbia",		"La Vida Es Un Carnaval - Celia Cruz",        		'sound/hispania/hispaniabox/cumbion.ogg',	2770,	5),
+		new /datum/track("Bachata",		"Propuesta Indecente - Romeo Santos",        		'sound/hispania/hispaniabox/bachata.ogg',	2320,	5),
 		)
 	var/datum/track/selection = null
 	var/track = ""
@@ -70,20 +70,32 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/machinery/hispaniabox/attackby(obj/item/O, mob/user, params)
-	if(!active)
-		if(iswrench(O))
-			if(!anchored && !isinspace())
-				to_chat(user,"<span class='notice'>You secure [src] to the floor.</span>")
-				anchored = TRUE
-				light()
-			else if(anchored)
-				to_chat(user,"<span class='notice'>You unsecure and disconnect [src].</span>")
-				anchored = FALSE
-				set_light(0)
-			playsound(src, O.usesound, 50, 1)
-			return
-	return ..()
+/obj/machinery/disco/wrench_act(mob/user, obj/item/I)
+	if(active)
+		return
+	. = TRUE
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	if(!anchored && !isinspace())
+		anchored = TRUE
+		WRENCH_ANCHOR_MESSAGE
+	else if(anchored)
+		anchored = FALSE
+		WRENCH_UNANCHOR_MESSAGE
+	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
+
+/obj/machinery/hispaniabox/wrench_act(mob/user, obj/item/I)
+	. = TRUE
+	if(active)
+		to_chat(user, "<span class='warning'>turn of [src] first!</span>")
+		return
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	anchored = !anchored
+	if(anchored)
+		WRENCH_ANCHOR_MESSAGE
+	else
+		WRENCH_UNANCHOR_MESSAGE
 
 /obj/machinery/hispaniabox/update_icon()
 	icon_state = (active ? "jukebox-running" : "jukebox")

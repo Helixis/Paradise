@@ -8,24 +8,24 @@
 	item_chair = null
 	var/image/over
 
-/obj/structure/chair/noose/attackby(obj/item/W, mob/user, params)
-	if(iswirecutter(W))
-		user.visible_message("[user] cuts the noose.", "<span class='notice'>You cut the noose.</span>")
-		if(has_buckled_mobs())
-			for(var/mob/living/buckled_mob in buckled_mobs)
-				if(buckled_mob.mob_has_gravity())
-					buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>",\
-												"<span class='userdanger'>You fall over and hit the ground!</span>")
-					buckled_mob.adjustBruteLoss(10)
-					buckled_mob.Stun(2)
-					buckled_mob.Weaken(2)
-					buckled_mob.pixel_x = initial(buckled_mob.pixel_x)
-			unbuckle_all_mobs()
-		var/turf/T = get_turf(src)
-		new /obj/item/stack/cable_coil(T, 25)
-		qdel(src)
+/obj/structure/chair/noose/wirecutter_act(mob/user, obj/item/I)
+	. = TRUE
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
 		return
-	..()
+	user.visible_message("[user] cuts the noose.", "<span class='notice'>You cut the noose.</span>")
+	if(has_buckled_mobs())
+		for(var/mob/living/buckled_mob in buckled_mobs)
+			if(buckled_mob.mob_has_gravity())
+				buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>",\
+											"<span class='userdanger'>You fall over and hit the ground!</span>")
+				buckled_mob.adjustBruteLoss(10)
+				buckled_mob.Stun(2)
+				buckled_mob.Weaken(2)
+				buckled_mob.pixel_x = initial(buckled_mob.pixel_x)
+		unbuckle_all_mobs()
+	var/turf/T = get_turf(src)
+	new /obj/item/stack/cable_coil(T, 25)
+	qdel(src)
 
 /obj/structure/chair/noose/New()
 	..()

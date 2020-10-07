@@ -178,7 +178,7 @@
 	id = "silver_sulfadiazine"
 	description = "This antibacterial compound is used to treat burn victims."
 	reagent_state = LIQUID
-	color = "#F0C814"
+	color = "#F0DC00"
 	metabolization_rate = 3
 	harmless = FALSE	//toxic if ingested, and I am NOT going to account for the difference
 	taste_description = "burn cream"
@@ -205,7 +205,7 @@
 	id = "styptic_powder"
 	description = "Styptic (aluminum sulfate) powder helps control bleeding and heal physical wounds."
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#FF9696"
 	metabolization_rate = 3
 	harmless = FALSE
 	taste_description = "wound cream"
@@ -221,7 +221,7 @@
 			M.adjustBruteLoss(-volume)
 			if(show_message)
 				to_chat(M, "<span class='notice'>The styptic powder stings like hell as it closes some of your wounds!</span>")
-			M.emote("scream")
+				M.emote("scream")
 		if(method == REAGENT_INGEST)
 			M.adjustToxLoss(0.5*volume)
 			if(show_message)
@@ -792,7 +792,7 @@
 	M.SetJitter(0)
 	var/needs_update = M.mutations.len > 0 || M.disabilities > 0
 	var/update_flags = STATUS_UPDATE_NONE
-	if(prob(5))
+	if(prob(1)) //este medicamento ni deberia existir
 		if(needs_update)
 			for(var/block = 1; block<=DNA_SE_LENGTH; block++)
 				if(!(block in M.dna.default_blocks))
@@ -801,7 +801,7 @@
 			M.dna.UpdateSE()
 
 			M.dna.struc_enzymes = M.dna.struc_enzymes_original
-			update_flags |= M.adjustCloneLoss(2, FALSE)
+			update_flags |= M.adjustCloneLoss(1, FALSE)
 			// Might need to update appearance for hulk etc.
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M

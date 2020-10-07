@@ -1,5 +1,4 @@
 ///HISPANIA GRILL RECIPES
-
 /datum/recipe/grill/arepa
 	reagents = list("sodiumchloride" = 5)
 	items = list(
@@ -39,7 +38,7 @@
 /datum/recipe/grill/xeno_arepa
 	reagents = list("sugar" = 5, "enzyme" = 5)
 	items = list(
-		/obj/item/reagent_containers/food/snacks/arepa, /obj/item/reagent_containers/food/snacks/xenomeat
+		/obj/item/reagent_containers/food/snacks/arepa, /obj/item/reagent_containers/food/snacks/monstermeat/xenomeat
 	)
 	result = /obj/item/reagent_containers/food/snacks/xeno_arepa
 
@@ -47,10 +46,10 @@
 	reagents = list("sodiumchloride" = 5, "charcoal" = 1)
 	items = list(
 		/obj/item/reagent_containers/food/snacks/arepa,
-		/obj/item/reagent_containers/food/snacks/spiderleg,
-		/obj/item/reagent_containers/food/snacks/spiderleg,
-		/obj/item/reagent_containers/food/snacks/spiderleg,
-		/obj/item/reagent_containers/food/snacks/spiderleg,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spiderleg,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spiderleg,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spiderleg,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spiderleg,
 	)
 	result = /obj/item/reagent_containers/food/snacks/spider_arepa
 
@@ -133,3 +132,42 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/arepa_magma
 
+//Toast//
+/datum/recipe/grill/toast
+	items = list(
+		/obj/item/reagent_containers/food/snacks/breadslice
+	)
+	result = /obj/item/reagent_containers/food/snacks/toast
+
+//Buttertoast//
+/datum/recipe/grill/butter_toast
+	reagents = list("butter" = 5)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/toast
+	)
+	result = /obj/item/reagent_containers/food/snacks/butter_toast
+// CHULETA//
+
+/datum/recipe/grill/syntisteak_cactus
+	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
+		/obj/item/reagent_containers/food/snacks/grown/prickly_pear,
+	)
+	result = /obj/item/reagent_containers/food/snacks/syntisteak_cactus
+
+/datum/recipe/grill/meatsteak_cactus
+	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/meat,
+		/obj/item/reagent_containers/food/snacks/grown/prickly_pear,
+	)
+	result = /obj/item/reagent_containers/food/snacks/meatsteak_cactus
+
+// BRONTOOOSAURIO//
+/datum/recipe/grill/brontosaurio
+	reagents = list("sodiumchloride" = 1)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/drakeribs
+	)
+	result = /obj/item/reagent_containers/food/snacks/brontosaurio

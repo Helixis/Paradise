@@ -84,6 +84,7 @@
 	var/single_gib_type = /obj/effect/decal/cleanable/blood/gibs
 	var/remains_type = /obj/effect/decal/remains/human //What sort of remains is left behind when the species dusts
 	var/base_color      //Used when setting species.
+	var/list/inherent_factions
 
 	//Used in icon caching.
 	var/race_key = 0
@@ -218,37 +219,38 @@
 ////////////////
 // MOVE SPEED //
 ////////////////
+#define ADD_SLOWDOWN(__value) if(!ignoreslow || __value < 0) . += __value
 
 /datum/species/proc/movement_delay(mob/living/carbon/human/H)
 	. = 0	//We start at 0.
-	var/flight = 0	//Check for flight and flying items
-	var/ignoreslow = 0
-	var/gravity = 0
-
-	if(H.flying)
-		flight = 1
-
-	if((H.status_flags & IGNORESLOWDOWN) || (RUN in H.mutations))
-		ignoreslow = 1
+	if(H.status_flags & IGNORE_SPEED_CHANGES)
+		return .
 
 	if(has_gravity(H))
-		gravity = 1
+		if(H.status_flags & GOTTAGOFAST)
+			. -= 1
 
-	if(!ignoreslow && gravity)
-		if(speed_mod)
-			. = speed_mod
+		var/ignoreslow = FALSE
+		if((H.status_flags & IGNORESLOWDOWN) || (RUN in H.mutations))
+			ignoreslow = TRUE
+
+		var/flight = H.flying	//Check for flight and flying items
+
+		ADD_SLOWDOWN(speed_mod)
 
 		if(H.wear_suit)
-			. += H.wear_suit.slowdown
-		if(!H.buckled)
-			if(H.shoes)
-				. += H.shoes.slowdown
+			ADD_SLOWDOWN(H.wear_suit.slowdown)
+		if(!H.buckled && H.shoes)
+			ADD_SLOWDOWN(H.shoes.slowdown)
 		if(H.back)
-			. += H.back.slowdown
+			ADD_SLOWDOWN(H.back.slowdown)
 		if(H.l_hand && (H.l_hand.flags & HANDSLOW))
-			. += H.l_hand.slowdown
+			ADD_SLOWDOWN(H.l_hand.slowdown)
 		if(H.r_hand && (H.r_hand.flags & HANDSLOW))
-			. += H.r_hand.slowdown
+			ADD_SLOWDOWN(H.r_hand.slowdown)
+
+		if(ignoreslow)
+			return . // Only malusses after here
 
 		var/health_deficiency = max(H.maxHealth - H.health, H.staminaloss)
 		var/hungry = (500 - H.nutrition)/5 // So overeat would be 100 and default level would be 80
@@ -282,6 +284,8 @@
 					. = S.drag_slowdown
 	return .
 
+#undef ADD_SLOWDOWN
+
 /datum/species/proc/on_species_gain(mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	for(var/slot_id in no_equip)
 		var/obj/item/thing = H.get_item_by_slot(slot_id)
@@ -291,10 +295,18 @@
 		H.hud_used.update_locked_slots()
 	H.ventcrawler = ventcrawler
 
+	if(inherent_factions)
+		for(var/i in inherent_factions)
+			H.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+
 /datum/species/proc/on_species_loss(mob/living/carbon/human/H)
 	if(H.butcher_results) //clear it out so we don't butcher a actual human.
 		H.butcher_results = null
 	H.ventcrawler = initial(H.ventcrawler)
+
+	if(inherent_factions)
+		for(var/i in inherent_factions)
+			H.faction -= i
 
 /datum/species/proc/updatespeciescolor(mob/living/carbon/human/H) //Handles changing icobase for species that have multiple skin colors.
 	return
@@ -353,7 +365,7 @@
 
 			if(H.LAssailant && ishuman(H.LAssailant)) //superheros still get the comical hit markers
 				var/mob/living/carbon/human/A = H.LAssailant
-				if(A.mind && A.mind in (SSticker.mode.superheroes || SSticker.mode.supervillains || SSticker.mode.greyshirts))
+				if(A.mind && (A.mind in (SSticker.mode.superheroes) || SSticker.mode.supervillains || SSticker.mode.greyshirts))
 					var/list/attack_bubble_recipients = list()
 					var/mob/living/user
 					for(var/mob/O in viewers(user, src))
@@ -969,7 +981,7 @@ It'll return null if the organ doesn't correspond, so include null checks when u
 
 /datum/species/proc/spec_hitby(atom/movable/AM, mob/living/carbon/human/H)
 
-/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
+/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/organ/external/affecting, intent, mob/living/carbon/human/H)
 
 /proc/get_random_species(species_name = FALSE)	// Returns a random non black-listed or hazardous species, either as a string or datum
 	var/static/list/random_species = list()

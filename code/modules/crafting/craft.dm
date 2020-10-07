@@ -165,6 +165,8 @@
 						return ", missing tool."
 					if(!check_pathtools(user, R, contents))
 						return ", missing tool."
+					if(HAS_TRAIT(user, TRAIT_NO_CRAFT))
+						return ", no enough skill."
 					var/list/parts = del_reqs(R, user)
 					var/atom/movable/I = new R.result (get_turf(user.loc))
 					I.CheckParts(parts, R)
@@ -356,6 +358,8 @@
 		var/fail_msg = construct_item(usr, TR)
 		if(!fail_msg)
 			to_chat(usr, "<span class='notice'>[TR.name] constructed.</span>")
+			if(TR.alert_admins_on_craft)
+				message_admins("[usr.ckey] has created a [TR.name] at [ADMIN_COORDJMP(usr)]")
 		else
 			to_chat(usr, "<span class ='warning'>Construction failed[fail_msg]</span>")
 		busy = FALSE

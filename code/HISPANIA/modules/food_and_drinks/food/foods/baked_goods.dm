@@ -1,12 +1,33 @@
 
 ///Hispania food
 
+//////////////////////
+//		Cakes		//
+//////////////////////
+/obj/item/reagent_containers/food/snacks/sliceable/cheeseanonnacake
+	name = "cheese anonna cake"
+	desc = "DANGEROUSLY sugary cheesy."
+	icon_state = "cheeseanonnacake"
+	slice_path = /obj/item/reagent_containers/food/snacks/slicecake/cheeseanonnacakeslice
+	slices_num = 5
+	filling_color = "#FAF7AF"
+	bitesize = 3
+	list_reagents = list("nutriment" = 20, "vitamin" = 5)
+	tastes = list("cake" = 4, "sugary cream cheese" = 3)
+	icon = 'icons/hispania/obj/food/food.dmi'
 
+/obj/item/reagent_containers/food/snacks/slicecake/cheeseanonnacakeslice
+	name = "cheese anonna cake slice"
+	desc = "Slice of pure cheestisfaction."
+	icon_state = "cheeseanonnacake_slice"
+	trash = /obj/item/trash/plate
+	filling_color = "#FAF7AF"
+	tastes = list("cake" = 4, "sugary cream cheese" = 3)
+	icon = 'icons/hispania/obj/food/food.dmi'
 
 //////////////////////
 //	  Mug Cakes		//
 //////////////////////
-
 /obj/item/reagent_containers/food/snacks/mugcake
 	name = "mugcake"
 	desc = "A delicious and spongy little cake inside a coffee mug."
@@ -89,7 +110,6 @@
 	list_reagents = list("nutriment" = 6)
 
 ///empanadas by Soulster
-
 /obj/item/reagent_containers/food/snacks/empanada
 	name = "empanada"
 	desc = "A meaty goodness"
@@ -99,7 +119,6 @@
 	list_reagents = list("nutriment" = 3, "vitamin" = 2)
 
 ///VIVA VENEZUELA CARAJO -EvoS
-
 /obj/item/reagent_containers/food/snacks/arepa
 	name = "arepa"
 	desc = "Venezuelan flavor."
@@ -172,7 +191,6 @@
 	bitesize = 3
 	list_reagents = list("nutriment" = 0, "vitamin" = 0, "strange_reagent" = 5)
 
-
 /obj/item/reagent_containers/food/snacks/arepa_slime
 	name = "slime arepa"
 	desc = "A smooth arepa."
@@ -229,7 +247,6 @@
 	bitesize = 5
 	list_reagents = list("nutriment" = 3, "vitamin" = 3, "capsaicin" = 10, "condensedcapsaicin" = 7)
 
-
 /obj/item/reagent_containers/food/snacks/arepa_ice
 	name = "iced arepa"
 	desc = "A solid ice cube, with an arepa in it."
@@ -254,11 +271,9 @@
 	bitesize = 6
 	list_reagents = list("nutriment" = 6, "vitamin" = 6, "capsaicin" = 20, "condensedcapsaicin" = 20)  //666,el diablo
 
-
 //////////////////////
 //       Pies       //
 //////////////////////
-
 /obj/item/reagent_containers/food/snacks/pie/honey
 	name = "honey pie"
 	desc = "A honey pie!"
@@ -269,9 +284,7 @@
 	bitesize = 3
 	list_reagents = list("nutriment" = 10, "vitamin" = 5)
 
-
 //  HoneyBread       //
-
 /obj/item/reagent_containers/food/snacks/sliceable/honeybread
 	name = "honey bread"
 	desc = "Just a Honey Bread."
@@ -290,3 +303,108 @@
 	icon_state = "honeybreadslice"
 	trash = /obj/item/trash/plate
 	filling_color = "#EFD8A7"
+
+///        Pancakes    (Coughthanksumeandevancough) ///
+/obj/item/reagent_containers/food/snacks/pancake
+    name = "pancake"
+    desc = "A fluffy pancake. The softer, superior relative of the waffle. This time with a top of butter."
+    icon = 'icons/hispania/obj/food/food.dmi'
+    icon_state = "pancake_1"
+    trash = /obj/item/trash/plate
+    filling_color = "#D2691E"
+    bitesize = 3
+    list_reagents = list("nutriment" = 4, "vitamin" = 1, "sugar" = 4)
+    var/list/pancakes = list()// If the pancakes are stacked, they come here
+    tastes = list("soft dough" = 10, "butter" = 10)
+
+obj/item/reagent_containers/food/snacks/pancake/update_icon()
+    overlays = list()
+    if(pancakes.len > 0)
+        desc = "A pile of delicious pancakes. There appears to be [pancakes.len+1] pancakes in the pile. All fully loaded of butter."
+    icon_state = "pancake_[pancakes.len+1]"
+
+/obj/item/reagent_containers/food/snacks/pancake/attackby(obj/item/reagent_containers/food/snacks/pancake/I, mob/user, params)
+    if(istype(I, /obj/item/reagent_containers/food/snacks/pancake/))
+        var/obj/item/reagent_containers/food/snacks/pancake = I
+
+        var/list/pancakestoadd = list()
+        pancakestoadd += pancake
+        for(var/obj/item/reagent_containers/food/snacks/pancake/i in I.pancakes)
+            pancakestoadd += i
+        if((pancakes.len) + pancakestoadd.len <= 2)
+            user.drop_item()
+            pancake.loc = src
+            pancakes.Add(pancakestoadd)
+            pancake.update_icon()
+            update_icon()
+            to_chat(user, "<span class='warning'>You put the [pancake] ontop of the [src]!</span>")
+        else
+            to_chat(user, "<span class='warning'>The stack is too high!</span>")
+
+///        Pancakes de mermelada ñom ñom ///
+/obj/item/reagent_containers/food/snacks/pancake_mermelada
+    name = "pancake"
+    desc = "A fluffy pancake. The softer, superior relative of the waffle. This time with a top of a jelly made of nispero and berries."
+    icon = 'icons/hispania/obj/food/food.dmi'
+    icon_state = "pancake_mermelada_1"
+    trash = /obj/item/trash/plate
+    filling_color = "#D2691E"
+    bitesize = 3
+    list_reagents = list("nutriment" = 4, "vitamin" = 1, "sugar" = 6)
+    var/list/pancakes = list()// If the pancakes are stacked, they come here
+    tastes = list("soft dough" = 10, "sweet jelly" = 10)
+
+/obj/item/reagent_containers/food/snacks/pancake_mermelada/update_icon()
+    overlays = list()
+    if(pancakes.len > 0)
+        desc = "A pile of delicious pancakes. There appears to be [pancakes.len+1] pancakes in the pile. All fully loaded of jelly of nispero and berries."
+    icon_state = "pancake_mermelada_[pancakes.len+1]"
+
+/obj/item/reagent_containers/food/snacks/pancake_mermelada/attackby(obj/item/reagent_containers/food/snacks/pancake_mermelada/I, mob/user, params)
+    if(istype(I, /obj/item/reagent_containers/food/snacks/pancake_mermelada/))
+        var/obj/item/reagent_containers/food/snacks/pancake_mermelada = I
+
+        var/list/pancakestoadd = list()
+        pancakestoadd += pancake_mermelada
+        for(var/obj/item/reagent_containers/food/snacks/pancake_mermelada/i in I.pancakes)
+            pancakestoadd += i
+        if((pancakes.len) + pancakestoadd.len <= 2)
+            user.drop_item()
+            pancake_mermelada.loc = src
+            pancakes.Add(pancakestoadd)
+            pancake_mermelada.update_icon()
+            update_icon()
+            to_chat(user, "<span class='warning'>You put the [pancake_mermelada] ontop of the [src]!</span>")
+        else
+            to_chat(user, "<span class='warning'>The stack is too high!</span>")
+
+//Toast//
+/obj/item/reagent_containers/food/snacks/toast
+	name = "toast"
+	desc = "It's a slice of bread but toasted."
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "toast"
+	filling_color = "#D2691E"
+	list_reagents = list("nutriment" = 2, "vitamin" = 1)
+	tastes = list("toast" = 1)
+	bitesize = 3
+
+//ButterToast//
+/obj/item/reagent_containers/food/snacks/butter_toast
+	name = "buttered toast"
+	desc = "Butter lightly spread over a piece of toast."
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "butter_toast"
+	filling_color = "#D2691E"
+	list_reagents = list("nutriment" = 4, "vitamin" = 1)
+	tastes = list("butter" = 1,"toast" = 1)
+	bitesize = 5
+
+//Stuffed mushrooms//
+/obj/item/reagent_containers/food/snacks/stuffed_mushrooms
+	name = "Stuffed Mushrooms"
+	desc = "Two mushrooms stuffed with bacon and cheese, delicious!"
+	icon = 'icons/hispania/obj/food/food.dmi'
+	icon_state = "stuffed_mushrooms"
+	list_reagents = list("nutriment" = 3, "vitamin" = 2)
+	tastes = list("bacon" = 1,"cheesy" = 1,"earthy" = 1)

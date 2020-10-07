@@ -52,7 +52,6 @@
 					M.put_in_l_hand(src)
 	else
 		return
-
 	add_fingerprint(M)
 
 /obj/item/bell/attack_hand(mob/user as mob)
@@ -66,32 +65,29 @@
 			return
 	if(anchored)
 		playsound(src, 'sound/misc/ding.ogg', 60)
-
 		if(emagged)
 			var/mob/living/carbon/S = user
 			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(12, 1, src)
 			S.electrocute_act(110, usr, 1)
 			s.start()
-
 	add_fingerprint(user)
 	return
 
-/obj/item/bell/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wrench))
-		add_fingerprint(user)
-		to_chat(user, "<span class='notice'>Now [anchored ? "un" : ""]securing [name].</span>")
-		if(anchored)
-			to_chat(user, "<span class='notice'>You've [anchored ? "un" : ""]secured [name].</span>")
-		anchored = !anchored
-
-		playsound(src.loc, W.usesound, 50, 1)
-	return
+/obj/item/bell/wrench_act(mob/user, obj/item/I)
+	. = TRUE
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	anchored = !anchored
+	if(anchored)
+		WRENCH_ANCHOR_MESSAGE
+	else
+		WRENCH_UNANCHOR_MESSAGE
 
 /obj/item/bell/emag_act(mob/user)
 	visible_message("<span class='warning'>The bell sparks!</span>")
 	add_fingerprint(user)
-	emagged = 1
+	emagged = TRUE
 	var/datum/effect_system/spark_spread/sparks = new
 	sparks.set_up(5, 1, src)
 	sparks.start()

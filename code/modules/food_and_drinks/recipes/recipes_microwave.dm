@@ -87,8 +87,7 @@
 /datum/recipe/microwave/xenoburger
 	items = list(
 		/obj/item/reagent_containers/food/snacks/bun,
-		/obj/item/reagent_containers/food/snacks/xenomeat
-	)
+		/obj/item/reagent_containers/food/snacks/monstermeat/xenomeat	)
 	result = /obj/item/reagent_containers/food/snacks/xenoburger
 
 /datum/recipe/microwave/fishburger
@@ -630,22 +629,22 @@ datum/recipe/microwave/slimesandwich
 /datum/recipe/microwave/boiledspiderleg
 	reagents = list("water" = 10)
 	items = list(
-		/obj/item/reagent_containers/food/snacks/spiderleg,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spiderleg
 	)
 	result = /obj/item/reagent_containers/food/snacks/boiledspiderleg
 
 /datum/recipe/microwave/spidereggsham
 	reagents = list("sodiumchloride" = 1)
 	items = list(
-		/obj/item/reagent_containers/food/snacks/spidereggs,
-		/obj/item/reagent_containers/food/snacks/spidermeat,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spidereggs,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spidermeat
 	)
 	result = /obj/item/reagent_containers/food/snacks/spidereggsham
 
 /datum/recipe/microwave/sashimi
 	reagents = list("soysauce" = 5)
 	items = list(
-		/obj/item/reagent_containers/food/snacks/spidereggs,
+		/obj/item/reagent_containers/food/snacks/monstermeat/spidereggs,
 		/obj/item/reagent_containers/food/snacks/carpmeat,
 	)
 	result = /obj/item/reagent_containers/food/snacks/sashimi
@@ -729,7 +728,7 @@ datum/recipe/microwave/slimesandwich
 	reagents = list("water" = 10, "sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/grown/banana, /obj/item/reagent_containers/food/snacks/grown/potato, /obj/item/reagent_containers/food/snacks/grown/carrot, /obj/item/reagent_containers/food/snacks/monkeycube )
 	result = /obj/item/reagent_containers/food/snacks/macacosoup
-	
+
 /datum/recipe/microwave/empanada
 	items = list(
 		/obj/item/reagent_containers/food/snacks/doughslice,
@@ -737,4 +736,3 @@ datum/recipe/microwave/slimesandwich
 	)
 	result = /obj/item/reagent_containers/food/snacks/empanada
 
-	
