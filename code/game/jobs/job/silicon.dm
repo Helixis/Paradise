@@ -27,18 +27,23 @@
 	title = "Cyborg"
 	flag = JOB_CYBORG
 	department_flag = JOBCAT_ENGSEC
+<<<<<<< HEAD
 	total_positions = 1
 	spawn_positions = 1
 	minimal_character_age = 1
 	minimal_command_character_age = 1
 	minimal_captain_character_age = 1
+=======
+	total_positions = 2
+	spawn_positions = 2
+>>>>>>> parent of 8b5f5ea4b2... Revert "Merge remote-tracking branch 'upstream/master'"
 	supervisors = "your laws and the AI"	//Nodrak
 	department_head = list("AI")
 	selection_color = "#ddffdd"
 	minimal_player_age = 15
 	exp_requirements = 600
 	exp_type = EXP_TYPE_CREW
-	alt_titles = list("Android", "Robot")
+	alt_titles = list("Robot")
 
 /datum/job/cyborg/equip(mob/living/carbon/human/H)
 	if(!H)

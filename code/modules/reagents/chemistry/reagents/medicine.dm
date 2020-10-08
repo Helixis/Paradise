@@ -9,7 +9,7 @@
 	var/total_depletion_rate = (metabolization_rate / M.metabolism_efficiency) * M.digestion_ratio // Cache it
 
 	handle_addiction(M, total_depletion_rate)
-
+	sate_addiction(M)
 	holder.remove_reagent(id, total_depletion_rate) //medicine reagents stay longer if you have a better metabolism
 	return STATUS_UPDATE_NONE
 
@@ -121,7 +121,14 @@
 
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	if(M.bodytemperature < TCRYO)
+	var/external_temp
+	if(istype(M.loc, /obj/machinery/atmospherics/unary/cryo_cell))
+		var/obj/machinery/atmospherics/unary/cryo_cell/C = M.loc
+		external_temp = C.temperature_archived
+	else
+		var/turf/T = get_turf(M)
+		external_temp = T.temperature
+	if(external_temp < TCRYO)
 		update_flags |= M.adjustCloneLoss(-4, FALSE)
 		update_flags |= M.adjustOxyLoss(-10, FALSE)
 		update_flags |= M.adjustToxLoss(-3, FALSE)
@@ -172,6 +179,29 @@
 	color = "#0AB478"
 	metabolization_rate = 0.2
 	taste_description = "antibiotics"
+
+/datum/reagent/medicine/spaceacillin/on_mob_life(mob/living/M)
+	var/list/organs_list = list()
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		organs_list += C.internal_organs
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		organs_list += H.bodyparts
+
+	for(var/X in organs_list)
+		var/obj/item/organ/O = X
+		if(O.germ_level < INFECTION_LEVEL_ONE)
+			O.germ_level = 0	//cure instantly
+		else if(O.germ_level < INFECTION_LEVEL_TWO)
+			O.germ_level = max(M.germ_level - 25, 0)	//at germ_level == 500, this should cure the infection in 34 seconds
+		else
+			O.germ_level = max(M.germ_level - 10, 0)	// at germ_level == 1000, this will cure the infection in 1 minutes, 14 seconds
+
+	organs_list.Cut()
+	M.germ_level = max(M.germ_level - 20, 0) // Reduces the mobs germ level, too
+	return ..()
 
 /datum/reagent/medicine/silver_sulfadiazine
 	name = "Silver Sulfadiazine"
@@ -790,23 +820,22 @@
 		..()
 		return
 	M.SetJitter(0)
-	var/needs_update = M.mutations.len > 0 || M.disabilities > 0
-	var/update_flags = STATUS_UPDATE_NONE
-	if(prob(1)) //este medicamento ni deberia existir
-		if(needs_update)
-			for(var/block = 1; block<=DNA_SE_LENGTH; block++)
-				if(!(block in M.dna.default_blocks))
-					M.dna.SetSEState(block, FALSE, TRUE)
-					genemutcheck(M, block, null, MUTCHK_FORCED)
-			M.dna.UpdateSE()
+	var/needs_update = M.mutations.len > 0
 
-			M.dna.struc_enzymes = M.dna.struc_enzymes_original
-			update_flags |= M.adjustCloneLoss(1, FALSE)
-			// Might need to update appearance for hulk etc.
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				H.update_mutations()
-	return ..() | update_flags
+	if(needs_update)
+		for(var/block = 1; block<=DNA_SE_LENGTH; block++)
+			if(!(block in M.dna.default_blocks))
+				M.dna.SetSEState(block, FALSE, TRUE)
+				genemutcheck(M, block, null, MUTCHK_FORCED)
+		M.dna.UpdateSE()
+
+		M.dna.struc_enzymes = M.dna.struc_enzymes_original
+
+		// Might need to update appearance for hulk etc.
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.update_mutations()
+	return ..()
 
 /datum/reagent/medicine/antihol
 	name = "Antihol"
@@ -827,7 +856,7 @@
 /datum/reagent/medicine/stimulants
 	name = "Stimulants"
 	id = "stimulants"
-	description = "Increases run speed and eliminates stuns, can heal minor damage. If overdosed it will deal toxin damage and stun."
+	description = "An illegal compound that dramatically enhances the body's performance and healing capabilities."
 	color = "#C8A5DC"
 	harmless = FALSE
 	can_synth = FALSE
@@ -864,7 +893,7 @@
 /datum/reagent/medicine/stimulative_agent
 	name = "Stimulative Agent"
 	id = "stimulative_agent"
-	description = "An illegal compound that dramatically enhances the body's performance and healing capabilities."
+	description = "Increases run speed and eliminates stuns, can heal minor damage. If overdosed it will deal toxin damage and be less effective for healing stamina."
 	color = "#C8A5DC"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	overdose_threshold = 60

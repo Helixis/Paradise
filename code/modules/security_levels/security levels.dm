@@ -31,15 +31,6 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 			// Mark down this time to prevent shuttle cheese
 			SSshuttle.emergency_sec_level_time = world.time
 
-		// Reset gamma borgs if the new security level is lower than Gamma.
-		if(level < SEC_LEVEL_GAMMA)
-			for(var/M in GLOB.silicon_mob_list)
-				if(isrobot(M))
-					var/mob/living/silicon/robot/R = M
-					if(istype(R.module, /obj/item/robot_module/combat) && !R.crisis)
-						R.reset_module()
-						to_chat(R, "<span class='warning'>Crisis mode deactivated. The combat module is no longer available and your module has been reset.</span>")
-
 		switch(level)
 			if(SEC_LEVEL_GREEN)
 				GLOB.security_announcement_down.Announce("Todas las amenazas a la estaci�n han cesado. Todas las armas deben estar enfundadas y las leyes de privacidad se vuelven a aplicar por completo.","�Atenci�n! Nivel de seguridad bajado a Verde.")
@@ -134,10 +125,6 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 						FA.overlays.Cut()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
 
-		if(level >= SEC_LEVEL_RED)
-			GLOB.atc.reroute_traffic(yes = TRUE) // Tell them fuck off we're busy.
-		else
-			GLOB.atc.reroute_traffic(yes = FALSE)
 		SSnightshift.check_nightshift(TRUE)
 
 	else

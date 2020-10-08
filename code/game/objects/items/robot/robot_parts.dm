@@ -253,7 +253,16 @@
 				to_chat(user, "<span class='warning'>This [W] does not seem to fit.</span>")
 				return
 
-			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot(get_turf(loc), unfinished = 1)
+			var/datum/ai_laws/laws_to_give
+			if(M.syndiemmi)
+				aisync = FALSE
+				lawsync = FALSE
+				laws_to_give = new /datum/ai_laws/syndicate_override
+
+			if(!aisync)
+				lawsync = FALSE
+
+			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot(get_turf(loc), unfinished = 1, ai_to_sync_to = forced_ai)
 			if(!O)
 				return
 
@@ -263,24 +272,15 @@
 			if(istype(task))
 				task.unit_completed()
 
-			if(M.syndiemmi)
-				aisync = 0
-				lawsync = 0
-				O.laws = new /datum/ai_laws/syndicate_override
-
 			O.invisibility = 0
 			//Transfer debug settings to new mob
 			O.custom_name = created_name
 			O.rename_character(O.real_name, O.get_default_name())
 			O.locked = panel_locked
-			if(!aisync)
-				lawsync = 0
-				O.connected_ai = null
-			else
-				O.notify_ai(NEW_BORG)
-				if(forced_ai)
-					O.connected_ai = forced_ai
-			if(!lawsync && !M.syndiemmi)
+
+			if(laws_to_give)
+				O.laws = laws_to_give
+			else if(!lawsync)
 				O.lawupdate = 0
 				O.make_laws()
 
@@ -317,41 +317,6 @@
 
 		else
 			to_chat(user, "<span class='warning'>The MMI must go in after everything else!</span>")
-
-	else if(istype(W, /obj/item/borg/upgrade/ai))
-		var/obj/item/borg/upgrade/ai/M = W
-		if(check_completion())
-			if(!isturf(loc))
-				to_chat(user, "<span class='warning'>You cannot install[M], the frame has to be standing on the ground to be perfectly precise!</span>")
-				return
-			if(!user.drop_item())
-				to_chat(user, "<span class='warning'>[M] is stuck to your hand!</span>")
-				return
-			qdel(M)
-			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot/shell(get_turf(src))
-
-			if(!aisync)
-				lawsync = FALSE
-				O.connected_ai = null
-			else
-				if(forced_ai)
-					O.connected_ai = forced_ai
-				O.notify_ai(AI_SHELL)
-			if(!lawsync)
-				O.lawupdate = FALSE
-				O.make_laws()
-
-
-			O.cell = chest.cell
-			chest.cell.loc = O
-			chest.cell = null
-			O.locked = panel_locked
-			O.job = "Cyborg"
-			forceMove(O)
-			O.robot_suit = src
-			if(!locomotion)
-				O.lockcharge = TRUE
-				O.update_canmove()
 
 	if(istype(W,/obj/item/pen))
 		to_chat(user, "<span class='warning'>You need to use a multitool to name [src]!</span>")
