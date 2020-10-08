@@ -262,7 +262,7 @@
 	name = "NT specops cybernetics implant"
 	desc = "An extremely powerful cybernetic implant that contains combat and utility modules used by NT special forces."
 	contents = newlist(/obj/item/gun/energy/pulse/pistol/m1911, /obj/item/door_remote/omni, /obj/item/melee/energy/blade/hardlight, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/gun/medbeam, /obj/item/borg/stun, /obj/item/implanter/mindshield, /obj/item/flash/armimplant)
-	icon = 'icons/hispania/obj/guns/energy.dmi'
+	icon = 'icons/obj/guns/energy.dmi'
 	icon_state = "m1911"
 	emp_proof = 1
 
@@ -305,10 +305,14 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "wire1"
 	flags = NOBLUDGEON
+	var/drawing_power = FALSE
 
 /obj/item/apc_powercord/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!istype(target, /obj/machinery/power/apc) || !ishuman(user) || !proximity_flag)
 		return ..()
+	if(drawing_power)
+		to_chat(user, "<span class='warning'>You're already charging.</span>")
+		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/obj/machinery/power/apc/A = target
 	var/mob/living/carbon/human/H = user
@@ -329,6 +333,7 @@
 
 /obj/item/apc_powercord/proc/powerdraw_loop(obj/machinery/power/apc/A, mob/living/carbon/human/H)
 	H.visible_message("<span class='notice'>[H] inserts a power connector into \the [A].</span>", "<span class='notice'>You begin to draw power from \the [A].</span>")
+	drawing_power = TRUE
 	while(do_after(H, 10, target = A))
 		if(loc != H)
 			to_chat(H, "<span class='warning'>You must keep your connector out while charging!</span>")
@@ -350,6 +355,7 @@
 			to_chat(H, "<span class='notice'>You are now fully charged.</span>")
 			break
 	H.visible_message("<span class='notice'>[H] unplugs from \the [A].</span>", "<span class='notice'>You unplug from \the [A].</span>")
+	drawing_power = FALSE
 
 /obj/item/organ/internal/cyberimp/arm/telebaton
 	name = "telebaton implant"

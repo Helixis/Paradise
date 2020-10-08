@@ -691,7 +691,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_banana_mortar
 	name = "H.O.N.K Banana Mortar"
@@ -752,11 +751,12 @@
 	category = list("Exosuit Equipment")
 
 /datum/design/mech_mining_scanner
-	name = "Exosuit Engineering Equipement (Mining Scanner)"
+	name = "Exosuit Engineering Equipment (Mining Scanner)"
 	id = "mech_mscanner"
 	build_type = MECHFAB
 	build_path = /obj/item/mecha_parts/mecha_equipment/mining_scanner
 	materials = list(MAT_METAL=5000,MAT_GLASS=2500)
+	construction_time = 50
 	category = list("Exosuit Equipment")
 
 /datum/design/mech_generator_nuclear
@@ -891,7 +891,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_laser
 	name = "Exosuit Weapon (CH-PL \"Firedart\" Laser)"
@@ -903,7 +902,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_disabler
 	name = "Exosuit Weapon (CH-PD Disabler)"
@@ -926,7 +924,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_scattershot
 	name = "Exosuit Weapon (LBX AC 10 \"Scattershot\")"
@@ -938,7 +935,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_ion
 	name = "Exosuit Weapon (MKIV Ion Heavy Cannon)"
@@ -950,11 +946,10 @@
 	materials = list(MAT_METAL=20000,MAT_SILVER=6000,MAT_URANIUM=2000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_grenade_launcher
-	name = "Exosuit Weapon (SGL-6 Grenade Launcher)"
-	desc = "Allows for the construction of SGL-6 Grenade Launcher."
+	name = "Exosuit Weapon (SGL-6 Flashbang Launcher)"
+	desc = "Allows for the construction of SGL-6 Flashbang Launcher."
 	id = "mech_grenade_launcher"
 	build_type = MECHFAB
 	req_tech = list("combat" = 4, "engineering" = 4)
@@ -973,7 +968,6 @@
 	materials = list(MAT_METAL=22000,MAT_GOLD=6000,MAT_SILVER=8000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_plasma_cutter
 	name = "Exosuit Module Design (217-D Heavy Plasma Cutter)"
@@ -996,7 +990,6 @@
 	materials = list(MAT_METAL=20000,MAT_SILVER=8000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_immolator
 	name = "Exosuit Weapon (ZFI Immolation Beam Gun)"
@@ -1008,7 +1001,6 @@
 	materials = list(MAT_METAL = 10000, MAT_SILVER = 8000, MAT_PLASMA = 8000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 //Cyborg Upgrade Modules
 
@@ -1069,7 +1061,6 @@
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 
-
 /datum/design/borg_upgrade_diamonddrill
 	name = "Cyborg Upgrade (Diamond Drill)"
 	id = "borg_upgrade_diamonddrill"
@@ -1090,11 +1081,40 @@
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 
+/datum/design/borg_upgrade_abductor_engi
+	name = "Cyborg Upgrade (Abdcutor Engineering Equipment)"
+	id = "borg_upgade_abductor_engi"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/abductor_engi
+	req_tech = list("engineering" = 7, "materials" = 7, "abductor" = 4)
+	materials = list(MAT_METAL = 25000, MAT_SILVER = 12500, MAT_PLASMA = 5000, MAT_TITANIUM = 10000, MAT_DIAMOND = 10000) //Base abductor engineering tools * 4
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_upgrade_abductor_medi
+	name = "Cyborg Upgrade (Abdcutor Medical Equipment)"
+	id = "borg_upgade_abductor_medi"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/abductor_medi
+	req_tech = list("biotech" = 7, "materials" = 7, "abductor" = 4)
+	materials = list(MAT_METAL = 18000, MAT_GLASS = 1500, MAT_SILVER = 13000, MAT_GOLD = 1000, MAT_PLASMA = 4000, MAT_TITANIUM = 12000, MAT_DIAMOND = 1000) //Base abductor engineering tools *8 + IMS cost
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_upgrade_lavaproof
+	name = "Cyborg Upgrade (Lavaproof Chassis)"
+	id = "borg_upgrade_lavaproof"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/lavaproof
+	materials = list(MAT_METAL = 10000, MAT_PLASMA = 4000, MAT_TITANIUM = 5000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
 /datum/design/borg_syndicate_module
-	name = "Cyborg Upgrade (Illegal Modules)"
+	name = "Cyborg Upgrade (Safety Override)"
 	id = "borg_syndicate_module"
 	build_type = MECHFAB
-	req_tech = list("combat" = 4, "syndicate" = 2)
+	req_tech = list("combat" = 7, "programming" = 7)
 	build_path = /obj/item/borg/upgrade/syndicate
 	materials = list(MAT_METAL=10000,MAT_GLASS=15000,MAT_DIAMOND = 10000)
 	construction_time = 120
@@ -1117,6 +1137,7 @@
 	build_type = MECHFAB
 	build_path =/obj/item/mecha_parts/mecha_tracking
 	materials = list(MAT_METAL=500)
+	construction_time = 50
 	category = list("Misc")
 
 /datum/design/mecha_tracking_ai_control
@@ -1126,6 +1147,7 @@
 	build_path = /obj/item/mecha_parts/mecha_tracking/ai_control
 	materials = list(MAT_METAL = 1000, MAT_GLASS = 500, MAT_SILVER = 200)
 	req_tech = list("programming" = 3, "magnets" = 2, "engineering" = 2)
+	construction_time = 50
 	category = list("Misc")
 
 /datum/design/ipc_head
@@ -1199,6 +1221,7 @@
 	id = "voice_standard"
 	build_type = MECHFAB
 	materials = list(MAT_METAL = 500)
+	construction_time = 50
 	build_path = /obj/item/mecha_modkit/voice
 	category = list("Misc")
 
@@ -1208,6 +1231,7 @@
 	id = "voice_nanotrasen"
 	build_type = MECHFAB
 	materials = list(MAT_METAL = 500)
+	construction_time = 50
 	build_path = /obj/item/mecha_modkit/voice/nanotrasen
 	category = list("Misc")
 
@@ -1217,6 +1241,7 @@
 	id = "voice_silent"
 	build_type = MECHFAB
 	materials = list(MAT_METAL = 500)
+	construction_time = 50
 	build_path = /obj/item/mecha_modkit/voice/silent
 	category = list("Misc")
 
@@ -1226,6 +1251,7 @@
 	id = "voice_honk"
 	build_type = MECHFAB
 	materials = list(MAT_METAL = 400, MAT_BANANIUM = 100)
+	construction_time = 50
 	build_path = /obj/item/mecha_modkit/voice/honk
 	category = list("Misc")
 
@@ -1236,5 +1262,6 @@
 	build_type = MECHFAB
 	materials = list(MAT_METAL = 400, MAT_TITANIUM = 100)
 	req_tech = list("syndicate" = 2)
+	construction_time = 50
 	build_path = /obj/item/mecha_modkit/voice/syndicate
 	category = list("Misc")

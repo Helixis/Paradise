@@ -22,15 +22,12 @@
 	var/angle = 45
 	var/power = 5
 
-	//Modulo de resistencia a la teleportación
-	var/power_off_factor
-
 	// Based on the power used
-	var/teleport_cooldown = 0 // every index requires 5 bluespace crystal
-	var/list/power_options = list(5, 10, 20, 25, 30, 40, 50, 60, 70, 80)
+	var/teleport_cooldown = 0 // every index requires a bluespace crystal
+	var/list/power_options = list(5, 10, 20, 25, 30, 40, 50, 80)
 	var/teleporting = 0
 	var/crystals = 0
-	var/max_crystals = 30
+	var/max_crystals = 4
 	var/obj/item/gps/inserted_gps
 
 /obj/machinery/computer/telescience/New()
@@ -118,7 +115,7 @@
 		t += "<div class='statusDisplay'>"
 
 		for(var/i = 1; i <= power_options.len; i++)
-			if(crystals/5 + telepad.efficiency < i)
+			if(crystals + telepad.efficiency < i)
 				t += "<span class='linkOff'>[power_options[i]]</span>"
 				continue
 			if(power == power_options[i])
@@ -172,15 +169,15 @@
 
 	if(telepad)
 
-		var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
+		var/truePower = clamp(power + power_off, 1, 1000)
 		var/trueRotation = rotation + rotation_off
-		var/trueAngle = Clamp(angle, 1, 90)
+		var/trueAngle = clamp(angle, 1, 90)
 
 		var/datum/projectile_data/proj_data = projectile_trajectory(telepad.x, telepad.y, trueRotation, trueAngle, truePower)
 		last_tele_data = proj_data
 
-		var/trueX = Clamp(round(proj_data.dest_x, 1), 1, world.maxx)
-		var/trueY = Clamp(round(proj_data.dest_y, 1), 1, world.maxy)
+		var/trueX = clamp(round(proj_data.dest_x, 1), 1, world.maxx)
+		var/trueY = clamp(round(proj_data.dest_y, 1), 1, world.maxy)
 		var/spawn_time = round(proj_data.time) * 10
 
 		var/turf/target = locate(trueX, trueY, z_co)
@@ -294,12 +291,12 @@
 			return
 
 
-	var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
+	var/truePower = clamp(power + power_off, 1, 1000)
 	var/trueRotation = rotation + rotation_off
-	var/trueAngle = Clamp(angle, 1, 90)
+	var/trueAngle = clamp(angle, 1, 90)
 
 	var/datum/projectile_data/proj_data = projectile_trajectory(telepad.x, telepad.y, trueRotation, trueAngle, truePower)
-	var/turf/target = locate(Clamp(round(proj_data.dest_x, 1), 1, world.maxx), Clamp(round(proj_data.dest_y, 1), 1, world.maxy), z_co)
+	var/turf/target = locate(clamp(round(proj_data.dest_x, 1), 1, world.maxx), clamp(round(proj_data.dest_y, 1), 1, world.maxy), z_co)
 	var/area/A = get_area(target)
 
 	if(A.tele_proof == 1)
@@ -319,13 +316,12 @@
 	return
 
 /obj/machinery/computer/telescience/proc/eject()
-	var/to_eject = 0
-	if(crystals > 0)
-		for(var/i in 1 to crystals)
-			to_eject += 1
-			crystals -= 1
-		new /obj/item/stack/ore/bluespace_crystal/artificial(drop_location(), to_eject)
-		power = 0
+	var/to_eject
+	for(var/i in 1 to crystals)
+		to_eject += 1
+		crystals -= 1
+	new /obj/item/stack/ore/bluespace_crystal/artificial(drop_location(), to_eject)
+	power = 0
 
 /obj/machinery/computer/telescience/Topic(href, href_list)
 	if(..())
@@ -340,27 +336,27 @@
 		var/new_rot = input("Please input desired bearing in degrees.", name, rotation) as num
 		if(..()) // Check after we input a value, as they could've moved after they entered something
 			return
-		rotation = Clamp(new_rot, -900, 900)
-		rotation = round(rotation, 0.001)
+		rotation = clamp(new_rot, -900, 900)
+		rotation = round(rotation, 0.01)
 
 	if(href_list["setangle"])
 		var/new_angle = input("Please input desired elevation in degrees.", name, angle) as num
 		if(..())
 			return
-		angle = Clamp(round(new_angle, 0.001), 1, 9999)
+		angle = clamp(round(new_angle, 0.1), 1, 9999)
 
 	if(href_list["setpower"])
 		var/index = href_list["setpower"]
 		index = text2num(index)
 		if(index != null && power_options[index])
-			if(crystals/5 + telepad.efficiency >= index)
+			if(crystals + telepad.efficiency >= index)
 				power = power_options[index]
 
 	if(href_list["setz"])
 		var/new_z = input("Please input desired sector.", name, z_co) as num
 		if(..())
 			return
-		z_co = Clamp(round(new_z), 1, 10)
+		z_co = clamp(round(new_z), 1, 10)
 
 	if(href_list["ejectGPS"])
 		if(inserted_gps)
@@ -394,8 +390,7 @@
 	updateUsrDialog()
 
 /obj/machinery/computer/telescience/proc/recalibrate()
-	teles_left = rand(35, 40)
+	teles_left = rand(30, 40)
 	//angle_off = rand(-25, 25)
 	power_off = rand(-4, 0)
 	rotation_off = rand(-10, 10)
-	power_off_factor = rand(-15, -5)/100

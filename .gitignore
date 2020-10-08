@@ -9,12 +9,15 @@
 /config/*
 !config/**/*/
 
+# ignore cfg, an internal BYOND folder
+/cfg/*
+
 #ignore other, specific files and folers
 *.before
 data/
 /_maps/map_files/backup/*
 /_maps/map_files/**/backup/*
-*.dmm.backup
+/_maps/map_files/**/*.dmm.backup
 /_maps/quicksave/*
 /nano/debug.html
 **/__pycache__/*

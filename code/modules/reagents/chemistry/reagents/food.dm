@@ -333,7 +333,7 @@
 	id = "hot_coco"
 	description = "Made with love! And cocoa beans."
 	reagent_state = LIQUID
-	nutriment_factor = 0
+	nutriment_factor = 2 * REAGENTS_METABOLISM
 	color = "#403010" // rgb: 64, 48, 16
 	taste_description = "chocolate"
 
@@ -343,8 +343,8 @@
 	return ..()
 
 /datum/reagent/consumable/garlic
-	name = "Garlic Paste"
-	id = "garlicpaste"
+	name = "Garlic Juice"
+	id = "garlic"
 	description = "Crushed garlic. Chefs love it, but it can make you smell bad."
 	color = "#FEFEFE"
 	taste_description = "garlic"
@@ -376,7 +376,7 @@
 
 /datum/reagent/consumable/sprinkles/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	if(ishuman(M) && HAS_TRAIT(M, TRAIT_AMANTE_DE_DONAS))
+	if(ishuman(M) && (M.job in list("Security Officer", "Security Pod Pilot", "Detective", "Warden", "Head of Security", "Brig Physician", "Internal Affairs Agent", "Magistrate")))
 		update_flags |= M.adjustBruteLoss(-1, FALSE)
 		update_flags |= M.adjustFireLoss(-1, FALSE)
 	return ..() | update_flags
@@ -569,7 +569,7 @@
 	id = "chocolate"
 	description = "Chocolate is a delightful product derived from the seeds of the theobroma cacao tree."
 	reagent_state = LIQUID
-	nutriment_factor = 0
+	nutriment_factor = 5 * REAGENTS_METABOLISM		//same as pure cocoa powder, because it makes no sense that chocolate won't fill you up and make you fat
 	color = "#2E2418"
 	drink_icon = "chocolateglass"
 	drink_name = "Glass of chocolate"
@@ -577,7 +577,7 @@
 	taste_description = "chocolate"
 
 /datum/reagent/consumable/chocolate/on_mob_life(mob/living/M)
-	M.reagents.add_reagent("sugar", 0.1)
+	M.reagents.add_reagent("sugar", 0.8)
 	return ..()
 
 /datum/reagent/consumable/chocolate/reaction_turf(turf/T, volume)
@@ -628,12 +628,8 @@
 	reagent_state = LIQUID
 	color = "#B4B400"
 	metabolization_rate = 0.2
-	nutriment_factor = 2
+	nutriment_factor = 2.5 * REAGENTS_METABOLISM
 	taste_description = "broth"
-
-/datum/reagent/consumable/chicken_soup/on_mob_life(mob/living/M)
-	if(prob(15))
-		M.reagents.add_reagent("cholesterol", rand(1,3))
 
 /datum/reagent/consumable/cheese
 	name = "Cheese"

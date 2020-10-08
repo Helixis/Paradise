@@ -40,6 +40,7 @@ GLOBAL_LIST_INIT(round_end_sounds, list(
 		'sound/AI/newroundsexy.ogg' = 2.3 SECONDS,
 		'sound/misc/apcdestroyed.ogg' = 3 SECONDS,
 		'sound/misc/bangindonk.ogg' = 1.6 SECONDS,
+		'sound/misc/berightback.ogg' = 2.9 SECONDS,
 		'sound/goonstation/misc/newround1.ogg' = 6.9 SECONDS,
 		'sound/goonstation/misc/newround2.ogg' = 14.8 SECONDS
 		))  // Maps available round end sounds to their duration
@@ -49,7 +50,7 @@ GLOBAL_LIST_INIT(cooking_recipe_types, list(
 	RECIPE_OVEN = /datum/recipe/oven,
 	RECIPE_GRILL = /datum/recipe/grill,
 	RECIPE_CANDY = /datum/recipe/candy,
-	RECIPE_MIXER = /datum/recipe/mixer
+	//RECIPE_MIXER = /datum/recipe/mixer
 	))
 GLOBAL_LIST_INIT(cooking_recipes, list(RECIPE_MICROWAVE = list(), RECIPE_OVEN = list(), RECIPE_GRILL = list(), RECIPE_CANDY = list(), RECIPE_MIXER = list()))
 GLOBAL_LIST_INIT(cooking_ingredients, list(RECIPE_MICROWAVE = list(), RECIPE_OVEN = list(), RECIPE_GRILL = list(), RECIPE_CANDY = list(), RECIPE_MIXER = list()))

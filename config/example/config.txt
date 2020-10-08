@@ -138,6 +138,9 @@ ALLOW_ADMIN_OOCCOLOR
 ## If metadata is supported
 ALLOW_METADATA
 
+## The time it takes for a round to start in seconds
+PREGAME_TIMESTART 240
+
 ## allow players to initiate a restart vote
 #ALLOW_VOTE_RESTART
 
@@ -164,14 +167,6 @@ DEFAULT_NO_VOTE
 
 ## allow AI job
 ALLOW_AI
-
-## Secborg ###
-## Uncomment to prevent the security cyborg module from being chosen
-#DISABLE_SECBORG
-
-## Peacekeeper Borg ###
-## Uncomment to prevent the peacekeeper cyborg module from being chosen
-#DISABLE_PEACEBORG
 
 ## Allow ghosts to see antagonist through AntagHUD
 ALLOW_ANTAG_HUD
@@ -241,11 +236,11 @@ CHECK_RANDOMIZER
 ## Rules address
 # RULESURL http://example.org
 
+## GitHub address
+# GITHUBURL http://example.org
+
 ## Discord address
 # DISCORDURL http://example.org
-
-## Bot ip address
-# RYZORBOT http://ryzorbot.herokuapp.com
 
 ## Discord address (forum-based invite)
 # DISCORDFORUMURL http://example.org
@@ -281,9 +276,6 @@ TICKLAG 0.5
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
-
-## Uncomment this to ban use of ToR
-#TOR_BAN
 
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
@@ -381,10 +373,10 @@ PLAYER_REROUTE_CAP 0
 #DISABLE_SPACE_RUINS
 
 ## Minimum number of space ruins levels to generate
-EXTRA_SPACE_RUIN_LEVELS_MIN 2
+EXTRA_SPACE_RUIN_LEVELS_MIN 4
 
 ## Maximum number of space ruins levels to generate
-EXTRA_SPACE_RUIN_LEVELS_MAX 4
+EXTRA_SPACE_RUIN_LEVELS_MAX 8
 
 ## Uncomment to disable the OOC/LOOC channel by default.
 #DISABLE_OOC

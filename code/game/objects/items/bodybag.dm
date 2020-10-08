@@ -3,19 +3,19 @@
 /obj/item/bodybag
 	name = "body bag"
 	desc = "A folded bag designed for the storage and transportation of cadavers."
-	icon = 'icons/hispania/obj/bodybag.dmi'
+	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = WEIGHT_CLASS_SMALL
 
-	attack_self(mob/user)
-		var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
+/obj/item/bodybag/attack_self(mob/user)
+	var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)
 
 /obj/structure/closet/body_bag
 	name = "body bag"
 	desc = "A plastic bag designed for the storage and transportation of cadavers."
-	icon = 'icons/hispania/obj/bodybag.dmi'
+	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_closed"
 	icon_closed = "bodybag_closed"
 	icon_opened = "bodybag_open"
@@ -56,16 +56,13 @@
 
 
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
-	..()
+	. = ..()
 	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		if(!ishuman(usr))	return
-		if(opened)	return 0
-		if(contents.len)	return 0
-		visible_message("[usr] folds up the [src.name]")
+		if(!ishuman(usr) || opened || length(contents))
+			return FALSE
+		visible_message("[usr] folds up the [name]")
 		new item_path(get_turf(src))
-		spawn(0)
-			qdel(src)
-		return
+		qdel(src)
 
 /obj/structure/closet/body_bag/relaymove(mob/user as mob)
 	if(user.stat)

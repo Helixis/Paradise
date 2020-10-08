@@ -21,11 +21,6 @@
 /obj/item/gun/energy/gun/cyborg/emp_act()
 	return
 
-/obj/item/gun/energy/gun/mounted
-	name = "mounted energy gun"
-	selfcharge = 1
-	use_external_power = 1
-
 /obj/item/gun/energy/gun/mini
 	name = "miniature energy gun"
 	desc = "A small, pistol-sized energy gun with a built-in flashlight. It has two settings: disable and kill."
@@ -96,4 +91,4 @@
 	can_charge = 0
 	ammo_x_offset = 1
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser, /obj/item/ammo_casing/energy/disabler)
-	selfcharge = TRUE
+	selfcharge = 1

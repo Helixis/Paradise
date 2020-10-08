@@ -9,7 +9,7 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-	speak_emote = list("barks", "woofs")
+	speak_emote = list("barks.", "woofs.")
 	emote_hear = list("barks!", "woofs!", "yaps.","pants.")
 	emote_see = list("shakes its head.", "chases its tail.","shivers.")
 	faction = list("neutral")
@@ -153,16 +153,16 @@
 	if(def_zone)
 		if(def_zone == "head")
 			if(inventory_head)
-				armorval = inventory_head.armor[type]
+				armorval = inventory_head.armor.getRating(type)
 		else
 			if(inventory_back)
-				armorval = inventory_back.armor[type]
+				armorval = inventory_back.armor.getRating(type)
 		return armorval
 	else
 		if(inventory_head)
-			armorval += inventory_head.armor[type]
+			armorval += inventory_head.armor.getRating(type)
 		if(inventory_back)
-			armorval += inventory_back.armor[type]
+			armorval += inventory_back.armor.getRating(type)
 	return armorval * 0.5
 
 /mob/living/simple_animal/pet/dog/corgi/attackby(obj/item/O, mob/user, params)
@@ -727,10 +727,6 @@
 	//spark for no reason
 	if(prob(5))
 		do_sparks(3, 1, src)
-		if(prob(0.5))
-			if(prob(10))
-				var/turf/T = get_turf(src)
-				new /mob/living/simple_animal/hostile/poison/fleas/borg(T)
 
 /mob/living/simple_animal/pet/dog/corgi/borgi/handle_automated_action()
 	if(emagged && prob(25))

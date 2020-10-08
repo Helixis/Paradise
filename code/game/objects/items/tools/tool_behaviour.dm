@@ -1,13 +1,10 @@
 // Called when a mob tries to use the item as a tool.
 // Handles most checks.
 /obj/item/proc/use_tool(atom/target, mob/living/user, delay, amount=0, volume=0, datum/callback/extra_checks)
-	if(HAS_TRAIT(user, TRAIT_NO_TOOLS) && ishuman(user)) //HISPA TRATIS
-		to_chat(user, "<span class='notice'>no sabrias usar esta herramienta aunque quisieras.</span>")
-		return
 	// No delay means there is no start message, and no reason to call tool_start_check before use_tool.
 	// Run the start check here so we wouldn't have to call it manually.
 	target.add_fingerprint(user)
-	if(!tool_start_check(user, amount) && !delay)
+	if(!tool_start_check(target, user, amount) && !delay)
 		return
 	delay *= toolspeed
 
@@ -42,7 +39,7 @@
 
 // Called before use_tool if there is a delay, or by use_tool if there isn't.
 // Only ever used by welding tools and stacks, so it's not added on any other use_tool checks.
-/obj/item/proc/tool_start_check(mob/living/user, amount=0)
+/obj/item/proc/tool_start_check(atom/target, mob/living/user, amount=0)
 	return tool_use_check(user, amount)
 
 // A check called by tool_start_check once, and by use_tool on every tick of delay.

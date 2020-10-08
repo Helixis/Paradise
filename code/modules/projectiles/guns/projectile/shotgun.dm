@@ -82,7 +82,6 @@
 	name = "riot shotgun"
 	desc = "A sturdy shotgun with a longer magazine and a fixed tactical stock designed for non-lethal riot control."
 	icon_state = "riotshotgun"
-	item_state = "riotgun"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/riot
 	sawn_desc = "Come with me if you want to live."
 	sawn_state = SAWN_INTACT
@@ -198,6 +197,8 @@
 	..()
 	post_sawoff()
 
+/obj/item/gun/projectile/shotgun/riot/buckshot	//comes pre-loaded with buckshot rather than rubber
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/riot/buckshot
 
 
 ///////////////////////
@@ -259,7 +260,7 @@
 	..()
 	guns_left = 0
 
-/obj/item/gun/projectile/shotgun/boltaction/enchanted/shoot_live_shot(mob/living/user as mob|obj, pointblank = 0, mob/pbtarget = null, message = 1)
+/obj/item/gun/projectile/shotgun/boltaction/enchanted/shoot_live_shot(mob/living/user, atom/target, pointblank = FALSE, message = TRUE)
 	..()
 	if(guns_left)
 		var/obj/item/gun/projectile/shotgun/boltaction/enchanted/GUN = new
@@ -277,7 +278,7 @@
 
 /obj/item/gun/projectile/shotgun/automatic
 
-/obj/item/gun/projectile/shotgun/automatic/shoot_live_shot(mob/living/user as mob|obj)
+/obj/item/gun/projectile/shotgun/automatic/shoot_live_shot(mob/living/user, atom/target, pointblank = FALSE, message = TRUE)
 	..()
 	pump(user)
 

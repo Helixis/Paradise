@@ -13,8 +13,6 @@
 	ammo_x_offset = 3
 	flight_x_offset = 17
 	flight_y_offset = 9
-	zoomable = TRUE
-	zoom_amt = 3
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	return
@@ -31,7 +29,6 @@
 	ammo_x_offset = 2
 	flight_x_offset = 18
 	flight_y_offset = 11
-	zoomable = FALSE
 
 // Decloner //
 /obj/item/gun/energy/decloner
@@ -66,7 +63,7 @@
 /obj/item/gun/energy/meteorgun
 	name = "meteor gun"
 	desc = "For the love of god, make sure you're aiming this the right way!"
-	icon = 'icons/hispania/obj/guns/projectile.dmi'
+	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "riotgun"
 	item_state = "c20r"
 	fire_sound = 'sound/weapons/gunshots/gunshot_shotgun.ogg'
@@ -115,10 +112,6 @@
 	max_mod_capacity = 0
 	empty_state = null
 
-/obj/item/gun/energy/kinetic_accelerator/crossbow/ninja
-	name = "energy dart thrower"
-	ammo_type = list(/obj/item/ammo_casing/energy/dart)
-
 /obj/item/gun/energy/kinetic_accelerator/crossbow/large
 	name = "energy crossbow"
 	desc = "A reverse engineered weapon using syndicate technology."
@@ -139,7 +132,7 @@
 	if(!suppressed)
 		playsound(loc, 'sound/weapons/kenetic_reload.ogg', 60, 1)
 	user.visible_message("<span class='suicide'>[user] cocks the [name] and pretends to blow [user.p_their()] brains out! It looks like [user.p_theyre()] trying to commit suicide!</b></span>")
-	shoot_live_shot()
+	shoot_live_shot(user, user, FALSE, FALSE)
 	return OXYLOSS
 
 // Plasma Cutters //
@@ -195,12 +188,8 @@
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
 	modifystate = "adv_plasmacutter"
-	item_state = "adv_plasmacutter"
 	origin_tech = "combat=3;materials=4;magnets=3;plasmatech=4;engineering=2"
-	lefthand_file = 'icons/hispania/mob/inhands/guns_lefthand.dmi'
-	righthand_file = 'icons/hispania/mob/inhands/guns_righthand.dmi'
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma/adv)
-	toolspeed = 0.8
 	force = 15
 
 // Wormhole Projectors //
@@ -255,7 +244,7 @@
 	name = "cyborg lmg"
 	desc = "A machinegun that fires 3d-printed flachettes slowly regenerated using a cyborg's internal power source."
 	icon_state = "l6closed0"
-	icon = 'icons/hispania/obj/guns/projectile.dmi'
+	icon = 'icons/obj/guns/projectile.dmi'
 	cell_type = /obj/item/stock_parts/cell/secborg
 	ammo_type = list(/obj/item/ammo_casing/energy/c3dbullet)
 	can_charge = 0
@@ -317,9 +306,10 @@
 	name = "L.W.A.P. Sniper Rifle"
 	desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
 	icon_state = "esniper"
-	item_state = "lwap"
 	origin_tech = "combat=6;materials=5;powerstorage=4"
 	ammo_type = list(/obj/item/ammo_casing/energy/sniper)
+	item_state = null
+	weapon_weight = WEAPON_HEAVY
 	slot_flags = SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	zoomable = TRUE
@@ -329,7 +319,7 @@
 // Temperature Gun //
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
-	icon = 'icons/hispania/obj/guns/gun_temperature.dmi'
+	icon = 'icons/obj/guns/gun_temperature.dmi'
 	icon_state = "tempgun_4"
 	item_state = "tempgun_4"
 	slot_flags = SLOT_BACK
@@ -430,7 +420,7 @@
 		update_icon()
 
 		if(istype(loc, /mob/living/carbon))
-			var /mob/living/carbon/M = loc
+			var/mob/living/carbon/M = loc
 			if(src == M.machine)
 				update_dat()
 				M << browse("<TITLE>Temperature Gun Configuration</TITLE><HR>[dat]", "window=tempgun;size=510x102")

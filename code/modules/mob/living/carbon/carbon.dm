@@ -2,6 +2,10 @@
 	var/canEnterVentWith = "/obj/item/implant=0&/obj/item/clothing/mask/facehugger=0&/obj/item/radio/borg=0&/obj/machinery/camera=0"
 	var/datum/middleClickOverride/middleClickOverride = null
 
+/mob/living/carbon/Initialize(mapload)
+	. = ..()
+	GLOB.carbon_list += src
+
 /mob/living/carbon/Destroy()
 	// This clause is here due to items falling off from limb deletion
 	for(var/obj/item in get_all_slots())
@@ -14,11 +18,11 @@
 	if(B)
 		B.leave_host()
 		qdel(B)
+	GLOB.carbon_list -= src
 	return ..()
 
 /mob/living/carbon/handle_atom_del(atom/A)
-	if(A in processing_patches)
-		processing_patches -= A
+	LAZYREMOVE(processing_patches, A)
 	return ..()
 
 /mob/living/carbon/blob_act(obj/structure/blob/B)
@@ -46,41 +50,40 @@
 
 /mob/living/carbon/var/last_stomach_attack //defining this here because no one would look in carbon_defines for it
 
-/mob/living/carbon/relaymove(var/mob/user, direction)
-	if(user in src.stomach_contents)
-		if(last_stomach_attack + STOMACH_ATTACK_DELAY > world.time)	return
+/mob/living/carbon/relaymove(mob/user, direction)
+	if(LAZYLEN(stomach_contents))
+		if(user in stomach_contents)
+			if(last_stomach_attack + STOMACH_ATTACK_DELAY > world.time)
+				return
 
-		last_stomach_attack = world.time
-		for(var/mob/M in hearers(4, src))
-			if(M.client)
-				M.show_message(text("<span class='warning'>You hear something rumbling inside [src]'s stomach...</span>"), 2)
-
-		var/obj/item/I = user.get_active_hand()
-		if(I && I.force)
-			var/d = rand(round(I.force / 4), I.force)
-
-			if(istype(src, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = src
-				var/obj/item/organ/external/organ = H.get_organ("chest")
-				if(istype(organ))
-					if(organ.receive_damage(d, 0))
-						H.UpdateDamageIcon()
-
-				H.updatehealth("stomach attack")
-
-			else
-				src.take_organ_damage(d)
-
-			for(var/mob/M in viewers(user, null))
+			last_stomach_attack = world.time
+			for(var/mob/M in hearers(4, src))
 				if(M.client)
-					M.show_message(text("<span class='warning'><B>[user] attacks [src]'s stomach wall with the [I.name]!</span>"), 2)
-			playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+					M.show_message(text("<span class='warning'>You hear something rumbling inside [src]'s stomach...</span>"), 2)
 
-			if(prob(src.getBruteLoss() - 50))
-				for(var/atom/movable/A in stomach_contents)
-					A.forceMove(drop_location())
-					stomach_contents.Remove(A)
-				src.gib()
+			var/obj/item/I = user.get_active_hand()
+			if(I && I.force)
+				var/d = rand(round(I.force / 4), I.force)
+
+				if(istype(src, /mob/living/carbon/human))
+					var/mob/living/carbon/human/H = src
+					var/obj/item/organ/external/organ = H.get_organ("chest")
+					if(istype(organ))
+						if(organ.receive_damage(d, 0))
+							H.UpdateDamageIcon()
+
+					H.updatehealth("stomach attack")
+
+				else
+					take_organ_damage(d)
+
+				for(var/mob/M in viewers(user, null))
+					if(M.client)
+						M.show_message(text("<span class='warning'><B>[user] attacks [src]'s stomach wall with the [I.name]!</span>"), 2)
+				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+
+				if(prob(getBruteLoss() - 50))
+					gib()
 
 #undef STOMACH_ATTACK_DELAY
 
@@ -135,9 +138,8 @@
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),5)
 
 	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
-		M.forceMove(get_turf(src))
+		LAZYREMOVE(stomach_contents, M)
+		M.forceMove(drop_location())
 		visible_message("<span class='danger'>[M] bursts out of [src]!</span>")
 
 /mob/living/carbon/electrocute_act(shock_damage, obj/source, siemens_coeff = 1, safety = FALSE, override = FALSE, tesla_shock = FALSE, illusion = FALSE, stun = TRUE)
@@ -219,27 +221,19 @@
 		swap_hand()
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
-	if(src == M && ishuman(src))
-		check_self_for_injuries()
-	else
-		if(player_logged)
-			M.visible_message("<span class='notice'>[M] shakes [src], but [p_they()] [p_do()] not respond. Probably suffering from SSD.", \
-			"<span class='notice'>You shake [src], but [p_theyre()] unresponsive. Probably suffering from SSD.</span>")
-		if(lying) // /vg/: For hugs. This is how update_icon figgers it out, anyway.  - N3X15
-			add_attack_logs(M, src, "Shaked", ATKLOG_ALL)
-			if(ishuman(src))
-				var/mob/living/carbon/human/H = src
-				if(H.w_uniform)
-					H.w_uniform.add_fingerprint(M)
-			if(health <= HEALTH_THRESHOLD_CRIT)
-				AdjustWeakened(-1)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				if(!player_logged)
-					M.visible_message( \
-					"<span class='notice'>[M] shakes [src] trying to wake [p_them()] up!</span>",\
-					"<span class='notice'>You shake [src] trying to wake [p_them()] up!</span>",\
-					)
-			if(health >= HEALTH_THRESHOLD_CRIT)
+	if(health >= HEALTH_THRESHOLD_CRIT)
+		if(src == M && ishuman(src))
+			check_self_for_injuries()
+		else
+			if(player_logged)
+				M.visible_message("<span class='notice'>[M] shakes [src], but [p_they()] [p_do()] not respond. Probably suffering from SSD.", \
+				"<span class='notice'>You shake [src], but [p_theyre()] unresponsive. Probably suffering from SSD.</span>")
+			if(lying) // /vg/: For hugs. This is how update_icon figgers it out, anyway.  - N3X15
+				add_attack_logs(M, src, "Shaked", ATKLOG_ALL)
+				if(ishuman(src))
+					var/mob/living/carbon/human/H = src
+					if(H.w_uniform)
+						H.w_uniform.add_fingerprint(M)
 				AdjustSleeping(-5)
 				if(sleeping == 0)
 					StopResting()
@@ -249,29 +243,29 @@
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				if(!player_logged)
 					M.visible_message( \
-					"<span class='notice'>[M] shakes [src] trying to wake [p_them()] up!</span>",\
-					"<span class='notice'>You shake [src] trying to wake [p_them()] up!</span>",\
-					)
+						"<span class='notice'>[M] shakes [src] trying to wake [p_them()] up!</span>",\
+						"<span class='notice'>You shake [src] trying to wake [p_them()] up!</span>",\
+						)
 			// BEGIN HUGCODE - N3X
-		else
-			playsound(get_turf(src), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			if(M.zone_selected == "head")
-				M.visible_message(\
-				"<span class='notice'>[M] pats [src] on the head.</span>",\
-				"<span class='notice'>You pat [src] on the head.</span>",\
-				)
 			else
+				playsound(get_turf(src), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				if(M.zone_selected == "head")
+					M.visible_message(\
+					"<span class='notice'>[M] pats [src] on the head.</span>",\
+					"<span class='notice'>You pat [src] on the head.</span>",\
+					)
+				else
 
-				M.visible_message(\
-				"<span class='notice'>[M] gives [src] a [pick("hug","warm embrace")].</span>",\
-				"<span class='notice'>You hug [src].</span>",\
-				)
-				if(ishuman(src))
-					var/mob/living/carbon/human/H = src
-					if(H.wear_suit)
-						H.wear_suit.add_fingerprint(M)
-					else if(H.w_uniform)
-						H.w_uniform.add_fingerprint(M)
+					M.visible_message(\
+					"<span class='notice'>[M] gives [src] a [pick("hug","warm embrace")].</span>",\
+					"<span class='notice'>You hug [src].</span>",\
+					)
+					if(ishuman(src))
+						var/mob/living/carbon/human/H = src
+						if(H.wear_suit)
+							H.wear_suit.add_fingerprint(M)
+						else if(H.w_uniform)
+							H.w_uniform.add_fingerprint(M)
 
 /mob/living/carbon/proc/check_self_for_injuries()
 	var/mob/living/carbon/human/H = src
@@ -294,14 +288,11 @@
 			status = "battered"
 		if(brutedamage > 40)
 			status = "mangled"
-		if(brutedamage > 70)
-			status = "destrosed"
 		if(brutedamage > 0 && burndamage > 0)
 			status += " and "
-		if(burndamage > 70)
-			status += "peeled away"
-		else if(burndamage > 40)
+		if(burndamage > 40)
 			status += "peeling away"
+
 		else if(burndamage > 10)
 			status += "blistered"
 		else if(burndamage > 0)
@@ -320,11 +311,6 @@
 
 	if(H.bleed_rate)
 		to_chat(src, "<span class='danger'>You are bleeding!</span>")
-	if(H.getToxLoss() > 60)
-		to_chat(src, "<span class='danger'>You feel awfully bad!</span>")
-	for(var/obj/item/organ/external/LB in H.bodyparts)
-		if(LB.status & ORGAN_BROKEN)
-			to_chat(src, "<span class='danger'>You feel a insane pain around one of yours bones. It must be broken...</span>")
 	if(staminaloss)
 		if(staminaloss > 30)
 			to_chat(src, "<span class='info'>You're completely exhausted.</span>")
@@ -502,7 +488,7 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
-	if(!istype(starting_machine) || !starting_machine.returnPipenet())
+	if(!istype(starting_machine) || !starting_machine.returnPipenet() || !starting_machine.can_see_pipes())
 		return
 	var/datum/pipeline/pipeline = starting_machine.returnPipenet()
 	var/list/totalMembers = list()
@@ -528,10 +514,10 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/update_pipe_vision()
 	if(pipes_shown.len)
-		if(!istype(loc, /obj/machinery/atmospherics))
+		if(!is_ventcrawling(src))
 			remove_ventcrawl()
 	else
-		if(istype(loc, /obj/machinery/atmospherics))
+		if(is_ventcrawling(src))
 			add_ventcrawl(loc)
 
 
@@ -552,6 +538,8 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 			take_organ_damage(10)
 	if(iscarbon(hit_atom) && hit_atom != src)
 		var/mob/living/carbon/victim = hit_atom
+		if(victim.flying)
+			return
 		if(hurt)
 			victim.take_organ_damage(10)
 			take_organ_damage(10)
@@ -804,11 +792,6 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 			if(!buckled)
 				return
 			buckled.user_unbuckle_mob(src,src)
-			if(istype(I, /obj/item/restraints/handcuffs/cable))
-				playsound(loc, 'sound/effects/snap.ogg', 50, 1, -1)
-				visible_message("<span class='danger'>As [src] manages to unbuckle... It destroys [I] as well!</span>")
-				handcuffed = null
-				update_handcuffed()
 		else
 			if(src && buckled)
 				to_chat(src, "<span class='warning'>You fail to unbuckle yourself!</span>")
@@ -891,7 +874,6 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 				unEquip(I)
 				I.dropped()
 				return
-			return 1
 		else
 			to_chat(src, "<span class='warning'>You fail to remove [I]!</span>")
 
@@ -947,9 +929,10 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 		return initial(pixel_y)
 
 /mob/living/carbon/emp_act(severity)
-	for(var/obj/item/organ/internal/O in internal_organs)
-		O.emp_act(severity)
 	..()
+	for(var/X in internal_organs)
+		var/obj/item/organ/internal/O = X
+		O.emp_act(severity)
 
 /mob/living/carbon/Stat()
 	..()
@@ -997,25 +980,30 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/carbon/proc/slip(description, stun, weaken, tilesSlipped, walkSafely, slipAny, slipVerb = "slip")
 	if(flying || buckled || (walkSafely && m_intent == MOVE_INTENT_WALK))
-		return 0
+		return FALSE
+
 	if((lying) && (!(tilesSlipped)))
-		return 0
+		return FALSE
+
 	if(!(slipAny))
 		if(istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
 			if(isobj(H.shoes) && H.shoes.flags & NOSLIP)
-				return 0
+				return FALSE
+
 	if(tilesSlipped)
-		for(var/t = 0, t<=tilesSlipped, t++)
-			spawn (t) step(src, src.dir)
+		for(var/i in 1 to tilesSlipped)
+			spawn(i)
+				step(src, dir)
+
 	stop_pulling()
 	to_chat(src, "<span class='notice'>You [slipVerb]ped on [description]!</span>")
-	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	// Something something don't run with scissors
 	moving_diagonally = 0 //If this was part of diagonal move slipping will stop it.
 	Stun(stun)
 	Weaken(weaken)
-	return 1
+	return TRUE
 
 /mob/living/carbon/proc/can_eat(flags = 255)
 	return 1
@@ -1080,10 +1068,6 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/carbon/proc/forceFedAttackLog(var/obj/item/reagent_containers/food/toEat, mob/user)
 	add_attack_logs(user, src, "Fed [toEat]. Reagents: [toEat.reagents.log_list(toEat)]", toEat.reagents.harmless_helper() ? ATKLOG_ALMOSTALL : null)
-	if(!iscarbon(user))
-		LAssailant = null
-	else
-		LAssailant = user
 
 
 /*TO DO - If/when stomach organs are introduced, override this at the human level sending the item to the stomach
@@ -1216,3 +1200,18 @@ so that different stomachs can handle things in different ways VB*/
 		I.acid_level = 0 //washes off the acid on our clothes
 		I.extinguish() //extinguishes our clothes
 	..()
+
+/mob/living/carbon/clean_blood(clean_hands = TRUE, clean_mask = TRUE, clean_feet = TRUE)
+	if(head)
+		if(head.clean_blood())
+			update_inv_head()
+		if(head.flags_inv & HIDEMASK)
+			clean_mask = FALSE
+	if(wear_suit)
+		if(wear_suit.clean_blood())
+			update_inv_wear_suit()
+		if(wear_suit.flags_inv & HIDESHOES)
+			clean_feet = FALSE
+		if(wear_suit.flags_inv & HIDEGLOVES)
+			clean_hands = FALSE
+	..(clean_hands, clean_mask, clean_feet)

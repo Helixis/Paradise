@@ -1,4 +1,5 @@
 
+
 /obj/item/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -11,6 +12,10 @@
 	materials = list(MAT_GLASS=500)
 	max_integrity = 20
 	resistance_flags = ACID_PROOF
+
+/obj/item/reagent_containers/food/drinks/set_APTFT()
+	set hidden = FALSE
+	..()
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/egg)) //breaking eggs

@@ -139,7 +139,6 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/mob/living/simple_animal/hostile/retaliate/clown,
 /turf/simulated/floor/lubed,
 /area/ruin/powered/clownplanet)
 "am" = (
@@ -1092,36 +1091,6 @@
 /obj/effect/mapping_helpers/no_lava,
 /turf/simulated/floor/noslip/lavaland,
 /area/lavaland/surface/outdoors/explored)
-"fq" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	invisibility = 101
-	},
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/simulated/floor/plasteel{
-	dir = 4;
-	icon_state = "white"
-	},
-/area/ruin/powered/clownplanet)
-"gc" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	invisibility = 101
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/simulated/floor/lubed,
-/area/ruin/powered/clownplanet)
 "gX" = (
 /obj/effect/mapping_helpers/no_lava,
 /turf/simulated/floor/chasm/straight_down/lava_land_surface,
@@ -1131,42 +1100,11 @@
 /obj/effect/mapping_helpers/no_lava,
 /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/powered/clownplanet)
-"iz" = (
-/obj/effect/turf_decal/tile/red,
-/obj/effect/turf_decal/tile/red{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/simulated/floor/plasteel,
-/area/ruin/powered/clownplanet)
 "pv" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"wK" = (
-/obj/structure/disposalpipe/segment{
-	invisibility = 101
-	},
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/simulated/floor/lubed,
 /area/ruin/powered/clownplanet)
 "ye" = (
 /turf/simulated/floor/plating/lava/smooth,
@@ -1195,30 +1133,17 @@
 /obj/effect/mapping_helpers/no_lava,
 /turf/simulated/floor/noslip/lavaland,
 /area/ruin/powered/clownplanet)
+"Mv" = (
+/obj/effect/mapping_helpers/no_lava,
+/mob/living/simple_animal/hostile/retaliate/clown,
+/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors/explored)
 "MR" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/effect/mapping_helpers/no_lava,
 /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"Qo" = (
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/simulated/floor/lubed,
 /area/ruin/powered/clownplanet)
 "TD" = (
 /obj/structure/disposalpipe/trunk,
@@ -1513,7 +1438,7 @@ aY
 bf
 cc
 bs
-iz
+br
 bB
 cc
 cc
@@ -1565,7 +1490,7 @@ aa
 "}
 (10,1,1) = {"
 aa
-XO
+Mv
 cc
 ye
 ac
@@ -1576,7 +1501,7 @@ aL
 am
 aL
 aN
-fq
+aN
 aZ
 bc
 bh
@@ -1633,7 +1558,7 @@ cc
 "}
 (12,1,1) = {"
 aa
-XO
+Mv
 cc
 ye
 ae
@@ -1667,7 +1592,7 @@ cc
 "}
 (13,1,1) = {"
 XO
-XO
+Mv
 cc
 ye
 cc
@@ -1708,7 +1633,7 @@ ye
 ac
 af
 af
-wK
+af
 af
 aJ
 af
@@ -1815,7 +1740,7 @@ aL
 an
 aO
 af
-Qo
+av
 bl
 bo
 bt
@@ -1844,7 +1769,7 @@ ye
 aL
 as
 am
-gc
+am
 an
 an
 an
@@ -1871,7 +1796,7 @@ cc
 "}
 (19,1,1) = {"
 XO
-XO
+Mv
 cc
 ye
 ye
@@ -1905,7 +1830,7 @@ cc
 "}
 (20,1,1) = {"
 aa
-XO
+Mv
 cc
 ye
 cc
@@ -1973,7 +1898,7 @@ cc
 "}
 (22,1,1) = {"
 aa
-XO
+Mv
 cc
 ye
 aq

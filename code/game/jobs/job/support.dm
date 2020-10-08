@@ -6,8 +6,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -30,7 +28,7 @@
 		/obj/item/toy/russian_revolver = 1
 	)
 
-/*/datum/outfit/job/bartender/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/datum/outfit/job/bartender/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	if(visualsOnly)
 		return
@@ -39,18 +37,16 @@
 	genemutcheck(H, GLOB.soberblock, null, MUTCHK_FORCED)
 	H.dna.default_blocks.Add(GLOB.soberblock)
 	H.check_mutations = 1
-*/ //MUEVO ESTO AL TRAIT DE INMUNIDAD
+
 
 
 /datum/job/chef
 	title = "Chef"
 	flag = JOB_CHEF
 	department_flag = JOBCAT_SUPPORT
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -82,20 +78,15 @@
 	title = "Botanist"
 	flag = JOB_BOTANIST
 	department_flag = JOBCAT_SUPPORT
-	total_positions = 2
+	total_positions = 3
 	spawn_positions = 2
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE)
 	minimal_access = list(ACCESS_HYDROPONICS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS)
-	alt_titles = list("Hydroponicist", "Botanical Researcher", "Beekeeper")
-	required_objectives = list(
-		/datum/job_objective/further_plants
-	)
+	alt_titles = list("Hydroponicist", "Botanical Researcher")
 	outfit = /datum/outfit/job/hydro
 
 /datum/outfit/job/hydro
@@ -124,13 +115,9 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_supply = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
-	exp_requirements = 600
-	exp_type = EXP_TYPE_CREW
 	access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_QM, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
 	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_QM, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
 	outfit = /datum/outfit/job/qm
@@ -156,12 +143,10 @@
 	total_positions = 2
 	spawn_positions = 2
 	is_supply = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
-	supervisors = "Quartermaster"
+	supervisors = "the quartermaster"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
-	access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
+	access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_QM, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
 	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MAILSORTING, ACCESS_MINERAL_STOREROOM)
 	outfit = /datum/outfit/job/cargo_tech
 
@@ -184,12 +169,10 @@
 	total_positions = 6
 	spawn_positions = 8
 	is_supply = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
-	supervisors = "Quartermaster"
+	supervisors = "the quartermaster"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
-	access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
+	access = list(ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_QM, ACCESS_MINT, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_MINERAL_STOREROOM)
 	minimal_access = list(ACCESS_MINING, ACCESS_MINT, ACCESS_MINING_STATION, ACCESS_MAILSORTING, ACCESS_MAINT_TUNNELS, ACCESS_MINERAL_STOREROOM)
 	alt_titles = list("Spelunker")
 	outfit = /datum/outfit/job/mining
@@ -256,8 +239,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -296,25 +277,24 @@
 		mask = /obj/item/clothing/mask/gas/clown_hat/sexy
 		uniform = /obj/item/clothing/under/rank/clown/sexy
 
-/*/datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE) //HISPATRAIT
+/datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	if(visualsOnly)
 		return
 
-	if(ismachine(H))
+	if(ismachineperson(H))
 		var/obj/item/organ/internal/cyberimp/brain/clown_voice/implant = new
 		implant.insert(H)
 
 	H.dna.SetSEState(GLOB.clumsyblock, TRUE)
 	genemutcheck(H, GLOB.clumsyblock, null, MUTCHK_FORCED)
 	H.dna.default_blocks.Add(GLOB.clumsyblock)
-	if(!ismachine(H))
+	if(!ismachineperson(H))
 		H.dna.SetSEState(GLOB.comicblock, TRUE)
 		genemutcheck(H, GLOB.comicblock, null, MUTCHK_FORCED)
 		H.dna.default_blocks.Add(GLOB.comicblock)
 	H.check_mutations = TRUE
 	H.add_language("Clownish")
-*/ //HISPATRAIT
 
 //action given to antag clowns
 /datum/action/innate/toggle_clumsy
@@ -344,8 +324,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -398,8 +376,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -426,8 +402,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -457,8 +431,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -478,3 +450,25 @@
 		/obj/item/storage/box/lip_stick = 1,
 		/obj/item/storage/box/barber = 1
 	)
+
+/datum/job/explorer
+	title = "Explorer"
+	flag = JOB_EXPLORER
+	department_flag = JOBCAT_SUPPORT
+	total_positions = 0
+	spawn_positions = 0
+	supervisors = "the head of personnel"
+	department_head = list("Head of Personnel")
+	selection_color = "#dddddd"
+	access = list(ACCESS_MAINT_TUNNELS, ACCESS_GATEWAY, ACCESS_EVA, ACCESS_EXTERNAL_AIRLOCKS)
+	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_GATEWAY, ACCESS_EVA, ACCESS_EXTERNAL_AIRLOCKS)
+	outfit = /datum/outfit/job/explorer
+	hidden_from_job_prefs = TRUE
+
+/datum/outfit/job/explorer
+	// This outfit is never used, because there are no slots for this job.
+	// To get it, you have to go to the HOP and ask for a transfer to it.
+	name = "Explorer"
+	jobtype = /datum/job/explorer
+	uniform = /obj/item/clothing/under/color/random
+	shoes = /obj/item/clothing/shoes/black

@@ -17,6 +17,7 @@
 	response_harm   = "stomps on"
 	emote_see = list("jiggles", "bounces in place")
 	speak_emote = list("blorbles")
+	bubble_icon = "slime"
 
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 
@@ -156,7 +157,7 @@
 
 	. += config.slime_delay
 
-/mob/living/simple_animal/slime/handle_hud_icons_health()
+/mob/living/simple_animal/slime/update_health_hud()
 	if(hud_used)
 		if(!client)
 			return
@@ -264,7 +265,7 @@
 /mob/living/simple_animal/slime/unEquip(obj/item/I, force)
 	return
 
-/mob/living/simple_animal/slime/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
+/mob/living/simple_animal/slime/start_pulling(atom/movable/AM, state, force = pull_force, show_message = FALSE)
 	return
 
 /mob/living/simple_animal/slime/attack_ui(slot)
@@ -377,7 +378,7 @@
 			force_effect = round(I.force / 2)
 		if(prob(10 + force_effect))
 			discipline_slime(user)
-	if(istype(I, /obj/item/storage/bag/bio))
+/*	if(istype(I, /obj/item/storage/bag/bio))
 		var/obj/item/storage/P = I
 		if(!effectmod)
 			to_chat(user, "<span class='warning'>The slime is not currently being mutated.</span>")
@@ -402,9 +403,9 @@
 			else
 				to_chat(user, "<span class='notice'>You feed the slime some extracts from the bag.</span>")
 				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
-		return
+		return */
 	..()
-
+/*
 /mob/living/simple_animal/slime/proc/spawn_corecross()
 	var/static/list/crossbreeds = subtypesof(/obj/item/slimecross)
 	visible_message("<span class='danger'>[src] shudders, its mutated core consuming the rest of its body!</span>")
@@ -420,7 +421,7 @@
 	else
 		visible_message("<span class='warning'>The mutated core shudders, and collapses into a puddle, unable to maintain its form.</span>")
 	qdel(src)
-
+*/
 /mob/living/simple_animal/slime/water_act(volume, temperature, source, method = REAGENT_TOUCH)
 	. = ..()
 	var/water_damage = rand(10, 15) * volume

@@ -5,12 +5,11 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
-	minimal_captain_character_age = 1
 	supervisors = "the captain"
 	department_head = list("Captain")
 	selection_color = "#ffdddd"
 	req_admin_notify = 1
-	access = list(ACCESS_EVA, ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT,
+	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT,
 			            ACCESS_FORENSICS_LOCKERS, ACCESS_PILOT, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_ALL_PERSONAL_LOCKERS,
 			            ACCESS_RESEARCH, ACCESS_ENGINE, ACCESS_MINING, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_MAILSORTING,
 			            ACCESS_HEADS, ACCESS_HOS, ACCESS_RC_ANNOUNCE, ACCESS_KEYCARD_AUTH, ACCESS_GATEWAY, ACCESS_WEAPONS)
@@ -18,7 +17,8 @@
 			            ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_ALL_PERSONAL_LOCKERS,
 			            ACCESS_RESEARCH, ACCESS_ENGINE, ACCESS_MINING, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_MAILSORTING,
 			            ACCESS_HEADS, ACCESS_HOS, ACCESS_RC_ANNOUNCE, ACCESS_KEYCARD_AUTH, ACCESS_GATEWAY, ACCESS_PILOT, ACCESS_WEAPONS)
-	exp_requirements = 2880
+	minimal_player_age = 21
+	exp_requirements = 1200
 	exp_type = EXP_TYPE_SECURITY
 	disabilities_allowed = 0
 	outfit = /datum/outfit/job/hos
@@ -57,15 +57,13 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of security"
 	department_head = list("Head of Security")
 	selection_color = "#ffeeee"
-	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT, ACCESS_MAINT_TUNNELS,ACCESS_PILOT, ACCESS_MORGUE, ACCESS_WEAPONS)
-	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_PILOT, ACCESS_WEAPONS)
+	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS)
+	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_ARMORY, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_WEAPONS)
 	minimal_player_age = 21
-	exp_requirements = 1440
+	exp_requirements = 600
 	exp_type = EXP_TYPE_SECURITY
 	outfit = /datum/outfit/job/warden
 
@@ -103,8 +101,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of security"
 	department_head = list("Head of Security")
 	selection_color = "#ffeeee"
@@ -112,9 +108,9 @@
 	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_COURT, ACCESS_WEAPONS)
 	minimal_access = list(ACCESS_SEC_DOORS, ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_COURT, ACCESS_WEAPONS)
 	alt_titles = list("Forensic Technician")
-	minimal_player_age = 10
+	minimal_player_age = 14
 	exp_requirements = 600
-	exp_type = EXP_TYPE_SECURITY
+	exp_type = EXP_TYPE_CREW
 	outfit = /datum/outfit/job/detective
 
 /datum/outfit/job/detective
@@ -148,14 +144,14 @@
 				suit = /obj/item/clothing/suit/storage/det_suit/forensics/blue
 				head = null
 
-/*/datum/outfit/job/detective/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/datum/outfit/job/detective/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	if(visualsOnly)
 		return
+
 	H.dna.SetSEState(GLOB.soberblock,1)
 	H.mutations += SOBER
 	H.check_mutations = 1
-*/ //movido a hispania para un hispatrait
 
 /datum/job/officer
 	title = "Security Officer"
@@ -164,15 +160,13 @@
 	total_positions = 7
 	spawn_positions = 7
 	is_security = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of security"
 	department_head = list("Head of Security")
 	selection_color = "#ffeeee"
-	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_PILOT)
+	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS)
 	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_WEAPONS)
 	minimal_player_age = 14
-	exp_requirements = 1200
+	exp_requirements = 600
 	exp_type = EXP_TYPE_CREW
 	outfit = /datum/outfit/job/officer
 
@@ -197,6 +191,8 @@
 	satchel = /obj/item/storage/backpack/satchel_sec
 	dufflebag = /obj/item/storage/backpack/duffel/security
 
+
+
 /datum/job/brigdoc
 	title = "Brig Physician"
 	flag = JOB_BRIGDOC
@@ -204,12 +200,10 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of security"
 	department_head = list("Head of Security")
 	selection_color = "#ffeeee"
-	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_GENETICS, ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS)
+	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_GENETICS)
 	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS)
 	outfit = /datum/outfit/job/brigdoc
 
@@ -230,6 +224,7 @@
 	satchel = /obj/item/storage/backpack/satchel_med
 	dufflebag = /obj/item/storage/backpack/duffel/medical
 
+
 /datum/job/pilot
 	title = "Security Pod Pilot"
 	flag = JOB_PILOT
@@ -237,8 +232,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of security"
 	department_head = list("Head of Security")
 	selection_color = "#ffeeee"

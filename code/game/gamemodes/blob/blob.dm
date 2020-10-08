@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	name = "blob"
 	config_tag = "blob"
 
-	required_players = 15
+	required_players = 30
 	required_enemies = 1
 	recommended_enemies = 1
 	restricted_jobs = list("Cyborg", "AI")
@@ -22,7 +22,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	var/players_per_core = 30
 	var/blob_point_rate = 3
 
-	var/blobwincount = 500
+	var/blobwincount = 350
 
 	var/list/infected_crew = list()
 
@@ -46,7 +46,6 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 		var/datum/mind/blob = pick(possible_blobs)
 		infected_crew += blob
 		blob.special_role = SPECIAL_ROLE_BLOB
-		update_blob_icons_added(blob)
 		blob.restricted_roles = restricted_jobs
 		log_game("[key_name(blob)] has been selected as a Blob")
 		possible_blobs -= blob
@@ -152,6 +151,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 
 	for(var/datum/mind/blob in infected_crew)
 		greet_blob(blob)
+		update_blob_icons_added(blob)
 
 	if(SSshuttle)
 		SSshuttle.emergencyNoEscape = 1

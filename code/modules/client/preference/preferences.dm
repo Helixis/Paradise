@@ -54,7 +54,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 		return C.player_age
 	else
 		return max(0, days - C.player_age)
-	return 0
 
 #define MAX_SAVE_SLOTS 30 // Save slots for regular players
 #define MAX_SAVE_SLOTS_MEMBER 30 // Save slots for BYOND members
@@ -79,7 +78,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	var/last_id
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/lastchangelog = "1"				//Saved changlog timestamp (unix epoch) to detect if there was a change. Dont set this to 0 unless you want the last changelog date to be 4x longer than the expected lifespan of the universe.
 	var/exp
 	var/ooccolor = "#b82e00"
 	var/list/be_special = list()				//Special role selection
@@ -145,9 +144,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null
 
-	//Quirk list
-	var/list/all_quirks = list()
-
 		//Jobs, uses bitflags
 	var/job_support_high = 0
 	var/job_support_med = 0
@@ -192,6 +188,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	// OOC Metadata:
 	var/metadata = ""
 	var/slot_name = ""
+	var/saved = FALSE // Indicates whether the character comes from the database or not
 
 	// Whether or not to use randomized character slots
 	var/randomslot = 0
@@ -267,10 +264,12 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			dat += "<a href='?_src_=prefs;preference=name'><span class='[be_random_name ? "good" : "bad"]'>(Always Randomize)</span></a><br>"
 			dat += "</td><td width='405px' height='25px' valign='left'>"
 			dat += "<center>"
-			dat += "Slot <b>[slot_name]</b> - "
+			dat += "Slot <b>[default_slot][saved ? "" : " (empty)"]</b><br>"
 			dat += "<a href=\"byond://?_src_=prefs;preference=open_load_dialog\">Load slot</a> - "
 			dat += "<a href=\"byond://?_src_=prefs;preference=save\">Save slot</a> - "
 			dat += "<a href=\"byond://?_src_=prefs;preference=reload\">Reload slot</a>"
+			if(saved)
+				dat += " - <a href=\"byond://?_src_=prefs;preference=clear\"><span class='bad'>Clear slot</span></a>"
 			dat += "</center>"
 			dat += "</td></tr></table>"
 			dat += "<table width='100%'><tr><td width='405px' height='200px' valign='top'>"
@@ -363,11 +362,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			else
 				dat += "<a href=\"byond://?_src_=prefs;preference=records;record=1\">Character Records</a><br>"
 
-			if(config.roundstart_traits)
-				dat += "<h2>Quirk Setup</h2>"
-				dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br>"
-				dat += "<b>Current Quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</b><br>"
-
 			dat += "<h2>Limbs</h2>"
 			if(S.bodyflags & HAS_ALT_HEADS) //Species with alt heads.
 				dat += "<b>Alternate Head:</b> "
@@ -406,6 +400,8 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 						organ_name = "right hand"
 					if("eyes")
 						organ_name = "eyes"
+					if("ears")
+						organ_name = "ears"
 					if("heart")
 						organ_name = "heart"
 					if("lungs")
@@ -497,7 +493,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 				dat += "<b>You are banned from special roles.</b>"
 				be_special = list()
 			else
-				for(var/i in special_roles)
+				for(var/i in GLOB.special_roles)
 					if(jobban_isbanned(user, i))
 						dat += "<b>Be [capitalize(i)]:</b> <font color=red><b> \[BANNED]</b></font><br>"
 					else if(!player_old_enough_antag(user.client, i))
@@ -552,7 +548,10 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			for(var/gear_name in LC.gear)
 				var/datum/gear/G = LC.gear[gear_name]
 				var/ticked = (G.display_name in loadout_gear)
-				dat += "<tr style='vertical-align:top;'><td width=15%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a></td>"
+				if(G.donator_tier > user.client.donator_level)
+					dat += "<tr style='vertical-align:top;'><td width=15%><B>[G.display_name]</B></td>"
+				else
+					dat += "<tr style='vertical-align:top;'><td width=15%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a></td>"
 				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
 				if(G.allowed_roles)
 					dat += "<font size=2>Restrictions: "
@@ -627,6 +626,9 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 		if(job.admin_only)
 			continue
 
+		if(job.hidden_from_job_prefs)
+			continue
+
 		index += 1
 		if((index >= limit) || (job.title in splitJobs))
 			if((index < limit) && (lastJob != null))
@@ -652,15 +654,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			continue
 		if(job.barred_by_disability(user.client))
 			HTML += "<del>[rank]</del></td><td> \[ DISABILITY \]</td></tr>"
-			continue
-		if(job.age_restringed(user.client))
-			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
-			continue
-		if(job.command_age_restringed(user.client))
-			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
-			continue
-		if(job.captain_age_restringed(user.client))
-			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
 			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
@@ -861,9 +854,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	return 1
 
 /datum/preferences/proc/ShowDisabilityState(mob/user, flag, label)
-	var/datum/species/S = GLOB.all_species[species]
-	if(flag == DISABILITY_FLAG_FAT && !(CAN_BE_FAT in S.species_traits))
-		return "<li><i>[species] cannot be fat.</i></li>"
 	return "<li><b>[label]:</b> <a href=\"?_src_=prefs;task=input;preference=disabilities;disability=[flag]\">[disabilities & flag ? "Yes" : "No"]</a></li>"
 
 /datum/preferences/proc/SetDisabilities(mob/user)
@@ -1119,46 +1109,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			else
 				SetChoices(user)
 		return 1
-
-	else if(href_list["preference"] == "trait")
-		switch(href_list["task"])
-			if("close")
-				user << browse(null, "window=mob_occupation")
-				ShowChoices(user)
-			if("update")
-				var/quirk = href_list["trait"]
-				if(!SSquirks.quirks[quirk])
-					return
-				for(var/V in SSquirks.quirk_blacklist) //V is a list
-					var/list/L = V
-					for(var/Q in all_quirks)
-						if((quirk in L) && (Q in L) && !(Q == quirk)) //two quirks have lined up in the list of the list of quirks that conflict with each other, so return (see quirks.dm for more details)
-							to_chat(user, "<span class='danger'>[quirk] is incompatible with [Q].</span>")
-							return
-				var/value = SSquirks.quirk_points[quirk]
-				var/balance = GetQuirkBalance()
-				if(quirk in all_quirks)
-					if(balance + value < 0)
-						to_chat(user, "<span class='warning'>Refunding this would cause you to go below your balance!</span>")
-						return
-					all_quirks -= quirk
-				else
-					var/is_positive_quirk = SSquirks.quirk_points[quirk] > 0
-					if(is_positive_quirk && GetPositiveQuirkCount() >= MAX_QUIRKS)
-						to_chat(user, "<span class='warning'>You can't have more than [MAX_QUIRKS] positive quirks!</span>")
-						return
-					if(balance - value < 0)
-						to_chat(user, "<span class='warning'>You don't have enough balance to gain this quirk!</span>")
-						return
-					all_quirks += quirk
-				SetQuirks(user)
-			if("reset")
-				all_quirks = list()
-				SetQuirks(user)
-			else
-				SetQuirks(user)
-		return TRUE
-
 	else if(href_list["preference"] == "disabilities")
 
 		switch(href_list["task"])
@@ -1170,9 +1120,8 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 				SetDisabilities(user)
 			if("input")
 				var/dflag=text2num(href_list["disability"])
-				if(dflag >= 0)
-					if(!(dflag==DISABILITY_FLAG_FAT && !(CAN_BE_FAT in S.species_traits))) //If the disability isn't fatness, toggle it. If it IS fatness, check to see if the species can be fat before going ahead.
-						disabilities ^= text2num(href_list["disability"]) //MAGIC
+				if(dflag >= 0) // Toggle it.
+					disabilities ^= text2num(href_list["disability"]) //MAGIC
 				SetDisabilities(user)
 			else
 				SetDisabilities(user)
@@ -1219,6 +1168,9 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			if(TG.display_name in loadout_gear)
 				loadout_gear -= TG.display_name
 			else
+				if(TG.donator_tier && user.client.donator_level < TG.donator_tier)
+					to_chat(user, "<span class='warning'>That gear is only available at a higher donation tier than you are on.</span>")
+					return
 				var/total_cost = 0
 				var/list/type_blacklist = list()
 				for(var/gear_name in loadout_gear)
@@ -1239,7 +1191,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			if(!tweak || !istype(gear) || !(tweak in gear.gear_tweaks))
 				return
 			var/metadata = tweak.get_metadata(user, get_tweak_metadata(gear, tweak))
-			if(!metadata || !CanUseTopic(user))
+			if(!metadata)
 				return
 			set_tweak_metadata(gear, tweak, metadata)
 		else if(href_list["select_category"])
@@ -1346,10 +1298,9 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 					if(new_age)
 						age = max(min(round(text2num(new_age)), AGE_MAX),AGE_MIN)
 				if("species")
-					var/list/new_species = list("Human", "Tajaran", "Skrell", "Unathi", "Diona", "Machine", "Plasmaman", "Kidan", "Drask", "Vox", "Slime People")
+					var/list/new_species = list("Human", "Tajaran", "Skrell", "Unathi", "Diona", "Vulpkanin")
 					var/prev_species = species
 //						var/whitelisted = 0
-					new_species -= list(/*"Tajaran", "Vulpkanin",*/ "Vox Armalis", "Nucleation")
 
 					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 						for(var/Spec in GLOB.whitelisted_species)
@@ -1358,8 +1309,8 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 //									whitelisted = 1
 //							if(!whitelisted)
 //								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-//					else //Not using the whitelist? Aliens for everyone!
-//						new_species += GLOB.whitelisted_species
+					else //Not using the whitelist? Aliens for everyone!
+						new_species += GLOB.whitelisted_species
 
 					species = input("Please select a species", "Character Generation", null) in sortTim(new_species, /proc/cmp_text_asc)
 					var/datum/species/NS = GLOB.all_species[species]
@@ -1957,7 +1908,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 									rlimb_data[second_limb] = choice
 									organ_data[second_limb] = "cyborg"
 				if("organs")
-					var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Eyes", "Heart", "Lungs", "Liver", "Kidneys")
+					var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Eyes", "Ears", "Heart", "Lungs", "Liver", "Kidneys")
 					if(!organ_name)
 						return
 
@@ -1965,6 +1916,8 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 					switch(organ_name)
 						if("Eyes")
 							organ = "eyes"
+						if("Ears")
+							organ = "ears"
 						if("Heart")
 							organ = "heart"
 						if("Lungs")
@@ -2053,6 +2006,11 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 					windowflashing = !windowflashing
 
 				if("afk_watch")
+					if(!afk_watch)
+						to_chat(user, "<span class='info'>You will now get put into cryo dorms after [config.auto_cryo_afk] minutes. \
+								Then after [config.auto_despawn_afk] minutes you will be fully despawned. You will receive a visual and auditory warning before you will be put into cryodorms.</span>")
+					else
+						to_chat(user, "<span class='info'>Automatic cryoing turned off.</span>")
 					afk_watch = !afk_watch
 
 				if("UIcolor")
@@ -2075,7 +2033,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 
 				if("be_special")
 					var/r = href_list["role"]
-					if(r in special_roles)
+					if(r in GLOB.special_roles)
 						be_special ^= r
 
 				if("name")
@@ -2122,6 +2080,11 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 				if("reload")
 					load_preferences(user)
 					load_character(user)
+
+				if("clear")
+					if(!saved || real_name != input("This will clear the current slot permanently. Please enter the character's full name to confirm."))
+						return FALSE
+					clear_character_slot(user)
 
 				if("open_load_dialog")
 					if(!IsGuestKey(user.key))
@@ -2273,7 +2236,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 
 	character.change_eye_color(e_colour)
 
-	if(disabilities & DISABILITY_FLAG_FAT && (CAN_BE_FAT in character.dna.species.species_traits))
+	if(disabilities & DISABILITY_FLAG_FAT)
 		character.dna.SetSEState(GLOB.fatblock, TRUE, TRUE)
 		character.overeatduration = 600
 		character.dna.default_blocks.Add(GLOB.fatblock)

@@ -1547,7 +1547,6 @@
 
 /datum/construction/reversible/mecha/odysseus
 	result = "/obj/mecha/medical/odysseus"
-	taskpath = /datum/job_objective/make_odysseus
 	steps = list(
 					//1
 					list("key"=TOOL_WELDER,

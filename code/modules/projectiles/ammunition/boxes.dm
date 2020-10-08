@@ -1,10 +1,11 @@
 /obj/item/ammo_box/a357
 	name = "speed loader (.357)"
 	desc = "Designed to quickly reload revolvers."
-	icon_state = "357"
 	ammo_type = /obj/item/ammo_casing/a357
 	max_ammo = 7
-	multiple_sprites = 1
+	icon_state = "357-7" // DEFAULT icon, composed of prefix + "-" + max_ammo for multiple_sprites == 1 boxes
+	multiple_sprites = 1 // see: /obj/item/ammo_box/update_icon()
+	icon_prefix = "357" // icon prefix, used in above formula to generate dynamic icons
 
 /obj/item/ammo_box/c38
 	name = "speed loader (.38)"
@@ -12,7 +13,9 @@
 	icon_state = "38"
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 6
+	icon_state = "38-6" // see previous entry for explanation of these vars
 	multiple_sprites = 1
+	icon_prefix = "38"
 
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
@@ -114,7 +117,7 @@
 //FOAM DARTS
 /obj/item/ammo_box/foambox
 	name = "ammo box (Foam Darts)"
-	icon = 'icons/hispania/obj/guns/toy.dmi'
+	icon = 'icons/obj/guns/toy.dmi'
 	icon_state = "foambox"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart
 	max_ammo = 40
@@ -127,7 +130,7 @@
 
 /obj/item/ammo_box/foambox/sniper
 	name = "ammo box (Foam Sniper Darts)"
-	icon = 'icons/hispania/obj/guns/toy.dmi'
+	icon = 'icons/obj/guns/toy.dmi'
 	icon_state = "foambox_sniper"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/sniper
 	max_ammo = 40

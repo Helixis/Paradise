@@ -72,7 +72,7 @@
 	if(powered) //so it doesn't show charge if it's unpowered
 		if(cell)
 			var/ratio = cell.charge / cell.maxcharge
-			ratio = Ceiling(ratio*4) * 25
+			ratio = CEILING(ratio*4, 1) * 25
 			overlays += "[icon_state]-charge[ratio]"
 
 /obj/item/defibrillator/CheckParts(list/parts_list)
@@ -141,6 +141,8 @@
 
 	if(paddles_on_defib)
 		//Detach the paddles into the user's hands
+		if(usr.incapacitated()) return
+
 		if(!usr.put_in_hands(paddles))
 			to_chat(user, "<span class='warning'>You need a free hand to hold the paddles!</span>")
 			update_icon()
@@ -157,7 +159,7 @@
 		A.UpdateButtonIcon()
 
 /obj/item/defibrillator/proc/make_paddles()
-		return new /obj/item/twohanded/shockpaddles(src)
+	return new /obj/item/twohanded/shockpaddles(src)
 
 /obj/item/defibrillator/equipped(mob/user, slot)
 	..()
@@ -267,8 +269,6 @@
 	var/cooldown = 0
 	var/busy = 0
 	var/obj/item/defibrillator/defib
-	var/custom = 0
-
 
 /obj/item/twohanded/shockpaddles/New(mainunit)
 	..()
@@ -386,10 +386,7 @@
 				if(H.undergoing_cardiac_arrest())
 					if(!H.get_int_organ(/obj/item/organ/internal/heart) && !H.get_int_organ(/obj/item/organ/internal/brain/slime)) //prevents defibing someone still alive suffering from a heart attack attack if they lack a heart
 						user.visible_message("<span class='boldnotice'>[defib] buzzes: Resuscitation failed - Failed to pick up any heart electrical activity.</span>")
-						if(custom)
-							playsound(get_turf(src), 'sound/machines/kdefibfail.ogg', 50, 0)
-						if(!custom)
-							playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
+						playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 						busy = 0
 						update_icon()
 						return
@@ -407,10 +404,7 @@
 						M.visible_message("<span class='warning'>[M]'s body convulses a bit.")
 						playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 50, 1, -1)
 						playsound(get_turf(src), "bodyfall", 50, 1)
-						if(custom)
-							playsound(get_turf(src), 'sound/machines/kdefibsuccess.ogg', 50, 0)
-						if(!custom)
-							playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
+						playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 						defib.deductcharge(revivecost)
 						busy = 0
 						cooldown = 1
@@ -433,10 +427,7 @@
 						H.adjustFireLoss(tobehealed)
 						H.adjustBruteLoss(tobehealed)
 						user.visible_message("<span class='boldnotice'>[defib] pings: Resuscitation successful.</span>")
-						if(custom)
-							playsound(get_turf(src), 'sound/machines/kdefibsuccess.ogg', 50, 0)
-						if(!custom)
-							playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
+						playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 						H.update_revive(FALSE)
 						H.KnockOut(FALSE)
 						H.Paralyse(5)
@@ -451,25 +442,16 @@
 					else
 						if(tplus > tlimit|| !H.get_int_organ(/obj/item/organ/internal/heart))
 							user.visible_message("<span class='boldnotice'>[defib] buzzes: Resuscitation failed - Heart tissue damage beyond point of no return for defibrillation.</span>")
-							if(custom)
-								playsound(get_turf(src), 'sound/machines/kdefibfail1.ogg', 50, 0)
 						else if(total_burn >= 180 || total_brute >= 180)
 							user.visible_message("<span class='boldnotice'>[defib] buzzes: Resuscitation failed - Severe tissue damage detected.</span>")
-							if(custom)
-								playsound(get_turf(src), 'sound/machines/kdefibfail1.ogg', 50, 0)
 						else if(ghost)
 							user.visible_message("<span class='notice'>[defib] buzzes: Resuscitation failed: Patient's brain is unresponsive. Further attempts may succeed.</span>")
-							if(custom)
-								playsound(get_turf(src), 'sound/machines/kdefibfail.ogg', 50, 0)
 							to_chat(ghost, "<span class='ghostalert'>Your heart is being defibrillated. Return to your body if you want to be revived!</span> (Verbs -> Ghost -> Re-enter corpse)")
 							window_flash(ghost.client)
 							ghost << sound('sound/effects/genetics.ogg')
 						else
 							user.visible_message("<span class='notice'>[defib] buzzes: Resuscitation failed.</span>")
-							if(custom)
-								playsound(get_turf(src), 'sound/machines/kdefibfail.ogg', 50, 0)
-							if(!custom)
-								playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
+						playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 						defib.deductcharge(revivecost)
 					update_icon()
 					cooldown = 1
@@ -602,4 +584,3 @@
 					playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 		busy = 0
 		update_icon()
-

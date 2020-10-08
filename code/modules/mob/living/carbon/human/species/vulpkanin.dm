@@ -2,7 +2,6 @@
 	name = "Vulpkanin"
 	name_plural = "Vulpkanin"
 	icobase = 'icons/mob/human_races/r_vulpkanin.dmi'
-	blacklisted = TRUE
 	deform = 'icons/mob/human_races/r_vulpkanin.dmi'
 	language = "Canilunzt"
 	primitive_form = /datum/species/monkey/vulpkanin
@@ -51,4 +50,4 @@
 		"is holding their breath!")
 
 /datum/species/vulpkanin/handle_death(gibbed, mob/living/carbon/human/H)
-	H.stop_tail_wagging(1)
+	H.stop_tail_wagging()

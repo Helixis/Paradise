@@ -41,8 +41,7 @@
 	if(cooldown > 0)
 		return FALSE
 	cooldown = 2
-	spawn(10)
-		process_cooldown()
+	addtimer(CALLBACK(src, .proc/process_cooldown), 10)
 
 	signal()
 	return TRUE
@@ -129,12 +128,6 @@
 	if(usr)
 		GLOB.lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
 
-/obj/item/assembly/signaler/pulse(var/radio = FALSE)
-	if(connected && wires)
-		connected.Pulse(src)
-	else
-		return ..(radio)
-
 /obj/item/assembly/signaler/receive_signal(datum/signal/signal)
 	if(!receiving || !signal)
 		return FALSE
@@ -167,7 +160,6 @@
 	item_state = "electronic"
 	resistance_flags = FIRE_PROOF
 	receiving = TRUE
-	var/anomaly_type = /obj/effect/anomaly
 
 /obj/item/assembly/signaler/anomaly/receive_signal(datum/signal/signal)
 	if(..())

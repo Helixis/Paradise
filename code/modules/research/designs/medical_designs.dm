@@ -37,7 +37,7 @@
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	id = "cyborg_analyzer"
 	req_tech = list("programming" = 2, "biotech" = 2, "magnets" = 2)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 30, MAT_GLASS = 20)
 	build_path = /obj/item/robotanalyzer
 	category = list("Medical")
@@ -121,6 +121,7 @@
 	req_tech = list("programming" = 3, "biotech" = 2, "engineering" = 2)
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 200)
+	construction_time = 50
 	build_path = /obj/item/mmi_radio_upgrade
 	category = list("Medical")
 
@@ -129,7 +130,7 @@
 	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
 	id = "nanopaste"
 	req_tech = list("materials" = 3, "engineering" = 2)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 7000, MAT_GLASS = 7000)
 	build_path = /obj/item/stack/nanopaste
 	category = list("Medical")
@@ -149,7 +150,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks basic and could be improved."
 	id = "scalpel_laser1"
 	req_tech = list("biotech" = 2, "materials" = 2, "magnets" = 2)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500)
 	build_path = /obj/item/scalpel/laser/laser1
 	category = list("Medical")
@@ -159,7 +160,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks somewhat advanced."
 	id = "scalpel_laser2"
 	req_tech = list("biotech" = 3, "materials" = 4, "magnets" = 4)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000)
 	build_path = /obj/item/scalpel/laser/laser2
 	category = list("Medical")
@@ -167,9 +168,9 @@
 /datum/design/item/scalpel_laser3
 	name = "Advanced Laser Scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks to be the pinnacle of precision energy cutlery!"
-	//id = "scalpel_laser3"
+	id = "scalpel_laser3"
 	req_tech = list("biotech" = 4, "materials" = 6, "magnets" = 5)
-	build_type = PROTOLATHE | MECHFAB
+	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000)
 	build_path = /obj/item/scalpel/laser/laser3
 	category = list("Medical")
@@ -178,9 +179,9 @@
 	name = "Incision Management System"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	id = "scalpel_manager"
-	req_tech = list("biotech" = 5, "materials" = 7, "magnets" = 6, "programming" = 4)
-	build_type = PROTOLATHE | MECHFAB
-	materials = list(MAT_METAL = 4000, MAT_GLASS = 2000, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 1000)
+	req_tech = list("biotech" = 4, "materials" = 7, "magnets" = 5, "programming" = 4)
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000, MAT_DIAMOND = 1000)
 	build_path = /obj/item/scalpel/laser/manager
 	category = list("Medical")
 
@@ -328,6 +329,7 @@
 	id = "ci-diaghud"
 	req_tech = list("materials" = 5, "engineering" = 4, "programming" = 4, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 500, MAT_GOLD = 500)
 	build_path = /obj/item/organ/internal/cyberimp/eyes/hud/diagnostic
 	category = list("Medical")
@@ -338,6 +340,7 @@
 	id = "ci-medhud"
 	req_tech = list("materials" = 5, "programming" = 4, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 500, MAT_GOLD = 500)
 	build_path = /obj/item/organ/internal/cyberimp/eyes/hud/medical
 	category = list("Medical")
@@ -348,6 +351,7 @@
 	id = "ci-sechud"
 	req_tech = list("materials" = 5, "programming" = 4, "biotech" = 4, "combat" = 3)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 750, MAT_GOLD = 750)
 	build_path = /obj/item/organ/internal/cyberimp/eyes/hud/security
 	category = list("Medical")
@@ -358,6 +362,7 @@
 	id = "ci-mesonhud"
 	req_tech = list("materials" = 4, "biotech" = 4, "engineering" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list(MAT_METAL = 500, MAT_GLASS = 500, MAT_SILVER = 500, MAT_GOLD = 300)
 	build_path = /obj/item/organ/internal/cyberimp/eyes/meson
 	category = list("Medical")
@@ -366,7 +371,7 @@
 	name = "X-Ray implant"
 	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
 	id = "ci-xray"
-	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 7, "magnets" = 5,"plasmatech" = 6)
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 8, "magnets" = 5,"plasmatech" = 6)
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 600, MAT_GOLD = 600, MAT_PLASMA = 1000, MAT_URANIUM = 1000, MAT_DIAMOND = 1000, MAT_BLUESPACE = 1000)
@@ -434,6 +439,7 @@
 	id = "ci-nutrimentplus"
 	req_tech = list("materials" = 5, "powerstorage" = 4, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_GOLD = 500, MAT_URANIUM = 750)
 	build_path = /obj/item/organ/internal/cyberimp/chest/nutriment/plus
 	category = list("Medical")
@@ -504,6 +510,17 @@
 	materials = list(MAT_METAL = 500, MAT_GLASS = 500)
 	construction_time = 60
 	build_path = /obj/item/organ/internal/eyes/cybernetic
+	category = list("Medical")
+
+/datum/design/cybernetic_ears
+	name = "Cybernetic Ears"
+	desc = "A cybernetic pair of ears"
+	id = "cybernetic_ears"
+	req_tech = list("biotech" = 4, "materials" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(MAT_METAL = 500, MAT_GLASS = 500)
+	construction_time = 60
+	build_path = /obj/item/organ/internal/ears/cybernetic
 	category = list("Medical")
 
 /datum/design/cybernetic_liver

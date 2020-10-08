@@ -48,7 +48,7 @@
 
 	var/mob/living/carbon/human/target = M
 
-	if(ismachine(target))
+	if(ismachineperson(target))
 		to_chat(user, "<span class= 'notice'>[target] has no skin, how do you expect to tattoo [target.p_them()]?</span>")
 		return
 
@@ -272,15 +272,6 @@
 	new /obj/item/reagent_containers/food/drinks/cans/cola(src)
 
 
-/obj/item/instrument/guitar/jello_guitar //Pineapple Salad: Dan Jello
-	name = "Dan Jello's Pink Guitar"
-	desc = "Dan Jello's special pink guitar."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "jello_guitar"
-	item_state = "jello_guitar"
-	righthand_file = 'icons/mob/inhands/fluff_righthand.dmi'
-	lefthand_file = 'icons/mob/inhands/fluff_lefthand.dmi'
-
 /obj/item/fluff/wingler_comb
 	name = "blue comb"
 	desc = "A blue comb, it looks like it was made to groom a Tajaran's fur."
@@ -349,7 +340,7 @@
 		to_chat(user, "<span class='notice'>You modify the appearance of [target].</span>")
 		var/obj/item/clothing/mask/gas/M = target
 		M.name = "Prescription Gas Mask"
-		M.desc = "It looks heavily modified, but otherwise functions as a gas mask. The words “Property of Yon-Dale” can be seen on the inner band."
+		M.desc = "It looks heavily modified, but otherwise functions as a gas mask. The words \"Property of Yon-Dale\" can be seen on the inner band."
 		M.icon = 'icons/obj/custom_items.dmi'
 		M.icon_state = "gas_tariq"
 		M.sprite_sheets = list(
@@ -1080,7 +1071,6 @@
 	icon_state = "counterfeitguise"
 	item_state = "counterfeitguise"
 	item_color = "counterfeitguise"
-	flags_size = ONESIZEFITSALL
 
 /obj/item/clothing/under/fluff/benjaminfallout // Benjaminfallout: Pretzel Brassheart
 	icon = 'icons/obj/custom_items.dmi'
@@ -1123,7 +1113,7 @@
 	icon_state = "elishirt"
 	item_state = "elishirt"
 	item_color = "elishirt"
-	displays_id = TRUE
+	displays_id = 0
 
 /obj/item/clothing/under/fluff/jay_turtleneck // Jayfeather: Jay Wingler
 	name = "Mar's Pattern Custom Turtleneck"
@@ -1132,7 +1122,7 @@
 	icon_state = "jaywingler"
 	item_state = "jaywingler"
 	item_color = "jaywingler"
-	displays_id = TRUE
+	displays_id = 0
 
 /obj/item/clothing/under/psysuit/fluff/isaca_sirius_1 // Xilia: Isaca Sirius
 	name = "Isaca's suit"
@@ -1186,7 +1176,7 @@
 	icon_state = "aegisuniform"
 	item_state = "aegisuniform"
 	item_color = "aegisuniform"
-	displays_id = TRUE
+	displays_id = 0
 
 /obj/item/clothing/under/fluff/elo_turtleneck // vforcebomber: E.L.O.
 	name = "E.L.O's Turtleneck"
@@ -1195,7 +1185,7 @@
 	icon_override = 'icons/obj/custom_items.dmi' // for the mob sprite
 	icon_state = "eloturtleneckfloor"
 	item_color = "eloturtleneck"
-	displays_id = TRUE
+	displays_id = FALSE
 
 //////////// Masks ////////////
 
@@ -1350,7 +1340,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "chronx_robe"
 	item_state = "chronx_robe"
-	flags_size = ONESIZEFITSALL
 	actions_types = list(/datum/action/item_action/toggle)
 	adjust_flavour = "untransform"
 	ignore_suitadjust = 0
@@ -1369,10 +1358,6 @@
 	icon_state = "vest_black"
 	item_state = "vest_black"
 	sprite_sheets = null
-	hispania_icon = FALSE
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/suit.dmi'
-		)
 
 /obj/item/clothing/under/pants/fluff/combat
 	name = "combat pants"
@@ -1503,7 +1488,7 @@
 	icon_state = "victorianlightfire"
 	item_state = "victorianvest"
 	item_color = "victorianlightfire"
-	displays_id = TRUE
+	displays_id = FALSE
 
 
 /obj/item/fluff/decemviri_spacepod_kit //Decemviri: Sylus Cain
@@ -1598,13 +1583,17 @@
 	item_state = "asmer_accordion"
 
 
-/obj/item/clothing/head/rabbitears/fluff/pinesalad_bunny // Pineapple Salad : Dan Jello
-	name = "Bluespace rabbit ears"
-	desc = "A pair of sparkly bluespace rabbit ears, with a small tag on them that reads, 'Dan Jello~'. Yuck, \
-	 there's some pink slime on the part that goes on your head!"
+/obj/item/clothing/head/fluff/pinesalad_horns //Pineapple Salad: Dan Jello 
+	name = "Bluespace Horns"
+	desc = "A pair of fake horns. Now with added bluespace!"
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "ps_bunny"
+	icon_state = "ps_horns"
 
+/obj/item/storage/backpack/fluff/hiking //Pineapple Salad: Dan Jello
+	name = "\improper Fancy Hiking Pack"
+	desc = "A black and red hiking pack with some nice little accessories."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "danpack"
 
 /obj/item/clothing/under/fluff/kiaoutfit //FullOfSkittles: Kiachi
 	name = "Suspicious Outfit"
@@ -1616,7 +1605,7 @@
 	icon_state = "kiaoutfit"
 	item_state = "kiaoutfit"
 	item_color = "kiaoutfit"
-	displays_id = TRUE
+	displays_id = FALSE
 	species_restricted = list("Vox")
 
 /obj/item/clothing/head/fluff/kiahat //FullOfSkittles: Kiachi

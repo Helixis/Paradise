@@ -37,6 +37,9 @@
 	cuff(C, user)
 
 /obj/item/restraints/handcuffs/proc/cuff(mob/living/carbon/C, mob/user, remove_src = TRUE)
+	if(!istype(C)) // Shouldn't be able to cuff anything but carbons.
+		return
+
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(!(H.has_left_hand() || H.has_right_hand()))
@@ -92,7 +95,7 @@
 	icon_state = "cuff_white"
 	origin_tech = "engineering=2"
 	materials = list(MAT_METAL=150, MAT_GLASS=75)
-	breakouttime = 200 //Deciseconds = 20s
+	breakouttime = 300 //Deciseconds = 30s
 	cuffsound = 'sound/weapons/cablecuff.ogg'
 
 /obj/item/restraints/handcuffs/cable/red
@@ -123,13 +126,15 @@
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
 
-/obj/item/restraints/handcuffs/cable/proc/cable_color(var/colorC)
-	if(colorC)
-		if(colorC == "rainbow")
-			colorC = color_rainbow()
-		color = colorC
-	else
+/obj/item/restraints/handcuffs/cable/proc/cable_color(colorC)
+	if(!colorC)
 		color = COLOR_RED
+	else if(colorC == "rainbow")
+		color = color_rainbow()
+	else if(colorC == "orange") //byond only knows 16 colors by name, and orange isn't one of them
+		color = COLOR_ORANGE
+	else
+		color = colorC
 
 /obj/item/restraints/handcuffs/cable/proc/color_rainbow()
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
@@ -178,7 +183,7 @@
 	name = "zipties"
 	desc = "Plastic, disposable zipties that can be used to restrain temporarily but are destroyed after use."
 	icon_state = "cuff_white"
-	breakouttime = 350 //Deciseconds = 35s
+	breakouttime = 450 //Deciseconds = 45s
 	materials = list()
 	trashtype = /obj/item/restraints/handcuffs/cable/zipties/used
 

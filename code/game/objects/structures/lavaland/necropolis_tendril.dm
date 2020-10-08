@@ -7,15 +7,14 @@
 	icon_state = "tendril"
 
 	faction = list("mining")
-	max_mobs = 4
-	max_integrity = 300
+	max_mobs = 3
+	max_integrity = 250
 	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/tendril)
 
 	move_resist = INFINITY // just killing it tears a massive hole in the ground, let's not move it
 	anchored = TRUE
 	resistance_flags = FIRE_PROOF | LAVA_PROOF
 
-	var/gps = null
 	var/obj/effect/light_emitter/tendril/emitted_light
 
 /obj/structure/spawner/lavaland/goliath
@@ -29,7 +28,6 @@ GLOBAL_LIST_INIT(tendrils, list())
 /obj/structure/spawner/lavaland/Initialize(mapload)
 	. = ..()
 	emitted_light = new(loc)
-	gps = new /obj/item/gps/internal(src)
 	GLOB.tendrils += src
 	return INITIALIZE_HINT_LATELOAD
 
@@ -59,7 +57,6 @@ GLOBAL_LIST_INIT(tendrils, list())
 				SSmedals.SetScore(TENDRIL_CLEAR_SCORE, L.client, 1)
 	GLOB.tendrils -= src
 	QDEL_NULL(emitted_light)
-	QDEL_NULL(gps)
 	return ..()
 
 /obj/effect/light_emitter/tendril

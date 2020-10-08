@@ -81,7 +81,7 @@
 	var/mob/dead/observer/current_spirits = list()
 
 	for(var/mob/dead/observer/O in GLOB.player_list)
-		if((O.following in contents))
+		if((O.orbiting in contents))
 			ghost_counter++
 			O.invisibility = 0
 			current_spirits |= O
@@ -97,13 +97,13 @@
 	force = 0
 	var/ghost_counter = ghost_check()
 
-	force = Clamp((ghost_counter * 4), 0, 75)
+	force = clamp((ghost_counter * 4), 0, 75)
 	user.visible_message("<span class='danger'>[user] strikes with the force of [ghost_counter] vengeful spirits!</span>")
 	..()
 
 /obj/item/melee/ghost_sword/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	var/ghost_counter = ghost_check()
-	final_block_chance += Clamp((ghost_counter * 5), 0, 75)
+	final_block_chance += clamp((ghost_counter * 5), 0, 75)
 	owner.visible_message("<span class='danger'>[owner] is protected by a ring of [ghost_counter] ghosts!</span>")
 	return ..()
 
@@ -161,7 +161,7 @@
 	desc = "The ability to fill the emergency shuttle with lava. What more could you want out of life?"
 	icon_state = "staffofstorms"
 	item_state = "staffofstorms"
-	icon = 'icons/hispania/obj/guns/magic.dmi'
+	icon = 'icons/obj/guns/magic.dmi'
 	slot_flags = SLOT_BACK
 	item_state = "staffofstorms"
 	w_class = WEIGHT_CLASS_BULKY

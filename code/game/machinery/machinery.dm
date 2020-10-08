@@ -116,8 +116,8 @@ Class Procs:
 	var/panel_open = 0
 	var/area/myArea
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
-	var/use_log = list()
-	var/list/settagwhitelist = list()//WHITELIST OF VARIABLES THAT THE set_tag HREF CAN MODIFY, DON'T PUT SHIT YOU DON'T NEED ON HERE, AND IF YOU'RE GONNA USE set_tag (format_tag() proc), ADD TO THIS LIST.
+	var/list/use_log // Init this list if you wish to add logging to your machine - currently only viewable in VV
+	var/list/settagwhitelist // (Init this list if needed) WHITELIST OF VARIABLES THAT THE set_tag HREF CAN MODIFY, DON'T PUT SHIT YOU DON'T NEED ON HERE, AND IF YOU'RE GONNA USE set_tag (format_tag() proc), ADD TO THIS LIST.
 	atom_say_verb = "beeps"
 	var/siemens_strength = 0.7 // how badly will it shock you?
 
@@ -224,7 +224,7 @@ Class Procs:
 	var/obj/item/multitool/P = get_multitool(usr)
 	if(P && istype(P))
 		var/update_mt_menu = FALSE
-		if("set_tag" in href_list)
+		if("set_tag" in href_list && settagwhitelist)
 			if(!(href_list["set_tag"] in settagwhitelist))//I see you're trying Href exploits, I see you're failing, I SEE ADMIN WARNING. (seriously though, this is a powerfull HREF, I originally found this loophole, I'm not leaving it in on my PR)
 				message_admins("set_tag HREF (var attempted to edit: [href_list["set_tag"]]) exploit attempted by [key_name_admin(user)] on [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 				return FALSE
@@ -310,6 +310,12 @@ Class Procs:
 
 	return ..()
 
+/obj/machinery/tgui_status(mob/user, datum/tgui_state/state)
+	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+		return STATUS_CLOSE
+
+	return ..()
+
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()
 	user.set_machine(src)
@@ -369,7 +375,6 @@ Class Procs:
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
-	return 0
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid
@@ -456,28 +461,19 @@ Class Procs:
 			var/P
 			if(W.works_from_distance)
 				to_chat(user, display_parts(user))
-			for(var/obj/item/A in component_parts)
+			for(var/obj/item/stock_parts/A in component_parts)
 				for(var/D in CB.req_components)
 					if(ispath(A.type, D))
 						P = D
 						break
-				for(var/obj/item/B in W.contents)
+				for(var/obj/item/stock_parts/B in W.contents)
 					if(istype(B, P) && istype(A, P))
-						if(B.get_part_rating() > A.get_part_rating())
-							if(istype(B,/obj/item/stack)) //conveniently this will mean A is also a stack and I will kill the first person to prove me wrong
-								var/obj/item/stack/SA = A
-								var/obj/item/stack/SB = B
-								var/used_amt = SA.get_amount()
-								if(!SB.use(used_amt))
-									continue //if we don't have the exact amount to replace we don't
-								var/obj/item/stack/SN = new SB.merge_type(null,used_amt)
-								component_parts += SN
-							else
-								W.remove_from_storage(B, src)
-								component_parts += B
-								B.loc = null
+						if(B.rating > A.rating)
+							W.remove_from_storage(B, src)
 							W.handle_item_insertion(A, 1)
 							component_parts -= A
+							component_parts += B
+							B.loc = null
 							to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
 							shouldplaysound = 1
 							break
@@ -486,9 +482,9 @@ Class Procs:
 			to_chat(user, display_parts(user))
 		if(shouldplaysound)
 			W.play_rped_sound()
-		return TRUE
+		return 1
 	else
-		return FALSE
+		return 0
 
 /obj/machinery/proc/display_parts(mob/user)
 	. = list("<span class='notice'>Following parts detected in the machine:</span>")
@@ -561,14 +557,18 @@ Class Procs:
 		if(check_records && !R)
 			threatcount += 4
 
-		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
-			threatcount += 4
+		if(R && R.fields["criminal"])
+			switch(R.fields["criminal"])
+				if(SEC_RECORD_STATUS_EXECUTE)
+					threatcount += 7
+				if(SEC_RECORD_STATUS_ARREST)
+					threatcount += 5
 
 	return threatcount
 
 
-/obj/machinery/proc/shock(mob/user, prb)
-	if(inoperable())
+/obj/machinery/proc/shock(mob/living/user, prb)
+	if(!istype(user) || inoperable())
 		return FALSE
 	if(!prob(prb))
 		return FALSE

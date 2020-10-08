@@ -70,20 +70,20 @@ Difficulty: Very Hard
 
 /datum/action/innate/megafauna_attack/shotgun
 	name = "Shotgun Fire"
-	icon_icon = 'icons/hispania/obj/guns/projectile.dmi'
+	icon_icon = 'icons/obj/guns/projectile.dmi'
 	button_icon_state = "shotgun"
 	chosen_message = "<span class='colossus'>You are now firing shotgun shots where you aim.</span>"
 	chosen_attack_num = 3
 
 /datum/action/innate/megafauna_attack/alternating_cardinals
 	name = "Alternating Shots"
-	icon_icon = 'icons/hispania/obj/guns/projectile.dmi'
+	icon_icon = 'icons/obj/guns/projectile.dmi'
 	button_icon_state = "pistol"
 	chosen_message = "<span class='colossus'>You are now firing in alternating cardinal directions.</span>"
 	chosen_attack_num = 4
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
-	anger_modifier = Clamp(((maxHealth - health)/50),0,20)
+	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	ranged_cooldown = world.time + 120
 
 	if(client)
@@ -122,8 +122,8 @@ Difficulty: Very Hard
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/enrage(mob/living/L)
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		if(H.martial_art && prob(H.martial_art.deflection_chance))
-			. = TRUE
+		if(H.mind && H.mind.martial_art && prob(H.mind.martial_art.deflection_chance))
+			return TRUE
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/alternating_dir_shots()
 	ranged_cooldown = world.time + 40
@@ -240,6 +240,14 @@ Difficulty: Very Hard
 		var/random_y = rand(0, 72)
 		AT.pixel_y += random_y
 	return ..()
+
+/mob/living/simple_animal/hostile/megafauna/colossus/float(on) //we don't want this guy to float, messes up his animations
+	if(throwing)
+		return
+	if(on && !floating)
+		floating = TRUE
+	else if(!on && floating)
+		floating = FALSE
 
 /obj/item/projectile/colossus
 	name ="death bolt"

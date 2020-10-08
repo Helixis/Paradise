@@ -64,13 +64,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
+
 	req_access = list(ACCESS_TOX)	//Data and setting manipulation requires scientist access.
 
 	var/selected_category
 	var/list/datum/design/matching_designs = list() //for the search function
-	//hispania vars
-	var/secureprotocols = TRUE	//si esta activo las cajas con req acces salen boqueadas por defecto
-	//fin hispania
+
 /proc/CallTechName(ID) //A simple helper proc to find the name of a tech with a given ID.
 	for(var/T in subtypesof(/datum/tech))
 		var/datum/tech/tt = T
@@ -132,7 +131,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 //Have it automatically push research to the centcom server so wild griffins can't fuck up R&D's work --NEO
 /obj/machinery/computer/rdconsole/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in world)
+	for(var/obj/machinery/r_n_d/server/centcom/C in GLOB.machines)
 		files.push_data(C.files)
 
 /obj/machinery/computer/rdconsole/proc/Maximize()
@@ -149,7 +148,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	files = new /datum/research(src) //Setup the research data holder.
 	matching_designs = list()
 	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in world)
+		for(var/obj/machinery/r_n_d/server/centcom/S in GLOB.machines)
 			S.initialize_serv()
 			break
 
@@ -185,23 +184,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			return
 		D.loc = src
 		to_chat(user, "<span class='notice'>You add the disk to the machine!</span>")
-	else if(istype(D, /obj/item/card/id))
-		if(!emagged)	//hispania
-			var/obj/item/card/id/id = D
-			for(var/a in id.access)
-				if(a == ACCESS_HOS || a == ACCESS_CAPTAIN)
-					if(secureprotocols)	//si no esta emmag el hos o el cap pueden desactivar esto
-						secureprotocols = FALSE
-						to_chat(user, "<span class='notice'>You disable the security protocols</span>")
-						return
-					else
-						secureprotocols = TRUE
-						to_chat(user, "<span class='notice'>You enable the security protocols</span>")
-						return	//fin hispania
-			to_chat(user, "<span class='notice'>You don't have enough access to disable security protocols</span>")
-		else
-			to_chat(user, "<span class='warning'>The machine don't respond!</span>")
-			return
 	else if(!(linked_destroy && linked_destroy.busy) && !(linked_lathe && linked_lathe.busy) && !(linked_imprinter && linked_imprinter.busy))
 		..()
 	SSnanoui.update_uis(src)
@@ -212,7 +194,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		req_access = list()
 		emagged = 1
-		secureprotocols = FALSE	//la emgag desactiva los protocolos de secguridad
 		to_chat(user, "<span class='notice'>You disable the security protocols</span>")
 
 /obj/machinery/computer/rdconsole/Topic(href, href_list)
@@ -409,7 +390,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			spawn(SYNC_RESEARCH_DELAY)
 				clear_wait_message()
 				if(src)
-					for(var/obj/machinery/r_n_d/server/S in world)
+					for(var/obj/machinery/r_n_d/server/S in GLOB.machines)
 						var/server_processed = 0
 						if(S.disabled)
 							continue

@@ -3,17 +3,17 @@
 /datum/game_mode
 	var/list/datum/mind/syndicates = list()
 
-proc/issyndicate(mob/living/M as mob)
+/proc/issyndicate(mob/living/M as mob)
 	return istype(M) && M.mind && SSticker && SSticker.mode && (M.mind in SSticker.mode.syndicates)
 
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 24	// 24 players - 4 players to be the nuke ops = 20 players remaining
-	required_enemies = 4
+	required_players = 30	// 30 players - 5 players to be the nuke ops = 25 players remaining
+	required_enemies = 5
 	recommended_enemies = 5
 
-	var/const/agents_possible = 2 //If we ever need more syndicate agents.
+	var/const/agents_possible = 5 //If we ever need more syndicate agents.
 
 	var/nukes_left = 1 //Call 3714-PRAY right now and order more nukes! Limited offer!
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
@@ -53,7 +53,6 @@ proc/issyndicate(mob/living/M as mob)
 	for(var/datum/mind/synd_mind in syndicates)
 		synd_mind.assigned_role = SPECIAL_ROLE_NUKEOPS //So they aren't chosen for other jobs.
 		synd_mind.special_role = SPECIAL_ROLE_NUKEOPS
-		synd_mind.offstation_role = TRUE
 	return 1
 
 
@@ -68,6 +67,7 @@ proc/issyndicate(mob/living/M as mob)
 		for(var/datum/objective/nuclear/O in operative_mind.objectives)
 			operative_mind.objectives -= O
 		operative_mind.current.create_attack_log("<span class='danger'>No longer nuclear operative</span>")
+		operative_mind.current.create_log(CONVERSION_LOG, "No longer nuclear operative")
 		if(issilicon(operative_mind.current))
 			to_chat(operative_mind.current, "<span class='userdanger'>You have been turned into a robot! You are no longer a Syndicate operative.</span>")
 		else
@@ -94,7 +94,8 @@ proc/issyndicate(mob/living/M as mob)
 
 	var/list/turf/synd_spawn = list()
 
-	for(var/obj/effect/landmark/A in GLOB.landmarks_list)
+	for(var/thing in GLOB.landmarks_list)
+		var/obj/effect/landmark/A = thing
 		if(A.name == "Syndicate-Spawn")
 			synd_spawn += get_turf(A)
 			qdel(A)
@@ -102,7 +103,7 @@ proc/issyndicate(mob/living/M as mob)
 
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
-	var/nuke_code = "[rand(10000, 99999)]"
+	var/nuke_code = rand(10000, 99999)
 	var/leader_selected = 0
 	var/agent_number = 1
 	var/spawnpos = 1
@@ -111,7 +112,7 @@ proc/issyndicate(mob/living/M as mob)
 		if(spawnpos > synd_spawn.len)
 			spawnpos = 2
 		synd_mind.current.loc = synd_spawn[spawnpos]
-
+		synd_mind.offstation_role = TRUE
 		forge_syndicate_objectives(synd_mind)
 		create_syndicate(synd_mind)
 		greet_syndicate(synd_mind)
@@ -139,7 +140,7 @@ proc/issyndicate(mob/living/M as mob)
 /datum/game_mode/nuclear/proc/scale_telecrystals()
 	var/danger
 	danger = GLOB.player_list.len
-	while(!IsMultiple(++danger, 10)) //Increments danger up to the nearest multiple of ten
+	while(!ISMULTIPLE(++danger, 10)) //Increments danger up to the nearest multiple of ten
 
 	total_tc += danger * NUKESCALINGMODIFIER
 
@@ -449,7 +450,7 @@ proc/issyndicate(mob/living/M as mob)
 	if(foecount == GLOB.score_arrested)
 		GLOB.score_allarrested = 1
 
-	for(var/obj/machinery/nuclearbomb/nuke in world)
+	for(var/obj/machinery/nuclearbomb/nuke in GLOB.machines)
 		if(nuke.r_code == "Nope")	continue
 		var/turf/T = get_turf(nuke)
 		var/area/A = T.loc
@@ -490,13 +491,16 @@ proc/issyndicate(mob/living/M as mob)
 	for(var/datum/mind/M in SSticker.mode.syndicates)
 		foecount++
 
-	for(var/mob/living/C in world)
+	for(var/mob in GLOB.mob_living_list)
+		var/mob/living/C = mob
 		if(ishuman(C) || isAI(C) || isrobot(C))
-			if(C.stat == 2) continue
-			if(!C.client) continue
+			if(C.stat == DEAD)
+				continue
+			if(!C.client)
+				continue
 			crewcount++
 
-	var/obj/item/disk/nuclear/N = locate() in world
+	var/obj/item/disk/nuclear/N = locate() in GLOB.poi_list
 	if(istype(N))
 		var/atom/disk_loc = N.loc
 		while(!isturf(disk_loc))

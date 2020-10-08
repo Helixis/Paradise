@@ -6,8 +6,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
-	minimal_command_character_age = 1
-	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -79,7 +77,7 @@
 			new_deity = deity_name
 		B.deity_name = new_deity
 
-		H.AddSpell(new /obj/effect/proc_holder/spell/targeted/chaplain_bless(null))
+		H.AddSpell(new /obj/effect/proc_holder/spell/targeted/click/chaplain_bless(null))
 
 		var/accepted = 0
 		var/outoftime = 0

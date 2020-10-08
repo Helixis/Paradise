@@ -33,6 +33,10 @@
 		deltimer(ant_timer)
 	return ..()
 
+/obj/item/reagent_containers/food/set_APTFT()
+	set hidden = TRUE
+	..()
+
 /obj/item/reagent_containers/food/proc/check_for_ants()
 	if(!antable)
 		return
@@ -45,11 +49,8 @@
 					antable = FALSE
 					desc += " It appears to be infested with ants. Yuck!"
 					reagents.add_reagent("ants", 1) // Don't eat things with ants in i you weirdo.
-					if(prob(1))
-						new /mob/living/simple_animal/hostile/poison/fleas(T)
 					if(ant_timer)
 						deltimer(ant_timer)
-
 		else
 			ant_location = T
 	if(ant_timer)

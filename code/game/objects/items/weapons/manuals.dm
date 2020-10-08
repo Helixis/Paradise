@@ -5,6 +5,7 @@
 	icon = 'icons/obj/library.dmi'
 	due_date = 0 // Game time in 1/10th seconds
 	unique = 1   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
+	has_drm = TRUE // No reuploading. Piracy is a crime
 
 
 /obj/item/book/manual/engineering_construction
@@ -805,7 +806,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://spacestation13.es/Menu.html" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='97%' src="https://www.paradisestation.org/wiki/index.php?title=Space_law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 

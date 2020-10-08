@@ -36,12 +36,10 @@
 			if(cargo_holder.cargo.len < cargo_holder.cargo_capacity)
 				chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
 				O.anchored = 1
-				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 				if(do_after_cooldown(target))
 					cargo_holder.cargo += O
 					O.loc = chassis
 					O.anchored = 0
-					playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 					occupant_message("<span class='notice'>[target] successfully loaded.</span>")
 					log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 				else
@@ -62,7 +60,7 @@
 			target.visible_message("<span class='danger'>[chassis] squeezes [target].</span>", \
 								"<span class='userdanger'>[chassis] squeezes [target].</span>",\
 								"<span class='italics'>You hear something crack.</span>")
-			add_attack_logs(chassis.occupant, M, "Squeezed with [src] (INTENT: [uppertext(chassis.occupant.a_intent)]) (DAMTYE: [uppertext(damtype)])")
+			add_attack_logs(chassis.occupant, M, "Squeezed with [src] ([uppertext(chassis.occupant.a_intent)]) ([uppertext(damtype)])")
 			start_cooldown()
 		else
 			step_away(M,chassis)
@@ -87,12 +85,10 @@
 			if(cargo_holder.cargo.len < cargo_holder.cargo_capacity)
 				chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
 				O.anchored = 1
-				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 				if(do_after_cooldown(target))
 					cargo_holder.cargo += O
 					O.loc = chassis
 					O.anchored = 0
-					playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 					occupant_message("<span class='notice'>[target] successfully loaded.</span>")
 					log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 				else

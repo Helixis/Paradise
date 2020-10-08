@@ -11,9 +11,9 @@ GLOBAL_LIST_EMPTY(cortical_stacks) //Stacks for 'leave nobody behind' objective.
 /datum/game_mode/heist
 	name = "heist"
 	config_tag = "heist"
-	required_players = 15
-	required_enemies = 2
-	recommended_enemies = 3
+	required_players = 25
+	required_enemies = 4
+	recommended_enemies = 5
 	votable = 0
 
 	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
@@ -250,7 +250,7 @@ GLOBAL_LIST_EMPTY(cortical_stacks) //Stacks for 'leave nobody behind' objective.
 
 	..()
 
-datum/game_mode/proc/auto_declare_completion_heist()
+/datum/game_mode/proc/auto_declare_completion_heist()
 	if(raiders.len)
 		var/check_return = 0
 		if(GAMEMODE_IS_HEIST)

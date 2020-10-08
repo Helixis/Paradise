@@ -1,7 +1,7 @@
 /obj/item/gun
 	name = "gun"
 	desc = "It's a gun. It's pretty terrible, though."
-	icon = 'icons/hispania/obj/guns/projectile.dmi'
+	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "detective"
 	item_state = "gun"
 	flags =  CONDUCT
@@ -44,8 +44,8 @@
 	var/current_skin = null //the skin choice if we had a reskin
 	var/list/options = list()
 
-	lefthand_file = 'icons/hispania/mob/inhands/guns_lefthand.dmi'
-	righthand_file = 'icons/hispania/mob/inhands/guns_righthand.dmi'
+	lefthand_file = 'icons/mob/inhands/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/guns_righthand.dmi'
 
 	var/obj/item/flashlight/gun_light = null
 	var/can_flashlight = 0
@@ -71,10 +71,6 @@
 
 /obj/item/gun/New()
 	..()
-	icon = (hispania_icon ? 'icons/hispania/obj/guns/projectile.dmi' : icon)
-	lefthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/guns_lefthand.dmi' : lefthand_file)
-	righthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/guns_righthand.dmi' : righthand_file)
-
 	if(gun_light)
 		verbs += /obj/item/gun/proc/toggle_gunlight
 	build_zooming()
@@ -113,20 +109,33 @@
 	to_chat(user, "<span class='danger'>*click*</span>")
 	playsound(user, 'sound/weapons/empty.ogg', 100, 1)
 
-/obj/item/gun/proc/shoot_live_shot(mob/living/user as mob|obj, pointblank = 0, mob/pbtarget = null, message = 1)
+/obj/item/gun/proc/shoot_live_shot(mob/living/user, atom/target, pointblank = FALSE, message = TRUE)
 	if(recoil)
 		shake_camera(user, recoil + 1, recoil)
 
+	var/muzzle_range = chambered.muzzle_flash_range
+	var/muzzle_strength = chambered.muzzle_flash_strength
+	var/muzzle_flash_time = 0.2 SECONDS
 	if(suppressed)
 		playsound(user, fire_sound, 10, 1)
+		muzzle_range *= 0.5
+		muzzle_strength *= 0.2
+		muzzle_flash_time *= 0.5
 	else
 		playsound(user, fire_sound, 50, 1)
-		if(!message)
-			return
-		if(pointblank)
-			user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", "<span class='danger'>You fire [src] point blank at [pbtarget]!</span>", "<span class='italics'>You hear \a [fire_sound_text]!</span>")
+		if(message)
+			if(pointblank)
+				user.visible_message("<span class='danger'>[user] fires [src] point blank at [target]!</span>", "<span class='danger'>You fire [src] point blank at [target]!</span>", "<span class='italics'>You hear \a [fire_sound_text]!</span>")
+			else
+				user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear \a [fire_sound_text]!")
+	if(chambered.muzzle_flash_effect)
+		var/obj/effect/temp_visual/target_angled/muzzle_flash/effect = new chambered.muzzle_flash_effect(get_turf(src), target, muzzle_flash_time)
+		effect.alpha = min(255, muzzle_strength * 255)
+		if(chambered.muzzle_flash_color)
+			effect.color = chambered.muzzle_flash_color
+			effect.set_light(muzzle_range, muzzle_strength, chambered.muzzle_flash_color)
 		else
-			user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear \a [fire_sound_text]!")
+			effect.color = LIGHT_COLOR_TUNGSTEN
 
 /obj/item/gun/emp_act(severity)
 	for(var/obj/O in contents)
@@ -175,21 +184,13 @@
 	//DUAL WIELDING
 	var/bonus_spread = 0
 	var/loop_counter = 0
-	//HISPATRAITS
-	var/dual_mod = 24 //para el trait de disparo dual
-	if(weapon_weight >= WEAPON_MEDIUM)	//las armas ligeras pueden ser disparadas por cualquiera
-		if(!HAS_TRAIT(user, TRAIT_SHOOTER) && ishuman(user)) //si no lo tiene no dispara bien armas grandes
-			bonus_spread += dual_mod * weapon_weight
-	if(HAS_TRAIT(user, TRAIT_DUAL_SHOOTER) && ishuman(user)) // si tiene esto dipara mejor a dos armas
-		dual_mod = dual_mod/2  //disparas con el doble de precision con dos armas si tienes este trait
-	//FIN HISPATRAITS
 	if(ishuman(user) && user.a_intent == INTENT_HARM)
 		var/mob/living/carbon/human/H = user
 		for(var/obj/item/gun/G in get_both_hands(H))
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
 				continue
 			else if(G.can_trigger_gun(user))
-				bonus_spread += dual_mod * G.weapon_weight //cambiado por hispania para el trait de dual shoot
+				bonus_spread += 24 * G.weapon_weight
 				loop_counter++
 				addtimer(CALLBACK(G, .proc/process_fire, target, user, 1, params, null, bonus_spread), loop_counter)
 
@@ -240,9 +241,9 @@
 					break
 				else
 					if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
-						shoot_live_shot(user, 1, target, message)
+						shoot_live_shot(user, target, TRUE, message)
 					else
-						shoot_live_shot(user, 0, target, message)
+						shoot_live_shot(user, target, FALSE, message)
 			else
 				shoot_with_empty_chamber(user)
 				break
@@ -262,9 +263,9 @@
 				return
 			else
 				if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
-					shoot_live_shot(user, 1, target, message)
+					shoot_live_shot(user, target, TRUE, message)
 				else
-					shoot_live_shot(user, 0, target, message)
+					shoot_live_shot(user, target, FALSE, message)
 		else
 			shoot_with_empty_chamber(user)
 			return
@@ -326,9 +327,9 @@
 		to_chat(user, "<span class='notice'>You attach [K] to [src]'s bayonet lug.</span>")
 		bayonet = K
 		var/state = "bayonet"							//Generic state.
-		if(bayonet.icon_state in icon_states('icons/hispania/obj/guns/bayonets.dmi'))		//Snowflake state?
+		if(bayonet.icon_state in icon_states('icons/obj/guns/bayonets.dmi'))		//Snowflake state?
 			state = bayonet.icon_state
-		var/icon/bayonet_icons = 'icons/hispania/obj/guns/bayonets.dmi'
+		var/icon/bayonet_icons = 'icons/obj/guns/bayonets.dmi'
 		knife_overlay = mutable_appearance(bayonet_icons, state)
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
@@ -399,10 +400,6 @@
 		toggle_gunlight()
 		visible_message("<span class='danger'>[src]'s light fades and turns off.</span>")
 
-/obj/item/gun/pickup(mob/user)
-	. = ..()
-	if(azoom)
-		azoom.Grant(user)
 
 /obj/item/gun/dropped(mob/user)
 	..()
@@ -534,3 +531,27 @@
 	if(zoomable)
 		azoom = new()
 		azoom.gun = src
+		RegisterSignal(src, COMSIG_ITEM_EQUIPPED, .proc/ZoomGrantCheck)
+
+/**
+ * Proc which will be called when the gun receives the `COMSIG_ITEM_EQUIPPED` signal.
+ *
+ * This happens if the mob picks up the gun, or equips it to any of their slots.
+ * If the slot is anything other than either of their hands (such as the back slot), un-zoom them, and `Remove` the zoom action button from the mob.
+ * Otherwise, `Grant` the mob the zoom action button.
+ *
+ * Arguments:
+ * * source - the gun that got equipped, which is `src`.
+ * * user - the mob equipping the gun.
+ * * slot - the slot the gun is getting equipped to.
+ */
+/obj/item/gun/proc/ZoomGrantCheck(datum/source, mob/user, slot)
+	// Checks if the gun got equipped into either of the user's hands.
+	if(slot != slot_r_hand && slot != slot_l_hand)
+		// If its not in their hands, un-zoom, and remove the zoom action button.
+		zoom(user, FALSE)
+		azoom.Remove(user)
+		return FALSE
+
+	// The gun is equipped in their hands, give them the zoom ability.
+	azoom.Grant(user)

@@ -11,6 +11,14 @@
 	<br><br>
 	You can order the satellites and control systems through the cargo shuttle."}
 
+/datum/station_goal/station_shield/on_report()
+	//Unlock
+	var/datum/supply_packs/P = SSshuttle.supply_packs["[/datum/supply_packs/misc/station_goal/shield_sat]"]
+	P.special_enabled = TRUE
+
+	P = SSshuttle.supply_packs["[/datum/supply_packs/misc/station_goal/shield_sat_control]"]
+	P.special_enabled = TRUE
+
 /datum/station_goal/station_shield/check_completion()
 	if(..())
 		return TRUE
@@ -170,7 +178,7 @@
 	for(var/datum/event_container/container in SSevents.event_containers)
 		for(var/datum/event_meta/M in container.available_events)
 			if(M.event_type == /datum/event/meteor_wave)
-				M.weight *= mod
+				M.weight_mod *= mod
 
 /obj/machinery/satellite/meteor_shield/Destroy()
 	. = ..()

@@ -567,6 +567,7 @@ CREATE TABLE `oauth_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 --
 -- Table structure for table `playtime_history`
 --
@@ -593,4 +594,18 @@ CREATE TABLE `connection_log` (
   `ip` varchar(32) NOT NULL,
   `computerid` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Table structure for table `changelog`
+--
+DROP TABLE IF EXISTS `changelog`;
+CREATE TABLE `changelog` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`pr_number` INT(11) NOT NULL,
+	`date_merged` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`author` VARCHAR(32) NOT NULL,
+	`cl_type` ENUM('FIX','WIP','TWEAK','SOUNDADD','SOUNDDEL','CODEADD','CODEDEL','IMAGEADD','IMAGEDEL','SPELLCHECK','EXPERIMENT') NOT NULL,
+	`cl_entry` TEXT NOT NULL,
+	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

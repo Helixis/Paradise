@@ -40,11 +40,11 @@
 		while(do_after_mecha(target, drill_delay))
 			if(isliving(target))
 				drill_mob(target, chassis.occupant)
-				playsound(src, 'sound/mecha/mechdrill.ogg', 40, TRUE)
+				playsound(src, 'sound/weapons/drill.ogg', 40, TRUE)
 			else if(isobj(target))
 				var/obj/O = target
 				O.take_damage(15, BRUTE, 0, FALSE, get_dir(chassis, target))
-				playsound(src, 'sound/mecha/mechdrill.ogg', 40, TRUE)
+				playsound(src, 'sound/weapons/drill.ogg', 40, TRUE)
 			else
 				set_ready_state(TRUE)
 				return
@@ -94,7 +94,7 @@
 /obj/item/mecha_parts/mecha_equipment/drill/proc/drill_mob(mob/living/target, mob/user)
 	target.visible_message("<span class='danger'>[chassis] is drilling [target] with [src]!</span>",
 						"<span class='userdanger'>[chassis] is drilling you with [src]!</span>")
-	add_attack_logs(user, target, "DRILLED with [src] (INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+	add_attack_logs(user, target, "DRILLED with [src] ([uppertext(user.a_intent)]) ([uppertext(damtype)])")
 	if(target.stat == DEAD && target.getBruteLoss() >= 200)
 		add_attack_logs(user, target, "gibbed")
 		if(LAZYLEN(target.butcher_results))

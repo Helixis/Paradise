@@ -37,8 +37,8 @@
 	return hold.attackby(W, user, params)
 
 /obj/item/clothing/accessory/storage/emp_act(severity)
-	hold.emp_act(severity)
 	..()
+	hold.emp_act(severity)
 
 /obj/item/clothing/accessory/storage/hear_talk(mob/M, list/message_pieces, verb)
 	hold.hear_talk(M, message_pieces, verb)
@@ -88,7 +88,7 @@
 	desc = "Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands."
 	icon_state = "vest_black"
 	item_color = "vest_black"
-	slots = 3
+	slots = 5
 
 /obj/item/clothing/accessory/storage/brown_vest
 	name = "brown webbing vest"
