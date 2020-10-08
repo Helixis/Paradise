@@ -152,11 +152,13 @@
 		return doTeleport()
 	return 0
 
-/datum/teleport/instant/start(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null)
-	if(..())
-		if(teleport())
-			return 1
-	return 0
+/datum/teleport/instant //teleports when datum is created
+
+	start(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null)
+		if(..())
+			if(teleport())
+				return 1
+		return 0
 
 
 /datum/teleport/instant/science
@@ -209,7 +211,7 @@
 		var/datum/gas_mixture/A = F.air
 
 		// Can most things breathe?
-		if(A.sleeping_agent)
+		if(A.trace_gases.len)
 			continue
 		if(A.oxygen < 16)
 			continue

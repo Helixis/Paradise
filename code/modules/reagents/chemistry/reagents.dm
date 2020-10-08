@@ -120,10 +120,8 @@
 	return
 
 // Called every time reagent containers process.
-/datum/reagent/process()
-	if(!holder || holder.flags & REAGENT_NOREACT)
-		return FALSE
-	return TRUE
+/datum/reagent/proc/on_tick(data)
+	return
 
 // Called when the reagent container is hit by an explosion
 /datum/reagent/proc/on_ex_act(severity)
@@ -144,69 +142,56 @@
 	return STATUS_UPDATE_NONE
 
 /datum/reagent/proc/addiction_act_stage2(mob/living/M)
-	if(minor_addiction)
-		if(prob(4))
-			to_chat(M, "<span class='notice'>You briefly think about getting some more [name].</span>")
-	else
-		if(prob(8))
-			M.emote("shiver")
-		if(prob(8))
-			M.emote("sneeze")
-		if(prob(4))
-			to_chat(M, "<span class='notice'>You feel a dull headache.</span>")
+	if(prob(8))
+		M.emote("shiver")
+	if(prob(8))
+		M.emote("sneeze")
+	if(prob(4))
+		to_chat(M, "<span class='notice'>You feel a dull headache.</span>")
 	return STATUS_UPDATE_NONE
 
 /datum/reagent/proc/addiction_act_stage3(mob/living/M)
-	if(minor_addiction)
-		if(prob(4))
-			to_chat(M, "<span class='notice'>You could really go for some [name] right now.</span>")
-	else
-		if(prob(8))
-			M.emote("twitch_s")
-		if(prob(8))
-			M.emote("shiver")
-		if(prob(4))
-			to_chat(M, "<span class='warning'>Your head hurts.</span>")
-		if(prob(4))
-			to_chat(M, "<span class='warning'>You begin craving [name]!</span>")
+	if(prob(8))
+		M.emote("twitch_s")
+	if(prob(8))
+		M.emote("shiver")
+	if(prob(4))
+		to_chat(M, "<span class='warning'>Your head hurts.</span>")
+	if(prob(4))
+		to_chat(M, "<span class='warning'>You begin craving [name]!</span>")
 	return STATUS_UPDATE_NONE
 
 /datum/reagent/proc/addiction_act_stage4(mob/living/M)
-	if(minor_addiction)
-		if(prob(8))
-			to_chat(M, "<span class='notice'>You could really go for some [name] right now.</span>")
-	else
-		if(prob(8))
-			M.emote("twitch")
-		if(prob(4))
-			to_chat(M, "<span class='warning'>You have a pounding headache.</span>")
-		if(prob(4))
-			to_chat(M, "<span class='warning'>You have the strong urge for some [name]!</span>")
-		else if(prob(4))
-			to_chat(M, "<span class='warning'>You REALLY crave some [name]!</span>")
+	if(prob(8))
+		M.emote("twitch")
+	if(prob(4))
+		to_chat(M, "<span class='warning'>You have a pounding headache.</span>")
+	if(prob(4))
+		to_chat(M, "<span class='warning'>You have the strong urge for some [name]!</span>")
+	else if(prob(4))
+		to_chat(M, "<span class='warning'>You REALLY crave some [name]!</span>")
 	return STATUS_UPDATE_NONE
 
 /datum/reagent/proc/addiction_act_stage5(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
 	if(minor_addiction)
-		if(prob(8))
-			to_chat(M, "<span class='notice'>You can't stop thinking about [name]...</span>")
-		if(prob(4))
-			M.emote(pick("twitch"))
+		if(prob(6))
+			M.AdjustSlowed(3)
+			to_chat(M, "<span class='warning'>You feel [pick("tired", "exhausted", "sluggish")].</span>")
 	else
 		if(prob(6))
 			to_chat(M, "<span class='warning'>Your stomach lurches painfully!</span>")
 			M.visible_message("<span class='warning'>[M] gags and retches!</span>")
 			update_flags |= M.Stun(rand(2,4), FALSE)
 			update_flags |= M.Weaken(rand(2,4), FALSE)
-		if(prob(8))
-			M.emote(pick("twitch", "twitch_s", "shiver"))
-		if(prob(4))
-			to_chat(M, "<span class='warning'>Your head is killing you!</span>")
-		if(prob(5))
-			to_chat(M, "<span class='warning'>You feel like you can't live without [name]!</span>")
-		else if(prob(5))
-			to_chat(M, "<span class='warning'>You would DIE for some [name] right now!</span>")
+	if(prob(8))
+		M.emote(pick("twitch", "twitch_s", "shiver"))
+	if(prob(4))
+		to_chat(M, "<span class='warning'>Your head is killing you!</span>")
+	if(prob(5))
+		to_chat(M, "<span class='warning'>You feel like you can't live without [name]!</span>")
+	else if(prob(5))
+		to_chat(M, "<span class='warning'>You would DIE for some [name] right now!</span>")
 	return update_flags
 
 /datum/reagent/proc/fakedeath(mob/living/M)
@@ -218,7 +203,9 @@
 		return
 	M.emote("deathgasp")
 	M.status_flags |= FAKEDEATH
-	M.updatehealth("fakedeath reagent")
+	M.update_stat("fakedeath reagent")
+	M.med_hud_set_health()
+	M.med_hud_set_status()
 
 /datum/reagent/proc/fakerevive(mob/living/M)
 	if(!(M.status_flags & FAKEDEATH))
@@ -228,6 +215,10 @@
 	if(M.resting)
 		M.StopResting()
 	M.status_flags &= ~(FAKEDEATH)
+	M.update_stat("fakedeath reagent end")
+	M.med_hud_set_status()
+	M.med_hud_set_health()
 	if(M.healthdoll)
 		M.healthdoll.cached_healthdoll_overlays.Cut()
-	M.updatehealth("fakedeath reagent end")
+	if(M.dna.species)
+		M.dna.species.handle_hud_icons(M)

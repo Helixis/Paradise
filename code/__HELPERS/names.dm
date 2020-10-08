@@ -19,10 +19,10 @@ GLOBAL_VAR(command_name)
 /proc/command_name()
 	return GLOB.using_map.dock_name
 
-GLOBAL_VAR(religion_name)
+var/religion_name = null
 /proc/religion_name()
-	if(GLOB.religion_name)
-		return GLOB.religion_name
+	if(religion_name)
+		return religion_name
 
 	var/name = ""
 

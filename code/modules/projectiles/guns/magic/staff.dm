@@ -58,6 +58,8 @@
 	ammo_type = /obj/item/ammo_casing/magic/slipping
 	icon_state = "staffofslipping"
 	item_state = "staffofslipping"
+	max_charges = 10
+	recharge_rate = 2
 	fire_sound = 'sound/items/bikehorn.ogg'
 
 /obj/item/gun/magic/staff/slipping/honkmother
@@ -71,7 +73,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "focus"
 	item_state = "focus"
-	ammo_type = /obj/item/ammo_casing/magic/forcebolt
+	ammo_type = list(/obj/item/ammo_casing/forcebolt)
 
 /obj/item/gun/magic/staff/spellblade
 	name = "spellblade"

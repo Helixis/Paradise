@@ -3,7 +3,6 @@ SUBSYSTEM_DEF(vote)
 	wait = 10
 	flags = SS_KEEP_TIMING|SS_NO_INIT
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
-	offline_implications = "Votes (Endround shuttle) will no longer function. Shuttle call recommended."
 
 	var/initiator = null
 	var/started_time = null
@@ -367,7 +366,7 @@ SUBSYSTEM_DEF(vote)
 				var/votedesc = capitalize(mode)
 				if(mode == "custom")
 					votedesc += " ([question])"
-				log_and_message_admins("cancelled the running [votedesc] vote.")
+				admin_log_and_message_admins("cancelled the running [votedesc] vote.")
 				reset()
 		if("toggle_restart")
 			if(admin)

@@ -24,8 +24,7 @@ GLOBAL_LIST_INIT(unused_trade_stations, list("sol"))
 		return
 
 	var/list/spawnlocs = list()
-	for(var/thing in GLOB.landmarks_list)
-		var/obj/effect/landmark/landmark = thing
+	for(var/obj/effect/landmark/landmark in GLOB.landmarks_list)
 		if(landmark.name == "traderstart_[station]")
 			spawnlocs += get_turf(landmark)
 	if(!spawnlocs.len)
@@ -34,7 +33,7 @@ GLOBAL_LIST_INIT(unused_trade_stations, list("sol"))
 	trader_objectives = forge_trader_objectives()
 
 	spawn()
-		var/list/candidates = SSghost_spawns.poll_candidates("Do you want to play as a Sol Trader?", ROLE_TRADER, TRUE)
+		var/list/candidates = pollCandidates("Do you want to play as a trader?", ROLE_TRADER, 1)
 		var/index = 1
 		while(spawn_count > 0 && candidates.len > 0)
 			if(index > spawnlocs.len)

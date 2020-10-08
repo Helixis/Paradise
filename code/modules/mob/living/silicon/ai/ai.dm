@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
 	//var/list/laws = list()
-	alarms_listend_for = list("Motion", "Fire", "Atmosphere", "Power", "Camera", "Burglar")
+	var/alarms = list("Motion" = list(), "Fire" = list(), "Atmosphere" = list(), "Power" = list(), "Camera" = list())
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/mecha/controlled_mech //For controlled_mech a mech, to determine whether to relaymove or use the AI eye.
@@ -63,7 +63,6 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 
 	//MALFUNCTION
 	var/datum/module_picker/malf_picker
-	var/datum/action/innate/ai/choose_modules/modules_action
 	var/list/datum/AI_Module/current_modules = list()
 	var/can_dominate_mechs = 0
 	var/shunted = 0 //1 if the AI is currently shunted. Used to differentiate between shunted and ghosted/braindead
@@ -102,6 +101,9 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	var/obj/machinery/camera/portable/builtInCamera
 
 	var/obj/structure/AIcore/deactivated/linked_core //For exosuit control
+	var/mob/living/silicon/robot/deployed_shell = null //For shell control
+	var/datum/action/innate/deploy_shell/deploy_action = new
+	var/datum/action/innate/deploy_last_shell/redeploy_action = new
 
 	var/arrivalmsg = "$name, $rank, has arrived on the station."
 
@@ -164,6 +166,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	additional_law_channels["Holopad"] = ":h"
 
 	aiCamera = new/obj/item/camera/siliconcam/ai_camera(src)
+	deploy_action.Grant(src)
 
 	if(isturf(loc))
 		add_ai_verbs(src)
@@ -173,19 +176,19 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	add_language("Galactic Common", 1)
 	add_language("Sol Common", 1)
 	add_language("Tradeband", 1)
-	add_language("Neo-Russkiya", 1)
-	add_language("Gutter", 1)
-	add_language("Sinta'unathi", 1)
-	add_language("Siik'tajr", 1)
-	add_language("Canilunzt", 1)
-	add_language("Skrellian", 1)
-	add_language("Vox-pidgin", 1)
-	add_language("Orluum", 1)
-	add_language("Rootspeak", 1)
+	add_language("Neo-Russkiya", 0)
+	add_language("Gutter", 0)
+	add_language("Sinta'unathi", 0)
+	add_language("Siik'tajr", 0)
+	add_language("Canilunzt", 0)
+	add_language("Skrellian", 0)
+	add_language("Vox-pidgin", 0)
+	add_language("Orluum", 0)
+	add_language("Rootspeak", 0)
 	add_language("Trinary", 1)
-	add_language("Chittin", 1)
-	add_language("Bubblish", 1)
-	add_language("Clownish", 1)
+	add_language("Chittin", 0)
+	add_language("Bubblish", 0)
+	add_language("Clownish", 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if(!B)//If there is no player/brain inside.
@@ -242,60 +245,21 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 			return
 		show_borg_info()
 
-/mob/living/silicon/ai/proc/ai_alerts()
-	var/list/dat = list("<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n")
-	dat += "<A HREF='?src=[UID()];mach_close=aialerts'>Close</A><BR><BR>"
-	var/list/list/temp_alarm_list = SSalarm.alarms.Copy()
-	for(var/cat in temp_alarm_list)
-		if(!(cat in alarms_listend_for))
-			continue
-		dat += text("<B>[]</B><BR>\n", cat)
-		var/list/list/L = temp_alarm_list[cat].Copy()
-		for(var/alarm in L)
-			var/list/list/alm = L[alarm].Copy()
-			var/area_name = alm[1]
-			var/C = alm[2]
-			var/list/list/sources = alm[3].Copy()
-			for(var/thing in sources)
-				var/atom/A = locateUID(thing)
-				if(A && A.z != z)
-					L -= alarm
-					continue
-				dat += "<NOBR>"
-				if(C && islist(C))
-					var/dat2 = ""
-					for(var/cam in C)
-						var/obj/machinery/camera/I = locateUID(cam)
-						if(!QDELETED(I))
-							dat2 += text("[]<A HREF=?src=[UID()];switchcamera=[cam]>[]</A>", (dat2 == "") ? "" : " | ", I.c_tag)
-					dat += text("-- [] ([])", area_name, (dat2 != "") ? dat2 : "No Camera")
-				else
-					dat += text("-- [] (No Camera)", area_name)
-				if(sources.len > 1)
-					dat += text("- [] sources", sources.len)
-				dat += "</NOBR><BR>\n"
-		if(!L.len)
-			dat += "-- All Systems Nominal<BR>\n"
-		dat += "<BR>\n"
-
-	viewalerts = TRUE
-	var/dat_text = dat.Join("")
-	src << browse(dat_text, "window=aialerts&can_close=0")
-
 /mob/living/silicon/ai/proc/show_borg_info()
 	stat(null, text("Connected cyborgs: [connected_robots.len]"))
-	for(var/thing in connected_robots)
-		var/mob/living/silicon/robot/R = thing
+	for(var/mob/living/silicon/robot/R in connected_robots)
 		var/robot_status = "Nominal"
+		if(R.shell)
+			robot_status = "AI SHELL"
 		if(R.stat || !R.client)
 			robot_status = "OFFLINE"
 		else if(!R.cell || R.cell.charge <= 0)
 			robot_status = "DEPOWERED"
 		// Name, Health, Battery, Module, Area, and Status! Everything an AI wants to know about its borgies!
 		var/area/A = get_area(R)
-		var/area_name = A ? sanitize(A.name) : "Unknown"
 		stat(null, text("[R.name] | S.Integrity: [R.health]% | Cell: [R.cell ? "[R.cell.charge] / [R.cell.maxcharge]" : "Empty"] | \
-		Module: [R.designation] | Loc: [area_name] | Status: [robot_status]"))
+		Module: [R.designation] | Loc: [sanitize(A.name)] | Status: [robot_status]"))
+	stat(null, text("AI shell beacons detected: [LAZYLEN(available_ai_shells)]")) //Count of total AI shells
 
 /mob/living/silicon/ai/rename_character(oldname, newname)
 	if(!..(oldname, newname))
@@ -614,13 +578,14 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	return FALSE
 
 /mob/living/silicon/ai/emp_act(severity)
-	..()
+	disconnect_shell()
 	if(prob(30))
 		switch(pick(1,2))
 			if(1)
 				view_core()
 			if(2)
 				ai_call_shuttle()
+	..()
 
 /mob/living/silicon/ai/ex_act(severity)
 	..()
@@ -652,7 +617,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	if(href_list["switchcamera"])
 		switchCamera(locate(href_list["switchcamera"])) in GLOB.cameranet.cameras
 	if(href_list["showalerts"])
-		ai_alerts()
+		subsystem_alarm_monitor()
 	if(href_list["show_paper"])
 		if(last_paper_seen)
 			src << browse(last_paper_seen, "window=show_paper")
@@ -827,49 +792,12 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 
 	Bot.call_bot(src, waypoint)
 
-/mob/living/silicon/ai/alarm_triggered(src, class, area/A, list/O, obj/alarmsource)
-	if(!(class in alarms_listend_for))
-		return
-	if(alarmsource.z != z)
-		return
-	if(stat == DEAD)
-		return TRUE
-	if(O)
-		var/obj/machinery/camera/C = locateUID(O[1])
-		if(O.len == 1 && !QDELETED(C) && C.can_use())
-			queueAlarm("--- [class] alarm detected in [A.name]! (<A HREF=?src=[UID()];switchcamera=[O[1]]>[C.c_tag]</A>)", class)
-		else if(O && O.len)
-			var/foo = 0
-			var/dat2 = ""
-			for(var/thing in O)
-				var/obj/machinery/camera/I = locateUID(thing)
-				if(!QDELETED(I))
-					dat2 += text("[]<A HREF=?src=[UID()];switchcamera=[thing]>[]</A>", (!foo) ? "" : " | ", I.c_tag)	//I'm not fixing this shit...
-					foo = 1
-			queueAlarm(text ("--- [] alarm detected in []! ([])", class, A.name, dat2), class)
-		else
-			queueAlarm(text("--- [] alarm detected in []! (No Camera)", class, A.name), class)
-	else
-		queueAlarm(text("--- [] alarm detected in []! (No Camera)", class, A.name), class)
-	if(viewalerts)
-		ai_alerts()
-
-/mob/living/silicon/ai/alarm_cancelled(src, class, area/A, obj/origin, cleared)
-	if(cleared)
-		if(!(class in alarms_listend_for))
-			return
-		if(origin.z != z)
-			return
-		queueAlarm("--- [class] alarm in [A.name] has been cleared.", class, 0)
-		if(viewalerts)
-			ai_alerts()
-
 /mob/living/silicon/ai/proc/switchCamera(obj/machinery/camera/C)
 
 	if(!tracking)
 		cameraFollow = null
 
-	if(QDELETED(C) || stat == DEAD) //C.can_use())
+	if(!C || stat == DEAD) //C.can_use())
 		return FALSE
 
 	if(!eyeobj)
@@ -928,6 +856,13 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 				break
 	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
 //End of code by Mord_Sith
+
+
+/mob/living/silicon/ai/proc/choose_modules()
+	set category = "Malfunction"
+	set name = "Choose Module"
+
+	malf_picker.use(src)
 
 /mob/living/silicon/ai/proc/ai_statuschange()
 	set category = "AI Commands"
@@ -1070,7 +1005,8 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 			"floating face",
 			"xeno queen",
 			"eldritch",
-			"ancient machine"
+			"ancient machine",
+			"clippy"
 			)
 			if(custom_hologram) //insert custom hologram
 				icon_list.Add("custom")
@@ -1087,6 +1023,8 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 						holo_icon = getHologramIcon(icon('icons/mob/ai.dmi',"holo3"))
 					if("eldritch")
 						holo_icon = getHologramIcon(icon('icons/mob/ai.dmi',"holo4"))
+					if("clippy")
+						holo_icon = getHologramIcon(icon('icons/hispania/mob/ai.dmi',"clippy"))
 					if("ancient machine")
 						holo_icon = getHologramIcon(icon('icons/mob/ancient_machine.dmi', "ancient_machine"))
 					if("custom")
@@ -1099,6 +1037,15 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 
 	return
 
+/mob/living/silicon/ai/proc/corereturn()
+	set category = "Malfunction"
+	set name = "Return to Main Core"
+
+	var/obj/machinery/power/apc/apc = loc
+	if(!istype(apc))
+		to_chat(src, "<span class='notice'>You are already in your Main Core.</span>")
+		return
+	apc.malfvacate()
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
@@ -1229,6 +1176,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	if(!..())
 		return
 	if(interaction == AI_TRANS_TO_CARD)//The only possible interaction. Upload AI mob to a card.
+		disconnect_shell() //If the AI is controlling a borg, force the player back to core!
 		if(!mind)
 			to_chat(user, "<span class='warning'>No intelligence patterns detected.</span>")//No more magical carding of empty cores, AI RETURN TO BODY!!!11
 			return
@@ -1242,6 +1190,16 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 
 /mob/living/silicon/ai/can_buckle()
 	return FALSE
+
+// Pass lying down or getting up to our pet human, if we're in a rig.
+/mob/living/silicon/ai/lay_down()
+	set name = "Rest"
+	set category = "IC"
+
+	resting = 0
+	var/obj/item/rig/rig = get_rig()
+	if(rig)
+		rig.force_rest(src)
 
 /mob/living/silicon/ai/switch_to_camera(obj/machinery/camera/C)
 	if(!C.can_use() || !is_in_chassis())
@@ -1296,17 +1254,8 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	to_chat(src, "In the top right corner of the screen you will find the Malfunctions tab, where you can purchase various abilities, from upgraded surveillance to station ending doomsday devices.")
 	to_chat(src, "You are also capable of hacking APCs, which grants you more points to spend on your Malfunction powers. The drawback is that a hacked APC will give you away if spotted by the crew. Hacking an APC takes 60 seconds.")
 	view_core() //A BYOND bug requires you to be viewing your core before your verbs update
+	verbs += /mob/living/silicon/ai/proc/choose_modules
 	malf_picker = new /datum/module_picker
-	modules_action = new(malf_picker)
-	modules_action.Grant(src)
-
-///Removes all malfunction-related /datum/action's from the target AI.
-/mob/living/silicon/ai/proc/remove_malf_abilities()
-	QDEL_NULL(modules_action)
-	for(var/datum/AI_Module/AM in current_modules)
-		for(var/datum/action/A in actions)
-			if(istype(A, initial(AM.power_type)))
-				qdel(A)
 
 /mob/living/silicon/ai/proc/open_nearest_door(mob/living/target)
 	if(!istype(target))
@@ -1332,10 +1281,8 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 		if(istype(A))
 			switch(alert(src, "Do you want to open \the [A] for [target]?", "Doorknob_v2a.exe", "Yes", "No"))
 				if("Yes")
-					if(!A.density)
-						to_chat(src, "<span class='notice'>[A] was already opened.</span>")
-					else if(A.open_close(src))
-						to_chat(src, "<span class='notice'>You open \the [A] for [target].</span>")
+					A.AIShiftClick()
+					to_chat(src, "<span class='notice'>You open \the [A] for [target].</span>")
 				else
 					to_chat(src, "<span class='warning'>You deny the request.</span>")
 		else

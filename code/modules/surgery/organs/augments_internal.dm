@@ -1,3 +1,5 @@
+#define STUN_SET_AMOUNT	2
+
 /obj/item/organ/internal/cyberimp
 	name = "cybernetic implant"
 	desc = "a state-of-the-art implant that improves a baseline's functionality"
@@ -126,40 +128,22 @@
 	implant_color = "#FFFF00"
 	slot = "brain_antistun"
 	origin_tech = "materials=5;programming=4;biotech=5"
-	var/stun_max_amount = 2
-
-/obj/item/organ/internal/cyberimp/brain/anti_stun/hardened
-	name = "Hardened CNS Rebooter implant"
-	emp_proof = TRUE
-
-/obj/item/organ/internal/cyberimp/brain/anti_stun/hardened/Initialize(mapload)
-	. = ..()
-	desc += " The implant has been hardened. It is invulnerable to EMPs."
 
 /obj/item/organ/internal/cyberimp/brain/anti_stun/on_life()
 	..()
 	if(crit_fail)
 		return
-	if(owner.stunned > stun_max_amount)
-		owner.SetStunned(stun_max_amount)
-	if(owner.weakened > stun_max_amount)
-		owner.SetWeakened(stun_max_amount)
+	if(owner.stunned > STUN_SET_AMOUNT)
+		owner.SetStunned(STUN_SET_AMOUNT)
+	if(owner.weakened > STUN_SET_AMOUNT)
+		owner.SetWeakened(STUN_SET_AMOUNT)
 
 /obj/item/organ/internal/cyberimp/brain/anti_stun/emp_act(severity)
-	..()
 	if(crit_fail || emp_proof)
 		return
-	crit_fail = TRUE
-	addtimer(CALLBACK(src, .proc/reboot), 90 / severity)
-
-/obj/item/organ/internal/cyberimp/brain/anti_stun/proc/reboot()
-	crit_fail = FALSE
-
-/obj/item/organ/internal/cyberimp/brain/anti_stun/hardened
-	name = "Hardened CNS Rebooter implant"
-	desc = "A military-grade version of the standard implant, for NT's more elite forces."
-	origin_tech = "materials=6;programming=5;biotech=5"
-	emp_proof = TRUE
+	crit_fail = 1
+	spawn(90 / severity)
+		crit_fail = 0
 
 /obj/item/organ/internal/cyberimp/brain/clown_voice
 	name = "Comical implant"
@@ -246,13 +230,11 @@
 	if(owner.stat == DEAD)
 		return
 	if(owner.nutrition <= hunger_threshold)
-		synthesizing = TRUE
+		synthesizing = 1
 		to_chat(owner, "<span class='notice'>You feel less hungry...</span>")
 		owner.adjust_nutrition(50)
-		addtimer(CALLBACK(src, .proc/synth_cool), 50)
-
-/obj/item/organ/internal/cyberimp/chest/nutriment/proc/synth_cool()
-	synthesizing = FALSE
+		spawn(50)
+			synthesizing = 0
 
 /obj/item/organ/internal/cyberimp/chest/nutriment/emp_act(severity)
 	if(!owner || emp_proof)
@@ -327,15 +309,10 @@
 		var/mob/living/carbon/human/H = owner
 		if(H.stat != DEAD && prob(50 / severity))
 			H.set_heartattack(TRUE)
-			addtimer(CALLBACK(src, .proc/undo_heart_attack), 600 / severity)
-
-/obj/item/organ/internal/cyberimp/chest/reviver/proc/undo_heart_attack()
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
-		return
-	H.set_heartattack(FALSE)
-	if(H.stat == CONSCIOUS)
-		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
+			spawn(600 / severity)
+				H.set_heartattack(FALSE)
+				if(H.stat == CONSCIOUS)
+					to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
 
 //BOX O' IMPLANTS
 

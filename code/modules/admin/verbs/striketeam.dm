@@ -30,15 +30,14 @@ GLOBAL_VAR_INIT(sent_strike_team, 0)
 	// Find the nuclear auth code
 	var/nuke_code
 	var/temp_code
-	for(var/obj/machinery/nuclearbomb/N in GLOB.machines)
+	for(var/obj/machinery/nuclearbomb/N in world)
 		temp_code = text2num(N.r_code)
 		if(temp_code)//if it's actually a number. It won't convert any non-numericals.
 			nuke_code = N.r_code
 			break
 
 	// Find ghosts willing to be DS
-	var/image/source = image('icons/obj/cardboard_cutout.dmi', "cutout_deathsquad")
-	var/list/commando_ghosts = pollCandidatesWithVeto(src, usr, COMMANDOS_POSSIBLE, "Join the DeathSquad?",, 21, 60 SECONDS, TRUE, GLOB.role_playtime_requirements[ROLE_DEATHSQUAD], TRUE, FALSE, source = source)
+	var/list/commando_ghosts = pollCandidatesWithVeto(src, usr, COMMANDOS_POSSIBLE, "Join the DeathSquad?",, 21, 600, 1, GLOB.role_playtime_requirements[ROLE_DEATHSQUAD], TRUE, FALSE)
 	if(!commando_ghosts.len)
 		to_chat(usr, "<span class='userdanger'>Nobody volunteered to join the DeathSquad.</span>")
 		return
@@ -49,8 +48,7 @@ GLOBAL_VAR_INIT(sent_strike_team, 0)
 	var/commando_number = COMMANDOS_POSSIBLE //for selecting a leader
 	var/is_leader = TRUE // set to FALSE after leader is spawned
 
-	for(var/thing in GLOB.landmarks_list)
-		var/obj/effect/landmark/L = thing
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
 
 		if(commando_number <= 0)
 			break
@@ -111,8 +109,7 @@ GLOBAL_VAR_INIT(sent_strike_team, 0)
 			commando_number--
 
 	//Spawns the rest of the commando gear.
-	for(var/thing in GLOB.landmarks_list)
-		var/obj/effect/landmark/L = thing
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
 		if(L.name == "Commando_Manual")
 			//new /obj/item/gun/energy/pulse_rifle(L.loc)
 			var/obj/item/paper/P = new(L.loc)
@@ -123,8 +120,7 @@ GLOBAL_VAR_INIT(sent_strike_team, 0)
 			P.stamp(stamp)
 			qdel(stamp)
 
-	for(var/thing in GLOB.landmarks_list)
-		var/obj/effect/landmark/L = thing
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
 		if(L.name == "Commando-Bomb")
 			new /obj/effect/spawner/newbomb/timer/syndicate(L.loc)
 			qdel(L)
@@ -162,9 +158,6 @@ GLOBAL_VAR_INIT(sent_strike_team, 0)
 
 	var/obj/item/radio/R = new /obj/item/radio/headset/alt(src)
 	R.set_frequency(DTH_FREQ)
-	R.requires_tcomms = FALSE
-	R.instant = TRUE
-	R.freqlock = TRUE
 	equip_to_slot_or_del(R, slot_l_ear)
 	if(is_leader)
 		equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)

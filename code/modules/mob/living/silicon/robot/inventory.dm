@@ -78,7 +78,6 @@
 		set_actions(O)
 	else
 		to_chat(src, "You need to disable a module first!")
-	check_module_damage(FALSE)
 	update_icons()
 
 /mob/living/silicon/robot/proc/set_actions(obj/item/I)

@@ -50,6 +50,8 @@
 		if(!pda.notifying_programs.len)
 			pda.overlays -= image('icons/obj/pda.dmi', "pda-r")
 
+/datum/data/pda/proc/
+
 // An app has a button on the home screen and its own UI
 /datum/data/pda/app
 	name = "App"
@@ -69,8 +71,7 @@
 	pda.current_app = src
 	return 1
 
-/datum/data/pda/app/proc/update_ui(mob/user, list/data)
-	return
+/datum/data/pda/app/proc/update_ui(mob/user as mob, list/data)
 
 
 // Utilities just have a button on the home screen, but custom code when clicked
@@ -100,10 +101,8 @@
 		name = "Disable [base_name]"
 
 	pda.update_shortcuts()
-	return TRUE
+	return 1
 
-/datum/data/pda/utility/scanmode/proc/scan_mob(mob/living/C, mob/living/user)
-	return
+/datum/data/pda/utility/scanmode/proc/scan_mob(mob/living/C as mob, mob/living/user as mob)
 
-/datum/data/pda/utility/scanmode/proc/scan_atom(atom/A, mob/user)
-	return
+/datum/data/pda/utility/scanmode/proc/scan_atom(atom/A as mob|obj|turf|area, mob/user as mob)

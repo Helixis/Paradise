@@ -170,7 +170,7 @@
 	for(var/datum/event_container/container in SSevents.event_containers)
 		for(var/datum/event_meta/M in container.available_events)
 			if(M.event_type == /datum/event/meteor_wave)
-				M.weight_mod *= mod
+				M.weight *= mod
 
 /obj/machinery/satellite/meteor_shield/Destroy()
 	. = ..()

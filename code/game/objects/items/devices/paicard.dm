@@ -18,6 +18,13 @@
 	name = "syndicate personal AI device"
 	faction = list("syndicate")
 
+/obj/item/paicard/relaymove(var/mob/user, var/direction)
+	if(user.stat || user.stunned)
+		return
+	var/obj/item/rig/rig = get_rig()
+	if(istype(rig))
+		rig.forced_move(direction, user)
+
 /obj/item/paicard/New()
 	..()
 	overlays += "pai-off"

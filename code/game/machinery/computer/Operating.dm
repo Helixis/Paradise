@@ -40,7 +40,8 @@
 	add_fingerprint(user)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	tgui_interact(user)
+	ui_interact(user)
+
 
 /obj/machinery/computer/operating/attack_hand(mob/user)
 	if(..(user))
@@ -51,15 +52,16 @@
 
 
 	add_fingerprint(user)
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/computer/operating/tgui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/tgui_state/state = GLOB.tgui_default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/computer/operating/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)//ui is mostly copy pasta from the sleeper ui
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "OperatingComputer", "Patient Monitor", 650, 455, master_ui, state)
+		ui = new(user, src, ui_key, "op_computer.tmpl", "Patient Monitor", 650, 455)
 		ui.open()
+		ui.set_auto_update(1)
 
-/obj/machinery/computer/operating/tgui_data(mob/user)
+/obj/machinery/computer/operating/ui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/mob/living/carbon/human/occupant
 	if(table)
@@ -134,43 +136,38 @@
 	return data
 
 
-/obj/machinery/computer/operating/tgui_act(action, params)
+/obj/machinery/computer/operating/Topic(href, href_list)
 	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
-
+		return 1
 	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
-	. = TRUE
-	switch(action)
-		if("verboseOn")
-			verbose = TRUE
-		if("verboseOff")
-			verbose = FALSE
-		if("healthOn")
-			healthAnnounce = TRUE
-		if("healthOff")
-			healthAnnounce = FALSE
-		if("critOn")
-			crit = TRUE
-		if("critOff")
-			crit = FALSE
-		if("oxyOn")
-			oxy = TRUE
-		if("oxyOff")
-			oxy = FALSE
-		if("oxy_adj")
-			oxyAlarm = clamp(text2num(params["new"]), -100, 100)
-		if("choiceOn")
-			choice = TRUE
-		if("choiceOff")
-			choice = FALSE
-		if("health_adj")
-			healthAlarm = clamp(text2num(params["new"]), -100, 100)
-		else
-			return FALSE
+	if(href_list["verboseOn"])
+		verbose=1
+	if(href_list["verboseOff"])
+		verbose=0
+	if(href_list["healthOn"])
+		healthAnnounce=1
+	if(href_list["healthOff"])
+		healthAnnounce=0
+	if(href_list["critOn"])
+		crit=1
+	if(href_list["critOff"])
+		crit=0
+	if(href_list["oxyOn"])
+		oxy=1
+	if(href_list["oxyOff"])
+		oxy=0
+	if(href_list["oxy_adj"]!=0)
+		oxyAlarm=oxyAlarm+text2num(href_list["oxy_adj"])
+	if(href_list["choiceOn"])
+		choice=1
+	if(href_list["choiceOff"])
+		choice=0
+	if(href_list["health_adj"]!=0)
+		healthAlarm=healthAlarm+text2num(href_list["health_adj"])
+	return
+
 
 /obj/machinery/computer/operating/process()
 
@@ -181,7 +178,6 @@
 				atom_say("New patient detected, loading stats")
 				victim = table.victim
 				atom_say("[victim.real_name], [victim.dna.blood_type] blood, [victim.stat ? "Non-Responsive" : "Awake"]")
-				SStgui.update_uis(src)
 			if(nextTick < world.time)
 				nextTick=world.time + OP_COMPUTER_COOLDOWN
 				if(crit && victim.health <= -50 )

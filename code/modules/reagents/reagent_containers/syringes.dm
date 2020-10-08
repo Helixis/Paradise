@@ -24,9 +24,6 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
-/obj/item/reagent_containers/syringe/set_APTFT()
-	set hidden = TRUE
-
 /obj/item/reagent_containers/syringe/on_reagent_change()
 	update_icon()
 
@@ -152,7 +149,7 @@
 	cut_overlays()
 	var/rounded_vol
 	if(reagents && reagents.total_volume)
-		rounded_vol = clamp(round((reagents.total_volume / volume * 15), 5), 1, 15)
+		rounded_vol = Clamp(round((reagents.total_volume / volume * 15), 5), 1, 15)
 		var/image/filling_overlay = mutable_appearance('icons/obj/reagentfillings.dmi', "syringe[rounded_vol]")
 		filling_overlay.icon += mix_color_from_reagents(reagents.reagent_list)
 		add_overlay(filling_overlay)

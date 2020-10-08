@@ -1,4 +1,4 @@
-/client/proc/one_click_antag()
+client/proc/one_click_antag()
 	set name = "Create Antagonist"
 	set desc = "Auto-create an antagonist of your choice"
 	set category = "Event"
@@ -137,8 +137,7 @@
 	var/confirm = alert("Are you sure?", "Confirm creation", "Yes", "No")
 	if(confirm != "Yes")
 		return 0
-	var/image/I = new('icons/mob/simple_human.dmi', "wizard")
-	var/list/candidates = SSghost_spawns.poll_candidates("Do you wish to be considered for the position of a Wizard Foundation 'diplomat'?", "wizard", source = I)
+	var/list/candidates = pollCandidates("Do you wish to be considered for the position of a Wizard Foundation 'diplomat'?", "wizard")
 
 	log_admin("[key_name(owner)] tried making a Wizard with One-Click-Antag")
 	message_admins("[key_name_admin(owner)] tried making a Wizard with One-Click-Antag")
@@ -242,7 +241,7 @@
 		var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 		var/obj/effect/landmark/closet_spawn = locate("landmark*Nuclear-Closet")
 
-		var/nuke_code = rand(10000, 99999)
+		var/nuke_code = "[rand(10000, 99999)]"
 
 		if(nuke_spawn)
 			var/obj/item/paper/P = new
@@ -268,7 +267,7 @@
 							var/I = image('icons/mob/mob.dmi', loc = synd_mind_1.current, icon_state = "synd")
 							synd_mind.current.client.images += I
 
-		for(var/obj/machinery/nuclearbomb/bomb in GLOB.machines)
+		for(var/obj/machinery/nuclearbomb/bomb in world)
 			bomb.r_code = nuke_code						// All the nukes are set to this code.
 	return 1
 
@@ -456,8 +455,7 @@
 	if(candidates.len)
 		var/raiders = min(antnum, candidates.len)
 		//Spawns vox raiders and equips them.
-		for(var/thing in GLOB.landmarks_list)
-			var/obj/effect/landmark/L = thing
+		for(var/obj/effect/landmark/L in world)
 			if(L.name == "voxstart")
 				if(raiders<=0)
 					break
@@ -585,8 +583,7 @@
 		var/teamOneMembers = 5
 		var/teamTwoMembers = 5
 		var/datum/preferences/A = new()
-		for(var/thing in GLOB.landmarks_list)
-			var/obj/effect/landmark/L = thing
+		for(var/obj/effect/landmark/L in world)
 			if(L.name == "tdome1")
 				if(teamOneMembers<=0)
 					break

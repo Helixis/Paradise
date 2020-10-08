@@ -2,17 +2,16 @@
   "name": "nanoui",
   "private": true,
   "dependencies": {
-    "@websanova/url": "git+https://github.com/websanova/js-url.git",
-    "domurl": "^2.3.4",
-    "es5-shim": "^4.5.14",
+    "domurl": "^2.1.9",
+    "es5-shim": "^4.5.12",
     "font-awesome": "^4.7.0",
     "gulp-clean-css": "^3.10.0",
     "js-url": "git+https://github.com/websanova/js-url.git",
-    "less": "^3.11.3",
+    "less": "^3.11.0",
     "less-loader": "^5.0.0",
-    "style-loader": "^1.2.1",
-    "tslib": "^1.13.0",
-    "webpack": "^4.43.0"
+    "style-loader": "^1.1.3",
+    "tslib": "^1.10.0",
+    "webpack": "^4.41.5"
   },
   "devDependencies": {
     "fs-extra": "^7.0.1",

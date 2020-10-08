@@ -8,8 +8,8 @@
 	layer = MOB_LAYER+1 // Overhead
 	anchored = 1
 	density = 1
-	damage_deflection = 15
-	var/emergency_mode = FALSE // Temporarily stops machine if it detects a mob
+	damage_deflection = 10
+	var/safety_mode = 0 // Temporarily stops machine if it detects a mob
 	var/icon_name = "grinder-o"
 	var/blood = 0
 	var/eat_dir = WEST
@@ -19,7 +19,8 @@
 	var/item_recycle_sound = 'sound/machines/recycler.ogg'
 
 /obj/machinery/recycler/New()
-	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_PLASMA, MAT_SILVER, MAT_GOLD, MAT_DIAMOND, MAT_URANIUM, MAT_BANANIUM, MAT_TRANQUILLITE, MAT_TITANIUM, MAT_PLASTIC, MAT_BLUESPACE), 0, TRUE, null, null, null, TRUE)
+	AddComponent(/datum/component/material_container, list(MAT_METAL, MAT_GLASS, MAT_PLASMA, MAT_SILVER, MAT_GOLD, MAT_DIAMOND, MAT_URANIUM, MAT_BANANIUM, MAT_TRANQUILLITE, MAT_TITANIUM, MAT_PLASTIC, MAT_BLUESPACE), 0,
+				TRUE, null, null, null, TRUE)
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/circuitboard/recycler(null)
@@ -36,15 +37,15 @@
 	mat_mod *= 50000
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		amt_made = 25 * M.rating //% of materials salvaged
-	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+	GET_COMPONENT(materials, /datum/component/material_container)
 	materials.max_amount = mat_mod
 	amount_produced = min(100, amt_made)
 
 /obj/machinery/recycler/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>The power light is [(stat & NOPOWER) ? "<b>off</b>" : "<b>on</b>"]."
-	. += "The operation light is [emergency_mode ? "<b>off</b>. [src] has detected a forbidden object with its sensors, and has shut down temporarily." : "<b>on</b>. [src] is active."]"
-	. += "The safety sensor light is [emagged ? "<b>off</b>!" : "<b>on</b>."]</span>"
+	. += "The power light is [(stat & NOPOWER) ? "off" : "on"]."
+	. += "The safety-mode light is [safety_mode ? "on" : "off"]."
+	. += "The safety-sensors status light is [emagged ? "off" : "on"]."
 
 /obj/machinery/recycler/power_change()
 	..()
@@ -73,8 +74,8 @@
 /obj/machinery/recycler/emag_act(mob/user)
 	if(!emagged)
 		emagged = 1
-		if(emergency_mode)
-			emergency_mode = FALSE
+		if(safety_mode)
+			safety_mode = 0
 			update_icon()
 		playsound(loc, "sparks", 75, 1, -1)
 		to_chat(user, "<span class='notice'>You use the cryptographic sequencer on the [name].</span>")
@@ -82,7 +83,7 @@
 /obj/machinery/recycler/update_icon()
 	..()
 	var/is_powered = !(stat & (BROKEN|NOPOWER))
-	if(emergency_mode)
+	if(safety_mode)
 		is_powered = 0
 	icon_state = icon_name + "[is_powered]" + "[(blood ? "bld" : "")]" // add the blood tag at the end
 
@@ -92,13 +93,14 @@
 	if(AM)
 		Bumped(AM)
 
+
 /obj/machinery/recycler/Bumped(atom/movable/AM)
 
 	if(stat & (BROKEN|NOPOWER))
 		return
 	if(!anchored)
 		return
-	if(emergency_mode)
+	if(safety_mode)
 		return
 
 	var/move_dir = get_dir(loc, AM.loc)
@@ -133,7 +135,7 @@
 /obj/machinery/recycler/proc/recycle_item(obj/item/I)
 	I.forceMove(loc)
 
-	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+	GET_COMPONENT(materials, /datum/component/material_container)
 	var/material_amount = materials.get_item_material_amount(I)
 	if(!material_amount)
 		qdel(I)
@@ -145,14 +147,14 @@
 
 /obj/machinery/recycler/proc/emergency_stop(mob/living/L)
 	playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
-	emergency_mode = TRUE
+	safety_mode = 1
 	update_icon()
 	L.loc = loc
 	addtimer(CALLBACK(src, .proc/reboot), SAFETY_COOLDOWN)
 
 /obj/machinery/recycler/proc/reboot()
 	playsound(loc, 'sound/machines/ping.ogg', 50, 0)
-	emergency_mode = FALSE
+	safety_mode = 0
 	update_icon()
 
 /obj/machinery/recycler/proc/crush_living(mob/living/L)

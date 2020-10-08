@@ -83,15 +83,10 @@
 
 /obj/item/shard/Crossed(mob/living/L, oldloc)
 	if(istype(L) && has_gravity(loc))
-		if(L.incorporeal_move || L.flying || L.floating)
+		if(L.incorporeal_move || L.flying)
 			return
 		playsound(loc, 'sound/effects/glass_step.ogg', 50, TRUE)
 	return ..()
-
-/obj/item/shard/decompile_act(obj/item/matter_decompiler/C, mob/user)
-	C.stored_comms["glass"] += 3
-	qdel(src)
-	return TRUE
 
 /obj/item/shard/plasma
 	name = "plasma shard"

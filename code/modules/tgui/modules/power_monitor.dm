@@ -20,13 +20,10 @@
 /datum/tgui_module/power_monitor/tgui_data(mob/user)
 	var/list/data = list()
 
-<<<<<<< HEAD
 	// Sanity check
 	if(QDELETED(powermonitor))
 		powermonitor = null
 
-=======
->>>>>>> parent of 8b5f5ea4b2... Revert "Merge remote-tracking branch 'upstream/master'"
 	data["powermonitor"] = powermonitor
 	if(select_monitor)
 		data["select_monitor"] = TRUE

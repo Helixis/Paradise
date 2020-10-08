@@ -8,6 +8,12 @@
 	nitrogen = MOLES_N2STANDARD
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
+	var/dirtoverlay = null
+
+/turf/simulated/New()
+	..()
+	levelupdate()
+	visibilityChanged()
 
 /turf/simulated/proc/break_tile()
 	return
@@ -53,7 +59,6 @@
 				wet_overlay = image('icons/effects/water.dmi', src, "ice_floor")
 			else
 				wet_overlay = image('icons/effects/water.dmi', src, "wet_static")
-		wet_overlay.plane = FLOOR_OVERLAY_PLANE
 		overlays += wet_overlay
 	if(time == INFINITY)
 		return

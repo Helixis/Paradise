@@ -48,8 +48,7 @@ GLOBAL_VAR_INIT(sent_honksquad, 0)
 		commandos += candidate//Add their ghost to commandos.
 
 //Spawns HONKsquad and equips them.
-	for(var/thing in GLOB.landmarks_list)
-		var/obj/effect/landmark/L = thing
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
 		if(honksquad_number<=0)	break
 		if(L.name == "HONKsquad")
 			honk_leader_selected = honksquad_number == 1?1:0

@@ -12,13 +12,8 @@
 	stat = 2
 	canmove = 0
 
-/mob/new_player/Initialize(mapload)
-	SHOULD_CALL_PARENT(FALSE)
-	if(initialized)
-		stack_trace("Warning: [src]([type]) initialized multiple times!")
-	initialized = TRUE
+/mob/new_player/New()
 	GLOB.mob_list += src
-	return INITIALIZE_HINT_NORMAL
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
@@ -77,10 +72,7 @@
 		else	output += "<p><a href='byond://?src=[UID()];skip_antag=2'>Global Antag Candidacy</A>"
 		output += "<br /><small>You are <b>[client.skip_antag ? "ineligible" : "eligible"]</b> for all antag roles.</small></p>"
 
-	if(!SSticker || SSticker.current_state == GAME_STATE_STARTUP)
-		output += "<p>Observe (Please wait...)</p>"
-	else
-		output += "<p><a href='byond://?src=[UID()];observe=1'>Observe</A></p>"
+	output += "<p><a href='byond://?src=[UID()];observe=1'>Observe</A></p>"
 
 	if(GLOB.join_tos)
 		output += "<p><a href='byond://?src=[UID()];tos=1'>Terms of Service</A></p>"
@@ -106,7 +98,7 @@
 
 	output += "</center>"
 
-	var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 240, 330)
+	var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 220, 290)
 	popup.set_window_options("can_close=0")
 	popup.set_content(output)
 	popup.open(0)
@@ -147,8 +139,7 @@
 
 
 /mob/new_player/Topic(href, href_list[])
-	if(!client)
-		return FALSE
+	if(!client)	return 0
 
 	if(href_list["consent_signed"])
 		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
@@ -166,12 +157,12 @@
 
 	if(href_list["show_preferences"])
 		client.prefs.ShowChoices(src)
-		return TRUE
+		return 1
 
 	if(href_list["ready"])
 		if(!tos_consent)
 			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return FALSE
+			return 0
 		ready = !ready
 		new_player_panel_proc()
 
@@ -186,11 +177,7 @@
 	if(href_list["observe"])
 		if(!tos_consent)
 			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return FALSE
-
-		if(!SSticker || SSticker.current_state == GAME_STATE_STARTUP)
-			to_chat(usr, "<span class='warning'>You must wait for the server to finish starting before you can join!</span>")
-			return FALSE
+			return 0
 
 		if(alert(src,"Are you sure you wish to observe? You cannot normally join the round after doing this!","Player Setup","Yes","No") == "Yes")
 			if(!client)
@@ -218,18 +205,17 @@
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 				observer.verbs -= /mob/dead/observer/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 			observer.key = key
-			QDEL_NULL(mind)
 			GLOB.respawnable_list += observer
 			qdel(src)
 			return 1
 	if(href_list["tos"])
 		privacy_consent()
-		return FALSE
+		return 0
 
 	if(href_list["late_join"])
 		if(!tos_consent)
 			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return FALSE
+			return 0
 		if(!SSticker || SSticker.current_state != GAME_STATE_PLAYING)
 			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 			return
@@ -237,7 +223,7 @@
 
 			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
-				return FALSE
+				return 0
 
 		LateChoices()
 
@@ -256,7 +242,7 @@
 		if(client.prefs.species in GLOB.whitelisted_species)
 			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
-				return FALSE
+				return 0
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 		return
@@ -420,7 +406,7 @@
 /mob/new_player/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 	if(SSticker.current_state == GAME_STATE_PLAYING)
 		var/ailist[] = list()
-		for(var/mob/living/silicon/ai/A in GLOB.alive_mob_list)
+		for(var/mob/living/silicon/ai/A in GLOB.living_mob_list)
 			ailist += A
 		if(ailist.len)
 			var/mob/living/silicon/ai/announcer = pick(ailist)
@@ -452,7 +438,7 @@
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 	if(SSticker.current_state == GAME_STATE_PLAYING)
 		var/ailist[] = list()
-		for(var/mob/living/silicon/ai/A in GLOB.alive_mob_list)
+		for(var/mob/living/silicon/ai/A in GLOB.living_mob_list)
 			ailist += A
 		if(ailist.len)
 			var/mob/living/silicon/ai/announcer = pick(ailist)

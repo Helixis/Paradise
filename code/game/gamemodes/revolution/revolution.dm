@@ -336,7 +336,7 @@
 	if(head_revolutionaries.len || GAMEMODE_IS_REVOLUTION)
 		var/num_revs = 0
 		var/num_survivors = 0
-		for(var/mob/living/carbon/survivor in GLOB.alive_mob_list)
+		for(var/mob/living/carbon/survivor in GLOB.living_mob_list)
 			if(survivor.ckey)
 				num_survivors++
 				if(survivor.mind)
@@ -385,8 +385,7 @@
 	if(foecount == GLOB.score_arrested)
 		GLOB.score_allarrested = 1
 
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/player = thing
+	for(var/mob/living/carbon/human/player in world)
 		if(player.mind)
 			var/role = player.mind.assigned_role
 			if(role in list("Captain", "Head of Security", "Head of Personnel", "Chief Engineer", "Research Director"))
@@ -416,8 +415,7 @@
 	for(var/datum/mind/M in SSticker.mode:revolutionaries)
 		if(M.current && M.current.stat != DEAD)
 			revcount++
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/player = thing
+	for(var/mob/living/carbon/human/player in world)
 		if(player.mind)
 			var/role = player.mind.assigned_role
 			if(role in list("Captain", "Head of Security", "Head of Personnel", "Chief Engineer", "Research Director"))
@@ -427,8 +425,7 @@
 				if(player.mind in SSticker.mode.revolutionaries) continue
 				loycount++
 
-	for(var/beepboop in GLOB.silicon_mob_list)
-		var/mob/living/silicon/X = beepboop
+	for(var/mob/living/silicon/X in world)
 		if(X.stat != DEAD)
 			loycount++
 

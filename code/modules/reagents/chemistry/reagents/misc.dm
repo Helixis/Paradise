@@ -451,18 +451,21 @@
 	var/mob/living/carbon/C = holder.my_atom
 	if(!istype(C))
 		return
+	var/mind_type = FALSE
 	if(C.mind)
 		if(C.mind.assigned_role == "Clown" || C.mind.assigned_role == SPECIAL_ROLE_HONKSQUAD)
+			mind_type = "Clown"
 			to_chat(C, "<span class='notice'>Whatever that was, it feels great!</span>")
 		else if(C.mind.assigned_role == "Mime")
+			mind_type = "Mime"
 			to_chat(C, "<span class='warning'>You feel nauseous.</span>")
 			C.AdjustDizzy(volume)
 		else
 			to_chat(C, "<span class='warning'>Something doesn't feel right...</span>")
 			C.AdjustDizzy(volume)
-	ADD_TRAIT(C, TRAIT_JESTER, id)
+	C.AddComponent(/datum/component/jestosterone, mind_type)
 	C.AddComponent(/datum/component/squeak, null, null, null, null, null, TRUE)
-	C.AddElement(/datum/element/waddling)
+	C.AddComponent(/datum/component/waddling)
 
 /datum/reagent/jestosterone/on_mob_life(mob/living/carbon/M)
 	if(!istype(M))
@@ -470,7 +473,8 @@
 	var/update_flags = STATUS_UPDATE_NONE
 	if(prob(10))
 		M.emote("giggle")
-	if(M?.mind.assigned_role == "Clown" || M?.mind.assigned_role == SPECIAL_ROLE_HONKSQUAD)
+	GET_COMPONENT_FROM(jestosterone_component, /datum/component/jestosterone, M)
+	if(jestosterone_component.mind_type == "Clown")
 		update_flags |= M.adjustBruteLoss(-1.5 * REAGENTS_EFFECT_MULTIPLIER) //Screw those pesky clown beatings!
 	else
 		M.AdjustDizzy(10, 0, 500)
@@ -490,15 +494,18 @@
 			"Your legs feel like jelly.",
 			"You feel like telling a pun.")
 			to_chat(M, "<span class='warning'>[pick(clown_message)]</span>")
-		if(M?.mind.assigned_role == "Mime")
+		if(jestosterone_component.mind_type == "Mime")
 			update_flags |= M.adjustToxLoss(1.5 * REAGENTS_EFFECT_MULTIPLIER)
 	return ..() | update_flags
 
 /datum/reagent/jestosterone/on_mob_delete(mob/living/M)
 	..()
-	REMOVE_TRAIT(M, TRAIT_JESTER, id)
-	qdel(M.GetComponent(/datum/component/squeak))
-	M.RemoveElement(/datum/element/waddling)
+	GET_COMPONENT_FROM(remove_fun, /datum/component/jestosterone, M)
+	GET_COMPONENT_FROM(squeaking, /datum/component/squeak, M)
+	GET_COMPONENT_FROM(waddling, /datum/component/waddling, M)
+	remove_fun.Destroy()
+	squeaking.Destroy()
+	waddling.Destroy()
 
 /datum/reagent/royal_bee_jelly
 	name = "royal bee jelly"
@@ -604,7 +611,7 @@
 	name = "Left 4 Zed"
 	id = "left4zednutriment"
 	description = "Unstable nutriment that makes plants mutate more often than usual."
-	color = "#2A1680" // RBG: 42, 128, 22
+	color = "#1A1E4D" // RBG: 26, 30, 77
 	tox_prob = 25
 	taste_description = "evolution"
 

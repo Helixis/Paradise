@@ -51,7 +51,7 @@
 	if(!ismob(M))
 		return
 
-	if(!check_rights(R_EVENT))
+	if(!check_rights(R_SERVER|R_EVENT))
 		return
 
 	var/msg = clean_input("Message:", text("Subtle PM to [M.key]"))
@@ -123,7 +123,7 @@
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_direct_narrate(var/mob/M)	// Targetted narrate -- TLE
-	set category = null
+	set category = "Event"
 	set name = "Direct Narrate"
 
 	if(!check_rights(R_SERVER|R_EVENT))
@@ -158,7 +158,7 @@
 /client/proc/admin_headset_message(mob/M in GLOB.mob_list, sender = null)
 	var/mob/living/carbon/human/H = M
 
-	if(!check_rights(R_EVENT))
+	if(!check_rights(R_ADMIN))
 		return
 
 	if(!istype(H))
@@ -201,7 +201,7 @@
 	feedback_add_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
-/proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
+proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	if(automute)
 		if(!config.automute_on)
 			return
@@ -572,7 +572,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","IONC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M as mob in GLOB.mob_list)
-	set category = null
+	set category = "Event"
 	set name = "Rejuvenate"
 
 	if(!check_rights(R_REJUVINATE))
@@ -624,11 +624,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			var/beepsound = input(usr, "What sound should the announcement make?", "Announcement Sound", "") as anything in MsgSound
 
 			GLOB.command_announcement.Announce(input, customname, MsgSound[beepsound], , , type)
-			print_command_report(input, customname)
+			print_command_report(input, "[command_name()] Update")
 		if("No")
 			//same thing as the blob stuff - it's not public, so it's classified, dammit
-			GLOB.command_announcer.autosay("A classified message has been printed out at all communication consoles.")
-			print_command_report(input, "Classified: [customname]")
+			GLOB.command_announcer.autosay("A classified message has been printed out at all communication consoles.");
+			print_command_report(input, "Classified [command_name()] Update")
 		else
 			return
 
@@ -638,7 +638,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 
 /client/proc/cmd_admin_delete(atom/A as obj|mob|turf in view())
-	set category = null
+	set category = "Admin"
 	set name = "Delete"
 
 	if(!check_rights(R_ADMIN))
@@ -826,10 +826,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		SSshuttle.emergency.canRecall = FALSE
 
-	if(seclevel2num(get_security_level()) >= SEC_LEVEL_RED)
-		SSshuttle.emergency.request(coefficient = 0.5, redAlert = TRUE)
-	else
-		SSshuttle.emergency.request()
+	SSshuttle.emergency.request()
 
 	feedback_add_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
@@ -874,13 +871,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!check_rights(R_ADMIN))
 		return
 
-	if(alert(usr, "Do you want to [SSshuttle.emergencyNoEscape ? "ALLOW" : "DENY"] shuttle calls?", "Toggle Deny Shuttle", "Yes", "No") != "Yes")
-		return
-
 	if(SSshuttle)
 		SSshuttle.emergencyNoEscape = !SSshuttle.emergencyNoEscape
 
-	feedback_add_details("admin_verb", "DENYSHUT")
 	log_admin("[key_name(src)] has [SSshuttle.emergencyNoEscape ? "denied" : "allowed"] the shuttle to be called.")
 	message_admins("[key_name_admin(usr)] has [SSshuttle.emergencyNoEscape ? "denied" : "allowed"] the shuttle to be called.")
 
@@ -961,9 +954,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(confirm != "Yes")
 		return
 
-	for(var/obj/machinery/tcomms/core/C in GLOB.tcomms_machines)
-		C.nttc.reset()
-
+	GLOB.nttc_config.reset()
 	log_admin("[key_name(usr)] reset NTTC scripts.")
 	message_admins("[key_name_admin(usr)] reset NTTC scripts.")
 	feedback_add_details("admin_verb","RAT2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -986,8 +977,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/role_string
 	var/obj_count = 0
 	var/obj_string = ""
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/H = thing
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list)
 		if(!isLivingSSD(H))
 			continue
 		mins_ssd = round((world.time - H.last_logout) / 600)
@@ -1024,8 +1014,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	msg += "AFK Players:<BR><TABLE border='1'>"
 	msg += "<TR><TD><B>Key</B></TD><TD><B>Real Name</B></TD><TD><B>Job</B></TD><TD><B>Mins AFK</B></TD><TD><B>Special Role</B></TD><TD><B>Area</B></TD><TD><B>PPN</B></TD><TD><B>Cryo</B></TD></TR>"
 	var/mins_afk
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/H = thing
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list)
 		if(H.client == null || H.stat == DEAD) // No clientless or dead
 			continue
 		mins_afk = round(H.client.inactivity / 600)
@@ -1081,12 +1070,12 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		message_admins("Admin [key_name_admin(usr)] has disabled ERT calling.", 1)
 
 /client/proc/show_tip()
-	set category = "Event"
+	set category = "Admin"
 	set name = "Show Custom Tip"
 	set desc = "Sends a tip (that you specify) to all players. After all \
 		you're the experienced player here."
 
-	if(!check_rights(R_EVENT))
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/input = input(usr, "Please specify your tip that you want to send to the players.", "Tip", "") as message|null

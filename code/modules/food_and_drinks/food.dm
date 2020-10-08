@@ -33,10 +33,6 @@
 		deltimer(ant_timer)
 	return ..()
 
-/obj/item/reagent_containers/food/set_APTFT()
-	set hidden = TRUE
-	..()
-
 /obj/item/reagent_containers/food/proc/check_for_ants()
 	if(!antable)
 		return

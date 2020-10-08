@@ -18,6 +18,7 @@
 	var/id_tag = null
 	var/frequency = ATMOS_VENTSCRUB
 	var/datum/radio_frequency/radio_connection
+	var/advcontrol = 0//does this device listen to the AAC?
 
 	var/list/turf/simulated/adjacent_turfs = list()
 
@@ -225,7 +226,7 @@
 	var/datum/gas_mixture/environment = tile.return_air()
 
 	if(scrubbing)
-		if((scrub_O2 && environment.oxygen>0.001) || (scrub_N2 && environment.nitrogen>0.001) || (scrub_CO2 && environment.carbon_dioxide>0.001) || (scrub_Toxins && environment.toxins>0.001) || (environment.sleeping_agent) || (environment.agent_b))
+		if((scrub_O2 && environment.oxygen>0.001) || (scrub_N2 && environment.nitrogen>0.001) || (scrub_CO2 && environment.carbon_dioxide>0.001) || (scrub_Toxins && environment.toxins>0.001) || (environment.trace_gases.len>0))
 			var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles()
 
 			//Take a gas sample
@@ -249,13 +250,14 @@
 				filtered_out.carbon_dioxide = removed.carbon_dioxide
 				removed.carbon_dioxide = 0
 
-			if(removed.agent_b)
-				filtered_out.agent_b = removed.agent_b
-				removed.agent_b = 0
-
-			if(scrub_N2O)
-				filtered_out.sleeping_agent = removed.sleeping_agent
-				removed.sleeping_agent = 0
+			if(removed.trace_gases.len>0)
+				for(var/datum/gas/trace_gas in removed.trace_gases)
+					if(istype(trace_gas, /datum/gas/oxygen_agent_b))
+						removed.trace_gases -= trace_gas
+						filtered_out.trace_gases += trace_gas
+					else if(istype(trace_gas, /datum/gas/sleeping_agent) && scrub_N2O)
+						removed.trace_gases -= trace_gas
+						filtered_out.trace_gases += trace_gas
 
 			//Remix the resulting gases
 			air_contents.merge(filtered_out)
@@ -284,7 +286,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
 		return
-	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
+	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command") || (signal.data["advcontrol"] && !advcontrol))
 		return 0
 
 	if(signal.data["power"] != null)
@@ -352,10 +354,15 @@
 	<ul>
 		<li><b>Frequency:</b> <a href="?src=[UID()];set_freq=-1">[format_frequency(frequency)] GHz</a> (<a href="?src=[UID()];set_freq=[ATMOS_VENTSCRUB]">Reset</a>)</li>
 		<li>[format_tag("ID Tag","id_tag", "set_id")]</li>
+		<li><b>AAC Acces:</b> <a href="?src=[UID()];toggleadvcontrol=1">[advcontrol ? "Allowed" : "Blocked"]</a>
 	</ul>
 	"}
 
 /obj/machinery/atmospherics/unary/vent_scrubber/multitool_topic(var/mob/user, var/list/href_list, var/obj/O)
+	if("toggleadvcontrol" in href_list)
+		advcontrol = !advcontrol
+		return TRUE
+
 	if("set_id" in href_list)
 		var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID tag for this machine", src, src:id_tag) as null|text),1,MAX_MESSAGE_LEN)
 		if(!newid)
@@ -404,10 +411,10 @@
 	if(I.use_tool(src, user, 20, volume = I.tool_volume))
 		if(!welded)
 			welded = TRUE
-			user.visible_message("<span class='notice'>[user] welds [src] shut!</span>",\
+			visible_message("<span class='notice'>[user] welds [src] shut!</span>",\
 				"<span class='notice'>You weld [src] shut!</span>")
 		else
 			welded = FALSE
-			user.visible_message("<span class='notice'>[user] unwelds [src]!</span>",\
+			visible_message("<span class='notice'>[user] unwelds [src]!</span>",\
 				"<span class='notice'>You unweld [src]!</span>")
 		update_icon()

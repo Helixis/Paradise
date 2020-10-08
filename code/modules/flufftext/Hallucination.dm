@@ -149,12 +149,10 @@ Gunshots/explosions/opening doors/less rare audio (done)
 /obj/effect/hallucination/fake_flood/process()
 	if(!target)
 		qdel(src)
-		return
 	if(next_expand <= world.time)
 		radius++
 		if(radius > FAKE_FLOOD_MAX_RADIUS)
 			qdel(src)
-			return
 		Expand()
 		if((get_turf(target) in flood_turfs) && !target.internal)
 			target.hallucinate("fake_alert", "too_much_tox")
@@ -462,9 +460,8 @@ Gunshots/explosions/opening doors/less rare audio (done)
 	target = T
 	var/image/A = null
 	var/kind = force_kind ? force_kind : pick("clown", "corgi", "carp", "skeleton", "demon","zombie")
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/H = thing
-		if(H.stat == DEAD || H == target)
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list)
+		if(H == target)
 			continue
 		if(skip_nearby && (H in view(target)))
 			continue
@@ -542,8 +539,7 @@ Gunshots/explosions/opening doors/less rare audio (done)
 	var/mob/living/carbon/human/clone = null
 	var/clone_weapon = null
 
-	for(var/thing in GLOB.human_list)
-		var/mob/living/carbon/human/H = thing
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list)
 		if(H.stat || H.lying)
 			continue
 		clone = H
@@ -755,10 +751,8 @@ GLOBAL_LIST_INIT(non_fakeattack_weapons, list(/obj/item/gun/projectile, /obj/ite
 			target.client.images.Remove(speech_overlay)
 	else // Radio talk
 		var/list/humans = list()
-		for(var/thing in GLOB.human_list)
-			var/mob/living/carbon/human/H = thing
-			if(H.stat != DEAD)
-				humans += H
+		for(var/mob/living/carbon/human/H in GLOB.living_mob_list)
+			humans += H
 		person = pick(humans)
 		target.hear_radio(message_to_multilingual(pick(radio_messages), pick(person.languages)), speaker = person, part_a = "<span class='[SSradio.frequency_span_class(PUB_FREQ)]'><b>\[[get_frequency_name(PUB_FREQ)]\]</b> <span class='name'>", part_b = "</span> <span class='message'>")
 	qdel(src)

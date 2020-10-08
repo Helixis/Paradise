@@ -44,14 +44,12 @@
 // Subsystem init_order, from highest priority to lowest priority
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
-#define INIT_ORDER_TITLE 100 // This **MUST** load first or people will se blank lobby screens
-#define INIT_ORDER_GARBAGE 21
-#define INIT_ORDER_DBCORE 20
-#define INIT_ORDER_BLACKBOX 19
-#define INIT_ORDER_CLEANUP 18
-#define INIT_ORDER_INPUT 17
-#define INIT_ORDER_SOUNDS 16
-#define INIT_ORDER_INSTRUMENTS 15
+
+#define INIT_ORDER_GARBAGE 19
+#define INIT_ORDER_DBCORE 18
+#define INIT_ORDER_BLACKBOX 17
+#define INIT_ORDER_SERVER_MAINT 16
+#define INIT_ORDER_INPUT 15
 #define INIT_ORDER_RESEARCH 14
 #define INIT_ORDER_EVENTS 13
 #define INIT_ORDER_JOBS 12
@@ -82,7 +80,8 @@
 #define INIT_ORDER_NANOMOB -23
 #define INIT_ORDER_SQUEAK -40
 #define INIT_ORDER_PATH -50
-#define INIT_ORDER_PERSISTENCE -95
+#define INIT_ORDER_PERSISTENCE		-95
+#define INIT_ORDER_CHAT				-100 //Should be last to ensure chat remains smooth during init.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
@@ -90,7 +89,7 @@
 #define FIRE_PRIORITY_NANOMOB       10
 #define FIRE_PRIORITY_NIGHTSHIFT	10
 #define FIRE_PRIORITY_IDLE_NPC		10
-#define FIRE_PRIORITY_CLEANUP		10
+#define FIRE_PRIORITY_SERVER_MAINT	10
 #define FIRE_PRIORITY_TICKETS		10
 #define FIRE_PRIORITY_RESEARCH		10
 #define FIRE_PRIORITY_GARBAGE		15
@@ -114,6 +113,7 @@
 #define FIRE_PRIORITY_MOBS			100
 #define FIRE_PRIORITY_NANOUI		110
 #define FIRE_PRIORITY_TICKER		200
+#define FIRE_PRIORITY_CHAT			400
 #define FIRE_PRIORITY_OVERLAYS		500
 #define FIRE_PRIORITY_INPUT			1000 // This must always always be the max highest priority. Player input must never be lost.
 

@@ -11,13 +11,6 @@
 #define SUGGESTED_CLIENT_VERSION	511		// only integers (e.g: 510, 511) useful here. Does not properly handle minor versions (e.g: 510.58, 511.848)
 #define SSD_WARNING_TIMER 30 // cycles, not seconds, so 30=60s
 
-#define LIMITER_SIZE	5
-#define CURRENT_SECOND	1
-#define SECOND_COUNT	2
-#define CURRENT_MINUTE	3
-#define MINUTE_COUNT	4
-#define ADMINSWARNED_AT	5
-
 	/*
 	When somebody clicks a link in game, this Topic is called first.
 	It does the stuff in this proc and  then is redirected to the Topic() proc for the src=[0xWhatever]
@@ -66,38 +59,10 @@
 	if(href_list["_src_"] == "chat")
 		return chatOutput.Topic(href, href_list)
 
-	// Rate limiting
-	var/mtl = 100 // 100 topics per minute
-	if (!holder) // Admins are allowed to spam click, deal with it.
-		var/minute = round(world.time, 600)
-		if (!topiclimiter)
-			topiclimiter = new(LIMITER_SIZE)
-		if (minute != topiclimiter[CURRENT_MINUTE])
-			topiclimiter[CURRENT_MINUTE] = minute
-			topiclimiter[MINUTE_COUNT] = 0
-		topiclimiter[MINUTE_COUNT] += 1
-		if (topiclimiter[MINUTE_COUNT] > mtl)
-			var/msg = "Your previous action was ignored because you've done too many in a minute."
-			if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
-				topiclimiter[ADMINSWARNED_AT] = minute
-				msg += " Administrators have been informed."
-				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-				message_admins("[ADMIN_LOOKUPFLW(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-			to_chat(src, "<span class='danger'>[msg]</span>")
-			return
-
-	var/stl = 10 // 10 topics a second
-	if (!holder) // Admins are allowed to spam click, deal with it.
-		var/second = round(world.time, 10)
-		if (!topiclimiter)
-			topiclimiter = new(LIMITER_SIZE)
-		if (second != topiclimiter[CURRENT_SECOND])
-			topiclimiter[CURRENT_SECOND] = second
-			topiclimiter[SECOND_COUNT] = 0
-		topiclimiter[SECOND_COUNT] += 1
-		if (topiclimiter[SECOND_COUNT] > stl)
-			to_chat(src, "<span class='danger'>Your previous action was ignored because you've done too many in a second</span>")
-			return
+	//Reduces spamming of links by dropping calls that happen during the delay period
+	if(next_allowed_topic_time > world.time)
+		return
+	next_allowed_topic_time = world.time + TOPIC_SPAM_DELAY
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
@@ -108,9 +73,13 @@
 
 	//Admin PM
 	if(href_list["priv_msg"])
-		var/ckey_txt = href_list["priv_msg"]
+		var/client/C = locate(href_list["priv_msg"])
 
-		cmd_admin_pm(ckey_txt, null, href_list["type"])
+		if(!C) // Might be a stealthmin ID, so pass it in straight
+			C = href_list["priv_msg"]
+		else if(C.UID() != href_list["priv_msg"])
+			C = null // 404 client not found. Let cmd_admin_pm handle the error
+		cmd_admin_pm(C, null, href_list["type"])
 		return
 
 	if(href_list["irc_msg"])
@@ -335,6 +304,11 @@
 	if(byond_version < SUGGESTED_CLIENT_VERSION) // Update is suggested, but not required.
 		to_chat(src,"<span class='userdanger'>Your BYOND client (v: [byond_version]) is out of date. This can cause glitches. We highly suggest you download the latest client from http://www.byond.com/ before playing. </span>")
 
+	if(IsGuestKey(key))
+		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
+		qdel(src)
+		return
+
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
 
 
@@ -399,11 +373,13 @@
 	send_resources()
 
 	if(prefs.toggles & UI_DARKMODE) // activates dark mode if its flagged. -AA07
-		activate_darkmode()
-	else
-		// activate_darkmode() calls the CL update button proc, so we dont want it double called
-		SSchangelog.UpdatePlayerChangelogButton(src)
+		if(establish_db_connection())
+			activate_darkmode()
 
+	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates. -CP
+		if(establish_db_connection())
+			to_chat(src, "<span class='info'>Changelog has changed since your last visit.</span>")
+			update_changelog_button()
 
 	if(prefs.toggles & DISABLE_KARMA) // activates if karma is disabled
 		if(establish_db_connection())
@@ -457,13 +433,7 @@
 //////////////
 //DISCONNECT//
 //////////////
-
 /client/Del()
-	if(!gc_destroyed)
-		Destroy() //Clean up signals and timers.
-	return ..()
-
-/client/Destroy()
 	if(holder)
 		holder.owner = null
 		GLOB.admins -= src
@@ -473,8 +443,7 @@
 		movingmob.client_mobs_in_contents -= mob
 		UNSETEMPTY(movingmob.client_mobs_in_contents)
 	Master.UpdateTickRate()
-	..() //Even though we're going to be hard deleted there are still some things that want to know the destroy is happening
-	return QDEL_HINT_HARDDEL_NOW
+	return ..()
 
 
 /client/proc/donator_check()
@@ -588,7 +557,7 @@
 		if(GLOB.panic_bunker_enabled)
 			var/threshold = config.panic_bunker_threshold
 			src << "Server is not accepting connections from never-before-seen players until player count is less than [threshold]. Please try again later."
-			qdel(src)
+			del(src)
 			return // Dont insert or they can just go in again
 
 		var/DBQuery/query_insert = GLOB.dbcon.NewQuery("INSERT INTO [format_table_name("player")] (id, ckey, firstseen, lastseen, ip, computerid, lastadminrank) VALUES (null, '[ckey]', Now(), Now(), '[sql_ip]', '[sql_computerid]', '[sql_admin_rank]')")
@@ -855,7 +824,7 @@
 // IF YOU CHANGE ANYTHING IN ACTIVATE, MAKE SURE IT HAS A DEACTIVATE METHOD, -AA07
 /client/proc/activate_darkmode()
 	///// BUTTONS /////
-	SSchangelog.UpdatePlayerChangelogButton(src)
+	update_changelog_button()
 	/* Rpane */
 	winset(src, "rpane.textb", "background-color=#40628a;text-color=#FFFFFF")
 	winset(src, "rpane.infob", "background-color=#40628a;text-color=#FFFFFF")
@@ -887,7 +856,7 @@
 
 /client/proc/deactivate_darkmode()
 	///// BUTTONS /////
-	SSchangelog.UpdatePlayerChangelogButton(src)
+	update_changelog_button()
 	/* Rpane */
 	winset(src, "rpane.textb", "background-color=none;text-color=#000000")
 	winset(src, "rpane.infob", "background-color=none;text-color=#000000")
@@ -917,6 +886,22 @@
 	///// NOTIFY USER /////
 	to_chat(src, "<span class='notice'>Darkmode Disabled</span>") // what a sick fuck
 
+// Better changelog button handling
+/client/proc/update_changelog_button()
+	if(establish_db_connection())
+		if(prefs.lastchangelog != GLOB.changelog_hash)
+			winset(src, "rpane.changelog", "background-color=#bb7700;text-color=#FFFFFF;font-style=bold")
+		else
+			if(prefs.toggles & UI_DARKMODE)
+				winset(src, "rpane.changelog", "background-color=#40628a;text-color=#FFFFFF")
+			else
+				winset(src, "rpane.changelog", "background-color=none;text-color=#000000")
+	else
+		if(prefs.toggles & UI_DARKMODE)
+			winset(src, "rpane.changelog", "background-color=#40628a;text-color=#FFFFFF")
+		else
+			winset(src, "rpane.changelog", "background-color=none;text-color=#000000")
+
 /client/proc/generate_clickcatcher()
 	if(!void)
 		void = new()
@@ -938,45 +923,3 @@
 	return TRUE
 
 #undef SSD_WARNING_TIMER
-
-/client/verb/resend_ui_resources()
-	set name = "Reload UI Resources"
-	set desc = "Reload your UI assets if they are not working"
-	set category = "Special Verbs"
-
-	if(last_ui_resource_send > world.time)
-		to_chat(usr, "<span class='warning'>You requested your UI resource files too quickly. Please try again in [(last_ui_resource_send - world.time)/10] seconds.</span>")
-		return
-
-	var/choice = alert(usr, "This will reload your NanoUI and TGUI resources. If you have any open UIs this may break them. Are you sure?", "Resource Reloading", "Yes", "No")
-	if(choice == "Yes")
-		// 600 deciseconds = 1 minute
-		last_ui_resource_send = world.time + 60 SECONDS
-
-		// Close their open UIs
-		SSnanoui.close_user_uis(usr)
-		SStgui.close_user_uis(usr)
-
-		// Resend the resources
-		var/datum/asset/nano_assets = get_asset_datum(/datum/asset/nanoui)
-		nano_assets.register()
-
-		var/datum/asset/tgui_assets = get_asset_datum(/datum/asset/simple/tgui)
-		tgui_assets.register()
-
-		var/datum/asset/nanomaps = get_asset_datum(/datum/asset/simple/nanomaps)
-		nanomaps.register()
-
-		// Clear the user's cache so they get resent.
-		// This is not fully clearing their BYOND cache, just their assets sent from the server this round
-		cache = list()
-
-		to_chat(usr, "<span class='notice'>UI resource files resent successfully. If you are still having issues, please try manually clearing your BYOND cache. <b>This can be achieved by opening your BYOND launcher, pressing the cog in the top right, selecting preferences, going to the Games tab, and pressing 'Clear Cache'.</b></span>")
-
-
-#undef LIMITER_SIZE
-#undef CURRENT_SECOND
-#undef SECOND_COUNT
-#undef CURRENT_MINUTE
-#undef MINUTE_COUNT
-#undef ADMINSWARNED_AT

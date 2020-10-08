@@ -2,10 +2,6 @@
 	var/canEnterVentWith = "/obj/item/implant=0&/obj/item/clothing/mask/facehugger=0&/obj/item/radio/borg=0&/obj/machinery/camera=0"
 	var/datum/middleClickOverride/middleClickOverride = null
 
-/mob/living/carbon/Initialize(mapload)
-	. = ..()
-	GLOB.carbon_list += src
-
 /mob/living/carbon/Destroy()
 	// This clause is here due to items falling off from limb deletion
 	for(var/obj/item in get_all_slots())
@@ -18,11 +14,11 @@
 	if(B)
 		B.leave_host()
 		qdel(B)
-	GLOB.carbon_list -= src
 	return ..()
 
 /mob/living/carbon/handle_atom_del(atom/A)
-	LAZYREMOVE(processing_patches, A)
+	if(A in processing_patches)
+		processing_patches -= A
 	return ..()
 
 /mob/living/carbon/blob_act(obj/structure/blob/B)
@@ -50,40 +46,41 @@
 
 /mob/living/carbon/var/last_stomach_attack //defining this here because no one would look in carbon_defines for it
 
-/mob/living/carbon/relaymove(mob/user, direction)
-	if(LAZYLEN(stomach_contents))
-		if(user in stomach_contents)
-			if(last_stomach_attack + STOMACH_ATTACK_DELAY > world.time)
-				return
+/mob/living/carbon/relaymove(var/mob/user, direction)
+	if(user in src.stomach_contents)
+		if(last_stomach_attack + STOMACH_ATTACK_DELAY > world.time)	return
 
-			last_stomach_attack = world.time
-			for(var/mob/M in hearers(4, src))
+		last_stomach_attack = world.time
+		for(var/mob/M in hearers(4, src))
+			if(M.client)
+				M.show_message(text("<span class='warning'>You hear something rumbling inside [src]'s stomach...</span>"), 2)
+
+		var/obj/item/I = user.get_active_hand()
+		if(I && I.force)
+			var/d = rand(round(I.force / 4), I.force)
+
+			if(istype(src, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = src
+				var/obj/item/organ/external/organ = H.get_organ("chest")
+				if(istype(organ))
+					if(organ.receive_damage(d, 0))
+						H.UpdateDamageIcon()
+
+				H.updatehealth("stomach attack")
+
+			else
+				src.take_organ_damage(d)
+
+			for(var/mob/M in viewers(user, null))
 				if(M.client)
-					M.show_message(text("<span class='warning'>You hear something rumbling inside [src]'s stomach...</span>"), 2)
+					M.show_message(text("<span class='warning'><B>[user] attacks [src]'s stomach wall with the [I.name]!</span>"), 2)
+			playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
-			var/obj/item/I = user.get_active_hand()
-			if(I && I.force)
-				var/d = rand(round(I.force / 4), I.force)
-
-				if(istype(src, /mob/living/carbon/human))
-					var/mob/living/carbon/human/H = src
-					var/obj/item/organ/external/organ = H.get_organ("chest")
-					if(istype(organ))
-						if(organ.receive_damage(d, 0))
-							H.UpdateDamageIcon()
-
-					H.updatehealth("stomach attack")
-
-				else
-					take_organ_damage(d)
-
-				for(var/mob/M in viewers(user, null))
-					if(M.client)
-						M.show_message(text("<span class='warning'><B>[user] attacks [src]'s stomach wall with the [I.name]!</span>"), 2)
-				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
-
-				if(prob(getBruteLoss() - 50))
-					gib()
+			if(prob(src.getBruteLoss() - 50))
+				for(var/atom/movable/A in stomach_contents)
+					A.forceMove(drop_location())
+					stomach_contents.Remove(A)
+				src.gib()
 
 #undef STOMACH_ATTACK_DELAY
 
@@ -138,8 +135,9 @@
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),5)
 
 	for(var/mob/M in src)
-		LAZYREMOVE(stomach_contents, M)
-		M.forceMove(drop_location())
+		if(M in src.stomach_contents)
+			src.stomach_contents.Remove(M)
+		M.forceMove(get_turf(src))
 		visible_message("<span class='danger'>[M] bursts out of [src]!</span>")
 
 /mob/living/carbon/electrocute_act(shock_damage, obj/source, siemens_coeff = 1, safety = FALSE, override = FALSE, tesla_shock = FALSE, illusion = FALSE, stun = TRUE)
@@ -504,7 +502,7 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
-	if(!istype(starting_machine) || !starting_machine.returnPipenet() || !starting_machine.can_see_pipes())
+	if(!istype(starting_machine) || !starting_machine.returnPipenet())
 		return
 	var/datum/pipeline/pipeline = starting_machine.returnPipenet()
 	var/list/totalMembers = list()
@@ -530,10 +528,10 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/update_pipe_vision()
 	if(pipes_shown.len)
-		if(!is_ventcrawling(src))
+		if(!istype(loc, /obj/machinery/atmospherics))
 			remove_ventcrawl()
 	else
-		if(is_ventcrawling(src))
+		if(istype(loc, /obj/machinery/atmospherics))
 			add_ventcrawl(loc)
 
 
@@ -554,8 +552,6 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 			take_organ_damage(10)
 	if(iscarbon(hit_atom) && hit_atom != src)
 		var/mob/living/carbon/victim = hit_atom
-		if(victim.flying)
-			return
 		if(hurt)
 			victim.take_organ_damage(10)
 			take_organ_damage(10)
@@ -895,6 +891,7 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 				unEquip(I)
 				I.dropped()
 				return
+			return 1
 		else
 			to_chat(src, "<span class='warning'>You fail to remove [I]!</span>")
 
@@ -950,10 +947,9 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 		return initial(pixel_y)
 
 /mob/living/carbon/emp_act(severity)
-	..()
-	for(var/X in internal_organs)
-		var/obj/item/organ/internal/O = X
+	for(var/obj/item/organ/internal/O in internal_organs)
 		O.emp_act(severity)
+	..()
 
 /mob/living/carbon/Stat()
 	..()
@@ -1001,30 +997,25 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/carbon/proc/slip(description, stun, weaken, tilesSlipped, walkSafely, slipAny, slipVerb = "slip")
 	if(flying || buckled || (walkSafely && m_intent == MOVE_INTENT_WALK))
-		return FALSE
-
+		return 0
 	if((lying) && (!(tilesSlipped)))
-		return FALSE
-
+		return 0
 	if(!(slipAny))
 		if(istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
 			if(isobj(H.shoes) && H.shoes.flags & NOSLIP)
-				return FALSE
-
+				return 0
 	if(tilesSlipped)
-		for(var/i in 1 to tilesSlipped)
-			spawn(i)
-				step(src, dir)
-
+		for(var/t = 0, t<=tilesSlipped, t++)
+			spawn (t) step(src, src.dir)
 	stop_pulling()
 	to_chat(src, "<span class='notice'>You [slipVerb]ped on [description]!</span>")
-	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	// Something something don't run with scissors
 	moving_diagonally = 0 //If this was part of diagonal move slipping will stop it.
 	Stun(stun)
 	Weaken(weaken)
-	return TRUE
+	return 1
 
 /mob/living/carbon/proc/can_eat(flags = 255)
 	return 1
@@ -1089,6 +1080,10 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 
 /mob/living/carbon/proc/forceFedAttackLog(var/obj/item/reagent_containers/food/toEat, mob/user)
 	add_attack_logs(user, src, "Fed [toEat]. Reagents: [toEat.reagents.log_list(toEat)]", toEat.reagents.harmless_helper() ? ATKLOG_ALMOSTALL : null)
+	if(!iscarbon(user))
+		LAssailant = null
+	else
+		LAssailant = user
 
 
 /*TO DO - If/when stomach organs are introduced, override this at the human level sending the item to the stomach
@@ -1221,18 +1216,3 @@ so that different stomachs can handle things in different ways VB*/
 		I.acid_level = 0 //washes off the acid on our clothes
 		I.extinguish() //extinguishes our clothes
 	..()
-
-/mob/living/carbon/clean_blood(clean_hands = TRUE, clean_mask = TRUE, clean_feet = TRUE)
-	if(head)
-		if(head.clean_blood())
-			update_inv_head()
-		if(head.flags_inv & HIDEMASK)
-			clean_mask = FALSE
-	if(wear_suit)
-		if(wear_suit.clean_blood())
-			update_inv_wear_suit()
-		if(wear_suit.flags_inv & HIDESHOES)
-			clean_feet = FALSE
-		if(wear_suit.flags_inv & HIDEGLOVES)
-			clean_hands = FALSE
-	..(clean_hands, clean_mask, clean_feet)

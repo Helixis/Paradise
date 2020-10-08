@@ -9,9 +9,6 @@
 /config/*
 !config/**/*/
 
-# ignore cfg, an internal BYOND folder
-/cfg/*
-
 #ignore other, specific files and folers
 *.before
 data/
