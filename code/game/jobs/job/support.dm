@@ -6,6 +6,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -28,7 +30,7 @@
 		/obj/item/toy/russian_revolver = 1
 	)
 
-/datum/outfit/job/bartender/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/*/datum/outfit/job/bartender/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	if(visualsOnly)
 		return
@@ -37,7 +39,7 @@
 	genemutcheck(H, GLOB.soberblock, null, MUTCHK_FORCED)
 	H.dna.default_blocks.Add(GLOB.soberblock)
 	H.check_mutations = 1
-
+*/ //MUEVO ESTO AL TRAIT DE INMUNIDAD
 
 
 /datum/job/chef
@@ -47,6 +49,8 @@
 	total_positions = 2
 	spawn_positions = 2
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -81,6 +85,8 @@
 	total_positions = 2
 	spawn_positions = 2
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -118,6 +124,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_supply = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -148,6 +156,8 @@
 	total_positions = 2
 	spawn_positions = 2
 	is_supply = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "Quartermaster"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -174,6 +184,8 @@
 	total_positions = 6
 	spawn_positions = 8
 	is_supply = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "Quartermaster"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -244,6 +256,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -282,7 +296,7 @@
 		mask = /obj/item/clothing/mask/gas/clown_hat/sexy
 		uniform = /obj/item/clothing/under/rank/clown/sexy
 
-/datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/*/datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE) //HISPATRAIT
 	. = ..()
 	if(visualsOnly)
 		return
@@ -300,6 +314,7 @@
 		H.dna.default_blocks.Add(GLOB.comicblock)
 	H.check_mutations = TRUE
 	H.add_language("Clownish")
+*/ //HISPATRAIT
 
 //action given to antag clowns
 /datum/action/innate/toggle_clumsy
@@ -329,6 +344,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -381,6 +398,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -407,6 +426,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"
@@ -436,6 +457,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1
+	minimal_command_character_age = 1
+	minimal_captain_character_age = 1
 	supervisors = "the head of personnel"
 	department_head = list("Head of Personnel")
 	selection_color = "#dddddd"

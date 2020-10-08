@@ -653,6 +653,15 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 		if(job.barred_by_disability(user.client))
 			HTML += "<del>[rank]</del></td><td> \[ DISABILITY \]</td></tr>"
 			continue
+		if(job.age_restringed(user.client))
+			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
+			continue
+		if(job.command_age_restringed(user.client))
+			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
+			continue
+		if(job.captain_age_restringed(user.client))
+			HTML += "<del>[rank]</del></td><td> \[ AGE RESTRINGED \]</td></tr>"
+			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
@@ -2141,9 +2150,9 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 					toggles ^= AMBIENT_OCCLUSION
 					if(parent && parent.screen && parent.screen.len)
 						var/obj/screen/plane_master/game_world/PM = locate(/obj/screen/plane_master/game_world) in parent.screen
-						PM.filters -= FILTER_AMBIENT_OCCLUSION
+						PM.remove_filter(AMBIENT_OCCLUSION_FILTER_KEY)
 						if(toggles & AMBIENT_OCCLUSION)
-							PM.filters += FILTER_AMBIENT_OCCLUSION
+							PM.add_filter(AMBIENT_OCCLUSION_FILTER_KEY, FILTER_AMBIENT_OCCLUSION)
 
 				if("parallax")
 					var/parallax_styles = list(

@@ -18,4 +18,3 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	hispania_icon = TRUE
 	resistance_flags = FIRE_PROOF
 	species_restricted = list("exclude", "Grey", "Vox")
-

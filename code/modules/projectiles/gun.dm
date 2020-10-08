@@ -175,13 +175,21 @@
 	//DUAL WIELDING
 	var/bonus_spread = 0
 	var/loop_counter = 0
+	//HISPATRAITS
+	var/dual_mod = 24 //para el trait de disparo dual
+	if(weapon_weight >= WEAPON_MEDIUM)	//las armas ligeras pueden ser disparadas por cualquiera
+		if(!HAS_TRAIT(user, TRAIT_SHOOTER) && ishuman(user)) //si no lo tiene no dispara bien armas grandes
+			bonus_spread += dual_mod * weapon_weight
+	if(HAS_TRAIT(user, TRAIT_DUAL_SHOOTER) && ishuman(user)) // si tiene esto dipara mejor a dos armas
+		dual_mod = dual_mod/2  //disparas con el doble de precision con dos armas si tienes este trait
+	//FIN HISPATRAITS
 	if(ishuman(user) && user.a_intent == INTENT_HARM)
 		var/mob/living/carbon/human/H = user
 		for(var/obj/item/gun/G in get_both_hands(H))
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
 				continue
 			else if(G.can_trigger_gun(user))
-				bonus_spread += 24 * G.weapon_weight
+				bonus_spread += dual_mod * G.weapon_weight //cambiado por hispania para el trait de dual shoot
 				loop_counter++
 				addtimer(CALLBACK(G, .proc/process_fire, target, user, 1, params, null, bonus_spread), loop_counter)
 

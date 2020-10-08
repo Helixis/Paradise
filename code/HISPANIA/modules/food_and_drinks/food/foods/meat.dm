@@ -1,5 +1,4 @@
 //Drake meat//
-
 /obj/item/reagent_containers/food/snacks/drakemeat
 	name = "drake meat"
 	desc = "A steak of an ash drake. It's melting only with the heat of your fingers."

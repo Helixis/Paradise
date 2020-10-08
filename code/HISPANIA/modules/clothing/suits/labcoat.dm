@@ -60,7 +60,6 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
         "Vox" = 'icons/hispania/mob/suit.dmi',
         "Grey" = 'icons/hispania/mob/suit.dmi')
 
-
 /obj/item/clothing/suit/storage/labcoat/rdlargeroundcut
 	name = "Research Director's large labcoat"
 	desc = "One purple and long labcoat."

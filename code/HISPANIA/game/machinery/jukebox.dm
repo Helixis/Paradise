@@ -70,20 +70,32 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/machinery/hispaniabox/attackby(obj/item/O, mob/user, params)
-	if(!active)
-		if(iswrench(O))
-			if(!anchored && !isinspace())
-				to_chat(user,"<span class='notice'>You secure [src] to the floor.</span>")
-				anchored = TRUE
-				light()
-			else if(anchored)
-				to_chat(user,"<span class='notice'>You unsecure and disconnect [src].</span>")
-				anchored = FALSE
-				set_light(0)
-			playsound(src, O.usesound, 50, 1)
-			return
-	return ..()
+/obj/machinery/disco/wrench_act(mob/user, obj/item/I)
+	if(active)
+		return
+	. = TRUE
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	if(!anchored && !isinspace())
+		anchored = TRUE
+		WRENCH_ANCHOR_MESSAGE
+	else if(anchored)
+		anchored = FALSE
+		WRENCH_UNANCHOR_MESSAGE
+	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
+
+/obj/machinery/hispaniabox/wrench_act(mob/user, obj/item/I)
+	. = TRUE
+	if(active)
+		to_chat(user, "<span class='warning'>turn of [src] first!</span>")
+		return
+	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
+		return
+	anchored = !anchored
+	if(anchored)
+		WRENCH_ANCHOR_MESSAGE
+	else
+		WRENCH_UNANCHOR_MESSAGE
 
 /obj/machinery/hispaniabox/update_icon()
 	icon_state = (active ? "jukebox-running" : "jukebox")

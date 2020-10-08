@@ -299,9 +299,19 @@
 
 	var/move_result = 0
 	var/move_type = 0
-	if(internal_damage & MECHA_INT_CONTROL_LOST)
+	if((internal_damage & MECHA_INT_CONTROL_LOST))
 		move_result = mechsteprand()
 		move_type = MECHAMOVE_RAND
+	else if(ishuman(occupant) && !HAS_TRAIT(occupant, TRAIT_MECH_PILOT)) //hispa trati
+		if(70)	//70% de las veces no tendras el control (con el pod es 80 pero con el por o te mueves o no esto es peor)
+			move_result = mechsteprand()
+			move_type = MECHAMOVE_RAND
+		else if(dir != direction)
+			move_result = mechturn(direction)
+			move_type = MECHAMOVE_TURN
+		else
+			move_result = mechstep(direction)
+			move_type = MECHAMOVE_STEP //fin hispatrait
 	else if(dir != direction)
 		move_result = mechturn(direction)
 		move_type = MECHAMOVE_TURN
@@ -773,7 +783,7 @@
 
 
 /obj/mecha/crowbar_act(mob/user, obj/item/I)
-	if(state != 2 && state != 3 && !(state == 4 && (pilot_is_mmi() || istype(occupant, /mob/living/carbon))))
+	if(state != 2 && state != 3 && !(state == 4 && (pilot_is_mmi() || iscarbon(occupant))))
 		return
 	. = TRUE
 	if(!I.use_tool(src, user, 0, volume = I.tool_volume))

@@ -247,7 +247,6 @@
 	bitesize = 5
 	list_reagents = list("nutriment" = 3, "vitamin" = 3, "capsaicin" = 10, "condensedcapsaicin" = 7)
 
-
 /obj/item/reagent_containers/food/snacks/arepa_ice
 	name = "iced arepa"
 	desc = "A solid ice cube, with an arepa in it."
