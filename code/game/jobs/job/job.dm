@@ -46,6 +46,10 @@
 	//If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/minimal_player_age = 0
 
+	var/minimal_character_age = 0
+	var/minimal_command_character_age = 0
+	var/minimal_captain_character_age = 0
+
 	var/exp_requirements = 0
 	var/exp_type = ""
 
@@ -110,6 +114,30 @@
 		return 0
 
 	return max(0, minimal_player_age - C.player_age)
+
+/datum/job/proc/age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_character_age)
+		return 0
+	if(C.prefs.age < 18)
+		return 1
+
+/datum/job/proc/command_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_command_character_age)
+		return 0
+	if(C.prefs.age < 25)
+		return 1
+
+/datum/job/proc/captain_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_captain_character_age)
+		return 0
+	if(C.prefs.age < 30)
+		return 1
 
 /datum/job/proc/barred_by_disability(client/C)
 	if(!C)

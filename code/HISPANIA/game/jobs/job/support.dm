@@ -1,5 +1,4 @@
 //Indumentaria para el beekeeper//
-
 /datum/outfit/job/hydro/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
     . = ..()
     if(H.mind && H.mind.role_alt_title)
@@ -17,7 +16,58 @@
                 backpack = /obj/item/storage/backpack/botany
                 satchel = /obj/item/storage/backpack/satchel_hyd
                 dufflebag = /obj/item/storage/backpack/duffel/hydro
+//fin beekeeper
 
+//BARTENDER
+/datum/outfit/job/bartender/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/borrachoexperto)
+
+// MIMO
+/datum/outfit/job/mime/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	. = ..()
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/mechpilot)
+
+//PAYASO
+/datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	. = ..()
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/mechpilot)
+	H.add_quirk(/datum/quirk/torpeza)
+
+	if(ismachine(H))
+		var/obj/item/organ/internal/cyberimp/brain/clown_voice/implant = new
+		implant.insert(H)
+	if(!ismachine(H))
+		H.dna.SetSEState(GLOB.comicblock, TRUE)
+		genemutcheck(H, GLOB.comicblock, null, MUTCHK_FORCED)
+		H.dna.default_blocks.Add(GLOB.comicblock)
+	H.check_mutations = TRUE
+	H.add_language("Clownish")
+
+// QM
+/datum/outfit/job/qm/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	. = ..()
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/mechpilot)
+
+// MINERO
+/datum/outfit/job/mining/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	. = ..()
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/mechpilot)
+
+/datum/outfit/job/cargo_tech/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	. = ..()
+	if(visualsOnly)
+		return
+	H.add_quirk(/datum/quirk/mechpilot)
 
 // Indumentaria Cadaveres de TSF Discovery //
 /datum/outfit/sol_gov/solgov_no_gun
@@ -52,3 +102,4 @@
 		/obj/item/gun/projectile/automatic/pistol/m1911 = 1,
 		/obj/item/ammo_box/magazine/m45 = 2
 	)
+// fin discovery

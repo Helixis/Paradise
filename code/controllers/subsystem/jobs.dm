@@ -80,6 +80,12 @@ SUBSYSTEM_DEF(jobs)
 			return 0
 		if(job.barred_by_disability(player.client))
 			return 0
+		if(job.age_restringed(player.client))
+			return 0
+		if(job.command_age_restringed(player.client))
+			return 0
+		if(job.captain_age_restringed(player.client))
+			return 0
 		if(!is_job_whitelisted(player, rank))
 			return 0
 
@@ -133,6 +139,15 @@ SUBSYSTEM_DEF(jobs)
 		if(job.barred_by_disability(player.client))
 			Debug("FOC player has disability rendering them ineligible for job, Player: [player]")
 			continue
+		if(job.age_restringed(player.client))
+			Debug("FOC player's character is underage rendering them ineligible for job, Player: [player]")
+			continue
+		if(job.command_age_restringed(player.client))
+			Debug("FOC player's character is underage rendering them ineligible for job, Player: [player]")
+			continue
+		if(job.captain_age_restringed(player.client))
+			Debug("FOC player's character is underage rendering them ineligible for job, Player: [player]")
+			continue
 		if(flag && !(flag in player.client.prefs.be_special))
 			Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 			continue
@@ -176,6 +191,18 @@ SUBSYSTEM_DEF(jobs)
 
 		if(job.barred_by_disability(player.client))
 			Debug("GRJ player has disability rendering them ineligible for job, Player: [player]")
+			continue
+
+		if(job.age_restringed(player.client))
+			Debug("GRJ player's character is underage rendering them ineligible for job, Player: [player]")
+			continue
+
+		if(job.command_age_restringed(player.client))
+			Debug("GRJ player's character is underage rendering them ineligible for job, Player: [player]")
+			continue
+
+		if(job.captain_age_restringed(player.client))
+			Debug("GRJ player's character is underage rendering them ineligible for job, Player: [player]")
 			continue
 
 		if(player.mind && (job.title in player.mind.restricted_roles))
@@ -353,6 +380,18 @@ SUBSYSTEM_DEF(jobs)
 
 				if(job.barred_by_disability(player.client))
 					Debug("DO player has disability rendering them ineligible for job, Player: [player], Job:[job.title]")
+					continue
+
+				if(job.age_restringed(player.client))
+					Debug("DO player's character is underage rendering them ineligible for job, Player: [player]")
+					continue
+
+				if(job.command_age_restringed(player.client))
+					Debug("DO player's character is underage rendering them ineligible for job, Player: [player]")
+					continue
+
+				if(job.captain_age_restringed(player.client))
+					Debug("DO player's character is underage rendering them ineligible for job, Player: [player]")
 					continue
 
 				if(player.mind && (job.title in player.mind.restricted_roles))
@@ -568,6 +607,15 @@ SUBSYSTEM_DEF(jobs)
 				level6++
 				continue
 			if(job.barred_by_disability(player.client))
+				level7++
+				continue
+			if(job.age_restringed(player.client))
+				level7++
+				continue
+			if(job.command_age_restringed(player.client))
+				level7++
+				continue
+			if(job.captain_age_restringed(player.client))
 				level7++
 				continue
 			if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)

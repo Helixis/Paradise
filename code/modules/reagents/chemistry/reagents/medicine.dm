@@ -792,7 +792,7 @@
 	M.SetJitter(0)
 	var/needs_update = M.mutations.len > 0 || M.disabilities > 0
 	var/update_flags = STATUS_UPDATE_NONE
-	if(prob(5))
+	if(prob(1)) //este medicamento ni deberia existir
 		if(needs_update)
 			for(var/block = 1; block<=DNA_SE_LENGTH; block++)
 				if(!(block in M.dna.default_blocks))
@@ -801,7 +801,7 @@
 			M.dna.UpdateSE()
 
 			M.dna.struc_enzymes = M.dna.struc_enzymes_original
-			update_flags |= M.adjustCloneLoss(2, FALSE)
+			update_flags |= M.adjustCloneLoss(1, FALSE)
 			// Might need to update appearance for hulk etc.
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M

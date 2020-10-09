@@ -31,7 +31,6 @@
 				medigun.LoseTarget()
 				set_ready_state(1)
 
-
 /obj/item/mecha_parts/mecha_equipment/medical/mechmedbeam/get_equip_info()
 	return "[..()] \[<a href='?src=[UID()];mode=0'>on</a>|<a href='?src=[UID()];mode=1'>off</a>\]"
 

@@ -37,6 +37,7 @@
 #define GOTTAGOFAST	32
 #define GOTTAGOFAST_METH	64
 #define IGNORESLOWDOWN	128
+#define IGNORE_SPEED_CHANGES	256
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define XENO_HOST	16384	//Tracks whether we're gonna be a baby alien's mummy.

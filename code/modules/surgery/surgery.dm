@@ -105,10 +105,12 @@
 	if(do_after(user, time * speed_mod, target = target))
 		var/advance = 0
 		var/prob_chance = 100
-
+		var/trait_mod = 1	//hispatrait
+		if(!HAS_TRAIT(user, TRAIT_CIRUJANO) && ishuman(user))	//si no tienes el trait el modificador baja
+			trait_mod = 0.5	//fin hispatrait
 		if(implement_type)	//this means it isn't a require nd or any item step.
 			prob_chance = allowed_tools[implement_type]
-		prob_chance *= get_location_modifier(target)
+		prob_chance *= get_location_modifier(target) * trait_mod
 
 
 		if(!ispath(surgery.steps[surgery.status], /datum/surgery_step/robotics) && !ispath(surgery.steps[surgery.status], /datum/surgery_step/rigsuit))//Repairing robotic limbs doesn't hurt, and neither does cutting someone out of a rig

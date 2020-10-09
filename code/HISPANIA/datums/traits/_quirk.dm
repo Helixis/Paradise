@@ -7,10 +7,19 @@
 	var/human_only = TRUE
 	var/gain_text
 	var/lose_text
-	var/medical_record_text //This text will appear on medical records for the trait. Not yet implemented
 	var/mood_quirk = FALSE //if true, this quirk affects mood and is unavailable if moodlets are disabled
 	var/mob_trait //if applicable, apply and remove this mob trait
 	var/mob/living/quirk_holder
+
+	//VARIABLES INUTILES DE CLASIFICACION
+	var/class //INGENERIA, CIENCIAS, MEDICINA, SEGURIDAD, CONDUCIR, MINERIA ETC, cosas generales
+	var/subclass //TOOLS, MECH, POD, DISPARAR, ETC, COSAS MAS ESPECIFICAS, QUIZA TENGA QUE UNIR AMBAS CLASESS EN EL FUTURO
+	//LA IDEA ES QUE QUE EL VALOR ESTE RELACIONADO CON EL TAG
+	//LOS DEFECTOS GENETICOS CON FACILES DE QUITAR POR LO QUE VALDRIAN -1 COMO MINIMO
+	//LAS SKILLS SON PERMANTES POR LOS QUE QUE DEBERIAN TENER UN ALTO VALOR
+	//Y LOS IMPLENTES PUEDEN RETIRARSE O SON AFECTADOS POR EMP Y DAÑARSE POR LO QUE QUIZA NO DEBAN VALER TAN ALTO
+	var/etiqueta //SKILL, IMPLANTE, GENETICA
+
 
 /datum/quirk/New(mob/living/quirk_mob, spawn_effects)
 	..()
@@ -75,9 +84,6 @@
 			return "None"
 		return dat.Join(", ")
 	else
-		for(var/V in roundstart_quirks)
-			var/datum/quirk/T = V
-			dat += T.medical_record_text
 		if(!dat.len)
 			return "None"
 		return dat.Join("<br>")
@@ -93,7 +99,6 @@
 		T.transfer_mob(to_mob)
 
 /*
-
 Commented version of Nearsighted to help you add your own traits
 Use this as a guideline
 

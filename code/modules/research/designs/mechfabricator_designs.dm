@@ -681,7 +681,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_lmg
 	name = "Exosuit Weapon (\"Ultra AC 2\" LMG)"
@@ -916,7 +915,6 @@
 	materials = list(MAT_METAL=10000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_carbine
 	name = "Exosuit Weapon (FNX-99 \"Hades\" Carbine)"
@@ -964,7 +962,6 @@
 	materials = list(MAT_METAL=22000,MAT_GOLD=6000,MAT_SILVER=8000)
 	construction_time = 100
 	category = list("Exosuit Equipment")
-	locked = 1
 
 /datum/design/mech_missile_rack
 	name = "Exosuit Weapon (SRM-8 Missile Rack)"

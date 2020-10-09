@@ -1046,6 +1046,12 @@
 /obj/spacepod/proc/handlerelaymove(mob/user, direction)
 	if(world.time < next_move)
 		return 0
+	if(!HAS_TRAIT(user, TRAIT_POD_PILOT) && ishuman(user))
+		if(prob(80))
+			to_chat(user, "<span class='warning'>No logras hacer que esta maldita chatarra avance.</span>")
+			battery.use(1) //modifique esto porque yo soy el dios de las baterias, attentamente EVAN
+			next_move = world.time + move_delay
+			return FALSE
 	var/moveship = 1
 	if(battery && battery.charge >= 1 && health && empcounter == 0)
 		src.dir = direction
@@ -1085,7 +1091,7 @@
 		else
 			to_chat(user, "<span class='warning'>Unknown error has occurred, yell at the coders.</span>")
 		return 0
-	battery.charge = max(0, battery.charge - 1)
+	battery.use(1) //modifique esto porque yo soy el dios de las baterias, attentamente EVAN
 	next_move = world.time + move_delay
 
 /obj/effect/landmark/spacepod/random

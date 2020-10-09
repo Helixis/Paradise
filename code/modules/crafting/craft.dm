@@ -165,6 +165,8 @@
 						return ", missing tool."
 					if(!check_pathtools(user, R, contents))
 						return ", missing tool."
+					if(HAS_TRAIT(user, TRAIT_NO_CRAFT))
+						return ", no enough skill."
 					var/list/parts = del_reqs(R, user)
 					var/atom/movable/I = new R.result (get_turf(user.loc))
 					I.CheckParts(parts, R)
