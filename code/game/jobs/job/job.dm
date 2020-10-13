@@ -49,6 +49,10 @@
 	var/exp_requirements = 0
 	var/exp_type = ""
 
+	var/minimal_character_age = 0
+	var/minimal_command_character_age = 0
+	var/minimal_captain_character_age = 0
+
 	var/disabilities_allowed = 1
 	var/transfer_allowed = TRUE // If false, ID computer will always discourage transfers to this job, even if player is eligible
 	var/hidden_from_job_prefs = FALSE // if true, job preferences screen never shows this job.
@@ -111,6 +115,30 @@
 		return 0
 
 	return max(0, minimal_player_age - C.player_age)
+
+/datum/job/proc/age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_character_age)
+		return 0
+	if(C.prefs.age < 18)
+		return 1
+
+/datum/job/proc/command_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_command_character_age)
+		return 0
+	if(C.prefs.age < 25)
+		return 1
+
+/datum/job/proc/captain_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_captain_character_age)
+		return 0
+	if(C.prefs.age < 30)
+		return 1
 
 /datum/job/proc/barred_by_disability(client/C)
 	if(!C)

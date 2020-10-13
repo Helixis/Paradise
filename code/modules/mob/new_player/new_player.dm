@@ -315,6 +315,7 @@
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
+
 	if(!SSticker || SSticker.current_state != GAME_STATE_PLAYING)
 		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return 0
@@ -328,7 +329,15 @@
 	if(thisjob.barred_by_disability(client))
 		to_chat(src, alert("[rank] is not available due to your character's disability. Please try another."))
 		return 0
-
+	if(thisjob.age_restringed(client))
+		to_chat(src, alert("[rank] is not available due to your character's age. Please try another."))
+		return 0
+	if(thisjob.command_age_restringed(client))
+		to_chat(src, alert("[rank] is not available due to your character's age. Please try another."))
+		return 0
+	if(thisjob.captain_age_restringed(client))
+		to_chat(src, alert("[rank] is not available due to your character's age. Please try another."))
+		return 0
 	SSjobs.AssignRole(src, rank, 1)
 
 	var/mob/living/character = create_character()	//creates the human and transfers vars and mind
@@ -497,7 +506,7 @@
 		"Supply" = list(jobs = list(), titles = GLOB.supply_positions, color = "#ead4ae"),
 		)
 	for(var/datum/job/job in SSjobs.occupations)
-		if(job && IsJobAvailable(job.title) && !job.barred_by_disability(client))
+		if(job && IsJobAvailable(job.title) && !job.barred_by_disability(client) && !job.age_restringed(client) && !job.command_age_restringed(client) && !job.captain_age_restringed(client))
 			num_jobs_available++
 			activePlayers[job] = 0
 			var/categorized = 0
