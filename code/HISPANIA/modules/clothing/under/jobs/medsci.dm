@@ -13,11 +13,13 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	hispania_icon = TRUE
 
 /obj/item/clothing/under/rank/research_director/formal
+	name = "research director's black formal uniform"
 	desc = "A formal uniform with a tie and a badge, it says Research Director"
 	icon_state = "rd_black"
 	item_color = "rd_black"
 
 /obj/item/clothing/under/rank/research_director/formal/purple
+	name = "research director's purple formal uniform"
 	icon_state = "rd_purple"
 	item_color = "rd_purple"
 	species_restricted = list("exclude", "Grey", "Vox")
