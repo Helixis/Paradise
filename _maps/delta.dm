@@ -7,6 +7,7 @@ z1 = station
 z2 = centcomm
 z3 = space (empty)
 z4 = lavaland
+
 Original design by Okand37 of TG Station
 Lovingly ported by Purpose2 to Paradise
 */
