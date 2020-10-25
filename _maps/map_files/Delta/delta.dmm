@@ -65773,9 +65773,7 @@
 	dir = 9
 	},
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L13"
-	},
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "cnz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -116140,12 +116138,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"fOy" = (
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L14"
-	},
-/area/hallway/primary/central)
 "fQw" = (
 /turf/simulated/wall/r_wall,
 /area/security/evidence)
@@ -159916,7 +159908,7 @@ ciO
 ckw
 clV
 cny
-fOy
+coD
 cqd
 crI
 csU
