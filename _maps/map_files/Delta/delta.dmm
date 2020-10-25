@@ -90327,7 +90327,6 @@
 	pixel_x = 28
 	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
-/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel,
 /area/toxins/explab)
 "dgl" = (
@@ -100739,14 +100738,6 @@
 	id = "toxinsdriver";
 	pixel_x = -26;
 	pixel_y = 6
-	},
-/obj/machinery/camera{
-	active_power_usage = 0;
-	c_tag = "Bomb Test Site";
-	dir = 4;
-	invuln = 1;
-	network = list("SS13,Toxins");
-	use_power = 0
 	},
 /turf/simulated/floor/plasteel,
 /area/toxins/mixing)
