@@ -761,9 +761,18 @@
 
 		if("sniff", "sniffs")
 			message = "<B>[src]</B> sniffs."
-			m_type = 2
+			playsound(loc, 'sound/hispania/effects/emotes/female/female_sniff.ogg', 50, 1, frequency = get_age_pitch())
+			m_type = 1
 			if(miming)
+				message = "<B>[src]</B> sniff silently."
 				m_type = 1
+			else
+				if(!muzzled)
+					message = "<B>[src]</B> make noise"
+					m_type = 2
+				else
+					message = "<B>[src]</B> makes a strong noise."
+					m_type = 2
 
 		if("snore", "snores")
 			if(miming)
@@ -945,12 +954,53 @@
 				src.vomit()
 				return
 
+		if("meow", "meows")
+			message = "<B>[src]</B> meow like a cat!"
+			playsound(loc, 'sound/hispania/effects/emotes/meow.ogg', 50, 1, frequency = get_age_pitch())
+			m_type = 1
+			if(miming)
+				message = "<B>[src]</B> meows silently."
+				m_type = 1
+			else
+				if(!muzzled)
+					message = "<B>[src]</B> make noise"
+					m_type = 2
+				else
+					message = "<B>[src]</B> makes a strong noise."
+					m_type = 2
+
+		if("bark", "barks")
+			message = "<B>[src]</B> barks like a... dog?"
+			playsound(loc, 'sound/hispania/effects/emotes/bark1.ogg', 50, 1, frequency = get_age_pitch())
+			m_type = 1
+			if(miming)
+				message = "<B>[src]</B> barks silently."
+				m_type = 1
+			else
+				if(!muzzled)
+					message = "<B>[src]</B> make noise"
+					m_type = 2
+				else
+					message = "<B>[src]</B> makes a strong noise."
+					m_type = 2
+
+		if("noseb")
+			m_type = 1
+			if(!restrained())
+				var/M = handle_emote_param(param, null, 1)
+
+				if(M)
+					message = "<B>[src] boops [M] nose!"
+				else
+					message = "<B>[src] boops [p_them()] nose!"
+				playsound(loc, 'sound/hispania/effects/emotes/Nose_boop.ogg', 50, 1)
+
 		//HISPANIA EMOTES END HERE
 
 		if("help")
-			var/emotelist = "aflap(s), airguitar, blink(s), blink(s)_r, blush(es), bow(s)-(none)/mob, burp(s), choke(s), chuckle(s), clap(s), collapse(s), cough(s),cry, cries, custom, dance, dap(s)(none)/mob," \
+			var/emotelist = "aflap(s), airguitar, bark(s), blink(s), blink(s)_r, blush(es), bow(s)-(none)/mob, burp(s), choke(s), chuckle(s), clap(s), collapse(s), cough(s),cry, cries, custom, dance, dap(s)(none)/mob," \
 			+ " deathgasp(s), drool(s), eyebrow, fart(s), faint(s), flap(s), flip(s), frown(s), gasp(s), giggle(s), glare(s)-(none)/mob, grin(s), groan(s), grumble(s), grin(s)," \
-			+ " handshake-mob, hug(s)-(none)/mob, hem, highfive, johnny, jump, laugh(s), look(s)-(none)/mob, moan(s), mumble(s), nod(s), pale(s), point(s)-atom, puke, quiver(s), raise(s), salute(s)-(none)/mob, scream(s), shake(s)," \
+			+ " handshake-mob, hug(s)-(none)/mob, hem, highfive, johnny, jump, laugh(s), look(s)-(none)/mob, moan(s), meow(s), mumble(s), nod(s), noseb, pale(s), point(s)-atom, puke, quiver(s), raise(s), salute(s)-(none)/mob, scream(s), shake(s)," \
 			+ " shiver(s), shrug(s), sigh(s), signal(s)-#1-10,slap(s)-(none)/mob, smile(s),snap(s), sneeze(s), sniff(s), snore(s), stare(s)-(none)/mob, swag(s), tremble(s), twitch(es), twitch(es)_s," \
 			+ " wag(s), wave(s),  whimper(s), wink(s), yawn(s), quill(s)"
 
