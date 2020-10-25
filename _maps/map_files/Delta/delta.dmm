@@ -12666,6 +12666,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 26
 	},
+/obj/item/rcs,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "brown"
@@ -14163,6 +14164,10 @@
 	location = "QM #1"
 	},
 /obj/effect/decal/warning_stripes/yellow,
+/obj/structure/window/reinforced{
+	dir = 1;
+	layer = 2.9
+	},
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "aCK" = (
@@ -14909,10 +14914,6 @@
 	location = "QM #2"
 	},
 /obj/effect/decal/warning_stripes/yellow,
-/mob/living/simple_animal/bot/mulebot{
-	home_destination = "QM #2";
-	suffix = "#2"
-	},
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "aDU" = (
@@ -19577,10 +19578,6 @@
 	location = "QM #4"
 	},
 /obj/effect/decal/warning_stripes/yellow,
-/mob/living/simple_animal/bot/mulebot{
-	home_destination = "QM #4";
-	suffix = "#4"
-	},
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "aLW" = (
@@ -22632,6 +22629,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel{
 	dir = 4;
 	icon_state = "neutralcorner"
@@ -22817,6 +22815,7 @@
 /obj/structure/table,
 /obj/item/folder/yellow,
 /obj/item/destTagger,
+/obj/item/rcs,
 /turf/simulated/floor/plasteel{
 	dir = 2;
 	icon_state = "brown"
@@ -23694,6 +23693,7 @@
 /obj/item/stack/sheet/metal{
 	amount = 50
 	},
+/obj/item/rcs,
 /turf/simulated/floor/plasteel{
 	dir = 8;
 	icon_state = "neutralfull"
@@ -34138,6 +34138,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/item/rcs,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "brown"
@@ -46724,6 +46725,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel{
 	dir = 8;
 	icon_state = "neutralfull"
@@ -62430,6 +62432,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel,
 /area/security/brig)
 "cgm" = (
@@ -66343,7 +66346,7 @@
 	level = 1
 	},
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plasteel/hispania,
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "cnv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -66352,18 +66355,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L3"
-	},
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "cnw" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L5"
-	},
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "cnx" = (
 /obj/structure/cable{
@@ -66376,9 +66375,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L7"
-	},
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "cny" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -66903,9 +66900,7 @@
 /area/hallway/primary/central)
 "coD" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L2"
-	},
+/turf/simulated/floor/plasteel,
 /area/hallway/primary/central)
 "coE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -90944,6 +90939,7 @@
 	pixel_x = 28
 	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel,
 /area/toxins/explab)
 "dgl" = (
@@ -116482,17 +116478,6 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/carpet/black,
 /area/magistrateoffice)
-"eiR" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L9"
-	},
-/area/hallway/primary/central)
 "ejp" = (
 /obj/effect/spawner/lootdrop/trade_sol/civ,
 /obj/structure/closet,
@@ -116934,17 +116919,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"gEo" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L11"
-	},
-/area/hallway/primary/central)
 "gEw" = (
 /obj/structure/rack{
 	dir = 8;
@@ -117118,11 +117092,6 @@
 	icon_state = "neutralfull"
 	},
 /area/atmos/control)
-"hSi" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L4"
-	},
-/area/hallway/primary/central)
 "hXm" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -117797,12 +117766,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/atmos/distribution)
-"mzu" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L6"
-	},
-/area/hallway/primary/central)
 "mOm" = (
 /obj/effect/decal/cleanable/blood,
 /obj/structure/fans/tiny,
@@ -117900,11 +117863,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/prison/cell_block/A)
-"ndx" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L10"
-	},
-/area/hallway/primary/central)
 "ndY" = (
 /obj/structure/chair/office/dark{
 	dir = 8
@@ -118609,6 +118567,12 @@
 	icon_state = "wall3"
 	},
 /area/shuttle/tsf)
+"qxv" = (
+/obj/machinery/telepad_cargo,
+/turf/simulated/floor/plasteel{
+	icon_state = "white"
+	},
+/area/medical/medbay3)
 "qyq" = (
 /obj/item/mounted/mirror,
 /turf/simulated/shuttle/wall{
@@ -118876,11 +118840,6 @@
 /obj/item/storage/box/ids,
 /turf/simulated/floor/plasteel,
 /area/space)
-"soq" = (
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L12"
-	},
-/area/hallway/primary/central)
 "ssQ" = (
 /turf/simulated/wall,
 /area/clownoffice)
@@ -119594,18 +119553,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"vFE" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/plasteel/hispania{
-	icon_state = "L8"
-	},
-/area/hallway/primary/central)
 "vFX" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -159259,7 +159206,7 @@ ciJ
 bYv
 clR
 cnv
-hSi
+ckv
 cpZ
 crD
 csP
@@ -159516,7 +159463,7 @@ ciK
 ciK
 clS
 cnw
-mzu
+ciK
 cqn
 crE
 csQ
@@ -159773,7 +159720,7 @@ ciL
 ciL
 clT
 cnx
-vFE
+ciL
 cqb
 crF
 csR
@@ -160029,8 +159976,8 @@ chp
 ciM
 ckv
 pnH
-eiR
-ndx
+cnv
+ckv
 cqc
 crG
 csS
@@ -160286,8 +160233,8 @@ bYx
 ciN
 bYx
 clU
-gEo
-soq
+cnv
+ckv
 cqc
 crD
 csT
@@ -167762,7 +167709,7 @@ oIC
 cMC
 cSP
 cOg
-daa
+qxv
 cXz
 daa
 cZQ
