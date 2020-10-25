@@ -36794,7 +36794,7 @@
 /obj/machinery/door_control{
 	id = "hosshutter";
 	name = "HoS Privacy Shutter";
-	req_one_access_txt = "56"
+	req_one_access_txt = "58"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
@@ -38365,16 +38365,6 @@
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
 /area/hallway/primary/central)
-"btI" = (
-/obj/structure/closet/emcloset,
-/obj/effect/decal/warning_stripes/yellow,
-/turf/simulated/floor/plasteel,
-/area/space/nearstation)
-"btJ" = (
-/obj/structure/closet/firecloset,
-/obj/effect/decal/warning_stripes/yellow,
-/turf/simulated/floor/plasteel,
-/area/space/nearstation)
 "btK" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -46701,6 +46691,13 @@
 	dir = 1;
 	network = list("SS13")
 	},
+/obj/machinery/turretid/stun{
+	control_area = "\improper AI Upload Chamber";
+	name = "AI Upload Turret Control";
+	pixel_x = 0;
+	pixel_y = -24;
+	req_access = list(75)
+	},
 /turf/simulated/floor/carpet,
 /area/bridge)
 "bHt" = (
@@ -51381,6 +51378,10 @@
 /area/security/armoury)
 "bPA" = (
 /obj/effect/decal/warning_stripes/northeast,
+/obj/machinery/navbeacon{
+	codes_txt = "patrol;next_patrol=Armory_South";
+	location = "Armory_North"
+	},
 /turf/simulated/floor/plasteel,
 /area/security/armoury)
 "bPB" = (
@@ -55086,6 +55087,13 @@
 	network = list("Minisat","SS13");
 	pixel_y = -22
 	},
+/obj/machinery/turretid/stun{
+	control_area = "\improper AI Satellite Antechamber";
+	name = "AI Antechamber Turret Control";
+	pixel_x = -24;
+	pixel_y = 0;
+	req_access_txt = "75"
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -57517,6 +57525,10 @@
 	level = 1
 	},
 /obj/structure/chair/office/dark,
+/obj/machinery/navbeacon{
+	codes_txt = "patrol;next_patrol=Armory_North";
+	location = "Armory_South"
+	},
 /turf/simulated/floor/plasteel,
 /area/security/armoury)
 "bZf" = (
@@ -57557,7 +57569,7 @@
 	},
 /obj/machinery/door/airlock/highsecurity{
 	name = "AI Upload Access";
-	req_access_txt = "16"
+	req_access_txt = "75"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "vault";
@@ -59238,6 +59250,7 @@
 /obj/item/paper/safe_code{
 	owner = "captain"
 	},
+/obj/item/hand_tele,
 /turf/simulated/floor/plasteel{
 	icon_state = "grimy"
 	},
@@ -116846,7 +116859,7 @@
 	dir = 8
 	},
 /turf/simulated/shuttle/floor,
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "kCn" = (
 /turf/space,
 /turf/simulated/shuttle/wall{
@@ -117126,7 +117139,7 @@
 	dir = 8
 	},
 /turf/simulated/shuttle/floor,
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "mtb" = (
 /obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/carpet,
@@ -117297,7 +117310,7 @@
 	icon_state = "swall_f6";
 	dir = 2
 	},
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "njG" = (
 /obj/machinery/light/spot{
 	tag = "icon-tube1 (WEST)";
@@ -117441,7 +117454,7 @@
 	icon_state = "swall_f9";
 	dir = 2
 	},
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "nQV" = (
 /obj/structure/spawner/headcrab_old,
 /turf/simulated/shuttle/floor{
@@ -117505,6 +117518,12 @@
 	},
 /turf/simulated/floor/plating/airless,
 /area/toxins/test_area)
+"ozo" = (
+/mob/living/simple_animal/bot/secbot/armsky{
+	auto_patrol = 1
+	},
+/turf/simulated/floor/plasteel,
+/area/security/armoury)
 "oCk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -117720,7 +117739,7 @@
 	name = "Escape Pod Hatch"
 	},
 /turf/simulated/shuttle/floor,
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "pry" = (
 /obj/effect/mob_spawn/human/sol_gov_dead_default,
 /turf/simulated/shuttle/floor{
@@ -117850,11 +117869,24 @@
 	icon_state = "neutralfull"
 	},
 /area/security/checkpoint/engineering)
+"pZX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/turretid/stun{
+	control_area = "\improper AI Upload Chamber";
+	name = "AI Upload Turret Control";
+	pixel_x = 0;
+	pixel_y = -24;
+	req_access = list(75)
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "dark"
+	},
+/area/turret_protected/aisat_interior)
 "qbB" = (
 /obj/structure/grille,
 /obj/structure/window/full/shuttle,
 /turf/simulated/shuttle/plating,
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "qbO" = (
 /obj/machinery/vending/accesories,
 /obj/machinery/light,
@@ -118821,7 +118853,7 @@
 	icon_state = "swall_f5";
 	dir = 2
 	},
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "uSE" = (
 /turf/simulated/wall,
 /area/medical/research{
@@ -118855,7 +118887,7 @@
 	layer = 2;
 	tag = "icon-swall_f10"
 	},
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "vgB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4;
@@ -119180,9 +119212,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"wHV" = (
-/turf/space,
-/area/tcommsat/chamber)
 "wKf" = (
 /obj/effect/decal/cleanable/blood,
 /obj/structure/fans/tiny,
@@ -119365,7 +119394,7 @@
 	icon_state = "swall12";
 	dir = 2
 	},
-/area/maintenance/aft)
+/area/shuttle/pod_4)
 "xDo" = (
 /obj/machinery/light{
 	dir = 1
@@ -124440,9 +124469,9 @@ aaa
 aaa
 aaa
 aaa
-wHV
-wHV
-wHV
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -124697,9 +124726,9 @@ aaa
 aaa
 aaa
 aaa
-wHV
-wHV
-wHV
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -128801,7 +128830,7 @@ bPM
 bRC
 bTE
 bVS
-bPM
+pZX
 bNQ
 caY
 ccX
@@ -163222,9 +163251,9 @@ boA
 bqv
 bsr
 bsv
-btI
-btI
-btJ
+bxi
+bxi
+bvV
 bwf
 aot
 bCA
@@ -173518,7 +173547,7 @@ bQn
 bQn
 bQn
 bXq
-bXz
+ozo
 bZd
 caR
 ccP
