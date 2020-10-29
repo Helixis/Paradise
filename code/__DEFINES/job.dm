@@ -19,6 +19,7 @@
 #define JOB_CYBORG			(1<<9)
 #define JOB_CENTCOM			(1<<10)
 #define JOB_SYNDICATE			(1<<11)
+#define JOB_INTERNSEC		(1<<12) //Cadetes
 
 #define JOBCAT_MEDSCI			(1<<1)
 
@@ -33,6 +34,8 @@
 #define JOB_ROBOTICIST		(1<<8)
 #define JOB_PARAMEDIC			(1<<9)
 #define JOB_CORONER			(1<<10)
+#define JOB_INTERN 			(1<<11) //Interno de med
+#define JOB_TECHWR			(1<<12) //Interno de ciencias
 
 
 #define JOBCAT_SUPPORT			(1<<2)
@@ -52,6 +55,8 @@
 #define JOB_MIME				(1<<12)
 #define JOB_CIVILIAN			(1<<13)
 #define JOB_EXPLORER			(1<<14)
+#define JOB_WAITER				(1<<15)	//Mesero
+#define JOB_COURIER				(1<<16)	//Mensajero
 
 #define JOBCAT_KARMA				(1<<3)
 

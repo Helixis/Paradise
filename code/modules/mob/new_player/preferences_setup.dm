@@ -423,7 +423,7 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-norm"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JOB_BARTENDER)
+			if(JOB_BARTENDER || JOB_WAITER) // Mesero
 				clothes_s = new /icon(uniform_dmi, "ba_suit_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 				if(prob(1))
@@ -499,7 +499,7 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-norm"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JOB_CARGOTECH)
+			if(JOB_CARGOTECH || JOB_COURIER) //Mensajero
 				clothes_s = new /icon(uniform_dmi, "cargotech_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 				clothes_s.Blend(new /icon('icons/mob/hands.dmi', "bgloves"), ICON_UNDERLAY)
@@ -585,7 +585,7 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-tox"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JOB_SCIENTIST)
+			if(JOB_SCIENTIST || JOB_TECHWR) //Internos de Ciencias
 				clothes_s = new /icon(uniform_dmi, "toxinswhite_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
 				clothes_s.Blend(new /icon('icons/mob/suit.dmi', "labcoat_tox_open"), ICON_OVERLAY)
@@ -626,7 +626,7 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-med"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JOB_DOCTOR)
+			if(JOB_DOCTOR || JOB_INTERN) //Internos de Med
 				clothes_s = new /icon(uniform_dmi, "medical_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
 				if(prob(1))
@@ -776,7 +776,7 @@
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-norm"), ICON_OVERLAY)
 					if(4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-			if(JOB_OFFICER)
+			if(JOB_OFFICER || JOB_INTERNSEC) //Internos de seguridad
 				clothes_s = new /icon(uniform_dmi, "secred_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "jackboots"), ICON_UNDERLAY)
 				if(prob(1))

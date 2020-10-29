@@ -28,7 +28,8 @@ GLOBAL_LIST_INIT(medical_positions, list(
 	"Chemist",
 	"Virologist",
 	"Paramedic",
-	"Coroner"
+	"Coroner",
+	"Intern"
 ))
 
 
@@ -37,6 +38,7 @@ GLOBAL_LIST_INIT(science_positions, list(
 	"Scientist",
 	//"Geneticist",	//Nosotros no tenemos genetista de ciencias por balance
 	"Roboticist",
+	"Science Assistant"
 ))
 
 //BS12 EDIT
@@ -58,14 +60,16 @@ GLOBAL_LIST_INIT(support_positions, list(
 	"Magistrate",
 	"Nanotrasen Representative",
 	"Blueshield",
-	"Explorer"
+	"Explorer",
+	"Waiter"
 ))
 
 GLOBAL_LIST_INIT(supply_positions, list(
 	"Head of Personnel",
 	"Quartermaster",
 	"Cargo Technician",
-	"Shaft Miner"
+	"Shaft Miner",
+	"Courier"
 ))
 
 GLOBAL_LIST_INIT(service_positions, (list("Head of Personnel") + (support_positions - supply_positions)))
@@ -78,7 +82,8 @@ GLOBAL_LIST_INIT(security_positions, list(
 	"Security Officer",
 	"Brig Physician",
 	"Security Pod Pilot",
-	"Magistrate"
+	"Magistrate",
+	"Cadet"
 ))
 
 

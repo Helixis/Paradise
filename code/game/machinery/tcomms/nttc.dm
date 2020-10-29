@@ -64,6 +64,7 @@
 		"Surgeon" = "medradio",
 		"Therapist" = "medradio",
 		"Virologist" = "medradio",
+		"Intern" = "medradio",
 		// Science
 		"Anomalist" = "sciradio",
 		"Biomechanical Engineer" = "sciradio",
@@ -76,6 +77,7 @@
 		"Scientist" = "sciradio",
 		"Xenoarcheologist" = "sciradio",
 		"Xenobiologist" = "sciradio",
+		"Science Assistant" = "sciradio",
 		// Security
 		"Brig Physician" = "secradio",
 		"Detective" = "secradio",
@@ -87,11 +89,13 @@
 		"Security Officer" = "secradio",
 		"Security Pod Pilot" = "secradio",
 		"Warden" = "secradio",
+		"Cadet" = "secradio",
 		// Supply
 		"Quartermaster" = "supradio",
 		"Cargo Technician" = "supradio",
 		"Shaft Miner" = "supradio",
 		"Spelunker" = "supradio",
+		"Courier" = "supradio",
 		// Service
 		"Barber" = "srvradio",
 		"Bartender" = "srvradio",
@@ -111,6 +115,7 @@
 		"Journalist" = "srvradio",
 		"Librarian" = "srvradio",
 		"Mime" = "srvradio",
+		"Waiter" = "srvradio"
 	)
 	// Just command members
 	var/heads = list("Captain", "Head of Personnel", "Nanotrasen Representative", "Blueshield", "Chief Engineer", "Chief Medical Officer", "Research Director", "Head of Security", "Magistrate", "AI")
