@@ -7,7 +7,7 @@
 	forceMove(get_turf(T))
 	notransform = TRUE
 	incorporeal_move = 3
-	density = 0
+	density = FALSE
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	dimension = TRUE
 	visible_message("<span class='danger'>[src] sinks into [T]!</span>")
@@ -16,18 +16,16 @@
 	rust(T)
 	icon_state = "entering"
 
-	if(pulling)
-		if(istype(pulling, /mob/living/))
-			var/mob/living/victim = pulling
-			if(victim.stat == CONSCIOUS)
-				visible_message("<span class='warning'>[victim] kicks free of [src] just before entering it!</span>")
-				stop_pulling()
-			else
-				victim.forceMove(src)
-				victim.emote("scream")
-				visible_message("<span class='warning'><b>[src] drags [victim] into [T]!</b></span>")
-				kidnapped = victim
-				stop_pulling()
+	if(pulling && isliving(pulling))
+		var/mob/living/victim = pulling
+		if(victim.stat == CONSCIOUS)
+			visible_message("<span class='warning'>[victim] kicks free of [src] just before entering it!</span>")
+		else
+			victim.forceMove(src)
+			victim.emote("scream")
+			visible_message("<span class='warning'><b>[src] drags [victim] into [T]!</b></span>")
+			kidnapped = victim
+		stop_pulling()
 
 	if(kidnapped)
 		to_chat(src, "<B>You begin to feast on [kidnapped]. You can not move while you are doing this.</B>")
@@ -50,19 +48,19 @@
 	notransform = FALSE
 	invisibility = INVISIBILITY_REVENANT
 	icon_state = "idle"
-	return
 
-/mob/living/simple_animal/hostile/oldman/proc/outdimension(var/turf/simulated/wall/T)
+
+/mob/living/simple_animal/hostile/oldman/proc/outdimension(turf/simulated/wall/T)
 	if(notransform)
 		to_chat(src, "<span class='warning'>You have to finish first!</span>")
 		return
-
+	if(!T)
+		return
 	playsound(get_turf(T), 'sound/weapons/sear.ogg', 100, 1, -1)
 	to_chat(viewers(T), "<span class='warning'>[T] starts to melt away...</span>")
 	notransform = TRUE
 	if(!do_after(src, 10, target = T))
-		return
-	if(!T)
+		notransform = FALSE
 		return
 	forceMove(get_turf(T))
 	rust(T)
@@ -70,21 +68,19 @@
 	invisibility = 0
 	client.eye = src
 	icon_state = "emergence"
-	sleep(20)
-	icon_state = "oldman"
-	notransform = FALSE
+	spawn(20)
+		icon_state = "oldman"
 	incorporeal_move = 0
 	speed = 7
-	density = 1
+	density = TRUE
 	pass_flags = 0
 	dimension = FALSE
 
-	var/list/voice = list('sound/hispania/effects/oldman/oldlaugh2.ogg','sound/hispania/effects/oldman/oldgrowl.ogg')
-	playsound(get_turf(src), pick(voice),50, 1, -1)
+	var/list/voices = list('sound/hispania/effects/oldman/oldlaugh2.ogg','sound/hispania/effects/oldman/oldgrowl.ogg')
+	playsound(get_turf(src), pick(voices),50, 1, -1)
 	visible_message("<span class='warning'><B>\The [src] emerges out of \the [T]!</B>")
-	return
 
-/mob/living/simple_animal/hostile/oldman/proc/rust(var/turf/simulated/wall/T)
+/mob/living/simple_animal/hostile/oldman/proc/rust(turf/simulated/wall/T)
 	if(!istype(T, /turf/simulated/shuttle) && !istype(T, /turf/simulated/wall/rust) && !istype(T, /turf/simulated/wall/r_wall) && istype(T, /turf/simulated/wall))
 		T.ChangeTurf(/turf/simulated/wall/rust)
 	if(!istype(T, /turf/simulated/wall/r_wall/rust) && istype(T, /turf/simulated/wall/r_wall))

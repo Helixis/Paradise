@@ -14,11 +14,10 @@
 	icon_living = "oldman"
 	incorporeal_move = 3
 	invisibility = INVISIBILITY_REVENANT
-	density = 0
+	density = FALSE
 	move_resist = INFINITY
 	mob_size = MOB_SIZE_TINY
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
-	var/dimension = TRUE
 	speed = 1
 	wander = 0
 	a_intent = INTENT_HARM
@@ -41,9 +40,6 @@
 	see_in_dark = 8
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 
-	var/last_meal
-	var/list/consumed_mobs = list()
-
 	loot = list(/obj/effect/decal/cleanable/blood/oil/sludge, /obj/effect/decal/cleanable/blood/oil/sludge, /obj/effect/gibspawner/generic, /obj/effect/gibspawner/generic)
 
 	del_on_death = 1
@@ -52,9 +48,13 @@
 	vision_range = 1
 	aggro_vision_range = 1
 
+	var/dimension = TRUE
+	var/last_meal
+	var/list/consumed_mobs = list()
 
-/mob/living/simple_animal/hostile/oldman/New()
-	..()
+
+/mob/living/simple_animal/hostile/oldman/Initialize(mapload)
+	. = ..()
 	remove_from_all_data_huds()
 	last_meal = world.time
 	addtimer(CALLBACK(src, .proc/giveObjective), 15 SECONDS)
@@ -72,7 +72,7 @@
 		to_chat(src, "<B><span class ='notice'>You are not currently in the same plane of existence as the station. Click a wall to emerge.</span></B>")
 
 /mob/living/simple_animal/hostile/oldman/Life(seconds, times_fired)
-	..()
+	.=..()
 	if(!dimension)
 		if(prob(20))
 			new /obj/effect/decal/cleanable/blood/oil/sludge(get_turf(src))
