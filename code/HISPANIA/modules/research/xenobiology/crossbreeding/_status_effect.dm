@@ -1,3 +1,11 @@
+/mob/living/carbon
+	var/carbon_siemens_coeff = 1
+
+/mob/living/carbon/human
+	var/human_brute_mod = 1
+	var/human_burn_mod = 1
+	var/human_hunger_drain = 1
+
 ///////////////////////////////////////
 ///////////    GALLETAS     //////////
 /////////////////////////////////////
@@ -50,13 +58,13 @@
 /datum/status_effect/metalcookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.brute_mod *= 0.9
+		H.human_brute_mod -= 0.1
 	return ..()
 
 /datum/status_effect/metalcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.brute_mod /= 0.9
+		H.human_brute_mod += 0.1
 
 /datum/status_effect/sparkcookie
 	id = "sparkcookie"
@@ -68,25 +76,25 @@
 /datum/status_effect/sparkcookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		original_coeff = H.dna.species.siemens_coeff
-		H.dna.species.siemens_coeff = 0
+		original_coeff = H.carbon_siemens_coeff
+		H.carbon_siemens_coeff = 0
 	return ..()
 
 /datum/status_effect/sparkcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.siemens_coeff = original_coeff
+		H.carbon_siemens_coeff = original_coeff
 
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.burn_mod *= 0.9
+		H.human_burn_mod -= 0.1
 	return ..()
 
 /datum/status_effect/adamantinecookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.burn_mod /= 0.9
+		H.human_burn_mod += 0.1
 
 ///////////////////////////////////////////////////////
 //////////////////STABILIZED EXTRACTS//////////////////
@@ -223,9 +231,11 @@
 /datum/status_effect/stabilized/yellow
 	id = "stabilizedyellow"
 	colour = "yellow"
+	examine_text = "<span class='warning'>Nearby electronics seem just a little more charged wherever SUBJECTPRONOUN goes.</span>"
+	duration = 600 //dura 1 minuto, recarga 60 veces 150 de carga, osea en un minuto recarga 9kW
+	var/energy = 150
 	var/cooldown = 10
 	var/max_cooldown = 10
-	examine_text = "<span class='warning'>Nearby electronics seem just a little more charged wherever SUBJECTPRONOUN goes.</span>"
 
 /datum/status_effect/stabilized/yellow/tick()
 	if(cooldown > 0)
@@ -238,7 +248,7 @@
 			batteries += C
 	if(batteries.len)
 		var/obj/item/stock_parts/cell/ToCharge = pick(batteries)
-		ToCharge.give(ToCharge.maxcharge/10) //10% of the cell, or to maximum.//puto jaunt, no sabe nada de baterias
+		ToCharge.give(energy)
 		for(var/obj/item/gun/energy/G in owner.GetAllContents())
 			G.on_recharge()
 			G.update_icon()
@@ -252,13 +262,13 @@
 /datum/status_effect/stabilized/silver/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.hunger_drain *= 0.8 //20% buff
+		H.human_hunger_drain *= 0.8 //20% buff
 	return ..()
 
 /datum/status_effect/stabilized/silver/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.hunger_drain /= 0.8
+		H.human_hunger_drain /= 0.8
 
 /datum/status_effect/stabilized/pyrite
 	id = "stabilizedpyrite"

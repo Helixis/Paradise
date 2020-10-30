@@ -1238,7 +1238,7 @@
 	if(dna.species.default_language)
 		add_language(dna.species.default_language)
 
-	hunger_drain = dna.species.hunger_drain
+	hunger_drain = dna.species.hunger_drain * human_hunger_drain
 	digestion_ratio = dna.species.digestion_ratio
 
 	if(dna.species.base_color && default_colour)
