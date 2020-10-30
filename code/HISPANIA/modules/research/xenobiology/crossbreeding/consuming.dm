@@ -76,7 +76,7 @@ Consuming extracts:
 			to_chat(M, "<span class='notice'>Tastes like [taste].</span>")
 		playsound(get_turf(M), 'sound/items/eatfood.ogg', 20, TRUE)
 		if(nutrition)
-			M.reagents.add_reagent("nutriment")
+			M.reagents.add_reagent("nutriment", nutrition)
 		do_effect(M, user)
 		qdel(src)
 		return
@@ -113,6 +113,48 @@ Consuming extracts:
 	M.adjustCloneLoss(-5)
 	M.adjustBrainLoss(-5)
 
+/obj/item/slimecross/consuming/blue
+	colour = "blue"
+	effect_desc = "Creates a slime cookie that wets the floor around you and makes you immune to water based slipping for a short time."
+	cookietype = /obj/item/slime_cookie/blue
+
+/obj/item/slime_cookie/blue
+	name = "water cookie"
+	desc = "A transparent blue cookie. Constantly dripping wet."
+	icon_state = "blue"
+	taste = "water"
+
+/obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/watercookie)
+
+/obj/item/slimecross/consuming/metal
+	colour = "metal"
+	effect_desc = "Creates a slime cookie that increases the target's resistance to brute damage."
+	cookietype = /obj/item/slime_cookie/metal
+
+/obj/item/slime_cookie/metal
+	name = "metallic cookie"
+	desc = "A shiny grey cookie. Hard to the touch."
+	icon_state = "metal"
+	taste = "copper"
+
+/obj/item/slime_cookie/metal/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/metalcookie)
+
+/obj/item/slimecross/consuming/yellow
+	colour = "yellow"
+	effect_desc = "Creates a slime cookie that makes the target immune to electricity for a short time."
+	cookietype = /obj/item/slime_cookie/yellow
+
+/obj/item/slime_cookie/yellow
+	name = "sparking cookie"
+	desc = "A yellow cookie with a lightning pattern. Has a rubbery texture."
+	icon_state = "yellow"
+	taste = "lemon cake and rubber gloves"
+
+/obj/item/slime_cookie/yellow/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/sparkcookie)
+
 /obj/item/slimecross/consuming/darkblue
 	colour = "dark blue"
 	effect_desc = "Creates a slime cookie that chills the target and extinguishes them."
@@ -127,6 +169,21 @@ Consuming extracts:
 /obj/item/slime_cookie/darkblue/do_effect(mob/living/M, mob/user)
 	M.adjust_bodytemperature(-110)
 	M.ExtinguishMob()
+
+/obj/item/slimecross/consuming/silver
+	colour = "silver"
+	effect_desc = "Creates a slime cookie that never gets the target fat."
+	cookietype = /obj/item/slime_cookie/silver
+
+/obj/item/slime_cookie/silver
+	name = "waybread cookie"
+	desc = "A warm, crispy cookie, sparkling silver in the light. Smells wonderful."
+	icon_state = "silver"
+	taste = "masterful elven baking"
+	nutrition = 0 //We don't want normal nutriment
+
+/obj/item/slime_cookie/silver/do_effect(mob/living/M, mob/user)
+	M.reagents.add_reagent("nutriestable", 10)
 
 /obj/item/slimecross/consuming/cerulean
 	colour = "cerulean"
@@ -219,3 +276,17 @@ Consuming extracts:
 
 /obj/item/slime_cookie/lightpink/do_effect(mob/living/M, mob/user)
 	M.apply_status_effect(/datum/status_effect/peacecookie)
+
+/obj/item/slimecross/consuming/adamantine
+	colour = "adamantine"
+	effect_desc = "Creates a slime cookie that increases the target's resistance to burn damage."
+	cookietype = /obj/item/slime_cookie/adamantine
+
+/obj/item/slime_cookie/adamantine
+	name = "crystal cookie"
+	desc = "A translucent rock candy in the shape of a cookie. Surprisingly chewy."
+	icon_state = "adamantine"
+	taste = "crystalline sugar and metal"
+
+/obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
+	M.apply_status_effect(/datum/status_effect/adamantinecookie)
