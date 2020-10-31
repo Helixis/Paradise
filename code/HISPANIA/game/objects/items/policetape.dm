@@ -268,7 +268,7 @@ GLOBAL_LIST_INIT(tape_roll_applications, list())
 		if (!allowed(M))	//only select few learn art of not crumpling the tape
 			to_chat(M, "<span class='warning'>You are not supposed to go past [src]...</span>")
 			if(M.a_intent == INTENT_HELP)
-				return 0
+				return FALSE
 	else
 		return ..(mover)
 

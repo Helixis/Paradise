@@ -76,7 +76,7 @@
 				if(ishuman(target))
 					var/mob/living/carbon/human/H = target
 					if(H.check_shields(0, "[user]'s [name]", src, MELEE_ATTACK))
-						return 0
+						return FALSE
 				playsound(get_turf(src), 'sound/effects/expropiesestun.ogg', 75)
 				target.Weaken(3)
 				add_attack_logs(user, target, "Stunned with [src]")
@@ -301,7 +301,7 @@
 				if(ishuman(target))
 					var/mob/living/carbon/human/H = target
 					if(H.check_shields(0, "[user]'s [name]", src, MELEE_ATTACK))
-						return 0
+						return FALSE
 				playsound(get_turf(src), 'sound/effects/succubuswhip.ogg', 75)
 				target.Weaken(3)
 				add_attack_logs(user, target, "Stunned with [src]")
