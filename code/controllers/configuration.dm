@@ -162,7 +162,7 @@
 	var/simultaneous_pm_warning_timeout = 100
 
 	var/assistant_maint = 0 //Do assistants get maint access?
-	var/gateway_delay = 6000 //How long the gateway takes before it activates. Default is half an hour.
+	var/gateway_delay = 6000
 	var/ghost_interaction = 0
 
 	var/comms_password = ""
@@ -255,6 +255,8 @@
 
 	var/roundstart_traits = TRUE //TRAITS
 	var/disable_human_mood = FALSE //TRAITS
+	/// BYOND account age limit for notifcations of new accounts (Any accounts older than this value will not send notifications on first join)
+	var/byond_account_age_threshold = 7
 
 /datum/configuration/New()
 	for(var/T in subtypesof(/datum/game_mode))
@@ -750,6 +752,8 @@
 					config.disable_localhost_admin = 1
 				if("enable_gamemode_player_limit")
 					config.enable_gamemode_player_limit = 1
+				if("byond_account_age_threshold")
+					config.byond_account_age_threshold = text2num(value)
 				else
 					log_config("Unknown setting in configuration: '[name]'")
 
