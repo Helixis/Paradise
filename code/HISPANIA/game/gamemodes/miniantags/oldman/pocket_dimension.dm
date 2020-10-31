@@ -1,9 +1,7 @@
-/mob/living/simple_animal/hostile/oldman/proc/indimension(var/turf/simulated/wall/T)
+/mob/living/simple_animal/hostile/oldman/proc/indimension(turf/simulated/wall/T)
 	to_chat(viewers(T), "<span class='warning'>[src] starts walking into [T]...</span>")
 	if(!do_after(src, 20, target = T))
 		return
-
-	var/mob/living/kidnapped
 	forceMove(get_turf(T))
 	notransform = TRUE
 	incorporeal_move = 3
@@ -12,9 +10,9 @@
 	dimension = TRUE
 	visible_message("<span class='danger'>[src] sinks into [T]!</span>")
 	playsound(get_turf(T), 'sound/hispania/effects/oldman/phasing.ogg', 100, 1, -1)
-	ExtinguishMob()
 	rust(T)
 	icon_state = "entering"
+	var/mob/living/kidnapped
 
 	if(pulling && isliving(pulling))
 		var/mob/living/victim = pulling
@@ -31,30 +29,27 @@
 		to_chat(src, "<B>You begin to feast on [kidnapped]. You can not move while you are doing this.</B>")
 		visible_message("<span class='warning'><B>A horrible melting sound comes from [T]...</B></span>")
 		playsound(get_turf(T), 'sound/hispania/effects/oldman/victim.ogg', 100, 1, -1)
-		sleep(75)
-		if(kidnapped)
-			to_chat(src, "<B>You feed on [kidnapped]. Your health is restored.</B>")
-			adjustBruteLoss(-kidnapped.maxHealth*2.5)
-			last_meal = world.time
+		spawn(75)
+			if(kidnapped)
+				to_chat(src, "<B>You feed on [kidnapped]. Your health is restored.</B>")
+				adjustBruteLoss(-kidnapped.maxHealth*2.5)
+				last_meal = world.time
 
-			to_chat(kidnapped, "<span class='userdanger'>You feel your flesh melting away...</span>")
-			kidnapped.adjustFireLoss(1000)
-			kidnapped.forceMove(src)
-			consumed_mobs.Add(kidnapped)
-		else
-			to_chat(src, "<span class='danger'>You happily devour... nothing? Your meal vanished at some point!</span>")
-	else
-		sleep(18)
-	notransform = FALSE
-	invisibility = INVISIBILITY_REVENANT
-	icon_state = "idle"
+				to_chat(kidnapped, "<span class='userdanger'>You feel your flesh melting away...</span>")
+				kidnapped.adjustFireLoss(1000)
+				kidnapped.death()//por si aun vive, el hijo de fruta
+				consumed_mobs.Add(kidnapped)
+			else
+				to_chat(src, "<span class='danger'>You happily devour... nothing? Your meal vanished at some point!</span>")
+	spawn(30)//para que quede mas o menos igual que con los sleeps
+		notransform = FALSE
+		invisibility = INVISIBILITY_REVENANT
+		icon_state = "idle"
 
 
 /mob/living/simple_animal/hostile/oldman/proc/outdimension(turf/simulated/wall/T)
 	if(notransform)
 		to_chat(src, "<span class='warning'>You have to finish first!</span>")
-		return
-	if(!T)
 		return
 	playsound(get_turf(T), 'sound/weapons/sear.ogg', 100, 1, -1)
 	to_chat(viewers(T), "<span class='warning'>[T] starts to melt away...</span>")

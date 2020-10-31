@@ -19,7 +19,7 @@
 	mob_size = MOB_SIZE_TINY
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	speed = 1
-	wander = 0
+	wander = FALSE
 	a_intent = INTENT_HARM
 	stop_automated_movement = 1
 	status_flags = CANPUSH
@@ -34,7 +34,7 @@
 	environment_smash = 1
 	universal_understand = 1
 	obj_damage = 50
-	melee_damage_type = "fire"
+	melee_damage_type = BURN
 	melee_damage_lower = 20
 	melee_damage_upper = 25
 	see_in_dark = 8
@@ -104,23 +104,20 @@
 		if(istype(loc, /turf/simulated/wall/rust) || istype(loc, /turf/simulated/wall/r_wall/rust))
 			to_chat(src, "<span class ='warning'>You cannot reach them!</span>")
 			return
-		var/attack = pick(list('sound/hispania/effects/oldman/gasp1.ogg','sound/hispania/effects/oldman/gasp2.ogg','sound/hispania/effects/oldman/sludge.ogg'))
-		attack_sound = attack
+		attack_sound = pick(list('sound/hispania/effects/oldman/gasp1.ogg','sound/hispania/effects/oldman/gasp2.ogg','sound/hispania/effects/oldman/sludge.ogg'))
 		var/mob/living/carbon/human/L = target
 		L.adjustStaminaLoss(20)
 		L.adjustToxLoss(3)
 		if(prob(5))
 			for(var/obj/item/organ/external/P in (L.bodyparts))
-				P.germ_level = INFECTION_LEVEL_ONE
-		..()
-	else
-		..()
+				P.germ_level += INFECTION_LEVEL_ONE //cada golpe tiene una prob de aumentar la infeccion
+	..()
 
 /mob/living/simple_animal/hostile/oldman/hitby(atom/movable/AM, datum/thrownthing/throwingdatum) //No floor tiling them to death, wiseguy
 	if(istype(AM, /obj/item))
-		var/obj/item/T = AM
 		if(!stat)
 			Aggro()
+		var/obj/item/T = AM
 		if(T.throwforce <= 10)
 			visible_message("<span class='notice'>The [src.name] seems unaffected by the [T.name]!</span>")
 			return
