@@ -113,4 +113,5 @@
 
 
 /mob/living/simple_animal/kiwi/New()
+	. = ..()
 	name = "kiwi ([rand(100,999)])"
