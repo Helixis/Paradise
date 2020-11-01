@@ -1307,7 +1307,7 @@
 	req_access_txt = "1"
 	products = list(/obj/item/restraints/handcuffs = 8,/obj/item/restraints/handcuffs/cable/zipties = 8,/obj/item/grenade/flashbang = 4,/obj/item/flash = 5,
 					/obj/item/reagent_containers/food/snacks/donut = 12,/obj/item/storage/box/evidence = 6,/obj/item/flashlight/seclite = 4,/obj/item/restraints/legcuffs/bola/energy = 7,
-					/obj/item/clothing/mask/muzzle/safety = 5)
+					/obj/item/clothing/mask/muzzle/safety = 4)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/storage/fancy/donut_box = 2,/obj/item/hailer = 5)
 	refill_canister = /obj/item/vending_refill/security
 
@@ -1358,7 +1358,6 @@
 					/obj/item/seeds/chanter = 3,
 					/obj/item/seeds/chili = 3,
 					/obj/item/seeds/cocoapod = 3,
-					/obj/item/seeds/coconut = 3,
 					/obj/item/seeds/coffee = 3,
 					/obj/item/seeds/comfrey =3,
 					/obj/item/seeds/corn = 3,
@@ -1370,12 +1369,8 @@
 					/obj/item/seeds/grass = 3,
 					/obj/item/seeds/lemon = 3,
 					/obj/item/seeds/lime = 3,
-					/obj/item/seeds/mango = 3,
-					/obj/item/seeds/mate = 3,
-					/obj/item/seeds/nispero = 3,
 					/obj/item/seeds/onion = 3,
 					/obj/item/seeds/orange = 3,
-					/obj/item/seeds/peach = 3,
 					/obj/item/seeds/peanuts = 3,
 					/obj/item/seeds/pineapple = 3,
 					/obj/item/seeds/poppy = 3,
