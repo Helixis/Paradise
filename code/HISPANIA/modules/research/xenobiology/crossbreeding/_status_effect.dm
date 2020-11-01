@@ -4,7 +4,6 @@
 /mob/living/carbon/human
 	var/human_brute_mod = 1
 	var/human_burn_mod = 1
-	var/human_hunger_drain = 1
 
 ///////////////////////////////////////
 ///////////    GALLETAS     //////////
@@ -58,13 +57,13 @@
 /datum/status_effect/metalcookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_brute_mod -= 0.1
+		H.human_brute_mod *= 0.9
 	return ..()
 
 /datum/status_effect/metalcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_brute_mod += 0.1
+		H.human_brute_mod /= 0.9
 
 /datum/status_effect/sparkcookie
 	id = "sparkcookie"
@@ -88,13 +87,13 @@
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_burn_mod -= 0.1
+		H.human_burn_mod *= 0.9
 	return ..()
 
 /datum/status_effect/adamantinecookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_burn_mod += 0.1
+		H.human_burn_mod /= 0.9
 
 ///////////////////////////////////////////////////////
 //////////////////STABILIZED EXTRACTS//////////////////
@@ -262,13 +261,13 @@
 /datum/status_effect/stabilized/silver/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_hunger_drain *= 0.8 //20% buff
+		H.hunger_drain *= 0.8 //20% buff
 	return ..()
 
 /datum/status_effect/stabilized/silver/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_hunger_drain /= 0.8
+		H.hunger_drain /= 0.8
 
 /datum/status_effect/stabilized/pyrite
 	id = "stabilizedpyrite"

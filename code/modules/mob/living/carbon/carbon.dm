@@ -154,7 +154,7 @@
 		return FALSE
 	shock_damage *= siemens_coeff
 	if(dna && dna.species)
-		shock_damage *= dna.species.siemens_coeff * carbon_siemens_coeff
+		shock_damage *= dna.species.siemens_coeff * carbon_siemens_coeff//carbon_siemens_coeff es una variable hispana
 	if(shock_damage < 1 && !override)
 		return FALSE
 	if(reagents.has_reagent("teslium"))

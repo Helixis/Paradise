@@ -85,7 +85,7 @@
 /mob/living/carbon/human/adjustBruteLoss(amount, updating_health = TRUE, damage_source = null, robotic = FALSE)
 	if(amount > 0)
 		if(dna.species)
-			amount = amount * dna.species.brute_mod * human_brute_mod
+			amount = amount * dna.species.brute_mod * human_brute_mod//human_brute_mod es una variable hispana
 		take_overall_damage(amount, 0, updating_health, used_weapon = damage_source)
 	else
 		heal_overall_damage(-amount, 0, updating_health, FALSE, robotic)
@@ -95,7 +95,7 @@
 /mob/living/carbon/human/adjustFireLoss(amount, updating_health = TRUE, damage_source = null, robotic = FALSE)
 	if(amount > 0)
 		if(dna.species)
-			amount = amount * dna.species.burn_mod * human_burn_mod
+			amount = amount * dna.species.burn_mod * human_burn_mod//human_burn_mod es una variable hispana
 		take_overall_damage(0, amount, updating_health, used_weapon = damage_source)
 	else
 		heal_overall_damage(0, -amount, updating_health, FALSE, robotic)
@@ -104,7 +104,7 @@
 
 /mob/living/carbon/human/proc/adjustBruteLossByPart(amount, organ_name, obj/damage_source = null, updating_health = TRUE)
 	if(dna.species && amount > 0)
-		amount = amount * dna.species.brute_mod * human_brute_mod
+		amount = amount * dna.species.brute_mod * human_brute_mod//human_brute_mod es una variable hispana
 	if(organ_name in bodyparts_by_name)
 		var/obj/item/organ/external/O = get_organ(organ_name)
 
@@ -117,7 +117,7 @@
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(amount, organ_name, obj/damage_source = null, updating_health = TRUE)
 	if(dna.species && amount > 0)
-		amount = amount * dna.species.burn_mod * human_burn_mod
+		amount = amount * dna.species.burn_mod * human_burn_mod//human_burn_mod es una variable hispana
 
 	if(organ_name in bodyparts_by_name)
 		var/obj/item/organ/external/O = get_organ(organ_name)
