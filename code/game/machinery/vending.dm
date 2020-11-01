@@ -102,10 +102,7 @@
 
 /obj/machinery/vending/Initialize(mapload)
 	//productos hispanos init
-	products |= hispa_products	// For each, use the following pattern:
-	contraband |= hispa_contraband	// list(/type/path = amount,/type/path2 = amount2)
-	premium |= hispa_premium
-	prices |= hispa_prices
+	make_products()
 	//productos hispanos end
 	var/build_inv = FALSE
 	if(!refill_canister)
@@ -138,6 +135,9 @@
 /obj/machinery/vending/RefreshParts()         //Better would be to make constructable child
 	if(!component_parts)
 		return
+	//productos hispanos init
+	make_products()
+	//productos hispanos end
 
 	product_records = list()
 	hidden_records = list()

@@ -6,6 +6,12 @@
 	var/list/hispa_prices = list()
 ///Hispania Civilians Clothes
 
+/obj/machinery/vending/proc/make_products()
+	products |= hispa_products	// For each, use the following pattern:
+	contraband |= hispa_contraband	// list(/type/path = amount,/type/path2 = amount2)
+	premium |= hispa_premium
+	prices |= hispa_prices
+
 /obj/machinery/vending/boozeomat
 	hispa_products = list(/obj/item/reagent_containers/food/drinks/bottle/fernet = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/mezcal = 5)
