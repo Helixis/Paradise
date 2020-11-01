@@ -246,12 +246,26 @@
 
 //este vending es gratis en paradise
 /obj/machinery/vending/hatdispenser
+	products = list(/obj/item/clothing/head/collectable/petehat = 2,
+					/obj/item/clothing/head/collectable/xenom = 2,
+					/obj/item/clothing/head/collectable/paper = 2,
+					/obj/item/clothing/head/collectable/slime = 2,
+					/obj/item/clothing/head/collectable/pirate = 2,
+					/obj/item/clothing/head/collectable/thunderdome = 2,
+   					/obj/item/clothing/head/collectable/rabbitears = 2)
 	hispa_prices = list(/obj/item/clothing/head/bowlerhat = 50,
 					/obj/item/clothing/head/beaverhat = 35,
 					/obj/item/clothing/head/boaterhat = 35,
 					/obj/item/clothing/head/fedora = 200,
 					/obj/item/clothing/head/fez = 120,
-					/obj/item/clothing/head/beret = 100)
+					/obj/item/clothing/head/beret = 100,
+    				/obj/item/clothing/head/collectable/petehat = 2000,
+					/obj/item/clothing/head/collectable/xenom = 2000,
+					/obj/item/clothing/head/collectable/paper = 2000,
+					/obj/item/clothing/head/collectable/slime = 2000,
+					/obj/item/clothing/head/collectable/pirate = 2000,
+					/obj/item/clothing/head/collectable/thunderdome = 2000,
+   					/obj/item/clothing/head/collectable/rabbitears = 2000)
 
 //este vending es gratis en paradise
 /obj/machinery/vending/suitdispenser
@@ -463,26 +477,19 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 					/obj/item/clothing/accessory/armband = 5,
 					/obj/item/lipstick = 5,
 					/obj/item/lipstick/blue = 5,
-					/obj/item/lipstick/lime= 5,
+					/obj/item/lipstick/lime = 5,
 					/obj/item/lipstick/purple = 5,
 					/obj/item/lipstick/jade = 5,
    					/obj/item/lipstick/black = 5,
    					/obj/item/lipstick/white = 5,
     				/obj/item/lipstick/green = 5,
-    				/obj/item/clothing/head/collectable/petehat = 2,
-					/obj/item/clothing/head/collectable/xenom = 2,
-					/obj/item/clothing/head/collectable/paper = 2,
-					/obj/item/clothing/head/collectable/slime = 2,
-					/obj/item/clothing/head/collectable/pirate = 2,
-					/obj/item/clothing/head/collectable/thunderdome = 2,
    					/obj/item/clothing/head/kitty = 10,
    					/obj/item/clothing/head/kitty/mouse= 10,
-   					/obj/item/clothing/head/collectable/rabbitears = 2,
 					/obj/item/clothing/head/hairflower = 5,
     				/obj/item/stack/sheet/animalhide/monkey = 5,
     				/obj/item/stack/sheet/animalhide/lizard = 5)
-	contraband = list(		/obj/item/stack/sheet/animalhide/human = 5)
-	prices = list(			/obj/item/storage/wallet = 300,
+	contraband = list(/obj/item/stack/sheet/animalhide/human = 5)
+	prices = list(	/obj/item/storage/wallet = 300,
 					/obj/item/clothing/glasses/monocle = 400,
 					/obj/item/clothing/glasses/regular = 400,
 					/obj/item/clothing/ears/headphones = 450,
@@ -500,17 +507,10 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
     				/obj/item/lipstick/white = 200,
     				/obj/item/clothing/head/kitty = 350,
     				/obj/item/clothing/head/kitty/mouse = 350,
-   					/obj/item/clothing/head/collectable/rabbitears = 2000,
     				/obj/item/clothing/head/hairflower = 200,
-    				/obj/item/clothing/head/collectable/petehat = 2000,
-					/obj/item/clothing/head/collectable/xenom = 2000,
-					/obj/item/clothing/head/collectable/paper = 2000,
-					/obj/item/clothing/head/collectable/slime = 2000,
-					/obj/item/clothing/head/collectable/pirate = 2000,
-					/obj/item/clothing/head/collectable/thunderdome = 2000,
     				/obj/item/stack/sheet/animalhide/monkey = 500,
     				/obj/item/kitchen/knife/folding/wood = 300,
     				/obj/item/kitchen/knife/folding/normal = 550,
     				/obj/item/kitchen/knife/folding/butterfly = 550,
     				/obj/item/stack/sheet/animalhide/lizard = 500)
-	premium = list(/obj/item/kitchen/knife/folding/wood =5,/obj/item/kitchen/knife/folding/normal =5,/obj/item/kitchen/knife/folding/butterfly =5)
+	premium = list(/obj/item/kitchen/knife/folding/wood = 5,/obj/item/kitchen/knife/folding/normal = 5,/obj/item/kitchen/knife/folding/butterfly = 5)
