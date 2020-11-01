@@ -289,6 +289,27 @@
 	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 50,
 					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 50)
 
+/obj/machinery/vending/wallmed
+	hispa_products = list(/obj/item/reagent_containers/food/pill/patch/styptic = 1, /obj/item/reagent_containers/food/pill/patch/silver_sulf = 1)
+
+/obj/machinery/vending/hydroseeds
+	hispa_products = list(/obj/item/seeds/agave = 3, /obj/item/seeds/aloe = 3,
+					/obj/item/seeds/anonna = 3, /obj/item/seeds/avocado = 3,
+					/obj/item/seeds/bell_pepper = 3, /obj/item/seeds/kiwi = 3,
+					/obj/item/seeds/fungus = 3,/obj/item/seeds/ricinus = 3,
+					/obj/item/seeds/strawberry = 3,
+					/obj/item/seeds/prickly_pear = 3)
+	hispa_contraband = list(/obj/item/seeds/money = 2)
+
+/obj/machinery/vending/dinnerware
+	hispa_products = list(/obj/item/storage/bag/kitchenbag = 3)
+
+/obj/machinery/vending/engivend
+	hispa_products = list(/obj/item/storage/bag/component/inge = 5)
+
+/obj/machinery/vending/shoedispenser
+	hispa_products = list(/obj/item/clothing/shoes/jackboots = 5)
+
 /*Nota: todos los sprites que sean pertenecientes al code hispania y tengan sus
 respectivos sprites en las carpetas de iconos de hispania , es decir icons/hispania
 deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE"*/
