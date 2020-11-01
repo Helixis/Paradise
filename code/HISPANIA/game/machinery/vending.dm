@@ -9,6 +9,11 @@
 /obj/machinery/vending/boozeomat
 	hispa_products = list(/obj/item/reagent_containers/food/drinks/bottle/fernet = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/mezcal = 5)
+	hispa_contraband = list(/obj/item/reagent_containers/food/drinks/bottle/vampire_bestfriend = 5)
+
+/obj/machinery/vending/coffee
+	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 10)
+	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 25)
 
 /obj/machinery/vending/security
 	hispa_products = list(/obj/item/taperoll = 8, /obj/item/device/binoculars/security = 2)
@@ -278,6 +283,11 @@
 					/obj/item/clothing/shoes/white = 100,
 					/obj/item/clothing/shoes/sandal = 15)
 
+/obj/machinery/vending/cola
+	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/space_mundet = 10, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 2,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 1)
+	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 50,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 50)
 
 /*Nota: todos los sprites que sean pertenecientes al code hispania y tengan sus
 respectivos sprites en las carpetas de iconos de hispania , es decir icons/hispania
@@ -412,7 +422,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	density = TRUE
 	vend_delay = 12
 
-	products = list(		/obj/item/storage/wallet = 15,
+	products = list(/obj/item/storage/wallet = 15,
 					/obj/item/clothing/glasses/monocle = 5,
 					/obj/item/clothing/glasses/regular = 5,
 					/obj/item/clothing/ears/headphones = 5,

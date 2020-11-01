@@ -925,7 +925,7 @@
 					/obj/item/reagent_containers/food/drinks/drinkingglass = 30,
 					/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass = 30,
 					/obj/item/reagent_containers/food/drinks/ice = 9)
-	contraband = list(/obj/item/reagent_containers/food/drinks/tea = 10, /obj/item/reagent_containers/food/drinks/bottle/vampire_bestfriend = 5)
+	contraband = list(/obj/item/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
 	slogan_list = list("I hope nobody asks me for a bloody cup o' tea...","Alcohol is humanity's friend. Would you abandon a friend?","Quite delighted to serve you!","Is nobody thirsty on this station?")
 	ads_list = list("Drink up!","Booze is good for you!","Alcohol is humanity's best friend.","Quite delighted to serve you!","Care for a nice, cold beer?","Nothing cures you like booze!","Have a sip!","Have a drink!","Have a beer!","Beer is good for you!","Only the finest alcohol!","Best quality booze since 2053!","Award-winning wine!","Maximum alcohol!","Man loves beer.","A toast for progress!")
@@ -953,16 +953,17 @@
 	item_slot = TRUE
 	vend_delay = 34
 	products = list(/obj/item/reagent_containers/food/drinks/coffee = 25,/obj/item/reagent_containers/food/drinks/tea = 25,/obj/item/reagent_containers/food/drinks/h_chocolate = 25,
-					/obj/item/reagent_containers/food/drinks/chocolate = 10, /obj/item/reagent_containers/food/drinks/chicken_soup = 10,/obj/item/reagent_containers/food/drinks/weightloss = 10, /obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 10,
+					/obj/item/reagent_containers/food/drinks/chocolate = 10, /obj/item/reagent_containers/food/drinks/chicken_soup = 10,/obj/item/reagent_containers/food/drinks/weightloss = 10,
 					/obj/item/reagent_containers/food/drinks/mug = 15)
 	contraband = list(/obj/item/reagent_containers/food/drinks/ice = 10)
 	premium = list(/obj/item/reagent_containers/food/drinks/mug/novelty = 5)
 	prices = list(/obj/item/reagent_containers/food/drinks/coffee = 25, /obj/item/reagent_containers/food/drinks/tea = 25, /obj/item/reagent_containers/food/drinks/h_chocolate = 25, /obj/item/reagent_containers/food/drinks/chocolate = 25,
-				  /obj/item/reagent_containers/food/drinks/chicken_soup = 30,/obj/item/reagent_containers/food/drinks/weightloss = 50, /obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 25, /obj/item/reagent_containers/food/drinks/mug = 50)
+				  /obj/item/reagent_containers/food/drinks/chicken_soup = 30,/obj/item/reagent_containers/food/drinks/weightloss = 50,/obj/item/reagent_containers/food/drinks/mug = 50)
 	refill_canister = /obj/item/vending_refill/coffee
 
 /obj/machinery/vending/coffee/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/coffee/Initialize(mapload)
 	component_parts = list()
@@ -1028,6 +1029,7 @@
 
 /obj/machinery/vending/snack/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/snack/Initialize(mapload)
 	component_parts = list()
@@ -1051,6 +1053,7 @@
 
 /obj/machinery/vending/chinese/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/chinese/Initialize(mapload)
 	component_parts = list()
@@ -1069,19 +1072,16 @@
 	ads_list = list("Refreshing!","Hope you're thirsty!","Over 1 million drinks sold!","Thirsty? Why not cola?","Please, have a drink!","Drink up!","The best drinks in space.")
 	products = list(/obj/item/reagent_containers/food/drinks/cans/cola = 10,/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 10,
 					/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/reagent_containers/food/drinks/cans/starkist = 10,
-					/obj/item/reagent_containers/food/drinks/cans/space_up = 10,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10,
-					/obj/item/reagent_containers/food/drinks/cans/space_mundet = 10, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 2,
-					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 1)
+					/obj/item/reagent_containers/food/drinks/cans/space_up = 10,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10)
 	contraband = list(/obj/item/reagent_containers/food/drinks/cans/thirteenloko = 5)
 	prices = list(/obj/item/reagent_containers/food/drinks/cans/cola = 20,/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 20,
 					/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 20,/obj/item/reagent_containers/food/drinks/cans/starkist = 20,
-					/obj/item/reagent_containers/food/drinks/cans/space_up = 20,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 20,
-					/obj/item/reagent_containers/food/drinks/cans/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 50,
-					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 50)
+					/obj/item/reagent_containers/food/drinks/cans/space_up = 20,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 20)
 	refill_canister = /obj/item/vending_refill/cola
 
 /obj/machinery/vending/cola/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/cola/Initialize(mapload)
 	component_parts = list()
@@ -1110,6 +1110,7 @@
 
 /obj/machinery/vending/cart/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/cart/Initialize(mapload)
 	component_parts = list()
@@ -1180,6 +1181,7 @@
 
 /obj/machinery/vending/cigarette/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/cigarette/syndicate
 	products = list(/obj/item/storage/fancy/cigarettes/cigpack_syndicate = 7,
@@ -1193,6 +1195,7 @@
 
 /obj/machinery/vending/cigarette/syndicate/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/cigarette/beach //Used in the lavaland_biodome_beach.dmm ruin
 	name = "\improper ShadyCigs Ultra"
@@ -1963,6 +1966,7 @@
 
 /obj/machinery/vending/crittercare/free
 	prices = list()
+	hispa_prices = list()
 
 /obj/machinery/vending/crittercare/Initialize(mapload)
 	component_parts = list()
