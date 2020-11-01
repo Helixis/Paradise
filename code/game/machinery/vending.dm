@@ -95,6 +95,11 @@
 	/// the actual item inserted
 	var/obj/item/inserted_item = null
 
+	/// blocks further flickering while true
+	var/flickering = FALSE
+	/// do I look unpowered, even when powered?
+	var/force_no_power_icon_state = FALSE
+
 /obj/machinery/vending/Initialize(mapload)
 	var/build_inv = FALSE
 	if(!refill_canister)
@@ -138,6 +143,49 @@
 	for(var/obj/item/vending_refill/VR in component_parts)
 		restock(VR)
 
+/obj/machinery/vending/update_icon()
+	cut_overlays()
+	if(panel_open)
+		add_overlay(image(icon, "[initial(icon_state)]-panel"))
+
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
+	else if (stat & NOPOWER || force_no_power_icon_state)
+		icon_state = "[initial(icon_state)]-off"
+	else
+		icon_state = initial(icon_state)
+
+/*
+ * Reimp, flash the screen on and off repeatedly.
+ */
+/obj/machinery/vending/flicker()
+	if(flickering)
+		return FALSE
+
+	if(stat & (BROKEN|NOPOWER))
+		return FALSE
+
+	flickering = TRUE
+	INVOKE_ASYNC(src, /obj/machinery/vending/.proc/flicker_event)
+
+	return TRUE
+
+/*
+ * Proc to be called by invoke_async in the above flicker() proc.
+ */
+/obj/machinery/vending/proc/flicker_event()
+	var/amount = rand(5, 15)
+
+	for(var/i in 1 to amount)
+		force_no_power_icon_state = TRUE
+		update_icon()
+		sleep(rand(1, 3))
+
+		force_no_power_icon_state = FALSE
+		update_icon()
+		sleep(rand(1, 10))
+	update_icon()
+	flickering = FALSE
 
 /**
  *  Build src.produdct_records from the products lists
@@ -285,12 +333,8 @@
 		return
 	if(anchored)
 		panel_open = !panel_open
-		if(panel_open)
-			SCREWDRIVER_OPEN_PANEL_MESSAGE
-			overlays += image(icon, "[initial(icon_state)]-panel")
-		else
-			SCREWDRIVER_CLOSE_PANEL_MESSAGE
-			overlays.Cut()
+		panel_open ? SCREWDRIVER_OPEN_PANEL_MESSAGE : SCREWDRIVER_CLOSE_PANEL_MESSAGE
+		update_icon()
 		SStgui.update_uis(src)
 
 /obj/machinery/vending/wirecutter_act(mob/user, obj/item/I)
@@ -753,21 +797,18 @@
 	atom_say(message)
 
 /obj/machinery/vending/power_change()
-	if(stat & BROKEN)
-		icon_state = "[initial(icon_state)]-broken"
+	if(powered())
+		stat &= ~NOPOWER
+		update_icon()
 	else
-		if( powered() )
-			icon_state = initial(icon_state)
-			stat &= ~NOPOWER
-		else
-			spawn(rand(0, 15))
-				icon_state = "[initial(icon_state)]-off"
-				stat |= NOPOWER
+		spawn(rand(0, 15))
+			stat |= NOPOWER
+			update_icon()
 
 /obj/machinery/vending/obj_break(damage_flag)
 	if(!(stat & BROKEN))
 		stat |= BROKEN
-		icon_state = "[initial(icon_state)]-broken"
+		update_icon()
 
 		var/dump_amount = 0
 		var/found_anything = TRUE
@@ -908,12 +949,12 @@
 	item_slot = TRUE
 	vend_delay = 34
 	products = list(/obj/item/reagent_containers/food/drinks/coffee = 25,/obj/item/reagent_containers/food/drinks/tea = 25,/obj/item/reagent_containers/food/drinks/h_chocolate = 25,
-					/obj/item/reagent_containers/food/drinks/chocolate = 10, /obj/item/reagent_containers/food/drinks/chicken_soup = 10,/obj/item/reagent_containers/food/drinks/weightloss = 10,
+					/obj/item/reagent_containers/food/drinks/chocolate = 10, /obj/item/reagent_containers/food/drinks/chicken_soup = 10,/obj/item/reagent_containers/food/drinks/weightloss = 10, /obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 10,
 					/obj/item/reagent_containers/food/drinks/mug = 15)
 	contraband = list(/obj/item/reagent_containers/food/drinks/ice = 10)
 	premium = list(/obj/item/reagent_containers/food/drinks/mug/novelty = 5)
 	prices = list(/obj/item/reagent_containers/food/drinks/coffee = 25, /obj/item/reagent_containers/food/drinks/tea = 25, /obj/item/reagent_containers/food/drinks/h_chocolate = 25, /obj/item/reagent_containers/food/drinks/chocolate = 25,
-				  /obj/item/reagent_containers/food/drinks/chicken_soup = 30,/obj/item/reagent_containers/food/drinks/weightloss = 50, /obj/item/reagent_containers/food/drinks/mug = 50)
+				  /obj/item/reagent_containers/food/drinks/chicken_soup = 30,/obj/item/reagent_containers/food/drinks/weightloss = 50, /obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 25, /obj/item/reagent_containers/food/drinks/mug = 50)
 	refill_canister = /obj/item/vending_refill/coffee
 
 /obj/machinery/vending/coffee/free
@@ -1024,11 +1065,15 @@
 	ads_list = list("Refreshing!","Hope you're thirsty!","Over 1 million drinks sold!","Thirsty? Why not cola?","Please, have a drink!","Drink up!","The best drinks in space.")
 	products = list(/obj/item/reagent_containers/food/drinks/cans/cola = 10,/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 10,
 					/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/reagent_containers/food/drinks/cans/starkist = 10,
-					/obj/item/reagent_containers/food/drinks/cans/space_up = 10,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10)
+					/obj/item/reagent_containers/food/drinks/cans/space_up = 10,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10,
+					/obj/item/reagent_containers/food/drinks/cans/space_mundet = 10, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 2,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 1)
 	contraband = list(/obj/item/reagent_containers/food/drinks/cans/thirteenloko = 5)
 	prices = list(/obj/item/reagent_containers/food/drinks/cans/cola = 20,/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 20,
 					/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 20,/obj/item/reagent_containers/food/drinks/cans/starkist = 20,
-					/obj/item/reagent_containers/food/drinks/cans/space_up = 20,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 20)
+					/obj/item/reagent_containers/food/drinks/cans/space_up = 20,/obj/item/reagent_containers/food/drinks/cans/grape_juice = 20,
+					/obj/item/reagent_containers/food/drinks/cans/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 50,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 50)
 	refill_canister = /obj/item/vending_refill/cola
 
 /obj/machinery/vending/cola/free
