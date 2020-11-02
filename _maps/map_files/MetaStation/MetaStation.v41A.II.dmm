@@ -95815,16 +95815,6 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/tsf)
-"fJd" = (
-/obj/machinery/camera{
-	active_power_usage = 0;
-	c_tag = "Turbine Vent";
-	dir = 4;
-	network = list("Turbine");
-	use_power = 0
-	},
-/turf/simulated/floor/plating/airless,
-/area/maintenance/incinerator)
 "fLj" = (
 /obj/machinery/camera{
 	c_tag = "Research Toxins Test Chamber East";
@@ -137077,7 +137067,7 @@ bKx
 bXO
 cts
 abq
-fJd
+fBB
 aaa
 abq
 abq
