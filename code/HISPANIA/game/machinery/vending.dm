@@ -47,11 +47,15 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 					/obj/item/clothing/suit/bio_suit/scientist = 1,
 					/obj/item/clothing/head/bio_hood/scientist = 1,
 					/obj/item/clothing/under/rank/research_director = 1,
+					/obj/item/clothing/under/rank/research_director/formal = 1,
+					/obj/item/clothing/under/rank/research_director/formal/purple = 1,
 					/obj/item/clothing/suit/storage/labcoat = 1,
 					/obj/item/clothing/suit/mantle/labcoat = 1,
 					/obj/item/clothing/mask/gas = 1,
 					/obj/item/clothing/shoes/white = 1,
 					/obj/item/clothing/gloves/color/latex = 1)
+	prices = list(/obj/item/clothing/under/rank/research_director/formal = 500,
+				  /obj/item/clothing/under/rank/research_director/formal/purple = 500)
 
 /obj/machinery/vending/walldrobe/hos
 	name = "\improper Head of Security's Walldrobe"
