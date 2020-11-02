@@ -6119,6 +6119,17 @@
 	icon_state = "engine"
 	},
 /area/centcom/holding)
+"uO" = (
+/obj/docking_port/stationary{
+	dir = 2;
+	dwidth = 10;
+	height = 26;
+	id = "tsf_away";
+	name = "TSF_Away";
+	width = 21
+	},
+/turf/space,
+/area/space)
 "wP" = (
 /turf/space,
 /area/shuttle/escape_pod5/centcom)
@@ -6368,7 +6379,7 @@
 /obj/structure/bed/abductor,
 /turf/unsimulated/floor/abductor,
 /area/abductor_ship)
-"Uq" = (
+"TH" = (
 /obj/docking_port/stationary/transit{
 	dir = 2;
 	dwidth = 10;
@@ -44964,7 +44975,7 @@ gl
 gl
 gl
 gl
-Uq
+TH
 gl
 gl
 gl
@@ -64852,7 +64863,7 @@ ab
 ab
 ab
 ab
-ab
+uO
 ab
 ab
 ab
