@@ -6200,6 +6200,18 @@
 	name = "Gamma Armory APC";
 	pixel_y = -24
 	},
+/obj/machinery/light/spot{
+	tag = "icon-tube1 (WEST)";
+	icon_state = "tube1";
+	dir = 8
+	},
+/obj/structure/closet/secure_closet/guncabinet,
+/obj/item/gun/projectile/shotgun/automatic/combat,
+/obj/item/gun/projectile/shotgun/automatic/combat,
+/obj/item/gun/projectile/shotgun/automatic/combat,
+/obj/item/ammo_box/shotgun/buck,
+/obj/item/ammo_box/shotgun/buck,
+/obj/item/ammo_box/shotgun/buck,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
 	},
@@ -6512,6 +6524,12 @@
 	icon_state = "floor4"
 	},
 /area/shuttle/assault_pod)
+"Fq" = (
+/obj/machinery/door/airlock/shuttle,
+/turf/simulated/shuttle/floor{
+	icon_state = "floor4"
+	},
+/area/shuttle/gamma/space)
 "Fz" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -6816,23 +6834,11 @@
 	},
 /area/shuttle/gamma/space)
 "XO" = (
-/obj/structure/closet/secure_closet/guncabinet,
-/obj/item/ammo_box/shotgun/buck,
-/obj/item/ammo_box/shotgun/buck,
-/obj/item/ammo_box/shotgun/buck,
-/obj/item/gun/projectile/shotgun/automatic/combat,
-/obj/item/gun/projectile/shotgun/automatic/combat,
-/obj/item/gun/projectile/shotgun/automatic/combat,
 /obj/machinery/status_display{
 	density = 0;
 	layer = 4;
 	pixel_x = 0;
 	pixel_y = 32
-	},
-/obj/machinery/light/spot{
-	tag = "icon-tube1 (WEST)";
-	icon_state = "tube1";
-	dir = 8
 	},
 /turf/simulated/shuttle/floor{
 	icon_state = "floor4"
@@ -32968,7 +32974,7 @@ ab
 ab
 Le
 Vl
-Oi
+Fq
 Oi
 Oi
 CI

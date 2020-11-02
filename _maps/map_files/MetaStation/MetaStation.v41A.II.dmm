@@ -98094,6 +98094,13 @@
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/plating/airless,
 /area/toxins/test_area)
+"vpX" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/vending/sovietsoda,
+/turf/simulated/floor/plating,
+/area/maintenance/fpmaint2{
+	name = "Port Maintenance"
+	})
 "vsQ" = (
 /obj/effect/spawner/lootdrop/trade_sol/minerals,
 /obj/structure/closet,
@@ -117085,7 +117092,7 @@ cgm
 cgo
 awe
 cgo
-cgo
+vpX
 auC
 bTr
 aoX
