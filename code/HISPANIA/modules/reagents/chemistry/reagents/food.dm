@@ -36,10 +36,10 @@
 	taste_description = "sweet iron"
 
 /datum/reagent/consumable/discount_sauce/on_mob_life(mob/living/M)
-	if(prob(5))
+	if(prob(25))
 		M.reagents.add_reagent("cholesterol", rand(1,3))
-	if(prob(5))
+	if(prob(20))
 		M.reagents.add_reagent("porktonium", 5)
-	if(prob(40))
+	if(prob(30))
 		M.reagents.add_reagent("omnizine", 5)
 	return ..()
