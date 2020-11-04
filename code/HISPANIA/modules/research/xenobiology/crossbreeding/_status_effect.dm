@@ -1,10 +1,3 @@
-/mob/living/carbon
-	var/carbon_siemens_coeff = 1
-
-/mob/living/carbon/human
-	var/human_brute_mod = 1
-	var/human_burn_mod = 1
-
 ///////////////////////////////////////
 ///////////    GALLETAS     //////////
 /////////////////////////////////////
@@ -57,13 +50,13 @@
 /datum/status_effect/metalcookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_brute_mod *= 0.9
+		H.dna.species.brute_mod *= 0.9
 	return ..()
 
 /datum/status_effect/metalcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_brute_mod /= 0.9
+		H.dna.species.brute_mod /= 0.9
 
 /datum/status_effect/sparkcookie
 	id = "sparkcookie"
@@ -75,25 +68,25 @@
 /datum/status_effect/sparkcookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		original_coeff = H.carbon_siemens_coeff
-		H.carbon_siemens_coeff = 0
+		original_coeff = H.dna.species.siemens_coeff
+		H.dna.species.siemens_coeff  = 0
 	return ..()
 
 /datum/status_effect/sparkcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.carbon_siemens_coeff = original_coeff
+		H.dna.species.siemens_coeff  = original_coeff
 
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_burn_mod *= 0.9
+		H.dna.species.burn_mod *= 0.9
 	return ..()
 
 /datum/status_effect/adamantinecookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.human_burn_mod /= 0.9
+		H.dna.species.burn_mod /= 0.9
 
 ///////////////////////////////////////////////////////
 //////////////////STABILIZED EXTRACTS//////////////////
