@@ -149,7 +149,7 @@
 	tastes = list("human meat" = 2, "iron" = 2)
 
 /obj/item/reagent_containers/food/snacks/discountpie/self_heating
-	name = "self-heating Donk-pocket"
+	name = "Self-Heating Donk-pocket"
 	desc = "Individually wrapped, frozen, unfrozen, desiccated, resiccated, twice recalled, and still edible. Infamously so."
 	icon = 'icons/hispania/obj/food/food.dmi'
 	icon_state = "donkpocket_wrapped"
