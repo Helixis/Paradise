@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(GPS_list)
 			if(G.emped == 1)
 				t += "<BR>[tracked_gpstag]: ERROR"
 			else if(G.tracking && (!G.local || (own_z == pos.z)))
-				t += "<BR>[tracked_gpstag]: [format_text(gps_area.name)] ([pos.x], [pos.y], [pos.z])"
+				t += "<BR>[tracked_gpstag]: [format_text(gps_area ? gps_area.name : "Unknown" )] ([pos.x], [pos.y], [pos.z])"
 			else
 				continue
 

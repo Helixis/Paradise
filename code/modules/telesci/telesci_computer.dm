@@ -22,20 +22,18 @@
 	var/angle = 45
 	var/power = 5
 
-	//Modulo de resistencia a la teleportación
-	var/list/power_off_factor_list = list()
-	var/power_off_factor = 0
 	// Based on the power used
-	var/teleport_cooldown = 0 // every index requires 2 bluespace crystal
-	var/list/power_options = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+	var/teleport_cooldown = 0
+	var/list/power_options = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100) //every index requires 1 bluespace crystal
 	var/teleporting = 0
 	var/crystals = 0
-	var/max_crystals = 30
+	var/max_crystals = 6
 	var/obj/item/gps/inserted_gps
 
 /obj/machinery/computer/telescience/New()
 	..()
 	recalibrate()
+	bluespace_tech = new(src)
 
 /obj/machinery/computer/telescience/Destroy()
 	eject()
@@ -47,6 +45,7 @@
 /obj/machinery/computer/telescience/examine(mob/user)
 	. = ..()
 	. += "There are [crystals ? crystals : "no"] bluespace crystal\s in the crystal slots."
+	. += "Hay datos suficientes para alcanzar el nivel [bluespace_tech.level] en investigacion bluespace"//hispania
 
 /obj/machinery/computer/telescience/Initialize()
 	..()
@@ -75,6 +74,10 @@
 			M.buffer = null
 			to_chat(user, "<span class = 'caution'>You upload the data from the [W.name]'s buffer.</span>")
 			updateUsrDialog()
+	else if(istype(W, /obj/item/disk/tech_disk))//ESTO CONTROLA LA GANANCIA DE TECH
+		var/obj/item/disk/tech_disk/disk = W
+		disk.load_tech(bluespace_tech)
+		to_chat(user, "<span class='notice'>You swipe the disk into [src].</span>")///FIN HISPANIA
 	else
 		return ..()
 
@@ -118,7 +121,7 @@
 		t += "<div class='statusDisplay'>"
 
 		for(var/i = 1; i <= power_options.len; i++)
-			if(crystals/2 + telepad.efficiency < i)
+			if(crystals + telepad.efficiency < i)
 				t += "<span class='linkOff'>[power_options[i]]</span>"
 				continue
 			if(power == power_options[i])
@@ -226,7 +229,7 @@
 			if(sending)
 				source = dest
 				dest = target
-
+			. = FALSE
 			flick("pad-beam", telepad)
 			playsound(telepad.loc, 'sound/weapons/emitter2.ogg', 25, 1, extrarange = 3, falloff = 5)
 			for(var/atom/movable/ROI in source)
@@ -264,7 +267,7 @@
 							log_msg += ")"
 					log_msg += ", "
 				do_teleport(ROI, dest)
-
+				. = TRUE//PARA QUE NO SALGA EL MENSAJE DE ERROR
 			if(dd_hassuffix(log_msg, ", "))
 				log_msg = dd_limittext(log_msg, length(log_msg) - 2)
 			else
@@ -353,7 +356,7 @@
 		var/index = href_list["setpower"]
 		index = text2num(index)
 		if(index != null && power_options[index])
-			if(crystals/2 + telepad.efficiency >= index)
+			if(crystals + telepad.efficiency >= index)
 				power = power_options[index]
 				power_off_factor = power_off_factor_list[index]
 	if(href_list["setz"])
@@ -398,7 +401,7 @@
 	//angle_off = rand(-25, 25)
 	power_off = rand(-4, 0)
 	rotation_off = rand(-10, 10)
-	power_off_factor_list = list()
+	power_off_factor_list = list()///HIPANIA
 	for(var/i in power_options)
 		var/off = rand(-10,10)/100
-		LAZYADD(power_off_factor_list, off)
+		LAZYADD(power_off_factor_list, off)///FIN HISPANIA
