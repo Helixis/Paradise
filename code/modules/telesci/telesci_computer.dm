@@ -23,8 +23,8 @@
 	var/power = 5
 
 	// Based on the power used
-	var/teleport_cooldown = 0
-	var/list/power_options = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100) //every index requires 1 bluespace crystal
+	var/teleport_cooldown = 0 // every index requires a bluespace crystal
+	var/list/power_options = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 	var/teleporting = 0
 	var/crystals = 0
 	var/max_crystals = 6
@@ -33,7 +33,7 @@
 /obj/machinery/computer/telescience/New()
 	..()
 	recalibrate()
-	bluespace_tech = new(src)
+	bluespace_tech = new(src)//hispania
 
 /obj/machinery/computer/telescience/Destroy()
 	eject()
@@ -175,7 +175,7 @@
 
 	if(telepad)
 
-		var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
+		var/truePower = clamp(power + power * power_off_factor + power_off, 1, 1000)
 		var/trueRotation = rotation + rotation_off
 		var/trueAngle = clamp(angle, 1, 90)
 
@@ -297,7 +297,7 @@
 			return
 
 
-	var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
+	var/truePower = clamp(power + power * power_off_factor + power_off, 1, 1000)
 	var/trueRotation = rotation + rotation_off
 	var/trueAngle = clamp(angle, 1, 90)
 
@@ -343,14 +343,14 @@
 		var/new_rot = input("Please input desired bearing in degrees.", name, rotation) as num
 		if(..()) // Check after we input a value, as they could've moved after they entered something
 			return
-		rotation = Clamp(new_rot, -900, 900)
+		rotation = clamp(new_rot, -900, 900)
 		rotation = round(rotation, 0.001)
 
 	if(href_list["setangle"])
 		var/new_angle = input("Please input desired elevation in degrees.", name, angle) as num
 		if(..())
 			return
-		angle = Clamp(round(new_angle, 0.001), 1, 9999)
+		angle = clamp(round(new_angle, 0.001), 1, 9999)
 
 	if(href_list["setpower"])
 		var/index = href_list["setpower"]

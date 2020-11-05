@@ -87,7 +87,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	var/selected_category
 	var/list/datum/design/matching_designs = list() //for the search function
-	//hispania vars
+	//hispania vars //EVAN MUEVE ESTO A HISPANIA
 	var/secureprotocols = TRUE	//si esta activo las cajas con req acces salen boqueadas por defecto
 	//fin hispania
 /proc/CallTechName(ID) //A simple helper proc to find the name of a tech with a given ID.

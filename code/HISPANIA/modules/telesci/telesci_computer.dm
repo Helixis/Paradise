@@ -32,15 +32,15 @@
 		return
 
 	if(telepad)
-		var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
+		var/truePower = clamp(power + power * power_off_factor + power_off, 1, 1000)
 		var/trueRotation = rotation + rotation_off
-		var/trueAngle = Clamp(angle, 1, 90)
+		var/trueAngle = clamp(angle, 1, 90)
 
 		var/datum/projectile_data/proj_data = projectile_trajectory(telepad.x, telepad.y, trueRotation, trueAngle, truePower)
 		last_tele_data = proj_data
 
-		var/trueX = Clamp(round(proj_data.dest_x, 1), 1, world.maxx)
-		var/trueY = Clamp(round(proj_data.dest_y, 1), 1, world.maxy)
+		var/trueX = clamp(round(proj_data.dest_x, 1), 1, world.maxx)
+		var/trueY = clamp(round(proj_data.dest_y, 1), 1, world.maxy)
 		var/spawn_time = round(proj_data.time) * 10
 
 		var/turf/target = locate(trueX, trueY, z_co)

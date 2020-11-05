@@ -1104,7 +1104,7 @@
 	else
 		main_status = APC_EXTERNAL_POWER_GOOD
 
-	//hispania
+	//hispania //EVAN, MUEVE ESTO A UN PROC
 	if(cell)	// esto es para que las baterias autorecargables no se recarguen tan rapido
 		if(cell.self_recharge)
 			if(!cell.minorrecharging)
