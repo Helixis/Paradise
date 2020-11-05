@@ -813,7 +813,7 @@ to destroy them and players will be able to make replacements.
 	board_type = "machine"
 	origin_tech = "programming=5;engineering=4;plasmatech=5;bluespace=6"
 	req_components = list(
-							/obj/item/stack/ore/bluespace_crystal = 5,
+							/obj/item/stack/ore/bluespace_crystal = 2,
 							/obj/item/stock_parts/capacitor = 1,
 							/obj/item/stack/cable_coil = 1,
 							/obj/item/stack/sheet/glass = 1)
