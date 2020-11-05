@@ -20,7 +20,7 @@
 	circuit = /obj/item/circuitboard/telesci_console/proto
 
 /obj/machinery/computer/telescience/proto/loaded
-	crystals = 6
+	crystals = 4//max es 6 //con potencia cincuenta basta 4cristlaes+1ranting = 5
 
 /obj/machinery/computer/telescience/proto/doteleport(mob/user)
 	if(teleport_cooldown > world.time)
@@ -124,8 +124,10 @@
 /obj/machinery/computer/telescience/proc/tech_upgrage_message()
 	var/message = "Bluespace technology level upgraded to [bluespace_tech.level]. Swipe a technology disk to save data."
 	atom_say(message)
+
 /area
 	var/list/teleci_reciver = list()
+
 /obj/machinery/teleci_reciver//basicamente una antena, de momento solo existirá una, hubidaca en el z3
 	name = "Antena telecientifica"
 	desc = "Una antena capaz de percibir las interacciones bluespace."

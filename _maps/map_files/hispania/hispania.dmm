@@ -759,7 +759,6 @@
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
 /turf/simulated/shuttle/wall{
 	tag = "icon-swall_f6";
 	icon_state = "swall_f6";
@@ -795,7 +794,6 @@
 	icon_state = "propulsion";
 	dir = 1
 	},
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 1;
 	icon_state = "diagonalWall3"
@@ -13430,7 +13428,6 @@
 /turf/simulated/floor/plasteel,
 /area/security/processing)
 "awo" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 8;
 	icon_state = "diagonalWall3"
@@ -95242,16 +95239,6 @@
 /obj/machinery/suit_storage_unit/engine,
 /turf/simulated/floor/plating,
 /area/storage/secure)
-"dtJ" = (
-/obj/structure/closet/bluespace,
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
-	},
-/turf/simulated/floor/plasteel{
-	icon_state = "white"
-	},
-/area/toxins/teleci)
 "duq" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
@@ -96805,6 +96792,12 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space/nearstation)
+"kSB" = (
+/obj/machinery/light,
+/turf/simulated/floor/plasteel{
+	icon_state = "white"
+	},
+/area/toxins/teleci)
 "kTj" = (
 /obj/machinery/door/airlock/command{
 	id_tag = "captainofficedoor";
@@ -97386,6 +97379,15 @@
 	icon_state = "wall3"
 	},
 /area/shuttle/tsf)
+"nEH" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/belt/utility,
+/obj/item/multitool,
+/turf/simulated/floor/plasteel{
+	icon_state = "white"
+	},
+/area/toxins/teleci)
 "nEY" = (
 /obj/item/radio/intercom{
 	broadcasting = 0;
@@ -97803,12 +97805,6 @@
 	},
 /turf/space,
 /area/space/nearstation)
-"qcg" = (
-/obj/machinery/light,
-/turf/simulated/floor/plasteel{
-	icon_state = "white"
-	},
-/area/toxins/teleci)
 "qem" = (
 /obj/structure/closet/secure_closet/medical3,
 /turf/simulated/shuttle/floor{
@@ -97826,16 +97822,6 @@
 	icon_state = "white"
 	},
 /area/assembly/robotics)
-"qfN" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel{
-	tag = "icon-whitepurple (EAST)";
-	icon_state = "whitepurple";
-	dir = 4
-	},
-/area/toxins/teleci)
 "qfR" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -98106,6 +98092,16 @@
 	dir = 1
 	},
 /area/shuttle/escape)
+"rkS" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/plasteel{
+	tag = "icon-whitepurple (EAST)";
+	icon_state = "whitepurple";
+	dir = 4
+	},
+/area/toxins/teleci)
 "rpg" = (
 /obj/structure/chair{
 	dir = 4
@@ -99340,6 +99336,16 @@
 	},
 /turf/simulated/wall/r_wall,
 /area/maintenance/fsmaint)
+"wBH" = (
+/obj/structure/closet/bluespace,
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 8
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "white"
+	},
+/area/toxins/teleci)
 "wCG" = (
 /obj/structure/ore_box,
 /turf/simulated/shuttle/floor{
@@ -143604,7 +143610,7 @@ cpR
 cxR
 cAd
 aao
-dtJ
+wBH
 aaC
 aaC
 abk
@@ -143865,7 +143871,7 @@ aau
 aay
 aay
 aaz
-qcg
+kSB
 cBR
 cKQ
 cMg
@@ -144893,7 +144899,7 @@ aaz
 abb
 abj
 aay
-aay
+nEH
 cBR
 cKY
 cEH
@@ -145149,7 +145155,7 @@ aas
 aaU
 abc
 aaA
-qfN
+rkS
 aaD
 cBR
 cIA

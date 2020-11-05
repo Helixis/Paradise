@@ -403,5 +403,5 @@
 	rotation_off = rand(-10, 10)
 	power_off_factor_list = list()///HIPANIA
 	for(var/i in power_options)
-		var/off = rand(-10,10)/100
+		var/off = rand(-20,20)/100//maximo de 20% de descalaibrado
 		LAZYADD(power_off_factor_list, off)///FIN HISPANIA
