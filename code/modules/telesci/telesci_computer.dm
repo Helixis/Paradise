@@ -23,11 +23,11 @@
 	var/power = 5
 
 	//Modulo de resistencia a la teleportación
-	var/power_off_factor
-
+	var/list/power_off_factor_list = list()
+	var/power_off_factor = 0
 	// Based on the power used
-	var/teleport_cooldown = 0 // every index requires 5 bluespace crystal
-	var/list/power_options = list(5, 10, 20, 25, 30, 40, 50, 60, 70, 80)
+	var/teleport_cooldown = 0 // every index requires 2 bluespace crystal
+	var/list/power_options = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 	var/teleporting = 0
 	var/crystals = 0
 	var/max_crystals = 30
@@ -118,7 +118,7 @@
 		t += "<div class='statusDisplay'>"
 
 		for(var/i = 1; i <= power_options.len; i++)
-			if(crystals/5 + telepad.efficiency < i)
+			if(crystals/2 + telepad.efficiency < i)
 				t += "<span class='linkOff'>[power_options[i]]</span>"
 				continue
 			if(power == power_options[i])
@@ -353,9 +353,9 @@
 		var/index = href_list["setpower"]
 		index = text2num(index)
 		if(index != null && power_options[index])
-			if(crystals/5 + telepad.efficiency >= index)
+			if(crystals/2 + telepad.efficiency >= index)
 				power = power_options[index]
-
+				power_off_factor = power_off_factor_list[index]
 	if(href_list["setz"])
 		var/new_z = input("Please input desired sector.", name, z_co) as num
 		if(..())
@@ -394,8 +394,11 @@
 	updateUsrDialog()
 
 /obj/machinery/computer/telescience/proc/recalibrate()
-	teles_left = rand(35, 40)
+	teles_left = rand(45, 50)
 	//angle_off = rand(-25, 25)
 	power_off = rand(-4, 0)
 	rotation_off = rand(-10, 10)
-	power_off_factor = rand(-15, -5)/100
+	power_off_factor_list = list()
+	for(var/i in power_options)
+		var/off = rand(-10,10)/100
+		LAZYADD(power_off_factor_list, off)

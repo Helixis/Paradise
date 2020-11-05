@@ -400,7 +400,7 @@
 
 	var/power_x = power * cos(angle)
 	var/power_y = power * sin(angle)
-	var/time = 2* power_y / 10 //10 = g
+	var/time = power_y / (2*10) //10 = g
 
 	var/distance = time * power_x
 

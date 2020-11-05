@@ -5,12 +5,7 @@
 	icon_screen = "telesci"
 	circuit = /obj/item/circuitboard/telesci_console/proto
 
-/obj/machinery/computer/telescience/New()
-	..()
-	recalibrate()
-
 /obj/machinery/computer/telescience/proto/doteleport(mob/user)
-
 	if(teleport_cooldown > world.time)
 		temp_msg = "Telepad is recharging power.<BR>Please wait [round((teleport_cooldown - world.time) / 10)] seconds."
 		return
@@ -20,7 +15,6 @@
 		return
 
 	if(telepad)
-
 		var/truePower = Clamp(power + power * power_off_factor + power_off, 1, 1000)
 		var/trueRotation = rotation + rotation_off
 		var/trueAngle = Clamp(angle, 1, 90)
@@ -79,41 +73,24 @@
 			flick("pad-beam", telepad)
 			playsound(telepad.loc, 'sound/weapons/emitter2.ogg', 25, 1, extrarange = 3, falloff = 5)
 			for(var/atom/movable/ROI in source)
-				if(istype(ROI, /mob/living) || istype(ROI, /obj/structure/closet/bluespace))
+				if(istype(ROI, /obj/structure/closet/bluespace))
 					// if is anchored, don't let through
-					if(ROI.anchored)
-						if(isliving(ROI))
-							var/mob/living/L = ROI
-							if(L.buckled)
-								// TP people on office chairs
-								if(L.buckled.anchored)
-									continue
-
-								log_msg += "[key_name(L)] (on a chair), "
+					log_msg += "[ROI.name]"
+					if(istype(ROI, /obj/structure/closet))
+						var/obj/structure/closet/C = ROI
+						log_msg += " ("
+						for(var/atom/movable/Q as mob|obj in C)
+							if(ismob(Q))
+								log_msg += "[key_name(Q)], "
 							else
-								continue
-						else if(!isobserver(ROI))
-							continue
-					if(ismob(ROI))
-						var/mob/T = ROI
-						log_msg += "[key_name(T)], "
-					else
-						log_msg += "[ROI.name]"
-						if(istype(ROI, /obj/structure/closet))
-							var/obj/structure/closet/C = ROI
-							log_msg += " ("
-							for(var/atom/movable/Q as mob|obj in C)
-								if(ismob(Q))
-									log_msg += "[key_name(Q)], "
-								else
-									log_msg += "[Q.name], "
-							if(dd_hassuffix(log_msg, "("))
-								log_msg += "empty)"
-							else
-								log_msg = dd_limittext(log_msg, length(log_msg) - 2)
-								log_msg += ")"
-						log_msg += ", "
-					do_teleport(ROI, dest)
+								log_msg += "[Q.name], "
+						if(dd_hassuffix(log_msg, "("))
+							log_msg += "empty)"
+						else
+							log_msg = dd_limittext(log_msg, length(log_msg) - 2)
+							log_msg += ")"
+					log_msg += ", "
+				do_teleport(ROI, dest)
 
 			if(dd_hassuffix(log_msg, ", "))
 				log_msg = dd_limittext(log_msg, length(log_msg) - 2)
