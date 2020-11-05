@@ -32,7 +32,7 @@
 		return
 
 	if(telepad)
-		var/truePower = clamp(power + power * power_off_factor + power_off, 1, 1000)
+		var/truePower = clamp(power + power * power_off_factor + power_off - abs((z-z_co)*power_off_factor), 1, 1000)
 		var/trueRotation = rotation + rotation_off
 		var/trueAngle = clamp(angle, 1, 90)
 
