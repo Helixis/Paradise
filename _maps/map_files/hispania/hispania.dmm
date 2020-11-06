@@ -184,6 +184,12 @@
 	},
 /obj/item/folder/white,
 /obj/item/pen,
+/obj/machinery/camera{
+	c_tag = "Research Tele Science Lab";
+	dir = 2;
+	network = list("Research","SS13");
+	pixel_x = 0
+	},
 /turf/simulated/floor/plasteel{
 	tag = "icon-whitepurple (EAST)";
 	icon_state = "whitepurple";
