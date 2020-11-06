@@ -517,3 +517,4 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 
 /obj/machinery/vending/artvend/free
 	prices = list()
+	hispa_prices = list()
