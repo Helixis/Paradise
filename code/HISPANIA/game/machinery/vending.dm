@@ -13,9 +13,9 @@
 	prices |= hispa_prices
 
 /obj/machinery/vending/boozeomat
-	hispa_products = list(/obj/item/reagent_containers/food/drinks/bottle/fernet = 5,
-					/obj/item/reagent_containers/food/drinks/bottle/mezcal = 5)
-	hispa_contraband = list(/obj/item/reagent_containers/food/drinks/bottle/vampire_bestfriend = 5)
+	hispa_products = list(/obj/item/reagent_containers/food/drinks/bottle/hispania/fernet = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/hispania/mezcal = 5)
+	hispa_contraband = list(/obj/item/reagent_containers/food/drinks/bottle/hispania/vampire_bestfriend = 5)
 
 /obj/machinery/vending/coffee
 	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 10)
