@@ -8,7 +8,7 @@
 
 /obj/machinery/computer/telescience
 	var/datum/tech/bluespace/bluespace_tech
-	var/max_bluespace_tech = 8
+	var/max_bluespace_tech = 7
 	var/list/power_off_factor_list = list()//Modulo de resistencia a la teleportación
 	var/power_off_factor = 0
 
@@ -131,7 +131,7 @@
 /obj/machinery/teleci_reciver//basicamente una antena, de momento solo existirá una, hubidaca en el z3
 	name = "Antena telecientifica"
 	desc = "Una antena capaz de percibir las interacciones bluespace."
-	icon = 'icons/obj/machines/research.dmi'//momentaneamente
+	icon = 'icons/obj/machines/research.dmi'//TODO:sprite unico
 	icon_state = "tdoppler"
 	density = TRUE
 	anchored = TRUE
@@ -155,7 +155,11 @@
 	var/new_dist = get_dist(src, target)
 	if(source.max_bluespace_tech < new_dist)
 		return
+	source.atom_say("Una resonancia bluespace provocada por [src] provoca una recalibracion forzosa")
+	source.recalibrate()//esto es un todo o nada, testeas en otro lado y luego apuntas a la entena
 	var/tmp_tech = source.max_bluespace_tech - new_dist
 	if(tmp_tech > source.bluespace_tech.level)
 		source.bluespace_tech.level = tmp_tech
 		source.tech_upgrage_message()
+		if(source.bluespace_tech.level == source.max_bluespace_tech && source.bluespace_tech.level < initial(source.max_bluespace_tech)+3)
+			source.max_bluespace_tech++//por cada vez que llegue al maximo aumenta un poco la tech maxima hasta cierto limite
