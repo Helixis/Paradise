@@ -31,7 +31,7 @@ Difficulty: Medium
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum
 	name = "bubblegum"
-	desc = "In what passes for a heirarchy among slaughter demons, this one is king."
+	desc = "In what passes for a heirarchy among slaughter demons, this one is the prince."
 	health = 2500
 	maxHealth = 2500
 	attacktext = "rends"
