@@ -54,7 +54,7 @@
 	desc = "A collapsed advanced roller bed that can be use for field surgery."
 	icon = 'icons/hispania/obj/rollerbed_adv.dmi'
 
-/obj/item/roller/advanced/advanced/attack_self(mob/user)
+/obj/item/roller/advanced/attack_self(mob/user)
 	var/obj/structure/bed/roller/advanced/R = new /obj/structure/bed/roller/advanced(user.loc)
 	R.add_fingerprint(user)
 	qdel(src)
