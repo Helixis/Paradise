@@ -55,6 +55,6 @@
 	icon = 'icons/hispania/obj/rollerbed_adv.dmi'
 
 /obj/item/roller/advanced/advanced/attack_self(mob/user)
-	var/obj/structure/bed/roller/advanced/R = new obj/structure/bed/roller/advanced(user.loc)
+	var/obj/structure/bed/roller/advanced/R = new /obj/structure/bed/roller/advanced(user.loc)
 	R.add_fingerprint(user)
 	qdel(src)
