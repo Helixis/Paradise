@@ -1,6 +1,6 @@
 /obj/structure/plast_barrel
 	name = "barrel"
-	desc = "A large plasteel barrel you can hold liquids inside. Open to put liquids in, Close to take liquids out."
+	desc = "A large plasteel barrel where you can hold liquids inside. Open tap to put liquids in, close tap to take liquids out. Use a wrench tu move, dismantle with a crowbar."
 	icon = 'icons/hispania/obj/miscellaneous.dmi'
 	icon_state = "barrel"
 	density = TRUE
@@ -38,7 +38,7 @@
 	else
 		icon_state = "barrel"
 
-/obj/structure/fermenting_barrel/crowbar_act(mob/living/user, obj/item/I)
+/obj/structure/plast_barrel/crowbar_act(mob/living/user, obj/item/I)
 	. = TRUE
 	if(!I.use_tool(src, user, 0))
 		return
