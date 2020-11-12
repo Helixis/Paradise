@@ -17,8 +17,6 @@
 	see_in_dark = 8
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 270
-	maxbodytemp = INFINITY
-	loot = list(/obj/effect/decal/cleanable/insectguts)
 	a_intent = INTENT_HARM
 	bubble_icon = "machine"
 	light_color = LIGHT_COLOR_CYAN
@@ -51,9 +49,15 @@
 	desc = "A horrific mix of organic tissue with nanomachines, theres no hope for what it use to be a grey"
 	icon_state = "grey_cyber_horror"
 
-/mob/living/simple_animal/hostile/cyber_organic/death(gibbed)
-	. = ..(gibbed)
-	if(!.)
-		return FALSE
-	do_sparks(3, 1, src)
-	empulse(src.loc, 3, 5, 1)
+/mob/living/simple_animal/hostile/cyber_organic/New()
+	..()
+	var/datum/effect_system/smoke_spread/smoke = new
+	smoke.set_up(5, 0, src.loc)
+	smoke.start()
+	playsound(src.loc, 'sound/effects/empulse.ogg', 25, 1)
+
+/mob/living/simple_animal/hostile/cyber_organic/emp_act()
+	if(health > 1)
+		adjustHealth(health-1)
+	else
+		death()

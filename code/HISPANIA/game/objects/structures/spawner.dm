@@ -26,12 +26,20 @@
 	spawn_text = "is assembled from"
 	mob_types = list(/mob/living/simple_animal/hostile/cyber_organic, /mob/living/simple_animal/hostile/cyber_organic/vox, /mob/living/simple_animal/hostile/cyber_organic/plasmamen, /mob/living/simple_animal/hostile/cyber_organic/tajaran, /mob/living/simple_animal/hostile/cyber_organic/grey)
 	faction = list("cyber")
-	light_range = 1.5
-	light_color = LIGHT_COLOR_CYAN
 	var/heal_delay = 30
 	var/last_heal = 0
 	var/corrupt_delay = 50
 	var/last_corrupt = 0
+
+/obj/structure/spawner/cyber_horror_spawner/New()
+	START_PROCESSING(SSobj, src)
+	set_light(6, 1, LIGHT_COLOR_CYAN)
+	..()
+
+/obj/structure/spawner/cyber_horror_spawner/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	set_light(0)
+	..()
 
 /obj/structure/spawner/cyber_horror_spawner/process()
 	if(!anchored)
@@ -65,4 +73,4 @@
 			if(istype(T, /turf/simulated/floor))
 				T.ChangeTurf(/turf/simulated/floor/bluegrid)
 			if(istype(T, /turf/simulated/wall))
-				T.ChangeTurf(/turf/simulated/wall/cult/artificer)
+				T.ChangeTurf(/turf/simulated/wall/rust)
