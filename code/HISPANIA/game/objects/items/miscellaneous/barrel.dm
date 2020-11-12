@@ -8,10 +8,12 @@
 	container_type = DRAINABLE | AMOUNT_VISIBLE
 	pressure_resistance = 2 * ONE_ATMOSPHERE
 	max_integrity = 500
+	var/material = /obj/item/stack/sheet/plasteel
+	var/cantidad = 500
 	var/open = FALSE
 
 /obj/structure/plast_barrel/New()
-	create_reagents(500)
+	create_reagents(cantidad)
 	. = ..()
 
 /obj/structure/plast_barrel/examine(mob/user)
@@ -33,6 +35,7 @@
 	default_unfasten_wrench(user, I, time = 20)
 
 /obj/structure/plast_barrel/update_icon()
+	..()
 	if(open)
 		icon_state = "barrel_open"
 	else
@@ -51,5 +54,5 @@
 	var/mat_drop = 2
 	if(disassembled)
 		mat_drop = 5
-	new /obj/item/stack/sheet/plasteel(drop_location(), mat_drop)
+	new material(drop_location(), mat_drop)
 	..()
