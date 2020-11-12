@@ -1,6 +1,6 @@
 /obj/structure/plast_barrel
 	name = "barrel"
-	desc = "A large plasteel barrel where you can hold liquids inside. Open tap to put liquids in, close tap to take liquids out. Use a wrench tu move, dismantle with a crowbar."
+	desc = "A large plasteel barrel where you can hold liquids inside. Open tap to put liquids in, close tap to take liquids out. Use a wrench to move, dismantle with a crowbar."
 	icon = 'icons/hispania/obj/miscellaneous.dmi'
 	icon_state = "barrel"
 	density = TRUE
