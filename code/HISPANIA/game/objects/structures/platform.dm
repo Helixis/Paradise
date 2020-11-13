@@ -2,7 +2,7 @@
 
 /obj/structure/platform
     name = "Metal Platform"
-    icon = 'icons\hispania\obj\platform.dmi'
+    icon = 'icons/hispania/obj/platform.dmi'
     icon_state = "metal"
     desc =  " A metal platform"
     anchored = TRUE
