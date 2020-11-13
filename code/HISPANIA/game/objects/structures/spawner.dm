@@ -20,9 +20,9 @@
 	desc = "A machine too advanced for a simple organic mind to understand."
 	icon = 'icons/hispania/mob/cyber_horror.dmi'
 	icon_state ="hive_artificer"
-	max_mobs = 8
-	max_integrity = 400
-	spawn_time = 200
+	max_mobs = 6
+	max_integrity = 500
+	spawn_time = 300
 	spawn_text = "is assembled from"
 	mob_types = list(/mob/living/simple_animal/hostile/cyber_organic, /mob/living/simple_animal/hostile/cyber_organic/vox, /mob/living/simple_animal/hostile/cyber_organic/plasmamen, /mob/living/simple_animal/hostile/cyber_organic/tajaran, /mob/living/simple_animal/hostile/cyber_organic/grey,/mob/living/simple_animal/hostile/cyber_organic/poison/cyber_sting)
 	faction = list("swarmer") //Una pequeña expansion de lore
