@@ -8,12 +8,15 @@
 	response_disarm = "pushes aside"
 	response_harm = "hits"
 	obj_damage = 60
-	melee_damage_lower = 15
-	melee_damage_upper = 15
+	melee_damage_lower = 25
+	melee_damage_upper = 25
 	obj_damage = 60
-	faction = list("cyber")
+	faction = list("swarmer") //Una pequeña expansion de lore
 	maxHealth = 130
-	turns_per_move = 5
+	turns_per_move = 3
+	speak_chance = 7
+	move_to_delay = 6
+	speak_emote = list("tones")
 	see_in_dark = 8
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 270
@@ -52,7 +55,7 @@
 /mob/living/simple_animal/hostile/cyber_organic/New()
 	..()
 	var/datum/effect_system/smoke_spread/smoke = new
-	smoke.set_up(5, 0, src.loc)
+	smoke.set_up(1, 0, src.loc)
 	smoke.start()
 	playsound(src.loc, 'sound/effects/empulse.ogg', 25, 1)
 

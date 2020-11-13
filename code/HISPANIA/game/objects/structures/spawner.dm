@@ -24,8 +24,8 @@
 	max_integrity = 400
 	spawn_time = 200
 	spawn_text = "is assembled from"
-	mob_types = list(/mob/living/simple_animal/hostile/cyber_organic, /mob/living/simple_animal/hostile/cyber_organic/vox, /mob/living/simple_animal/hostile/cyber_organic/plasmamen, /mob/living/simple_animal/hostile/cyber_organic/tajaran, /mob/living/simple_animal/hostile/cyber_organic/grey)
-	faction = list("cyber")
+	mob_types = list(/mob/living/simple_animal/hostile/cyber_organic, /mob/living/simple_animal/hostile/cyber_organic/vox, /mob/living/simple_animal/hostile/cyber_organic/plasmamen, /mob/living/simple_animal/hostile/cyber_organic/tajaran, /mob/living/simple_animal/hostile/cyber_organic/grey,/mob/living/simple_animal/hostile/cyber_organic/poison/cyber_sting)
+	faction = list("swarmer") //Una pequeña expansion de lore
 	var/heal_delay = 30
 	var/last_heal = 0
 	var/corrupt_delay = 50
@@ -40,6 +40,11 @@
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
 	..()
+
+/obj/structure/spawner/cyber_horror_spawner/deconstruct(disassembled)
+	if(prob(40))
+		new /obj/item/autoimplanter(loc)
+	return ..()
 
 /obj/structure/spawner/cyber_horror_spawner/process()
 	if(!anchored)
