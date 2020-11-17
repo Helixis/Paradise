@@ -131,9 +131,9 @@
 
 /proc/get_location_modifier(mob/M)
 	var/turf/T = get_turf(M)
-	if(locate(/obj/machinery/optable, T) || locate(/obj/structure/bed/roller/advanced, T) || locate(/obj/structure/bed/roller/bluespace, T)) //Modificador para roller beds avanzadas
+	if(locate(/obj/machinery/optable, T) || locate(/obj/structure/bed/roller/advanced, T)) //Modificador para roller beds avanzadas
 		return 1
-	else if(locate(/obj/structure/table, T))
+	else if(locate(/obj/structure/table, T) || locate(/obj/structure/bed/roller/bluespace, T)) //Modificador para roller beds bluespace
 		return 0.8
 	else if(locate(/obj/structure/bed, T))
 		return 0.7
