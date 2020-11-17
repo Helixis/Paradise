@@ -75763,6 +75763,10 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
+/obj/machinery/kitchen_machine/microwave{
+	pixel_x = -3;
+	pixel_y = 6
+	},
 /turf/simulated/floor/plasteel,
 /area/engine/break_room)
 "cGv" = (
@@ -80672,6 +80676,7 @@
 /obj/machinery/light_switch{
 	pixel_x = 27
 	},
+/obj/structure/engineeringcart,
 /turf/simulated/floor/plasteel,
 /area/engine/equipmentstorage)
 "cPr" = (
@@ -81430,6 +81435,9 @@
 	name = "Engineering Requests Console";
 	pixel_x = 30;
 	pixel_y = 0
+	},
+/obj/item/stack/sheet/glass{
+	amount = 50
 	},
 /obj/item/stack/sheet/glass{
 	amount = 50
