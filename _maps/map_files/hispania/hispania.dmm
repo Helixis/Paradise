@@ -75763,10 +75763,6 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
-/obj/machinery/kitchen_machine/microwave{
-	pixel_x = -3;
-	pixel_y = 6
-	},
 /turf/simulated/floor/plasteel,
 /area/engine/break_room)
 "cGv" = (
