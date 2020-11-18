@@ -725,8 +725,8 @@
 
 /obj/machinery/computer/shuttle
 	name = "Shuttle Console"
-	icon_screen = "shuttle"
-	icon_keyboard = "tech_key"
+	icon = 'icons/hispania/obj/fuel_console.dmi'
+	icon_state = "console_base"
 	req_access = list()
 	circuit = /obj/item/circuitboard/shuttle
 	var/shuttleId
@@ -734,6 +734,9 @@
 	var/admin_controlled
 	var/max_connect_range = 7
 	var/moved = FALSE	//workaround for nukie shuttle, hope I find a better way to do this...
+	var/fuel = 0
+	var/travel_cost = 125 //4 viajes a maximo de carga
+	var/fuel_limit = 500
 
 /obj/machinery/computer/shuttle/New(location, obj/item/circuitboard/shuttle/C)
 	..()
@@ -814,18 +817,23 @@
 		if(!options.Find(destination))//figure out if this translation works
 			message_admins("<span class='boldannounce'>EXPLOIT:</span> [ADMIN_LOOKUPFLW(usr)] attempted to move [src] to an invalid location! [ADMIN_COORDJMP(src)]")
 			return
-		switch(SSshuttle.moveShuttle(shuttleId, destination, TRUE, usr))
-			if(0)
-				atom_say("Shuttle departing! Please stand away from the doors.")
-				usr.create_log(MISC_LOG, "used [src] to call the [shuttleId] shuttle")
-				if(!moved)
-					moved = TRUE
-				add_fingerprint(usr)
-				return TRUE
-			if(1)
-				to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
-			else
-				to_chat(usr, "<span class='notice'>Unable to comply.</span>")
+		if(fuel >= travel_cost)
+			switch(SSshuttle.moveShuttle(shuttleId, destination, TRUE, usr))
+				if(0)
+					atom_say("Shuttle departing! Please stand away from the doors.")
+					usr.create_log(MISC_LOG, "used [src] to call the [shuttleId] shuttle")
+					if(!moved)
+						moved = TRUE
+					add_fingerprint(usr)
+					fuel = fuel - travel_cost
+					update_icon()
+					return TRUE
+				if(1)
+					to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
+				else
+					to_chat(usr, "<span class='notice'>Unable to comply.</span>")
+		to_chat(usr, "<span class='warning'>You dont have enough fuel!.</span>")
+		return FALSE
 
 
 /obj/machinery/computer/shuttle/emag_act(mob/user)
