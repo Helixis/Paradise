@@ -2627,14 +2627,6 @@
 /obj/effect/decal/warning_stripes/east,
 /turf/simulated/floor/plating/airless,
 /area/syndicate_mothership)
-"hp" = (
-/obj/machinery/computer/shuttle/ferry,
-/turf/unsimulated/floor{
-	tag = "icon-warndark (WEST)";
-	icon_state = "warndark";
-	dir = 8
-	},
-/area/centcom/ferry)
 "hq" = (
 /turf/unsimulated/floor{
 	icon_state = "green";
@@ -4266,13 +4258,6 @@
 	icon_state = "cult"
 	},
 /area/wizard_station)
-"lQ" = (
-/obj/machinery/computer/shuttle/syndicate/recall,
-/turf/unsimulated/floor{
-	icon_state = "bar";
-	dir = 2
-	},
-/area/syndicate_mothership)
 "lR" = (
 /obj/machinery/vending/syndisnack,
 /turf/unsimulated/floor{
@@ -6520,13 +6505,6 @@
 "DD" = (
 /obj/machinery/light,
 /obj/machinery/cryopod/right,
-/turf/unsimulated/floor{
-	tag = "icon-floor";
-	icon_state = "floor"
-	},
-/area/trader_station/sol)
-"DT" = (
-/obj/machinery/computer/shuttle/trade/sol,
 /turf/unsimulated/floor{
 	tag = "icon-floor";
 	icon_state = "floor"
@@ -24536,7 +24514,7 @@ kx
 ax
 iS
 iS
-lQ
+jx
 mC
 mQ
 nd
@@ -37622,7 +37600,7 @@ fX
 gV
 gQ
 gQ
-hp
+gQ
 gQ
 gQ
 gQ
@@ -49221,7 +49199,7 @@ ab
 ab
 ab
 zK
-DT
+SX
 SU
 SX
 SX

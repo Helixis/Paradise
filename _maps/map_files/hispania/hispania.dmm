@@ -15135,10 +15135,6 @@
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
 /area/security/processing)
-"ayZ" = (
-/obj/machinery/computer/shuttle/labor,
-/turf/simulated/floor/plasteel,
-/area/security/prisonershuttle)
 "aza" = (
 /turf/simulated/wall/r_wall,
 /area/security/processing)
@@ -35731,7 +35727,7 @@
 	},
 /area/bridge)
 "bnY" = (
-/obj/machinery/computer/shuttle/labor,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "blue"
@@ -35749,7 +35745,7 @@
 	},
 /area/hallway/secondary/exit)
 "boa" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "blue"
@@ -37070,20 +37066,17 @@
 /turf/simulated/wall/r_wall,
 /area/hallway/primary/central/nw)
 "bqO" = (
-/obj/machinery/computer/prisoner{
-	req_access = null;
-	req_access_txt = "2"
-	},
+/obj/machinery/computer/secure_data,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "red"
 	},
 /area/bridge)
 "bqP" = (
-/obj/machinery/computer/secure_data,
 /obj/machinery/alarm{
 	pixel_y = 26
 	},
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "red"
@@ -37154,7 +37147,7 @@
 /turf/simulated/floor/plasteel,
 /area/bridge)
 "bqZ" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "brown"
@@ -37165,7 +37158,9 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/machinery/computer/shuttle/engineering,
+/obj/machinery/computer/security/mining{
+	network = list("Mining Outpost")
+	},
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "brown"
@@ -60558,7 +60553,6 @@
 	},
 /area/shuttle/administration)
 "cgB" = (
-/obj/structure/table,
 /obj/machinery/computer/shuttle/mining,
 /turf/simulated/shuttle/floor,
 /area/shuttle/mining)
@@ -60602,7 +60596,6 @@
 	},
 /area/quartermaster/miningdock)
 "cgH" = (
-/obj/machinery/computer/shuttle/mining,
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "brown"
@@ -124539,7 +124532,7 @@ acY
 ads
 adM
 aed
-ayZ
+auV
 aeH
 afb
 afo

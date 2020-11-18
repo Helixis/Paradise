@@ -35319,7 +35319,7 @@
 /obj/machinery/status_display{
 	pixel_y = 32
 	},
-/obj/machinery/computer/shuttle/labor,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "red"
@@ -49690,8 +49690,8 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/chief)
 "bMn" = (
-/obj/machinery/computer/shuttle/mining,
 /obj/effect/decal/warning_stripes/yellow/hollow,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/miningdock)
 "bMo" = (

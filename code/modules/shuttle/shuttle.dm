@@ -734,9 +734,12 @@
 	var/admin_controlled
 	var/max_connect_range = 7
 	var/moved = FALSE	//workaround for nukie shuttle, hope I find a better way to do this...
+	//Variables de Combustible by Spircen
 	var/fuel = 0
 	var/travel_cost = 125 //4 viajes a maximo de carga
 	var/fuel_limit = 500
+	resistance_flags = INDESTRUCTIBLE //Son parte de la nave
+	//Fin de variables
 
 /obj/machinery/computer/shuttle/New(location, obj/item/circuitboard/shuttle/C)
 	..()
@@ -820,7 +823,7 @@
 		if(fuel >= travel_cost)
 			switch(SSshuttle.moveShuttle(shuttleId, destination, TRUE, usr))
 				if(0)
-					atom_say("Shuttle departing! Please stand away from the doors.")
+					atom_say("Shuttle departing! Please stand away from the doors. Please remember to refuel with plasma")
 					usr.create_log(MISC_LOG, "used [src] to call the [shuttleId] shuttle")
 					if(!moved)
 						moved = TRUE

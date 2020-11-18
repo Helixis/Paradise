@@ -12601,10 +12601,10 @@
 	c_tag = "Labor Shuttle Control Desk";
 	dir = 4
 	},
-/obj/machinery/computer/shuttle/labor,
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/table,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -16072,7 +16072,6 @@
 	},
 /area/shuttle/mining)
 "aCp" = (
-/obj/structure/table,
 /obj/machinery/computer/shuttle/mining,
 /turf/simulated/shuttle/floor,
 /area/shuttle/mining)
@@ -19095,7 +19094,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/computer/shuttle/mining,
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "brown"
@@ -41713,7 +41711,7 @@
 	name = "Station Intercom (General)";
 	pixel_y = 29
 	},
-/obj/machinery/computer/shuttle/labor,
+/obj/structure/table/glass,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},

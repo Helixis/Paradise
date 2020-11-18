@@ -3062,13 +3062,6 @@
 "ih" = (
 /turf/unsimulated/wall,
 /area/wizard_station)
-"ii" = (
-/obj/machinery/computer/shuttle/syndicate/recall,
-/turf/unsimulated/floor{
-	icon_state = "bar";
-	dir = 2
-	},
-/area/syndicate_mothership)
 "ij" = (
 /obj/item/radio/intercom/syndicate{
 	pixel_x = 0;
@@ -9930,13 +9923,6 @@
 	icon_state = "wood"
 	},
 /area/admin)
-"ye" = (
-/obj/machinery/computer/shuttle/trade/sol,
-/turf/unsimulated/floor{
-	tag = "icon-floor";
-	icon_state = "floor"
-	},
-/area/trader_station/sol)
 "yf" = (
 /obj/effect/spawner/window/reinforced,
 /turf/unsimulated/floor,
@@ -11648,12 +11634,6 @@
 "FL" = (
 /turf/simulated/wall/r_wall,
 /area/adminconstruction)
-"Ga" = (
-/obj/machinery/computer/shuttle/ert,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/centcom/specops)
 "Gp" = (
 /mob/living/simple_animal/hostile/carp,
 /turf/simulated/floor/beach/sand,
@@ -31435,7 +31415,7 @@ pb
 uj
 uj
 uj
-Ga
+uj
 sX
 we
 we
@@ -41806,7 +41786,7 @@ aN
 aN
 aN
 ko
-ye
+yF
 yF
 yh
 yF
@@ -54501,7 +54481,7 @@ hI
 ag
 nj
 nj
-ii
+hn
 iq
 iB
 iL
