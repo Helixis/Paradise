@@ -836,7 +836,7 @@
 					to_chat(usr, "<span class='warning'>Invalid shuttle requested.</span>")
 				else
 					to_chat(usr, "<span class='notice'>Unable to comply.</span>")
-		to_chat(usr, "<span class='warning'>You dont have enough fuel!.</span>")
+		atom_say("You dont have enough fuel, please insert plasma to refuel!")
 		return FALSE
 
 
