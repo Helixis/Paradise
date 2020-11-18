@@ -29,3 +29,7 @@
 		icon_state = "console_4"
 	if(fuel == 0)
 		icon_state = "console_0"
+
+/obj/machinery/computer/shuttle/Initialize()
+	fuel = fuel_limit
+	..()
