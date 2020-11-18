@@ -739,6 +739,7 @@
 	var/travel_cost = 125 //4 viajes a maximo de carga
 	var/fuel_limit = 500
 	resistance_flags = INDESTRUCTIBLE //Son parte de la nave
+	flags = NODECONSTRUCT //Son parte de la nave y evitamos el combustible gratis al desarmarlas y volver a armarlas
 	//Fin de variables
 
 /obj/machinery/computer/shuttle/New(location, obj/item/circuitboard/shuttle/C)
