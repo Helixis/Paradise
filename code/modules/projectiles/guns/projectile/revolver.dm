@@ -417,7 +417,7 @@
 		slung = 0
 		icon_state = "ishotgun-sawn"
 
-/obj/item/gun/projectile/revolver/doublebarrel/improvised/sawoff(mob/user)
+/obj/item/gun/projectile/revolver/doublebarrel/improvised/cane/sawoff(mob/user) //Evitamos que afecte item de traitor
 	. = ..()
 	if(. && slung) //sawing off the gun removes the sling
 		new /obj/item/stack/cable_coil(get_turf(src), 10)

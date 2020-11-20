@@ -11,3 +11,7 @@
 		user.Stun(3)
 		return FALSE
 	..()
+
+/obj/item/gun/projectile/revolver/doublebarrel/improvised/sawoff(mob/user)
+	to_chat(user, "<span class='warning'>[src] cant be shorter!</span>")
+	return
