@@ -1,7 +1,7 @@
 /obj/item/gun/energy/kinetic_accelerator/premiumka
-	name = "premium accelerator"
+	name = "Premium kinetic accelerator"
 	desc = "A premium kinetic accelerator fitted with an extended barrel and increased pressure tank."
-	icon = 'icons/obj/guns/energy.dmi'
+	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "premiumgun"
 	item_state = "kineticgun"
 	ammo_type = list(/obj/item/ammo_casing/energy/kinetic/premium)
@@ -21,9 +21,8 @@
 
 //Rapid KA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/rapid
-	name = "Rapid accelerator"
+	name = "Rapid kinetic accelerator"
 	desc = "A Kinetic Accelerator featuring an overclocked charger and a smaller pressure tank."
-	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "rapidka"
 	overheat_time = 8
 	ammo_type = list(/obj/item/ammo_casing/energy/kinetic/premium/rapid)
@@ -41,9 +40,8 @@
 
 //Heavy KA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/heavy
-	name = "Heavy accelerator"
+	name = "Heavy kinetic accelerator"
 	desc = "A robust Kinetic Accelerator capable of shots strongs blasts of kinetic force in close range."
-	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "heavyka"
 	flight_x_offset = 12
 	flight_y_offset = 11
@@ -68,9 +66,8 @@
 
 //Precise KA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/precise
-	name = "Precise accelerator"
+	name = "Precise kinetic accelerator"
 	desc = "A modified Accelerator. This one has been zeroed in with a choked down barrel to give a longer range"
-	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "preciseka"
 	flight_x_offset = 16
 	flight_y_offset = 13
@@ -94,9 +91,8 @@
 
 //Modular KA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/modular
-	name = "Modular accelerator"
+	name = "Modular kinetic accelerator"
 	desc = "A rather bare-bones kinetic accelerator capable of forming to one's preferences."
-	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "modularka"
 	flight_x_offset = 15
 	flight_y_offset = 21
@@ -118,9 +114,8 @@
 
 //BYOKA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/byoka
-	name = "Custom accelerator"
+	name = "Custom kinetic accelerator"
 	desc = "You're not sure how it's made, but it is truly a kinetic accelerator fit for a clown. Its handle smells faintly of bananas."
-	icon = 'icons/hispania/obj/guns/energy.dmi'
 	icon_state = "byoka"
 	overheat_time = 27
 	ammo_type = list(/obj/item/ammo_casing/energy/kinetic/premium/byoka)
