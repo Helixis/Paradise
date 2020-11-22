@@ -1324,6 +1324,7 @@
 #include "code\HISPANIA\modules\martial_arts\bscqc.dm"
 #include "code\HISPANIA\modules\mob\language.dm"
 #include "code\HISPANIA\modules\mob\living\status_procs.dm"
+#include "code\HISPANIA\modules\mob\living\carbon\carbon.dm"
 #include "code\HISPANIA\modules\mob\living\carbon\human\human.dm"
 #include "code\HISPANIA\modules\mob\living\carbon\human\species\murghal.dm"
 #include "code\HISPANIA\modules\mob\living\silicon\ai\ai.dm"
