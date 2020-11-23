@@ -158,8 +158,8 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 /obj/effect/warped_rune/greyspace/proc/delete_slime()
 	spawned_slime = null
 
-
 /obj/effect/warped_rune/greyspace/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	extractype = null
 	return ..()
 
@@ -211,6 +211,10 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
         var/turf/simulated/F = lube_turf
         F.MakeSlippery(TURF_WET_LUBE, 10 SECONDS)
 
+/obj/effect/warped_rune/cyanspace/Destroy()
+    STOP_PROCESSING(SSprocessing, src)
+    .=..()
+
 /*The purple warp rune makes advanced burn kit and advanced trauma kit if you put cloth or plastic on it. */
 
 /obj/item/slimecross/warping/purple
@@ -253,6 +257,10 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		cloth.use(2)
 		burn = new(rune_turf, 1)
 		playsound(rune_turf, 'sound/effects/splat.ogg', 20, TRUE)
+
+/obj/effect/warped_rune/purplespace/Destroy()
+    STOP_PROCESSING(SSprocessing, src)
+    .=..()
 
 /*Metal rune : makes an invisible wall. actually I lied, the rune is the wall.*/
 
@@ -329,6 +337,10 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		if(battery.charge > battery.maxcharge)
 			battery.charge = battery.maxcharge //we don't need to update the cell icon since literally no one can see the battery inside the borg anyway.
 
+/obj/effect/warped_rune/yellowspace/Destroy()
+    STOP_PROCESSING(SSprocessing, src)
+    .=..()
+
 /* Dark purple crossbreed, Fill up any beaker like container with 50 unit of plasma dust every 30 seconds  */
 
 /obj/item/slimecross/warping/darkpurple
@@ -379,6 +391,10 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	for(var/mob/living/carbon/human in rune_turf)
 		human.adjust_bodytemperature(-1000) //Not enough to crit anyone not already weak to cold, might need serious rebalance if cold damage is reworked.
 
+/obj/effect/warped_rune/darkbluespace/Destroy()
+    STOP_PROCESSING(SSprocessing, src)
+    .=..()
+
 /* makes a rune that absorb food, whenever someone step on the rune the nutrition come back to them until they are full.*/
 
 /obj/item/slimecross/warping/silver
@@ -415,6 +431,7 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		nutriment -= nutrition_to_add
 
 /obj/effect/warped_rune/silverspace/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	nutriment = null
 	return ..()
 
@@ -491,11 +508,9 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 /obj/effect/warped_rune/oilspace
 	icon_state = "oil_rune"
 	desc = "The world is ending, but we have one last trick up our sleeve, we will survive."
-	///used to remember the oilspace_bunker specific to this rune
-	var/list/bunker_list
+	var/list/bunker_list ///used to remember the oilspace_bunker specific to this rune
 
 /obj/effect/oilspace_bunker
-	icon = 'icons/hispania/obj/slimecrossing.dmi'
 	icon_state = "barrier"
 	desc = "Thicc."
 
@@ -521,6 +536,7 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		LAZYADD(bunker_list, bunker_wall)
 
 /obj/effect/warped_rune/oilspace/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	for(var/bunker_wall in bunker_list)
 		LAZYREMOVE(bunker_list, bunker_wall)
 		qdel(bunker_wall)
@@ -590,3 +606,7 @@ obj/effect/warped_rune/blackspace/proc/swap_species(atom/movable/crossing)
 		first_person = null
 	else if(destroyed_person == second_person)
 		second_person = null
+
+/obj/effect/warped_rune/blackspace/Destroy()
+    STOP_PROCESSING(SSprocessing, src)
+    .=..()
