@@ -238,9 +238,9 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		cooldown = world.time + max_cooldown
 		transmute_heal()
 
-///transforms cloth and plastic into advanced burn kit and advanced trauma kit
+///transforms cloth and plastic into advanced trauma kit and advanced burn kit
 /obj/effect/warped_rune/purplespace/proc/transmute_heal()
-	for(var/obj/item/stack/sheet/plastic/plastic in rune_turf)  //replace plastic with advanced trauma kit
+	for(var/obj/item/stack/sheet/plastic/plastic in rune_turf)  //replace plastic with advanced burn kit
 		if(plastic.amount < 2)
 			break
 
@@ -524,7 +524,7 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
     ..()
     air_update_turf(TRUE)
 
-/obj/effect/oilspace_bunker/CanAtmosPass(Turf/T)
+/obj/effect/oilspace_bunker/CanAtmosPass(turf/T)
 	return FALSE
 
 /obj/effect/warped_rune/oilspace/Initialize()
@@ -576,7 +576,7 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	second_person = null
 	return ..()
 
-obj/effect/warped_rune/blackspace/proc/swap_species(atom/movable/crossing)
+/obj/effect/warped_rune/blackspace/proc/swap_species(atom/movable/crossing)
 	if(cooldown > world.time) //here to avoid spam/lag
 		to_chat(crossing, "<span class='warning'>The rune needs a little more time before processing your DNA!</span>")
 		return
