@@ -220,16 +220,14 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 /obj/item/slimecross/warping/purple
 	colour = "purple"
 	runepath = /obj/effect/warped_rune/purplespace
-	effect_desc = "Draws a rune that transforms plastic into advanced trauma kit and cloth into ointment"
+	effect_desc = "Draws a rune that transforms plastic into advanced burn kit and cloth into advanced trauma kit"
 
 /obj/effect/warped_rune/purplespace
 	desc = "When all that was left were plastic walls and the clothes on their back, they knew what they had to do."
 	icon_state = "purplespace"
 	max_cooldown = 3 SECONDS
-	///object path of the advanced burn kit spawned
-	var/obj/item/stack/medical/ointment/advanced/advanced
-	///object path of the advanced trauma kit spawned
-	var/obj/item/stack/medical/bruise_pack/advanced/burn
+	var/obj/item/stack/medical/ointment/advanced/advanced///object path of the advanced burn kit spawned
+	var/obj/item/stack/medical/bruise_pack/advanced/burn///object path of the advanced trauma kit spawned
 
 /obj/effect/warped_rune/purplespace/Initialize()
 	. = ..()
