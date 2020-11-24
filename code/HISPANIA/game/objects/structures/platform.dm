@@ -6,23 +6,20 @@
     icon_state = "metal"
     desc =  " A metal platform"
     flags = ON_BORDER
+    anchored = FALSE
     var/corner = FALSE
     var/material_type = /obj/item/stack/sheet/metal
-    var/material_amount = 5 
-    var/decon_speed
-    
-/obj/structure/platform/Initialize()
-    anchored = TRUE
-    return ..()
+    var/material_amount = 10 
+    var/decon_speed = null
 
 /obj/structure/platform/New()
     ..()
     if(corner)
-        decon_speed = 5
+        decon_speed = 30
     else   
-        decon_speed = 10    
+        decon_speed = 60    
 
-// Construction
+// Construcción
 
 /obj/structure/platform/screwdriver_act(mob/user, obj/item/I)
     . = TRUE
@@ -48,16 +45,28 @@
     TOOL_DISMANTLE_SUCCESS_MESSAGE 
     qdel(src)
 
-/obj/structure/platform/CanPass(atom/movable/mover, turf/target, height=0)
-    if(corner)
-        if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
-            return !density
-        else
-            return TRUE
+/obj/structure/platform/CheckExit(atom/movable/O, turf/target)
+    if(corner) 
+        return  FALSE
+    if(O && O.throwing)
+        return TRUE
+    if(((flags & ON_BORDER) && get_dir(loc, target) == dir))
+        return FALSE
+    else
+        return TRUE
 
-/obj/structure/platform/CheckExit(atom/movable/O, target) 
-	if(istype(O) && O.checkpass(PASSTABLE))
-		return TRUE
+/obj/structure/platform/CanPass(atom/movable/mover, turf/target)
+    if(corner)
+        return FALSE
+    if(mover && mover.throwing)
+        return TRUE
+    var/obj/structure/S = locate(/obj/structure) in get_turf(mover)
+    if(S && S.climbable && !(S.flags & ON_BORDER) && climbable && isliving(mover)) //Climbable objects allow you to universally climb over others
+        return TRUE
+    if(!(flags & ON_BORDER) || get_dir(loc, target) == dir)
+        return FALSE
+    else
+        return TRUE
 
 /obj/structure/platform/CanAtmosPass()
     return TRUE
@@ -81,6 +90,21 @@
     desc =  " A metal platform corner"
     icon_state = "metalcorner2"
     corner = TRUE
-    material_type = /obj/item/stack/sheet/plasteel
     material_amount = 5 
 
+/*Plataformas para el Map
+Tan simple como que no hubo forma de hacer 
+que las plataformas del mapa iniciaron anchored y 
+las de construccion iniciaran unanchored*/
+
+/obj/structure/platform/map
+    anchored = TRUE
+
+/obj/structure/platform/corner/map
+    anchored = TRUE
+
+/obj/structure/platform/metal2/map
+    anchored = TRUE
+
+/obj/structure/platform/metal2/corner/map
+    anchored = TRUE
