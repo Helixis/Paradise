@@ -117,6 +117,10 @@
 	name = "Custom kinetic accelerator"
 	desc = "You're not sure how it's made, but it is truly a kinetic accelerator fit for a clown. Its handle smells faintly of bananas."
 	icon_state = "byoka"
+	flight_x_offset = 15
+	flight_y_offset = 21
+	knife_x_offset = 14
+	knife_y_offset = 14
 	overheat_time = 27
 	ammo_type = list(/obj/item/ammo_casing/energy/kinetic/premium/byoka)
 	max_mod_capacity = 330
