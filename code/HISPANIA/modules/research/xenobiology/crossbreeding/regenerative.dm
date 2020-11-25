@@ -177,3 +177,18 @@ Regenerative extracts:
 	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/head/soft/purple(null), SLOT_HEAD)
 	if(equipped > 0)
 		target.visible_message("<span class='notice'>The milky goo congeals into clothing!</span>")
+
+/obj/item/slimecross/regenerative/bluespace
+	colour = "bluespace"
+	effect_desc = "Fully heals the target and teleports them to where this core was created."
+	var/turf/simulated/T
+
+/obj/item/slimecross/regenerative/bluespace/core_effect(mob/living/target, mob/user)
+	var/turf/old_location = get_turf(target)
+	if(do_teleport(target, T))
+		old_location.visible_message("<span class='warning'>[target] disappears in a shower of sparks!</span>")
+		to_chat(target, "<span class='danger'>The milky goo teleports you somewhere it remembers!</span>")
+
+/obj/item/slimecross/regenerative/bluespace/Initialize()
+	. = ..()
+	T = get_turf(src)
