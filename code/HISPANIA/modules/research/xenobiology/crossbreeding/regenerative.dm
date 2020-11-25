@@ -171,10 +171,10 @@ Regenerative extracts:
 
 /obj/item/slimecross/regenerative/darkpurple/core_effect(mob/living/target, mob/user)
 	var/equipped = 0
-	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/shoes/purple(null), SLOT_FEET)
-	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(null), SLOT_ICLOTHING)
-	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/gloves/color/purple(null), SLOT_GLOVES)
-	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/head/soft/purple(null), SLOT_HEAD)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/shoes/purple(null), slot_shoes)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(null), slot_w_uniform)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/gloves/color/purple(null), slot_gloves)
+	equipped += target.equip_to_slot_or_del(new /obj/item/clothing/head/soft/purple(null), slot_head)
 	if(equipped > 0)
 		target.visible_message("<span class='notice'>The milky goo congeals into clothing!</span>")
 
@@ -192,3 +192,12 @@ Regenerative extracts:
 /obj/item/slimecross/regenerative/bluespace/Initialize()
 	. = ..()
 	T = get_turf(src)
+
+/obj/item/slimecross/regenerative/oil
+	colour = "oil"
+	effect_desc = "Fully heals the target and flashes everyone in sight."
+
+/obj/item/slimecross/regenerative/oil/core_effect(mob/living/target, mob/user)
+	playsound(src, 'sound/weapons/flash.ogg', 100, TRUE)
+	for(var/mob/living/L in view(user,7))
+		L.flash_eyes()
