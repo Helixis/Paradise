@@ -141,10 +141,6 @@ Charged extracts:
 	user.visible_message("<span class='warning'>[src] solidifies with a horrifying banana stench!</span>")
 	..()
 
-/obj/item/slimecross/charged/gold/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
-
 /obj/item/slimecross/charged/oil
 	colour = "oil"
 	effect_desc = "Creates an explosion after a few seconds."
