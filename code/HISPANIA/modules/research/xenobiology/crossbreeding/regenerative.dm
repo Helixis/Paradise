@@ -54,6 +54,16 @@ Regenerative extracts:
 /obj/item/slimecross/regenerative/purple/core_effect(mob/living/target, mob/user)
 	target.reagents.add_reagent("regen_jelly",10)
 
+/obj/item/slimecross/regenerative/blue
+	colour = "blue"
+	effect_desc = "Fully heals the target and makes the floor wet."
+
+/obj/item/slimecross/regenerative/blue/core_effect(mob/living/target, mob/user)
+	if(isturf(target.loc))
+		var/turf/simulated/T = get_turf(target)
+		T.MakeSlippery(TURF_WET_WATER, 10 SECONDS)
+		target.visible_message("<span class='warning'>The milky goo in the extract gets all over the floor!</span>")
+
 /obj/item/slimecross/regenerative/metal
 	colour = "metal"
 	effect_desc = "Fully heals the target and encases the target in a locker."
