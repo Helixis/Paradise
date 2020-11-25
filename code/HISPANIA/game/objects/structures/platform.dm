@@ -7,17 +7,57 @@
     desc =  " A metal platform"
     flags = ON_BORDER
     anchored = FALSE
+    layer = ABOVE_OBJ_LAYER
     var/corner = FALSE
     var/material_type = /obj/item/stack/sheet/metal
     var/material_amount = 10 
-    var/decon_speed = null
+    var/decon_speed
+
+/obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
+    if(corner)
+        if(dir == NORTH)  
+            layer = ABOVE_MOB_LAYER
+        if(dir == SOUTH)
+            layer = ABOVE_MOB_LAYER
+    if(dir == NORTH)
+        layer = ABOVE_MOB_LAYER
+    return
+
+/obj/structure/platform/setDir(newdir)
+    . = ..()
+    CheckLayer()
 
 /obj/structure/platform/New()
     ..()
     if(corner)
         decon_speed = 30
+        density = FALSE
     else   
-        decon_speed = 60    
+        decon_speed = 40
+
+/obj/structure/platform/examine(mob/user)
+    . = ..()
+
+    . += "<span class='notice'>The [src] is [anchored == TRUE ? "screwed" : "unscrewed"] to the floor.</span>"
+
+/obj/structure/platform/verb/rotate()
+	set name = "Rotate Platform Counter-Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if(usr.incapacitated())
+		return
+
+	if(anchored)
+		to_chat(usr, "<span class='warning'>[src] cannot be rotated while it is screwed to the floor!</span>")
+		return FALSE
+
+	var/target_dir = turn(dir, 90)
+
+	setDir(target_dir)
+	air_update_turf(1)
+	add_fingerprint(usr)
+	return TRUE
 
 // Construcción
 
@@ -45,9 +85,10 @@
     TOOL_DISMANTLE_SUCCESS_MESSAGE 
     qdel(src)
 
+
 /obj/structure/platform/CheckExit(atom/movable/O, turf/target)
-    if(corner) 
-        return  FALSE
+    if(corner)
+        return !density
     if(O && O.throwing)
         return TRUE
     if(((flags & ON_BORDER) && get_dir(loc, target) == dir))
@@ -57,7 +98,7 @@
 
 /obj/structure/platform/CanPass(atom/movable/mover, turf/target)
     if(corner)
-        return FALSE
+        return !density
     if(mover && mover.throwing)
         return TRUE
     var/obj/structure/S = locate(/obj/structure) in get_turf(mover)
@@ -71,23 +112,26 @@
 /obj/structure/platform/CanAtmosPass()
     return TRUE
 
+// Plataformas de otros tipos
+
 /obj/structure/platform/metal2
-    name = "Metal Platform 2"
+    name = "Reinforced Plasteel Platform"
+    desc =  "A robust platform made of plasteel, more resistance for hazard sites"
     icon_state = "metal2"
     material_type = /obj/item/stack/sheet/plasteel
 
 ///Corners
 
 /obj/structure/platform/corner
-    name = "Metal Platform Corner"
+    name = "Metal Platform Corner"  
     icon_state = "metalcorner"
     desc =  " A metal platform corner"
     corner = TRUE
     material_amount = 5 
 
 /obj/structure/platform/metal2/corner 
-    name = "Metal Platform 2"
-    desc =  " A metal platform corner"
+    name = "Reinforced Platform Corner"
+    desc =  "A robust platform corner made of plasteel, more resistance for hazard sites"
     icon_state = "metalcorner2"
     corner = TRUE
     material_amount = 5 
