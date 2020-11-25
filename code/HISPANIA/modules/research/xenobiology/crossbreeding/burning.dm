@@ -242,17 +242,3 @@ Burning extracts:
 		playsound(W, 'sound/effects/break_stone.ogg', 50, TRUE)
 	user.visible_message("<span class='danger'>[src] pulses violently, and shatters the walls around it!</span>")
 	..()
-
-/obj/item/slimecross/burning/darkpurple
-	colour = "dark purple"
-	effect_desc = "Creates a cloud of plasma."
-
-/obj/item/slimecross/burning/darkpurple/do_effect(mob/user)
-    user.visible_message("<span class='danger'>[src] sublimates into a cloud of plasma!</span>")
-    var/turf/simulated/T = get_turf(src)
-    if(!istype(T))
-        return
-    T.atmos_spawn_air("LINDA_SPAWN_TOXINS",60)
-    T.air_update_turf()
-    to_chat(world,"vamooo")
-    ..()
