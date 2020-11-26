@@ -14,14 +14,10 @@
     var/decon_speed
 
 /obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
-    if(corner)
-        if(dir == NORTH)  
-            layer = ABOVE_MOB_LAYER
-        if(dir == SOUTH)
-            layer = ABOVE_MOB_LAYER
     if(dir == NORTH)
         layer = ABOVE_MOB_LAYER
-    return
+    else if(corner && dir == SOUTH)
+        layer = ABOVE_MOB_LAYER
 
 /obj/structure/platform/setDir(newdir)
     . = ..()
@@ -34,6 +30,7 @@
         density = FALSE
     else   
         decon_speed = 40
+    CheckLayer()
 
 /obj/structure/platform/examine(mob/user)
     . = ..()
