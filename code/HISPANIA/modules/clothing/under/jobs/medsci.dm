@@ -4,13 +4,17 @@
 respectivos sprites en las carpetas de iconos de hispania , es decir icons/hispania
 deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE"*/
 
-//Resprite of RD Uniform
+//Resprite of RD Uniform by Danaleja2005
 
 /obj/item/clothing/under/rank/research_director
 	icon_state = "rd"
 	item_state = "rd"
 	item_color = "rd"
 	hispania_icon = TRUE
+	sprite_sheets = list(
+		"Vox" = 'icons/hispania/mob/species/vox/uniform.dmi',
+		"Grey" = 'icons/hispania/mob/species/grey/uniform.dmi'
+		)
 
 /obj/item/clothing/under/rank/research_director/formal
 	name = "research director's black formal uniform"
