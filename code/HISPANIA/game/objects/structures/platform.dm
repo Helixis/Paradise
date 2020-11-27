@@ -8,6 +8,8 @@
     flags = ON_BORDER
     anchored = FALSE
     layer = ABOVE_OBJ_LAYER
+    max_integrity = 200
+    armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
     var/corner = FALSE
     var/material_type = /obj/item/stack/sheet/metal
     var/material_amount = 10 
@@ -34,7 +36,6 @@
 
 /obj/structure/platform/examine(mob/user)
     . = ..()
-
     . += "<span class='notice'>The [src] is [anchored == TRUE ? "screwed" : "unscrewed"] to the floor.</span>"
 
 /obj/structure/platform/verb/rotate()
@@ -116,6 +117,8 @@
     desc =  "A robust platform made of plasteel, more resistance for hazard sites"
     icon_state = "metal2"
     material_type = /obj/item/stack/sheet/plasteel
+    max_integrity = 300
+    armor = list("melee" = 20, "bullet" = 30, "laser" = 30, "energy" = 100, "bomb" = 50, "bio" = 0, "rad" = 75, "fire" = 100, "acid" = 100)
 
 ///Corners
 
