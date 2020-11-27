@@ -133,8 +133,8 @@ GLOBAL_LIST_INIT(metal_recipes, list(
  * Plasteel
  */
 GLOBAL_LIST_INIT(plasteel_recipes, list(
-	new /datum/stack_recipe("Reinforced Plasteel Platform", /obj/structure/platform/metal2, 10, time = 40,one_per_turf = TRUE, on_floor = TRUE),
-	new /datum/stack_recipe("Reinforced Plasteel Platform Corner", /obj/structure/platform/metal2/corner, 5, time = 30,one_per_turf = TRUE, on_floor = TRUE),
+	new /datum/stack_recipe("Reinforced Plasteel Platform", /obj/structure/platform/reinforced, 10, time = 40,one_per_turf = TRUE, on_floor = TRUE),
+	new /datum/stack_recipe("Reinforced Plasteel Platform Corner", /obj/structure/platform/reinforced/corner, 5, time = 30,one_per_turf = TRUE, on_floor = TRUE),
 	new /datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1),
 	new /datum/stack_recipe("bomb assembly", /obj/machinery/syndicatebomb/empty, 3, time = 50),
 	new /datum/stack_recipe("Surgery Table", /obj/machinery/optable, 5, time = 50, one_per_turf = 1, on_floor = 1),
