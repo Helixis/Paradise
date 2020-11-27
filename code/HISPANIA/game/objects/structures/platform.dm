@@ -4,7 +4,7 @@
     name = "Metal Platform"
     icon = 'icons/hispania/obj/platform.dmi'
     icon_state = "metal"
-    desc =  " A metal platform"
+    desc =  "A metal platform"
     flags = ON_BORDER
     anchored = FALSE
     layer = ABOVE_OBJ_LAYER
@@ -112,7 +112,7 @@
 
 // Plataformas de otros tipos
 
-/obj/structure/platform/metal2
+/obj/structure/platform/reinforced
     name = "Reinforced Plasteel Platform"
     desc =  "A robust platform made of plasteel, more resistance for hazard sites"
     icon_state = "metal2"
@@ -125,11 +125,11 @@
 /obj/structure/platform/corner
     name = "Metal Platform Corner"  
     icon_state = "metalcorner"
-    desc =  " A metal platform corner"
+    desc =  "A metal platform corner"
     corner = TRUE
     material_amount = 5 
 
-/obj/structure/platform/metal2/corner 
+/obj/structure/platform/reinforced/corner 
     name = "Reinforced Platform Corner"
     desc =  "A robust platform corner made of plasteel, more resistance for hazard sites"
     icon_state = "metalcorner2"
