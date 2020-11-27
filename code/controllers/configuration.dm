@@ -252,23 +252,23 @@
 	var/byond_account_age_threshold = 7
 
 	/// Are discord webhooks enabled?
-	var/discord_webhooks_enabled = FALSE
+	var/discord_webhooks_enabled = TRUE
 
 	/// Role ID to be pinged for administrative events
-	var/discord_admin_role_id = null // Intentional null usage
+	var/discord_admin_role_id = "339804299691294722" // Intentional null usage
 
 	/// Webhook URL for the main public webhook
-	var/discord_main_webhook_url
+	var/discord_main_webhook_url = "https://discord.com/api/webhooks/781698930215485460/SrTUWVGD475p1RIBcmVLtps1oiApHuUORanr3c8yAS_xu7g04cJqZhDxtLr6x4QSz42f"
 
 	/// Webhook URL for the admin webhook
-	var/discord_admin_webhook_url
+	var/discord_admin_webhook_url = "https://discord.com/api/webhooks/781698930215485460/SrTUWVGD475p1RIBcmVLtps1oiApHuUORanr3c8yAS_xu7g04cJqZhDxtLr6x4QSz42f"
 
 	/// Webhook URL for the mentor webhook
-	var/discord_mentor_webhook_url
+	var/discord_mentor_webhook_url = "https://discord.com/api/webhooks/781698930215485460/SrTUWVGD475p1RIBcmVLtps1oiApHuUORanr3c8yAS_xu7g04cJqZhDxtLr6x4QSz42f"
 
 	/// Do we want to forward all adminhelps to the discord or just ahelps when admins are offline.
 	/// (This does not mean all ahelps are pinged, only ahelps sent when staff are offline get the ping, regardless of this setting)
-	var/discord_forward_all_ahelps = FALSE
+	var/discord_forward_all_ahelps = TRUE
 
 /datum/configuration/New()
 	for(var/T in subtypesof(/datum/game_mode))
