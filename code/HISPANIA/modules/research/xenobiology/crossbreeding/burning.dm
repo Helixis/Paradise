@@ -15,10 +15,10 @@ Burning extracts:
 	create_reagents(10, INJECTABLE | DRAWABLE)
 
 /obj/item/slimecross/burning/attack_self(mob/user)
-	if(!reagents.has_reagent("plasma_dust",  10))
+	if(!reagents.has_reagent("plasma_dust", 10))
 		to_chat(user, "<span class='warning'>This extract needs to be full of plasma to activate!</span>")
 		return
-	reagents.remove_reagent("plasma_dust",  10)
+	reagents.remove_reagent("plasma_dust", 10)
 	to_chat(user, "<span class='notice'>You squeeze the extract, and it absorbs the plasma!</span>")
 	playsound(src, 'sound/effects/bubbles.ogg', 50, TRUE)
 	playsound(src, 'sound/magic/fireball.ogg', 50, TRUE)
