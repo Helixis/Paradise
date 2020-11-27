@@ -141,7 +141,7 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	for(var/obj/item/slime_extract/extract in rune_turf)
 		if(extract.color_slime == extractype || !extractype) //check if the extract is the first one or of the right color.
 			extractype = extract.color_slime
-			qdel(extract)    //vores the slime extract
+			qdel(extract)//vores the slime extract
 			playsound(rune_turf, 'sound/effects/splat.ogg', 20, TRUE)
 			absorbed_extracts++
 			if (absorbed_extracts < 8)
@@ -207,13 +207,13 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	slippery_rune(rune_turf)
 
 /obj/effect/warped_rune/cyanspace/proc/slippery_rune(turf/lube_turf)
-    if(isfloorturf(lube_turf))
-        var/turf/simulated/F = lube_turf
-        F.MakeSlippery(TURF_WET_LUBE, 10 SECONDS)
+	if(isfloorturf(lube_turf))
+		var/turf/simulated/F = lube_turf
+		F.MakeSlippery(TURF_WET_LUBE, 10 SECONDS)
 
 /obj/effect/warped_rune/cyanspace/Destroy()
-    STOP_PROCESSING(SSprocessing, src)
-    .=..()
+	STOP_PROCESSING(SSprocessing, src)
+	.=..()
 
 /*The purple warp rune makes advanced burn kit and advanced trauma kit if you put cloth or plastic on it. */
 
@@ -257,8 +257,8 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		playsound(rune_turf, 'sound/effects/splat.ogg', 20, TRUE)
 
 /obj/effect/warped_rune/purplespace/Destroy()
-    STOP_PROCESSING(SSprocessing, src)
-    .=..()
+	STOP_PROCESSING(SSprocessing, src)
+	.=..()
 
 /*Metal rune : makes an invisible wall. actually I lied, the rune is the wall.*/
 
@@ -336,8 +336,8 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 			battery.charge = battery.maxcharge //we don't need to update the cell icon since literally no one can see the battery inside the borg anyway.
 
 /obj/effect/warped_rune/yellowspace/Destroy()
-    STOP_PROCESSING(SSprocessing, src)
-    .=..()
+	STOP_PROCESSING(SSprocessing, src)
+	.=..()
 
 /* Dark purple crossbreed, Fill up any beaker like container with 50 unit of plasma dust every 30 seconds  */
 
@@ -390,8 +390,8 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		human.adjust_bodytemperature(-1000) //Not enough to crit anyone not already weak to cold, might need serious rebalance if cold damage is reworked.
 
 /obj/effect/warped_rune/darkbluespace/Destroy()
-    STOP_PROCESSING(SSprocessing, src)
-    .=..()
+	STOP_PROCESSING(SSprocessing, src)
+	.=..()
 
 /* makes a rune that absorb food, whenever someone step on the rune the nutrition come back to them until they are full.*/
 
@@ -442,40 +442,38 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	effect_desc = "Puts up a rune that will swap the next two person that walk on the rune."
 
 /obj/effect/warped_rune/bluespace
-    desc = "Everyone is everywhere at once, yet so far away from each other"
-    icon_state = "bluespace_rune"
-    max_cooldown = 3 SECONDS //only here to avoid spam lag
-    /// first person to run into the rune
-    var/mob/living/carbon/first_person
-    ///second person that run into the rune
-    var/mob/living/carbon/second_person
+	desc = "Everyone is everywhere at once, yet so far away from each other"
+	icon_state = "bluespace_rune"
+	max_cooldown = 3 SECONDS //only here to avoid spam lag
+	var/mob/living/carbon/first_person /// first person to run into the rune
+	var/mob/living/carbon/second_person ///second person that run into the rune
 
 ///the first two person that stepped on the rune swap places after the second person stepped on it.
 /obj/effect/warped_rune/bluespace/Crossed(atom/movable/crossing)
-    . = ..()
-    if(cooldown > world.time) //checks if 2 seconds have passed to avoid spam.
-        return
+	. = ..()
+	if(cooldown > world.time) //checks if 2 seconds have passed to avoid spam.
+		return
 
-    cooldown = max_cooldown + world.time
-    if(!istype(crossing,/mob/living/carbon/human))
-        return
+	cooldown = max_cooldown + world.time
+	if(!istype(crossing,/mob/living/carbon/human))
+		return
 
-    if(!first_person)
-        first_person = crossing //remember who stepped in so we can teleport them later.
-        return
+	if(!first_person)
+		first_person = crossing //remember who stepped in so we can teleport them later.
+		return
 
-    if(crossing == first_person)
-        return
+	if(crossing == first_person)
+		return
 
-    second_person = crossing
-    do_teleport(second_person, first_person)//swap both of their place.
-    do_teleport(first_person, rune_turf)
-    first_person = null
+	second_person = crossing
+	do_teleport(second_person, first_person)//swap both of their place.
+	do_teleport(first_person, rune_turf)
+	first_person = null
 
 /obj/effect/warped_rune/bluespace/Destroy()
-    first_person = null
-    second_person = null
-    .=..()
+	first_person = null
+	second_person = null
+	.=..()
 
 ///colors whatever steps on the rune randomly
 
@@ -521,8 +519,8 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/effect/oilspace_bunker/New()
-    ..()
-    air_update_turf(TRUE)
+	..()
+	air_update_turf(TRUE)
 
 /obj/effect/oilspace_bunker/CanAtmosPass(turf/T)
 	return FALSE
@@ -606,5 +604,5 @@ put up a rune with bluespace effects, lots of those runes are fluff or act as a 
 		second_person = null
 
 /obj/effect/warped_rune/blackspace/Destroy()
-    STOP_PROCESSING(SSprocessing, src)
-    .=..()
+	STOP_PROCESSING(SSprocessing, src)
+	.=..()
