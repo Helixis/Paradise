@@ -23,8 +23,6 @@ SUBSYSTEM_DEF(discord)
 			webhook_urls = config.discord_main_webhook_urls
 		if(DISCORD_WEBHOOK_MENTOR)
 			webhook_urls = config.discord_mentor_webhook_urls
-		if(DISCORD_WEBHOOK_NEWROUND)
-			webhook_urls = config.discord_newround_webhook_urls
 
 	var/datum/discord_webhook_payload/dwp = new()
 	dwp.webhook_content = content
