@@ -760,7 +760,7 @@
 				if("discord_webhooks_admin_role_id")
 					discord_admin_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers
 				if("discord_webhooks_newround_role_id")
-					discord_newround_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers
+					discord_newround_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers, esta es una variable de hispania
 				if("discord_webhooks_main_url")
 					discord_main_webhook_urls = splittext(value, "|")
 				if("discord_webhooks_admin_url")
