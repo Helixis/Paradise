@@ -258,7 +258,7 @@
 	var/discord_admin_role_id = null // Intentional null usage
 
 	/// Role ID to be pinged for administrative events
-	var/discord_newround_role_id //toma el valor del archivo config.txt
+	var/discord_newround_role_id //toma el valor del archivo config.txt, esta es una variable de hispania
 
 	/// Webhook URLs for the main public webhook
 	var/list/discord_main_webhook_urls = list()
