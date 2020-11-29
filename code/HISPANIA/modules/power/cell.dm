@@ -4,7 +4,7 @@
 /obj/item/stock_parts/cell/proc/minorrecharge()
 	minorrecharging = FALSE
 
-// Refactor que me mando a hacer Evan, POR DANALEJA2005 //	
+//refactor de baterias creadas en los autolathes/protolathes/mechfab por danaleja2005
 
 /obj/item/stock_parts/cell/proc/discharge() 
 	use(charge)
