@@ -258,7 +258,7 @@
 	var/discord_admin_role_id = null // Intentional null usage
 
 	/// Role ID to be pinged for administrative events
-	var/discord_newround_role_id = null // Intentional null usage
+	var/discord_newround_role_id = null // Intentional null usage, toma el valor del archivo .config
 
 	/// Webhook URLs for the main public webhook
 	var/list/discord_main_webhook_urls = list()
@@ -760,7 +760,7 @@
 				if("discord_webhooks_admin_role_id")
 					discord_admin_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers
 				if("discord_webhooks_newround_role_id")
-					discord_newround_role_id = "[value]" // Este comentario no tiene ningun sentido pero, Hola, todo bien?
+					discord_newround_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers
 				if("discord_webhooks_main_url")
 					discord_main_webhook_urls = splittext(value, "|")
 				if("discord_webhooks_admin_url")

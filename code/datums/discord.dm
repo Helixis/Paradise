@@ -78,6 +78,8 @@
 	embed_timestamp = time_stamp() // 8601 is king
 	fields = list() // Initialize the list
 
+/datum/discord_embed/embed/new_round
+
 /**
   * Embed Serializer
   *
