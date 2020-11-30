@@ -8,7 +8,7 @@
 #define NOT_DRACONIAN 0
 #define DRACONIAN 1
 #define FULL_DRACONIAN 2
-#define MEAT /obj/item/reagent_containers/food/snacks/meat
+#define MEAT /obj/item/reagent_containers/food/snacks/monstermeat
 #define CORE /obj/item/organ/internal/regenerative_core
 #define FLORA /obj/item/reagent_containers/food/snacks/grown/ash_flora
 #define ORGANS /obj/item/organ/internal
@@ -52,7 +52,7 @@
 	sentience_type = SENTIENCE_OTHER
 	var/pre_attack = FALSE
 	var/pre_attack_icon = "Goliath_preattack"
-	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide, /obj/item/reagent_containers/food/snacks/meat)
+	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide, /obj/item/reagent_containers/food/snacks/monstermeat/goliath)
 	var/growth = 1200 // Out of 1200.
 	var/growth_stage = ADULT // Can be ANCIENT, ADULT, SUBADULT, JUVENILE.
 	var/tame_progress = 0
@@ -217,7 +217,7 @@
 		environment_smash = 2
 		aux_tentacles = 3
 		crusher_loot = /obj/item/crusher_trophy/goliath_tentacle
-		butcher_results = list(/obj/item/reagent_containers/food/snacks/goliath = 2, /obj/item/stack/sheet/animalhide/goliath_hide = 1, /obj/item/stack/sheet/bone = 2, /obj/item/reagent_containers/food/snacks/meat = 1)
+		butcher_results = list(/obj/item/reagent_containers/food/snacks/monstermeat/goliath = 2, /obj/item/stack/sheet/animalhide/goliath_hide = 1, /obj/item/stack/sheet/bone = 2, /obj/item/reagent_containers/food/snacks/meat = 1)
 		loot = list()
 		stat_attack = UNCONSCIOUS
 		robust_searching = TRUE
@@ -251,7 +251,7 @@
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/becomeaware() // Becoming tamed and player controlled
 	visible_message("<span class='notice'>\The [src] looks around...</span>")
 	spawn()
-		var/list/candidates = pollCandidates("Do you want to play as a tamed young goliath?", ROLE_SENTIENT, 1, 150)
+		var/list/mob/dead/observer/candidates = SSghost_spawns.poll_candidates("Do you want to play as a tamed young goliath?", ROLE_SENTIENT, TRUE, poll_time = 30)
 		if(candidates.len)
 			var/mob/C = pick(candidates)
 			if(C)
@@ -344,7 +344,7 @@
 	throw_message = "does nothing to the tough hide of the"
 	pre_attack_icon = "goliath2"
 	crusher_loot = /obj/item/crusher_trophy/goliath_tentacle
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/goliath = 2, /obj/item/stack/sheet/animalhide/goliath_hide = 1, /obj/item/stack/sheet/bone = 2)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/monstermeat/goliath = 2, /obj/item/stack/sheet/animalhide/goliath_hide = 1, /obj/item/stack/sheet/bone = 2)
 	loot = list()
 	stat_attack = UNCONSCIOUS
 	robust_searching = TRUE
@@ -370,7 +370,7 @@
 	pre_attack_icon = "Goliath_preattack"
 	throw_message = "does nothing to the rocky hide of the"
 	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide) //A throwback to the asteroid days
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/goliath = 2, /obj/item/stack/sheet/bone = 2)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/monstermeat/goliath = 2, /obj/item/stack/sheet/bone = 2)
 	crusher_drop_mod = 30
 	wander = FALSE
 	growth_stage = ANCIENT
@@ -438,7 +438,7 @@
 
 /obj/effect/temp_visual/goliath_tentacle/original/Initialize(mapload, new_spawner, aux_tentacles)
 	. = ..()
-	var/list/directions = cardinal.Copy()
+	var/list/directions = GLOB.cardinal.Copy()
 	for(var/i in 1 to aux_tentacles)
 		var/spawndir = pick_n_take(directions)
 		var/turf/T = get_step(src, spawndir)
@@ -531,7 +531,7 @@
 			if(food_wanted == MEAT)
 				feed_cooldown = rand(5, 10)
 			else
-				feed_cooldown = rand(30, 100)
+				feed_cooldown = rand(20, 50)
 			reroll_food()
 		else // If dead or not hungry
 			if(stat == DEAD)
