@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(available_ai_shells, list())
 	var/mob/living/silicon/ai/mainframe
 	var/datum/action/innate/undeployment/undeployment_action = new
 
-/mob/living/silicon/robot/proc/make_shell(var/obj/item/borg/upgrade/ai/board)
+/mob/living/silicon/robot/proc/make_shell(obj/item/borg/upgrade/ai/board)//no entiendo por qué esto necesita un argumento
 	shell = TRUE
 	braintype = "AI Shell"
 	name = "[designation] AI Shell [rand(100,999)]"

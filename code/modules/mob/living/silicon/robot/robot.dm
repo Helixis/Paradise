@@ -150,8 +150,10 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			camera.status = 0
 
 		//If this body is meant to be a borg controlled by the AI player
-	if(shell)
-		make_shell()
+	if(shell)//luego de un tiempo muerto convierte a la ia en shell debido a que aun no esta inicializado el mob, pd: PUTO PARADISE
+		spawn(1)
+			if(src)
+				make_shell()
 
 	else if(mmi == null)
 		mmi = new /obj/item/mmi/robotic_brain(src)	//Give the borg an MMI if he spawns without for some reason. (probably not the correct way to spawn a robotic brain, but it works)
