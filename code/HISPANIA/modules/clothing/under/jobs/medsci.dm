@@ -11,6 +11,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 	item_state = "rd"
 	item_color = "rd"
 	hispania_icon = TRUE
+	icon = 'icons/hispania/mob/uniform.dmi'
 	sprite_sheets = list(
 		"Vox" = 'icons/hispania/mob/species/vox/uniform.dmi',
 		"Grey" = 'icons/hispania/mob/species/grey/uniform.dmi'
@@ -19,6 +20,7 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 /obj/item/clothing/under/rank/research_director/formal
 	name = "research director's black formal uniform"
 	desc = "A formal uniform with a tie and a badge, it says Research Director"
+	icon = 'icons/hispania/mob/uniform.dmi'
 	icon_state = "rd_black"
 	item_color = "rd_black"
 	species_restricted = list("exclude", "Grey", "Vox")
