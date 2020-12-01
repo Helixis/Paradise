@@ -7,6 +7,7 @@
 	desc =  "A metal platform"
 	flags = ON_BORDER
 	anchored = FALSE
+	climbable = TRUE
 	layer = ABOVE_OBJ_LAYER
 	max_integrity = 200
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
