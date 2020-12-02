@@ -64,6 +64,7 @@
 	var/mutable_appearance/draconian_overlay
 	var/aux_tentacles = 3 // Auxillary tentacles. The total amount of tentacles is 1 + [aux_tentacles] + [extra_tentacles].
 	var/mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient/leader = null
+	var/list/ghost_volunteers[0]
 
 /mob/living/simple_animal/hostile/asteroid/goliath/juvenile
 	name = "juvenile goliath"
@@ -250,24 +251,73 @@
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/becomeaware() // Becoming tamed and player controlled
 	visible_message("<span class='notice'>\The [src] looks around...</span>")
-	spawn()
-		var/list/mob/dead/observer/candidates = SSghost_spawns.poll_candidates("Do you want to play as a tamed young goliath?", ROLE_SENTIENT, TRUE, poll_time = 30)
-		if(candidates.len)
-			var/mob/C = pick(candidates)
-			if(C)
-				key = C.key
-				to_chat(src, "<span class='biggerdanger'>You are a young goliath!</span>")
-				to_chat(src, "<span class='danger'>You have been introduced to the non-aggressive way of living by being fed and treated well, but you have also been disowned by the creatures you previously coexisted with.</span>")
+	ghost_volunteers.Cut()
+	request_player()
+	spawn(600)
+		if(ghost_volunteers.len)
+			var/mob/dead/observer/O
+			while(!istype(O) && ghost_volunteers.len)
+				O = pick_n_take(ghost_volunteers)
+			if(istype(O) && check_observer(O))
+				if(leader)
+					leader.goliaths_owned--
+					leader = null
 				picking_candidates = FALSE
 				tame_stage = TAMED
-				leader.goliaths_owned--
-				leader = null
 				faction = list("neutral")
-		if(!ckey)
+				ckey = O.ckey
+				to_chat(src, "<span class='biggerdanger'>You are a young goliath!</span>")
+				to_chat(src, "<span class='danger'>You have been introduced to the non-aggressive way of living by being fed and treated well, but you have also been disowned by the creatures you previously coexisted with.</span>")
+				mind.assigned_role = "Tamed Goliath"
+				visible_message("<span class='notice'>[src] roars! He looks happy.</span>")
+		else
 			visible_message("<span class='notice'>\The [src] looks undecided...</span>")
 			tame_progress = 2100
 			picking_candidates = FALSE
 	return
+
+/mob/living/simple_animal/hostile/asteroid/goliath/proc/request_player()
+	for(var/mob/dead/observer/O in GLOB.player_list)
+		if(check_observer(O))
+			to_chat(O, "<span class='boldnotice'>\A [src] is being tamed. (<a href='?src=[O.UID()];jump=\ref[src]'>Teleport</a> | <a href='?src=[UID()];signup=\ref[O]'>Sign Up</a>)</span>")
+
+/mob/living/simple_animal/hostile/asteroid/goliath/proc/check_observer(mob/dead/observer/O)
+	if(cannotPossess(O))
+		return FALSE
+	if(!O.can_reenter_corpse)
+		return FALSE
+	if(O.client)
+		return TRUE
+	return FALSE
+
+/mob/living/simple_animal/hostile/asteroid/goliath/Topic(href, href_list)
+	if("signup" in href_list)
+		var/mob/dead/observer/O = locate(href_list["signup"])
+		if(!O)
+			return
+		volunteer(O)
+
+/mob/living/simple_animal/hostile/asteroid/goliath/proc/volunteer(mob/dead/observer/O)
+	if(!picking_candidates)
+		to_chat(O, "Not looking for a ghost, yet.")
+		return
+	if(!istype(O))
+		to_chat(O, "<span class='warning'>Error.</span>")
+		return
+	if(O in ghost_volunteers)
+		to_chat(O, "<span class='notice'>Removed from registration list.</span>")
+		ghost_volunteers.Remove(O)
+		return
+	if(!check_observer(O))
+		to_chat(O, "<span class='warning'>You cannot be \a [src].</span>")
+		return
+	if(cannotPossess(O))
+		to_chat(O, "<span class='warning'>Upon using the antagHUD you forfeited the ability to join the round.</span>")
+		return
+	to_chat(O, "<span class='notice'>You've been added to the list of ghosts that may become this [src].  Click again to unvolunteer.</span>")
+	ghost_volunteers.Add(O)
+
+
 
 /mob/living/simple_animal/hostile/asteroid/goliath/Stat()
 	..()
