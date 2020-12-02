@@ -15,6 +15,7 @@
 #define DIAMOND /obj/item/stack/ore/diamond
 #define CYBERORGAN /obj/item/organ/internal/cyberimp
 #define DRAGONSBLOOD /obj/item/dragons_blood
+#define GROWTH_MAX 1200
 
 /mob/living/simple_animal/hostile/asteroid/goliath
 	var/growth = 1200 // Out of 1200.
@@ -96,7 +97,7 @@
 	..()
 	if(statpanel("Status"))
 		if(growth_stage != ADULT && growth_stage != ANCIENT)
-			stat(null, "Growth: [(growth*100)/1200]%.")
+			stat(null, "Growth: [(growth*100)/GROWTH_MAX]%.")
 		else
 			stat(null, "Growth: Complete.")
 
@@ -251,7 +252,7 @@
 	if(cannotPossess(O))
 		to_chat(O, "<span class='warning'>Upon using the antagHUD you forfeited the ability to join the round.</span>")
 		return
-	to_chat(O, "<span class='notice'>You've been added to the list of ghosts that may become this [src].  Click again to unvolunteer.</span>")
+	to_chat(O, "<span class='notice'>You've been added to the list of ghosts that may become this [src]. Click again to unvolunteer.</span>")
 	ghost_volunteers.Add(O)
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/add_draconian_effect() // Apply the draconian overlay
@@ -332,18 +333,9 @@
 	else
 		..()
 
-/mob/living/simple_animal/hostile/asteroid/goliath/revive()
-	..()
-	anchored = TRUE
-	add_draconian_effect(draconian_overlay)
-
 /mob/living/simple_animal/hostile/asteroid/goliath/Destroy() // When gibbed / deleted, the ancient goliath that spawned it will be able to spawn another.
 	..()
 	leader.goliaths_owned--
-
-/mob/living/simple_animal/hostile/asteroid/goliath/death()
-	..()
-	add_draconian_effect(draconian_overlay)
 
 #undef ANCIENT
 #undef ADULT
@@ -362,3 +354,4 @@
 #undef DIAMOND
 #undef CYBERORGAN
 #undef DRAGONSBLOOD
+#undef GROWTH_MAX

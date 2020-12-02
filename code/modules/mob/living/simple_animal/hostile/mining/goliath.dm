@@ -15,6 +15,7 @@
 #define DIAMOND /obj/item/stack/ore/diamond
 #define CYBERORGAN /obj/item/organ/internal/cyberimp
 #define DRAGONSBLOOD /obj/item/dragons_blood
+#define GROWTH_MAX 1200
 
 //A slow but strong beast that tries to stun using its tentacles
 /mob/living/simple_animal/hostile/asteroid/goliath
@@ -89,6 +90,10 @@
 			Goto(pick(surrounding_turfs), move_to_delay)
 			return
 
+/mob/living/simple_animal/hostile/asteroid/goliath/revive()
+	..()
+	anchored = TRUE
+	add_draconian_effect(draconian_overlay)
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/handle_preattack()
 	if(ranged_cooldown <= world.time + ranged_cooldown_time * 0.25 && !pre_attack)
@@ -151,10 +156,10 @@
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/random/Initialize(mapload)
 	. = ..()
-	if(prob(10))
-		new /mob/living/simple_animal/hostile/asteroid/goliath/juvenile(loc)
 	if(prob(1))
 		new /mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient(loc)
+	else if(prob(10))
+		new /mob/living/simple_animal/hostile/asteroid/goliath/juvenile(loc)
 	return INITIALIZE_HINT_QDEL
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient
@@ -210,7 +215,6 @@
 			if((S.leader == null || S.leader.stat == DEAD) && S.tame_stage == WILD && (S.growth_stage != ADULT && S.growth_stage != ANCIENT))
 				S.leader = src
 				goliaths_owned++
-		return
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/tendril
 	fromtendril = TRUE
@@ -275,6 +279,10 @@
 	deltimer(timerid)
 	timerid = QDEL_IN(src, 7)
 
+/mob/living/simple_animal/hostile/asteroid/goliath/death()
+	..()
+	add_draconian_effect(draconian_overlay)
+
 #undef ANCIENT
 #undef ADULT
 #undef SUBADULT
@@ -292,3 +300,4 @@
 #undef DIAMOND
 #undef CYBERORGAN
 #undef DRAGONSBLOOD
+#undef GROWTH_MAX
