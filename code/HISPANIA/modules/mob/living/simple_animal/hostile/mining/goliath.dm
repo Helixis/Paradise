@@ -16,6 +16,20 @@
 #define CYBERORGAN /obj/item/organ/internal/cyberimp
 #define DRAGONSBLOOD /obj/item/dragons_blood
 
+/mob/living/simple_animal/hostile/asteroid/goliath
+	var/growth = 1200 // Out of 1200.
+	var/growth_stage = ADULT // Can be ANCIENT, ADULT, SUBADULT, JUVENILE.
+	var/tame_progress = 0
+	var/tame_stage = WILD // Can be WILD, PASSIVE, TAMED.
+	var/picking_candidates = FALSE
+	var/food_wanted = MEAT // Meat by default.
+	var/feed_cooldown = 0
+	var/draconian = NOT_DRACONIAN // Can be NOT_DRACONIAN, DRACONIAN, FULL_DRACONIAN.
+	var/mutable_appearance/draconian_overlay
+	var/aux_tentacles = 3 // Auxillary tentacles. The total amount of tentacles is 1 + [aux_tentacles] + [extra_tentacles].
+	var/mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient/leader = null
+	var/list/ghost_volunteers[0]
+
 /mob/living/simple_animal/hostile/asteroid/goliath/juvenile
 	name = "juvenile goliath"
 	desc = "A small red animal. It looks like it can run fast!"
@@ -77,6 +91,14 @@
 				if(DIAMOND)
 					msgs += "<span class='notice'>It seems to want to eat something crunchy!</span>"
 		. += msgs
+
+/mob/living/simple_animal/hostile/asteroid/goliath/Stat()
+	..()
+	if(statpanel("Status"))
+		if(growth_stage != ADULT && growth_stage != ANCIENT)
+			stat(null, "Growth: [(growth*100)/1200]%.")
+		else
+			stat(null, "Growth: Complete.")
 
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/reroll_food() // Picking a random preferred food to eat
 	if(tame_stage == WILD && tame_progress <= 599)
@@ -309,6 +331,19 @@
 			add_draconian_effect()
 	else
 		..()
+
+/mob/living/simple_animal/hostile/asteroid/goliath/revive()
+	..()
+	anchored = TRUE
+	add_draconian_effect(draconian_overlay)
+
+/mob/living/simple_animal/hostile/asteroid/goliath/Destroy() // When gibbed / deleted, the ancient goliath that spawned it will be able to spawn another.
+	..()
+	leader.goliaths_owned--
+
+/mob/living/simple_animal/hostile/asteroid/goliath/death()
+	..()
+	add_draconian_effect(draconian_overlay)
 
 #undef ANCIENT
 #undef ADULT
