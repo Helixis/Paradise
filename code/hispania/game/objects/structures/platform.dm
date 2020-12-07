@@ -148,8 +148,8 @@ las de construccion iniciaran unanchored*/
 /obj/structure/platform/corner/map
 	anchored = TRUE
 
-/obj/structure/platform/metal2/map
+/obj/structure/platform/reinforced/map
 	anchored = TRUE
 
-/obj/structure/platform/metal2/corner/map
+/obj/structure/platform/reinforced/corner/map
 	anchored = TRUE
