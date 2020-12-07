@@ -28,11 +28,11 @@
 
 /obj/structure/platform/New()
 	..()
-		if(corner)
-			decon_speed = 30
-			density = FALSE
-		else
-			decon_speed = 40
+	if(corner)
+		decon_speed = 30
+		density = FALSE
+	else
+		decon_speed = 40
 	CheckLayer()
 
 /obj/structure/platform/examine(mob/user)
