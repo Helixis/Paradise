@@ -27,7 +27,7 @@
 	CheckLayer()
 
 /obj/structure/platform/New()
-		..()
+	..()
 		if(corner)
 			decon_speed = 30
 			density = FALSE
