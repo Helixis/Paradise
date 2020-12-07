@@ -4,7 +4,7 @@
 	name = "Metal Platform"
 	icon = 'icons/hispania/obj/platform.dmi'
 	icon_state = "metal"
-	desc =  "A metal platform"
+	desc = "A metal platform"
 	flags = ON_BORDER
 	anchored = FALSE
 	climbable = TRUE
@@ -13,7 +13,7 @@
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
 	var/corner = FALSE
 	var/material_type = /obj/item/stack/sheet/metal
-	var/material_amount = 10 
+	var/material_amount = 10
 	var/decon_speed
 
 /obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
@@ -27,12 +27,12 @@
 	CheckLayer()
 
 /obj/structure/platform/New()
-	..()
-	if(corner)
-		decon_speed = 30
-		density = FALSE
-	else   
-		decon_speed = 40
+		..()
+		if(corner)
+			decon_speed = 30
+			density = FALSE
+		else
+			decon_speed = 40
 	CheckLayer()
 
 /obj/structure/platform/examine(mob/user)
@@ -115,7 +115,7 @@
 
 /obj/structure/platform/reinforced
 	name = "Reinforced Plasteel Platform"
-	desc =  "A robust platform made of plasteel, more resistance for hazard sites"
+	desc = "A robust platform made of plasteel, more resistance for hazard sites"
 	icon_state = "metal2"
 	material_type = /obj/item/stack/sheet/plasteel
 	max_integrity = 300
@@ -124,18 +124,18 @@
 ///Corners
 
 /obj/structure/platform/corner
-	name = "Metal Platform Corner"  
+	name = "Metal Platform Corner"
 	icon_state = "metalcorner"
-	desc =  "A metal platform corner"
+	desc = "A metal platform corner"
 	corner = TRUE
-	material_amount = 5 
+	material_amount = 5
 
 /obj/structure/platform/reinforced/corner 
 	name = "Reinforced Platform Corner"
-	desc =  "A robust platform corner made of plasteel, more resistance for hazard sites"
+	desc = "A robust platform corner made of plasteel, more resistance for hazard sites"
 	icon_state = "metalcorner2"
 	corner = TRUE
-	material_amount = 5 
+	material_amount = 5
 
 /*Plataformas para el Map
 Tan simple como que no hubo forma de hacer 
