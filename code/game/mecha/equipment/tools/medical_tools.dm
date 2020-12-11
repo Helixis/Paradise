@@ -130,7 +130,7 @@
 				<head>
 				<title>[patient] statistics</title>
 				<script language='javascript' type='text/javascript'>
-				[js_byjax]
+				[JS_BYJAX]
 				</script>
 				<style>
 				h3 {margin-bottom:2px;font-size:14px;}
@@ -314,6 +314,7 @@
 	playsound(chassis, 'sound/items/syringeproj.ogg', 50, 1)
 	log_message("Launched [mechsyringe] from [src], targeting [target].")
 	var/mob/originaloccupant = chassis.occupant
+	var/original_target_zone = originaloccupant.zone_selected
 	spawn(0)
 		src = null //if src is deleted, still process the syringe
 		var/max_range = 6
@@ -330,13 +331,13 @@
 			if(M)
 				var/R
 				mechsyringe.visible_message("<span class=\"attack\"> [M] was hit by the syringe!</span>")
-				if(M.can_inject(null, TRUE))
+				if(M.can_inject(originaloccupant, TRUE, original_target_zone))
 					if(mechsyringe.reagents)
 						for(var/datum/reagent/A in mechsyringe.reagents.reagent_list)
 							R += A.id + " ("
 							R += num2text(A.volume) + "),"
 					add_attack_logs(originaloccupant, M, "Shot with [src] containing [R], transferred [mechsyringe.reagents.total_volume] units")
-					mechsyringe.reagents.reaction(M, INGEST)
+					mechsyringe.reagents.reaction(M, REAGENT_INGEST)
 					mechsyringe.reagents.trans_to(M, mechsyringe.reagents.total_volume)
 					M.take_organ_damage(2)
 				break
@@ -394,7 +395,7 @@
 						<head>
 						<title>Reagent Synthesizer</title>
 						<script language='javascript' type='text/javascript'>
-						[js_byjax]
+						[JS_BYJAX]
 						</script>
 						<style>
 						h3 {margin-bottom:2px;font-size:14px;}

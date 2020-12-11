@@ -1,4 +1,3 @@
-
 /*
  * Backpack
  */
@@ -193,6 +192,12 @@
 	icon_state = "viropack"
 	item_state = "viropack"
 
+/obj/item/storage/backpack/blueshield
+	name = "blueshield backpack"
+	desc = "A robust backpack issued to Nanotrasen's finest."
+	icon_state = "blueshieldpack"
+	item_state = "blueshieldpack"
+
 /*
  * Satchel Types
  */
@@ -225,6 +230,11 @@
 	name = "leather satchel"
 	desc = "An NT Deluxe satchel, with the finest quality leather and the company logo in a thin gold stitch"
 	icon_state = "nt_deluxe"
+
+/obj/item/storage/backpack/satchel/lizard
+	name = "lizard skin handbag"
+	desc = "A handbag made out of what appears to be supple green Unathi skin. A face can be vaguely seen on the front."
+	icon_state = "satchel-lizard"
 
 /obj/item/storage/backpack/satchel/withwallet/New()
 	..()
@@ -311,6 +321,11 @@
 	lefthand_file = 'icons/hispania/mob/inhands/backpack_lefthand.dmi'
 	righthand_file = 'icons/hispania/mob/inhands/backpack_righthand.dmi'
 
+/obj/item/storage/backpack/satchel_blueshield
+	name = "blueshield satchel"
+	desc = "A robust satchel issued to Nanotrasen's finest."
+	icon_state = "satchel-blueshield"
+
 /obj/item/storage/backpack/satchel_flat
 	name = "smuggler's satchel"
 	desc = "A very slim satchel that can easily fit into tight spaces."
@@ -381,6 +396,15 @@
 	new /obj/item/ammo_box/magazine/m12g/buckshot(src)
 	new /obj/item/ammo_box/magazine/m12g/buckshot(src)
 	new /obj/item/ammo_box/magazine/m12g/dragon(src)
+
+/obj/item/storage/backpack/duffel/syndie/ammo/shotgunXLmags
+	desc = "A large duffelbag, containing three types of extended drum magazines."
+
+/obj/item/storage/backpack/duffel/syndie/ammo/shotgunXLmags/New()
+	..()
+	new /obj/item/ammo_box/magazine/m12g/XtrLrg(src)
+	new /obj/item/ammo_box/magazine/m12g/XtrLrg/buckshot(src)
+	new /obj/item/ammo_box/magazine/m12g/XtrLrg/dragon(src)
 
 /obj/item/storage/backpack/duffel/mining_conscript/
 	name = "mining conscription kit"
@@ -557,12 +581,19 @@
 	icon_state = "duffel-clown"
 	item_state = "duffel-clown"
 
+/obj/item/storage/backpack/duffel/blueshield
+	name = "blueshield duffelbag"
+	desc = "A robust duffelbag issued to Nanotrasen's finest."
+	icon_state = "duffel-blueshield"
+	item_state = "duffel-blueshield"
+
 //ERT backpacks.
 /obj/item/storage/backpack/ert
 	name = "emergency response team backpack"
 	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state = "backpack"
+	max_combined_w_class = 30
 	resistance_flags = FIRE_PROOF
 
 //Commander

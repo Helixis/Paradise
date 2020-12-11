@@ -1,10 +1,10 @@
 //TODO: Make these simple_animals
 
-var/const/MIN_IMPREGNATION_TIME = 100 //time it takes to impregnate someone
-var/const/MAX_IMPREGNATION_TIME = 150
+#define MIN_IMPREGNATION_TIME 100 //time it takes to impregnate someone
+#define MAX_IMPREGNATION_TIME 150
 
-var/const/MIN_ACTIVE_TIME = 200 //time between being dropped and going idle
-var/const/MAX_ACTIVE_TIME = 400
+#define MIN_ACTIVE_TIME 200 //time between being dropped and going idle
+#define MAX_ACTIVE_TIME 400
 
 /obj/item/clothing/mask/facehugger
 	name = "alien"
@@ -27,6 +27,10 @@ var/const/MAX_ACTIVE_TIME = 400
 	var/strength = 5
 
 	var/attached = 0
+
+/obj/item/clothing/mask/facehugger/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/proximity_monitor)
 
 /obj/item/clothing/mask/facehugger/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	..()
@@ -78,12 +82,12 @@ var/const/MAX_ACTIVE_TIME = 400
 		return HasProximity(finder)
 	return 0
 
-/obj/item/clothing/mask/facehugger/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/clothing/mask/facehugger/HasProximity(atom/movable/AM)
 	if(CanHug(AM) && Adjacent(AM))
 		return Attach(AM)
 	return 0
 
-/obj/item/clothing/mask/facehugger/throw_at(atom/target, range, speed)
+/obj/item/clothing/mask/facehugger/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force)
 	if(!..())
 		return
 	if(stat == CONSCIOUS)
@@ -146,7 +150,7 @@ var/const/MAX_ACTIVE_TIME = 400
 									"<span class='userdanger'>[src] tears [W] off of [target]'s face!</span>")
 
 		src.loc = target
-		target.equip_to_slot(src, slot_wear_mask,,0)
+		target.equip_to_slot_if_possible(src, slot_wear_mask, FALSE, TRUE)
 		if(!sterile)
 			M.Paralyse(MAX_IMPREGNATION_TIME/6) //something like 25 ticks = 20 seconds with the default settings
 
@@ -210,6 +214,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	icon_state = "[initial(icon_state)]_dead"
 	item_state = "facehugger_inactive"
 	stat = DEAD
+	qdel(GetComponent(/datum/component/proximity_monitor))
 
 	visible_message("<span class='danger'>[src] curls up into a ball!</span>")
 

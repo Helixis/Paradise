@@ -104,7 +104,7 @@
 				return
 
 /datum/species/unathi/handle_death(gibbed, mob/living/carbon/human/H)
-	H.stop_tail_wagging(1)
+	H.stop_tail_wagging()
 
 /datum/species/unathi/ashwalker
 	name = "Ash Walker"
@@ -117,4 +117,5 @@
 	default_language = "Sinta'unathi"
 
 	speed_mod = -0.80
+	burn_mod = 0.9
 	species_traits = list(NO_BREATHE, NOGUNS)

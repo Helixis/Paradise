@@ -1,3 +1,5 @@
+//BUBBLEGUM MODIFICADO PARA QUE DEJEN DE LLORAR
+
 /obj/structure/closet/crate/necropolis/bubblegum
 	name = "bubblegum chest"
 
@@ -5,14 +7,21 @@
 	..()
 	new /obj/item/clothing/suit/space/hostile_environment(src)
 	new /obj/item/clothing/head/helmet/space/hostile_environment(src)
+	/*//NNERFEADO REMOVER EN CASO DE QUITAR NERF
 	var/loot = rand(1,3)
 	switch(loot)
 		if(1)
 			new /obj/item/mayhem(src)
+			new /obj/item/organ/internal/heart/demon(src)
 		if(2)
 			new /obj/item/blood_contract(src)
+			new /obj/item/organ/internal/heart/demon(src)
 		if(3)
 			new /obj/item/gun/magic/staff/spellblade(src)
+			new /obj/item/organ/internal/heart/demon(src)
+	*/
+	new /obj/item/gun/magic/staff/spellblade(src)
+	new /obj/item/organ/internal/heart/demon(src)
 
 /obj/structure/closet/crate/necropolis/bubblegum/crusher
 	name = "bloody bubblegum chest"
@@ -82,7 +91,7 @@
 			B.mineEffect(L)
 
 		for(var/mob/living/carbon/human/H in GLOB.player_list)
-			if(H == L)
+			if(H.stat == DEAD || H == L)
 				continue
 			to_chat(H, "<span class='userdanger'>You have an overwhelming desire to kill [L]. [L.p_they(TRUE)] [L.p_have()] been marked red! Go kill [L.p_them()]!</span>")
 			H.put_in_hands(new /obj/item/kitchen/knife/butcher(H))

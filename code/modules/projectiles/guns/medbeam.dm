@@ -47,7 +47,7 @@
 
 	if(current_target)
 		LoseTarget()
-	if(!isliving(target) || ismachine(target) || isbot(target) || issilicon(target))
+	if(!isliving(target) || isrobot(target) || isbot(target) || issilicon(target))
 		return
 
 	current_target = target
@@ -119,7 +119,7 @@
 	target.adjustFireLoss(-4)
 	if(upgrade)
 		if(ishuman(target))
-			var/var/mob/living/carbon/human/H = target
+			var/mob/living/carbon/human/H = target
 			for(var/obj/item/organ/external/E in H.bodyparts)
 				if(prob(10))
 					E.mend_fracture()

@@ -27,6 +27,7 @@
 	materials = list(MAT_GLASS=7500, MAT_METAL=1000)
 	origin_tech = "materials=3;combat=4"
 	attack_verb = list("shoved", "bashed")
+	hispania_icon = TRUE
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 
 /obj/item/shield/riot/attackby(obj/item/W as obj, mob/user as mob, params)
@@ -43,6 +44,7 @@
 	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>."
 	icon_state = "roman_shield"
 	item_state = "roman_shield"
+	hispania_icon = FALSE
 	materials = list(MAT_METAL=8500)
 
 /obj/item/shield/riot/roman/fake
@@ -58,6 +60,7 @@
 	materials = list()
 	origin_tech = "materials=1;combat=3;biotech=2"
 	resistance_flags = FLAMMABLE
+	hispania_icon = FALSE
 	block_chance = 30
 
 /obj/item/shield/energy
@@ -71,6 +74,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	origin_tech = "materials=4;magnets=5;syndicate=6"
 	attack_verb = list("shoved", "bashed")
+	hispania_icon = FALSE
 	var/active = 0
 
 /obj/item/shield/energy/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
@@ -80,7 +84,7 @@
 	return (active)
 
 /obj/item/shield/energy/attack_self(mob/living/carbon/human/user)
-	if(user.disabilities & CLUMSY && prob(50))
+	if((CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You beat yourself in the head with [src].</span>")
 		user.take_organ_damage(5)
 	active = !active
@@ -117,6 +121,7 @@
 	throwforce = 3
 	throw_speed = 3
 	throw_range = 4
+	hispania_icon = FALSE
 	w_class = WEIGHT_CLASS_NORMAL
 	var/active = 0
 

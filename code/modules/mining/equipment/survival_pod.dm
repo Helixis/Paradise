@@ -19,7 +19,7 @@
 /obj/item/survivalcapsule/proc/get_template()
 	if(template)
 		return
-	template = shelter_templates[template_id]
+	template = GLOB.shelter_templates[template_id]
 	if(!template)
 		log_runtime("Shelter template ([template_id]) not found!", src)
 		qdel(src)
@@ -165,7 +165,7 @@
 	desc = "Wall-mounted Medical Equipment dispenser. This one seems just a tiny bit smaller."
 	req_access = list()
 
-	products = list(/obj/item/stack/medical/splint = 2)
+	products = list(/obj/item/stack/medical/splint = 2, /obj/item/reagent_containers/syringe/charcoal = 1, /obj/item/reagent_containers/food/pill/patch/styptic = 2, /obj/item/reagent_containers/food/pill/patch/silver_sulf = 2) //Buff menor a mineria
 	contraband = list()
 
 //Computer

@@ -21,11 +21,6 @@
 /obj/item/gun/energy/gun/cyborg/emp_act()
 	return
 
-/obj/item/gun/energy/gun/mounted
-	name = "mounted energy gun"
-	selfcharge = 1
-	use_external_power = 1
-
 /obj/item/gun/energy/gun/mini
 	name = "miniature energy gun"
 	desc = "A small, pistol-sized energy gun with a built-in flashlight. It has two settings: disable and kill."
@@ -36,9 +31,9 @@
 	can_flashlight = 0 // Can't attach or detach the flashlight, and override it's icon update
 	actions_types = list(/datum/action/item_action/toggle_gunlight)
 
-/obj/item/gun/energy/gun/mini/New()
+/obj/item/gun/energy/gun/mini/Initialize(mapload, ...)
 	gun_light = new /obj/item/flashlight/seclite(src)
-	..()
+	. = ..()
 	cell.maxcharge = 600
 	cell.charge = 600
 
@@ -89,14 +84,10 @@
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized nuclear reactor that automatically charges the internal power cell."
 	icon_state = "nucgun"
-	item_state = null //so the human update icon uses the icon_state instead.
+	item_state = "nucgun"
 	origin_tech = "combat=4;magnets=4;powerstorage=4"
 	var/fail_tick = 0
 	charge_delay = 5
 	can_charge = 0
-	ammo_x_offset = 3
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser, /obj/item/ammo_casing/energy/disabler)
-	selfcharge = 1
-	flight_x_offset = 15
-	flight_y_offset = 10
-	modifystate = 3
+	selfcharge = TRUE

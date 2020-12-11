@@ -77,6 +77,7 @@
 #define TARGET_DEPT_MED 3
 #define TARGET_DEPT_SCI 4
 #define TARGET_DEPT_ENG 5
+#define TARGET_DEPT_SUP 6
 
 // These are used by supermatter and supermatter monitor program, mostly for UI updating purposes. Higher should always be worse!
 // These are warning defines, they should trigger before the state, not after.
@@ -88,3 +89,13 @@
 #define SUPERMATTER_DANGER 4		// Integrity < 75%
 #define SUPERMATTER_EMERGENCY 5		// Integrity < 50%
 #define SUPERMATTER_DELAMINATING 6	// Pretty obvious, Integrity < 25%
+
+// Firelock states
+#define FD_OPEN 1
+#define FD_CLOSED 2
+
+// Computer login types
+#define LOGIN_TYPE_NORMAL 1
+#define LOGIN_TYPE_AI 2
+#define LOGIN_TYPE_ROBOT 3
+#define LOGIN_TYPE_ADMIN 4

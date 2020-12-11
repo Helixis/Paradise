@@ -1,6 +1,6 @@
 /obj/structure/computerframe
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	name = "computer frame"
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "0"
@@ -45,7 +45,6 @@
 	var/list/req_components = null
 	var/powernet = null
 	var/list/records = null
-	var/frame_desc = null
 	var/contain_parts = 1
 	toolspeed = 1
 	usesound = 'sound/items/deconstruct.ogg'
@@ -64,7 +63,7 @@
 			var/atom/A = B
 			if(!ispath(A))
 				continue
-			nice_list += list("[req_components[A]] [initial(A.name)]")
+			nice_list += list("[req_components[A]] [initial(A.name)]\s")
 		. += "<span class='notice'>Required components: [english_list(nice_list)].</span>"
 
 /obj/item/circuitboard/message_monitor
@@ -160,18 +159,12 @@
 	name = "Circuit board (Security Records)"
 	build_path = /obj/machinery/computer/secure_data
 	origin_tech = "programming=2;combat=2"
-/obj/item/circuitboard/skills
-	name = "Circuit board (Employment Records)"
-	build_path = /obj/machinery/computer/skills
 /obj/item/circuitboard/stationalert_engineering
 	name = "Circuit Board (Station Alert Console (Engineering))"
 	build_path = /obj/machinery/computer/station_alert
-/obj/item/circuitboard/stationalert_security
-	name = "Circuit Board (Station Alert Console (Security))"
+/obj/item/circuitboard/stationalert
+	name = "Circuit Board (Station Alert Console)"
 	build_path = /obj/machinery/computer/station_alert
-/obj/item/circuitboard/stationalert_all
-	name = "Circuit Board (Station Alert Console (All))"
-	build_path = /obj/machinery/computer/station_alert/all
 /obj/item/circuitboard/atmos_alert
 	name = "Circuit Board (Atmospheric Alert Computer)"
 	build_path = /obj/machinery/computer/atmos_alert
@@ -237,14 +230,17 @@
 /obj/item/circuitboard/brigcells
 	name = "Circuit board (Brig Cell Control)"
 	build_path = /obj/machinery/computer/brigcells
-
+/obj/item/circuitboard/sm_monitor
+	name = "Circuit board (Supermatter Monitoring Console)"
+	build_path = /obj/machinery/computer/sm_monitor
+	origin_tech = "programming=2;powerstorage=2"
 
 // RD console circuits, so that {de,re}constructing one of the special consoles doesn't ruin everything forever
 /obj/item/circuitboard/rdconsole
 	name = "Circuit Board (RD Console)"
 	desc = "Swipe a Scientist level ID or higher to reconfigure."
 	build_path = /obj/machinery/computer/rdconsole/core
-	req_access = list(access_tox) // This is for adjusting the type of computer we're building - in case something messes up the pre-existing robotics or mechanics consoles
+	req_access = list(ACCESS_TOX) // This is for adjusting the type of computer we're building - in case something messes up the pre-existing robotics or mechanics consoles
 	var/access_types = list("R&D Core", "Robotics", "E.X.P.E.R.I-MENTOR", "Mechanics", "Public")
 	id = 1
 /obj/item/circuitboard/rdconsole/robotics
@@ -284,7 +280,7 @@
 	origin_tech = "programming=3;powerstorage=3"
 /obj/item/circuitboard/ordercomp
 	name = "Circuit board (Supply Ordering Console)"
-	build_path = /obj/machinery/computer/ordercomp
+	build_path = /obj/machinery/computer/supplycomp/public
 	origin_tech = "programming=3"
 /obj/item/circuitboard/supplycomp
 	name = "Circuit board (Supply Shuttle Console)"
@@ -296,19 +292,6 @@
 	name = "Circuit board (Operating Computer)"
 	build_path = /obj/machinery/computer/operating
 	origin_tech = "programming=2;biotech=3"
-/obj/item/circuitboard/comm_monitor
-	name = "Circuit board (Telecommunications Monitor)"
-	build_path = /obj/machinery/computer/telecomms/monitor
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-/obj/item/circuitboard/comm_server
-	name = "Circuit board (Telecommunications Server Monitor)"
-	build_path = /obj/machinery/computer/telecomms/server
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-/obj/item/circuitboard/comm_traffic
-	name = "Circuitboard (Telecommunications Traffic Control)"
-	build_path = /obj/machinery/computer/telecomms/traffic
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-
 
 /obj/item/circuitboard/shuttle
 	name = "circuit board (Shuttle)"
@@ -364,9 +347,6 @@
 	build_path = /obj/machinery/computer/telescience
 	origin_tech = "programming=6;bluespace=7;plasmatech=5"
 
-/obj/item/circuitboard/atmos_automation
-	name = "Circuit board (Atmospherics Automation)"
-	build_path = /obj/machinery/computer/general_air_control/atmos_automation
 /obj/item/circuitboard/large_tank_control
 	name = "Circuit board (Atmospheric Tank Control)"
 	build_path = /obj/machinery/computer/general_air_control/large_tank_control

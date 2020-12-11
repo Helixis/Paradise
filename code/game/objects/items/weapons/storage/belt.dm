@@ -48,6 +48,7 @@
 	item_state = "utility"
 	use_item_overlays = 1
 	can_hold = list(
+		/obj/item/taperoll,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
@@ -134,8 +135,9 @@
 		/obj/item/rad_laser,
 		/obj/item/sensor_device,
 		/obj/item/wrench/medical,
+		/obj/item/handheld_defibrillator,
+		/obj/item/reagent_containers/applicator,
 		/obj/item/pinpointer/crew,
-		/obj/item/handheld_defibrillator
 	)
 
 /obj/item/storage/belt/medical/surgery
@@ -155,7 +157,7 @@
 		/obj/item/bonesetter,
 		/obj/item/FixOVein,
 		/obj/item/surgicaldrill,
-		/obj/item/cautery,
+		/obj/item/cautery
 	)
 
 /obj/item/storage/belt/medical/surgery/loaded
@@ -219,6 +221,7 @@
 	max_w_class = WEIGHT_CLASS_NORMAL
 	use_item_overlays = 1
 	can_hold = list(
+		/obj/item/taperoll,
 		/obj/item/grenade/flashbang,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/reagent_containers/spray/pepper,
@@ -228,7 +231,7 @@
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_box,
 		/obj/item/reagent_containers/food/snacks/donut,
-		/obj/item/kitchen/knife/combat,
+		/obj/item/kitchen/knife,
 		/obj/item/melee/baton,
 		/obj/item/melee/classic_baton,
 		/obj/item/flashlight/seclite,
@@ -258,6 +261,14 @@
 	new /obj/item/grenade/flashbang(src)
 	new /obj/item/grenade/flashbang(src)
 	update_icon()
+
+/obj/item/storage/belt/security/webbing
+	name = "security webbing"
+	desc = "Unique and versatile chest rig, can hold security gear."
+	icon_state = "securitywebbing"
+	item_state = "securitywebbing"
+	storage_slots = 6
+	use_item_overlays = FALSE
 
 /obj/item/storage/belt/soulstone
 	name = "soul stone belt"
@@ -310,6 +321,18 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	use_item_overlays = 1 // So it will still show tools in it in case sec get lazy and just glance at it.
+
+/obj/item/storage/belt/military/traitor/hacker
+
+/obj/item/storage/belt/military/traitor/hacker/New()
+	..()
+	new /obj/item/screwdriver(src, "red")
+	new /obj/item/wrench(src)
+	new /obj/item/weldingtool/largetank(src)
+	new /obj/item/crowbar/red(src)
+	new /obj/item/wirecutters(src, "red")
+	new /obj/item/stack/cable_coil(src, 30, COLOR_RED)
+	update_icon()
 
 /obj/item/storage/belt/grenade
 	name = "grenadier belt"
@@ -670,7 +693,6 @@
 				bolacount++
 		cooldown = world.time
 		update_icon()
-		orient2hud()
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			if(H.belt && H.belt == src)
@@ -795,3 +817,29 @@
 	icon_state = "ebelt"
 	item_state = "ebelt"
 	storage_slots = 5
+
+/obj/item/storage/belt/chef
+	name = "culinary tool apron"
+	desc = "An apron with various pockets for holding all your cooking tools and equipment."
+	icon_state = "chefbelt"
+	item_state = "chefbelt"
+	storage_slots = 10
+	max_w_class = WEIGHT_CLASS_NORMAL
+	max_combined_w_class = 25
+	can_hold = list(
+		/obj/item/kitchen/utensil,
+		/obj/item/kitchen/knife,
+		/obj/item/kitchen/rollingpin,
+		/obj/item/kitchen/mould,
+		/obj/item/kitchen/sushimat,
+		/obj/item/kitchen/cutter,
+		/obj/item/assembly/mousetrap,
+		/obj/item/reagent_containers/spray/pestspray,
+		/obj/item/reagent_containers/food/drinks/flask,
+		/obj/item/reagent_containers/food/drinks/drinkingglass,
+		/obj/item/reagent_containers/food/drinks/bottle,
+		/obj/item/reagent_containers/food/drinks/cans,
+		/obj/item/reagent_containers/food/drinks/shaker,
+		/obj/item/reagent_containers/food/snacks,
+		/obj/item/reagent_containers/food/condiment,
+		/obj/item/reagent_containers/glass/beaker)

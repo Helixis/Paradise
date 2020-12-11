@@ -2,6 +2,7 @@
 	name = "helmet"
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmetmaterials"
+	w_class = WEIGHT_CLASS_NORMAL
 	flags = HEADBANGPROTECT
 	flags_cover = HEADCOVERSEYES
 	item_state = "helmetmaterials"
@@ -72,10 +73,12 @@
 /obj/item/clothing/head/helmet/alt
 	name = "bulletproof helmet"
 	desc = "A bulletproof helmet that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
+	icon = 'icons/hispania/obj/clothing/hats.dmi'
 	icon_state = "swat"
 	item_state = "swat-alt"
 	armor = list("melee" = 15, "bullet" = 60, "laser" = 10, "energy" = 10, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
 	dog_fashion = null
+	hispania_icon = TRUE
 
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
@@ -194,7 +197,7 @@
 	toggle_sound = 'sound/items/zippoclose.ogg'
 	dog_fashion = null
 
-obj/item/clothing/head/helmet/redtaghelm
+/obj/item/clothing/head/helmet/redtaghelm
 	name = "red laser tag helmet"
 	desc = "They have chosen their own end."
 	icon_state = "redtaghelm"
@@ -205,7 +208,7 @@ obj/item/clothing/head/helmet/redtaghelm
 	flags_inv = HIDEEARS|HIDEEYES
 	dog_fashion = null
 
-obj/item/clothing/head/helmet/bluetaghelm
+/obj/item/clothing/head/helmet/bluetaghelm
 	name = "blue laser tag helmet"
 	desc = "They'll need more men."
 	icon_state = "bluetaghelm"
@@ -216,7 +219,7 @@ obj/item/clothing/head/helmet/bluetaghelm
 	flags_inv = HIDEEARS|HIDEEYES
 	dog_fashion = null
 
-obj/item/clothing/head/blob
+/obj/item/clothing/head/blob
 	name = "blob hat"
 	desc = "A collectible hat handed out at the latest Blob Family Reunion."
 	icon_state = "blobhat"

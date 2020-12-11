@@ -13,6 +13,10 @@
 	var/recharge_speed_nutrition
 	var/repairs
 
+/obj/machinery/recharge_station/Destroy()
+	go_out()
+	return ..()
+
 /obj/machinery/recharge_station/New()
 	..()
 	component_parts = list()
@@ -136,13 +140,13 @@
 				R.heal_overall_damage(repairs, repairs)
 			if(R.cell)
 				var/transfered = R.cell.give(recharge_speed)
-				use_power(transfered * 12)
+				use_power(transfered * 1.6)
 		else if(ishuman(occupant))
 			var/mob/living/carbon/human/H = occupant
 			if(H.get_int_organ(/obj/item/organ/internal/cell) && H.nutrition < 450)
 				H.set_nutrition(min(H.nutrition + recharge_speed_nutrition, 450))
-				if(repairs)
-					H.heal_overall_damage(repairs, repairs, TRUE, 0, 1)
+			if(repairs)
+				H.heal_overall_damage(repairs, repairs, TRUE, 0, 1)
 			for(var/A in H.reagents.addiction_list)
 				var/datum/reagent/R = A
 				var/addiction_removal_chance = 5
@@ -186,21 +190,21 @@
 							F.broken = 0
 							F.times_used = 0
 							F.icon_state = "flash"
-					if(istype(O,/obj/item/gun/energy/disabler/cyborg))
-						var/obj/item/gun/energy/disabler/cyborg/D = O
+					if(istype(O,/obj/item/gun/energy))
+						var/obj/item/gun/energy/D = O
 						if(D.cell.charge < D.cell.maxcharge)
 							var/obj/item/ammo_casing/energy/E = D.ammo_type[D.select]
 							var/transfered = D.cell.give(E.e_cost)
 							D.on_recharge()
 							D.update_icon()
-							use_power(transfered * 12)
+							use_power(transfered * 1.6)
 						else
 							D.charge_tick = 0
 					if(istype(O,/obj/item/melee/baton))
 						var/obj/item/melee/baton/B = O
 						if(B.cell)
 							var/transfered = B.cell.give(B.cell.chargerate)
-							use_power(transfered * 12)
+							use_power(transfered * 1.6)
 					//Service
 					if(istype(O,/obj/item/reagent_containers/food/condiment/enzyme))
 						if(O.reagents.get_reagent_amount("enzyme") < 50)
@@ -280,7 +284,7 @@
 		if(occupant)
 			to_chat(H, "<span class='warning'>The cell is already occupied!</span>")
 			return
-		if(ismachine(H))
+		if(isrobot(H))
 			can_accept_user = TRUE
 		else if(!H.get_int_organ(/obj/item/organ/internal/cell))
 			to_chat(user, "<span class='notice'>Only non-organics may enter the recharger!</span>")

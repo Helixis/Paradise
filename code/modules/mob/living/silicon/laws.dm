@@ -4,7 +4,7 @@
 
 /mob/living/silicon/proc/laws_sanity_check()
 	if(!src.laws)
-		laws = new base_law_type
+		laws = new BASE_LAW_TYPE
 
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null
@@ -95,7 +95,7 @@
 
 	stating_laws[prefix] = 1
 
-	var/can_state = statelaw("[prefix]Current Active Laws:")
+	var/can_state = statelaw("[prefix]Leyes activas:")
 
 	for(var/datum/ai_law/law in laws.laws_to_state())
 		can_state = statelaw("[prefix][law.get_index()]. [law.law]")

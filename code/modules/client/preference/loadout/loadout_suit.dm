@@ -66,50 +66,14 @@
 	path = /obj/item/clothing/suit/storage/labcoat/emt
 	allowed_roles = list("Chief Medical Officer", "Paramedic")
 
-/datum/gear/suit/labcoat_cmolarge
-	display_name = "long labcoat, CMO"
-	path = /obj/item/clothing/suit/storage/labcoat/cmolarge
-	allowed_roles = list("Chief Medical Officer")
-
-/datum/gear/suit/labcoat_cmolargeroundcut
-	display_name = "long labcoat roundcut, CMO"
-	path = /obj/item/clothing/suit/storage/labcoat/cmolargeroundcut
-	allowed_roles = list("Chief Medical Officer")
-
-/datum/gear/suit/labcoat_medicallarge
-	display_name = "long labcoat, Medical"
-	path = /obj/item/clothing/suit/storage/labcoat/medicallarge
-	allowed_roles = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Psychiatrist", "Paramedic", "Virologist", "Brig Physician" , "Coroner")
-
-/datum/gear/suit/labcoat_medicalroundlarge
-	display_name = "long labcoat roundcut, Medical"
-	path = /obj/item/clothing/suit/storage/labcoat/medicalroundlarge
-	allowed_roles = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Psychiatrist", "Paramedic", "Virologist", "Brig Physician" , "Coroner")
-
-/datum/gear/suit/labcoat_RDlarge
-	display_name = "long labcoat, RD"
-	path = /obj/item/clothing/suit/storage/labcoat/RDlarge
-	allowed_roles = list("Research Director")
-
-/datum/gear/suit/labcoat_RDlargeroundcut
-	display_name = "long labcoat roundcut, RD"
-	path = /obj/item/clothing/suit/storage/labcoat/RDlargeroundcut
-	allowed_roles = list("Research Director")
-
-/datum/gear/suit/labcoat_sciencelarge
-	display_name = "long labcoat, Scientist"
-	path = /obj/item/clothing/suit/storage/labcoat/sciencelarge
-	allowed_roles = list("Scientist", "Research Director")
-
-/datum/gear/suit/labcoat_scienceroundlarge
-	display_name = "long labcoat roundcut, Scientist"
-	path = /obj/item/clothing/suit/storage/labcoat/scienceroundlarge
-	allowed_roles = list("Scientist", "Research Director")
-
 //JACKETS
 /datum/gear/suit/leather_jacket
 	display_name = "leather jacket"
 	path = /obj/item/clothing/suit/jacket/leather
+
+/datum/gear/suit/motojacket
+	display_name = "leather motorcycle jacket"
+	path = /obj/item/clothing/suit/jacket/motojacket
 
 /datum/gear/suit/br_tcoat
 	display_name = "trenchcoat, brown"
@@ -215,32 +179,44 @@
 	display_name = "regal shawl"
 	path = /obj/item/clothing/suit/mantle/regal
 
-/datum/gear/suit/captain_cloak
+/datum/gear/suit/mantle/job
+	subtype_path = /datum/gear/suit/mantle/job
+	subtype_cost_overlap = FALSE
+
+/datum/gear/suit/mantle/job/captain
 	display_name = "mantle, captain"
 	path = /obj/item/clothing/suit/mantle/armor/captain
 	allowed_roles = list("Captain")
 
-/datum/gear/suit/ce_mantle
+/datum/gear/suit/mantle/job/ce
 	display_name = "mantle, chief engineer"
 	path = /obj/item/clothing/suit/mantle/chief_engineer
 	allowed_roles = list("Chief Engineer")
 
-/datum/gear/suit/cmo_mantle
+/datum/gear/suit/mantle/job/cmo
 	display_name = "mantle, chief medical officer"
 	path = /obj/item/clothing/suit/mantle/labcoat/chief_medical_officer
 	allowed_roles = list("Chief Medical Officer")
 
-/datum/gear/suit/armored_shawl
+/datum/gear/suit/mantle/job/hos
 	display_name = "mantle, head of security"
 	path = /obj/item/clothing/suit/mantle/armor
 	allowed_roles = list("Head of Security")
 
-/datum/gear/suit/hop_shawl
+/datum/gear/suit/mantle/job/hop
 	display_name = "mantle, head of personnel"
 	path = /obj/item/clothing/suit/mantle/armor/head_of_personnel
 	allowed_roles = list("Head of Personnel")
 
-/datum/gear/suit/rd_mantle
+/datum/gear/suit/mantle/job/rd
 	display_name = "mantle, research director"
 	path = /obj/item/clothing/suit/mantle/labcoat
 	allowed_roles = list("Research Director")
+
+//Robes!
+
+/datum/gear/suit/witch
+	display_name = "witch robes"
+	path = /obj/item/clothing/suit/wizrobe/marisa/fake
+
+

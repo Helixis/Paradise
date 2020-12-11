@@ -144,7 +144,7 @@
 		to_chat(user,  "<span class='notice'>You [open ? "close":"open"] [src].</span>")
 		toggle_lock(user)
 
-obj/structure/displaycase/welder_act(mob/user, obj/item/I)
+/obj/structure/displaycase/welder_act(mob/user, obj/item/I)
 	. = TRUE
 	if(default_welder_repair(user, I))
 		broken = FALSE
@@ -201,9 +201,9 @@ obj/structure/displaycase/welder_act(mob/user, obj/item/I)
 				electronics.forceMove(display)
 				display.electronics = electronics
 				if(electronics.one_access)
-					display.req_one_access = electronics.conf_access
+					display.req_one_access = electronics.selected_accesses
 				else
-					display.req_access = electronics.conf_access
+					display.req_access = electronics.selected_accesses
 			qdel(src)
 	else
 		return ..()
@@ -223,16 +223,16 @@ obj/structure/displaycase/welder_act(mob/user, obj/item/I)
 /obj/structure/displaycase/captain
 	alert = TRUE
 	start_showpiece_type = /obj/item/gun/energy/laser/captain
-	req_access = list(access_captain)
+	req_access = list(ACCESS_CAPTAIN)
 
 /obj/structure/displaycase/labcage
 	name = "lab cage"
 	desc = "A glass lab container for storing interesting creatures."
 	start_showpiece_type = /obj/item/clothing/mask/facehugger/lamarr
-	req_access = list(access_rd)
+	req_access = list(ACCESS_RD)
 
 /obj/structure/displaycase/stechkin
 	name = "officer's display case"
 	desc = "A display case containing a humble stechkin pistol. Never forget your roots."
 	start_showpiece_type = /obj/item/gun/projectile/automatic/pistol
-	req_access = list(access_syndicate_command)
+	req_access = list(ACCESS_SYNDICATE_COMMAND)

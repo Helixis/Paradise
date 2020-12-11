@@ -43,7 +43,7 @@
 	id = "slimejelly"
 	description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence. SO REAL."
 	reagent_state = LIQUID
-	color = "#801E28" // rgb: 128, 30, 40
+	color = "#0b8f70" // rgb: 11, 143, 112
 	taste_description = "slimes"
 	taste_mult = 1.3
 
@@ -51,10 +51,22 @@
 	var/update_flags = STATUS_UPDATE_NONE
 	if(prob(10))
 		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
-		update_flags |= M.adjustToxLoss(rand(20,60)*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+		update_flags |= M.adjustToxLoss(rand(2, 6) * REAGENTS_EFFECT_MULTIPLIER, FALSE) // avg 0.4 toxin per cycle, not unreasonable
 	else if(prob(40))
-		update_flags |= M.adjustBruteLoss(-5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+		update_flags |= M.adjustBruteLoss(-0.5 * REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
+
+/datum/reagent/slimejelly/on_merge(list/mix_data)
+	if(data && mix_data)
+		if(mix_data["colour"])
+			color = mix_data["colour"]
+
+/datum/reagent/slimejelly/reaction_turf(turf/T, volume, color)
+	if(volume >= 3 && !isspaceturf(T) && !locate(/obj/effect/decal/cleanable/blood/slime) in T)
+		var/obj/effect/decal/cleanable/blood/slime/B = new(T)
+		B.basecolor = color
+		B.update_icon()
+
 
 /datum/reagent/slimetoxin
 	name = "Mutation Toxin"
@@ -85,8 +97,8 @@
 	can_synth = FALSE
 	taste_description = "slime"
 
-/datum/reagent/aslimetoxin/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(method != TOUCH)
+/datum/reagent/aslimetoxin/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	if(method != REAGENT_TOUCH)
 		M.ForceContractDisease(new /datum/disease/transformation/slime(0))
 
 
@@ -165,12 +177,12 @@
 	taste_mult = 0.9
 	taste_description = "slime"
 
-/datum/reagent/mutagen/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/mutagen/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(!..())
 		return
 	if(!M.dna)
 		return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
-	if((method==TOUCH && prob(33)) || method==INGEST)
+	if((method==REAGENT_TOUCH && prob(33)) || method==REAGENT_INGEST)
 		randmutb(M)
 		domutcheck(M, null)
 		M.UpdateAppearance()
@@ -192,6 +204,14 @@
 	color = "#7DFF00"
 	taste_description = "slime"
 
+/datum/reagent/stable_mutagen/on_new(data)
+	..()
+	START_PROCESSING(SSprocessing, src)
+
+/datum/reagent/stable_mutagen/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
+	return ..()
+
 /datum/reagent/stable_mutagen/on_mob_life(mob/living/M)
 	if(!ishuman(M) || !M.dna)
 		return
@@ -212,42 +232,11 @@
 
 	return ..()
 
-/datum/reagent/stable_mutagen/on_tick()
-	var/datum/reagent/blood/B = locate() in holder.reagent_list
-	if(B && islist(B.data) && !data)
-		data = B.data.Copy()
-	..()
-
-/datum/reagent/romerol
-	name = "romerol"
-	// the REAL zombie powder
-	id = "romerol"
-	description = "Romerol is a highly experimental bioterror agent \
-		which causes dormant nodules to be etched into the grey matter of \
-		the subject. These nodules only become active upon death of the \
-		host, upon which, the secondary structures activate and take control \
-		of the host body."
-	color = "#123524" // RGB (18, 53, 36)
-	metabolization_rate = INFINITY
-	can_synth = FALSE
-	taste_description = "CAAAARL"
-
-/datum/reagent/romerol/reaction_mob(mob/living/carbon/human/H, method = TOUCH, volume)
-	if(!istype(H))
-		return
-	// Silently add the zombie infection organ to be activated upon death
-	if(!H.get_organ_slot("zombie_infection"))
-		var/obj/item/organ/internal/zombie_infection/nodamage/ZI = new()
-		ZI.insert(H)
-	..()
-
-/datum/reagent/romerol/on_mob_life(mob/living/M)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(!H.get_organ_slot("zombie_infection"))
-			var/obj/item/organ/internal/zombie_infection/nodamage/ZI = new()
-			ZI.insert(H)
-	return ..()
+/datum/reagent/stable_mutagen/process()
+	if(..())
+		var/datum/reagent/blood/B = locate() in holder.reagent_list
+		if(B && islist(B.data) && !data)
+			data = B.data.Copy()
 
 /datum/reagent/uranium
 	name ="Uranium"
@@ -297,10 +286,10 @@
 	update_flags |= M.adjustFireLoss(1, FALSE)
 	return ..() | update_flags
 
-/datum/reagent/acid/reaction_mob(mob/living/M, method = TOUCH, volume)
+/datum/reagent/acid/reaction_mob(mob/living/M, method = REAGENT_TOUCH, volume)
 	if(ishuman(M) && !isgrey(M))
 		var/mob/living/carbon/human/H = M
-		if(method == TOUCH)
+		if(method == REAGENT_TOUCH)
 			if(volume > 25)
 				if(H.wear_mask)
 					to_chat(H, "<span class='danger'>Your [H.wear_mask] protects you from the acid!</span>")
@@ -350,10 +339,10 @@
 	update_flags |= M.adjustToxLoss(1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
-/datum/reagent/acid/facid/reaction_mob(mob/living/M, method = TOUCH, volume)
+/datum/reagent/acid/facid/reaction_mob(mob/living/M, method = REAGENT_TOUCH, volume)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(method == TOUCH)
+		if(method == REAGENT_TOUCH)
 			if(volume > 9)
 				if(!H.wear_mask && !H.head)
 					var/obj/item/organ/external/affecting = H.get_organ("head")
@@ -382,6 +371,36 @@
 			H.emote("scream")
 			H.adjustFireLoss(min(max(8, (volume - 5) * 3), 75))
 		to_chat(H, "<span class='warning'>The blueish acidic substance stings[volume < 5 ? " you, but isn't concentrated enough to harm you" : null]!</span>")
+
+/datum/reagent/acetic_acid
+	name = "acetic acid"
+	id = "acetic_acid"
+	description = "A weak acid that is the main component of vinegar and bad hangovers."
+	color = "#0080ff"
+	reagent_state = LIQUID
+	taste_description = "vinegar"
+
+/datum/reagent/acetic_acid/reaction_mob(mob/M, method = REAGENT_TOUCH, volume)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(method == REAGENT_TOUCH)
+			if(H.wear_mask || H.head)
+				return
+			if(volume >= 50 && prob(75))
+				var/obj/item/organ/external/affecting = H.get_organ("head")
+				if(affecting)
+					affecting.disfigure()
+				H.adjustBruteLoss(5)
+				H.adjustFireLoss(15)
+				H.emote("scream")
+			else
+				H.adjustBruteLoss(min(5, volume * 0.25))
+		else
+			to_chat(H, "<span class='warning'>The transparent acidic substance stings[volume < 25 ? " you, but isn't concentrated enough to harm you" : null]!</span>")
+			if(volume >= 25)
+				H.adjustBruteLoss(2)
+				H.emote("scream")
+
 
 /datum/reagent/carpotoxin
 	name = "Carpotoxin"
@@ -473,9 +492,9 @@
 	overdose_threshold = 40
 	taste_mult = 0
 
-/datum/reagent/histamine/reaction_mob(mob/living/M, method=TOUCH, volume) //dumping histamine on someone is VERY mean.
+/datum/reagent/histamine/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume) //dumping histamine on someone is VERY mean.
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == REAGENT_TOUCH)
 			M.reagents.add_reagent("histamine",10)
 		else
 			to_chat(M, "<span class='danger'>You feel a burning sensation in your throat...</span>")
@@ -546,7 +565,7 @@
 	id = "formaldehyde"
 	description = "Formaldehyde is a common industrial chemical and is used to preserve corpses and medical samples. It is highly toxic and irritating."
 	reagent_state = LIQUID
-	color = "#DED6D0"
+	color = "#B44B00"
 	penetrates_skin = TRUE
 	taste_description = "bitterness"
 
@@ -555,6 +574,20 @@
 	update_flags |= M.adjustToxLoss(1*REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	if(prob(10))
 		M.reagents.add_reagent("histamine",rand(5,15))
+	return ..() | update_flags
+
+/datum/reagent/acetaldehyde
+	name = "Acetaldehyde"
+	id = "acetaldehyde"
+	description = "Acetaldehyde is a common industrial chemical. It is a severe irritant."
+	reagent_state = LIQUID
+	color = "#B44B00"
+	penetrates_skin = TRUE
+	taste_description = "apples"
+
+/datum/reagent/acetaldehyde/on_mob_life(mob/living/M)
+	var/update_flags = STATUS_UPDATE_NONE
+	update_flags |= M.adjustFireLoss(1 * REAGENTS_EFFECT_MULTIPLIER, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/venom
@@ -896,6 +929,7 @@
 	reagent_state = LIQUID
 	color = "#191919"
 	metabolization_rate = 0.1
+	can_synth = FALSE
 	penetrates_skin = TRUE
 	taste_mult = 0
 
@@ -922,23 +956,6 @@
 			else if(prob(8))
 				to_chat(M, "<span class='danger'>You can't [pick("breathe", "move", "feel your legs", "feel your face", "feel anything")]!</span>")
 				M.AdjustLoseBreath(1)
-	return ..() | update_flags
-
-/datum/reagent/heparin //Based on a real-life anticoagulant.
-	name = "Heparin"
-	id = "heparin"
-	description = "A powerful anticoagulant. Victims will bleed uncontrollably and suffer scaling bruising."
-	reagent_state = LIQUID
-	color = "#C8C8C8" //RGB: 200, 200, 200
-	metabolization_rate = 0.2 * REAGENTS_METABOLISM
-	taste_mult = 0
-
-/datum/reagent/heparin/on_mob_life(mob/living/M)
-	var/update_flags = STATUS_UPDATE_NONE
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.bleed_rate = min(H.bleed_rate + 2, 8)
-		update_flags |= H.adjustBruteLoss(1, FALSE)
 	return ..() | update_flags
 
 /datum/reagent/sarin
@@ -1030,7 +1047,7 @@
 		var/obj/structure/spacevine/SV = O
 		SV.on_chem_effect(src)
 
-/datum/reagent/glyphosate/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/glyphosate/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(!C.wear_mask) // If not wearing a mask
@@ -1050,7 +1067,7 @@
 	id = "atrazine"
 	description = "A herbicidal compound used for destroying unwanted plants."
 	reagent_state = LIQUID
-	color = "#17002D"
+	color = "#773E73" //RGB: 47 24 45
 	lethality = 2 //Atrazine, however, is definitely toxic
 
 
@@ -1071,7 +1088,7 @@
 		O.visible_message("<span class='warning'>The ants die.</span>")
 		qdel(O)
 
-/datum/reagent/pestkiller/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/pestkiller/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(!C.wear_mask) // If not wearing a mask
@@ -1161,12 +1178,12 @@
 	color = "#00FD00"
 	taste_description = "slime"
 
-/datum/reagent/glowing_slurry/reaction_mob(mob/living/M, method=TOUCH, volume) //same as mutagen
+/datum/reagent/glowing_slurry/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume) //same as mutagen
 	if(!..())
 		return
 	if(!M.dna)
 		return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
-	if((method==TOUCH && prob(50)) || method==INGEST)
+	if((method==REAGENT_TOUCH && prob(50)) || method==REAGENT_INGEST)
 		randmutb(M)
 		domutcheck(M, null)
 		M.UpdateAppearance()
@@ -1201,9 +1218,9 @@
 	update_flags |= M.adjustBruteLoss(2, FALSE)
 	return ..() | update_flags
 
-/datum/reagent/ants/reaction_mob(mob/living/M, method=TOUCH, volume) //NOT THE ANTS
+/datum/reagent/ants/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume) //NOT THE ANTS
 	if(iscarbon(M))
-		if(method == TOUCH || method==INGEST)
+		if(method == REAGENT_TOUCH || method==REAGENT_INGEST)
 			to_chat(M, "<span class='warning'>OH SHIT ANTS!!!!</span>")
 			M.emote("scream")
 			M.adjustBruteLoss(4)
@@ -1233,7 +1250,8 @@
 	description = "An advanced corruptive toxin produced by something terrible."
 	reagent_state = LIQUID
 	color = "#5EFF3B" //RGB: 94, 255, 59
+	can_synth = FALSE
 	taste_description = "decay"
 
-/datum/reagent/gluttonytoxin/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
+/datum/reagent/gluttonytoxin/reaction_mob(mob/living/L, method=REAGENT_TOUCH, reac_volume)
 	L.ForceContractDisease(new /datum/disease/transformation/morph())
