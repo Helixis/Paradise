@@ -31,6 +31,7 @@
 	description = "Nothing good can come from this. Learn from their mistakes and turn around."
 	suffix = "lavaland_surface_cube.dmm"
 	cost = 10
+	always_place = TRUE
 	allow_duplicates = FALSE
 
 /datum/map_template/ruin/lavaland/seed_vault
