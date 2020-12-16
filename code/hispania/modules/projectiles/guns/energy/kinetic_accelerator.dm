@@ -136,7 +136,7 @@
 //Bloody KA
 /obj/item/gun/energy/kinetic_accelerator/premiumka/bloody
 	name = "bloody accelerator"
-	desc = "A modded premium kinetic accelerator with an increased mod capacity as well as lesser cooldown."
+	desc = "This Kinetic Accelerator are covered in blood and flesh, looks corrupted and cursed."
 	icon_state = "bdpka"
 	item_state = "kineticgun"
 	overheat_time = 9
