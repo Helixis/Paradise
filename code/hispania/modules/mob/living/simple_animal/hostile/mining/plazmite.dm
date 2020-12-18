@@ -32,6 +32,7 @@
 	light_color = LIGHT_COLOR_YELLOW
 	loot = list()
 	aggro_vision_range = 9
+	crusher_loot = /obj/item/crusher_trophy/blaster_tubes/plazmitew
 	butcher_results = list(/obj/item/stack/sheet/bone = 1, /obj/item/reagent_containers/food/snacks/plazmiteleg = 2)
 	var/venom_per_bite = 6
 
@@ -46,3 +47,23 @@
 
 /mob/living/simple_animal/hostile/asteroid/poison/plazmite/tendril
 	fromtendril = TRUE
+
+//Kinetic Crusher Trophy Plazmite
+
+/obj/item/crusher_trophy/blaster_tubes/plazmitew
+	name = "wings of plazmite"
+	desc = "A pair of ripped wings, looks fine on the kinetic crusher."
+	icon = 'icons/hispania/obj/lavaland/artefacts.dmi'
+	icon_state = "plazmawings"
+	gender = PLURAL
+	denied_type = /obj/item/crusher_trophy/blaster_tubes/plazmitew
+	bonus_value = 5
+
+/obj/item/crusher_trophy/blaster_tubes/plazmitew/effect_desc()
+	return "marker has more range and gains <b>[bonus_value]</b> damage point on random shots"
+
+/obj/item/crusher_trophy/blaster_tubes/plazmitew/on_projectile_fire(obj/item/projectile/destabilizer/marker, mob/living/user)
+	if(deadly_shot)
+		marker.range = 14
+		marker.damage = bonus_value
+
