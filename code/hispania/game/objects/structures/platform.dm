@@ -8,7 +8,6 @@
 	flags = ON_BORDER
 	anchored = FALSE
 	climbable = TRUE
-	layer = ABOVE_OBJ_LAYER
 	max_integrity = 200
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
 	var/corner = FALSE
@@ -17,10 +16,10 @@
 	var/decon_speed
 
 /obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
-	if(dir == NORTH)
+	if(dir == SOUTH)
 		layer = ABOVE_MOB_LAYER
-	else if(corner && dir == SOUTH)
-		layer = ABOVE_MOB_LAYER
+	else if(corner && dir == NORTH)
+		layer = BELOW_MOB_LAYER
 
 /obj/structure/platform/setDir(newdir)
 	. = ..()
@@ -58,6 +57,24 @@
 	add_fingerprint(usr)
 	return TRUE
 
+/obj/structure/platform/verb/revrotate()
+	set name = "Rotate Platform Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if(usr.incapacitated())
+		return
+
+	if(anchored)
+		to_chat(usr, "<span class='warning'>[src] cannot be rotated while it is screwed to the floor!</span>")
+		return FALSE
+	
+	var/target_dir = turn(dir, 270)
+
+	setDir(target_dir)
+	add_fingerprint(usr)
+	return TRUE
+
 // Construcción
 
 /obj/structure/platform/screwdriver_act(mob/user, obj/item/I)
@@ -86,6 +103,8 @@
 
 
 /obj/structure/platform/CheckExit(atom/movable/O, turf/target)
+	if(istype(O, /obj/structure/platform)) //Para que no hayan dos platforms en un mismo title
+		return FALSE
 	if(corner)
 		return !density
 	if(O && O.throwing)
@@ -96,6 +115,8 @@
 		return TRUE
 
 /obj/structure/platform/CanPass(atom/movable/mover, turf/target)
+	if(istype(mover, /obj/structure/platform)) // Para que no hayan dos platforms en un mismo title
+		return FALSE
 	if(corner)
 		return !density
 	if(mover && mover.throwing)
