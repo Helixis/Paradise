@@ -103,7 +103,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 /datum/job/nanotrasenrep
 	title = "Nanotrasen Representative"
 	flag = JOB_NANO
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	minimal_captain_character_age = 1
@@ -150,7 +150,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 /datum/job/blueshield
 	title = "Blueshield"
 	flag = JOB_BLUESHIELD
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	minimal_command_character_age = 1
@@ -198,7 +198,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 /datum/job/judge
 	title = "Magistrate"
 	flag = JOB_JUDGE
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Nanotrasen Supreme Court"

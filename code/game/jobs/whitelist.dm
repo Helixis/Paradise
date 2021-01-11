@@ -82,14 +82,14 @@ GLOBAL_LIST_EMPTY(alien_whitelist)
 				if(species in allowed_species) return 1
 			else return 1
 		return 0
-/*
+
 	if(M && species)
-		for(var/s in alien_whitelist)
+		for(var/s in GLOB.alien_whitelist)
 			if(findtext(s,"[M.ckey] - [species]"))
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
-*/
+
 
 
 #undef WHITELISTFILE

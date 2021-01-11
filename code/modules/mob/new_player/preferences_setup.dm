@@ -850,8 +850,8 @@
 					clothes_s.Blend(new /icon('icons/mob/back.dmi', "backpack"), ICON_OVERLAY)
 				else if(backbag == 3 || backbag == 4)
 					clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-	else if(job_karma_high)
-		switch(job_karma_high)
+	//else if(job_karma_high)carma is no more, by evan
+	//	switch(job_karma_high)
 			if(JOB_MECHANIC)
 				clothes_s = new /icon(uniform_dmi, "mechanic_s")
 				clothes_s.Blend(new /icon('icons/mob/feet.dmi', "orange"), ICON_UNDERLAY)

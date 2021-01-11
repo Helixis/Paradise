@@ -457,7 +457,7 @@
 /datum/job/barber
 	title = "Barber"
 	flag = JOB_BARBER
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_SUPPORT
 	total_positions = 1
 	spawn_positions = 1
 	is_service = 1

@@ -93,14 +93,14 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"pAI"
 ))
 
-GLOBAL_LIST_INIT(whitelisted_positions, list(
-	"Blueshield",
-	"Nanotrasen Representative",
-	"Barber",
-	"Mechanic",
-	"Brig Physician",
-	"Magistrate",
-	"Security Pod Pilot",
+GLOBAL_LIST_INIT(whitelisted_positions, list(//no más karma jobs, hijos de puta acá se encuentran los jobs de karma, BY Evan, de nada.
+	//"Blueshield",
+	//"Nanotrasen Representative",
+	//"Barber",
+	//"Mechanic",
+	//"Brig Physician",
+	//"Magistrate",
+	//"Security Pod Pilot",
 ))
 
 

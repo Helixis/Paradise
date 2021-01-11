@@ -126,7 +126,7 @@
 /datum/job/mechanic
 	title = "Mechanic"
 	flag = JOB_MECHANIC
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	is_engineering = 1

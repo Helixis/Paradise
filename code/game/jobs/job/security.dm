@@ -201,7 +201,7 @@
 /datum/job/brigdoc
 	title = "Brig Physician"
 	flag = JOB_BRIGDOC
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
@@ -234,7 +234,7 @@
 /datum/job/pilot
 	title = "Security Pod Pilot"
 	flag = JOB_PILOT
-	department_flag = JOBCAT_KARMA
+	department_flag = JOBCAT_ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	is_security = 1
