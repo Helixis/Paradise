@@ -212,7 +212,7 @@
 	strip_delay = 20			//	   but seperated to allow items to protect but not impair vision, like space helmets
 	put_on_delay = 25
 	resistance_flags = NONE
-	species_restricted = list("exclude","Kidan")
+
 /*
 SEE_SELF  // can see self, no matter what
 SEE_MOBS  // can see all mobs, no matter what
@@ -718,7 +718,6 @@ BLIND     // can't see anything
 	icon = (hispania_icon ? 'icons/hispania/obj/clothing/uniforms.dmi' : icon)
 	lefthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/clothing_lefthand.dmi' : lefthand_file)
 	righthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/clothing_righthand.dmi' : righthand_file)
-
 
 /obj/item/clothing/under/rank/New()
 	if(random_sensor)
