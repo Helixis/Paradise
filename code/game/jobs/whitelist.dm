@@ -106,7 +106,7 @@ GLOBAL_LIST_EMPTY(alien_whitelist)
 		qdel(species_read)
 /*
 	if(M && species)
-		for(var/s in GLOB.alien_whitelist)
+		for(var/s in alien_whitelist)
 			if(findtext(s,"[M.ckey] - [species]"))
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
