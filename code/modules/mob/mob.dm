@@ -1452,3 +1452,4 @@ GLOBAL_LIST_INIT(slot_equipment_priority, list( \
 		blood_state = BLOOD_STATE_NOT_BLOODY
 		update_inv_shoes()
 	update_icons()	//apply the now updated overlays to the mob
+
