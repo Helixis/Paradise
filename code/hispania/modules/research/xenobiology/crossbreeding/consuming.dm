@@ -14,7 +14,6 @@ Consuming extracts:
 	var/last_produced = 0
 	var/cookies = 5 //Number of cookies to spawn
 	var/cookietype = /obj/item/slime_cookie
-	var/effect_type
 
 /obj/item/slimecross/consuming/attackby(obj/item/O, mob/user)
 	if(istype(O,/obj/item/reagent_containers/food/snacks))
@@ -56,6 +55,7 @@ Consuming extracts:
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 6
+	var/effect_type
 
 /obj/item/slime_cookie/proc/do_effect(mob/living/M, mob/user)
 	return
