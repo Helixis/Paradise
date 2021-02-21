@@ -28,10 +28,10 @@
 	id = "watercookie"
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
-	duration = 100
+	duration = 110
 
 /datum/status_effect/watercookie/on_apply()
-	ADD_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+	ADD_TRAIT(owner, TRAIT_NOSLIPWATER, "watercookie")
 	return ..()
 
 /datum/status_effect/watercookie/tick()
@@ -39,7 +39,7 @@
 		T.MakeSlippery(TURF_WET_WATER, 10)
 
 /datum/status_effect/watercookie/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER,"watercookie")
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPWATER, "watercookie")
 
 /datum/status_effect/metalcookie
 	id = "metalcookie"
@@ -69,13 +69,13 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		original_coeff = H.dna.species.siemens_coeff
-		H.dna.species.siemens_coeff  = 0
+		H.dna.species.siemens_coeff = 0
 	return ..()
 
 /datum/status_effect/sparkcookie/on_remove()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.siemens_coeff  = original_coeff
+		H.dna.species.siemens_coeff = original_coeff
 
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
