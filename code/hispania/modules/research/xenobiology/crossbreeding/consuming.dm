@@ -290,6 +290,7 @@ Consuming extracts:
 
 /obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
 	M.apply_status_effect(/datum/status_effect/adamantinecookie)
+
 /obj/item/slimecross/consuming/bluespace
 	colour = "bluespace"
 	effect_desc = "Creates a slime cookie that teleports the target to a random place in the area."

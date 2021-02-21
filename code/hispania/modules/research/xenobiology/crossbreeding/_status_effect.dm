@@ -77,6 +77,12 @@
 		var/mob/living/carbon/human/H = owner
 		H.dna.species.siemens_coeff = original_coeff
 
+/datum/status_effect/adamantinecookie
+	id = "adamantinecookie"
+	status_type = STATUS_EFFECT_REPLACE
+	alert_type = null
+	duration = 100
+
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
