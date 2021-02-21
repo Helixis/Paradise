@@ -127,7 +127,7 @@ Consuming extracts:
 	effect_type = /datum/status_effect/watercookie
 
 /obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
-	if(!M.has_status_effect(effect_type)
+	if(!M.has_status_effect(effect_type))
 		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/metal
@@ -143,7 +143,7 @@ Consuming extracts:
 	effect_type = /datum/status_effect/metalcookie
 
 /obj/item/slime_cookie/metal/do_effect(mob/living/M, mob/user)
-	if(!M.has_status_effect(effect_type)
+	if(!M.has_status_effect(effect_type))
 		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/yellow
@@ -159,7 +159,7 @@ Consuming extracts:
 	effect_type = /datum/status_effect/adamantinecookie
 
 /obj/item/slime_cookie/yellow/do_effect(mob/living/M, mob/user)
-	if(!M.has_status_effect(effect_type)
+	if(!M.has_status_effect(effect_type))
 		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/darkblue
@@ -283,7 +283,7 @@ Consuming extracts:
 	effect_type = /datum/status_effect/peacecookie
 
 /obj/item/slime_cookie/lightpink/do_effect(mob/living/M, mob/user)
-	if(!M.has_status_effect(effect_type)
+	if(!M.has_status_effect(effect_type))
 		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/adamantine
@@ -299,7 +299,7 @@ Consuming extracts:
 	effect_type = /datum/status_effect/adamantinecookie
 
 /obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
-	if(!M.has_status_effect(effect_type)
+	if(!M.has_status_effect(effect_type))
 		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/bluespace
