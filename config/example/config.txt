@@ -456,6 +456,10 @@ BYOND_ACCOUNT_AGE_THRESHOLD 7
 ## IF YOU ARE DISABLING THIS COMMENT IT OUT ENTIRELY, DONT LEAVE IT BLANK
 #DISCORD_WEBHOOKS_ADMIN_ROLE_ID
 
+## ID del rol que el webhook menciona cuando termina , si no se modifica, la mencion estara desactivada, esta es una variable de hispania
+## IF YOU ARE DISABLING THIS COMMENT IT OUT ENTIRELY, DONT LEAVE IT BLANK
+#DISCORD_WEBHOOKS_NEWROUND_ROLE_ID
+
 ## Webhook URLs for the main discord webhook. Separate multiple URLs with a | (EG: https://url1|https://url2)
 #DISCORD_WEBHOOKS_MAIN_URL
 
@@ -476,3 +480,9 @@ BYOND_ACCOUNT_AGE_THRESHOLD 7
 ## THE TRAILING SLASH ON THE END IS IMPORTANT SINCE IT JUST APPENDS THE CKEY TO THE END IN RAW
 ## Add a hash before the line below to disable the system
 CENTCOM_BAN_DB_URL https://centcom.melonmesa.com/ban/search/
+
+## Max amount of CIDs that one ckey can have attached to them before they trip a warning. Set to 0 to disable.
+MAX_CLIENT_CID_HISTORY 2
+
+## Uncomment to enable automatic performance profiling of rounds
+#ENABLE_AUTO_PROFILER

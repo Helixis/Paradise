@@ -37,7 +37,6 @@
 	var/datum/effect_system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
-	var/emagged = FALSE
 	var/frozen = FALSE
 	var/repairing = FALSE
 
@@ -604,7 +603,8 @@
 /obj/mecha/handle_atom_del(atom/A)
 	if(A == occupant)
 		occupant = null
-		icon_state = initial(icon_state)+"-open"
+		reset_icon()
+		icon_state += "-open"
 		setDir(dir_in)
 	if(A in trackers)
 		trackers -= A
@@ -752,9 +752,14 @@
 
 		name = P.new_name
 		desc = P.new_desc
+		var/state
+		if(findtext(icon_state, "-open"))
+			state = "-open"
 		initial_icon = P.new_icon
+		if(P.new_icon_carpet)//para que la carpeta del icon este en hispania
+			icon = P.new_icon_carpet//fin hispania
 		reset_icon()
-
+		icon_state += state
 		user.drop_item()
 		qdel(P)
 
@@ -925,7 +930,8 @@
 			occupant = null
 			AI.controlled_mech = null
 			AI.remote_control = null
-			icon_state = initial(icon_state)+"-open"
+			reset_icon()//hispania, reseteamos el icono
+			icon_state += "-open"
 			to_chat(AI, "You have been downloaded to a mobile storage device. Wireless connection offline.")
 			to_chat(user, "<span class='boldnotice'>Transfer successful</span>: [AI.name] ([rand(1000,9999)].exe) removed from [name] and stored within local memory.")
 
@@ -959,7 +965,7 @@
 	AI.aiRestorePowerRoutine = 0
 	AI.loc = src
 	occupant = AI
-	icon_state = initial(icon_state)
+	reset_icon()
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	if(!hasInternalDamage())
 		occupant << sound(nominalsound, volume = 50)
@@ -1260,7 +1266,8 @@
 				var/obj/item/mmi/robotic_brain/R = mmi
 				if(R.imprinted_master)
 					to_chat(L, "<span class='notice'>Imprint re-enabled, you are once again bound to [R.imprinted_master]'s commands.</span>")
-		icon_state = initial(icon_state)+"-open"
+		reset_icon()//resetea el icon del mecha antes de cambiarlo
+		icon_state += "-open"//nada de initial icon
 		dir = dir_in
 
 	if(L && L.client)
@@ -1494,6 +1501,9 @@
 			AI = occupant
 			occupant = null
 		var/obj/structure/mecha_wreckage/WR = new wreckage(loc, AI)
+		reset_icon()//este codigo hace que el wreckage tenga el mismo tema(sprite) que el mecha
+		WR.icon = icon
+		WR.icon_state = icon_state+"-broken"//fin paintkists code
 		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
 			if(E.salvageable && prob(30))
 				WR.crowbar_salvage += E

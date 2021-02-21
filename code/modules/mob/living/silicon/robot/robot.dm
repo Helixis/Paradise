@@ -17,11 +17,6 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 
-	var/shell = FALSE
-	var/deployed = FALSE
-	var/mob/living/silicon/ai/mainframe = null
-	var/datum/action/innate/undeployment/undeployment_action = new
-
 //Hud stuff
 
 	var/obj/screen/inv1 = null
@@ -154,8 +149,10 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			camera.status = 0
 
 		//If this body is meant to be a borg controlled by the AI player
-	if(shell)
-		make_shell()
+	if(shell)//luego de un tiempo muerto convierte a la ia en shell debido a que aun no esta inicializado el mob, pd: PUTO PARADISE
+		spawn(1)
+			if(src)
+				make_shell()
 
 	else if(mmi == null)
 		mmi = new /obj/item/mmi/robotic_brain(src)	//Give the borg an MMI if he spawns without for some reason. (probably not the correct way to spawn a robotic brain, but it works)
@@ -241,6 +238,9 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 
 				if(Entry[2] == ckey)	//They're in the list? Custom sprite time, var and icon change required
 					custom_sprite = 1
+
+	if(mmi && mmi.brainmob)
+		mmi.brainmob.name = newname
 
 	return 1
 
@@ -340,7 +340,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 	switch(modtype)
 		if("Generalist")
 			module = new /obj/item/robot_module/standard(src)
-			module.channels = list("Engineering" = 1, "Medical" = 1, "Security" = 1, "Service" = 1)
+			module.channels = list("Engineering" = 1, "Medical" = 1, "Security" = 1, "Service" = 1, "Supply" = 1)
 			module_sprites["Basic"] = "robot_old"
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "Standard"
@@ -496,8 +496,6 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module = new /obj/item/robot_module/alien/hunter(src)
 			icon_state = "xenoborg-state-a"
 			modtype = "Xeno-Hu"
-			feedback_inc("xeborg_hunter",1)
-
 
 	//languages
 	module.add_languages(src)
@@ -509,7 +507,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
 
 	hands.icon_state = lowertext(module.module_type)
-	feedback_inc("cyborg_[lowertext(modtype)]",1)
+	SSblackbox.record_feedback("tally", "cyborg_modtype", 1, "[lowertext(modtype)]")
 	rename_character(real_name, get_default_name())
 
 	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
@@ -524,7 +522,6 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 	notify_ai(NEW_MODULE)
 
 	uneq_all()
-	SSnanoui.close_user_uis(src)
 	SStgui.close_user_uis(src)
 	sight_mode = null
 	update_sight()
@@ -537,6 +534,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 	rename_character(real_name, get_default_name("Default"))
 	languages = list()
 	speech_synthesizer_langs = list()
+	radio.recalculateChannels()
 
 	update_icons()
 	update_headlamp()
@@ -545,7 +543,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 	ionpulse = FALSE
 	magpulse = FALSE
 	revert_shell()
-	add_language("Robot Talk", 1)
+	add_language("Robot Talk", TRUE)
 	if("lava" in weather_immunities) // Remove the lava-immunity effect given by a printable upgrade
 		weather_immunities -= "lava"
 

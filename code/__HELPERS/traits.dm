@@ -71,6 +71,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOSLIPWATER		"noslip_water"
 //finhispatraits
 
+#define TRAIT_TESLA_SHOCKIMMUNE	"tesla_shock_immunity"
 //
 // common trait sources
 #define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention

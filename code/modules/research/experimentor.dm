@@ -282,9 +282,7 @@
 			ejectItem()
 		if(prob(EFFECT_PROB_VERYLOW-badThingCoeff))
 			visible_message("<span class='danger'>[src] malfunctions, melting [exp_on] and leaking radiation!</span>")
-			for(var/mob/living/m in oview(1, src))
-				m.apply_effect(25,IRRADIATE)
-				investigate_log("Experimentor has irradiated [m]", "experimentor") //One entry per person so we know what was irradiated.
+			radiation_pulse(src, 500)
 			ejectItem(TRUE)
 		if(prob(EFFECT_PROB_LOW-badThingCoeff))
 			visible_message("<span class='warning'>[src] malfunctions, spewing toxic waste!</span>")
@@ -666,9 +664,11 @@
 	warn_admins(user, "Smoke", 0)
 
 /obj/item/relic/proc/flash(mob/user)
+	to_chat(user, "<span class='danger'>[src] begins to shake!</span>")
 	playsound(src.loc, "sparks", rand(25,50), 1)
-	var/obj/item/grenade/flashbang/CB = new/obj/item/grenade/flashbang(get_turf(user))
-	CB.prime()
+	spawn(rand(35,100))
+		var/obj/item/grenade/flashbang/CB = new/obj/item/grenade/flashbang(get_turf(user))
+		CB.prime()
 	warn_admins(user, "Flash")
 
 /obj/item/relic/proc/petSpray(mob/user)

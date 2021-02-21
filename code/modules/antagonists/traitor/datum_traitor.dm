@@ -13,7 +13,6 @@
 	var/traitor_kind = TRAITOR_HUMAN
 	var/list/assigned_targets = list() // This includes assassinate as well as steal objectives. prevents duplicate objectives
 
-
 /datum/antagonist/traitor/on_gain()
 	if(owner.current && isAI(owner.current))
 		traitor_kind = TRAITOR_AI
@@ -250,14 +249,15 @@
 
 
 /datum/antagonist/traitor/proc/update_traitor_icons_added(datum/mind/traitor_mind)
+	var/is_contractor = LAZYACCESS(GLOB.contractors, traitor_mind)
 	if(locate(/datum/objective/hijack) in owner.objectives)
 		var/datum/atom_hud/antag/hijackhud = GLOB.huds[ANTAG_HUD_TRAITOR]
 		hijackhud.join_hud(owner.current, null)
-		set_antag_hud(owner.current, "hudhijack")
+		set_antag_hud(owner.current, is_contractor ? "hudhijackcontractor" : "hudhijack")
 	else
 		var/datum/atom_hud/antag/traitorhud = GLOB.huds[ANTAG_HUD_TRAITOR]
 		traitorhud.join_hud(owner.current, null)
-		set_antag_hud(owner.current, "hudsyndicate")
+		set_antag_hud(owner.current, is_contractor ? "hudcontractor" : "hudsyndicate")
 
 
 /datum/antagonist/traitor/proc/update_traitor_icons_removed(datum/mind/traitor_mind)
