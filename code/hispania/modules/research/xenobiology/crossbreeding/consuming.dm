@@ -14,6 +14,7 @@ Consuming extracts:
 	var/last_produced = 0
 	var/cookies = 5 //Number of cookies to spawn
 	var/cookietype = /obj/item/slime_cookie
+	var/effect_type
 
 /obj/item/slimecross/consuming/attackby(obj/item/O, mob/user)
 	if(istype(O,/obj/item/reagent_containers/food/snacks))
@@ -123,9 +124,11 @@ Consuming extracts:
 	desc = "A transparent blue cookie. Constantly dripping wet."
 	icon_state = "blue"
 	taste = "water"
+	effect_type = /datum/status_effect/watercookie
 
 /obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/watercookie)
+	if(!M.has_status_effect(effect_type)
+		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/metal
 	colour = "metal"
@@ -137,9 +140,11 @@ Consuming extracts:
 	desc = "A shiny grey cookie. Hard to the touch."
 	icon_state = "metal"
 	taste = "copper"
+	effect_type = /datum/status_effect/metalcookie
 
 /obj/item/slime_cookie/metal/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/metalcookie)
+	if(!M.has_status_effect(effect_type)
+		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/yellow
 	colour = "yellow"
@@ -151,9 +156,11 @@ Consuming extracts:
 	desc = "A yellow cookie with a lightning pattern. Has a rubbery texture."
 	icon_state = "yellow"
 	taste = "lemon cake and rubber gloves"
+	effect_type = /datum/status_effect/adamantinecookie
 
 /obj/item/slime_cookie/yellow/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/sparkcookie)
+	if(!M.has_status_effect(effect_type)
+		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/darkblue
 	colour = "dark blue"
@@ -273,9 +280,11 @@ Consuming extracts:
 	desc = "A light pink cookie with a peace symbol in the icing. Lovely!"
 	icon_state = "lightpink"
 	taste = "strawberry icing and P.L.U.R" //Literal candy raver.
+	effect_type = /datum/status_effect/peacecookie
 
 /obj/item/slime_cookie/lightpink/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/peacecookie)
+	if(!M.has_status_effect(effect_type)
+		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/adamantine
 	colour = "adamantine"
@@ -287,9 +296,11 @@ Consuming extracts:
 	desc = "A translucent rock candy in the shape of a cookie. Surprisingly chewy."
 	icon_state = "adamantine"
 	taste = "crystalline sugar and metal"
+	effect_type = /datum/status_effect/adamantinecookie
 
 /obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/adamantinecookie)
+	if(!M.has_status_effect(effect_type)
+		M.apply_status_effect(effect_type)
 
 /obj/item/slimecross/consuming/bluespace
 	colour = "bluespace"

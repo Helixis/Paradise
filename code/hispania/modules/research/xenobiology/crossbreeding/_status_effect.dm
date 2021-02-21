@@ -81,7 +81,7 @@
 	id = "adamantinecookie"
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
-	duration = 100
+	duration = 300
 
 /datum/status_effect/adamantinecookie/on_apply()
 	if(ishuman(owner))
