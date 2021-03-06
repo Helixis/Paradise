@@ -8,7 +8,7 @@
 
 /obj/item/clothing/suit/hooded/Initialize(mapload)
 	. = ..()
-	base_icon = icon_state
+	base_icon = initial(icon_state)
 	MakeHood()
 
 /obj/item/clothing/suit/hooded/Destroy()
