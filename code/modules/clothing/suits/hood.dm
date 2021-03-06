@@ -4,7 +4,7 @@
 	actions_types = list(/datum/action/item_action/toggle)
 	var/obj/item/clothing/head/hooded/hood
 	var/hoodtype = /obj/item/clothing/head/hooded/winterhood //so the chaplain hoodie or other hoodies can override this
-	var/base_icon
+	var/base_icon //base icon es una variable de hispania igual "initial(icon_state)".
 
 /obj/item/clothing/suit/hooded/Initialize(mapload)
 	. = ..()
