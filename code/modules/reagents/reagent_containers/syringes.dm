@@ -69,6 +69,7 @@
 	if(istype(target, /mob/living/carbon/human/monkey) && prob(MONKEY_SYRINGE_RETALIATION_PROB))
 		var/mob/living/carbon/human/monkey/M
 		M = target
+		M.visible_message("[M] looks angry!")
 		M.retaliate(user)
 
 	switch(mode)

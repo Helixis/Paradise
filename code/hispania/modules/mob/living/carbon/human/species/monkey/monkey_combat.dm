@@ -22,11 +22,11 @@
 	var/martial_art = new/datum/martial_art
 	var/resisting = FALSE
 	var/pickpocketing = FALSE
-	var/disposing_body = FALSE
-	var/obj/machinery/disposal/bodyDisposal = null
+	//var/disposing_body = FALSE
+	//var/obj/machinery/disposal/bodyDisposal = null
 
 /mob/living/carbon/human/monkey/proc/IsStandingStill()
-	return resisting || pickpocketing || disposing_body
+	return resisting || pickpocketing //|| disposing_body
 
 // blocks
 // taken from /mob/living/carbon/human/interactive/
@@ -197,7 +197,7 @@
 		if(MONKEY_IDLE)		// idle
 
 			var/list/around = view(src, MONKEY_ENEMY_VISION)
-			bodyDisposal = locate(/obj/machinery/disposal/) in around
+			//bodyDisposal = locate(/obj/machinery/disposal/) in around
 
 			// scan for enemies
 			for(var/mob/living/L in around)
@@ -206,10 +206,12 @@
 						emote(pick("roar","screech"))
 						retaliate(L)
 						return TRUE
+					/*
 					else if(bodyDisposal)
 						target = L
 						mode = MONKEY_DISPOSE
 						return TRUE
+					*/
 
 			// pickup any nearby objects
 			if(!pickupTarget && prob(MONKEY_PICKUP_PROB))
@@ -297,14 +299,16 @@
 			for(var/mob/living/L in around)
 				if( enemies[L] && L.stat == CONSCIOUS )
 					target = L
-
-			if(target != null)
-				walk_away(src, target, MONKEY_ENEMY_VISION, 5)
+			if(!IsDeadOrIncap())
+				if(target != null)
+					walk_away(src, target, MONKEY_ENEMY_VISION, 5)
+				else
+					back_to_idle()
 			else
-				back_to_idle()
+				return TRUE
 
 			return TRUE
-
+		/*
 		if(MONKEY_DISPOSE)
 
 			// if can't dispose of body go back to idle
@@ -341,6 +345,7 @@
 						frustration = 0
 
 			return TRUE
+		*/
 
 
 
@@ -358,11 +363,13 @@
 	pickupTarget = null
 	pickupTimer = 0
 
+/*
 /mob/living/carbon/human/monkey/proc/stuff_mob_in()
 	if(bodyDisposal && target && Adjacent(bodyDisposal))
 		bodyDisposal.MouseDrop_T(target, src)
 	disposing_body = FALSE
 	back_to_idle()
+*/
 
 /mob/living/carbon/human/monkey/proc/back_to_idle()
 

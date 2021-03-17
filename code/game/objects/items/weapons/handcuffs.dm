@@ -36,7 +36,8 @@
 
 		// chance of monkey retaliation
 	if(istype(C, /mob/living/carbon/human/monkey) && prob(MONKEY_CUFF_RETALIATION_PROB))
-		var/mob/living/carbon/human/monkey/M = C
+		var/mob/living/carbon/human/monkey/M = 
+		M.visible_message("[M] looks angry!")
 		M.retaliate(user)
 
 	cuff(C, user)
