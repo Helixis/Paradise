@@ -1,6 +1,15 @@
 /mob/living/carbon/human/monkey
 	var/aggressive=0 // set to 1 using VV for an angry monkey
 	var/frustration=0
+
+	var/melee_damage_lower = 4
+	var/melee_damage_upper = 10
+	var/attacktext = "bites"
+	var/attack_sound = 'sound/weapons/bite.ogg'
+	var/obj_damage = 0 //how much damage this simple animal does to objects, if any
+	var/armour_penetration = 0
+	var/melee_damage_type = BRUTE
+
 	var/pickupTimer=0
 	var/list/enemies = list()
 	var/mob/living/target
@@ -134,7 +143,7 @@
 		return TRUE
 
 	// have we been disarmed
-	if(!locate(/obj/item/melee) in get_both_hands())
+	if(!locate(/obj/item/melee) in get_both_hands(src))
 		best_force = 0
 
 	if(restrained() || blacklistItems[pickupTarget])
@@ -351,7 +360,7 @@
 
 /mob/living/carbon/human/monkey/proc/stuff_mob_in()
 	if(bodyDisposal && target && Adjacent(bodyDisposal))
-		bodyDisposal.stuff_mob_in(target, src)
+		bodyDisposal.MouseDrop_T(target, src)
 	disposing_body = FALSE
 	back_to_idle()
 
@@ -368,13 +377,13 @@
 
 // attack using a held weapon otherwise bite the enemy, then if we are angry there is a chance we might calm down a little
 /mob/living/carbon/human/monkey/proc/monkey_attack(mob/living/L)
-	var/obj/item/melee/Weapon = locate(/obj/item/melee) in get_both_hands()
+	var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
 
 	// attack with weapon if we have one
 	if(Weapon)
 		L.attackby(Weapon, src)
 	else
-		L.attack_paw(src)
+		L.attack_animal(src)
 
 	// no de-aggro
 	if(aggressive)
@@ -412,7 +421,7 @@
 		retaliate(L)
 	return ..()
 
-/mob/living/carbon/human/monkey/proc/attack_paw(mob/living/L)
+/mob/living/carbon/human/monkey/attack_animal(mob/living/L)
 	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 		retaliate(L)
 	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
@@ -431,7 +440,7 @@
 				retaliate(Proj.firer)
 	..()
 
-/mob/living/carbon/human/monkey/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0)
+/mob/living/carbon/human/monkey/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
@@ -439,7 +448,7 @@
 			retaliate(H)
 	..()
 
-/mob/living/carbon/human/monkey/proc/knockOver(var/mob/living/carbon/C)	
+/mob/living/carbon/human/monkey/proc/knockOver(var/mob/living/carbon/C)
 	C.visible_message("<span class='warning'>[pick( \
 					  "[C] dives out of [src]'s way!", \
 					  "[C] stumbles over [src]!", \
@@ -462,3 +471,11 @@
 	if(A)
 		unEquip(A, 1)
 		update_icons()
+
+/mob/living/carbon/human/monkey/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+	if(!no_effect && !visual_effect_icon)
+		visual_effect_icon = ATTACK_EFFECT_BITE
+	var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
+	if(Weapon)
+		visual_effect_icon = null
+	..()
