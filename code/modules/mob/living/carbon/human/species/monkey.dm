@@ -37,11 +37,12 @@
 	brute_mod = 1.5
 	burn_mod = 1.5
 
-/datum/species/monkey/handle_npc(mob/living/carbon/human/monkey/H)
+/datum/species/monkey/handle_npc(mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
-	if(H.handle_combat())
-		return
+	if(!H.mind && !H.ckey)
+		if(H.handle_combat())
+			return
 	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled
 		step(H, pick(GLOB.cardinal))
 	if(prob(1))

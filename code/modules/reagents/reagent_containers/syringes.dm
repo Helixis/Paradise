@@ -66,9 +66,8 @@
 			return
 
 	// chance of monkey retaliation
-	if(istype(target, /mob/living/carbon/human/monkey) && prob(MONKEY_SYRINGE_RETALIATION_PROB))
-		var/mob/living/carbon/human/monkey/M
-		M = target
+	if(ismonkeybasic(target) && prob(MONKEY_SYRINGE_RETALIATION_PROB))
+		var/mob/living/carbon/human/M = target
 		M.visible_message("[M] looks angry!")
 		M.retaliate(user)
 

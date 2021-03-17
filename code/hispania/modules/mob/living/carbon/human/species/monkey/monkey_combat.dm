@@ -1,4 +1,4 @@
-/mob/living/carbon/human/monkey
+/mob/living/carbon/human
 	var/aggressive=0 // set to 1 using VV for an angry monkey
 	var/frustration=0
 
@@ -25,12 +25,12 @@
 	//var/disposing_body = FALSE
 	//var/obj/machinery/disposal/bodyDisposal = null
 
-/mob/living/carbon/human/monkey/proc/IsStandingStill()
+/mob/living/carbon/human/proc/IsStandingStill()
 	return resisting || pickpocketing //|| disposing_body
 
 // blocks
 // taken from /mob/living/carbon/human/interactive/
-/mob/living/carbon/human/monkey/proc/walk2derpless(target)
+/mob/living/carbon/human/proc/walk2derpless(target)
 	if(!target || IsStandingStill())
 		return 0
 
@@ -54,7 +54,7 @@
 	return 0
 
 // taken from /mob/living/carbon/human/interactive/
-/mob/living/carbon/human/monkey/proc/IsDeadOrIncap(checkDead = TRUE)
+/mob/living/carbon/human/proc/IsDeadOrIncap(checkDead = TRUE)
 	if(!canmove)
 		return 1
 	if(health <= 0 && checkDead)
@@ -67,7 +67,7 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/monkey/proc/equip_item(var/obj/item/I)
+/mob/living/carbon/human/proc/equip_item(var/obj/item/I)
 
 	if(I.loc == src)
 		return TRUE
@@ -99,13 +99,13 @@
 	blacklistItems[I] ++
 	return FALSE
 
-/mob/living/carbon/human/monkey/proc/pickup_and_wear(var/obj/item/clothing/C)
+/mob/living/carbon/human/proc/pickup_and_wear(var/obj/item/clothing/C)
 	if(!equip_to_appropriate_slot(C))
 		monkeyDrop(get_item_by_slot(C)) // remove the existing item if worn
 		sleep(5)
 		equip_to_appropriate_slot(C)
 
-/mob/living/carbon/human/monkey/resist_restraints()
+/mob/living/carbon/human/resist_restraints()
 	var/obj/item/I = null
 	if(handcuffed)
 		I = handcuffed
@@ -114,7 +114,7 @@
 	if(I)
 		cuff_resist(I)
 
-/mob/living/carbon/human/monkey/proc/should_target(var/mob/living/L)
+/mob/living/carbon/human/proc/should_target(var/mob/living/L)
 
 	if(L == src)
 		return 0
@@ -123,12 +123,12 @@
 		return 1
 
 	// target non-monkey mobs when aggressive, with a small probability of monkey v monkey
-	if(aggressive && (!istype(L, /mob/living/carbon/human/monkey/) || prob(MONKEY_AGGRESSIVE_MVM_PROB)))
+	if(aggressive && (!istype(L, /mob/living/carbon/human/) || prob(MONKEY_AGGRESSIVE_MVM_PROB)))
 		return 1
 
 	return 0
 
-/mob/living/carbon/human/monkey/proc/handle_combat()
+/mob/living/carbon/human/proc/handle_combat()
 
 	if(on_fire || buckled || restrained())
 		if(!resisting && prob(MONKEY_RESIST_PROB))
@@ -247,7 +247,7 @@
 
 			// recruit other monkies
 			var/list/around = view(src, MONKEY_ENEMY_VISION)
-			for(var/mob/living/carbon/human/monkey/M in around)
+			for(var/mob/living/carbon/human/M in around)
 				if(M.mode == MONKEY_IDLE && prob(MONKEY_RECRUIT_PROB))
 					M.emote(pick("roar","screech"))
 					M.target = target
@@ -316,7 +316,7 @@
 				back_to_idle()
 				return TRUE
 
-			if(target.pulledby != src && !istype(target.pulledby, /mob/living/carbon/human/monkey/))
+			if(target.pulledby != src && !istype(target.pulledby, /mob/living/carbon/human/))
 
 				addtimer(CALLBACK(src, .proc/walk2derpless, target.loc), 0)
 
@@ -351,7 +351,7 @@
 
 	return IsStandingStill()
 
-/mob/living/carbon/human/monkey/proc/pickpocket(var/mob/M)
+/mob/living/carbon/human/proc/pickpocket(var/mob/M)
 	if(do_mob(src, M, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
 		for(var/obj/item/I in get_both_hands(M))
 			if(I == pickupTarget)
@@ -364,14 +364,14 @@
 	pickupTimer = 0
 
 /*
-/mob/living/carbon/human/monkey/proc/stuff_mob_in()
+/mob/living/carbon/human/proc/stuff_mob_in()
 	if(bodyDisposal && target && Adjacent(bodyDisposal))
 		bodyDisposal.MouseDrop_T(target, src)
 	disposing_body = FALSE
 	back_to_idle()
 */
 
-/mob/living/carbon/human/monkey/proc/back_to_idle()
+/mob/living/carbon/human/proc/back_to_idle()
 
 	if(pulling)
 		stop_pulling()
@@ -383,7 +383,7 @@
 	walk_to(src,0)
 
 // attack using a held weapon otherwise bite the enemy, then if we are angry there is a chance we might calm down a little
-/mob/living/carbon/human/monkey/proc/monkey_attack(mob/living/L)
+/mob/living/carbon/human/proc/monkey_attack(mob/living/L)
 	var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
 
 	// attack with weapon if we have one
@@ -412,7 +412,7 @@
 			back_to_idle()
 
 // get angry are a mob
-/mob/living/carbon/human/monkey/proc/retaliate(mob/living/L)
+/mob/living/carbon/human/proc/retaliate(mob/living/L)
 	mode = MONKEY_HUNT
 	target = L
 	enemies[L] += MONKEY_HATRED_AMOUNT
@@ -421,33 +421,33 @@
 		emote(pick("roar","screech"))
 		a_intent = INTENT_HARM
 
-/mob/living/carbon/human/monkey/attack_hand(mob/living/L)
+/mob/living/carbon/human/attack_hand(mob/living/L)
 	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 		retaliate(L)
 	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 		retaliate(L)
 	return ..()
 
-/mob/living/carbon/human/monkey/attack_animal(mob/living/L)
+/mob/living/carbon/human/attack_animal(mob/living/L)
 	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 		retaliate(L)
 	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 		retaliate(L)
 	return ..()
 
-/mob/living/carbon/human/monkey/attackby(obj/item/melee/W, mob/user, params)
+/mob/living/carbon/human/attackby(obj/item/melee/W, mob/user, params)
 	..()
 	if((W.force) && (!target) && (W.damtype != STAMINA) )
 		retaliate(user)
 
-/mob/living/carbon/human/monkey/bullet_act(obj/item/projectile/Proj)
+/mob/living/carbon/human/bullet_act(obj/item/projectile/Proj)
 	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
 		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
 			if(!Proj.nodamage && Proj.damage < src.health)
 				retaliate(Proj.firer)
 	..()
 
-/mob/living/carbon/human/monkey/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
+/mob/living/carbon/human/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
@@ -455,7 +455,7 @@
 			retaliate(H)
 	..()
 
-/mob/living/carbon/human/monkey/proc/knockOver(var/mob/living/carbon/C)
+/mob/living/carbon/human/proc/knockOver(var/mob/living/carbon/C)
 	C.visible_message("<span class='warning'>[pick( \
 					  "[C] dives out of [src]'s way!", \
 					  "[C] stumbles over [src]!", \
@@ -465,21 +465,21 @@
 					  "[C] leaps out of [src]'s way!")]</span>")
 	C.Weaken(2)
 
-/mob/living/carbon/human/monkey/Crossed(atom/movable/AM)
+/mob/living/carbon/human/Crossed(atom/movable/AM)
 	if(!IsDeadOrIncap() && ismob(AM) && target)
-		var/mob/living/carbon/human/monkey/M = AM
+		var/mob/living/carbon/human/M = AM
 		if(!istype(M) || !M)
 			return
 		knockOver(M)
 		return
 	..()
 
-/mob/living/carbon/human/monkey/proc/monkeyDrop(var/obj/item/A)
+/mob/living/carbon/human/proc/monkeyDrop(var/obj/item/A)
 	if(A)
 		unEquip(A, 1)
 		update_icons()
 
-/mob/living/carbon/human/monkey/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/carbon/human/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_BITE
 	var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
