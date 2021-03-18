@@ -35,7 +35,7 @@
 		return
 
 		// chance of monkey retaliation
-	if(ismonkeybasic(C) && prob(MONKEY_CUFF_RETALIATION_PROB))
+	if(IsLesserBeing(C) && prob(MONKEY_CUFF_RETALIATION_PROB))
 		var/mob/living/carbon/human/M = C
 		M.visible_message("[M] looks angry!")
 		M.retaliate(user)

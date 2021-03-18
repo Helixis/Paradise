@@ -1,3 +1,16 @@
+/proc/IsLesserBeing(var/mob/living/carbon/human/H)
+	if(ismonkeybasic(H))
+		return TRUE
+	if(iswolpin(H))
+		return TRUE
+	if(isneara(H))
+		return TRUE
+	if(isfarwa(H))
+		return TRUE
+	if(isstok(H))
+		return TRUE
+	return FALSE
+
 /mob/living/carbon/human
 	var/aggressive=0 // set to 1 using VV for an angry monkey
 	var/frustration=0
@@ -32,7 +45,7 @@
 // taken from /mob/living/carbon/human/interactive/
 /mob/living/carbon/human/proc/walk2derpless(target)
 	if(!target || IsStandingStill())
-		return 0
+		return FALSE
 
 	if(myPath.len <= 0)
 		myPath = get_path_to(src, get_turf(target), /turf/proc/Distance, 7 + 1, 250,1)
@@ -44,28 +57,28 @@
 					if(myPath.len >= 1)
 						walk_to(src,myPath[1],0,5)
 						myPath -= myPath[1]
-			return 1
+			return TRUE
 
 	// failed to path correctly so just try to head straight for a bit
 	walk_to(src,get_turf(target),0,5)
 	sleep(1)
 	walk_to(src,0)
 
-	return 0
+	return FALSE
 
 // taken from /mob/living/carbon/human/interactive/
 /mob/living/carbon/human/proc/IsDeadOrIncap(checkDead = TRUE)
 	if(!canmove)
-		return 1
+		return TRUE
 	if(health <= 0 && checkDead)
-		return 1
+		return TRUE
 	if(paralysis)
-		return 1
+		return TRUE
 	if(stunned)
-		return 1
+		return TRUE
 	if(stat)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /mob/living/carbon/human/proc/equip_item(var/obj/item/I)
 
@@ -117,16 +130,16 @@
 /mob/living/carbon/human/proc/should_target(var/mob/living/L)
 
 	if(L == src)
-		return 0
+		return FALSE
 
 	if(enemies[L])
-		return 1
+		return TRUE
 
 	// target non-monkey mobs when aggressive, with a small probability of monkey v monkey
 	if(aggressive && (!istype(L, /mob/living/carbon/human/) || prob(MONKEY_AGGRESSIVE_MVM_PROB)))
-		return 1
+		return TRUE
 
-	return 0
+	return FALSE
 
 /mob/living/carbon/human/proc/handle_combat()
 
