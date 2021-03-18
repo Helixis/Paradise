@@ -1,4 +1,4 @@
-/proc/IsLesserBeing(var/mob/living/carbon/human/H)
+/proc/IsLesserBeing(mob/living/carbon/human/H)
 	if(ismonkeybasic(H))
 		return TRUE
 	if(iswolpin(H))
@@ -80,7 +80,7 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/human/proc/equip_item(var/obj/item/I)
+/mob/living/carbon/human/proc/equip_item(obj/item/I)
 
 	if(I.loc == src)
 		return TRUE
@@ -112,7 +112,7 @@
 	blacklistItems[I] ++
 	return FALSE
 
-/mob/living/carbon/human/proc/pickup_and_wear(var/obj/item/clothing/C)
+/mob/living/carbon/human/proc/pickup_and_wear(obj/item/clothing/C)
 	if(!equip_to_appropriate_slot(C))
 		monkeyDrop(get_item_by_slot(C)) // remove the existing item if worn
 		sleep(5)
@@ -127,7 +127,7 @@
 	if(I)
 		cuff_resist(I)
 
-/mob/living/carbon/human/proc/should_target(var/mob/living/L)
+/mob/living/carbon/human/proc/should_target(mob/living/L)
 
 	if(L == src)
 		return FALSE
@@ -364,7 +364,7 @@
 
 	return IsStandingStill()
 
-/mob/living/carbon/human/proc/pickpocket(var/mob/M)
+/mob/living/carbon/human/proc/pickpocket(mob/M)
 	if(do_mob(src, M, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
 		for(var/obj/item/I in get_both_hands(M))
 			if(I == pickupTarget)
@@ -468,7 +468,7 @@
 			retaliate(H)
 	..()
 
-/mob/living/carbon/human/proc/knockOver(var/mob/living/carbon/C)
+/mob/living/carbon/human/proc/knockOver(mob/living/carbon/C)
 	C.visible_message("<span class='warning'>[pick( \
 					  "[C] dives out of [src]'s way!", \
 					  "[C] stumbles over [src]!", \
@@ -487,7 +487,7 @@
 		return
 	..()
 
-/mob/living/carbon/human/proc/monkeyDrop(var/obj/item/A)
+/mob/living/carbon/human/proc/monkeyDrop(obj/item/A)
 	if(A)
 		unEquip(A, 1)
 		update_icons()
