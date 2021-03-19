@@ -456,7 +456,6 @@
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
 			var/mob/living/carbon/human/H = I.thrownby
 			retaliate(H)
-	..()
 
 /mob/living/carbon/human/proc/knockOver(mob/living/carbon/C)
 	C.visible_message("<span class='warning'>[pick( \
