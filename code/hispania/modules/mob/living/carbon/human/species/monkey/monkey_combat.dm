@@ -431,7 +431,6 @@
 			retaliate(L)
 		else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 			retaliate(L)
-	return ..()
 
 /mob/living/carbon/human/proc/on_attack_animal(mob/living/L)
 	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
