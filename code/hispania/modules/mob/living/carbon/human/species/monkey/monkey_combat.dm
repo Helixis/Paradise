@@ -425,7 +425,7 @@
 		emote(pick("roar","screech"))
 		a_intent = INTENT_HARM
 
-/mob/living/carbon/human/attack_hand(mob/living/L)
+/mob/living/carbon/human/proc/on_attack_hand(mob/living/L)
 	if(IsLesserBeing(src))
 		if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 			retaliate(L)
@@ -433,34 +433,30 @@
 			retaliate(L)
 	return ..()
 
-/mob/living/carbon/human/attack_animal(mob/living/L)
-	if(IsLesserBeing(src))
-		if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
-			retaliate(L)
-		else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
-			retaliate(L)
-	return ..()
+/mob/living/carbon/human/proc/on_attack_animal(mob/living/L)
+	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
+		retaliate(L)
+	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
+		retaliate(L)
 
 /mob/living/carbon/human/attackby(obj/item/melee/W, mob/user, params)
 	..()
 	if(IsLesserBeing(src) && W.force && !target && W.damtype != STAMINA)
 		retaliate(user)
 
-/mob/living/carbon/human/bullet_act(obj/item/projectile/Proj)
-	if(IsLesserBeing(src))
-		if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
-			if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
-				if(!Proj.nodamage && Proj.damage < src.health)
-					retaliate(Proj.firer)
-	..()
+/datum/species/monkey/bullet_act(obj/item/projectile/P, mob/living/carbon/human/H)
+	. = ..()
+	if(istype(P ,/obj/item/Pectile/beam) || istype(P,/obj/item/Pectile/bullet))
+		if((P.damage_type == BURN) || (P.damage_type == BRUTE))
+			if(!P.nodamage && P.damage < src.health)
+				H.retaliate(P.firer)
 
-/mob/living/carbon/human/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
-	if(IsLesserBeing(src))
-		if(istype(AM, /obj/item))
-			var/obj/item/I = AM
-			if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
-				var/mob/living/carbon/human/H = I.thrownby
-				retaliate(H)
+/mob/living/carbon/human/on_hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
+	if(istype(AM, /obj/item))
+		var/obj/item/I = AM
+		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
+			var/mob/living/carbon/human/H = I.thrownby
+			retaliate(H)
 	..()
 
 /mob/living/carbon/human/proc/knockOver(mob/living/carbon/C)
