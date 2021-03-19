@@ -446,7 +446,7 @@
 
 /datum/species/monkey/bullet_act(obj/item/projectile/P, mob/living/carbon/human/H)
 	. = ..()
-	if(istype(P ,/obj/item/Pectile/beam) || istype(P,/obj/item/Pectile/bullet))
+	if(istype(P ,/obj/item/projectile/beam) || istype(P,/obj/item/projectile/bullet))
 		if((P.damage_type == BURN) || (P.damage_type == BRUTE))
 			if(!P.nodamage && P.damage < src.health)
 				H.retaliate(P.firer)
