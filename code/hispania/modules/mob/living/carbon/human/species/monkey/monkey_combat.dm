@@ -450,7 +450,7 @@
 
 /mob/living/carbon/human/attackby(obj/item/melee/W, mob/user, params)
 	..()
-	if((W.force) && (!target) && (W.damtype != STAMINA) )
+	if(IsLesserBeing(src) && W.force && !target && W.damtype != STAMINA)
 		retaliate(user)
 
 /mob/living/carbon/human/bullet_act(obj/item/projectile/Proj)
