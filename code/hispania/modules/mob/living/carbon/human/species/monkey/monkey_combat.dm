@@ -118,15 +118,6 @@
 		sleep(5)
 		equip_to_appropriate_slot(C)
 
-/mob/living/carbon/human/resist_restraints()
-	var/obj/item/I = null
-	if(handcuffed)
-		I = handcuffed
-	else if(legcuffed)
-		I = legcuffed
-	if(I)
-		cuff_resist(I)
-
 /mob/living/carbon/human/proc/should_target(mob/living/L)
 
 	if(L == src)
@@ -435,17 +426,19 @@
 		a_intent = INTENT_HARM
 
 /mob/living/carbon/human/attack_hand(mob/living/L)
-	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
-		retaliate(L)
-	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
-		retaliate(L)
+	if(IsLesserBeing(src))
+		if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
+			retaliate(L)
+		else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
+			retaliate(L)
 	return ..()
 
 /mob/living/carbon/human/attack_animal(mob/living/L)
-	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
-		retaliate(L)
-	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
-		retaliate(L)
+	if(IsLesserBeing(src))
+		if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
+			retaliate(L)
+		else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
+			retaliate(L)
 	return ..()
 
 /mob/living/carbon/human/attackby(obj/item/melee/W, mob/user, params)
@@ -454,18 +447,20 @@
 		retaliate(user)
 
 /mob/living/carbon/human/bullet_act(obj/item/projectile/Proj)
-	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
-		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
-			if(!Proj.nodamage && Proj.damage < src.health)
-				retaliate(Proj.firer)
+	if(IsLesserBeing(src))
+		if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
+			if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
+				if(!Proj.nodamage && Proj.damage < src.health)
+					retaliate(Proj.firer)
 	..()
 
 /mob/living/carbon/human/hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
-	if(istype(AM, /obj/item))
-		var/obj/item/I = AM
-		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
-			var/mob/living/carbon/human/H = I.thrownby
-			retaliate(H)
+	if(IsLesserBeing(src))
+		if(istype(AM, /obj/item))
+			var/obj/item/I = AM
+			if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
+				var/mob/living/carbon/human/H = I.thrownby
+				retaliate(H)
 	..()
 
 /mob/living/carbon/human/proc/knockOver(mob/living/carbon/C)
@@ -479,12 +474,13 @@
 	C.Weaken(2)
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
-	if(!IsDeadOrIncap() && ismob(AM) && target)
-		var/mob/living/carbon/human/M = AM
-		if(!istype(M) || !M)
+	if(IsLesserBeing(src))
+		if(!IsDeadOrIncap() && ismob(AM) && target)
+			var/mob/living/carbon/human/M = AM
+			if(!istype(M) || !M)
+				return
+			knockOver(M)
 			return
-		knockOver(M)
-		return
 	..()
 
 /mob/living/carbon/human/proc/monkeyDrop(obj/item/A)
@@ -493,9 +489,10 @@
 		update_icons()
 
 /mob/living/carbon/human/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
-	if(!no_effect && !visual_effect_icon)
-		visual_effect_icon = ATTACK_EFFECT_BITE
-	var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
-	if(Weapon)
-		visual_effect_icon = null
+	if(IsLesserBeing(src))
+		if(!no_effect && !visual_effect_icon)
+			visual_effect_icon = ATTACK_EFFECT_BITE
+		var/obj/item/melee/Weapon = locate(/obj/item) in get_both_hands(src)
+		if(Weapon)
+			visual_effect_icon = null
 	..()
