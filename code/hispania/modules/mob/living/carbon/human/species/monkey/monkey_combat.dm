@@ -447,7 +447,7 @@
 	. = ..()
 	if(istype(P ,/obj/item/projectile/beam) || istype(P,/obj/item/projectile/bullet))
 		if((P.damage_type == BURN) || (P.damage_type == BRUTE))
-			if(!P.nodamage && P.damage < src.health)
+			if(!P.nodamage && P.damage < H.health)
 				H.retaliate(P.firer)
 
 /mob/living/carbon/human/on_hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
