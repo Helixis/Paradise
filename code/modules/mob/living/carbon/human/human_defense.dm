@@ -584,8 +584,7 @@ emp_act
 		var/mob/living/carbon/human/H = user
 		dna.species.spec_attack_hand(H, src)
 
-	if(IsLesserBeing(src))
-		on_attack_hand(user)
+	on_attack_hand(user)
 
 /mob/living/carbon/human/attack_larva(mob/living/carbon/alien/larva/L)
 	if(..()) //successful larva bite.
