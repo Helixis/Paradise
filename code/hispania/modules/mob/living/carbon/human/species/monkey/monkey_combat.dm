@@ -450,12 +450,11 @@
 				H.retaliate(P.firer)
 
 /mob/living/carbon/human/proc/on_hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
-	if(IsLesserBeing(src))
-		if(istype(AM, /obj/item))
-			var/obj/item/I = AM
-			if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
-				var/mob/living/carbon/human/H = I.thrownby
-				retaliate(H)
+	if(IsLesserBeing(src) && istype(AM, /obj/item))
+		var/obj/item/I = AM
+		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
+			var/mob/living/carbon/human/H = I.thrownby
+			retaliate(H)
 
 /mob/living/carbon/human/proc/knockOver(mob/living/carbon/C)
 	C.visible_message("<span class='warning'>[pick( \
