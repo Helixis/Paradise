@@ -538,8 +538,7 @@ emp_act
 					hitpush = FALSE
 					skipcatch = TRUE //can't catch the now embedded item
 
-	if(IsLesserBeing(src))
-		on_hitby(AM)
+	on_hitby(AM)
 
 	return ..()
 
