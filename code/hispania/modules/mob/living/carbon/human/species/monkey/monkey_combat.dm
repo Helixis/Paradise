@@ -24,7 +24,6 @@
 	var/list/blacklistItems = list()
 	var/maxStepsTick = 6
 	var/best_force = 0
-	var/martial_art = new/datum/martial_art
 	var/resisting = FALSE
 	var/pickpocketing = FALSE
 	//var/disposing_body = FALSE
