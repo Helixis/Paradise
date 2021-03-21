@@ -50,14 +50,13 @@
 	if(myPath.len <= 0)
 		myPath = get_path_to(src, get_turf(target), /turf/proc/Distance, 7 + 1, 250,1)
 
-	if(myPath)
-		if(myPath.len > 0)
-			for(var/i = 0; i < maxStepsTick; ++i)
-				if(!IsDeadOrIncap())
-					if(myPath.len >= 1)
-						walk_to(src,myPath[1],0,5)
-						myPath -= myPath[1]
-			return TRUE
+	if(myPath && myPath.len > 0)
+		for(var/i = 0; i < maxStepsTick; ++i)
+			if(!IsDeadOrIncap())
+				if(myPath.len >= 1)
+					walk_to(src,myPath[1],0,5)
+					myPath -= myPath[1]
+		return TRUE
 
 	// failed to path correctly so just try to head straight for a bit
 	walk_to(src,get_turf(target),0,5)
