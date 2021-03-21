@@ -460,7 +460,7 @@
 /mob/living/carbon/human/Crossed(atom/movable/AM)
 	if(IsLesserBeing(src) && !IsDeadOrIncap() && ismob(AM) && target)
 		var/mob/living/carbon/human/M = AM
-		if(!istype(M) || !M)
+		if(!istype(M))
 			return
 		knockOver(M)
 		return
