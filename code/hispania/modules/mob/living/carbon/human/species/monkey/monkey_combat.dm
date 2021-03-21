@@ -437,7 +437,7 @@
 		else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 			retaliate(L)
 
-/mob/living/carbon/human/attackby(obj/item/melee/W, mob/user, params)
+/mob/living/carbon/human/attackby(obj/item/W, mob/user, params)
 	..()
 	if(IsLesserBeing(src) && W.force && !target && W.damtype != STAMINA)
 		retaliate(user)
