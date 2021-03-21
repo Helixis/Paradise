@@ -650,8 +650,7 @@ emp_act
 		apply_damage(damage, M.melee_damage_type, affecting, armor)
 		updatehealth("animal attack")
 
-	if(IsLesserBeing(src))
-		on_attack_animal(M)
+	on_attack_animal(M)
 
 /mob/living/carbon/human/attack_slime(mob/living/simple_animal/slime/M)
 	if(..()) //successful slime attack
