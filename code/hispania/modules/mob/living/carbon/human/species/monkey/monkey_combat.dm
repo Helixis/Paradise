@@ -468,13 +468,12 @@
 	C.Weaken(2)
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
-	if(IsLesserBeing(src))
-		if(!IsDeadOrIncap() && ismob(AM) && target)
-			var/mob/living/carbon/human/M = AM
-			if(!istype(M) || !M)
-				return
-			knockOver(M)
+	if(IsLesserBeing(src) && !IsDeadOrIncap() && ismob(AM) && target)
+		var/mob/living/carbon/human/M = AM
+		if(!istype(M) || !M)
 			return
+		knockOver(M)
+		return
 	..()
 
 /mob/living/carbon/human/proc/monkeyDrop(obj/item/A)
