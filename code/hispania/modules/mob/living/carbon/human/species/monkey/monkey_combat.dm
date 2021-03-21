@@ -450,7 +450,7 @@
 			if(!P.nodamage && P.damage < H.health)
 				H.retaliate(P.firer)
 
-/mob/living/carbon/human/on_hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
+/mob/living/carbon/human/proc/on_hitby(atom/movable/AM, skipcatch = 0, hitpush = 1, blocked = 0, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
