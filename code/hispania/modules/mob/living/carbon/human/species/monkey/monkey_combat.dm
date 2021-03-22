@@ -79,8 +79,8 @@
 		return FALSE
 
 	// WEAPONS
-	if(istype(I, /obj/item/melee))
-		var/obj/item/melee/W = I
+	if(istype(I, /obj/item/melee) || istype(I, /obj/item/kitchen/knife))
+		var/obj/item/W = I
 		if(W.force >= best_force)
 			put_in_hands(W)
 			best_force = W.force
