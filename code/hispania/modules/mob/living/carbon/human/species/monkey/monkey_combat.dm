@@ -458,10 +458,7 @@
 	C.Weaken(2)
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
-	if(IsLesserBeing(src) && !IsDeadOrIncap() && ismob(AM) && target)
-		var/mob/living/carbon/human/M = AM
-		if(!istype(M))
-			return
+	if(IsLesserBeing(src) && !IsDeadOrIncap() && ishuman(AM) && target)
 		knockOver(M)
 		return
 	..()
