@@ -34,8 +34,8 @@
 		apply_cuffs(user, user)
 		return
 
-		// chance of monkey retaliation
-	monkey_s_angy(C)
+	// chance of monkey retaliation
+	monkey_retaliation(C)
 
 	cuff(C, user)
 

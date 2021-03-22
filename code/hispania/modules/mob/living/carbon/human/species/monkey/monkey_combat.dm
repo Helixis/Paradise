@@ -459,7 +459,7 @@
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
 	if(IsLesserBeing(src) && !IsDeadOrIncap() && ishuman(AM) && target)
-		knockOver(M)
+		knockOver(AM)
 		return
 	..()
 
@@ -477,7 +477,7 @@
 			visual_effect_icon = null
 	..()
 
-/obj/item/proc/monke_s_angy(mob/living/carbon/target)
+/obj/item/proc/monkey_retaliation(mob/living/carbon/target)
 	if(IsLesserBeing(target) && prob(MONKEY_CUFF_OR_SYRINGE_RETALIATION_PROB))
 		var/mob/living/carbon/human/M = target
 		M.visible_message("[M] looks angry!")
