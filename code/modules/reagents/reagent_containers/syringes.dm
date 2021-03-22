@@ -66,10 +66,7 @@
 			return
 
 	// chance of monkey retaliation
-	if(IsLesserBeing(target) && prob(MONKEY_SYRINGE_RETALIATION_PROB))
-		var/mob/living/carbon/human/M = target
-		M.visible_message("[M] looks angry!")
-		M.retaliate(user)
+	monkey_s_angy(target)
 
 	switch(mode)
 		if(SYRINGE_DRAW)
