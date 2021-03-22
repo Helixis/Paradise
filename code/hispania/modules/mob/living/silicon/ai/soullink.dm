@@ -163,4 +163,3 @@
 //Lose your claim to the throne!
 /datum/soullink/multisharer/replacementpool/sharerDies(gibbed, mob/living/sharer)
 	removeSoulsharer(sharer)
-

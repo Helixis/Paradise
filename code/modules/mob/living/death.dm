@@ -104,8 +104,6 @@
 
 	if(SSticker && SSticker.mode)
 		SSticker.mode.check_win()
-	if(mind && mind.devilinfo) // Expand this into a general-purpose death-response system when appropriate
-		mind.devilinfo.beginResurrectionCheck(src)
 
 	// u no we dead
 	return TRUE

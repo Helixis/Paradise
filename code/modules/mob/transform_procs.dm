@@ -235,7 +235,7 @@
 	qdel(src)
 
 
-/mob/living/carbon/human/proc/paize(var/name)
+/mob/living/carbon/human/proc/paize(name)
 	if(notransform)
 		return
 	for(var/obj/item/W in src)
@@ -261,7 +261,7 @@
 	pai.update_pipe_vision()
 	qdel(src)
 
-/mob/proc/safe_respawn(var/MP)
+/mob/proc/safe_respawn(MP)
 	if(!MP)
 		return 0
 
