@@ -15,6 +15,14 @@
 	var/aggressive=0 // set to 1 using VV for an angry monkey
 	var/frustration=0
 
+	var/melee_damage_lower = 4
+	var/melee_damage_upper = 10
+	var/attacktext = "bites"
+	var/attack_sound = 'sound/weapons/bite.ogg'
+	var/obj_damage = 0 //how much damage this simple animal does to objects, if any
+	var/armour_penetration = 0
+	var/melee_damage_type = BRUTE
+
 	var/pickupTimer=0
 	var/list/enemies = list()
 	var/mob/living/target
