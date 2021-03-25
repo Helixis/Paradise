@@ -35,7 +35,7 @@
 		return
 
 	// chance of monkey retaliation
-	monkey_retaliation(C)
+	monkey_retaliation(C, user)
 
 	cuff(C, user)
 

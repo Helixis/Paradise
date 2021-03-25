@@ -66,7 +66,7 @@
 			return
 
 	// chance of monkey retaliation
-	monkey_retaliation(target)
+	monkey_retaliation(target, user)
 
 	switch(mode)
 		if(SYRINGE_DRAW)

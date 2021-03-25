@@ -477,7 +477,7 @@
 			visual_effect_icon = null
 	..()
 
-/obj/item/proc/monkey_retaliation(mob/living/carbon/target)
+/obj/item/proc/monkey_retaliation(mob/living/carbon/target, mob/living/carbon/user)
 	if(IsLesserBeing(target) && prob(MONKEY_CUFF_OR_SYRINGE_RETALIATION_PROB))
 		var/mob/living/carbon/human/M = target
 		M.visible_message("[M] looks angry!")
