@@ -9,7 +9,7 @@
 #define MONKEY_FLEE_HEALTH 					50	// below this health value the monkey starts to flee from enemies
 #define MONKEY_ENEMY_VISION 				9	// how close an enemy must be to trigger aggression
 #define MONKEY_FLEE_VISION					4	// how close an enemy must be before it triggers flee
-#define MONKEY_ITEM_SNATCH_DELAY 			25	// How long does it take the item to be taken from a mobs hand
+#define MONKEY_ITEM_SNATCH_DELAY 			15	// How long does it take the item to be taken from a mobs hand
 #define MONKEY_CUFF_OR_SYRINGE_RETALIATION_PROB		20  // Probability monkey will aggro when cuffed or syringed
 
 // Probability per Life tick that the monkey will:
@@ -34,4 +34,4 @@
 #define MONKEY_HUNT_FRUSTRATION_LIMIT 		8	// Chase after an enemy before giving up
 #define MONKEY_DISPOSE_FRUSTRATION_LIMIT 	16 	// Dispose of a body before giving up
 
-#define MONKEY_AGGRESSIVE_MVM_PROB			1	// If you mass edit monkies to be aggressive. there is a small chance of in-fighting 
+#define MONKEY_AGGRESSIVE_MVM_PROB			1	// If you mass edit monkies to be aggressive. there is a small chance of in-fighting

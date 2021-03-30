@@ -63,24 +63,13 @@
 
 	return FALSE
 
-// taken from /mob/living/carbon/human/interactive/
-/mob/living/carbon/human/proc/IsDeadOrIncap(checkDead = TRUE)
-	if(!canmove)
-		return TRUE
-	if(health <= 0 && checkDead)
-		return TRUE
-	if(paralysis)
-		return TRUE
-	if(stunned)
-		return TRUE
-	if(stat)
-		return TRUE
-	return FALSE
-
 /mob/living/carbon/human/proc/equip_item(obj/item/I)
-
 	if(I.loc == src)
 		return TRUE
+
+	if(istype(I, /obj/item/twohanded/required/kirbyplants))
+		blacklistItems[I] ++
+		return FALSE
 
 	if(I.anchored)
 		blacklistItems[I] ++
@@ -172,7 +161,7 @@
 				if(!pickpocketing)
 					pickpocketing = TRUE
 					M.visible_message("[src] starts trying to take [pickupTarget] from [M]", "[src] tries to take [pickupTarget]!")
-					addtimer(CALLBACK(src, .proc/pickpocket, M), 0)
+					pickpocket(M)
 
 		else
 			if(pickupTimer >= 8)
@@ -352,7 +341,7 @@
 	return IsStandingStill()
 
 /mob/living/carbon/human/proc/pickpocket(mob/M)
-	if(do_mob(src, M, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
+	if(do_after(src, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
 		for(var/obj/item/I in get_both_hands(M))
 			if(I == pickupTarget)
 				M.visible_message("<span class='danger'>[src] snatches [pickupTarget] from [M].</span>", "<span class='userdanger'>[src] snatched [pickupTarget]!</span>")
