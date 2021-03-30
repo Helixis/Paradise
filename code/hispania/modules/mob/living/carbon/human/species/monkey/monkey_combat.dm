@@ -51,7 +51,7 @@
 
 	if(myPath && myPath.len > 0)
 		for(var/i = 0; i < maxStepsTick; ++i)
-			if(!IsDeadOrIncap() && myPath.len >= 1)
+			if(!incapacitated() && myPath.len >= 1)
 				walk_to(src,myPath[1],0,5)
 				myPath -= myPath[1]
 		return TRUE
@@ -131,6 +131,9 @@
 
 /mob/living/carbon/human/proc/handle_combat()
 
+	if(incapacitated())
+		return TRUE
+
 	if(on_fire || buckled || restrained())
 		if(!resisting && prob(MONKEY_RESIST_PROB))
 			resisting = TRUE
@@ -138,10 +141,6 @@
 			resist()
 	else
 		resisting = FALSE
-
-
-	if(IsDeadOrIncap())
-		return TRUE
 
 	// have we been disarmed
 	if(!locate(/obj/item/melee) in get_both_hands(src))
@@ -300,7 +299,7 @@
 			for(var/mob/living/L in around)
 				if( enemies[L] && L.stat == CONSCIOUS )
 					target = L
-			if(!IsDeadOrIncap())
+			if(!incapacitated())
 				if(target != null)
 					walk_away(src, target, MONKEY_ENEMY_VISION, 5)
 				else
@@ -466,7 +465,7 @@
 	C.Weaken(2)
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
-	if(IsLesserBeing(src) && !IsDeadOrIncap() && ishuman(AM) && target)
+	if(IsLesserBeing(src) && !incapacitated() && ishuman(AM) && target)
 		knockOver(AM)
 		return
 	..()
