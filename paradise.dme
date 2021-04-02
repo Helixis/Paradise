@@ -11,7 +11,7 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\__MAP_DEFINES.dm"
-#include "_maps\hispania.dm"
+#include "_maps\centauri.dm"
 #include "code\_compile_options.dm"
 #include "code\hub.dm"
 #include "code\world.dm"
@@ -1901,6 +1901,14 @@
 #include "code\modules\lighting\lighting_setup.dm"
 #include "code\modules\lighting\lighting_source.dm"
 #include "code\modules\lighting\lighting_turf.dm"
+<<<<<<< HEAD
+=======
+#include "code\modules\logic\converter.dm"
+#include "code\modules\logic\dual_input.dm"
+#include "code\modules\logic\logic_base.dm"
+#include "code\modules\logic\mono_input.dm"
+#include "code\modules\map_fluff\centauri.dm"
+>>>>>>> 675f0c02c21cbf156ca4bd3fb33ec064f9565088
 #include "code\modules\map_fluff\cyberiad.dm"
 #include "code\modules\map_fluff\delta.dm"
 #include "code\modules\map_fluff\hispania.dm"
