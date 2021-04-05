@@ -31,7 +31,7 @@
 	var/list/myPath = list()
 	var/list/blacklistItems = list()
 	var/maxStepsTick = 6
-	var/best_force = 0
+	var/best_force = 8
 	var/resisting = FALSE
 	var/pickpocketing = FALSE
 	//var/disposing_body = FALSE
@@ -215,8 +215,9 @@
 					pickupTarget = pick(get_both_hands(H))
 
 			// clear any combat walking
-			if(!resisting)
-				walk_to(src,0)
+			if(!incapacitated())
+				if(!resisting)
+					walk_to(src,0)
 
 			return IsStandingStill()
 
