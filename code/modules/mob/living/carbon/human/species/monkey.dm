@@ -38,7 +38,7 @@
 	burn_mod = 1.5
 
 /datum/species/monkey/handle_npc(mob/living/carbon/human/H)
-	if(H.stat != CONSCIOUS)
+	if(H.incapacitated())
 		return
 	if(H.mind || H.ckey)
 		return
