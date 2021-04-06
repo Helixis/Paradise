@@ -48,13 +48,13 @@
 
 	if(myPath.len <= 0)
 		myPath = get_path_to(src, get_turf(target), /turf/proc/Distance, 7 + 1, 250,1)
-
-	if(myPath && myPath.len > 0)
-		for(var/i = 0; i < maxStepsTick; ++i)
-			if(!incapacitated() && myPath.len >= 1)
-				walk_to(src,myPath[1],0,5)
-				myPath -= myPath[1]
-		return TRUE
+	if(!stat && !paralysis && !restrained() && !lying && !weakened)
+		if(myPath && myPath.len > 0)
+			for(var/i = 0; i < maxStepsTick; ++i)
+				if(myPath.len >= 1)
+					walk_to(src,myPath[1],0,5)
+					myPath -= myPath[1]
+			return TRUE
 
 	// failed to path correctly so just try to head straight for a bit
 	walk_to(src,get_turf(target),0,5)
@@ -120,7 +120,7 @@
 
 /mob/living/carbon/human/proc/handle_combat()
 
-	if(incapacitated())
+	if(stat || paralysis || restrained() || lying || weakened)
 		return TRUE
 
 	if(on_fire || buckled || restrained())
@@ -215,9 +215,8 @@
 					pickupTarget = pick(get_both_hands(H))
 
 			// clear any combat walking
-			if(!incapacitated())
-				if(!resisting)
-					walk_to(src,0)
+			if(!stat && !paralysis && !restrained() && !lying && !weakened && !resisting)
+				walk_to(src,0)
 
 			return IsStandingStill()
 
@@ -289,7 +288,7 @@
 			for(var/mob/living/L in around)
 				if( enemies[L] && L.stat == CONSCIOUS )
 					target = L
-			if(!incapacitated())
+			if(!stat && !paralysis && !restrained() && !lying && !weakened)
 				if(target != null)
 					walk_away(src, target, MONKEY_ENEMY_VISION, 5)
 				else
@@ -455,7 +454,7 @@
 	C.Weaken(2)
 
 /mob/living/carbon/human/Crossed(atom/movable/AM)
-	if(IsLesserBeing(src) && !incapacitated() && ishuman(AM) && target)
+	if(IsLesserBeing(src) && !stat && !paralysis && !restrained() && !lying && !weakened && ishuman(AM) && target)
 		knockOver(AM)
 		return
 	..()
