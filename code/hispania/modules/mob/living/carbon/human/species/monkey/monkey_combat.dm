@@ -87,7 +87,7 @@
 	else if(istype(I,/obj/item/clothing))
 		var/obj/item/clothing/C = I
 		monkeyDrop(C)
-		addtimer(CALLBACK(src, .proc/pickup_and_wear, C), 5)
+		pickup_and_wear(C)
 		return TRUE
 
 	// EVERYTHING ELSE
@@ -143,7 +143,7 @@
 
 		// next to target
 		if(Adjacent(pickupTarget) || Adjacent(pickupTarget.loc))
-			addtimer(CALLBACK(src, .proc/walk2derpless, pickupTarget.loc), 0)
+			walk2derpless(pickupTarget.loc)
 
 			// who cares about these items, i want that one!
 			drop_r_hand()
@@ -169,7 +169,7 @@
 				pickupTarget = null
 				pickupTimer = 0
 			else
-				addtimer(CALLBACK(src, .proc/walk2derpless, pickupTarget.loc), 0)
+				walk2derpless(pickupTarget.loc)
 
 		return TRUE
 
@@ -227,7 +227,7 @@
 				return TRUE
 
 			if(target != null)
-				addtimer(CALLBACK(src, .proc/walk2derpless, target), 0)
+				walk2derpless(target)
 
 			// pickup any nearby weapon
 			if(!pickupTarget && prob(MONKEY_WEAPON_PROB))
@@ -408,7 +408,7 @@
 	enemies[L] += MONKEY_HATRED_AMOUNT
 
 	if(a_intent != INTENT_HARM)
-		emote(pick("roar","screech"))
+		emote("scream")
 		a_intent = INTENT_HARM
 
 /mob/living/carbon/human/proc/on_attack_hand(mob/living/L)
