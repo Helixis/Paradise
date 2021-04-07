@@ -166,12 +166,13 @@
 					if(!check_pathtools(user, R, contents))
 						return ", missing tool."
 					var/list/parts = del_reqs(R, user)
-					var/atom/movable/I = new R.result (get_turf(user.loc))
-					I.CheckParts(parts, R)
-					if(isitem(I))
-						user.put_in_hands(I)
-					if(send_feedback)
-						feedback_add_details("object_crafted","[I.type]")
+					for(var/I in R.result)
+						var/atom/movable/M = new I (get_turf(user))
+						M.CheckParts(parts)
+						if(isitem(M))
+							user.put_in_hands(M)
+						if(send_feedback)
+							SSblackbox.record_feedback("tally", "object_crafted", 1, M.type)
 					return 0
 				return "."
 			return ", missing tool."
@@ -297,18 +298,18 @@
 		Deletion.Cut(Deletion.len)
 		qdel(DL)
 
-/datum/personal_crafting/tgui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/tgui_state/state = GLOB.tgui_not_incapacitated_turf_state)
+/datum/personal_crafting/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.not_incapacitated_turf_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "PersonalCrafting", "Crafting Menu", 700, 800, master_ui, state)
 		ui.open()
 
 /datum/personal_crafting/proc/close(mob/user)
-	var/datum/nanoui/ui = SStgui.get_open_ui(user, src, "main")
+	var/datum/tgui/ui = SStgui.get_open_ui(user, src, "main")
 	if(ui)
 		ui.close()
 
-/datum/personal_crafting/tgui_data(mob/user)
+/datum/personal_crafting/ui_data(mob/user)
 	var/list/data = list()
 	var/list/subs = list()
 	var/cur_subcategory = CAT_NONE
@@ -349,7 +350,7 @@
 	data["cant_craft"] = cant_craft
 	return data
 
-/datum/personal_crafting/tgui_act(action, list/params)
+/datum/personal_crafting/ui_act(action, list/params)
 	if(..())
 		return
 

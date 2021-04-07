@@ -9,7 +9,7 @@ on:
 jobs:
   run_linters:
     name: Run Linters
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Setup Cache
@@ -24,7 +24,6 @@ jobs:
       - name: Run Linters
         run: |
           find . -name "*.json" -not -path "*/node_modules/*" -print0 | xargs -0 python3 ./tools/ci/json_verifier.py
-          tools/ci/build_nanoui.sh
           tools/ci/build_tgui.sh
           tools/ci/check_grep.sh
           python3 tools/ci/check_line_endings.py
@@ -37,7 +36,7 @@ jobs:
 
   compile_all_maps:
     name: Compile All Maps
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Setup Cache
@@ -54,10 +53,10 @@ jobs:
 
   unit_tests_and_sql:
     name: Unit Tests + SQL Validation
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     services:
-      mysql:
-        image: mysql:latest
+      mariadb:
+        image: mariadb:latest
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -75,12 +74,12 @@ jobs:
           sudo systemctl start mysql
           python3 tools/ci/generate_sql_scripts.py
           tools/ci/validate_sql.sh
-      - name: Install RUST_G
+      - name: Install RUST_G Deps
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update || true
           sudo apt install libssl1.1:i386
-          bash tools/ci/install_rustg.sh
+          ldd librust_g.so
       - name: Compile & Run Unit Tests
         run: |
           tools/ci/install_byond.sh
@@ -88,3 +87,13 @@ jobs:
           tools/ci/dm.sh -DCIBUILDING paradise.dme
           tools/ci/run_server.sh
 
+  windows_dll_tests:
+    name: Windows RUSTG Validation
+    runs-on: windows-2016
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.2' # Script was made for 3.8.2
+        architecture: 'x86' # This MUST be x86
+    - run: python tools/ci/validate_rustg_windows.py

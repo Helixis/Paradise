@@ -12,7 +12,7 @@
 	if(!istype(magazine, /obj/item/ammo_box/magazine/internal/cylinder))
 		verbs -= /obj/item/gun/projectile/revolver/verb/spin
 
-/obj/item/gun/projectile/revolver/chamber_round(var/spin = 1)
+/obj/item/gun/projectile/revolver/chamber_round(spin = 1)
 	if(spin)
 		chambered = magazine.get_round(1)
 	else
@@ -90,7 +90,7 @@
 
 /obj/item/gun/projectile/revolver/detective
 	desc = "A cheap Martian knock-off of a classic law enforcement firearm. Uses .38-special rounds."
-	name = "\improper .38 Mars Special"
+	name = ".38 Mars Special"
 	icon_state = "detective"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38
 	unique_rename = 1
@@ -103,7 +103,7 @@
 	options["Black Panther"] = "detective_panther"
 	options["Gold Trim"] = "detective_gold"
 	options["The Peacemaker"] = "detective_peacemaker"
-	options["Cancel"] = null
+	//options["Cancel"] = null HISPANIA RADIALS
 
 /obj/item/gun/projectile/revolver/detective/process_fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override = "")
 	if(magazine.caliber != initial(magazine.caliber))
@@ -331,6 +331,7 @@
 	icon_state = "dshotgun"
 	item_state = "shotgun"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_HEAVY
 	force = 10
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
@@ -349,7 +350,7 @@
 	options["Faded Grey"] = "dshotgun-g"
 	options["Maple"] = "dshotgun-l"
 	options["Rosewood"] = "dshotgun-p"
-	options["Cancel"] = null
+	//options["Cancel"] = null HISPANIA RADIALS
 
 /obj/item/gun/projectile/revolver/doublebarrel/attackby(obj/item/A, mob/user, params)
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
@@ -362,6 +363,10 @@
 		sawoff(user)
 	else
 		return ..()
+
+/obj/item/gun/projectile/revolver/doublebarrel/sawoff(mob/user)
+    . = ..()
+    weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/projectile/revolver/doublebarrel/attack_self(mob/living/user)
 	var/num_unloaded = 0
