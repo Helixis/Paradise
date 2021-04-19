@@ -101880,6 +101880,10 @@
 	icon_state = "darkyellowcorners"
 	},
 /area/atmos/control)
+"xwi" = (
+/obj/machinery/vending/walldrobe/ce,
+/turf/simulated/wall/r_wall,
+/area/engine/chiefs_office)
 "xwH" = (
 /obj/machinery/computer/HolodeckControl,
 /turf/simulated/floor/plasteel,
@@ -134944,7 +134948,7 @@ gkw
 cHQ
 cOi
 dVl
-cRR
+xwi
 deL
 lws
 orP
