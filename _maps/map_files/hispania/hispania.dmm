@@ -63631,6 +63631,13 @@
 	req_one_access_txt = "0"
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id_tag = "Engineering";
+	name = "Engineering Security Doors";
+	opacity = 0
+	},
 /turf/simulated/floor/plasteel,
 /area/assembly/assembly_line)
 "ctU" = (
@@ -66418,7 +66425,8 @@
 "czT" = (
 /obj/machinery/camera{
 	c_tag = "Construction Area";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -68390,7 +68398,8 @@
 /area/maintenance/asmaint)
 "cFr" = (
 /obj/machinery/camera{
-	c_tag = "Engineering Lobby"
+	c_tag = "Engineering Lobby";
+	network = list("SS13","Engi")
 	},
 /obj/item/twohanded/required/kirbyplants,
 /turf/simulated/floor/plasteel{
@@ -71054,7 +71063,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
-/area/solar/port)
+/area/maintenance/aft)
 "cMC" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plasteel{
@@ -71070,7 +71079,8 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Engineering Drone Fabricator Room";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -71265,7 +71275,8 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Secure Tech Storage";
-	dir = 2
+	dir = 2;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellow";
@@ -72128,7 +72139,8 @@
 /obj/machinery/suit_storage_unit/standard_unit,
 /obj/machinery/camera{
 	c_tag = "Engineering Emergency Supplies";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /obj/structure/sign/nosmoking_2{
 	pixel_x = -28
@@ -72702,6 +72714,10 @@
 "cQW" = (
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/camera{
+	c_tag = "Engineering Dock Room";
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel,
 /area/engine/break_room)
@@ -73278,16 +73294,6 @@
 	icon_state = "yellow"
 	},
 /area/engine/engineering)
-"cSE" = (
-/obj/machinery/shieldgen,
-/obj/machinery/camera{
-	c_tag = "Engineering Secure Storage East";
-	dir = 8;
-	network = list("SS13")
-	},
-/obj/effect/decal/warning_stripes/yellow/hollow,
-/turf/simulated/floor/plating,
-/area/storage/secure)
 "cSH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -73466,7 +73472,8 @@
 /obj/machinery/light,
 /obj/machinery/camera{
 	c_tag = "Engineering Chief Engineer's Office";
-	dir = 1
+	dir = 1;
+	network = list("SS13","Engi")
 	},
 /obj/machinery/keycard_auth{
 	pixel_y = -26
@@ -73611,7 +73618,7 @@
 "cTP" = (
 /obj/machinery/camera{
 	c_tag = "Engineering Equipment Storage";
-	network = list("SS13")
+	network = list("SS13","Engi)")
 	},
 /obj/machinery/vending/engivend,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -73726,7 +73733,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmospherics Control Room";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /obj/structure/closet/fireaxecabinet{
 	pixel_y = 28
@@ -74226,7 +74233,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/camera{
 	c_tag = "Engineering Break Room";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
@@ -74807,9 +74815,9 @@
 	dir = 1
 	},
 /obj/machinery/camera{
-	c_tag = "Engineering Shuttle Dock";
+	c_tag = "Engineering Maintenance Lobby";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/aft)
@@ -75827,7 +75835,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos Center North";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -76356,6 +76364,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/mob/living/simple_animal/parrot/Poly,
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellow";
 	dir = 1
@@ -76407,7 +76416,7 @@
 /obj/machinery/camera{
 	c_tag = "Mini Satellite Access";
 	dir = 4;
-	network = list("SS13","MiniSat")
+	network = list("SS13","MiniSat","Engi")
 	},
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/plasteel{
@@ -76456,7 +76465,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Supermatter Starboard";
 	dir = 8;
-	network = list("SS13","engine");
+	network = list("SS13","engine","Engi");
 	pixel_x = 0
 	},
 /turf/simulated/floor/plasteel{
@@ -76565,7 +76574,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering SM Prep Room";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /obj/item/healthanalyzer,
 /turf/simulated/floor/plasteel{
@@ -77268,14 +77277,20 @@
 /area/atmos)
 "deL" = (
 /obj/structure/table/reinforced,
-/obj/machinery/photocopier/faxmachine{
-	department = "Chief Engineer's Office"
-	},
 /obj/item/radio/intercom{
 	name = "station intercom (General)";
 	pixel_x = 28;
 	pixel_y = 0
 	},
+/obj/item/book/manual/sop_engineering,
+/obj/item/lock_buster,
+/obj/item/megaphone,
+/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high/plus,
+/obj/item/rcd_ammo/large,
+/obj/item/rcd_ammo/large,
+/obj/item/rcd_ammo/large,
+/obj/item/rcd/preloaded,
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellow";
 	dir = 5
@@ -78202,7 +78217,8 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos SM Equipment Room";
-	dir = 1
+	dir = 1;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -79314,22 +79330,6 @@
 	oxygen = 0
 	},
 /area/atmos)
-"dkj" = (
-/obj/effect/decal/warning_stripes/west,
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/machinery/door/poddoor/shutters/radiation/preopen{
-	dir = 2;
-	id_tag = "engsm";
-	name = "Radiation Chamber Shutters"
-	},
-/turf/simulated/floor/plating,
-/area/engine/controlroom)
 "dkk" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 1;
@@ -81817,7 +81817,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos NorthWest";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -82708,7 +82708,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Supermatter Storage";
 	dir = 8;
-	network = list("Mining Outpost")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -83479,9 +83479,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/atmos{
-	name = "Atmospherics Supermatter Supplies";
-	req_access_txt = "24"
+/obj/machinery/door/airlock/atmos/glass{
+	name = "Atmospherics Supermatter Supplies"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -84033,7 +84032,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Foyer East";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 4;
@@ -84355,7 +84354,7 @@
 /obj/machinery/mineral/stacking_unit_console{
 	machinedir = 8
 	},
-/turf/simulated/wall,
+/turf/simulated/wall/r_wall,
 /area/maintenance/incinerator)
 "fvK" = (
 /obj/effect/spawner/random_spawners/grille_maybe,
@@ -85112,7 +85111,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/wall,
+/turf/simulated/wall/r_wall,
 /area/maintenance/incinerator)
 "grJ" = (
 /obj/machinery/power/apc{
@@ -85159,8 +85158,8 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Particle Accelerator";
 	dir = 2;
-	pixel_x = 23;
-	network = list("Singularity","SS13")
+	network = list("Singularity","SS13","Engi");
+	pixel_x = 23
 	},
 /obj/machinery/door_control{
 	id = "Singularity";
@@ -85623,7 +85622,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos West";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -85843,7 +85842,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Tesling Engine North";
 	dir = 2;
-	network = list("Singularity","SS13");
+	network = list("Singularity","SS13","Engi");
 	pixel_x = 23
 	},
 /turf/simulated/floor/plasteel{
@@ -86925,7 +86924,8 @@
 /area/maintenance/incinerator)
 "iev" = (
 /obj/machinery/computer/security{
-	network = list("SS13","Research Outpost","Mining Outpost")
+	desc = "Used to access the various cameras networks on the station... It has a strange antenna attached into it...";
+	network = list("SS13","Research Outpost","Mining Outpost","ERT","CentComm")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -88490,6 +88490,10 @@
 /obj/structure/sink/kitchen,
 /turf/simulated/wall/mineral/plastitanium,
 /area/shuttle/tsf)
+"jJu" = (
+/obj/machinery/vending/walldrobe/ce,
+/turf/simulated/wall/r_wall,
+/area/engine/chiefs_office)
 "jJy" = (
 /obj/structure/disposalpipe/junction,
 /turf/simulated/floor/plating,
@@ -89100,7 +89104,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Tesling Engine Room South";
 	dir = 1;
-	network = list("Research","SS13");
+	network = list("SS13","Engi");
 	pixel_x = 0
 	},
 /turf/simulated/floor/plasteel,
@@ -89260,7 +89264,9 @@
 	},
 /area/engine/engineering)
 "kCD" = (
-/obj/machinery/computer/security/engineering,
+/obj/machinery/computer/security/engineering{
+	network = list("Power Alarms","Atmosphere Alarms","Fire Alarms","Engi")
+	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = 24
@@ -89317,10 +89323,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plasteel,
 /area/maintenance/aft)
-"kEC" = (
-/obj/effect/decal/cleanable/fungus,
-/turf/simulated/wall,
-/area/maintenance/incinerator)
 "kEM" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -89437,7 +89439,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Reception";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel,
 /area/engine/controlroom)
@@ -89769,13 +89771,6 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
-"kZM" = (
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/wall,
-/area/maintenance/incinerator)
 "laa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -90609,7 +90604,7 @@
 /obj/machinery/camera/emp_proof{
 	c_tag = "Engineering Singularity North-East";
 	dir = 1;
-	network = list("Singularity","SS13")
+	network = list("Singularity","SS13","Engi")
 	},
 /turf/simulated/floor/plating/airless,
 /area/space/nearstation)
@@ -91497,7 +91492,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Foyer West";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -91800,6 +91795,9 @@
 	icon_state = "bcarpet05"
 	},
 /area/blueshield)
+"nis" = (
+/turf/simulated/wall/r_wall,
+/area/engine/mechanic_workshop)
 "njn" = (
 /obj/machinery/power/turbine{
 	dir = 4
@@ -93347,7 +93345,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos East";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -93356,6 +93354,7 @@
 /area/atmos)
 "oMY" = (
 /obj/structure/table/reinforced,
+/obj/item/book/manual/sop_engineering,
 /turf/simulated/floor/plasteel{
 	dir = 4;
 	icon_state = "darkyellowfull"
@@ -93568,32 +93567,10 @@
 /area/hallway/primary/aft)
 "pfL" = (
 /obj/structure/table/reinforced,
-/obj/item/rcd,
-/obj/item/rcd_ammo,
-/obj/item/rcd_ammo,
-/obj/item/rcd_ammo,
-/obj/item/rcd_ammo,
-/obj/item/rcd_ammo,
-/obj/item/rcd_ammo,
-/obj/item/stock_parts/cell/high{
-	charge = 100;
-	maxcharge = 15000
-	},
-/obj/item/stock_parts/cell/high{
-	charge = 100;
-	maxcharge = 15000
-	},
-/obj/item/clothing/glasses/meson{
-	pixel_y = 4
-	},
-/obj/item/megaphone,
-/obj/item/lock_buster,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/clipboard,
-/obj/item/book/manual/sop_engineering,
-/mob/living/simple_animal/parrot/Poly,
+/obj/machinery/photocopier/faxmachine,
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellow";
 	dir = 8
@@ -93793,7 +93770,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos Storage";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -93949,7 +93926,8 @@
 /obj/machinery/power/emitter,
 /obj/machinery/camera{
 	c_tag = "Engineering Secure Storage West";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plating,
@@ -95735,9 +95713,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/engine/supermatter)
-"riW" = (
-/turf/simulated/wall,
-/area/engine/mechanic_workshop/hanger)
 "rja" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -95803,7 +95778,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Equipment Storage Lockers";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -95897,7 +95872,8 @@
 "rug" = (
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos Mini-Hallway";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -96228,7 +96204,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Supermatter Port";
 	dir = 4;
-	network = list("SS13","engine");
+	network = list("SS13","engine","Engi");
 	pixel_x = 0
 	},
 /turf/simulated/floor/plasteel{
@@ -96453,6 +96429,18 @@
 	icon_state = "neutral"
 	},
 /area/atmos)
+"sfh" = (
+/obj/structure/barricade/wooden,
+/obj/structure/grille,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id_tag = "Engineering";
+	name = "Engineering Security Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/assembly/assembly_line)
 "sgH" = (
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -96943,7 +96931,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos Northeast";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -97668,7 +97656,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Engine Storage";
 	dir = 2;
-	network = list("ERT","CentComm")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plating,
 /area/engine/supermatter)
@@ -97938,7 +97926,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Atmos Center";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -98683,7 +98671,7 @@
 /obj/machinery/camera/emp_proof{
 	c_tag = "Engineering Singularity North-West";
 	dir = 2;
-	network = list("Singularity","SS13");
+	network = list("Singularity","SS13","Engi");
 	pixel_x = 20;
 	pixel_y = 0
 	},
@@ -99325,7 +99313,8 @@
 /obj/machinery/light,
 /obj/machinery/camera{
 	c_tag = "Engineering SMES Room";
-	dir = 1
+	dir = 1;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel,
 /area/engine/engineering)
@@ -99481,6 +99470,13 @@
 	icon_state = "dark"
 	},
 /area/engine/engineering)
+"vhL" = (
+/obj/machinery/camera{
+	c_tag = "Mechanical PodBay";
+	network = list("SS13","Engi")
+	},
+/turf/simulated/floor/engine,
+/area/engine/mechanic_workshop/hanger)
 "vin" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/computer/security/telescreen/entertainment{
@@ -99893,6 +99889,13 @@
 	dir = 6
 	},
 /area/atmos)
+"vvp" = (
+/obj/machinery/camera{
+	c_tag = "Mechanical Workshop";
+	network = list("SS13","Engi")
+	},
+/turf/simulated/floor/plasteel,
+/area/engine/mechanic_workshop)
 "vvB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/universal,
 /obj/machinery/door/airlock/atmos{
@@ -99915,7 +99918,7 @@
 /obj/machinery/camera{
 	c_tag = "Engineering Supermatter South";
 	dir = 1;
-	network = list("SS13","engine");
+	network = list("SS13","engine","Engi)");
 	pixel_x = 0
 	},
 /obj/structure/sign/poster/official/random{
@@ -100328,7 +100331,6 @@
 	dir = 4;
 	level = 2
 	},
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel{
@@ -100602,7 +100604,7 @@
 /obj/machinery/camera{
 	c_tag = "Tech Storage";
 	dir = 2;
-	network = list("SS13")
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plating,
 /area/storage/tech)
@@ -100951,12 +100953,6 @@
 	icon_state = "white"
 	},
 /area/toxins/teleci)
-"wBU" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/wall,
-/area/maintenance/incinerator)
 "wCA" = (
 /obj/effect/spawner/window/reinforced,
 /obj/machinery/door/poddoor{
@@ -101002,12 +100998,6 @@
 /turf/simulated/floor/mineral/titanium,
 /area/shuttle/arrival/station)
 "wFL" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	tag = ""
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/poddoor{
@@ -101690,6 +101680,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
+/obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellow";
 	dir = 8
@@ -101710,11 +101701,6 @@
 "xmH" = (
 /obj/machinery/light/small{
 	dir = 8
-	},
-/obj/machinery/camera{
-	c_tag = "Engineering Secure Storage North";
-	dir = 4;
-	network = list("SS13")
 	},
 /obj/machinery/field/generator,
 /obj/effect/decal/warning_stripes/yellow/hollow,
@@ -101880,10 +101866,6 @@
 	icon_state = "darkyellowcorners"
 	},
 /area/atmos/control)
-"xwi" = (
-/obj/machinery/vending/walldrobe/ce,
-/turf/simulated/wall/r_wall,
-/area/engine/chiefs_office)
 "xwH" = (
 /obj/machinery/computer/HolodeckControl,
 /turf/simulated/floor/plasteel,
@@ -101895,7 +101877,8 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Aft Primary Hallway 1";
-	dir = 4
+	dir = 4;
+	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -102353,6 +102336,7 @@
 "xVF" = (
 /obj/structure/table/reinforced,
 /obj/item/flashlight/lamp,
+/obj/item/clipboard,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -114611,9 +114595,9 @@ aaa
 aaa
 aaa
 aaa
-gKh
+cwx
 rvZ
-gKh
+cwx
 aaa
 aaa
 aaa
@@ -114868,12 +114852,12 @@ aaa
 aaa
 aaa
 aaa
-gKh
+cwx
 elL
-gKh
+cwx
 svF
 svF
-gKh
+cwx
 aab
 cvp
 ohR
@@ -115125,12 +115109,12 @@ aaa
 aaa
 aaa
 aaa
-gKh
+cwx
 ybd
 svF
 eoj
 elV
-gKh
+cwx
 aab
 cvp
 iIv
@@ -115381,14 +115365,14 @@ aaa
 aaa
 aaa
 aaa
-gKh
-gKh
+cwx
+cwx
 sTU
 gKh
 nzo
 eoj
-gKh
-gKh
+cwx
+cwx
 cvp
 cLi
 cLi
@@ -115645,7 +115629,7 @@ vdf
 rqX
 ePc
 bKD
-gKh
+cwx
 cMr
 cWn
 eNr
@@ -115895,14 +115879,14 @@ aaa
 aaa
 aaa
 aaa
-wBU
+czF
 grd
 sTU
 iep
 sRf
 sOs
 wIE
-gKh
+cwx
 cKH
 cWn
 oXv
@@ -116152,14 +116136,14 @@ cgQ
 cgQ
 cgQ
 cgQ
-wBU
+czF
 fhF
 sTU
 eou
 irO
 euB
 pNJ
-gKh
+cwx
 fdP
 oXv
 cNB
@@ -116409,14 +116393,14 @@ fyg
 cgQ
 oMZ
 eOk
-wBU
+czF
 iLo
 sTU
 eoj
 kRu
 nIw
 rgh
-gKh
+cwx
 cLi
 cLi
 cLi
@@ -116666,14 +116650,14 @@ coL
 cgQ
 hXe
 raH
-kZM
+czP
 mKh
 uqf
 sJF
 mGi
-gKh
-gKh
-gKh
+cwx
+cwx
+cwx
 iXC
 cLi
 lmO
@@ -116923,12 +116907,12 @@ cgQ
 cgQ
 ggh
 cgQ
-kEC
-kEC
-kEC
+cwy
+cwy
+cwy
 fvm
 wcA
-gKh
+cwx
 rKm
 eoj
 cNB
@@ -127474,7 +127458,7 @@ cNB
 cNB
 cNB
 cFL
-cNK
+sfh
 cJx
 cJx
 cJx
@@ -127731,7 +127715,7 @@ cXu
 cHR
 cFg
 cGm
-cNK
+sfh
 cJx
 cJx
 cJx
@@ -130069,7 +130053,7 @@ cSU
 cRb
 cRb
 oYQ
-cSE
+oYQ
 xxa
 fMz
 fMz
@@ -134948,7 +134932,7 @@ gkw
 cHQ
 cOi
 dVl
-xwi
+jJu
 deL
 lws
 orP
@@ -135732,7 +135716,7 @@ pYU
 pSH
 fgG
 lik
-eMs
+gkK
 nqk
 cSd
 dfT
@@ -140096,7 +140080,7 @@ fzW
 diu
 dja
 gbw
-dkj
+gbw
 gbq
 dja
 leB
@@ -152380,7 +152364,7 @@ cEY
 cEY
 cEY
 rMo
-cEY
+nis
 aaa
 dbP
 cgs
@@ -152637,7 +152621,7 @@ baN
 daZ
 dbo
 cJX
-cEY
+nis
 aaa
 dbP
 cgy
@@ -152894,7 +152878,7 @@ bWR
 bYp
 cbb
 dbH
-cEY
+nis
 aaa
 dbZ
 cgy
@@ -153151,7 +153135,7 @@ baO
 bYo
 bcl
 ccP
-cEY
+nis
 aaa
 dbX
 cgy
@@ -153408,7 +153392,7 @@ baG
 bYq
 cHC
 ccS
-cEY
+nis
 aaa
 dbX
 cgs
@@ -153665,7 +153649,7 @@ baT
 gdK
 nSa
 xhk
-cEY
+nis
 aaa
 dca
 dcc
@@ -153922,7 +153906,7 @@ baQ
 sUP
 xkY
 bgc
-cEY
+nis
 pHR
 esA
 esA
@@ -154179,7 +154163,7 @@ baR
 jVE
 tbK
 bgm
-cEY
+nis
 jNu
 qUv
 uDK
@@ -154432,11 +154416,11 @@ cZJ
 cZK
 daq
 cEY
-cJV
+vvp
 iff
 cJV
 cJV
-cEY
+nis
 pHR
 qUv
 nMi
@@ -154693,7 +154677,7 @@ mee
 xjc
 tMy
 tMy
-cEY
+nis
 jNu
 qUv
 uDK
@@ -154950,9 +154934,9 @@ cFW
 baU
 cIJ
 cEY
-cEY
-riW
-riW
+nis
+mfz
+mfz
 uxy
 xWg
 nMi
@@ -155209,7 +155193,7 @@ uGW
 noo
 vAW
 rro
-riW
+mfz
 uxy
 pZO
 uDK
@@ -155974,7 +155958,7 @@ aaa
 aaa
 aaa
 mfz
-baV
+vhL
 uSh
 uGW
 vAW
@@ -156237,7 +156221,7 @@ uGW
 uXV
 vAW
 tBL
-riW
+mfz
 aaa
 aaa
 aaa
@@ -156491,10 +156475,10 @@ mfz
 fwy
 fwy
 ntm
-riW
-riW
-riW
-riW
+mfz
+mfz
+mfz
+mfz
 aaa
 aaa
 aaa
