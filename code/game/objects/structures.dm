@@ -76,15 +76,19 @@
 	if(!can_touch(user) || !climbable)
 		climber = null
 		return
-
-	usr.loc = get_turf(src)
+	
 	if(get_turf(user) == get_turf(src))
-		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+	
+		if(src.loc == usr.loc)
+			usr.loc = get_step(src, dir)
+		else
+			usr.loc = get_turf(src)
+
+			usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
 
 	climber = null
 
 /obj/structure/proc/structure_shaken()
-
 	for(var/mob/living/M in get_turf(src))
 
 		if(M.lying) return //No spamming this on people.

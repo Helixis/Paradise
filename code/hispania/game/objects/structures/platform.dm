@@ -17,10 +17,10 @@
 
 /obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
 	if(dir == SOUTH)
-		layer = ABOVE_MOB_LAYER
-	else if(corner && dir == NORTH)
 		layer = BELOW_MOB_LAYER
-
+	else if(corner && dir == NORTH)
+		layer = ABOVE_MOB_LAYER
+		
 /obj/structure/platform/setDir(newdir)
 	. = ..()
 	CheckLayer()
