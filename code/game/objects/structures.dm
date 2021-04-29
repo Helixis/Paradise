@@ -76,15 +76,11 @@
 	if(!can_touch(user) || !climbable)
 		climber = null
 		return
-	
-	if(get_turf(user) == get_turf(src))
-	
-		if(src.loc == usr.loc)
-			usr.loc = get_step(src, dir)
-		else
-			usr.loc = get_turf(src)
 
-			usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
+	usr.loc = get_turf(src)
+
+	if(get_turf(user) == get_turf(src))
+		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
 
 	climber = null
 

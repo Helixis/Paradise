@@ -20,8 +20,12 @@
 		layer = BELOW_MOB_LAYER
 	else if(corner && dir == NORTH)
 		layer = ABOVE_MOB_LAYER
-		
+
 /obj/structure/platform/setDir(newdir)
+	. = ..()
+	CheckLayer()
+
+/obj/structure/platform/Initialize()
 	. = ..()
 	CheckLayer()
 
@@ -68,7 +72,7 @@
 	if(anchored)
 		to_chat(usr, "<span class='warning'>[src] cannot be rotated while it is screwed to the floor!</span>")
 		return FALSE
-	
+
 	var/target_dir = turn(dir, 270)
 
 	setDir(target_dir)
@@ -97,8 +101,8 @@
 		return
 	var/obj/item/stack/sheet/G = new material_type(user.loc, material_amount)
 	G.add_fingerprint(user)
-	playsound(src, 'sound/items/deconstruct.ogg', 50, 1) 
-	TOOL_DISMANTLE_SUCCESS_MESSAGE 
+	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
+	TOOL_DISMANTLE_SUCCESS_MESSAGE
 	qdel(src)
 
 
@@ -129,6 +133,38 @@
 	else
 		return TRUE
 
+/obj/structure/platform/do_climb(mob/living/user)
+	if(!can_touch(user) || !climbable)
+		return
+	var/blocking_object = density_check()
+	if(blocking_object)
+		to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [blocking_object]!</span>")
+		return
+
+	var/turf/T = src.loc
+	if(!T || !istype(T)) return
+
+	if(get_turf(user) == get_turf(src))
+		usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	else
+		usr.visible_message("<span class='warning'>[user] starts getting off \the [src]!</span>")
+	climber = user
+	if(!do_after(user, 50, target = src))
+		climber = null
+		return
+
+	if(!can_touch(user) || !climbable)
+		climber = null
+		return
+
+	if(get_turf(user) == get_turf(src))
+		usr.loc = get_step(src, dir)
+		usr.visible_message("<span class='warning'>[user] leaves \the [src]!</span>")
+	else
+		usr.loc = get_turf(src)
+		usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	climber = null
+
 /obj/structure/platform/CanAtmosPass()
 	return TRUE
 
@@ -151,7 +187,7 @@
 	corner = TRUE
 	material_amount = 5
 
-/obj/structure/platform/reinforced/corner 
+/obj/structure/platform/reinforced/corner
 	name = "Reinforced Platform Corner"
 	desc = "A robust platform corner made of plasteel, more resistance for hazard sites"
 	icon_state = "metalcorner2"
@@ -159,8 +195,8 @@
 	material_amount = 5
 
 /*Plataformas para el Map
-Tan simple como que no hubo forma de hacer 
-que las plataformas del mapa iniciaron anchored y 
+Tan simple como que no hubo forma de hacer
+que las plataformas del mapa iniciaron anchored y
 las de construccion iniciaran unanchored*/
 
 /obj/structure/platform/map
