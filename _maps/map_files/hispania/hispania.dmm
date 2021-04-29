@@ -70994,6 +70994,9 @@
 "cMp" = (
 /obj/structure/table,
 /obj/item/stack/sheet/cardboard,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/asmaint2)
 "cMq" = (
@@ -87750,19 +87753,6 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
-"iWu" = (
-/obj/machinery/power/solar{
-	id = "aftportsolar";
-	name = "Aft Port Solar Array"
-	},
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
-	},
-/turf/simulated/floor/plasteel/airless{
-	icon_state = "solarpanel"
-	},
-/area/maintenance/portsolar)
 "iWF" = (
 /obj/machinery/atmospherics/trinary/filter{
 	density = 0;
@@ -88794,6 +88784,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/asmaint)
+"kdk" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "kdG" = (
 /turf/simulated/floor/plasteel{
 	dir = 4;
@@ -89510,6 +89509,9 @@
 	},
 /turf/simulated/floor/plasteel,
 /area/engine/supermatter)
+"kNi" = (
+/turf/simulated/floor,
+/area/maintenance/asmaint)
 "kNr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
@@ -91905,6 +91907,13 @@
 	icon_state = "yellowcorner"
 	},
 /area/engine/engineering)
+"nmS" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "nnI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/floor/plasteel{
@@ -92409,6 +92418,13 @@
 	icon_state = "dark"
 	},
 /area/storage/secure)
+"nKx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table,
+/obj/effect/spawner/lootdrop/maintenance,
+/obj/machinery/light/small,
+/turf/simulated/floor/plasteel,
+/area/maintenance/asmaint)
 "nKP" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -92818,7 +92834,7 @@
 	id_tag = "auxiliaryturbinevent";
 	name = "Auxiliary Turbine Vent"
 	},
-/turf/space,
+/turf/simulated/floor,
 /area/maintenance/turbine)
 "ogy" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -93152,6 +93168,12 @@
 	icon_state = "darkyellowcorners"
 	},
 /area/atmos/control)
+"oyQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "ozz" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -93221,6 +93243,9 @@
 /obj/structure/sign/restroom,
 /turf/simulated/wall/mineral/plastitanium,
 /area/shuttle/tsf)
+"oEe" = (
+/turf/simulated/floor,
+/area/maintenance/asmaint2)
 "oFs" = (
 /obj/machinery/computer/atmos_alert,
 /obj/structure/cable{
@@ -94743,6 +94768,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plasteel,
 /area/maintenance/aft)
+"qkz" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "qla" = (
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -94907,6 +94937,11 @@
 	},
 /turf/simulated/floor/plating,
 /area/engine/controlroom)
+"qrR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint)
 "qsw" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -95098,6 +95133,19 @@
 	},
 /turf/simulated/floor,
 /area/maintenance/turbine)
+"qzr" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
+	},
+/obj/structure/grille,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "qzt" = (
 /obj/structure/transit_tube{
 	icon_state = "D-SW"
@@ -95172,7 +95220,7 @@
 	id_tag = "turbinevent";
 	name = "Turbine Vent"
 	},
-/turf/space,
+/turf/simulated/floor,
 /area/maintenance/turbine)
 "qDA" = (
 /obj/structure/chair{
@@ -95504,6 +95552,14 @@
 /obj/effect/decal/warning_stripes/yellow/hollow,
 /turf/simulated/floor/plating,
 /area/storage/secure)
+"qVP" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/grille,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "qYi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -96296,6 +96352,13 @@
 	dir = 1
 	},
 /area/security/armoury)
+"rVh" = (
+/obj/effect/spawner/random_spawners/grille_maybe,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "rVk" = (
 /obj/item/stack/sheet/wood,
 /turf/simulated/floor/wood{
@@ -96303,18 +96366,6 @@
 	icon_state = "wood-broken"
 	},
 /area/maintenance/aft)
-"rVW" = (
-/obj/machinery/power/solar{
-	id = "aftportsolar";
-	name = "Aft Port Solar Array"
-	},
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/plasteel/airless{
-	icon_state = "solarpanel"
-	},
-/area/maintenance/portsolar)
 "rWp" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
@@ -96598,6 +96649,13 @@
 	icon_state = "darkyellowcorners"
 	},
 /area/engine/supermatter)
+"smp" = (
+/obj/effect/spawner/random_spawners/grille_maybe,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint)
 "smG" = (
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
@@ -98112,6 +98170,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/engine/supermatter)
+"tIY" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "tJy" = (
 /obj/machinery/camera{
 	c_tag = "Aft Port Solar Control";
@@ -99825,6 +99889,18 @@
 /obj/effect/spawner/random_spawners/oil_maybe,
 /turf/simulated/floor/plasteel,
 /area/maintenance/asmaint2)
+"vtz" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "vuk" = (
 /obj/machinery/atmospherics/pipe/simple/visible/purple{
 	dir = 6
@@ -100800,6 +100876,11 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
+"wsd" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint2)
 "wsP" = (
 /obj/effect/decal/cleanable/fungus,
 /turf/simulated/wall,
@@ -100972,6 +101053,14 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
+"wEB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint)
 "wEJ" = (
 /obj/structure/table/reinforced,
 /obj/item/wirecutters,
@@ -117199,13 +117288,13 @@ amW
 aab
 cyO
 aab
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
 aab
 cyO
 aab
@@ -117713,13 +117802,13 @@ amW
 aab
 cyO
 aab
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
 aab
 aab
 aab
@@ -118486,15 +118575,15 @@ cyO
 cyO
 aab
 aab
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
-iWu
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
+kKo
 aab
 aab
 aab
@@ -119000,15 +119089,15 @@ cyO
 cyO
 aab
 aab
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
-rVW
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
+lWD
 aab
 aab
 aab
@@ -135679,7 +135768,7 @@ csL
 csL
 cAv
 csL
-chf
+kNi
 csL
 gyx
 ckK
@@ -135939,7 +136028,7 @@ nYs
 ofW
 nYs
 noS
-chf
+kNi
 csL
 cJc
 csL
@@ -136196,7 +136285,7 @@ kaG
 cKO
 csL
 ctZ
-chf
+kNi
 cFq
 cJc
 csL
@@ -137741,7 +137830,7 @@ cxF
 cQk
 cTB
 cNq
-cAm
+wEB
 cBP
 aaa
 aaa
@@ -139799,7 +139888,7 @@ cQk
 ctZ
 spX
 czq
-opI
+nKx
 dgS
 uVd
 vuL
@@ -140310,7 +140399,7 @@ cQk
 cQk
 cyZ
 cQk
-cAu
+smp
 spX
 csL
 cFq
@@ -141340,7 +141429,7 @@ chf
 dhQ
 kcG
 cJc
-cyJ
+qrR
 cBK
 cBP
 dgS
@@ -142879,7 +142968,7 @@ cSQ
 cBP
 cyN
 dcK
-dlD
+nmS
 iPy
 nAk
 cMF
@@ -144678,7 +144767,7 @@ cts
 cts
 cep
 bGG
-esz
+rVh
 bGG
 bGG
 uDR
@@ -144696,7 +144785,7 @@ bGG
 dcW
 dia
 dlD
-dlD
+wsd
 cIa
 bGH
 cIa
@@ -144957,7 +145046,7 @@ cac
 cac
 cac
 cac
-gOy
+qzr
 dTL
 lXx
 ruu
@@ -145207,7 +145296,7 @@ cIc
 cIq
 djo
 djo
-owb
+qVP
 owb
 jJy
 djo
@@ -146750,7 +146839,7 @@ cIu
 cJz
 cKG
 bQX
-bQX
+cpE
 cep
 vkM
 wnn
@@ -147017,7 +147106,7 @@ hKn
 sFj
 uxM
 dcX
-dlD
+wsd
 cuQ
 dfc
 dfc
@@ -148296,13 +148385,13 @@ cxN
 cBR
 bZZ
 cIa
-bGG
+dgB
 cuQ
 cuQ
 cAU
 bGG
 stc
-dbm
+oyQ
 cuQ
 bKl
 bGG
@@ -149326,7 +149415,7 @@ aaa
 aaa
 bGH
 diH
-bGG
+dgB
 cuQ
 dff
 cTS
@@ -149336,7 +149425,7 @@ cuQ
 cJQ
 bGG
 bGG
-bGG
+dgB
 bGH
 aab
 aab
@@ -150614,7 +150703,7 @@ vgw
 hix
 cuQ
 bPA
-dff
+kdk
 bGH
 aaa
 bGH
@@ -150622,7 +150711,7 @@ cuQ
 dgf
 cuQ
 bGG
-bKl
+qkz
 cxS
 aab
 aab
@@ -151385,7 +151474,7 @@ ggP
 hix
 cxS
 cAU
-dff
+kdk
 cMs
 aaa
 bGH
@@ -151646,7 +151735,7 @@ dff
 bGH
 bGH
 bGH
-bGG
+dgB
 bGH
 aaa
 aaa
@@ -153164,7 +153253,7 @@ bGG
 bGG
 bGG
 bGG
-bGG
+tIY
 bGG
 bGG
 cTL
@@ -153172,13 +153261,13 @@ cJQ
 cuQ
 bGG
 esz
+tIY
 bGG
 bGG
 bGG
+oEe
 bGG
-cuQ
-bGG
-esz
+dgB
 cuQ
 cuQ
 cuQ
@@ -153409,11 +153498,11 @@ cgs
 bGG
 cyR
 bGG
-bGG
+tIY
 cBD
 cac
 cac
-cac
+vtz
 cac
 aaL
 cac
@@ -153941,12 +154030,12 @@ bGG
 cjA
 cAU
 bGG
+tIY
 bGG
 bGG
 bGG
 bGG
-bGG
-bGG
+tIY
 dcJ
 ddJ
 cuQ
