@@ -12,14 +12,14 @@
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
 	var/corner = FALSE
 	var/material_type = /obj/item/stack/sheet/metal
-	var/material_amount = 10
+	var/material_amount = 4
 	var/decon_speed
 
 /obj/structure/platform/proc/CheckLayer() // Para saber si el icono debe ir encima del mob o no
 	if(dir == SOUTH)
-		layer = BELOW_MOB_LAYER
-	else if(corner && dir == NORTH)
 		layer = ABOVE_MOB_LAYER
+	else if(corner || dir == NORTH)
+		layer = BELOW_MOB_LAYER
 
 /obj/structure/platform/setDir(newdir)
 	. = ..()
@@ -107,6 +107,8 @@
 
 
 /obj/structure/platform/CheckExit(atom/movable/O, turf/target)
+	if(!anchored)
+		CheckLayer()
 	if(istype(O, /obj/structure/platform)) //Para que no hayan dos platforms en un mismo title
 		return FALSE
 	if(corner)
@@ -119,6 +121,8 @@
 		return TRUE
 
 /obj/structure/platform/CanPass(atom/movable/mover, turf/target)
+	if(!anchored)
+		CheckLayer()
 	if(istype(mover, /obj/structure/platform)) // Para que no hayan dos platforms en un mismo title
 		return FALSE
 	if(corner)
@@ -185,6 +189,7 @@
 	icon_state = "metalcorner"
 	desc = "A metal platform corner"
 	corner = TRUE
+	climbable = FALSE
 	material_amount = 5
 
 /obj/structure/platform/reinforced/corner
@@ -192,6 +197,7 @@
 	desc = "A robust platform corner made of plasteel, more resistance for hazard sites"
 	icon_state = "metalcorner2"
 	corner = TRUE
+	climbable = FALSE
 	material_amount = 5
 
 /*Plataformas para el Map
