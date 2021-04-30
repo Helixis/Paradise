@@ -34,6 +34,7 @@
 	if(corner)
 		decon_speed = 30
 		density = FALSE
+		climbable = FALSE	
 	else
 		decon_speed = 40
 	CheckLayer()
@@ -189,7 +190,6 @@
 	icon_state = "metalcorner"
 	desc = "A metal platform corner"
 	corner = TRUE
-	climbable = FALSE
 	material_amount = 5
 
 /obj/structure/platform/reinforced/corner
@@ -197,7 +197,6 @@
 	desc = "A robust platform corner made of plasteel, more resistance for hazard sites"
 	icon_state = "metalcorner2"
 	corner = TRUE
-	climbable = FALSE
 	material_amount = 5
 
 /*Plataformas para el Map
