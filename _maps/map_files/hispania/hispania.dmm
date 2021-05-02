@@ -215,6 +215,13 @@
 /area/toxins/teleci)
 "aaB" = (
 /obj/effect/spawner/window/reinforced,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/toxins/teleci)
 "aaC" = (
@@ -25057,6 +25064,11 @@
 /obj/item/pen/multi,
 /obj/item/paper_bin/nanotrasen,
 /obj/item/paper/tcommskey,
+/obj/item/radio/intercom{
+	name = "station intercom (General)";
+	pixel_x = 0;
+	pixel_y = 0
+	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
 	icon_state = "neutralfull"
@@ -60194,6 +60206,14 @@
 	scrub_N2O = 1;
 	scrub_Toxins = 1
 	},
+/obj/structure/closet/crate/trashcart,
+/obj/item/storage/bag/trash{
+	pixel_x = -8
+	},
+/obj/item/storage/bag/trash{
+	pixel_x = 8
+	},
+/obj/item/storage/bag/trash,
 /turf/simulated/floor/plasteel,
 /area/janitor)
 "cmV" = (
@@ -78445,16 +78465,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plasteel,
 /area/engine/equipmentstorage)
-"cTf" = (
-/obj/machinery/newscaster{
-	pixel_x = 0;
-	pixel_y = 30
-	},
-/turf/simulated/floor/plasteel{
-	dir = 8;
-	icon_state = "neutralfull"
-	},
-/area/engine/chiefs_office)
 "cTg" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
@@ -80664,16 +80674,15 @@
 	dir = 4;
 	network = list("SS13")
 	},
-/obj/item/radio/intercom{
-	name = "station intercom (General)";
-	pixel_x = -28;
-	pixel_y = 0
-	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
+	},
+/obj/machinery/newscaster{
+	pixel_x = -30;
+	pixel_y = 0
 	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -123320,7 +123329,7 @@ cMG
 cPL
 cJZ
 cOX
-kLS
+cRR
 cUu
 cRM
 cWD
@@ -124090,8 +124099,8 @@ cKL
 cOK
 cNT
 cJZ
-cRR
-cTf
+kLS
+cUw
 cUw
 cGY
 aYt
