@@ -34,7 +34,7 @@
 	if(corner)
 		decon_speed = 30
 		density = FALSE
-		climbable = FALSE	
+		climbable = FALSE
 	else
 		decon_speed = 40
 	CheckLayer()
@@ -112,6 +112,8 @@
 		CheckLayer()
 	if(istype(O, /obj/structure/platform)) //Para que no hayan dos platforms en un mismo title
 		return FALSE
+	if(istype(O, /obj/item/projectile))
+		return TRUE
 	if(corner)
 		return !density
 	if(O && O.throwing)
@@ -126,6 +128,8 @@
 		CheckLayer()
 	if(istype(mover, /obj/structure/platform)) // Para que no hayan dos platforms en un mismo title
 		return FALSE
+	if(istype(mover, /obj/item/projectile))
+		return TRUE
 	if(corner)
 		return !density
 	if(mover && mover.throwing)
