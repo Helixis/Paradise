@@ -58289,7 +58289,7 @@
 /obj/docking_port/stationary{
 	dir = 8;
 	dwidth = 3;
-	height = 5;
+	height = 7;
 	id = "mining_home";
 	name = "mining shuttle bay";
 	width = 7
@@ -66743,7 +66743,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/asmaint)
 "cAC" = (
-/obj/effect/spawner/random_barrier/obstruction,
 /obj/machinery/door/window/southright,
 /turf/simulated/floor/plating,
 /area/maintenance/asmaint2)
@@ -74853,11 +74852,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light{
 	dir = 1
-	},
-/obj/machinery/camera{
-	c_tag = "Engineering Maintenance Lobby";
-	dir = 2;
-	network = list("SS13","Engi")
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/aft)
@@ -97878,11 +97872,12 @@
 /area/engine/supermatter)
 "tpW" = (
 /obj/machinery/computer/security{
-	desc = "Used to access the various cameras networks on the station... It has a strange antenna attached into it...";
-	network = list("SS13","Research Outpost","Mining Outpost","ERT","CentComm")
+	network = list("SS13","Research Outpost","Mining Outpost")
 	},
 /turf/simulated/floor/plasteel{
-	icon_state = "dark"
+	dir = 5;
+	icon_state = "dark";
+	tag = "icon-vault (NORTHEAST)"
 	},
 /area/maintenance/aft)
 "tqJ" = (
@@ -100990,6 +100985,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/port)
+"wAT" = (
+/obj/machinery/door/airlock/maintenance{
+	req_access_txt = "26"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/asmaint)
 "wBo" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/briefcase/inflatable{
@@ -120559,7 +120560,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aab
 cgQ
 cgQ
 cgQ
@@ -121588,7 +121589,7 @@ aaa
 aaa
 aaa
 aaa
-aab
+aaa
 aaa
 aaa
 aaa
@@ -121847,8 +121848,8 @@ aaa
 aaa
 aaa
 aaa
-aab
 aaa
+aab
 cgQ
 wwg
 cLi
@@ -122104,8 +122105,8 @@ aaa
 aaa
 aaa
 aaa
-aab
 aaa
+aab
 cgQ
 kTn
 coL
@@ -122361,7 +122362,7 @@ aaa
 aaa
 aaa
 aaa
-aab
+aaa
 aab
 cng
 ieg
@@ -122618,8 +122619,8 @@ aaa
 aaa
 aaa
 aaa
-aab
 aaa
+aab
 cng
 enF
 cwz
@@ -122875,7 +122876,7 @@ aaa
 aaa
 aaa
 aaa
-aab
+aaa
 aab
 cvp
 enF
@@ -123132,8 +123133,8 @@ ckk
 aaa
 aaa
 aaa
-aab
 aaa
+aab
 cvp
 rRq
 cgQ
@@ -123388,8 +123389,8 @@ bYP
 ckl
 bYP
 bYP
-aab
-aab
+aaa
+aaa
 aaa
 cvp
 enF
@@ -123645,8 +123646,8 @@ cip
 cfb
 clJ
 bYP
-aaa
-aaa
+aab
+aab
 aaa
 cng
 enF
@@ -134189,7 +134190,7 @@ csL
 cyJ
 csL
 csL
-cmt
+wAT
 czq
 cDa
 cCJ
