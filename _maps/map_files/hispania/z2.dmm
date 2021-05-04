@@ -5915,12 +5915,6 @@
 	tag = "icon-snow"
 	},
 /area/holodeck/source_snowfield)
-"tN" = (
-/obj/structure/table/wood{
-	icon_state = ""
-	},
-/turf/simulated/floor/plasteel/stairs,
-/area/centcom/bar)
 "tQ" = (
 /obj/docking_port/stationary/transit{
 	dir = 8;
@@ -6109,18 +6103,8 @@
 /turf/simulated/wall/indestructible/syndicate,
 /area/space)
 "uE" = (
-/obj/item/reagent_containers/food/drinks/cans/beer{
-	pixel_x = 5;
-	pixel_y = -3
-	},
-/obj/item/reagent_containers/food/drinks/cans/beer{
-	pixel_x = 5;
-	pixel_y = -4
-	},
-/obj/item/reagent_containers/food/drinks/cans/beer{
-	pixel_x = -4
-	},
 /obj/structure/table/reinforced,
+/obj/machinery/kitchen_machine/microwave,
 /turf/simulated/floor/mineral/plastitanium/red/brig,
 /area/centcom/bar)
 "uF" = (
@@ -8025,6 +8009,10 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape)
+"Ar" = (
+/obj/structure/reagent_dispensers/beerkeg,
+/turf/simulated/floor/mineral/plastitanium/red/brig,
+/area/centcom/bar)
 "As" = (
 /obj/machinery/door/airlock/hatch{
 	desc = "Uh oh. You'd better hope you aren't going in here!";
@@ -9385,6 +9373,22 @@
 	tag = "icon-asteroid6"
 	},
 /area/holodeck/source_desert)
+"FU" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/turf/simulated/floor/mineral/plastitanium/red/brig,
+/area/centcom/bar)
 "FY" = (
 /obj/structure/holohoop,
 /turf/simulated/floor/holofloor{
@@ -10298,6 +10302,11 @@
 	icon_state = "dark"
 	},
 /area/tdome/arena_source4)
+"Ku" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/drinkingglasses,
+/turf/simulated/floor/mineral/plastitanium/red/brig,
+/area/centcom/bar)
 "Kv" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark{
@@ -11129,6 +11138,7 @@
 	pixel_x = 2;
 	pixel_y = 5
 	},
+/obj/structure/table/reinforced,
 /turf/simulated/floor/mineral/plastitanium/red/brig,
 /area/centcom/bar)
 "NL" = (
@@ -48108,7 +48118,7 @@ nd
 nd
 nd
 nd
-tN
+Gn
 oL
 DC
 El
@@ -49652,7 +49662,7 @@ aN
 aN
 aN
 zn
-xK
+Ar
 xK
 xK
 xK
@@ -50167,10 +50177,10 @@ aN
 aN
 zn
 uE
-xK
+FU
 us
 NK
-xK
+Ku
 XB
 ZO
 TJ
