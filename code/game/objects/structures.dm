@@ -84,6 +84,7 @@
 	climber = null
 
 /obj/structure/proc/structure_shaken()
+
 	for(var/mob/living/M in get_turf(src))
 
 		if(M.lying) return //No spamming this on people.
