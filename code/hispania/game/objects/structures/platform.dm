@@ -190,7 +190,7 @@
 	icon_state = "metalcorner"
 	desc = "A metal platform corner"
 	corner = TRUE
-	material_amount = 5
+	material_amount = 2
 
 /obj/structure/platform/reinforced/corner
 	name = "Reinforced Platform Corner"
