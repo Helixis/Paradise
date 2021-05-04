@@ -197,21 +197,4 @@
 	desc = "A robust platform corner made of plasteel, more resistance for hazard sites"
 	icon_state = "metalcorner2"
 	corner = TRUE
-	material_amount = 5
-
-/*Plataformas para el Map
-Tan simple como que no hubo forma de hacer
-que las plataformas del mapa iniciaron anchored y
-las de construccion iniciaran unanchored*/
-
-/obj/structure/platform/map
-	anchored = TRUE
-
-/obj/structure/platform/corner/map
-	anchored = TRUE
-
-/obj/structure/platform/reinforced/map
-	anchored = TRUE
-
-/obj/structure/platform/reinforced/corner/map
-	anchored = TRUE
+	material_amount = 2
