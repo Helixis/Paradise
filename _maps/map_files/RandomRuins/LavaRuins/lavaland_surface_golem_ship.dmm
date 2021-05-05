@@ -111,7 +111,7 @@
 /turf/simulated/floor/mineral/titanium/purple,
 /area/shuttle/freegolem)
 "x" = (
-/obj/structure/computerframe,
+/obj/machinery/computer/shuttle/golem_ship/recall,
 /turf/simulated/floor/mineral/titanium/purple,
 /area/shuttle/freegolem)
 "y" = (
@@ -235,10 +235,6 @@
 /obj/item/storage/firstaid/adv,
 /turf/simulated/floor/mineral/titanium/purple,
 /area/shuttle/freegolem)
-"P" = (
-/obj/machinery/computer/shuttle/golem_ship/recall,
-/turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/golem_ship)
 "Q" = (
 /obj/structure/table/wood,
 /obj/item/disk/design_disk/golem_shell,
@@ -630,7 +626,7 @@ a
 A
 A
 A
-P
+A
 a
 a
 a
