@@ -215,6 +215,13 @@
 /area/toxins/teleci)
 "aaB" = (
 /obj/effect/spawner/window/reinforced,
+/obj/machinery/door/poddoor{
+	density = 0;
+	icon_state = "open";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/toxins/teleci)
 "aaC" = (
@@ -35710,8 +35717,11 @@
 "bua" = (
 /obj/machinery/portable_atmospherics/scrubber,
 /obj/machinery/light,
-/obj/effect/decal/warning_stripes/yellow,
-/turf/simulated/floor/plasteel,
+/obj/structure/window/reinforced{
+	dir = 4;
+	pixel_x = 0
+	},
+/turf/simulated/floor/carpet,
 /area/crew_quarters/locker)
 "bub" = (
 /obj/effect/decal/cleanable/cobweb2,
@@ -39628,8 +39638,9 @@
 /turf/simulated/floor/plasteel,
 /area/crew_quarters/locker)
 "bCo" = (
-/obj/item/latexballon,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plasteel{
+	icon_state = "freezerfloor"
+	},
 /area/maintenance/port)
 "bCq" = (
 /obj/machinery/door/airlock/maintenance{
@@ -40285,6 +40296,9 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /mob/living/simple_animal/mouse,
 /turf/simulated/floor/plating,
 /area/maintenance/port)
@@ -40525,6 +40539,9 @@
 "bEr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
+	},
+/obj/effect/landmark{
+	name = "blobstart"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
@@ -41413,10 +41430,6 @@
 /turf/simulated/floor/plasteel,
 /area/hallway/secondary/entry)
 "bGn" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/effect/decal/warning_stripes/west,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
@@ -42477,13 +42490,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/port)
 "bIs" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = 11
-	},
-/obj/structure/mirror{
-	pixel_x = 28
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -43561,11 +43567,10 @@
 /area/maintenance/port)
 "bKr" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/lootdrop/maintenance,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/wall,
 /area/maintenance/port)
 "bKs" = (
 /obj/item/storage/backpack/duffel,
@@ -43575,15 +43580,10 @@
 "bKt" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark{
-	name = "xeno_spawn";
-	pixel_x = -1
-	},
-/obj/effect/spawner/lootdrop/maintenance,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/wall,
 /area/maintenance/port)
 "bKv" = (
 /obj/effect/spawner/window/reinforced,
@@ -67230,7 +67230,17 @@
 	},
 /area/toxins/misc_lab)
 "cCa" = (
-/obj/item/storage/bag/trash,
+/obj/item/storage/bag/trash{
+	pixel_x = 6
+	},
+/obj/structure/closet/crate/trashcart,
+/obj/item/storage/bag/trash{
+	pixel_y = 5
+	},
+/obj/item/storage/bag/trash{
+	pixel_x = 7;
+	pixel_y = 6
+	},
 /turf/simulated/floor/plasteel,
 /area/maintenance/asmaint)
 "cCb" = (
@@ -83013,7 +83023,7 @@
 	},
 /area/engine/engineering)
 "dYs" = (
-/obj/item/twohanded/required/kirbyplants,
+/obj/machinery/vending/discdan,
 /turf/simulated/floor/wood{
 	broken = 1;
 	icon_state = "wood-broken"
@@ -84147,8 +84157,7 @@
 /area/storage/secure)
 "ffs" = (
 /obj/machinery/portable_atmospherics/pump,
-/obj/effect/decal/warning_stripes/yellow,
-/turf/simulated/floor/plasteel,
+/turf/simulated/floor/carpet,
 /area/crew_quarters/locker)
 "fgf" = (
 /obj/machinery/mineral/stacking_machine{
@@ -87091,6 +87100,13 @@
 	},
 /turf/simulated/wall/r_wall,
 /area/maintenance/asmaint2)
+"imE" = (
+/obj/structure/curtain/open/shower,
+/obj/machinery/shower,
+/turf/simulated/floor/plasteel{
+	icon_state = "freezerfloor"
+	},
+/area/maintenance/port)
 "imX" = (
 /obj/machinery/light/small,
 /turf/simulated/floor/plasteel{
@@ -88552,21 +88568,6 @@
 	icon_state = "darkyellowcorners"
 	},
 /area/engine/engineering)
-"jUM" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/rack{
-	dir = 8;
-	layer = 2.9
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/port)
 "jVb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -89446,6 +89447,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/apmaint)
+"kUe" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/spawner/lootdrop/maintenance,
+/turf/simulated/floor/plating,
+/area/maintenance/port)
 "kUi" = (
 /obj/structure/table,
 /obj/item/trash/plate,
@@ -92450,13 +92458,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
-"nOc" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/port)
 "nOr" = (
 /obj/machinery/atmospherics/binary/valve/digital/open{
 	name = "Mixed Air Outlet Valve"
@@ -92909,6 +92910,16 @@
 "oms" = (
 /turf/space,
 /area/space/nearstation)
+"omD" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/landmark{
+	name = "xeno_spawn";
+	pixel_x = -1
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/port)
 "omG" = (
 /obj/effect/decal/warning_stripes/south,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
@@ -97103,6 +97114,14 @@
 	icon_state = "brown"
 	},
 /area/quartermaster/office)
+"sEG" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "freezerfloor"
+	},
+/area/space)
 "sEH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4;
@@ -97329,12 +97348,10 @@
 	},
 /area/engine/engineering)
 "sNb" = (
-/obj/effect/landmark{
-	name = "blobstart"
+/obj/item/bikehorn/rubberducky,
+/turf/simulated/floor/plasteel{
+	icon_state = "freezerfloor"
 	},
-/obj/item/clothing/suit/ianshirt,
-/obj/structure/closet,
-/turf/simulated/floor/plating,
 /area/maintenance/port)
 "sNA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -99252,11 +99269,6 @@
 	},
 /area/hallway/primary/aft)
 "uTN" = (
-/obj/machinery/camera{
-	c_tag = "Engineering West";
-	dir = 4;
-	network = list("SS13")
-	},
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
 	},
@@ -99981,6 +99993,17 @@
 	icon_state = "dark"
 	},
 /area/engine/supermatter)
+"vHG" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/closet,
+/obj/item/clothing/suit/ianshirt,
+/turf/simulated/floor/plating,
+/area/maintenance/port)
 "vHR" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -102606,6 +102629,15 @@
 	},
 /turf/simulated/floor/plasteel,
 /area/atmos)
+"xUi" = (
+/obj/machinery/door/airlock{
+	name = "Unisex Restrooms";
+	req_access_txt = "0"
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "freezerfloor"
+	},
+/area/crew_quarters/locker/locker_toilet)
 "xUy" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -118484,7 +118516,7 @@ bwZ
 uPj
 bnw
 blQ
-jUM
+bIP
 bCk
 bGT
 blQ
@@ -119513,7 +119545,7 @@ bwP
 bvs
 bwP
 bvs
-bCk
+kUe
 bGW
 bKv
 aaa
@@ -119770,7 +119802,7 @@ bzv
 bvs
 bCm
 bvs
-ivG
+vHG
 bGW
 bKv
 aaa
@@ -120539,7 +120571,7 @@ bvs
 bvs
 bvs
 bvs
-bvs
+xUi
 bym
 bvG
 bGW
@@ -120797,7 +120829,7 @@ wvO
 bzz
 blM
 bCo
-blQ
+imE
 bKt
 bGW
 blQ
@@ -121054,7 +121086,7 @@ wvO
 bzy
 blM
 sNb
-blQ
+imE
 bKr
 bGW
 blQ
@@ -121310,9 +121342,9 @@ bBU
 wvO
 bzA
 blM
-bCo
-blQ
-nOc
+sEG
+imE
+bKr
 bGW
 bDQ
 bxb
@@ -121569,7 +121601,7 @@ qNu
 blM
 blM
 blQ
-ivG
+bvH
 bHb
 bnw
 bxb
@@ -122339,7 +122371,7 @@ bCn
 bCn
 bGn
 blM
-bCk
+omD
 bKy
 bxb
 bIV
