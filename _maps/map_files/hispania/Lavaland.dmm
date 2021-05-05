@@ -1679,15 +1679,13 @@
 /obj/machinery/alarm{
 	pixel_y = 23
 	},
-/obj/machinery/computer/shuttle/mining{
-	req_access = null
-	},
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
+/obj/structure/ore_box,
 /turf/simulated/floor/plasteel,
 /area/mine/production)
 "ea" = (

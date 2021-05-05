@@ -13081,7 +13081,7 @@
 /turf/simulated/floor/plating,
 /area/security/processing)
 "ayZ" = (
-/obj/machinery/computer/shuttle/labor,
+/obj/structure/table,
 /turf/simulated/floor/plasteel,
 /area/security/prisonershuttle)
 "aza" = (
@@ -33097,7 +33097,7 @@
 	},
 /area/bridge)
 "bnY" = (
-/obj/machinery/computer/shuttle/labor,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "blue"
@@ -33113,7 +33113,7 @@
 	},
 /area/hallway/secondary/exit)
 "boa" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "blue"
@@ -34502,7 +34502,7 @@
 /turf/simulated/floor/plasteel,
 /area/bridge)
 "bqZ" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 10;
 	icon_state = "brown"
@@ -34513,7 +34513,7 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/machinery/computer/shuttle/engineering,
+/obj/structure/table/reinforced,
 /turf/simulated/floor/plasteel{
 	dir = 6;
 	icon_state = "brown"
@@ -53804,6 +53804,7 @@
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/brown,
+/obj/structure/rack,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "brown"
@@ -56498,13 +56499,14 @@
 	name = "Toxins Launch Room"
 	})
 "cgG" = (
+/obj/structure/table,
 /turf/simulated/floor/plasteel{
 	dir = 1;
 	icon_state = "brown"
 	},
 /area/quartermaster/miningdock)
 "cgH" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/structure/rack,
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "brown"

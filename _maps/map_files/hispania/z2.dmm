@@ -283,7 +283,7 @@
 	},
 /area/holodeck/source_desert)
 "be" = (
-/obj/machinery/computer/shuttle/ert,
+/obj/structure/table/wood,
 /turf/simulated/floor/plasteel/grimy,
 /area/centcom/specops)
 "bf" = (
@@ -656,14 +656,6 @@
 	icon_state = "red"
 	},
 /area/holodeck/source_basketball)
-"cH" = (
-/obj/machinery/computer/shuttle/ferry,
-/turf/simulated/floor/plating,
-/area/centcom/evac)
-"cK" = (
-/obj/machinery/computer/shuttle/admin,
-/turf/simulated/floor/plating,
-/area/centcom/evac)
 "cL" = (
 /turf/simulated/floor/holofloor{
 	dir = 8;
@@ -1470,10 +1462,6 @@
 /obj/item/reagent_containers/food/drinks/bottle/vodka,
 /turf/simulated/floor/wood,
 /area/syndicate_mothership)
-"fi" = (
-/obj/machinery/computer/shuttle/syndicate/recall,
-/turf/simulated/floor/wood,
-/area/syndicate_mothership)
 "fj" = (
 /obj/structure/bookcase{
 	name = "Forbidden Knowledge"
@@ -2210,12 +2198,6 @@
 "ih" = (
 /turf/simulated/wall/indestructible/uranium,
 /area/wizard_station)
-"ii" = (
-/obj/machinery/computer/shuttle/syndicate/recall,
-/turf/simulated/floor/plasteel{
-	icon_state = "bar"
-	},
-/area/syndicate_mothership)
 "ij" = (
 /obj/item/radio/intercom/syndicate{
 	pixel_x = 0;
@@ -3830,10 +3812,6 @@
 	icon_state = "greencorner"
 	},
 /area/centcom/control)
-"nF" = (
-/obj/machinery/computer/shuttle/sit,
-/turf/simulated/floor/plasteel/dark,
-/area/syndicate_mothership)
 "nG" = (
 /turf/simulated/floor/plasteel{
 	dir = 1;
@@ -3885,10 +3863,6 @@
 	},
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/specops)
-"nL" = (
-/obj/machinery/computer/shuttle/sst,
-/turf/simulated/floor/plasteel/dark,
-/area/syndicate_mothership)
 "nM" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door_control{
@@ -4167,12 +4141,6 @@
 /obj/structure/table,
 /turf/simulated/floor/carpet,
 /area/centcom/bar)
-"oz" = (
-/obj/structure/chair/office/dark{
-	dir = 1
-	},
-/turf/simulated/floor/plasteel/dark,
-/area/syndicate_mothership)
 "oA" = (
 /obj/machinery/door/poddoor/shutters{
 	dir = 8;
@@ -7387,10 +7355,6 @@
 /obj/structure/chair/comfy/black,
 /turf/simulated/floor/wood,
 /area/admin)
-"ye" = (
-/obj/machinery/computer/shuttle/trade/sol,
-/turf/simulated/floor/plasteel,
-/area/trader_station/sol)
 "yf" = (
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
@@ -8319,10 +8283,6 @@
 /obj/item/reagent_containers/food/drinks/drinkingglass/devilskiss,
 /turf/simulated/floor/plasteel/dark,
 /area/syndicate_mothership)
-"Br" = (
-/obj/structure/chair/office/dark,
-/turf/simulated/floor/plasteel/dark,
-/area/syndicate_mothership)
 "Bt" = (
 /obj/structure/chair/comfy/red{
 	dir = 1;
@@ -8355,12 +8315,6 @@
 /obj/effect/landmark{
 	name = "Syndicate-Commando";
 	tag = "Commando"
-	},
-/turf/simulated/floor/plasteel/dark,
-/area/syndicate_mothership)
-"By" = (
-/obj/machinery/computer/shuttle/syndicate{
-	name = "Nuclear Operatives Shuttle Console"
 	},
 /turf/simulated/floor/plasteel/dark,
 /area/syndicate_mothership)
@@ -9396,10 +9350,6 @@
 	icon_state = "red"
 	},
 /area/holodeck/source_basketball)
-"Ga" = (
-/obj/machinery/computer/shuttle/ert,
-/turf/simulated/floor/plasteel/dark,
-/area/centcom/specops)
 "Gb" = (
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
@@ -32439,7 +32389,7 @@ pb
 uj
 uj
 uj
-Ga
+uj
 sX
 we
 we
@@ -38888,10 +38838,10 @@ wK
 wK
 wK
 wK
-cH
 yv
 yv
-cK
+yv
+yv
 wK
 IH
 IH
@@ -43059,7 +43009,7 @@ aN
 aN
 aN
 xQ
-ye
+yF
 yw
 yF
 yF
@@ -55505,7 +55455,7 @@ ab
 ab
 ef
 ef
-ii
+hn
 iq
 iB
 iL
@@ -56027,7 +55977,7 @@ hn
 jf
 jn
 fa
-fi
+jk
 ef
 ab
 ab
@@ -60369,11 +60319,11 @@ ga
 kr
 kr
 ef
-nF
-oz
 kr
-Br
-By
+kr
+kr
+kr
+kr
 ef
 gg
 kr
@@ -62425,8 +62375,8 @@ gb
 kr
 kr
 ef
-nL
-oz
+kr
+kr
 kr
 kr
 BA
