@@ -35715,14 +35715,15 @@
 /turf/simulated/floor/wood,
 /area/library)
 "bua" = (
-/obj/machinery/portable_atmospherics/scrubber,
 /obj/machinery/light,
 /obj/structure/window/reinforced{
 	dir = 4;
 	pixel_x = 0
 	},
+/obj/structure/bed,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/locker)
+/area/maintenance/port)
 "bub" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/machinery/portable_atmospherics/canister/air,
@@ -39637,11 +39638,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plasteel,
 /area/crew_quarters/locker)
-"bCo" = (
-/turf/simulated/floor/plasteel{
-	icon_state = "freezerfloor"
-	},
-/area/maintenance/port)
 "bCq" = (
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
@@ -43571,7 +43567,7 @@
 	dir = 4
 	},
 /turf/simulated/wall,
-/area/maintenance/port)
+/area/crew_quarters/locker/locker_toilet)
 "bKs" = (
 /obj/item/storage/backpack/duffel,
 /obj/effect/decal/cleanable/dirt,
@@ -43584,7 +43580,7 @@
 	dir = 4
 	},
 /turf/simulated/wall,
-/area/maintenance/port)
+/area/crew_quarters/locker/locker_toilet)
 "bKv" = (
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plating,
@@ -84155,10 +84151,6 @@
 	icon_state = "dark"
 	},
 /area/storage/secure)
-"ffs" = (
-/obj/machinery/portable_atmospherics/pump,
-/turf/simulated/floor/carpet,
-/area/crew_quarters/locker)
 "fgf" = (
 /obj/machinery/mineral/stacking_machine{
 	input_dir = 1;
@@ -87106,7 +87098,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
 	},
-/area/maintenance/port)
+/area/crew_quarters/locker/locker_toilet)
 "imX" = (
 /obj/machinery/light/small,
 /turf/simulated/floor/plasteel{
@@ -88426,6 +88418,12 @@
 	icon_state = "darkyellow"
 	},
 /area/atmos/control)
+"jMO" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/wall,
+/area/crew_quarters/locker/locker_toilet)
 "jNh" = (
 /obj/machinery/light{
 	dir = 8
@@ -92870,6 +92868,13 @@
 	icon_state = "yellowcorner"
 	},
 /area/engine/controlroom)
+"okT" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/fungus,
+/turf/simulated/wall,
+/area/crew_quarters/locker/locker_toilet)
 "olh" = (
 /obj/machinery/camera{
 	c_tag = "Library Middle";
@@ -97121,7 +97126,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
 	},
-/area/space)
+/area/crew_quarters/locker/locker_toilet)
 "sEH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4;
@@ -97352,7 +97357,7 @@
 /turf/simulated/floor/plasteel{
 	icon_state = "freezerfloor"
 	},
-/area/maintenance/port)
+/area/crew_quarters/locker/locker_toilet)
 "sNA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -120573,7 +120578,7 @@ bvs
 bvs
 xUi
 bym
-bvG
+okT
 bGW
 blQ
 aaa
@@ -120827,8 +120832,8 @@ bzU
 bBQ
 wvO
 bzz
-blM
-bCo
+bvs
+uTN
 imE
 bKt
 bGW
@@ -121084,7 +121089,7 @@ bnD
 bwT
 wvO
 bzy
-blM
+bvs
 sNb
 imE
 bKr
@@ -121341,7 +121346,7 @@ eGR
 bBU
 wvO
 bzA
-blM
+bvs
 sEG
 imE
 bKr
@@ -121598,10 +121603,10 @@ bnD
 pcs
 rgm
 qNu
-blM
-blM
-blQ
-bvH
+bvs
+bvs
+bvs
+jMO
 bHb
 bnw
 bxb
@@ -121855,8 +121860,8 @@ bAb
 brN
 rgm
 rgm
-ffs
-blM
+rgm
+blQ
 bDP
 bKE
 bKY
@@ -122113,7 +122118,7 @@ bst
 gVi
 ssS
 bua
-blM
+blQ
 bCk
 bKy
 bxb
