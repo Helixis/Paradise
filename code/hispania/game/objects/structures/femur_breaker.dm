@@ -102,7 +102,7 @@
 
 	slat_status = BREAKER_SLAT_DROPPED
 	icon_state = "breaker"
-	if(H.Ckey)
+	if(H.ckey)
 		attract_oldman()
 	current_action = 0
 
@@ -186,7 +186,7 @@
 		return ..()
 
 /obj/structure/femur_breaker/proc/attract_oldman()
-	for(var/mob/living/simple_animal/hostile/oldman/M in GLOB.mob_list)
+	for(var/mob/living/simple_animal/hostile/oldman/M in GLOB.player_list)
 		if(!M)
 			return
 		var/mob/living/carbon/human/H = buckled_mobs[1]
@@ -201,7 +201,7 @@
 					new /obj/effect/decal/cleanable/blood/oil/sludge(get_turf(src))
 					playsound(src, 'sound/hispania/effects/oldman/sacrifice.ogg', 50, FALSE)
 					M.icon_state = "sacrifice"
-					M.maxHealth = 999999
+					M.maxHealth = 999999 //Para que sobreviva durante la animacion
 					M.health = 999999
 					M.incorporeal_move = 0
 					M.density = TRUE

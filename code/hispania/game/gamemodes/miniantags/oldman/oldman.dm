@@ -115,7 +115,7 @@
 		if(ishuman(L))
 			if(prob(5))
 				for(var/obj/item/organ/external/P in (L.bodyparts))
-					P.germ_level += INFECTION_LEVEL_ONE //cada golpe tiene una prob de infectarse
+					P.germ_level += INFECTION_LEVEL_ONE //cada golpe tiene una prob de infectar
 	..()
 
 /mob/living/simple_animal/hostile/oldman/hitby(atom/movable/AM, datum/thrownthing/throwingdatum) //No floor tiling them to death, wiseguy
