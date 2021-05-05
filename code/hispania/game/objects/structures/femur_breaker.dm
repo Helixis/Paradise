@@ -100,10 +100,11 @@
 		addtimer(CALLBACK(src, .proc/damage_leg, H), BREAKER_ANIMATION_LENGTH, TIMER_UNIQUE)
 		add_attack_logs(user, H, "femur broke with [src]")
 
+		if(H.key)
+			attract_oldman()
+
 	slat_status = BREAKER_SLAT_DROPPED
 	icon_state = "breaker"
-	if(H.ckey)
-		attract_oldman()
 	current_action = 0
 
 /obj/structure/femur_breaker/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
