@@ -100,7 +100,7 @@
 		addtimer(CALLBACK(src, .proc/damage_leg, H), BREAKER_ANIMATION_LENGTH, TIMER_UNIQUE)
 		add_attack_logs(user, H, "femur broke with [src]")
 
-		if(H.key)
+		if(H.key && H.stat == CONSCIOUS)
 			attract_oldman()
 
 	slat_status = BREAKER_SLAT_DROPPED
@@ -197,7 +197,6 @@
 			M.notransform = TRUE
 			to_chat(M, "<span class='danger'>You cannot resist your hunger and you go directly to them!</span>")
 			spawn(2 SECONDS)
-				current_action = BREAKER_ACTION_INUSE
 				if(world.time - M.time_spawned > 20 MINUTES)
 					new /obj/effect/decal/cleanable/blood/oil/sludge(get_turf(src))
 					playsound(src, 'sound/hispania/effects/oldman/sacrifice.ogg', 50, FALSE)
