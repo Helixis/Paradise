@@ -32,11 +32,11 @@
 /obj/structure/platform/New()
 	..()
 	if(corner)
-		decon_speed = 30
+		decon_speed = 20
 		density = FALSE
 		climbable = FALSE
 	else
-		decon_speed = 40
+		decon_speed = 30
 	CheckLayer()
 
 /obj/structure/platform/examine(mob/user)
@@ -150,6 +150,10 @@
 		to_chat(user, "<span class='warning'>You cannot climb [src], as it is blocked by \a [blocking_object]!</span>")
 		return
 
+	var/destino_climb = get_step(src, dir)
+	if(is_blocked_turf(destino_climb))
+		to_chat(user, "<span class='warning'>You cannot climb over the [src], the path is blocked!")
+		return
 	var/turf/T = src.loc
 	if(!T || !istype(T)) return
 
