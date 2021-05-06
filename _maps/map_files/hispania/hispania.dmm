@@ -76069,6 +76069,9 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
+/obj/machinery/computer/monitor{
+	name = "Grid Power Monitoring Computer"
+	},
 /turf/simulated/floor/plasteel,
 /area/engine/controlroom)
 "dbv" = (
@@ -84313,10 +84316,11 @@
 	req_access_txt = "10";
 	req_one_access_txt = "0"
 	},
-/obj/structure/cable/yellow{
+/obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2"
+	icon_state = "1-2";
+	tag = ""
 	},
 /turf/simulated/floor/engine,
 /area/engine/supermatter)
@@ -84755,9 +84759,7 @@
 /area/engine/engineering)
 "ger" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
+/obj/structure/cable{
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/engine,
@@ -85784,6 +85786,12 @@
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 8;
 	name = "Gas to Filter"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	tag = ""
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
@@ -90412,6 +90420,11 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4;
 	level = 2
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -100739,7 +100752,7 @@
 	dir = 1;
 	name = "Gas to Filter"
 	},
-/obj/structure/cable/yellow{
+/obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
