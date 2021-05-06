@@ -14,8 +14,8 @@
  * Metal
  */
 GLOBAL_LIST_INIT(metal_recipes, list(
-	new /datum/stack_recipe("metal platform", /obj/structure/platform, 4, time = 40,one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
-	new /datum/stack_recipe("metal platform corner", /obj/structure/platform/corner, 2, time = 30, one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
+	new /datum/stack_recipe("metal platform", /obj/structure/platform, 4, time = 30,one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
+	new /datum/stack_recipe("metal platform corner", /obj/structure/platform/corner, 2, time = 20, one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
 	new /datum/stack_recipe("stool", /obj/structure/chair/stool, one_per_turf = 1, on_floor = 1),
 	new /datum/stack_recipe("barstool", /obj/structure/chair/stool/bar, one_per_turf = 1, on_floor = 1),
 	new /datum/stack_recipe("chair", /obj/structure/chair, one_per_turf = 1, on_floor = 1),
