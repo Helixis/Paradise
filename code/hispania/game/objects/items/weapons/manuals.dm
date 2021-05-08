@@ -289,7 +289,7 @@
 			<li>2 Plumphelmet</li>
 			<br>
 			<I>Arepa De Magma:</I><BR>
-			<li>1 Arepa Basica</li>
+			<li>1 Arepa Infernal</li>
 			<li>10u Capsaicin</li>
 			<li>10 Blood</li>
 			<li>10 Plasma Dust</li>
