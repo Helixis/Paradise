@@ -57,7 +57,7 @@
 	var/time_spawned
 
 /mob/living/simple_animal/hostile/oldman/Initialize(mapload)
-	..()
+	. = ..()
 	remove_from_all_data_huds()
 	last_meal = world.time
 	time_spawned = world.time
@@ -92,7 +92,7 @@
 /mob/living/simple_animal/hostile/oldman/Destroy()
 	for(var/mob/living/M in consumed_mobs)
 		M.forceMove(get_turf(src))
-	..()
+	return ..()
 
 /mob/living/simple_animal/hostile/oldman/AttackingTarget()
 	if(istype(target, /turf/simulated/wall))
@@ -112,7 +112,7 @@
 		var/mob/living/carbon/human/L = target
 		L.adjustStaminaLoss(20)
 		L.adjustToxLoss(3)
-		if(ishuman(L))
+		if(ishuman(L) && !HAS_TRAIT(L, TRAIT_NOGERMS))
 			if(prob(5))
 				for(var/obj/item/organ/external/P in (L.bodyparts))
 					P.germ_level += INFECTION_LEVEL_ONE //cada golpe tiene una prob de infectar

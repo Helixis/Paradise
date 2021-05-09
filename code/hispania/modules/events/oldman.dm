@@ -41,7 +41,7 @@
 		if(!spawn_locs) //If we can't find THAT, then just retry
 			kill()
 			return
-		var/mob/living/simple_animal/hostile/oldman/SCP = new /mob/living/simple_animal/hostile/oldman/(pick(spawn_locs))
+		var/mob/living/simple_animal/hostile/oldman/SCP = new /mob/living/simple_animal/hostile/oldman(pick(spawn_locs))
 		player_mind.transfer_to(SCP)
 		player_mind.assigned_role = SPECIAL_ROLE_OLD_MAN
 		player_mind.special_role = SPECIAL_ROLE_OLD_MAN
