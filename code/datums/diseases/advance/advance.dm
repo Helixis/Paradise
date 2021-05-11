@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(advance_cures, list(
 									"mitocholide", "spaceacillin", "pen_acid",
 									"haloperidol", "carpotoxin", "prions",
 									"nanomachines", "bath_salts"
-))
+)) ///Curas Diferentes Hispania
 
 /*
 
