@@ -15,7 +15,7 @@
 		return ..()
 
 	if(C.inert)
-		to_chat(user, "<span class='warning'>It is too late, this organ has already decayed.")
+		to_chat(user, "<span class='warning'>It is too late, this organ has already decayed.</span>")
 		return ..()
 
 	C.preserved()
