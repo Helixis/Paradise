@@ -1325,6 +1325,7 @@
 #include "code\hispania\modules\power\apc.dm"
 #include "code\hispania\modules\power\cell.dm"
 #include "code\hispania\modules\projectiles\ammo\energy.dm"
+#include "code\hispania\modules\projectiles\ammunition\boxes.dm"
 #include "code\hispania\modules\projectiles\ammunition\magazines.dm"
 #include "code\hispania\modules\projectiles\guns\energy.dm"
 #include "code\hispania\modules\projectiles\guns\fullauto.dm"
