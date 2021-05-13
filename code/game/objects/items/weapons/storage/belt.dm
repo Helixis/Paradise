@@ -435,7 +435,9 @@
 	desc = "A bandolier for holding shotgun ammunition."
 	icon_state = "bandolier"
 	item_state = "bandolier"
-	storage_slots = 8
+	storage_slots = 3
+	max_combined_w_class = 16
+	display_contents_with_number = TRUE
 	can_hold = list(/obj/item/ammo_casing/shotgun)
 
 /obj/item/storage/belt/bandolier/Initialize(mapload)
@@ -443,12 +445,12 @@
 	update_icon()
 
 /obj/item/storage/belt/bandolier/full/populate_contents()
-	for(var/I in 1 to 8)
+	for(var/I in 1 to 16)
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
 
 /obj/item/storage/belt/bandolier/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]_[length(contents)]"
+	icon_state = "[initial(icon_state)]_[CEILING(length(contents)/2, 1)]"
 
 /obj/item/storage/belt/bandolier/attackby(obj/item/I, mob/user)
 	var/amount = length(contents)
