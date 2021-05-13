@@ -13,6 +13,7 @@
 				/mob/living/simple_animal/mouse = 60,
 				/mob/living/simple_animal/lizard = 30,
 				/mob/living/simple_animal/cockroach = 30,
+				/mob/living/simple_animal/hostile/retaliate/poison/snake = 10,
 				/mob/living/simple_animal/hostile/poison/giant_spider/hunter = 5,
 				"" = 20 //Nada
 				)
