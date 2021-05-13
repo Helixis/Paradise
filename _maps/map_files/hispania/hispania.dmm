@@ -6,16 +6,108 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space/nearstation)
+"aac" = (
+/obj/structure/rack,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/decal/warning_stripes/red/hollow,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/item/ammo_box/buck,
+/obj/item/ammo_box/buck{
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "red";
+	dir = 5
+	},
+/area/security/armoury)
+"aad" = (
+/obj/structure/rack,
+/obj/structure/window/reinforced,
+/obj/effect/decal/warning_stripes/red/hollow,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/item/ammo_box/beanbag,
+/obj/item/ammo_box/beanbag,
+/obj/item/ammo_box/tranquilizer{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/ammo_box/beanbag{
+	pixel_y = 2;
+	pixel_z = -2
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "redcorner";
+	dir = 4
+	},
+/area/security/armoury)
 "aae" = (
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 8
 	},
 /turf/simulated/wall/mineral/titanium,
 /area/shuttle/pod_3)
+"aaf" = (
+/obj/machinery/door/window/eastright{
+	base_state = "left";
+	dir = 8;
+	icon_state = "left";
+	name = "Hydroponics Pasture";
+	req_access_txt = "35"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/plasteel{
+	dir = 2;
+	icon_state = "asteroid";
+	tag = "icon-asteroid (NORTH)"
+	},
+/turf/simulated/floor/plasteel{
+	tag = "icon-siding1 (NORTH)";
+	icon_state = "siding1";
+	dir = 1
+	},
+/turf/simulated/floor/plasteel{
+	tag = "icon-siding2 (NORTH)";
+	icon_state = "siding2";
+	dir = 1
+	},
+/area/hydroponics)
 "aag" = (
 /obj/structure/shuttle/engine/propulsion/burst,
 /turf/simulated/wall/mineral/titanium,
 /area/shuttle/pod_1)
+"aah" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6;
+	level = 1
+	},
+/turf/simulated/floor/plasteel{
+	dir = 2;
+	icon_state = "asteroid";
+	tag = "icon-asteroid (NORTH)"
+	},
+/turf/simulated/floor/plasteel{
+	tag = "icon-siding1 (NORTH)";
+	icon_state = "siding1";
+	dir = 1
+	},
+/turf/simulated/floor/plasteel{
+	tag = "icon-siding2 (NORTH)";
+	icon_state = "siding2";
+	dir = 1
+	},
+/area/hydroponics)
 "aai" = (
 /obj/structure/shuttle/engine/propulsion/burst,
 /turf/simulated/wall/mineral/titanium,
@@ -3972,25 +4064,6 @@
 	icon_state = "darkredcorners"
 	},
 /area/security/brig)
-"ajK" = (
-/obj/structure/rack,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/item/storage/box/buck,
-/obj/item/storage/box/buck{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/effect/decal/warning_stripes/red/hollow,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel{
-	icon_state = "red";
-	dir = 5
-	},
-/area/security/armoury)
 "ajL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4463,31 +4536,6 @@
 	dir = 4
 	},
 /obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel{
-	icon_state = "redcorner";
-	dir = 4
-	},
-/area/security/armoury)
-"aku" = (
-/obj/structure/rack,
-/obj/item/storage/box/beanbag{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/beanbag,
-/obj/item/storage/box/beanbag{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/tranquilizer{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/structure/window/reinforced,
-/obj/effect/decal/warning_stripes/red/hollow,
-/obj/structure/window/reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/plasteel{
@@ -86233,33 +86281,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/library)
-"hMr" = (
-/obj/machinery/door/window/eastright{
-	base_state = "left";
-	dir = 8;
-	icon_state = "left";
-	name = "Hydroponics Pasture";
-	req_access_txt = "35"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "asteroid";
-	tag = "icon-asteroid (NORTH)"
-	},
-/turf/simulated/floor/plasteel{
-	tag = "icon-siding1 (NORTH)";
-	icon_state = "siding1";
-	dir = 1
-	},
-/turf/simulated/floor/plasteel{
-	tag = "icon-siding2 (NORTH)";
-	icon_state = "siding2";
-	dir = 1
-	},
-/area/hydroponics)
 "hMt" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
@@ -94967,30 +94988,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/engine/singularity)
-"qzo" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6;
-	level = 1
-	},
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "asteroid";
-	tag = "icon-asteroid (NORTH)"
-	},
-/turf/simulated/floor/plasteel{
-	tag = "icon-siding1 (NORTH)";
-	icon_state = "siding1";
-	dir = 1
-	},
-/turf/simulated/floor/plasteel{
-	tag = "icon-siding2 (NORTH)";
-	icon_state = "siding2";
-	dir = 1
-	},
-/area/hydroponics)
 "qzv" = (
 /obj/machinery/firealarm{
 	pixel_y = 32
@@ -133556,9 +133553,9 @@ agt
 agt
 agt
 agt
-ajK
+aac
 akt
-aku
+aad
 agt
 amH
 anJ
@@ -142341,7 +142338,7 @@ bbI
 aGY
 beb
 bfH
-hMr
+aaf
 bjx
 mtc
 bmy
@@ -142598,7 +142595,7 @@ bbV
 aGY
 beb
 bfJ
-qzo
+aah
 bjy
 bkY
 bmy
