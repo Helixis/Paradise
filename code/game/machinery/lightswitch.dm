@@ -59,13 +59,20 @@
 	return ..()
 
 /obj/machinery/light_switch/proc/updateicon()
+	overlays -= overlays // Limpiamos
 	if(stat & NOPOWER)
 		icon_state = "light-p"
 	else
 		if(on)
 			icon_state = "light1"
+			var/image/light_overlay = image('icons/hispania/obj/power.dmi', src, "lighton")
+			light_overlay.plane = ABOVE_LIGHTING_PLANE
+			overlays += light_overlay
 		else
 			icon_state = "light0"
+			var/image/light_overlay = image('icons/hispania/obj/power.dmi', src, "lightoff")
+			light_overlay.plane = ABOVE_LIGHTING_PLANE
+			overlays += light_overlay
 
 /obj/machinery/light_switch/examine(mob/user)
 	. = ..()

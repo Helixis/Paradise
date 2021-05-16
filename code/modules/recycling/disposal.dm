@@ -1293,7 +1293,7 @@
 // expel the contents of the outlet
 /obj/structure/disposaloutlet/proc/expel(animation = TRUE)
 	if(animation)
-		flick("outlet-open", src)
+		flick("[icon_state]-open", src)
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 50, 0, 0)
 		sleep(20)	//wait until correct animation frame
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)

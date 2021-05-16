@@ -196,12 +196,12 @@
   */
 /obj/machinery/mecha_part_fabricator/proc/build_design_timer_finish(datum/design/D, list/final_cost)
 	// Spawn the item (in a lockbox if restricted) OR mob (e.g. IRC body)
-	var/atom/A = new D.build_path(get_step(src, SOUTH))
+	var/atom/A = new D.build_path(get_step(src, dir))
 	if(istype(A, /obj/item))
 		var/obj/item/I = A
 		I.materials = final_cost
 		if(D.locked)
-			var/obj/item/storage/lockbox/research/large/L = new(get_step(src, SOUTH))
+			var/obj/item/storage/lockbox/research/large/L = new(get_step(src, dir))
 			I.forceMove(L)
 			L.name += " ([I.name])"
 			L.origin_tech = I.origin_tech

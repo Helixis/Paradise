@@ -307,7 +307,7 @@
 
 /obj/machinery/disposal/deliveryChute/flush()
 	flushing = 1
-	flick("intake-closing", src)
+	flick("[icon_state]-closing", src)
 	var/deliveryCheck = 0
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 													// travels through the pipes.

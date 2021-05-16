@@ -953,6 +953,8 @@
 		T.icon_state = icon_state
 	if(T.icon != icon)
 		T.icon = icon
+	if(T.overlays != overlays)
+		T.overlays = overlays
 	if(color)
 		T.atom_colours = atom_colours.Copy()
 		T.update_atom_colour()

@@ -5,6 +5,7 @@
 	icon = 'icons/hispania/obj/platform.dmi'
 	icon_state = "metal"
 	desc = "A metal platform"
+	layer = OPEN_DOOR_LAYER // Ayuda a la hora de mapear
 	flags = ON_BORDER
 	anchored = FALSE
 	climbable = TRUE
@@ -19,7 +20,7 @@
 	if(dir == SOUTH)
 		layer = ABOVE_MOB_LAYER
 	else if(corner || dir == NORTH)
-		layer = BELOW_MOB_LAYER
+		layer = OPEN_DOOR_LAYER
 
 /obj/structure/platform/setDir(newdir)
 	. = ..()

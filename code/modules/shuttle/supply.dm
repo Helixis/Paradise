@@ -7,7 +7,7 @@
 /obj/docking_port/mobile/supply
 	name = "supply shuttle"
 	id = "supply"
-	callTime = 1200
+	callTime = 30
 
 	dir = 8
 	travelDir = 90
@@ -47,21 +47,22 @@
 
 	var/list/emptyTurfs = list()
 	for(var/turf/simulated/T in areaInstance)
-		if(T.density)
-			continue
-
-		var/contcount
-		for(var/atom/A in T.contents)
-			if(!A.simulated)
+		if(istype(T,/turf/simulated/floor/mineral/titanium/blue))
+			if(T.density)
 				continue
-			if(istype(A, /obj/machinery/light))
-				continue //hacky but whatever, shuttles need three spots each for this shit
-			contcount++
 
-		if(contcount)
-			continue
+			var/contcount
+			for(var/atom/A in T.contents)
+				if(!A.simulated)
+					continue
+				if(istype(A, /obj/machinery/light))
+					continue //hacky but whatever, shuttles need three spots each for this shit
+				contcount++
 
-		emptyTurfs += T
+			if(contcount)
+				continue
+
+			emptyTurfs += T
 
 	for(var/datum/supply_order/SO in SSshuttle.shoppinglist)
 		if(!SO.object)
