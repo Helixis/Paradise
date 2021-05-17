@@ -1194,6 +1194,7 @@
 #include "code\hispania\game\objects\items\miscellaneous\noose.dm"
 #include "code\hispania\game\objects\items\miscellaneous\paintkits_items.dm"
 #include "code\hispania\game\objects\items\miscellaneous\plazmite_stuff.dm"
+#include "code\hispania\game\objects\items\miscellaneous\spawn_eggs.dm"
 #include "code\hispania\game\objects\items\robot\robot_upgrades.dm"
 #include "code\hispania\game\objects\items\stacks\sheets\leather.dm"
 #include "code\hispania\game\objects\items\toys\balloon.dm"
