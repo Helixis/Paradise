@@ -1,6 +1,7 @@
 /datum/action/item_action/active_pda
 
 /obj/item/pda/pid_boy
+	name = "pid boy"
 	icon_state =  "pda-pib_boy"
 	icon = 'icons/hispania/obj/pda.dmi'
 	//armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
