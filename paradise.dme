@@ -1315,6 +1315,7 @@
 #include "code\hispania\modules\mob\new_player\sprite_accessories\human\human_hair.dm"
 #include "code\hispania\modules\mob\new_player\sprite_accessories\murghal\murghal_hair.dm"
 #include "code\hispania\modules\mob\new_player\sprite_accessories\slime\slime_hair.dm"
+#include "code\hispania\modules\pda\pdas.dm"
 #include "code\hispania\modules\power\apc.dm"
 #include "code\hispania\modules\power\cell.dm"
 #include "code\hispania\modules\projectiles\ammo\energy.dm"
