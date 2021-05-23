@@ -6,7 +6,7 @@
 	item_state = "dallas"
 	item_color = "dallas"
 	hispania_icon = TRUE
-	species_restricted = list("exclude", "Unathi", "Plasmaman", "Grey", "Vox")
+	species_restricted = list("exclude", "Unathi", "Plasmaman", "Grey", "Vox", "Kidan")
 	flags_inv = HIDEFACE
 	flags_cover = MASKCOVERSMOUTH
 

@@ -38,3 +38,4 @@ stddef.dm
 
 # ignore RUSTG linux binary, since linux dependencies vary with pretty much every single install
 data/mode.txt
+data/mode.txt
