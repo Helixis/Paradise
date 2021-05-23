@@ -1,11 +1,12 @@
 /obj/item/clothing/mask/thief
 	name = "mastermind's mask"
-	desc = "A white mask with some strange drawings. Designed to hide the wearer's face"
+	desc = "A white strap mask with some distingished pattern. Designed to hide the wearer's identity."
 	icon = 'icons/hispania/obj/clothing/masks.dmi'
 	icon_state = "dallas"
 	item_state = "dallas"
 	item_color = "dallas"
 	hispania_icon = TRUE
+	species_restricted = list("exclude", "Unathi", "Plasmaman", "Grey", "Vox")
 	flags_inv = HIDEFACE
 	flags_cover = MASKCOVERSMOUTH
 
