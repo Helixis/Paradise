@@ -1,6 +1,7 @@
 /obj/item/clothing/mask/thief
 	name = "mastermind's mask"
 	desc = "A white mask with some strange drawings. Designed to hide the wearer's face"
+	icon = 'icons/hispania/obj/clothing/masks.dmi'
 	icon_state = "dallas"
 	item_state = "dallas"
 	item_color = "dallas"
