@@ -1486,8 +1486,8 @@
 /area/mine/eva)
 "dF" = (
 /obj/machinery/computer/shuttle/labor/one_way{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/laborcamp)
@@ -2159,15 +2159,15 @@
 /area/lavaland/surface/outdoors)
 "eY" = (
 /obj/machinery/computer/secure_data{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/laborcamp/security)
 "eZ" = (
 /obj/machinery/computer/prisoner{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/laborcamp/security)
@@ -4310,10 +4310,10 @@
 /area/mine/spacepod)
 "jE" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
-/obj/structure/ore_box,
+/obj/machinery/telepad_cargo,
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "jF" = (
@@ -4351,8 +4351,8 @@
 /area/mine/spacepod)
 "jI" = (
 /obj/machinery/computer/mech_bay_power_console{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
@@ -4463,7 +4463,7 @@
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "jY" = (
-/obj/machinery/telepad_cargo,
+/obj/machinery/computer/podtracker,
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "jZ" = (
@@ -4505,6 +4505,8 @@
 	pixel_x = -23;
 	pixel_y = 0
 	},
+/obj/item/storage/toolbox/mechanical,
+/obj/item/clothing/glasses/welding,
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "kf" = (
@@ -4518,14 +4520,15 @@
 /area/mine/spacepod)
 "kg" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "kh" = (
-/obj/structure/closet/crate{
-	icon_state = "crateopen"
+/obj/machinery/computer/rdconsole/mechanics{
+	name = "mining R&D console";
+	req_access = list(48)
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
@@ -4539,23 +4542,20 @@
 	pixel_x = -27;
 	pixel_y = 2
 	},
-/obj/structure/closet/crate{
-	icon_state = "crateopen"
+/obj/machinery/mecha_part_fabricator/spacepod{
+	req_access = list(48)
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
 "kj" = (
-/obj/structure/table,
-/obj/item/clothing/glasses/welding,
-/obj/item/storage/toolbox/mechanical,
 /obj/machinery/camera{
 	c_tag = "Mining Space Pod Docking";
 	dir = 4;
 	network = list("Mining Outpost")
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/spacepod)
