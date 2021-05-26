@@ -1,3 +1,11 @@
+//nuestros propios gritos del colossus
+GLOBAL_DATUM_INIT(stun_words, /regex, regex("para|paren|detente|detenganse|quedate quieto|quedense quietos"))
+GLOBAL_DATUM_INIT(weaken_words, /regex, regex("caete|caiganse|tropiezate|tropiecen|tropezar|al suelo"))
+GLOBAL_DATUM_INIT(sleep_words, /regex, regex("duermete|duermanse|sueño|dormir|a mimir|dormid"))
+GLOBAL_DATUM_INIT(vomit_words, /regex, regex("vomita|vomiten|vomitar|vomitad"))
+GLOBAL_DATUM_INIT(silence_words, /regex, regex("callate|callense|silencio|ssh|callad"))
+GLOBAL_DATUM_INIT(hallucinate_words, /regex, regex("admira la verdad|alucina|alucinen"))
+GLOBAL_DATUM_INIT(wakeup_words, /regex, regex("despierta|despierten|arriba|despertad"))
 GLOBAL_DATUM_INIT(heal_words, /regex, regex("vive|vivan|curacion|heroes never die"))
 GLOBAL_DATUM_INIT(hurt_words, /regex, regex("muere|mueran|sufran|sufre|morid"))
 GLOBAL_DATUM_INIT(bleed_words, /regex, regex("sangra|sangren|sangrad"))
