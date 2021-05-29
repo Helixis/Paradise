@@ -215,8 +215,7 @@
 		/obj/item/flashlight/seclite=1,\
 		/obj/item/kitchen/knife/combat/survival=1,\
 		/obj/item/mining_voucher=1,\
-		/obj/item/stack/marker_beacon/ten=1,\
-		/obj/item/stack/medical/quickclot/survivalqc=1 ///Quickclot Hispania
+		/obj/item/stack/marker_beacon/ten=1
 	)
 
 	backpack = /obj/item/storage/backpack/explorer

@@ -413,9 +413,6 @@
 /atom/proc/emag_act()
 	return
 
-/atom/proc/unemag()
-	return
-
 /**
  * Respond to a radioactive wave hitting this atom
  *

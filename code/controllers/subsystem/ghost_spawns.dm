@@ -155,7 +155,7 @@ SUBSYSTEM_DEF(ghost_spawns)
   */
 /datum/controller/subsystem/ghost_spawns/proc/is_eligible(mob/M, role, antag_age_check, role_text, min_hours, check_antaghud)
 	. = FALSE
-	if(!M.key || !M.client)
+	/*if(!M.key || !M.client)
 		return
 	if(role)
 		if(!(role in M.client.prefs.be_special))
@@ -171,7 +171,7 @@ SUBSYSTEM_DEF(ghost_spawns)
 			return
 	if(check_antaghud && cannotPossess(M))
 		return
-
+	*/
 	return TRUE
 
 /**

@@ -383,9 +383,6 @@
 /datum/action/item_action/hands_free/activate
 	name = "Activate"
 
-/datum/action/item_action/hands_free/activate/always
-    check_flags = null
-
 /datum/action/item_action/toggle_research_scanner
 	name = "Toggle Research Scanner"
 	button_icon_state = "scan_mode"

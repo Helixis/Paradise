@@ -542,7 +542,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 
-	var/input = input("Please enter the reason for calling the shuttle.", "Shuttle Call Reason.") as null|message
+	var/input = clean_input("Please enter the reason for calling the shuttle.", "Shuttle Call Reason.","")
 	if(!input || stat)
 		return
 
@@ -1012,7 +1012,6 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 			"Fox",
 			"Goat",
 			"Goose",
-			"Kangaroo",
 			"Kitten",
 			"Kitten2",
 			"Pig",
@@ -1030,7 +1029,7 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 					if("Bear")
 						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"bear"))
 					if("Carp")
-						holo_icon = getHologramIcon(icon('icons/mob/carp.dmi',"carp"))
+						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"carp"))
 					if("Chicken")
 						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"chicken_brown"))
 					if("Corgi")
@@ -1047,8 +1046,6 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"goat"))
 					if("Goose")
 						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"goose"))
-					if("Kangaroo")
-						holo_icon = getHologramIcon(icon('icons/mob/animal.dmi',"kangaroo"))
 					if("Kitten")
 						holo_icon = getHologramIcon(icon('icons/mob/pets.dmi',"cat"))
 					if("Kitten2")
@@ -1329,9 +1326,6 @@ GLOBAL_LIST_INIT(ai_verbs_default, list(
 
 /mob/living/silicon/ai/proc/open_nearest_door(mob/living/target)
 	if(!istype(target))
-		return
-
-	if(check_unable(AI_CHECK_WIRELESS))
 		return
 
 	if(target && target.can_track())

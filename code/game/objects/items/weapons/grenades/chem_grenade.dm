@@ -460,7 +460,7 @@
 
 
 /obj/item/grenade/chem_grenade/firefighting
-	payload_name = "fire fighting"
+	payload_name = "fire fighting grenade"
 	desc = "Can help to put out dangerous fires from a distance."
 	stage = READY
 

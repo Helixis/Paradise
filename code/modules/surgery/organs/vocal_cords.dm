@@ -1,4 +1,3 @@
-/* tenemos nuestra version traducida en hispania
 GLOBAL_DATUM_INIT(stun_words, /regex, regex("stop|wait|stand still|hold on|halt"))
 GLOBAL_DATUM_INIT(weaken_words, /regex, regex("drop|fall|trip"))
 GLOBAL_DATUM_INIT(sleep_words, /regex, regex("sleep|slumber"))
@@ -35,7 +34,7 @@ GLOBAL_DATUM_INIT(deathgasp_words, /regex, regex("play dead"))
 GLOBAL_DATUM_INIT(clap_words, /regex, regex("clap|applaud"))
 GLOBAL_DATUM_INIT(honk_words, /regex, regex("ho+nk")) //hooooooonk
 GLOBAL_DATUM_INIT(multispin_words, /regex, regex("like a record baby"))
-*/
+
 /obj/item/organ/internal/vocal_cords //organs that are activated through speech with the :x channel
 	name = "vocal cords"
 	icon_state = "appendix"
@@ -113,9 +112,6 @@ GLOBAL_DATUM_INIT(multispin_words, /regex, regex("like a record baby"))
 	if(check_flags & AB_CHECK_CONSCIOUS)
 		if(owner.stat)
 			return FALSE
-	if(istype(owner.loc, /obj/effect/dummy/spell_jaunt))
-		to_chat(owner, "<span class='warning'>No one can hear you when you are jaunting, no point in talking now!</span>")
-		return FALSE
 	return TRUE
 
 /datum/action/item_action/organ_action/colossus/Trigger()
@@ -143,15 +139,12 @@ GLOBAL_DATUM_INIT(multispin_words, /regex, regex("like a record baby"))
 		return FALSE
 	if(owner.stat)
 		return FALSE
-	if(istype(owner.loc, /obj/effect/dummy/spell_jaunt))
-		to_chat(owner, "<span class='warning'>No one can hear you when you are jaunting, no point in talking now!</span>")
-		return FALSE
 	return TRUE
 
 /obj/item/organ/internal/vocal_cords/colossus/handle_speech(message)
 	spans = "colossus yell" //reset spans, just in case someone gets deculted or the cords change owner
 	if(iscultist(owner))
-		spans += "narsiesmall"
+		spans += " narsiesmall"
 	return "<span class=\"[spans]\">[uppertext(message)]</span>"
 
 /obj/item/organ/internal/vocal_cords/colossus/speak_with(message)

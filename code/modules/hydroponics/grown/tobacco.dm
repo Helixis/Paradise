@@ -22,7 +22,7 @@
 	icon_state = "tobacco_leaves"
 	tastes = list("tobacco" = 1)
 	filling_color = "#008000"
-	distill_reagent = "menthol"
+	distill_reagent = "creme_de_menthe" //Menthol, I guess.
 
 // Space Tobacco
 /obj/item/seeds/tobacco/space

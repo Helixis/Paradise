@@ -397,8 +397,7 @@
 	return TRUE
 
 /obj/structure/window/AltClick(mob/user)
-	if(fulltile) // Can't rotate these.
-		return ..()
+
 	if(user.incapacitated())
 		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
 		return

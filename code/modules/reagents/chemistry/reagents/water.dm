@@ -238,10 +238,6 @@
 /datum/reagent/holywater/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
 	M.AdjustJitter(-5)
-	//HEAL CHAP STARTS HERE
-	if(ishuman(M) && M.mind.isholy)
-		update_flags |= M.adjustToxLoss(-1.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
-	//HEAL CHAP ENDS HERE
 	if(current_cycle >= 30)		// 12 units, 60 seconds @ metabolism 0.4 units & tick rate 2.0 sec
 		M.AdjustStuttering(4, bound_lower = 0, bound_upper = 20)
 		M.Dizzy(5)
@@ -269,11 +265,16 @@
 			M.SetConfused(0)
 			return
 		if(iscultist(M))
-			SSticker.mode.remove_cultist(M.mind, TRUE, TRUE)
+			SSticker.mode.remove_cultist(M.mind)
 			holder.remove_reagent(id, volume)	// maybe this is a little too perfect and a max() cap on the statuses would be better??
 			M.SetJitter(0)
 			M.SetStuttering(0)
 			M.SetConfused(0)
+			if(ishuman(M)) // Unequip all cult clothing
+				var/mob/living/carbon/human/H = M
+				for(var/I in H.contents)
+					if(is_type_in_list(I, CULT_CLOTHING))
+						H.unEquip(I)
 			return
 	if(ishuman(M) && M.mind && M.mind.vampire && !M.mind.vampire.get_ability(/datum/vampire_passive/full) && prob(80))
 		var/mob/living/carbon/V = M
@@ -283,7 +284,7 @@
 			update_flags |= M.adjustStaminaLoss(5, FALSE)
 			if(prob(20))
 				M.emote("scream")
-			M.mind.vampire.adjust_nullification(5, 2)
+			M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
 			M.mind.vampire.bloodusable = max(M.mind.vampire.bloodusable - 3,0)
 			if(M.mind.vampire.bloodusable)
 				V.vomit(0,1)
@@ -295,7 +296,7 @@
 			switch(current_cycle)
 				if(1 to 4)
 					to_chat(M, "<span class = 'warning'>Something sizzles in your veins!</span>")
-					M.mind.vampire.adjust_nullification(5, 2)
+					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
 				if(5 to 12)
 					to_chat(M, "<span class = 'danger'>You feel an intense burning inside of you!</span>")
 					update_flags |= M.adjustFireLoss(1, FALSE)
@@ -303,7 +304,7 @@
 					M.Jitter(20)
 					if(prob(20))
 						M.emote("scream")
-					M.mind.vampire.adjust_nullification(5, 2)
+					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
 				if(13 to INFINITY)
 					to_chat(M, "<span class = 'danger'>You suddenly ignite in a holy fire!</span>")
 					for(var/mob/O in viewers(M, null))
@@ -315,7 +316,7 @@
 					M.Jitter(30)
 					if(prob(40))
 						M.emote("scream")
-					M.mind.vampire.adjust_nullification(5, 2)
+					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
 	return ..() | update_flags
 
 
@@ -332,7 +333,7 @@
 				return
 			else
 				to_chat(M, "<span class='warning'>Something holy interferes with your powers!</span>")
-				M.mind.vampire.adjust_nullification(5, 2)
+				M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
 
 
 /datum/reagent/holywater/reaction_turf(turf/simulated/T, volume)

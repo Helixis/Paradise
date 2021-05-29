@@ -418,7 +418,6 @@
 	new /obj/item/kitchen/knife/combat/survival(src)
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/clothing/suit/hooded/explorer(src)
-	new /obj/item/book/manual/how_to_goliath(src)
 
 
 /obj/item/storage/backpack/duffel/syndie/ammo/smg

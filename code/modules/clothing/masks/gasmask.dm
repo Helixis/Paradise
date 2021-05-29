@@ -58,9 +58,6 @@
 		"Grey" = 'icons/mob/species/grey/mask.dmi'
 		)
 
-/obj/item/clothing/mask/gas/explorer/marines
-	name = "military gas mask"
-
 /obj/item/clothing/mask/gas/explorer/attack_self(mob/user)
 	adjustmask(user)
 
@@ -237,7 +234,7 @@
 								"dredd"			= "I am, the LAW!"
 								)
 /obj/item/clothing/mask/gas/sechailer/hos
-	name = "head of security's SWAT mask"
+	name = "\improper HOS SWAT mask"
 	desc = "A close-fitting tactical mask with an especially aggressive Compli-o-nator 3000. It has a tan stripe."
 	icon_state = "hosmask"
 	aggressiveness = 3
@@ -245,7 +242,7 @@
 	actions_types = list(/datum/action/item_action/halt, /datum/action/item_action/selectphrase)
 
 /obj/item/clothing/mask/gas/sechailer/warden
-	name = "warden's SWAT mask"
+	name = "\improper Warden SWAT mask"
 	desc = "A close-fitting tactical mask with an especially aggressive Compli-o-nator 3000. It has a blue stripe."
 	icon_state = "wardenmask"
 	aggressiveness = 3

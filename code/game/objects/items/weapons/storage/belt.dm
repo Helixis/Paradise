@@ -53,7 +53,6 @@
 	pickup_sound = 'sound/items/handling/toolbelt_pickup.ogg'
 	can_hold = list(
 		/obj/item/taperoll,
-		/obj/item/device/binoculars,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
@@ -220,7 +219,6 @@
 	use_item_overlays = TRUE
 	can_hold = list(
 		/obj/item/taperoll,
-		/obj/item/device/binoculars,
 		/obj/item/grenade/flashbang,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/reagent_containers/spray/pepper,
@@ -372,22 +370,6 @@
 	item_state = "assault"
 	storage_slots = 6
 
-/obj/item/storage/belt/military/assault/marines/full/populate_contents()
-	new /obj/item/ammo_box/magazine/m12g(src)
-	new /obj/item/ammo_box/magazine/m12g(src)
-	new /obj/item/ammo_box/magazine/m12g(src)
-	new /obj/item/ammo_box/magazine/m12g(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	update_icon()
-
-/obj/item/storage/belt/military/assault/marines/elite/full/populate_contents()
-	new /obj/item/ammo_box/magazine/m556/arg(src)
-	new /obj/item/ammo_box/magazine/m556/arg(src)
-	new /obj/item/ammo_box/magazine/m556/arg(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	update_icon()
 /obj/item/storage/belt/janitor
 	name = "janibelt"
 	desc = "A belt used to hold most janitorial supplies."
@@ -761,7 +743,6 @@
 	use_item_overlays = FALSE
 	can_hold = list(
 		/obj/item/crowbar,
-		/obj/item/device/binoculars,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
 		/obj/item/wirecutters,

@@ -137,8 +137,7 @@ GLOBAL_LIST_INIT(admin_verbs_server, list(
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/set_ooc,
 	/client/proc/reset_ooc,
-	/client/proc/toggledrones,
-	/client/proc/set_next_map
+	/client/proc/toggledrones
 	))
 GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/cmd_admin_list_open_jobs,

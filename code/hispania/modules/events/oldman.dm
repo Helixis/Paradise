@@ -5,23 +5,19 @@
 	var/key_of_oldman
 
 /datum/event/spawn_oldman/announce()
-	if(key_of_oldman)
-		GLOB.event_announcement.Announce("Unknown entity detected aboard [station_name()]. Please report any sightings to local authority.", "Bioscan Alert", 'sound/hispania/effects/oldman/alert.ogg')
+	GLOB.event_announcement.Announce("Unknown entity detected aboard [station_name()]. Please report any sightings to local authority.", "Bioscan Alert", 'sound/hispania/effects/oldman/alert.ogg')
 
 /datum/event/spawn_oldman/proc/get_oldman(end_if_fail = 0)
 	spawn()
-		var/list/candidates = SSghost_spawns.poll_candidates("Do you want to play as the old man?", ROLE_DEMON, TRUE, source = /mob/living/simple_animal/hostile/oldman)
+		var/list/candidates = pollCandidatesWithVeto("Do you want to play as the old man?", ROLE_DEMON, 1)
 		if(!candidates.len)
 			key_of_oldman = null
 			kill()
-			return
 		var/mob/C = pick(candidates)
 		key_of_oldman = C.key
 
 		if(!key_of_oldman)
 			kill()
-			return
-
 		var/datum/mind/player_mind = new /datum/mind(key_of_oldman)
 		player_mind.active = 1
 		var/list/spawn_locs = list()
@@ -40,8 +36,7 @@
 			spawn_locs += get_turf(player_mind.current)
 		if(!spawn_locs) //If we can't find THAT, then just retry
 			kill()
-			return
-		var/mob/living/simple_animal/hostile/oldman/SCP = new /mob/living/simple_animal/hostile/oldman(pick(spawn_locs))
+		var /mob/living/simple_animal/hostile/oldman/SCP = new /mob/living/simple_animal/hostile/oldman/(pick(spawn_locs))
 		player_mind.transfer_to(SCP)
 		player_mind.assigned_role = SPECIAL_ROLE_OLD_MAN
 		player_mind.special_role = SPECIAL_ROLE_OLD_MAN

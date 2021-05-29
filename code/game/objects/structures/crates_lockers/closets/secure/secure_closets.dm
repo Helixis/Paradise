@@ -69,6 +69,7 @@
 	togglelock(user)
 
 /obj/structure/closet/secure_closet/AltClick(mob/user)
+	..()
 	if(Adjacent(user))
 		togglelock(user)
 

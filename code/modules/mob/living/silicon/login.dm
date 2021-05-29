@@ -9,4 +9,5 @@
 		SSticker.mode.remove_thrall(mind, 0)
 		SSticker.mode.remove_shadowling(mind)
 		SSticker.mode.remove_abductor(mind)
+		//remove_fugitive
 	..()

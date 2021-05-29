@@ -45,7 +45,7 @@
 	)
 	prize_list["Consumables"] = list(
 		EQUIPMENT("10 Marker Beacons", 				/obj/item/stack/marker_beacon/ten, 									100),
-		EQUIPMENT("First-Aid Kit", 					/obj/item/storage/firstaid/regular,									600), //Hispania Medikits
+		EQUIPMENT("Brute First-Aid Kit", 			/obj/item/storage/firstaid/brute,									600),
 		EQUIPMENT("Fulton Pack", 					/obj/item/extraction_pack, 											1000),
 		EQUIPMENT("Jaunter", 						/obj/item/wormhole_jaunter, 										750),
 		EQUIPMENT("Lazarus Injector", 				/obj/item/lazarus_injector, 										1000),
@@ -53,7 +53,6 @@
 		EQUIPMENT("Shelter Capsule", 				/obj/item/survivalcapsule, 											400),
 		EQUIPMENT("Stabilizing Serum", 				/obj/item/hivelordstabilizer, 										400),
 		EQUIPMENT("Survival Medipen", 				/obj/item/reagent_containers/hypospray/autoinjector/survival, 		500),
-		EQUIPMENT("Survival Quikclot", 				/obj/item/stack/medical/quickclot/survivalqc, 						900),
 	)
 	prize_list["Kinetic Accelerator"] = list(
 		EQUIPMENT("Kinetic Accelerator", 			/obj/item/gun/energy/kinetic_accelerator, 							750),
@@ -89,7 +88,6 @@
 		EQUIPMENT("Minebot Melee Upgrade", 			/obj/item/mine_bot_upgrade, 										400),
 	)
 	prize_list["Miscellaneous"] = list(
-		EQUIPMENT("How to Tame: The Goliath",		/obj/item/book/manual/how_to_goliath,								10),
 		EQUIPMENT("Absinthe", 						/obj/item/reagent_containers/food/drinks/bottle/absinthe/premium, 	100),
 		EQUIPMENT("Alien Toy", 						/obj/item/clothing/mask/facehugger/toy, 							300),
 		EQUIPMENT("Cigar", 							/obj/item/clothing/mask/cigarette/cigar/havana, 					150),
@@ -267,19 +265,7 @@
 			new /obj/item/twohanded/kinetic_crusher(drop_location)
 		if("Mining Conscription Kit")
 			new /obj/item/storage/backpack/duffel/mining_conscript(drop_location)
-		//HISPANIA SPACEPOD STARTER KIT STARTS HERE
-		if("Spacepod Starter Kit")
-			var/confirm = alert("Are you sure theres a mechanic on the station?", "Confirm Pick", "Yes", "No")
-			if(confirm == "Yes")
-				new /obj/item/spacepod_equipment/weaponry/mining_laser_basic(drop_location)
-				new /obj/item/spacepod_equipment/cargo/ore(drop_location)
-				new /obj/item/spacepod_equipment/lock/keyed(drop_location)
-				new /obj/item/spacepod_key(drop_location)
-				new /obj/item/pod_parts/core(drop_location)
-				new /obj/item/circuitboard/mecha/pod(drop_location)
-			else
-				return
-			//HISPANIA SPACEPOD STARTER KIT ENDS HERE
+
 	qdel(voucher)
 
 /obj/machinery/mineral/equipment_vendor/ex_act(severity, target)

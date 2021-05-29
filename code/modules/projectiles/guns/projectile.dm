@@ -9,10 +9,11 @@
 	var/mag_type = /obj/item/ammo_box/magazine/m10mm //Removes the need for max_ammo and caliber info
 	var/obj/item/ammo_box/magazine/magazine
 	var/can_tactical = FALSE //check to see if the gun can tactically reload
+	var/spawn_loaded = TRUE //variable para dmm
 
 /obj/item/gun/projectile/New()
 	..()
-	if(!magazine)
+	if(!magazine && spawn_loaded)
 		magazine = new mag_type(src)
 	chamber_round()
 	update_icon()

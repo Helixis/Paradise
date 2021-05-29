@@ -17,7 +17,7 @@
 	var/stop = 0
 	var/list/spotlights = list()
 	var/list/sparkles = list()
-	var/list/songs = list(
+	var/static/list/songs = list(
 		"Play/Pause", // POR NADA DEL MUNDO QUITAR A ESTE
 		"Lo-Fi Chill || Fly me to the moon - Frank Sinatra"    = new /datum/track('sound/hispania/hispaniabox/Fly_Me_To_The_Moon.ogg',	1340,	5,	"moon", "Fly me to the moon - Frank Sinatra"),
 		"Lo-Fi Chill • Interstellar Main Theme - Hans Zimmer"  = new /datum/track('sound/music/title11.ogg',		2540,	5,	"zimmer", "Interstellar Main Theme - Hans Zimmer"),
@@ -46,7 +46,6 @@
 		)
 	var/datum/track/selection
 	var/track = ""
-	var/musicrange = 10
 
 /datum/track
 	song_name = "???"
@@ -133,7 +132,7 @@
 		. += "<span class='notice'>[bicon(src)] Estas escuchando \"[selection.song_name]\" [bicon(image)]</span>"
 
 /obj/machinery/hispaniabox/proc/double_jukebox()
-	for(var/obj/machinery/hispaniabox/B in range(musicrange*2,src))
+	for(var/obj/machinery/hispaniabox/B in range(20,src))
 		if (B != src && B.active)
 			return TRUE
 	return FALSE
@@ -227,7 +226,7 @@
 	if(world.time < stop && active)
 		var/sound/song_played = sound(selection["song_path"])
 
-		for(var/mob/M in range(musicrange,src))
+		for(var/mob/M in range(10,src))
 			if(!(M in rangers))
 				rangers[M] = TRUE
 
@@ -235,7 +234,7 @@
 					continue
 				M.playsound_local(src, null, 100, channel = CHANNEL_JUKEBOX, S = song_played)
 		for(var/mob/L in rangers)
-			if(get_dist(src, L) > musicrange)
+			if(get_dist(src, L) > 10)
 				rangers -= L
 				if(!L || !L.client)
 					continue
@@ -246,25 +245,13 @@
 		STOP_PROCESSING(SSobj, src)
 		dance_over()
 		playsound(src,'sound/machines/terminal_off.ogg',50,1)
-		icon_state = "[initial(icon_state)]"
+		icon_state = "jukebox"
 		stop = world.time + 100
 
 /obj/machinery/hispaniabox/update_icon()
 	if(stat & BROKEN)
-		icon_state = "[initial(icon_state)]-broken"
+		icon_state = "jukebox-broken"
 	else if (active)
-		icon_state = "[initial(icon_state)]-running"
+		icon_state = "jukebox-running"
 	else
-		icon_state = "[initial(icon_state)]"
-
-/obj/machinery/hispaniabox/boombox
-	name = "boombox"
-	desc = "For REAL Workout."
-	icon_state = "boombox"
-	anchored = TRUE
-	max_integrity = 150
-	integrity_failure = 40
-	songs = list(
-		"Play/Pause",
-		"WORK HARDER NOT SMARTER || Work Harder - LISA"    = new /datum/track('sound/hispania/hispaniabox/harder.ogg',	1240,	5,	"harder", "Work Harder - LISA"),)
-	musicrange = 5
+		icon_state = "jukebox"

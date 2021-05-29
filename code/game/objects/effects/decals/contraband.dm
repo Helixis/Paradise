@@ -82,7 +82,6 @@
 
 	name = initial(selected.name)
 	desc = initial(selected.desc)
-	icon = initial(selected.icon) //Para hispania posters
 	icon_state = initial(selected.icon_state)
 	poster_item_name = initial(selected.poster_item_name)
 	poster_item_desc = initial(selected.poster_item_desc)

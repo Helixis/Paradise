@@ -5,20 +5,34 @@
 	icon_state = "coatrack0"
 	var/obj/item/clothing/suit/coat
 	var/list/allowed = list(/obj/item/clothing/suit/storage/labcoat, /obj/item/clothing/suit/storage/det_suit, /obj/item/clothing/suit/armor/hos, /obj/item/clothing/suit/captunic/capjacket, /obj/item/clothing/suit/storage/lawyer, /obj/item/clothing/suit/tracksuit, /obj/item/clothing/suit/hooded/hoodie,
-							/obj/item/clothing/suit/storage/blueshield, /obj/item/clothing/suit/jacket/pilot, /obj/item/clothing/suit/jacket/miljacket, /obj/item/clothing/suit/tailcoat, /obj/item/clothing/suit/victcoat, /obj/item/clothing/suit/blacktrenchcoat, /obj/item/clothing/head/hooded/winterhood)
+							/obj/item/clothing/suit/storage/blueshield, /obj/item/clothing/suit/jacket/pilot, /obj/item/clothing/suit/jacket/miljacket, /obj/item/clothing/suit/tailcoat, /obj/item/clothing/suit/victcoat, /obj/item/clothing/suit/blacktrenchcoat, /obj/item/clothing/suit/hooded/wintercoat)
+
+/obj/structure/coatrack/New()
+	..()
+	if(coat)
+		coat = new coat
+		coat.loc = src
+		update_icon()
 
 /obj/structure/coatrack/attack_hand(mob/user as mob)
-	user.visible_message("[user] takes [coat] off \the [src].", "You take [coat] off the \the [src]")
-	if(!user.put_in_active_hand(coat))
-		coat.loc = get_turf(user)
-	coat = null
-	update_icon()
+	if(coat)
+		user.visible_message("[user] takes [coat] off \the [src].", "You take [coat] off the \the [src]")
+		if(!user.put_in_active_hand(coat))
+			coat.loc = get_turf(user)
+		coat = null
+		update_icon()
+
+/obj/structure/coatrack/examine(mob/living/M)
+	. = ..()
+	if (coat)
+		var/image = image(coat.icon, icon_state = initial(coat.icon_state))
+		. += "<span class='notice'>There's an [coat.name] [bicon(image)] hanging.</span>"
 
 /obj/structure/coatrack/attackby(obj/item/W as obj, mob/user as mob, params)
-	var/can_hang = 0
+	var/can_hang = FALSE
 	for(var/T in allowed)
 		if(istype(W,T))
-			can_hang = 1
+			can_hang = TRUE
 	if(can_hang && !coat)
 		user.visible_message("[user] hangs [W] on \the [src].", "You hang [W] on the \the [src]")
 		coat = W
@@ -29,10 +43,10 @@
 		return ..()
 
 /obj/structure/coatrack/CanPass(atom/movable/mover, turf/target, height=0)
-	var/can_hang = 0
+	var/can_hang = FALSE
 	for(var/T in allowed)
 		if(istype(mover,T))
-			can_hang = 1
+			can_hang = TRUE
 
 	if(can_hang && !coat)
 		src.visible_message("[mover] lands on \the [src].")
@@ -59,8 +73,8 @@
 		overlays += image(icon, icon_state = "jacket")
 	if(istype(coat, /obj/item/clothing/suit/storage/lawyer))
 		overlays += image(icon, icon_state = "iaa")
-	if(istype(coat, /obj/item/clothing/head/hooded/winterhood))
-		overlays += image(icon, icon_state = "fluffy")
+	if(istype(coat, /obj/item/clothing/suit/hooded/wintercoat))
+		overlays += image(icon, icon_state = initial(coat.icon_state))
 	if(istype(coat, /obj/item/clothing/suit/captunic/capjacket))
 		overlays += image(icon, icon_state = "cap")
 	if(istype(coat, /obj/item/clothing/suit/jacket/pilot))

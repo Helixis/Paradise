@@ -6,7 +6,7 @@
 	item_color = "doctor_envirosuit"
 
 /obj/item/clothing/under/plasmaman/cmo
-	name = "chief medical officer's plasma envirosuit"
+	name = "cmo plasma envirosuit"
 	desc = "A suit designed for the station's more plasma-based chief medical officer."
 	icon_state = "cmo_envirosuit"
 	item_state = "cmo_envirosuit"
@@ -20,7 +20,7 @@
 	item_color = "scientist_envirosuit"
 
 /obj/item/clothing/under/plasmaman/rd
-	name = "research director's plasma envirosuit"
+	name = "rd plasma envirosuit"
 	desc = "A plasmaman envirosuit designed for the research director."
 	icon_state = "rd_envirosuit"
 	item_state = "rd_envirosuit"

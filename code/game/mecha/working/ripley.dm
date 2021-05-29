@@ -62,7 +62,7 @@
 			add_overlay(occupant ? "ripley-g-full" : "ripley-g-full-open")
 
 /obj/mecha/working/ripley/firefighter
-	desc = "A standard APLU chassis that was refitted with additional thermal protection and a cistern."
+	desc = "Standart APLU chassis was refitted with additional thermal protection and cistern."
 	name = "APLU \"Firefighter\""
 	icon_state = "firefighter"
 	initial_icon = "firefighter"

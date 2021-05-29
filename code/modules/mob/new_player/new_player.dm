@@ -98,8 +98,8 @@
 
 		if(SSticker.current_state == GAME_STATE_PREGAME)
 			stat("Players:", "[totalPlayers]")
-			//if(check_rights(R_ADMIN, 0, src)) Readys Global
-			stat("Players Ready:", "[totalPlayersReady]")
+			if(check_rights(R_ADMIN, 0, src))
+				stat("Players Ready:", "[totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
@@ -198,8 +198,7 @@
 			QDEL_NULL(mind)
 			GLOB.respawnable_list += observer
 			qdel(src)
-			return TRUE
-		return FALSE
+			return 1
 	if(href_list["tos"])
 		privacy_consent()
 		return FALSE

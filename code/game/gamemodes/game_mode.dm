@@ -40,6 +40,8 @@
 	var/list/datum/mind/xenos = list()
 	var/list/datum/mind/eventmiscs = list()
 
+	var/datum/game_mode/eventmode = null
+
 	var/list/datum/station_goal/station_goals = list() // A list of all station goals for this game mode
 
 /datum/game_mode/proc/announce() //to be calles when round starts
@@ -69,6 +71,9 @@
 
 	return 1
 
+// SHISHISHITCODEEEEE
+/datum/game_mode/proc/eventmode_end()
+	return
 
 ///post_setup()
 ///Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things
@@ -513,7 +518,7 @@
 		var/datum/station_goal/picked = pick_n_take(possible)
 		goal_weights += initial(picked.weight)
 		station_goals += new picked
-	station_goals += new /datum/station_goal/redspacesearch //Forzamos que siempre sea un station_goal Hispania
+
 	if(station_goals.len)
 		send_station_goals_message()
 

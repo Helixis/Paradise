@@ -21,11 +21,10 @@
 	item_state = "pwig"
 
 /obj/item/clothing/head/justice_wig
-	name = "justice wig"
+	name = "Justice wig"
 	desc = "A fancy powdered wig given to arbitrators of the law. It looks itchy."
 	icon_state = "jwig"
 	item_state = "jwig"
-	dog_fashion = /datum/dog_fashion/head/justice_wig
 
 /obj/item/clothing/head/beret/blue
 	icon_state = "beret_blue"
@@ -188,7 +187,6 @@
 	icon_state = "bowler_hat"
 	item_state = "bowler_hat"
 	desc = "For that industrial age look."
-	dog_fashion = /datum/dog_fashion/head/bowlerhat
 
 /obj/item/clothing/head/beaverhat
 	name = "beaver hat"
@@ -300,10 +298,10 @@
 	flags = BLOCKHAIR
 
 /obj/item/clothing/head/xenos
-	name = "xeno helmet"
-	desc = "A helmet made out of chitinous alien hide."
+	name = "xenos helmet"
 	icon_state = "xenos"
 	item_state = "xenos_helm"
+	desc = "A helmet made out of chitinous alien hide."
 	flags = BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
@@ -332,51 +330,51 @@
 	"Vox" = 'icons/mob/species/vox/head.dmi'
 	)
 
-/obj/item/clothing/head/stalhelm //Why do these exist
-	name = "clown stalhelm"
+/obj/item/clothing/head/stalhelm
+	name = "Clown Stalhelm"
 	desc = "The typical clown soldier's helmet."
 	icon_state = "stalhelm"
 	item_state = "stalhelm"
 	flags = BLOCKHAIR
 	flags_inv = HIDEEARS
 
-/obj/item/clothing/head/panzer //Why
-	name = "clown HONKMech cap"
+/obj/item/clothing/head/panzer
+	name = "Clown HONKMech Cap"
 	desc = "The softcap worn by HONK Mech pilots."
 	icon_state = "panzercap"
 	item_state = "panzercap"
 	flags = BLOCKHAIR
 
-/obj/item/clothing/head/naziofficer //Ah, come on
-	name = "clown officer cap"
+/obj/item/clothing/head/naziofficer
+	name = "Clown Officer Cap"
 	desc = "The peaked clown officer's cap, disturbingly similar to the warden's."
 	icon_state = "officercap"
 	item_state = "officercap"
 	flags = BLOCKHAIR
 	flags_inv = HIDEEARS
 
-/obj/item/clothing/head/beret/purple //Fluff?
+/obj/item/clothing/head/beret/purple
 	name = "Pierson Family Beret"
 	desc = " A purple beret, with a small golden crescent moon sewn onto it."
 	icon_state = "beret_purple"
 	item_state = "purpleberet"
 
 /obj/item/clothing/head/beret/centcom/officer
-	name = "officer beret"
+	name = "officers beret"
 	desc = "A black beret adorned with the shield—a silver kite shield with an engraved sword—of the Nanotrasen security forces, announcing to the world that the wearer is a defender of Nanotrasen."
 	icon_state = "beret_centcom_officer"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30,"energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 20, "acid" = 50)
 	strip_delay = 60
 
 /obj/item/clothing/head/beret/centcom/officer/navy
-	name = "navy blue officer beret"
+	name = "navy blue officers beret"
 	desc = "A navy blue beret adorned with the shield—a silver kite shield with an engraved sword—of the Nanotrasen security forces, announcing to the world that the wearer is a defender of Nanotrasen."
 	icon_state = "beret_centcom_officer_navy"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30,"energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 20, "acid" = 50)
 	strip_delay = 60
 
 /obj/item/clothing/head/beret/centcom/captain
-	name = "captain's beret"
+	name = "captains beret"
 	desc = "A white beret adorned with the shield—a cobalt kite shield with an engraved sword—of the Nanotrasen security forces, worn only by those captaining a vessel of the Nanotrasen Navy."
 	icon_state = "beret_centcom_captain"
 
@@ -403,8 +401,8 @@
 	dog_fashion = null
 
 /obj/item/clothing/head/cone
-	name = "warning cone"
 	desc = "This cone is trying to warn you of something!"
+	name = "warning cone"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cone"
 	item_state = "cone"
@@ -450,7 +448,7 @@
 
 
 /obj/item/clothing/head/lordadmiralhat
-	name = "lord admiral's hat"
+	name = "Lord Admiral's Hat"
 	desc = "A hat suitable for any man of high and exalted rank."
 	icon_state = "lordadmiralhat"
 	item_state = "lordadmiralhat"

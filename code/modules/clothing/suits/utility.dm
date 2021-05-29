@@ -122,7 +122,7 @@
  * Radiation protection
  */
 /obj/item/clothing/head/radiation
-	name = "radiation hood"
+	name = "Radiation Hood"
 	icon_state = "rad"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
 	flags = BLOCKHAIR|THICKMATERIAL
@@ -138,7 +138,7 @@
 		)
 
 /obj/item/clothing/suit/radiation
-	name = "radiation suit"
+	name = "Radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
 	icon_state = "rad"
 	item_state = "rad_suit"

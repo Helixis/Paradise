@@ -26,8 +26,6 @@
 	male_scream_sound = 'sound/goonstation/voice/monkey_scream.ogg'
 	female_scream_sound = 'sound/goonstation/voice/monkey_scream.ogg'
 
-	male_laughs_sound = list('sound/hispania/voice/human/silence.ogg')//Hispania Laughs
-	female_laughs_sound = list('sound/hispania/voice/human/silence.ogg')//Hispania Laughs
 	tail = "chimptail"
 	bodyflags = HAS_TAIL
 	reagent_tag = PROCESS_ORG
@@ -40,10 +38,7 @@
 	burn_mod = 1.5
 
 /datum/species/monkey/handle_npc(mob/living/carbon/human/H)
-	if(H.incapacitated(TRUE, TRUE) || !H.canmove)
-		walk_to(H,0)
-		return
-	if(H.handle_combat())
+	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled
 		step(H, pick(GLOB.cardinal))

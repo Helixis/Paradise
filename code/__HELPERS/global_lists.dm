@@ -84,13 +84,13 @@
 			continue
 
 		if(!use_name)
-			stack_trace("Loadout - Missing display name: [G]")
+			error("Loadout - Missing display name: [G]")
 			continue
 		if(!initial(G.cost))
-			stack_trace("Loadout - Missing cost: [G]")
+			error("Loadout - Missing cost: [G]")
 			continue
 		if(!initial(G.path))
-			stack_trace("Loadout - Missing path definition: [G]")
+			error("Loadout - Missing path definition: [G]")
 			continue
 
 		if(!GLOB.loadout_categories[use_category])

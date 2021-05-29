@@ -323,7 +323,6 @@
 					var/mob/living/simple_animal/hostile/construct/C = new picked_class(shell.loc)
 					C.init_construct(shade, src, shell)
 					to_chat(C, C.playstyle_string)
-					to_chat(C, "<span class='motd'>For more information, check the wiki page: ([config.wikiurl]/index.php/Construct)</span>")
 			else
 				to_chat(user, "<span class='danger'>Creation failed!</span>: The soul stone is empty! Go kill someone!")
 
@@ -340,11 +339,13 @@
 	if(shade.mind)
 		shade.mind.transfer_to(src)
 	if(SS.purified)
-		make_holy()
+		set_light(3, 5, LIGHT_COLOR_DARK_BLUE)
+		name = "Holy [name]"
+		real_name = "Holy [real_name]"
+
 		// Replace regular soulstone summoning with purified soulstones
-		if(is_type_in_list(/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone, mob_spell_list))
-			RemoveSpell(/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone)
-			AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone/holy)
+		RemoveSpell(/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone)
+		AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone/holy)
 
 	else if(iscultist(src)) // Re-grant cult actions, lost in the transfer
 		var/datum/action/innate/cult/comm/CC = new

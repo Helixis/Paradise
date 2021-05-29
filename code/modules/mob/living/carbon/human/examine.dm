@@ -7,7 +7,6 @@
 	var/skipears = 0
 	var/skipeyes = 0
 	var/skipface = 0
-	var/obscure_name = FALSE
 
 	//exosuits and helmets obscure our view and stuff.
 	if(wear_suit)
@@ -26,17 +25,11 @@
 		skipface |= wear_mask.flags_inv & HIDEFACE
 		skipeyes |= wear_mask.flags_inv & HIDEEYES
 
-	var/msg = ""
+	var/msg = "<span class='info'>*---------*\nThis is "
 
 	if(!(skipjumpsuit && skipface) && icon) //big suits/masks/helmets make it hard to tell their gender
 		msg += "[bicon(icon(icon, dir=SOUTH))] " //fucking BYOND: this should stop dreamseeker crashing if we -somehow- examine somebody before their icon is generated
-
-	if(isliving(user)) // HISPANIA || SIN CARAS
-		var/mob/living/L = user
-		if(HAS_TRAIT(L,TRAIT_PROSOPAGNOSIA))
-			obscure_name = TRUE
-
-	msg += "<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "UNKNOWN"]</EM>"  // HISPANIA END
+	msg += "<EM>[name]</EM>"
 
 	var/displayed_species = dna.species.name
 	var/examine_color = dna.species.flesh_color

@@ -1,5 +1,5 @@
 /obj/item/clothing/head/helmet/space/chronos
-	name = "chronosuit helmet"
+	name = "Chronosuit Helmet"
 	desc = "A white helmet with an opaque blue visor."
 	icon_state = "chronohelmet"
 	item_state = "chronohelmet"
@@ -19,7 +19,7 @@
 
 
 /obj/item/clothing/suit/space/chronos
-	name = "chronosuit"
+	name = "Chronosuit"
 	desc = "An advanced spacesuit equipped with teleportation and anti-compression technology"
 	icon_state = "chronosuit"
 	item_state = "chronosuit"
@@ -178,7 +178,7 @@
 
 
 /obj/effect/chronos_cam
-	name = "chronosuit view"
+	name = "Chronosuit View"
 	density = 0
 	anchored = 1
 	invisibility = 101

@@ -14,8 +14,6 @@
  * Metal
  */
 GLOBAL_LIST_INIT(metal_recipes, list(
-	new /datum/stack_recipe("metal platform", /obj/structure/platform, 4, time = 30,one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
-	new /datum/stack_recipe("metal platform corner", /obj/structure/platform/corner, 2, time = 20, one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
 	new /datum/stack_recipe("stool", /obj/structure/chair/stool, one_per_turf = 1, on_floor = 1),
 	new /datum/stack_recipe("barstool", /obj/structure/chair/stool/bar, one_per_turf = 1, on_floor = 1),
 	new /datum/stack_recipe("chair", /obj/structure/chair, one_per_turf = 1, on_floor = 1),
@@ -112,8 +110,6 @@ GLOBAL_LIST_INIT(metal_recipes, list(
 	point_value = 2
 
 /obj/item/stack/sheet/metal/cyborg
-	energy_type = /datum/robot_energy_storage/metal
-	is_cyborg = TRUE
 	materials = list()
 
 /obj/item/stack/sheet/metal/fifty
@@ -135,8 +131,6 @@ GLOBAL_LIST_INIT(metal_recipes, list(
  * Plasteel
  */
 GLOBAL_LIST_INIT(plasteel_recipes, list(
-	new /datum/stack_recipe("reinforced plasteel platform", /obj/structure/platform/reinforced, 4, time = 40,one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
-	new /datum/stack_recipe("reinforced plasteel platform corner", /obj/structure/platform/reinforced/corner, 2, time = 30,one_per_turf = TRUE, on_floor = TRUE), //Hispania Platform Recipe
 	new /datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1),
 	new /datum/stack_recipe("bomb assembly", /obj/machinery/syndicatebomb/empty, 3, time = 50),
 	new /datum/stack_recipe("Surgery Table", /obj/machinery/optable, 5, time = 50, one_per_turf = 1, on_floor = 1),
@@ -168,10 +162,6 @@ GLOBAL_LIST_INIT(plasteel_recipes, list(
 /obj/item/stack/sheet/plasteel/New(loc, amount=null)
 	recipes = GLOB.plasteel_recipes
 	return ..()
-
-/obj/item/stack/sheet/wood/cyborg
-	energy_type = /datum/robot_energy_storage/wood
-	is_cyborg = TRUE
 
 /*
  * Wood
@@ -331,7 +321,6 @@ GLOBAL_LIST_INIT(cardboard_recipes, list (
 	new /datum/stack_recipe("folder", /obj/item/folder),
 	new /datum/stack_recipe("cardboard tube", /obj/item/c_tube),
 	new /datum/stack_recipe("cardboard box", /obj/structure/closet/cardboard, 4),
-	new /datum/stack_recipe("beer box", /obj/item/storage/fancy/beerbox, 2), //Hispania Beerbox
 	new /datum/stack_recipe("cardboard cutout", /obj/item/cardboard_cutout, 5)
 ))
 

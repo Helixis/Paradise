@@ -83,7 +83,7 @@
 
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
-	desc = "A Nazi great coat." //A what
+	desc = "A Nazi great coat."
 	icon_state = "nazi"
 	item_state = "nazi"
 
@@ -383,7 +383,7 @@
 	body_parts_covered = HEAD
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
-	flags = BLOCKHAIR
+	flags = BLOCKHEADHAIR
 	flags_inv = HIDEEARS
 
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
@@ -710,7 +710,7 @@
 	icon_state = "white_jacket"
 
 /obj/item/clothing/suit/xenos
-	name = "xeno suit"
+	name = "xenos suit"
 	desc = "A suit made out of chitinous alien hide."
 	icon_state = "xenos"
 	item_state = "xenos_helm"
@@ -764,7 +764,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/head/mercy_hood
-	name = "mercy Hood"
+	name = "Mercy Hood"
 	desc = "A soft white hood made of a synthetic fiber that provides improved protection against biohazards. Its elegant design allows a clear field of vision."
 	icon_state = "mercy_hood"
 	item_state = "mercy_hood"
@@ -841,8 +841,8 @@
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/suit/officercoat
-	name = "clown officer's coat"
-	desc = "A classy clown officer's overcoat, also designed by Hugo Boss." //What and why
+	name = "Clown Officer's Coat"
+	desc = "A classy clown officer's overcoat, also designed by Hugo Boss."
 	icon_state = "officersuit"
 	item_state = "officersuit"
 	ignore_suitadjust = 0
@@ -854,7 +854,7 @@
 		)
 
 /obj/item/clothing/suit/soldiercoat
-	name = "clown soldier's coat"
+	name = "Clown Soldier's Coat"
 	desc = "An overcoat for the clown soldier, to keep him warm during those cold winter nights on the front."
 	icon_state = "soldiersuit"
 	item_state = "soldiersuit"
@@ -897,7 +897,7 @@
 		A.UpdateButtonIcon()
 
 /obj/item/clothing/suit/lordadmiral
-	name = "lord admiral's coat"
+	name = "Lord Admiral's Coat"
 	desc = "You'll be the Ruler of the King's Navy in no time."
 	icon_state = "lordadmiral"
 	item_state = "lordadmiral"
@@ -914,7 +914,7 @@
 ///Advanced Protective Suit, AKA, God Mode in wearable form.
 
 /obj/item/clothing/suit/advanced_protective_suit
-	name = "advanced protective suit"
+	name = "Advanced Protective Suit"
 	desc = "An incredibly advanced and complex suit; it has so many buttons and dials as to be incomprehensible."
 	w_class = WEIGHT_CLASS_BULKY
 	icon_state = "bomb"

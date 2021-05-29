@@ -117,7 +117,6 @@
 	////////////////
 	var/datum/click_handler/CH
 	///////////////////////////
-	var/list/recent_examines // HISPANIA EYE CONTACT
 
 /client/vv_edit_var(var_name, var_value)
 	switch(var_name)

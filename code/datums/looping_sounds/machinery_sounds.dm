@@ -16,4 +16,3 @@
 	falloff_exponent = 10
 	falloff_distance = 5
 	vary = TRUE
-	channel = CHANNEL_ENGINE

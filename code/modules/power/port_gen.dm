@@ -398,6 +398,7 @@
 	component_parts += new /obj/item/stock_parts/capacitor/super(null)
 	component_parts += new board_path(null)
 	RefreshParts()
+	update_icon()
 
 /obj/machinery/power/port_gen/pacman/super/UseFuel()
 	//produces a tiny amount of radiation when in use

@@ -18,13 +18,11 @@
 	hispa_contraband = list(/obj/item/reagent_containers/food/drinks/bottle/hispania/vampire_bestfriend = 5)
 
 /obj/machinery/vending/coffee
-	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/hispania/mr_coffe_brown = 10)
-	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/hispania/mr_coffe_brown = 25)
+	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 10)
+	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/mr_coffe_brown = 25)
 
 /obj/machinery/vending/security
-	hispa_products = list(/obj/item/taperoll = 8, /obj/item/device/binoculars/security = 2, /obj/item/storage/bag/plasticbag/mre = 2)
-	hispa_prices = list(/obj/item/storage/bag/plasticbag/mre = 450)
-	hispa_premium = list(/obj/item/fluff/mongosflash = 1)
+	hispa_products = list(/obj/item/taperoll = 8, /obj/item/device/binoculars/security = 2)
 
 /obj/machinery/vending/tool
 	hispa_products = list(/obj/item/taperoll/engi = 10)
@@ -113,8 +111,7 @@
 					/obj/item/storage/belt/fannypack/red = 30,
 					/obj/item/clothing/suit/mantle = 200,
 					/obj/item/clothing/suit/mantle/old = 200,
-					/obj/item/clothing/suit/mantle/regal = 200,
-					/obj/item/clothing/suit/jacket/motojacket = 450)
+					/obj/item/clothing/suit/mantle/regal = 200)
 
 //este vending es gratis en paradise
 /obj/machinery/vending/artvend
@@ -135,12 +132,6 @@
 
 //este vending es gratis en paradise
 /obj/machinery/vending/autodrobe
-
-	hispa_products = list(/obj/item/clothing/mask/thief = 4,
-					/obj/item/clothing/mask/thief/wolf = 4,
-					/obj/item/clothing/mask/thief/hoxton = 4,
-					/obj/item/clothing/mask/thief/chains = 4)
-
 	hispa_prices = list(/obj/item/clothing/suit/chickensuit = 150,
 					/obj/item/clothing/head/chicken = 150,
 					/obj/item/clothing/under/gladiator = 100,
@@ -211,10 +202,6 @@
 					/obj/item/clothing/mask/face/fox = 90,
 					/obj/item/clothing/mask/face/tribal = 90,
 					/obj/item/clothing/mask/face/rat = 90,
-					/obj/item/clothing/mask/thief = 100,
-					/obj/item/clothing/mask/thief/wolf = 100,
-					/obj/item/clothing/mask/thief/hoxton = 100,
-					/obj/item/clothing/mask/thief/chains = 100,
 					/obj/item/clothing/suit/apron/overalls = 50,
 					/obj/item/clothing/head/rabbitears = 100,
 					/obj/item/clothing/head/sombrero = 100,
@@ -255,8 +242,7 @@
 					/obj/item/clothing/under/redhawaiianshirt = 52,
 					/obj/item/clothing/under/pinkhawaiianshirt = 52,
 					/obj/item/clothing/under/bluehawaiianshirt = 52,
-					/obj/item/clothing/under/orangehawaiianshirt = 52,
-					/obj/item/clothing/under/tourist_suit = 50)
+					/obj/item/clothing/under/orangehawaiianshirt = 52)
 
 //este vending es gratis en paradise
 /obj/machinery/vending/hatdispenser
@@ -315,35 +301,26 @@
 					/obj/item/clothing/shoes/purple = 50,
 					/obj/item/clothing/shoes/red = 100,
 					/obj/item/clothing/shoes/white = 100,
-					/obj/item/clothing/shoes/sandal = 15,
-					/obj/item/clothing/shoes/jackboots = 350)
-	hispa_premium = list(/obj/item/clothing/shoes/swagshoes = 1)
+					/obj/item/clothing/shoes/sandal = 15)
 
 /obj/machinery/vending/cola
-	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/hispania/space_mundet = 10, /obj/item/reagent_containers/food/drinks/cans/hispania/behemoth_energy = 2,
-					/obj/item/reagent_containers/food/drinks/cans/hispania/behemoth_energy_lite = 1)
-	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/hispania/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/hispania/behemoth_energy = 50,
-					/obj/item/reagent_containers/food/drinks/cans/hispania/behemoth_energy_lite = 50)
+	hispa_products = list(/obj/item/reagent_containers/food/drinks/cans/space_mundet = 10, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 2,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 1)
+	hispa_prices = list(/obj/item/reagent_containers/food/drinks/cans/space_mundet = 20, /obj/item/reagent_containers/food/drinks/cans/behemoth_energy = 50,
+					/obj/item/reagent_containers/food/drinks/cans/behemoth_energy_lite = 50)
 
 /obj/machinery/vending/wallmed
 	hispa_products = list(/obj/item/reagent_containers/food/pill/patch/styptic = 1, /obj/item/reagent_containers/food/pill/patch/silver_sulf = 1)
 
 /obj/machinery/vending/hydroseeds
-	hispa_products = list(/obj/item/seeds/agave = 3,
-						/obj/item/seeds/aloe = 3,
-						/obj/item/seeds/anonna = 3,
-						/obj/item/seeds/avocado = 3,
-						/obj/item/seeds/bell_pepper = 3,
-						/obj/item/seeds/coconut = 3,
-						/obj/item/seeds/fungus = 3,
-						/obj/item/seeds/kiwi = 3,
-						/obj/item/seeds/mango = 3,
-						/obj/item/seeds/mate = 3,
-						/obj/item/seeds/nispero = 3,
-						/obj/item/seeds/peach = 3,
-						/obj/item/seeds/prickly_pear = 3,
-						/obj/item/seeds/ricinus = 3,
-						/obj/item/seeds/strawberry = 3)
+	hispa_products = list(/obj/item/seeds/agave = 3, /obj/item/seeds/aloe = 3,
+					/obj/item/seeds/anonna = 3, /obj/item/seeds/avocado = 3,
+					/obj/item/seeds/bell_pepper = 3, /obj/item/seeds/kiwi = 3,
+					/obj/item/seeds/fungus = 3,/obj/item/seeds/ricinus = 3,
+					/obj/item/seeds/strawberry = 3,/obj/item/seeds/mango = 3,
+					/obj/item/seeds/prickly_pear = 3,/obj/item/seeds/coconut = 3,
+					/obj/item/seeds/mate = 3,/obj/item/seeds/nispero = 3,
+					/obj/item/seeds/peach = 3)
 
 	hispa_contraband = list(/obj/item/seeds/money = 2)
 
@@ -495,7 +472,6 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 					/obj/item/clothing/glasses/monocle = 5,
 					/obj/item/clothing/glasses/regular = 5,
 					/obj/item/clothing/ears/headphones = 5,
-					/obj/item/clothing/ears/headphones/airpods = 2,
 					/obj/item/clothing/accessory/necklace = 5,
 					/obj/item/clothing/accessory/necklace = 5,
 					/obj/item/clothing/accessory/necklace/dope = 5,
@@ -526,7 +502,6 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 					/obj/item/clothing/glasses/monocle = 400,
 					/obj/item/clothing/glasses/regular = 400,
 					/obj/item/clothing/ears/headphones = 450,
-					/obj/item/clothing/ears/headphones/airpods = 2000,
 					/obj/item/clothing/accessory/necklace = 300,
 					/obj/item/clothing/accessory/necklace/dope = 500,
 					/obj/item/clothing/accessory/necklace/locket = 1200,
@@ -587,32 +562,4 @@ deberan tener una linea de codigo demas para que funcionen "hispania_icon = TRUE
 					/obj/item/reagent_containers/food/snacks/discountbar = 15,
 					/obj/item/reagent_containers/food/snacks/discountpie = 50,
 					/obj/item/reagent_containers/food/condiment/pack/discount_sauce = 10
-					)
-
-/obj/machinery/vending/fitness
-	name = "\improper SweatMAX"
-	desc = "An exercise aid and nutrition supplement vendor that preys on your inadequacy."
-	ads_list = list("Pain is just weakness leaving the body!","Run! Your fat is catching up to you", "Never forget leg day!","Push out!","This is the only break you get today.","Don't cry, sweat!","Healthy is an outfit that looks good on everybody.")
-	icon = 'icons/hispania/obj/vending.dmi'
-	slogan_list = list("SweatMAX, get robust!")
-	vend_reply = "Get robust!"
-	icon_state = "fitness"
-	icon_vend = "fitness-vend"
-	density = TRUE
-	vend_delay = 12
-	products = list(/obj/item/reagent_containers/food/drinks/hispania/minimilk = 6,
-					/obj/item/reagent_containers/food/drinks/hispania/minimilk/minimilk_chocolate = 6,
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker = 1, ///Cause its edgy everyone wants it
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker/red = 2,
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker/blue = 2,
-					/obj/item/reagent_containers/food/snacks/proteinbar = 3,
-					/obj/item/reagent_containers/glass/beaker/waterbottle = 10
-					)
-	prices = list(	/obj/item/reagent_containers/food/drinks/hispania/minimilk = 50,
-					/obj/item/reagent_containers/food/drinks/hispania/minimilk/minimilk_chocolate = 55,
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker = 550, //Protein its expensive even in space
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker/red = 500,
-					/obj/item/reagent_containers/glass/beaker/waterbottle/fitnessshaker/blue = 500,
-					/obj/item/reagent_containers/food/snacks/proteinbar = 100,
-					/obj/item/reagent_containers/glass/beaker/waterbottle = 30
 					)

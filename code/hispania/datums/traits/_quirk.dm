@@ -79,8 +79,8 @@
 			var/datum/quirk/T = V
 			dat += T.medical_record_text
 		if(!dat.len)
-			return "Paciente sin rasgos destacables."
-		return dat.Join(" || ")
+			return "None"
+		return dat.Join("<br>")
 
 /mob/living/proc/cleanse_trait_datums() //removes all trait datums
 	for(var/V in roundstart_quirks)

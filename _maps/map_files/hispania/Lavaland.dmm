@@ -2030,7 +2030,7 @@
 /obj/docking_port/mobile{
 	dir = 8;
 	dwidth = 3;
-	height = 7;
+	height = 5;
 	id = "mining";
 	name = "mining shuttle";
 	rebuildable = 1;
@@ -2041,13 +2041,13 @@
 	area_type = /area/lavaland/surface/outdoors;
 	dir = 8;
 	dwidth = 3;
-	height = 7;
+	height = 5;
 	id = "mining_away";
 	name = "lavaland mine";
 	turf_type = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface;
 	width = 7
 	},
-/turf/simulated/floor/mineral/titanium,
+/turf/simulated/floor/plating,
 /area/shuttle/mining)
 "eJ" = (
 /obj/machinery/door/airlock/external{
@@ -4591,11 +4591,6 @@
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/living_quarters)
-"mG" = (
-/obj/structure/table,
-/obj/item/storage/firstaid/regular,
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 "mT" = (
 /obj/structure/curtain/open/shower,
 /obj/machinery/shower,
@@ -4645,14 +4640,6 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/siberia)
-"si" = (
-/obj/structure/closet/walllocker/emerglocker/west,
-/obj/structure/rack,
-/obj/item/stack/sheet/mineral/sandbags{
-	amount = 20
-	},
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 "sS" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -4676,6 +4663,13 @@
 /area/mine/living_quarters)
 "uR" = (
 /turf/simulated/wall/mineral/titanium,
+/area/shuttle/mining)
+"vm" = (
+/obj/structure/ore_box,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "wT" = (
 /obj/machinery/light/small{
@@ -4745,6 +4739,10 @@
 "CO" = (
 /turf/simulated/wall/mineral/titanium,
 /area/shuttle/siberia)
+"CW" = (
+/obj/structure/table,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "CY" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
@@ -4820,19 +4818,6 @@
 	},
 /turf/simulated/floor/plasteel,
 /area/mine/living_quarters)
-"Is" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/shuttle/engine/heater,
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 "It" = (
 /obj/effect/baseturf_helper/lava_land/surface,
 /turf/simulated/floor/plasteel{
@@ -4873,6 +4858,12 @@
 	},
 /turf/simulated/floor/mineral/titanium,
 /area/shuttle/siberia)
+"Lq" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "NX" = (
 /obj/machinery/computer/arcade/orion_trail,
 /turf/simulated/floor/plasteel,
@@ -4881,30 +4872,6 @@
 /obj/structure/chair/sofa/left,
 /turf/simulated/floor/plasteel,
 /area/mine/living_quarters)
-"Pl" = (
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
-"Pr" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/item/radio/intercom{
-	dir = 8;
-	name = "Station Intercom (General)";
-	pixel_x = -28
-	},
-/obj/structure/extinguisher_cabinet{
-	pixel_x = -5;
-	pixel_y = 30
-	},
-/obj/structure/rack,
-/obj/item/pickaxe,
-/obj/item/shovel,
-/obj/item/stack/sheet/mineral/sandbags{
-	amount = 20
-	},
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 "PB" = (
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/siberia)
@@ -4917,15 +4884,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/vending/wallmed{
-	name = "Emergency NanoMed";
-	pixel_x = 30;
-	pixel_y = 0;
-	req_access_txt = "0"
-	},
-/obj/item/storage/pill_bottle/patch_pack,
-/obj/item/storage/pill_bottle/patch_pack,
-/obj/item/roller,
 /turf/simulated/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "Ru" = (
@@ -4946,10 +4904,6 @@
 /obj/effect/spawner/window/reinforced,
 /turf/simulated/floor/plasteel,
 /area/mine/living_quarters)
-"SM" = (
-/obj/structure/ore_box,
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 "Tn" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
@@ -4958,14 +4912,6 @@
 	},
 /turf/simulated/floor/plating/airless,
 /area/shuttle/siberia)
-"Vv" = (
-/obj/machinery/door/airlock/titanium{
-	id_tag = "s_docking_airlock";
-	req_access_txt = "48"
-	},
-/obj/structure/fans/tiny,
-/turf/simulated/floor/mineral/titanium,
-/area/shuttle/mining)
 "VH" = (
 /obj/machinery/alarm{
 	pixel_y = 23
@@ -4975,22 +4921,12 @@
 /area/mine/living_quarters)
 "Xz" = (
 /obj/structure/closet/crate,
-/obj/machinery/light/small,
 /turf/simulated/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "Yb" = (
 /obj/item/clothing/head/beanie/waldo,
 /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
-"ZK" = (
-/obj/structure/rack,
-/obj/item/pickaxe,
-/obj/item/shovel,
-/obj/item/stack/sheet/mineral/sandbags{
-	amount = 20
-	},
-/turf/simulated/floor/mineral/titanium/blue,
-/area/shuttle/mining)
 
 (1,1,1) = {"
 aa
@@ -16262,7 +16198,7 @@ cI
 cI
 cI
 cX
-cQ
+cX
 bp
 bp
 aD
@@ -16517,8 +16453,8 @@ cI
 cI
 cX
 cX
-cQ
-cQ
+cX
+cX
 bp
 bp
 bp
@@ -16772,13 +16708,13 @@ bp
 bp
 cX
 cX
-cQ
-cQ
+cX
+cX
 bp
 bp
-aD
-aD
-aD
+bp
+bp
+bp
 bp
 bp
 bp
@@ -17031,13 +16967,13 @@ bp
 bp
 bp
 bp
+bp
+bp
 aD
-aD
-aD
-aD
-aD
-aD
-aD
+bp
+bp
+bp
+bp
 bp
 bp
 aD
@@ -17287,15 +17223,15 @@ bp
 bp
 bp
 bp
+bp
+bp
+bp
 aD
-uR
-uR
-zi
-Vv
-zi
-uR
-uR
+bp
 aD
+bp
+bp
+bp
 bp
 bp
 fs
@@ -17543,16 +17479,16 @@ bp
 bp
 bp
 bp
+bp
+bp
 aD
 aD
-uR
-Pr
-Pl
-Cx
-Hr
-si
-uR
 aD
+aD
+aD
+aD
+aD
+bp
 bp
 bp
 bp
@@ -17799,16 +17735,16 @@ aD
 bp
 bp
 bp
+bp
+bp
 aD
-aD
-aD
+uR
+uR
 zi
-ZK
-Cx
-Cx
-CY
-Is
-Hi
+uR
+zi
+uR
+uR
 aD
 bp
 bp
@@ -18060,10 +17996,10 @@ bp
 aD
 aD
 uR
-Jm
-CY
+CW
 Cx
-CY
+Lq
+Hr
 Xz
 uR
 aD
@@ -18317,10 +18253,10 @@ bp
 aD
 aD
 zi
-mG
-Cx
-Cx
+Jm
 CY
+Cx
+Hr
 sS
 Hi
 aD
@@ -18575,10 +18511,10 @@ bp
 aD
 uR
 Re
-Pl
+Cx
 Cx
 Hr
-SM
+vm
 uR
 aD
 aD

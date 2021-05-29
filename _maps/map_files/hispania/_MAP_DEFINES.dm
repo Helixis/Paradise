@@ -1,1 +1,0 @@
-#define PLANET "Near Planet"

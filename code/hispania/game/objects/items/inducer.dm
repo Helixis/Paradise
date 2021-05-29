@@ -33,17 +33,21 @@
 
 /obj/item/inducer/proc/induce(obj/item/stock_parts/cell/target, coefficient)
 	var/promcharge = (target.maxcharge + cell.maxcharge)/2
-	powertransfer = max(mintransfer, promcharge * ratio)
-	var/totransfer = min(cell.charge/coefficient, powertransfer)
+	powertransfer = max(mintransfer, (promcharge * ratio))
+	var/totransfer = min((cell.charge/coefficient), powertransfer)
 	var/transferred = target.give(totransfer)
-	cell.use(min(cell.charge, transferred * coefficient))
+	cell.use(transferred * coefficient)
+	cell.update_icon()
+	target.update_icon()
 
 /obj/item/inducer/proc/invertinduce(obj/item/stock_parts/cell/target, coefficient)
 	var/promcharge = (target.maxcharge + cell.maxcharge)/2
-	powertransfer = max(mintransfer, promcharge * ratio)
-	var/totransfer = min(target.charge/coefficient, powertransfer)
+	powertransfer = max(mintransfer, (promcharge * ratio))
+	var/totransfer = min((target.charge/coefficient), powertransfer)
 	var/transferred = cell.give(totransfer)
-	target.use(min(target.charge, transferred * coefficient))
+	target.use(transferred * coefficient)
+	cell.update_icon()
+	target.update_icon()
 
 /obj/item/inducer/attack(mob/M, mob/user)
 	if(user.a_intent == INTENT_HARM)
@@ -238,7 +242,7 @@
 		update_icon()
 
 /obj/item/inducer/sci/examine(mob/living/M)
-	. = ..()
+	..()
 	if(on)
 		to_chat(M,"<span class='notice'>the self charge is [on ? "on" : "off"].</span>")
 	if(cell)
@@ -274,7 +278,7 @@
 	icon_state = "inducer-engi"
 	item_state = "inducer-engi"
 	origin_tech = "powerstorage=4;materials=3;engineering=3"
-	ratio = 0.15 //<15%> determina que porcentaje de la carga maxima promedio recargada (la mitad de la del objetivo entre la interna)
+	ratio = 0.15 //<30%> determina que porcentaje de la carga maxima promedio recargada (la mitad de la del objetivo entre la interna)
 	coefficient_base = 1.1 //determina que porcentje de energia, del a bateria interna, se pierde al inducir, 10%
 	mintransfer = 50 //determina el valor minimo de la energia inducida
 	on = TRUE
@@ -284,7 +288,8 @@
 	. = ..()
 	if(!cell && cell_type)
 		cell = new cell_type
-		cell.use(cell.charge/2)
+		cell.charge = 500
+	cell.update_icon()
 	update_icon()
 
 /obj/item/inducer/apc/attack_self(mob/user)
@@ -305,12 +310,15 @@
 	else
 		add_overlay("inducer-unpowered")
 
+/obj/item/inducer/apc/proc/DisplayPower(powerused)
+	return "[powerused/2] kW"
+
 /obj/item/inducer/apc/examine(mob/living/M)
-	. = ..()
+	..()
 	if(on)
 		to_chat(M,"<span class='notice'>[on ? "Emission" : "Suction"]Emission mode is activate.</span>")
 	if(cell)
-		to_chat(M, "<span class='notice'>Its display shows: [DisplayPower(cell.charge/GLOB.CELLRATE)] ([round(cell.percent())]%).</span>")
+		to_chat(M, "<span class='notice'>Its display shows: [DisplayPower(cell.charge)] ([round(cell.percent() )]%).</span>")
 	else
 		to_chat(M,"<span class='notice'>Its display is dark.</span>")
 
@@ -384,7 +392,7 @@
 				done_any = FALSE
 			recharging = FALSE
 			return TRUE
-		else
+		if(!on)
 			if(!C.charge)
 				to_chat(user, "<span class='warning'>[A]'s battery is dead!</span>")
 				recharging = FALSE

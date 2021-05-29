@@ -156,6 +156,3 @@
 
 		else
 			. = 1
-
-/obj/structure/chair/wheelchair/bike/wrench_act(mob/user, obj/item/I)
-	return

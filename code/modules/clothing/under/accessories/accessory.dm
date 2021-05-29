@@ -14,8 +14,7 @@
 
 /obj/item/clothing/accessory/New()
 	..()
-	inv_overlay = (hispania_icon ? image("icon" = 'icons/hispania/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]") : image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]"))
-	icon = (hispania_icon ? 'icons/hispania/obj/clothing/ties.dmi' : icon)
+	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]")
 
 /obj/item/clothing/accessory/Destroy()
 	if(has_suit)

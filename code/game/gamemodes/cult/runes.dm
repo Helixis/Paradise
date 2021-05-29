@@ -263,8 +263,6 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/turf/T = get_turf(src)
 	for(var/mob/living/M in T)
 		if(!iscultist(M) || (M.mind && is_sacrifice_target(M.mind)))
-			if(isconstruct(M)) // No offering constructs please
-				continue
 			offer_targets += M
 
 	// Offering a head/brain
@@ -420,8 +418,6 @@ structure_check() searches for nearby cultist structures required for the invoca
 
 /obj/effect/rune/teleport/Destroy()
 	GLOB.teleport_runes -= src
-	QDEL_NULL(inner_portal)
-	QDEL_NULL(outer_portal)
 	return ..()
 
 /obj/effect/rune/teleport/invoke(list/invokers)
@@ -456,7 +452,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 
 	var/input_rune_key = input(user, "Choose a rune to teleport to.", "Rune to Teleport to") as null|anything in potential_runes //we know what key they picked
 	var/obj/effect/rune/teleport/actual_selected_rune = potential_runes[input_rune_key] //what rune does that key correspond to?
-	if(QDELETED(src) || QDELETED(actual_selected_rune) ||!Adjacent(user) || user.incapacitated())
+	if(!src || !Adjacent(user) || QDELETED(src) || user.incapacitated() || !actual_selected_rune)
 		fail_invoke()
 		return
 
@@ -689,7 +685,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 			cultists[M.current.real_name] = M.current
 	var/input = input(user, "Who do you wish to call to [src]?", "Acolytes") as null|anything in cultists
 	var/mob/living/cultist_to_summon = cultists[input]
-	if(QDELETED(src) || !Adjacent(user) || user.incapacitated())
+	if(!src || QDELETED(src) || !Adjacent(user) || user.incapacitated())
 		return
 	if(!cultist_to_summon)
 		log_game("Summon Cultist rune failed - no target")
@@ -886,7 +882,6 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/mob/living/carbon/human/new_human = new(T)
 	new_human.real_name = ghost_to_spawn.real_name
 	new_human.key = ghost_to_spawn.key
-	new_human.gender = ghost_to_spawn.gender
 	new_human.alpha = 150 //Makes them translucent
 	new_human.equipOutfit(/datum/outfit/ghost_cultist) //give them armor
 	new_human.apply_status_effect(STATUS_EFFECT_SUMMONEDGHOST) //ghosts can't summon more ghosts, also lets you see actual ghosts
@@ -1004,7 +999,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 	//BEGIN THE SUMMONING
 	gamemode.cult_objs.succesful_summon()
 	used = TRUE
-	color = COLOR_RED
+	color = rgb(255, 0, 0)
 	..()
 	SEND_SOUND(world, sound('sound/effects/dimensional_rend.ogg'))
 	to_chat(world, "<span class='cultitalic'><b>The veil... <span class='big'>is...</span> <span class='reallybig'>TORN!!!--</span></b></span>")

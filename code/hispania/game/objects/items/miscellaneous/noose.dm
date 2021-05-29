@@ -9,7 +9,7 @@
 	var/image/over
 
 /obj/structure/chair/noose/attackby(obj/item/W, mob/user, params)
-	if(W.sharp)
+	if(iswirecutter(W))
 		user.visible_message("[user] cuts the noose.", "<span class='notice'>You cut the noose.</span>")
 		if(has_buckled_mobs())
 			for(var/mob/living/buckled_mob in buckled_mobs)

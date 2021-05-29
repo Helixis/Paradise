@@ -14,7 +14,6 @@
 	detonation_damage = 65
 	backstab_bonus = 40
 	flags = NODROP
-	slot_flags = 0
 	proyectile_type = /obj/item/projectile/destabilizer/cursed
 
 /obj/item/projectile/destabilizer/cursed

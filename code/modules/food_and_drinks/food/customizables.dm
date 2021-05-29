@@ -41,13 +41,14 @@
 /obj/item/trash/bowl
 	name = "bowl"
 	desc = "An empty bowl. Put some food in it to start making a soup."
-	icon = 'icons/obj/food/custom.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "soup"
 
-/obj/item/trash/bowl/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/reagent_containers/food/snacks) && !(I.flags & NODROP))
+/obj/item/trash/bowl/attackby(obj/item/W, mob/user, params)
+
+	if(istype(W, /obj/item/reagent_containers/food/snacks) && !(W.flags & NODROP))
 		var/obj/item/reagent_containers/food/snacks/customizable/soup/S = new(get_turf(user))
-		S.attackby(I, user, params)
+		S.attackby(W,user, params)
 		qdel(src)
 	else
 		..()
@@ -312,7 +313,6 @@
 	icon_state = "soup"
 	baseicon = "soup"
 	basename = "soup"
-	consume_sound = 'sound/items/drink.ogg'
 	snack_overlays = 0
 	trash = /obj/item/trash/bowl
 	top = 0

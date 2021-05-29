@@ -76,7 +76,6 @@
 		"<span class='notice'>You hear someone rustle around in a plastic bag, and remove something.</span>")
 		overlays.Cut()	//remove the overlays
 		user.put_in_hands(I)
-		I.pickup(user)
 		w_class = WEIGHT_CLASS_TINY
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
@@ -84,3 +83,4 @@
 	else
 		to_chat(user, "[src] is empty.")
 		icon_state = "evidenceobj"
+

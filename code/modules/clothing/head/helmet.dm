@@ -75,7 +75,7 @@
 	desc = "A bulletproof helmet that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
 	icon = 'icons/hispania/obj/clothing/hats.dmi'
 	icon_state = "swat"
-	item_state = "swat"
+	item_state = "swat-alt"
 	armor = list("melee" = 15, "bullet" = 60, "laser" = 10, "energy" = 10, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
 	dog_fashion = null
 	hispania_icon = TRUE
@@ -166,7 +166,7 @@
 	icon_state = "roman"
 	item_state = "roman"
 	strip_delay = 100
-	dog_fashion = /datum/dog_fashion/head/roman
+	dog_fashion = null
 
 /obj/item/clothing/head/helmet/roman/fake
 	desc = "An ancient helmet made of plastic and leather."

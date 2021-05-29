@@ -408,7 +408,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/clothing/mask/gas/clown_hat/pennywise
-	name = "\improper Pennywise mask"
+	name = "Pennywise Mask"
 	desc = "It's the eater of worlds, and of children."
 	icon_state = "pennywise_mask"
 	item_state = "pennywise_mask"
