@@ -13977,7 +13977,7 @@
 /area/space)
 "aEJ" = (
 /obj/machinery/door/airlock/external{
-	locked = 1;
+	locked = 0;
 	name = "Mining Dock Airlock"
 	},
 /obj/structure/fans/tiny,
@@ -13992,7 +13992,7 @@
 	})
 "aEL" = (
 /obj/machinery/door/airlock/mining/glass{
-	locked = 1;
+	locked = 0;
 	name = "Mining Dock";
 	req_access_txt = "48"
 	},
@@ -14995,7 +14995,9 @@
 /turf/simulated/floor/plasteel,
 /area/crew_quarters/sleep)
 "aGU" = (
-/obj/machinery/door/airlock/tranquillite,
+/obj/machinery/door/airlock/tranquillite{
+	req_access_txt = "46"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -16383,7 +16385,9 @@
 /turf/simulated/floor/engine,
 /area/engine/engineering)
 "aJK" = (
-/obj/machinery/door/airlock/bananium/glass,
+/obj/machinery/door/airlock/bananium/glass{
+	req_access_txt = "46"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
