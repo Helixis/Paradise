@@ -47627,7 +47627,7 @@
 	tag = ""
 	},
 /obj/machinery/computer/security{
-	network = list("SS13","Mining Outpost")
+	network = list("SS13","Research Outpost","Mining Outpost")
 	},
 /turf/simulated/floor/plasteel{
 	dir = 2;
@@ -111013,6 +111013,9 @@
 	icon_state = "whitebluefull"
 	},
 /area/medical/surgery)
+"otb" = (
+/turf/space,
+/area/shuttle/gamma/station)
 "oCh" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -111397,6 +111400,10 @@
 	},
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
+"sck" = (
+/obj/structure/lattice,
+/turf/space,
+/area/shuttle/gamma/station)
 "sdt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atm{
@@ -167444,13 +167451,13 @@ bWC
 abj
 iAx
 aaa
-eCr
-aaa
-aaa
-eCr
-aaa
-aaa
-aaa
+otb
+otb
+otb
+otb
+otb
+otb
+otb
 bvh
 aaa
 aaa
@@ -167701,13 +167708,13 @@ abi
 abj
 lOI
 eCr
-eCr
-eCr
-eCr
-eCr
-eCr
-eCr
-abj
+otb
+otb
+otb
+otb
+otb
+otb
+sck
 bvh
 abi
 abi
@@ -167958,13 +167965,13 @@ abj
 aaa
 lOI
 aaa
-eCr
-aaa
-aaa
-eCr
-aaa
-aaa
-aaa
+otb
+otb
+otb
+otb
+otb
+otb
+otb
 bvh
 aaa
 aaa
@@ -168215,13 +168222,13 @@ abi
 abi
 lOI
 eCr
-eCr
-eCr
-eCr
-eCr
-eCr
-eCr
-eCr
+otb
+otb
+otb
+otb
+otb
+otb
+otb
 abi
 abj
 abj
@@ -168472,13 +168479,13 @@ aaa
 aaa
 iAx
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+otb
+otb
+otb
+otb
+otb
+otb
+otb
 iAx
 aaa
 aaa
@@ -168729,13 +168736,13 @@ aaa
 aaa
 iAx
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+otb
+otb
+otb
+otb
+otb
+otb
+otb
 iAx
 aaa
 aaa
