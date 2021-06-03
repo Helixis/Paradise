@@ -110914,6 +110914,15 @@
 	},
 /turf/simulated/floor/carpet,
 /area/medical/psych)
+"nuR" = (
+/obj/structure/closet/secure_closet/security,
+/obj/machinery/vending/walldrobe/sec{
+	pixel_x = 28
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "dark"
+	},
+/area/security/main)
 "nxd" = (
 /obj/structure/sign/cargo,
 /turf/simulated/wall/mineral/plastitanium,
@@ -140974,8 +140983,8 @@ byF
 bGO
 bIL
 bKx
-bIL
 bOn
+bIL
 sdt
 bIL
 bUA
@@ -166920,7 +166929,7 @@ bpa
 brc
 bsU
 bui
-bsU
+nuR
 bwE
 bmf
 bIa

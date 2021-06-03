@@ -715,6 +715,9 @@
 	pixel_y = 28
 	},
 /obj/machinery/computer/card/minor/hos,
+/obj/machinery/vending/walldrobe/hos{
+	pixel_x = 28
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -3069,21 +3072,6 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
-	},
-/turf/simulated/floor/plasteel{
-	icon_state = "dark"
-	},
-/area/security/hos)
-"aib" = (
-/obj/machinery/status_display{
-	layer = 4;
-	pixel_x = 32;
-	pixel_y = 32
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -25976,6 +25964,10 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/vending/walldrobe/ce{
+	pixel_x = 29;
+	pixel_y = 0
+	},
 /turf/simulated/floor/plasteel{
 	dir = 5;
 	icon_state = "vault"
@@ -37343,6 +37335,9 @@
 	c_tag = "Captain's Office";
 	dir = 8
 	},
+/obj/machinery/vending/walldrobe/cap{
+	pixel_x = 28
+	},
 /turf/simulated/floor/carpet{
 	icon_state = "carpet10-8";
 	tag = "icon-carpet10-8"
@@ -45340,6 +45335,7 @@
 	pixel_x = 3;
 	pixel_y = -2
 	},
+/obj/item/clothing/glasses/welding/superior,
 /turf/simulated/floor/plasteel{
 	dir = 5;
 	icon_state = "cafeteria";
@@ -57514,10 +57510,8 @@
 	name = "Medbay Storage"
 	})
 "cpF" = (
-/obj/item/radio/intercom{
-	dir = 1;
-	name = "Station Intercom (General)";
-	pixel_y = -29
+/obj/machinery/vending/walldrobe/cmo{
+	pixel_y = -28
 	},
 /turf/simulated/floor/plasteel{
 	dir = 8;
@@ -70937,6 +70931,9 @@
 	},
 /obj/machinery/photocopier/faxmachine{
 	department = "Research Director's Office"
+	},
+/obj/machinery/vending/walldrobe/rd{
+	pixel_y = -28
 	},
 /turf/simulated/floor/plasteel{
 	dir = 5;
@@ -85446,6 +85443,10 @@
 /obj/structure/closet/secure_closet/security,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/vending/walldrobe/sec{
+	pixel_x = 0;
+	pixel_y = -28
 	},
 /turf/simulated/floor/plasteel{
 	icon_state = "showroomfloor"
@@ -117992,7 +117993,7 @@ abq
 aaa
 agC
 adg
-aib
+aiW
 aja
 ugy
 akU
