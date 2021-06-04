@@ -370,6 +370,9 @@
 /obj/item/cultivator,
 /obj/item/seeds/carrot,
 /obj/machinery/hydroponics/constructable,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
 /turf/simulated/floor/plasteel{
 	icon_state = "floorgrime"
 	},
@@ -432,7 +435,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
 /turf/simulated/floor/plasteel{
@@ -22423,6 +22426,7 @@
 /obj/item/paper,
 /obj/item/paper,
 /obj/effect/decal/warning_stripes/east,
+/obj/item/rcs,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "aXo" = (
@@ -27822,6 +27826,7 @@
 	pixel_y = 10
 	},
 /obj/effect/decal/warning_stripes/south,
+/obj/item/rcs,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "biJ" = (
@@ -44029,6 +44034,7 @@
 	pixel_x = -4;
 	pixel_y = 10
 	},
+/obj/item/rcs,
 /turf/simulated/floor/plasteel{
 	icon_state = "brown"
 	},
