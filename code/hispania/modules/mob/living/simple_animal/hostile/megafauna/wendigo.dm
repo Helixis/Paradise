@@ -6,12 +6,10 @@
 #define WENDIGO_WAVE_REPEATCOUNT 32
 #define WENDIGO_SHOTGUN_SHOTCOUNT 5
 #define COOLDOWN_DECLARE(cd_index) var/##cd_index = 0
-
-/*
-
-Difficulty: Hard
-
-*/
+#define COOLDOWN_FINISHED(cd_source, cd_index) (cd_source.cd_index < world.time)
+#define COOLDOWN_RESET(cd_source, cd_index) cd_source.cd_index = 0
+#define COOLDOWN_START(cd_source, cd_index, cd_time) (cd_source.cd_index = world.time + cd_time)
+#define HEAR_1 (1<<0)
 
 /mob/living/simple_animal/hostile/megafauna/wendigo
 	name = "wendigo"
@@ -21,9 +19,10 @@ Difficulty: Hard
 	icon_state = "wendigo"
 	icon_living = "wendigo"
 	icon_dead = "wendigo_dead"
-	icon = 'icons/mob/icemoon/64x64megafauna.dmi'
+	icon = 'icons/hispania/mob/lavaland/wendigo.dmi'
 	attacktext = "claws"
-	attack_sound = 'sound/magic/demon_attack1.ogg'
+	attack_sound = 'sound/misc/demon_attack1.ogg'
+	faction = list("creature")
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	speak_emote = list("roars")
 	armour_penetration = 40
@@ -33,8 +32,8 @@ Difficulty: Hard
 	aggro_vision_range = 18 // man-eating for a reason
 	speed = 6
 	move_to_delay = 6
-	rapid_melee = 8 // every 1/4 second
-	melee_queue_distance = 18 // as far as possible really, need this because of charging and teleports
+	rapid_melee = 8
+	melee_queue_distance = 18
 	ranged = TRUE
 	pixel_x = -16
 	internal_type = /obj/item/gps/internal/wendigo
@@ -45,22 +44,16 @@ Difficulty: Hard
 	del_on_death = FALSE
 	blood_volume = BLOOD_VOLUME_NORMAL
 	deathmessage = "falls, shaking the ground around it"
-	deathsound = 'sound/effects/gravhit.ogg'
+	death_sound = 'sound/hispania/effects/gravhit.ogg'
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	attack_action_types = list(/datum/action/innate/megafauna_attack/heavy_stomp,
 							   /datum/action/innate/megafauna_attack/teleport,
 							   /datum/action/innate/megafauna_attack/shockwave_scream)
-	/// Saves the turf the megafauna was created at (spawns exit portal here)
 	var/turf/starting
-	/// Range for wendigo stomping when it moves
 	var/stomp_range = 1
-	/// Stores directions the mob is moving, then calls that a move has fully ended when these directions are removed in moved
 	var/stored_move_dirs = 0
-	/// If the wendigo is allowed to move
 	var/can_move = TRUE
-	/// Time before the wendigo can scream again
 	var/scream_cooldown_time = 10 SECONDS
-	/// Stores the last scream time so it doesn't spam it
 	COOLDOWN_DECLARE(scream_cooldown)
 
 /obj/item/gps/internal/wendigo
@@ -69,10 +62,9 @@ Difficulty: Hard
 	desc = "Fear the man eating creature"
 	invisibility = 100
 
-
 /datum/action/innate/megafauna_attack/heavy_stomp
 	name = "Heavy Stomp"
-	icon_icon = 'icons/mob/actions/actions_items.dmi'
+	icon_icon = 'icons/mob/actions/actions.dmi'
 	button_icon_state = "sniper_zoom"
 	chosen_message = "<span class='colossus'>You are now stomping the ground around you.</span>"
 	chosen_attack_num = 1
@@ -125,7 +117,7 @@ Difficulty: Hard
 		if(2)
 			try_teleport()
 		if(3)
-			do_teleport(src, starting, 0,  channel=TELEPORT_CHANNEL_BLUESPACE, forced = TRUE)
+			do_teleport(src, starting, 0, "bluespace", bypass_area_flag = TRUE)
 			shockwave_scream()
 
 /mob/living/simple_animal/hostile/megafauna/wendigo/Move(atom/newloc, direct)
@@ -140,7 +132,19 @@ Difficulty: Hard
 	if(!stored_move_dirs)
 		INVOKE_ASYNC(GLOBAL_PROC, .proc/wendigo_slam, src, stomp_range, 1, 8)
 
-/// Slams the ground around the source throwing back enemies caught nearby, delay is for the radius increase
+/proc/get_ranged_target_turf_direct(atom/A, atom/target, range, offset) //No se donde mas ponerlo lol
+	var/angle = ATAN2(target.x - A.x, target.y - A.y)
+	if(offset)
+		angle += offset
+	var/turf/T = get_turf(A)
+	for(var/i in 1 to range)
+		var/turf/check = locate(A.x + cos(angle) * i, A.y + sin(angle) * i, A.z)
+		if(!check)
+			break
+		T = check
+
+	return T
+
 /proc/wendigo_slam(atom/source, range, delay, throw_range)
 	var/turf/orgin = get_turf(source)
 	var/list/all_turfs = RANGE_TURFS(range, orgin)
@@ -155,20 +159,18 @@ Difficulty: Hard
 					continue
 				to_chat(L, "<span class='userdanger'>[source]'s ground slam shockwave sends you flying!</span>")
 				var/turf/thrownat = get_ranged_target_turf_direct(source, L, throw_range, rand(-10, 10))
-				L.throw_at(thrownat, 8, 2, null, TRUE, force = MOVE_FORCE_OVERPOWERING, gentle = TRUE)
-				L.apply_damage(20, BRUTE, wound_bonus=CANT_WOUND)
+				L.throw_at(thrownat, 8, 2, null, TRUE, force = MOVE_FORCE_OVERPOWERING)
+				L.apply_damage(40, BRUTE)
 				shake_camera(L, 2, 1)
 			all_turfs -= stomp_turf
 		sleep(delay)
 
-/// Larger but slower ground stomp
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/heavy_stomp()
 	can_move = FALSE
 	wendigo_slam(src, 5, 3 - WENDIGO_ENRAGED, 8)
 	SetRecoveryTime(0 SECONDS)
 	can_move = TRUE
 
-/// Teleports to a location 4 turfs away from the enemy in view
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/try_teleport()
 	teleport(6)
 	if(WENDIGO_ENRAGED)
@@ -179,7 +181,7 @@ Difficulty: Hard
 			var/turf/endloc = get_turf(target)
 			if(!endloc)
 				break
-			var/obj/projectile/wendigo_shockwave/shockwave = new /obj/projectile/wendigo_shockwave(loc)
+			var/obj/item/projectile/wendigo_shockwave/shockwave = new /obj/item/projectile/wendigo_shockwave (loc)
 			shockwave.speed = 8
 			shockwave.preparePixelProjectile(endloc, startloc, null, spread)
 			shockwave.firer = src
@@ -190,19 +192,43 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/teleport(range = 6)
 	var/list/possible_ends = view(range, target.loc) - view(range - 1, target.loc)
-	for(var/turf/closed/cant_teleport_turf in possible_ends)
+	for(var/turf/simulated/floor/cant_teleport_turf in possible_ends)
 		possible_ends -= cant_teleport_turf
 	if(!possible_ends.len)
 		return
 	var/turf/end = pick(possible_ends)
-	do_teleport(src, end, 0,  channel=TELEPORT_CHANNEL_BLUESPACE, forced = TRUE)
+	do_teleport(src, end, 0, "bluespace", bypass_area_flag = TRUE)
 
-/// Applies dizziness to all nearby enemies that can hear the scream and animates the wendigo shaking up and down as shockwave projectiles shoot outward
+/proc/get_hearers_in_view(R, atom/source)
+	var/turf/T = get_turf(source)
+	. = list()
+	if(!T)
+		return
+	var/list/processing_list = list()
+	if (R == 0)
+		processing_list += T.contents
+	else
+		var/lum = T.luminosity
+		T.luminosity = 6
+		for(var/mob/M in view(R, T))
+			processing_list += M
+		for(var/obj/O in view(R, T))
+			processing_list += O
+		T.luminosity = lum
+
+	var/i = 0
+	while(i < length(processing_list))
+		var/atom/A = processing_list[++i]
+		if(A.flags & HEAR_1)
+			. += A
+			SEND_SIGNAL(A, COMSIG_ATOM_HEARER_IN_VIEW, processing_list, .)
+		processing_list += A.contents
+
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/shockwave_scream()
 	can_move = FALSE
 	COOLDOWN_START(src, scream_cooldown, scream_cooldown_time)
 	SLEEP_CHECK_DEATH(5)
-	playsound(loc, 'sound/magic/demon_dies.ogg', 600, FALSE, 10)
+	playsound(loc, 'sound/misc/demon_dies.ogg', 600, FALSE, 10)
 	animate(src, pixel_z = rand(5, 15), time = 1, loop = 20)
 	animate(pixel_z = 0, time = 1)
 	for(var/mob/living/dizzy_target in get_hearers_in_view(7, src) - src)
@@ -214,7 +240,6 @@ Difficulty: Hard
 	SLEEP_CHECK_DEATH(3 SECONDS)
 	can_move = TRUE
 
-/// Shoots shockwave projectiles in a random preset pattern
 /mob/living/simple_animal/hostile/megafauna/wendigo/proc/spiral_attack()
 	var/list/choices = list("Alternating Circle", "Spiral")
 	if(WENDIGO_ENRAGED)
@@ -227,7 +252,7 @@ Difficulty: Hard
 				var/offset = shoot_times % 2
 				for(var/shot in 1 to shots_per)
 					var/angle = shot * 360 / shots_per + (offset * 360 / shots_per) * 0.5
-					var/obj/projectile/wendigo_shockwave/shockwave = new /obj/projectile/wendigo_shockwave(loc)
+					var/obj/item/projectile/wendigo_shockwave/shockwave = new /obj/item/projectile/wendigo_shockwave(loc)
 					shockwave.firer = src
 					shockwave.speed = 3 - WENDIGO_ENRAGED
 					shockwave.fire(angle)
@@ -241,7 +266,7 @@ Difficulty: Hard
 				var/angle_change = (5 + WENDIGO_ENRAGED * shot / 6) * spiral_direction
 				for(var/count in 1 to shots_per_tick)
 					var/angle = angle_to_target + shot * angle_change + count * 360 / shots_per_tick
-					var/obj/projectile/wendigo_shockwave/shockwave = new /obj/projectile/wendigo_shockwave(loc)
+					var/obj/item/projectile/wendigo_shockwave/shockwave = new /obj/item/projectile/wendigo_shockwave(loc)
 					shockwave.firer = src
 					shockwave.damage = 15
 					shockwave.fire(angle)
@@ -253,24 +278,13 @@ Difficulty: Hard
 			for(var/shoot_times in 1 to WENDIGO_WAVE_REPEATCOUNT)
 				for(var/shot in 1 to shots_per)
 					var/angle = shot * difference + shoot_times * 5 * wave_direction * -1
-					var/obj/projectile/wendigo_shockwave/shockwave = new /obj/projectile/wendigo_shockwave(loc)
+					var/obj/item/projectile/wendigo_shockwave/shockwave = new /obj/item/projectile/wendigo_shockwave(loc)
 					shockwave.firer = src
-					shockwave.wave_movement = TRUE
 					shockwave.speed = 8
 					shockwave.wave_speed = 10 * wave_direction
 					shockwave.fire(angle)
 				SLEEP_CHECK_DEATH(2)
-
-/mob/living/simple_animal/hostile/megafauna/wendigo/death(gibbed, list/force_grant)
-	if(health > 0)
-		return
-	var/obj/effect/portal/permanent/one_way/exit = new /obj/effect/portal/permanent/one_way(starting)
-	exit.id = "wendigo arena exit"
-	exit.add_atom_colour(COLOR_RED_LIGHT, ADMIN_COLOUR_PRIORITY)
-	exit.set_light(20, 1, COLOR_SOFT_RED)
-	return ..()
-
-/obj/projectile/wendigo_shockwave
+/obj/item/projectile/wendigo_shockwave
 	name ="wendigo shockwave"
 	icon_state= "chronobolt"
 	damage = 25
@@ -279,18 +293,8 @@ Difficulty: Hard
 	eyeblur = 5
 	damage_type = BRUTE
 	pass_flags = PASSTABLE
-	/// If wave movement is enabled
-	var/wave_movement = FALSE
-	/// Amount the angle changes every pixel move
 	var/wave_speed = 15
-	/// Amount of movements this projectile has made
 	var/pixel_moves = 0
-
-/obj/projectile/wendigo_shockwave/pixel_move(trajectory_multiplier, hitscanning = FALSE)
-	. = ..()
-	if(wave_movement)
-		pixel_moves++
-		set_angle(original_angle + pixel_moves * wave_speed)
 
 /obj/item/wendigo_blood
 	name = "bottle of wendigo blood"
@@ -310,36 +314,40 @@ Difficulty: Hard
 	playsound(human_user.loc, 'sound/items/drink.ogg', rand(10,50), TRUE)
 	qdel(src)
 
+/mob/living/simple_animal/hostile/bear/wendigo_version //¿Alguien si quiera puede matarlo?
+	name = "Polar Bear"
+	maxHealth = 500
+	health = 500
+	melee_damage_lower = 50
+	melee_damage_upper = 50
+	icon = 'icons/hispania/mob/animals.dmi'
 /obj/effect/proc_holder/spell/targeted/shapeshift/polar_bear
 	name = "Polar Bear Form"
 	desc = "Take on the shape of a polar bear."
 	invocation = "RAAAAAAAAWR!"
-	convert_damage = FALSE
-	shapeshift_type = /mob/living/simple_animal/hostile/asteroid/polarbear/lesser
+	shapeshift_type = /mob/living/simple_animal/hostile/bear/wendigo_version
 
-/obj/item/crusher_trophy/wendigo_horn
+/obj/item/crusher_trophy/wendigo_horn //OP SHIT
 	name = "wendigo horn"
 	desc = "A horn from the head of an unstoppable beast."
 	icon_state = "wendigo_horn"
 	denied_type = /obj/item/crusher_trophy/wendigo_horn
 
 /obj/item/crusher_trophy/wendigo_horn/effect_desc()
-	return "melee hits inflict twice as much damage"
+	return
 
-/obj/item/crusher_trophy/wendigo_horn/add_to(obj/item/kinetic_crusher/crusher, mob/living/user)
+/obj/item/crusher_trophy/wendigo_horn/add_to(obj/item/twohanded/kinetic_crusher/H, mob/living/user)
 	. = ..()
-	if(.)
-		crusher.AddComponent(/datum/component/two_handed, force_wielded=40)
+	H.force += (bonus_value*2)
 
-/obj/item/crusher_trophy/wendigo_horn/remove_from(obj/item/kinetic_crusher/crusher, mob/living/user)
+/obj/item/crusher_trophy/wendigo_horn/remove_from(obj/item/twohanded/kinetic_crusher/H, mob/living/user)
 	. = ..()
-	if(.)
-		crusher.AddComponent(/datum/component/two_handed, force_wielded=20)
+	H.force -= (bonus_value*2)
 
 /obj/item/wendigo_skull
 	name = "wendigo skull"
 	desc = "A skull of a massive hulking beast."
-	icon = 'icons/obj/ice_moon/artifacts.dmi'
+	icon = 'icons/hispania/obj/lavaland/artefacts.dmi'
 	icon_state = "wendigo_skull"
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
