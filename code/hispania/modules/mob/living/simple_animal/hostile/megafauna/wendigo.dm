@@ -286,7 +286,7 @@
 				SLEEP_CHECK_DEATH(2)
 /obj/item/projectile/wendigo_shockwave
 	name ="wendigo shockwave"
-	icon_state= "chronobolt"
+	icon_state= "meatproj"
 	damage = 25
 	armour_penetration = 100
 	speed = 2
