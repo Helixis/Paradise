@@ -352,6 +352,14 @@
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
 
+/mob/living/simple_animal/hostile/megafauna/wendigo/meatoverlord
+	name = "Redspace Overlord"
+	desc = "A disgusting creature that makes you wanna vomit, you probably aren't going to survive this."
+	icon_state = "meatboss"
+	icon_living = "meatboss"
+	icon_dead = "meatboss_dead"
+	icon = 'icons/hispania/mob/lavaland/meatoverlord.dmi'
+
 #undef WENDIGO_CIRCLE_SHOTCOUNT
 #undef WENDIGO_CIRCLE_REPEATCOUNT
 #undef WENDIGO_SPIRAL_SHOTCOUNT
