@@ -20546,13 +20546,6 @@
 /obj/item/trash/canned_fishegg,
 /turf/simulated/floor/plating/asteroid/snow/naga,
 /area/snowland/unexplored)
-"Wd" = (
-/obj/effect/decal/redspacesthings/floordecals_3,
-/mob/living/simple_animal/hostile/netherworld/hispanether/corruptcrew,
-/turf/simulated/floor/plasteel{
-	icon_state = "dark"
-	},
-/area/NT_Polar_Outpost)
 "Wh" = (
 /obj/effect/decal/redspacesthings/floordecals_3,
 /obj/machinery/computer/nagacomputer,
@@ -58033,7 +58026,7 @@ WY
 WY
 WY
 WY
-Wd
+WY
 WY
 WY
 WY
@@ -59314,16 +59307,16 @@ WY
 WY
 WY
 WY
-Wd
 WY
 WY
 WY
 WY
-Wd
 WY
 WY
 WY
-Wd
+WY
+WY
+WY
 WY
 WY
 WY
@@ -61109,7 +61102,7 @@ mP
 mP
 mP
 Uz
-Wd
+WY
 WY
 WY
 WY
@@ -61125,7 +61118,7 @@ WY
 WY
 WY
 WY
-Wd
+WY
 WY
 WY
 WY
@@ -62148,7 +62141,7 @@ WY
 WY
 WY
 WY
-Wd
+WY
 WY
 WY
 WY
@@ -62911,7 +62904,7 @@ Uz
 WY
 WY
 WY
-Wd
+WY
 WY
 WY
 WY
@@ -63687,7 +63680,6 @@ WY
 WY
 WY
 WY
-Wd
 WY
 WY
 WY
@@ -63696,7 +63688,8 @@ WY
 WY
 WY
 WY
-Wd
+WY
+WY
 WY
 WY
 Uz
