@@ -11989,16 +11989,6 @@
 /obj/structure/chair/comfy/shuttle,
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/tsf)
-"Ri" = (
-/obj/structure/table,
-/obj/item/folder/blue,
-/obj/item/stamp/hop,
-/obj/item/eftpos,
-/obj/item/book/manual/sop_service,
-/obj/item/book/manual/sop_supply,
-/obj/item/book/manual/sop_command,
-/turf/simulated/floor/plasteel,
-/area/space)
 "Rk" = (
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plasteel{
@@ -46845,7 +46835,7 @@ fg
 fh
 fm
 aC
-Ri
+aa
 jT
 TQ
 ed
