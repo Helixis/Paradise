@@ -1283,9 +1283,7 @@
 /area/hallway/primary/central/ne)
 "cs" = (
 /obj/machinery/computer/message_monitor,
-/obj/item/radio/intercom{
-	step_y = 24
-	},
+/obj/item/radio/intercom,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
