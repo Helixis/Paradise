@@ -52,8 +52,8 @@
 	if(stat & BROKEN)
 		icon_state = "gashapon_broken"
 	else if(panel_open)
-		icon_state = "gashapon_broken_open"
+		icon_state = "gashapon_open"
 	else if(stat & NOPOWER)
-		icon_state = "gashapon_broken_off"
+		icon_state = "gashapon_off"
 	else
-		icon_state = "gashapon_broken_on"
+		icon_state = "gashapon__on"
