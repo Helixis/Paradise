@@ -56,4 +56,4 @@
 	else if(stat & NOPOWER)
 		icon_state = "gashapon_off"
 	else
-		icon_state = "gashapon__on"
+		icon_state = "gashapon_on"
