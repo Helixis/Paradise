@@ -123,7 +123,7 @@
 	name = "salbutamol blister pack"
 	desc = "A blister pack of salbutamol pills."
 	icon_state = "salbox0"
-	icon_type = "salbox"
+	icon_type = "sal"
 	item_state = "salbox"
 
 /obj/item/storage/fancy/pilltablet/salbutamol/populate_contents()
@@ -137,7 +137,7 @@
 	name = "charcoal blister pack"
 	desc = "A blister pack of charcoal pills."
 	icon_state = "charbox0"
-	icon_type = "charbox"
+	icon_type = "char"
 	item_state = "charbox"
 
 /obj/item/storage/fancy/pilltablet/charcoal/populate_contents()
@@ -151,7 +151,7 @@
 	name = "salicylic blister pack"
 	desc = "A blister pack of salicylic pills. DONT CONSUME MORE THAN ONE."
 	icon_state = "cylbox0"
-	icon_type = "cylbox"
+	icon_type = "cyl"
 	item_state = "cylbox"
 
 /obj/item/storage/fancy/pilltablet/salicylic/populate_contents()
