@@ -27,7 +27,7 @@
 
 /obj/item/storage/firstaid/fire
 	name = "fire first-aid kit"
-	desc = "A medical kit that contains several medical patches and pills for treating burns. Contains one epinephrine syringe for emergency use and a health analyzer."
+	desc = "A medical kit that contains several medical patches and pills for treating burns. Contains one epinephrine syringe for emergency use."
 	icon_state = "ointment"
 	item_state = "firstaid-ointment"
 	med_bot_skin = "ointment"
@@ -38,7 +38,8 @@
 
 /obj/item/storage/firstaid/fire/populate_contents()
 	new /obj/item/reagent_containers/applicator/burn(src)
-	new /obj/item/reagent_containers/food/pill/patch/silver_sulf/small(src)
+	//new /obj/item/reagent_containers/food/pill/patch/silver_sulf/small(src)
+	new /obj/item/storage/fancy/pilltablet/salicylic(src)
 	//new /obj/item/healthanalyzer(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 	new /obj/item/reagent_containers/food/pill/salicylic(src)
@@ -47,13 +48,14 @@
 	return
 
 /obj/item/storage/firstaid/regular
-	desc = "A general medical kit that contains medical patches for both brute damage and burn damage. Also contains an epinephrine syringe for emergency use and a health analyzer"
+	desc = "A general medical kit that contains medical patches for both brute damage and burn damage. Also contains an epinephrine syringe for emergency use."
 	icon_state = "firstaid"
 
 /obj/item/storage/firstaid/regular/populate_contents()
 	new /obj/item/reagent_containers/food/pill/patch/styptic(src)
 	new /obj/item/reagent_containers/food/pill/patch/styptic(src)
-	new /obj/item/reagent_containers/food/pill/salicylic(src)
+	//new /obj/item/reagent_containers/food/pill/salicylic(src)
+	new /obj/item/storage/fancy/pilltablet/salicylic(src)
 	new /obj/item/reagent_containers/food/pill/patch/silver_sulf(src)
 	new /obj/item/reagent_containers/food/pill/patch/silver_sulf(src)
 	//new /obj/item/healthanalyzer(src)
@@ -63,7 +65,7 @@
 	return
 
 /obj/item/storage/firstaid/doctor
-	desc = "A general medical kit that contains medical patches for both brute damage and burn damage. Also contains an epinephrine syringe for emergency use and a health analyzer"
+	desc = "A general medical kit that contains medical patches for both brute damage and burn damage. Also contains an epinephrine syringe for emergency use."
 	icon_state = "firstaid"
 
 /obj/item/storage/firstaid/doctor/populate_contents()
@@ -71,7 +73,8 @@
 	new /obj/item/reagent_containers/applicator/burn(src)
 	new /obj/item/reagent_containers/food/pill/patch/styptic(src)
 	new /obj/item/reagent_containers/food/pill/patch/silver_sulf(src)
-	new /obj/item/reagent_containers/food/pill/salicylic(src)
+	//new /obj/item/reagent_containers/food/pill/salicylic(src)
+	new /obj/item/storage/fancy/pilltablet/salicylic(src)
 	//new /obj/item/healthanalyzer/advanced(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 
@@ -89,32 +92,38 @@
 /obj/item/storage/firstaid/toxin/populate_contents()
 	for(var/I in 1 to 3)
 		new /obj/item/reagent_containers/syringe/charcoal(src)
-		new /obj/item/reagent_containers/food/pill/charcoal(src)
-	//new /obj/item/healthanalyzer(src)
+		//new /obj/item/reagent_containers/food/pill/charcoal(src)
+		new /obj/item/storage/fancy/pilltablet/charcoal(src)
+		//new /obj/item/healthanalyzer(src)
 
 /obj/item/storage/firstaid/toxin/empty/populate_contents()
 	return
 
 /obj/item/storage/firstaid/o2
 	name = "oxygen deprivation first aid kit"
-	desc = "A first aid kit that contains four pills of salbutamol, which is able to counter injuries caused by suffocation. Also contains a health analyzer to determine the health of the patient."
+	desc = "A first aid kit that contains four pills of salbutamol, which is able to counter injuries caused by suffocation."
 	icon_state = "o2"
 	item_state = "firstaid-o2"
 	med_bot_skin = "o2"
 
 /obj/item/storage/firstaid/o2/populate_contents()
+	/*
 	new /obj/item/reagent_containers/food/pill/salbutamol(src)
 	new /obj/item/reagent_containers/food/pill/salbutamol(src)
 	new /obj/item/reagent_containers/food/pill/salbutamol(src)
 	new /obj/item/reagent_containers/food/pill/salbutamol(src)
-	//new /obj/item/healthanalyzer(src)
+	new /obj/item/healthanalyzer(src)
+	*/
+	new /obj/item/storage/fancy/pilltablet/salbutamol(src)
+	new /obj/item/storage/fancy/pilltablet/salbutamol(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 
 /obj/item/storage/firstaid/o2/empty/populate_contents()
 	return
 
 /obj/item/storage/firstaid/brute
 	name = "brute trauma treatment kit"
-	desc = "A medical kit that contains several medical patches and pills for treating brute injuries. Contains one epinephrine syringe for emergency use and a health analyzer."
+	desc = "A medical kit that contains several medical patches and pills for treating brute injuries. Contains one epinephrine syringe for emergency use."
 	icon_state = "brute"
 	item_state = "firstaid-brute"
 	med_bot_skin = "brute"
@@ -129,7 +138,7 @@
 	//new /obj/item/healthanalyzer(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector(src)
 	new /obj/item/stack/medical/bruise_pack(src)
-	
+
 /obj/item/storage/firstaid/brute/empty/populate_contents()
 	return
 
@@ -201,10 +210,6 @@
 	can_hold = list(/obj/item/roller,/obj/item/bonesetter,/obj/item/bonegel, /obj/item/scalpel, /obj/item/hemostat,
 		/obj/item/cautery, /obj/item/retractor, /obj/item/FixOVein, /obj/item/surgicaldrill, /obj/item/circular_saw)
 
-/obj/item/storage/firstaid/surgery/New()
-	..()
-	new /obj/item/roller/advanced(src) //Hispania Roller Bed
-	
 /obj/item/storage/firstaid/surgery/populate_contents()
 	new /obj/item/roller(src)
 	new /obj/item/bonesetter(src)
@@ -216,6 +221,7 @@
 	new /obj/item/FixOVein(src)
 	new /obj/item/surgicaldrill(src)
 	new /obj/item/circular_saw(src)
+	new /obj/item/roller/advanced(src)
 
 /*
  * Pill Bottles
