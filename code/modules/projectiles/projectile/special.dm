@@ -224,10 +224,12 @@
 /obj/item/projectile/plasma/adv
 	damage = 15
 	range = 5
+	dismemberment = 24
 
 /obj/item/projectile/plasma/adv/mech
 	damage = 25
 	range = 9
+	dismemberment = 30
 
 /obj/item/projectile/energy/teleport
 	name = "teleportation burst"
