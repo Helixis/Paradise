@@ -17,17 +17,17 @@ GLOBAL_LIST_INIT(summoned_guns, list(
 	/obj/item/gun/projectile/revolver/doublebarrel,
 	/obj/item/gun/projectile/shotgun,
 	/obj/item/gun/projectile/shotgun/automatic/combat,
-	/obj/item/gun/projectile/automatic/ar,
+	/obj/item/gun/projectile/automatic/fullauto/ar,
 	/obj/item/gun/projectile/revolver/mateba,
 	/obj/item/gun/projectile/shotgun/boltaction,
-	/obj/item/gun/projectile/automatic/mini_uzi,
+	/obj/item/gun/projectile/automatic/fullauto/mini_uzi,
 	/obj/item/gun/energy/lasercannon,
 	/obj/item/gun/energy/kinetic_accelerator/crossbow/large,
 	/obj/item/gun/energy/gun/nuclear,
-	/obj/item/gun/projectile/automatic/proto,
-	/obj/item/gun/projectile/automatic/c20r,
-	/obj/item/gun/projectile/automatic/l6_saw,
-	/obj/item/gun/projectile/automatic/m90,
+	/obj/item/gun/projectile/automatic/fullauto/twomode/proto,
+	/obj/item/gun/projectile/automatic/fullauto/twomode/c20r,
+	/obj/item/gun/projectile/automatic/fullauto/l6_saw,
+	/obj/item/gun/projectile/automatic/fullauto/twomode/m90,
 	/obj/item/gun/energy/alien,
 	/obj/item/gun/energy/gun/turret,
 	/obj/item/gun/energy/pulse/carbine,
@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(summoned_guns, list(
 	/obj/item/gun/energy/kinetic_accelerator,
 	/obj/item/gun/energy/plasmacutter/adv,
 	/obj/item/gun/energy/wormhole_projector,
-	/obj/item/gun/projectile/automatic/wt550,
+	/obj/item/gun/projectile/automatic/fullauto/wt550,
 	/obj/item/gun/projectile/automatic/shotgun/bulldog,
 	/obj/item/gun/projectile/revolver/grenadelauncher,
 	/obj/item/gun/projectile/revolver/golden,
@@ -109,6 +109,7 @@ GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 
 		H.mind.add_antag_datum(/datum/antagonist/survivalist/guns)
 		H.create_attack_log("<font color='red'>was made into a survivalist, and trusts no one!</font>")
+		H.create_log(CONVERSION_LOG, "was made into a survivalist")
 
 	var/gun_type = pick(GLOB.summoned_guns)
 	var/obj/item/gun/G = new gun_type(get_turf(H))
@@ -130,6 +131,7 @@ GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 
 		H.mind.add_antag_datum(/datum/antagonist/survivalist/magic)
 		H.create_attack_log("<font color='red'>was made into a survivalist, and trusts no one!</font>")
+		H.create_log(CONVERSION_LOG, "was made into a survivalist")
 
 	var/magic_type = pick(GLOB.summoned_magic)
 	var/lucky = FALSE

@@ -9,13 +9,14 @@
 	action_background_icon_state = "bg_vampire"
 	var/required_blood = 0
 	var/gain_desc = null
+	var/deduct_blood_on_cast = TRUE  //Do we want to take the blood when this is cast, or at a later point?
 
 /obj/effect/proc_holder/spell/vampire/New()
 	..()
 	if(!gain_desc)
 		gain_desc = "You have gained \the [src] ability."
 
-/obj/effect/proc_holder/spell/vampire/cast_check(skipcharge = 0, mob/living/user = usr)
+/obj/effect/proc_holder/spell/vampire/cast_check(charge_check = TRUE, start_recharge = TRUE, mob/living/user = usr)
 	if(!user.mind)
 		return 0
 	if(!ishuman(user))
@@ -45,7 +46,7 @@
 		return 0
 	return ..()
 
-/obj/effect/proc_holder/spell/vampire/can_cast(mob/user = usr)
+/obj/effect/proc_holder/spell/vampire/can_cast(mob/user = usr, charge_check = TRUE, show_message = FALSE)
 	if(!user.mind)
 		return 0
 	if(!ishuman(user))
@@ -99,6 +100,8 @@
 	var/datum/vampire/vampire = usr.mind.vampire
 
 	if(required_blood <= vampire.bloodusable)
+		if(!deduct_blood_on_cast) //don't take the blood yet if this is false!
+			return
 		vampire.bloodusable -= required_blood
 	else
 		// stop!!
@@ -145,7 +148,7 @@
 
 /obj/effect/proc_holder/spell/vampire/self/rejuvenate
 	name = "Rejuvenate"
-	desc= "Flush your system with spare blood to remove any incapacitating effects."
+	desc= "Use reserve blood to enliven your body, removing any incapacitating effects."
 	action_icon_state = "vampire_rejuvinate"
 	charge_max = 200
 	stat_allowed = 1
@@ -158,7 +161,7 @@
 	user.SetParalysis(0)
 	user.SetSleeping(0)
 	U.adjustStaminaLoss(-75)
-	to_chat(user, "<span class='notice'>You flush your system with clean blood and remove any incapacitating effects.</span>")
+	to_chat(user, "<span class='notice'>You instill your body with clean blood and remove any incapacitating effects.</span>")
 	spawn(1)
 		if(usr.mind.vampire.get_ability(/datum/vampire_passive/regen))
 			for(var/i = 1 to 5)
@@ -243,7 +246,7 @@
 		scramble(1, H, 100)
 		H.real_name = random_name(H.gender, H.dna.species.name) //Give them a name that makes sense for their species.
 		H.sync_organ_dna(assimilate = 1)
-		H.update_body(0)
+		H.update_body()
 		H.reset_hair() //No more winding up with hairstyles you're not supposed to have, and blowing your cover.
 		H.reset_markings() //...Or markings.
 		H.dna.ResetUIFrom(H)
@@ -264,13 +267,13 @@
 			continue
 		if(ishuman(C))
 			var/mob/living/carbon/human/H = C
-			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+			if(H.check_ear_prot() >= HEARING_PROTECTION_TOTAL)
 				continue
 		if(!affects(C))
 			continue
 		to_chat(C, "<span class='warning'><font size='3'><b>You hear a ear piercing shriek and your senses dull!</font></b></span>")
 		C.Weaken(4)
-		C.MinimumDeafTicks(20)
+		C.AdjustEarDamage(0, 20)
 		C.Stuttering(20)
 		C.Stun(4)
 		C.Jitter(150)
@@ -288,8 +291,10 @@
 	gain_desc = "You have gained the Enthrall ability which at a heavy blood cost allows you to enslave a human that is not loyal to any other for a random period of time."
 	action_icon_state = "vampire_enthrall"
 	required_blood = 300
+	deduct_blood_on_cast = FALSE
 
 /obj/effect/proc_holder/spell/vampire/targetted/enthrall/cast(list/targets, mob/user = usr)
+	var/datum/vampire/vampire = user.mind.vampire
 	for(var/mob/living/target in targets)
 		user.visible_message("<span class='warning'>[user] bites [target]'s neck!</span>", "<span class='warning'>You bite [target]'s neck and begin the flow of power.</span>")
 		to_chat(target, "<span class='warning'>You feel the tendrils of evil invade your mind.</span>")
@@ -299,6 +304,7 @@
 		if(do_mob(user, target, 50))
 			if(can_enthrall(user, target))
 				handle_enthrall(user, target)
+				vampire.bloodusable -= required_blood //we take the blood after enthralling, not before
 			else
 				revert_cast(user)
 				to_chat(user, "<span class='warning'>You or your target either moved or you dont have enough usable blood.</span>")
@@ -354,10 +360,10 @@
 	var/datum/objective/protect/serve_objective = new
 	serve_objective.owner = user.mind
 	serve_objective.target = H.mind
-	serve_objective.explanation_text = "You have been Enthralled by [user]. Follow [user.p_their()] every command."
+	serve_objective.explanation_text = "You have been Enthralled by [user.real_name]. Follow [user.p_their()] every command."
 	H.mind.objectives += serve_objective
 
-	to_chat(H, "<span class='biggerdanger'>You have been Enthralled by [user]. Follow [user.p_their()] every command.</span>")
+	to_chat(H, "<span class='biggerdanger'>You have been Enthralled by [user.real_name]. Follow [user.p_their()] every command.</span>")
 	to_chat(user, "<span class='warning'>You have successfully Enthralled [H]. <i>If [H.p_they()] refuse[H.p_s()] to do as you say just adminhelp.</i></span>")
 	H.Stun(2)
 	add_attack_logs(user, H, "Vampire-thralled")
@@ -397,7 +403,7 @@
 
 /obj/effect/proc_holder/spell/vampire/bats/choose_targets(mob/user = usr)
 	var/list/turf/locs = new
-	for(var/direction in alldirs) //looking for bat spawns
+	for(var/direction in GLOB.alldirs) //looking for bat spawns
 		if(locs.len == num_bats) //we found 2 locations and thats all we need
 			break
 		var/turf/T = get_step(usr, direction) //getting a loc in that direction
@@ -507,13 +513,13 @@
 		to_chat(user, "<span class='warning'>You cannot find darkness to step to.</span>")
 		return
 
+	turfs = list(pick(turfs)) // Pick a single turf for the vampire to jump to.
 	perform(turfs, user = user)
 
+// `targets` should only ever contain the 1 valid turf we're jumping to, even though its a list, that's just how the cast() proc works.
 /obj/effect/proc_holder/spell/vampire/shadowstep/cast(list/targets, mob/user = usr)
 	spawn(0)
-		var/turf/picked = pick(targets)
-
-		if(!picked || !isturf(picked))
+		if(!LAZYLEN(targets)) // If for some reason the turf got deleted.
 			return
 		var/mob/living/U = user
 		U.ExtinguishMob()
@@ -525,7 +531,7 @@
 		animation.alpha = 127
 		animation.layer = 5
 		//animation.master = src
-		user.forceMove(picked)
+		user.forceMove(targets[1])
 		spawn(10)
 			qdel(animation)
 
@@ -564,7 +570,7 @@
 		H.raise_vampire(user)
 
 
-/mob/living/carbon/human/proc/raise_vampire(var/mob/M)
+/mob/living/carbon/human/proc/raise_vampire(mob/M)
 	if(!istype(M))
 		log_debug("human/proc/raise_vampire called with invalid argument.")
 		return

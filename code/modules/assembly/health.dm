@@ -55,7 +55,7 @@
 		health_scan = M.health
 		if(health_scan <= alarm_health)
 			pulse()
-			audible_message("[bicon(src)] *beep* *beep*", "*beep* *beep*")
+			audible_message("[bicon(src)] *beep* *beep*")
 			toggle_scan()
 		return
 	return
@@ -72,7 +72,7 @@
 
 /obj/item/assembly/health/interact(mob/user)//TODO: Change this to the wires thingy
 	if(!secured)
-		user.show_message("<span class='warning'>The [name] is unsecured!</span>")
+		user.show_message("<span class='warning'>[src] is unsecured!</span>")
 		return FALSE
 	var/dat = text("<TT><B>Health Sensor</B> <A href='?src=[UID()];scanning=1'>[scanning?"On":"Off"]</A>")
 	if(scanning && health_scan)

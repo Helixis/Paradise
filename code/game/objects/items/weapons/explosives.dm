@@ -31,7 +31,7 @@
 		A.master = src
 		A.loc = src
 		assemblyattacher = user.ckey
-		to_chat(user, "<span class='notice'>You add [A] to the [name].</span>")
+		to_chat(user, "<span class='notice'>You add [A] to [src].</span>")
 		playsound(src, 'sound/weapons/tap.ogg', 20, 1)
 		update_icon()
 		return
@@ -62,7 +62,7 @@
 		return
 	var/newtime = input(usr, "Please set the timer.", "Timer", det_time) as num
 	if(user.is_in_active_hand(src))
-		newtime = Clamp(newtime, 10, 60000)
+		newtime = clamp(newtime, 10, 60000)
 		det_time = newtime
 		to_chat(user, "Timer set for [det_time] seconds.")
 
@@ -71,7 +71,7 @@
 		return
 	if (istype(AM, /mob/living/carbon))
 		return
-	to_chat(user, "<span class='notice'>You start planting the [src]. The timer is set to [det_time]...</span>")
+	to_chat(user, "<span class='notice'>You start planting [src]. The timer is set to [det_time]...</span>")
 
 	if(do_after(user, 50 * toolspeed, target = AM))
 		if(!user.unEquip(src))
@@ -90,7 +90,7 @@
 /obj/item/grenade/plastic/suicide_act(mob/user)
 	message_admins("[key_name_admin(user)]([ADMIN_QUE(user,"?")]) ([ADMIN_FLW(user,"FLW")]) suicided with [src.name] at ([user.x],[user.y],[user.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)",0,1)
 	log_game("[key_name(user)] suicided with [name] at ([user.x],[user.y],[user.z])")
-	user.visible_message("<span class='suicide'>[user] activates the [name] and holds it above [user.p_their()] head! It looks like [user.p_theyre()] going out with a bang!</span>")
+	user.visible_message("<span class='suicide'>[user] activates [src] and holds it above [user.p_their()] head! It looks like [user.p_theyre()] going out with a bang!</span>")
 	var/message_say = "FOR NO RAISIN!"
 	if(user.mind)
 		if(user.mind.special_role)
@@ -109,8 +109,6 @@
 				message_say = "FOR THE REVOLOUTION!"
 			else if(role == "death commando" || role == ROLE_ERT)
 				message_say = "FOR NANOTRASEN!"
-			else if(role == ROLE_DEVIL)
-				message_say = "FOR INFERNO!"
 	user.say(message_say)
 	target = user
 	sleep(10)
@@ -229,6 +227,7 @@
 	desc = "A C4 charge with an altered chemical composition, designed to blind and deafen the occupants of a room before breaching."
 
 /obj/item/grenade/plastic/c4_shaped/flash/prime()
+	var/turf/T
 	if(target && target.density)
 		T = get_step(get_turf(target), aim_dir)
 	else if(target)
@@ -266,6 +265,7 @@
 			addtimer(CALLBACK(null, .proc/explosion, T, 0, 0, 2), 3)
 			addtimer(CALLBACK(smoke, /datum/effect_system/smoke_spread/.proc/start), 3)
 		else
+			var/turf/T = get_step(location, aim_dir)
 			addtimer(CALLBACK(null, .proc/explosion, T, 0, 0, 2), 3)
 			addtimer(CALLBACK(smoke, /datum/effect_system/smoke_spread/.proc/start), 3)
 

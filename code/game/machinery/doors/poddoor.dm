@@ -59,9 +59,18 @@
 /obj/machinery/door/poddoor/try_to_activate_door(mob/user)
  	return
 
-/obj/machinery/door/poddoor/try_to_crowbar(obj/item/I, mob/user)
+/obj/machinery/door/poddoor/try_to_crowbar(mob/user, obj/item/I)
+	if(!density)
+		return
 	if(!hasPower())
-		open()
+		to_chat(user, "<span class='notice'>You start forcing [src] open...</span>")
+		if(do_after(user, 50 * I.toolspeed, target = src))
+			if(!hasPower())
+				open()
+			else
+				to_chat(user, "<span class='warning'>[src] resists your efforts to force it!</span>")
+	else
+		to_chat(user, "<span class='warning'>[src] resists your efforts to force it!</span>")
 
  // Whoever wrote the old code for multi-tile spesspod doors needs to burn in hell. - Unknown
  // Wise words. - Bxil
@@ -70,7 +79,7 @@
 	layer = CLOSED_DOOR_LAYER
 	closingLayer = CLOSED_DOOR_LAYER
 
-/obj/machinery/door/poddoor/multi_tile/New()
+/obj/machinery/door/poddoor/multi_tile/Initialize(mapload)
 	. = ..()
 	apply_opacity_to_my_turfs(opacity)
 
@@ -88,7 +97,7 @@
 	return ..()
 
 //Multi-tile poddoors don't turn invisible automatically, so we change the opacity of the turfs below instead one by one.
-/obj/machinery/door/poddoor/multi_tile/proc/apply_opacity_to_my_turfs(var/new_opacity)
+/obj/machinery/door/poddoor/multi_tile/proc/apply_opacity_to_my_turfs(new_opacity)
 	for(var/turf/T in locs)
 		T.opacity = new_opacity
 		T.has_opaque_atom = new_opacity

@@ -2,7 +2,7 @@
 	var/list/buildon_types = list(/turf/simulated/wall)
 
 
-/obj/item/mounted/afterattack(var/atom/A, mob/user, proximity_flag)
+/obj/item/mounted/afterattack(atom/A, mob/user, proximity_flag)
 	var/found_type = 0
 	for(var/turf_type in src.buildon_types)
 		if(istype(A, turf_type))
@@ -20,7 +20,7 @@
 		return
 	if(proximity_flag != 1) //if we aren't next to the wall
 		return
-	if(!( get_dir(on_wall,user) in cardinal))
+	if(!( get_dir(on_wall,user) in GLOB.cardinal))
 		to_chat(user, "<span class='warning'>You need to be standing next to a wall to place \the [src].</span>")
 		return
 

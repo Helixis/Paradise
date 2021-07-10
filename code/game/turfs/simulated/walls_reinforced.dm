@@ -6,8 +6,8 @@
 	opacity = 1
 	density = 1
 	explosion_block = 2
+	rad_insulation = RAD_HEAVY_INSULATION
 	damage_cap = 600
-	max_temperature = 6000
 	hardness = 10
 	sheet_type = /obj/item/stack/sheet/plasteel
 	sheet_amount = 1
@@ -43,7 +43,7 @@
 			update_icon()
 			to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 		return
-	else if(RWALL_SUPPORT_RODS && istype(I, /obj/item/gun/energy/plasmacutter))
+	else if(d_state == RWALL_SUPPORT_RODS && istype(I, /obj/item/gun/energy/plasmacutter))
 		to_chat(user, "<span class='notice'>You begin slicing through the support rods...</span>")
 		if(I.use_tool(src, user, 70, volume = I.tool_volume) && d_state == RWALL_SUPPORT_RODS)
 			d_state = RWALL_SHEATH
@@ -72,23 +72,6 @@
 				queue_smooth_neighbors(src)
 				to_chat(user, "<span class='notice'>You repair the last of the damage.</span>")
 			return
-
-	else if(istype(I, /obj/item/stack/sheet/plasteel))
-		var/obj/item/stack/sheet/plasteel/PS = I
-		if(!can_be_reinforced)
-			to_chat(user, "<span class='notice'>The wall is already coated!</span>")
-			return
-		to_chat(user, "<span class='notice'>You begin adding an additional layer of coating to the wall with [PS]...</span>")
-		if(do_after(user, 40 * PS.toolspeed, target = src) && !d_state)
-			if(!PS.use(2))
-				to_chat(user, "<span class='warning'>You don't have enough [PS.name] for that!</span>")
-				return
-			to_chat(user, "<span class='notice'>You add an additional layer of coating to the wall.</span>")
-			ChangeTurf(/turf/simulated/wall/r_wall/coated)
-			update_icon()
-			queue_smooth_neighbors(src)
-			can_be_reinforced = FALSE
-		return
 	else
 		return ..()
 
@@ -132,11 +115,11 @@
 			to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 		if(RWALL_SHEATH)
 			to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath...</span>")
-			if(!I.use_tool(src, user, 100, volume = I.tool_volume) || d_state != RWALL_SHEATH)
+			if(!I.use_tool(src, user, 100, volume = I.tool_volume))
 				return
-			to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
-			dismantle_wall()
-			return
+			if(dismantle_wall())
+				to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
+
 		if(RWALL_BOLTS)
 			to_chat(user, "<span class='notice'>You start to pry the cover back into place...</span>")
 			playsound(src, I.usesound, 100, 1)
@@ -198,6 +181,9 @@
 		d_state = RWALL_BOLTS
 		to_chat(user, "<span class='notice'>You tighten the bolts anchoring the support rods.</span>")
 	update_icon()
+
+/turf/simulated/wall/r_wall/try_decon(obj/item/I, mob/user, params) //Plasma cutter only works in the deconstruction steps!
+	return FALSE
 
 /turf/simulated/wall/r_wall/try_destroy(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/pickaxe/drill/diamonddrill))

@@ -4,6 +4,10 @@
 	glasses_over = 1
 	models_allowed = list("Bishop Cybernetics mtr.", "Hesphiastos Industries mtr.", "Morpheus Cyberkinetics", "Ward-Takahashi mtr.", "Xion Manufacturing Group mtr.", "Shellguard Munitions Monitor Series")
 
+/datum/sprite_accessory/hair/ipc/ipc_screen_blank
+	name = "Blank IPC Screen"
+	icon_state = "blank"
+
 /datum/sprite_accessory/hair/ipc/ipc_screen_pink
 	name = "Pink IPC Screen"
 	icon_state = "pink"
@@ -83,6 +87,14 @@
 /datum/sprite_accessory/hair/ipc/ipc_screen_glider
 	name = "Glider IPC Screen"
 	icon_state = "gol_glider"
+
+/datum/sprite_accessory/hair/ipc/ipc_screen_smoking
+	name = "Smoking IPC Screen"
+	icon_state = "smoking"
+
+/datum/sprite_accessory/hair/ipc/ipc_screen_test
+	name = "Test IPC Screen"
+	icon_state = "test"
 
 /datum/sprite_accessory/hair/ipc/hesphiastos_alt_off
 	name = "Dark Hesphiastos Screen"

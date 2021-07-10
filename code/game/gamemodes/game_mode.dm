@@ -20,11 +20,15 @@
 	var/explosion_in_progress = 0 //sit back and relax
 	var/list/datum/mind/modePlayer = new
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
+	var/list/secondary_restricted_jobs = list() // Same as above, but for secondary antagonists
 	var/list/protected_jobs = list()	// Jobs that can't be traitors
 	var/list/protected_species = list() // Species that can't be traitors
+	var/list/secondary_protected_species = list() // Same as above, but for secondary antagonists
 	var/required_players = 0
 	var/required_enemies = 0
 	var/recommended_enemies = 0
+	var/secondary_enemies = 0
+	var/secondary_enemies_scaling = 0 // Scaling rate of secondary enemies
 	var/newscaster_announcements = null
 	var/ert_disabled = 0
 	var/uplink_welcome = "Syndicate Uplink Console:"
@@ -73,15 +77,11 @@
 	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
 		display_roundstart_logout_report()
 
-	feedback_set_details("round_start","[time2text(world.realtime)]")
-	if(SSticker && SSticker.mode)
-		feedback_set_details("game_mode","[SSticker.mode]")
-//	if(revdata)
-//		feedback_set_details("revision","[revdata.revision]")
-	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
+	INVOKE_ASYNC(src, .proc/set_mode_in_db) // Async query, dont bother slowing roundstart
+
 	generate_station_goals()
-	start_state = new /datum/station_state()
-	start_state.count()
+	GLOB.start_state = new /datum/station_state()
+	GLOB.start_state.count()
 	return 1
 
 ///process()
@@ -89,18 +89,29 @@
 /datum/game_mode/process()
 	return 0
 
+// I wonder what this could do guessing by the name
+/datum/game_mode/proc/set_mode_in_db()
+	if(SSticker?.mode && SSdbcore.IsConnected())
+		var/datum/db_query/query_round_game_mode = SSdbcore.NewQuery("UPDATE [format_table_name("round")] SET game_mode=:gm WHERE id=:rid", list(
+			"gm" = SSticker.mode.name,
+			"rid" = GLOB.round_id
+		))
+		// We dont do anything with output. Dont bother wrapping with if()
+		query_round_game_mode.warn_execute()
+		qdel(query_round_game_mode)
+
 //Called by the gameticker
 /datum/game_mode/proc/process_job_tasks()
 	var/obj/machinery/message_server/useMS = null
-	if(message_servers)
-		for(var/obj/machinery/message_server/MS in message_servers)
+	if(GLOB.message_servers)
+		for(var/obj/machinery/message_server/MS in GLOB.message_servers)
 			if(MS.active)
 				useMS = MS
 				break
 	for(var/mob/M in GLOB.player_list)
 		if(M.mind)
 			var/obj/item/pda/P=null
-			for(var/obj/item/pda/check_pda in PDAs)
+			for(var/obj/item/pda/check_pda in GLOB.PDAs)
 				if(check_pda.owner==M.name)
 					P=check_pda
 					break
@@ -164,11 +175,11 @@
 			if(ishuman(M))
 				if(!M.stat)
 					surviving_humans++
-					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
+					if(M.loc && M.loc.loc && (M.loc.loc.type in escape_locations))
 						escaped_humans++
 			if(!M.stat)
 				surviving_total++
-				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
+				if(M.loc && M.loc.loc && (M.loc.loc.type in escape_locations))
 					escaped_total++
 
 				if(M.loc && M.loc.loc && M.loc.loc.type == SSshuttle.emergency.areaInstance.type && SSshuttle.emergency.mode >= SHUTTLE_ENDGAME)
@@ -186,37 +197,46 @@
 			if(isobserver(M))
 				ghosts++
 
-	if(clients > 0)
-		feedback_set("round_end_clients",clients)
-	if(ghosts > 0)
-		feedback_set("round_end_ghosts",ghosts)
-	if(surviving_humans > 0)
-		feedback_set("survived_human",surviving_humans)
-	if(surviving_total > 0)
-		feedback_set("survived_total",surviving_total)
-	if(escaped_humans > 0)
-		feedback_set("escaped_human",escaped_humans)
-	if(escaped_total > 0)
-		feedback_set("escaped_total",escaped_total)
-	if(escaped_on_shuttle > 0)
-		feedback_set("escaped_on_shuttle",escaped_on_shuttle)
-	if(escaped_on_pod_1 > 0)
-		feedback_set("escaped_on_pod_1",escaped_on_pod_1)
-	if(escaped_on_pod_2 > 0)
-		feedback_set("escaped_on_pod_2",escaped_on_pod_2)
-	if(escaped_on_pod_3 > 0)
-		feedback_set("escaped_on_pod_3",escaped_on_pod_3)
-	if(escaped_on_pod_5 > 0)
-		feedback_set("escaped_on_pod_5",escaped_on_pod_5)
+	if(clients)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", clients, list("clients"))
+	if(ghosts)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", ghosts, list("ghosts"))
+	if(surviving_humans)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", surviving_humans, list("survivors", "human"))
+	if(surviving_total)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", surviving_total, list("survivors", "total"))
+	if(escaped_humans)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_humans, list("escapees", "human"))
+	if(escaped_total)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_total, list("escapees", "total"))
+	if(escaped_on_shuttle)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_on_shuttle, list("escapees", "on_shuttle"))
+	if(escaped_on_pod_1)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_on_pod_1, list("escapees", "on_pod_1"))
+	if(escaped_on_pod_2)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_on_pod_2, list("escapees", "on_pod_2"))
+	if(escaped_on_pod_3)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_on_pod_3, list("escapees", "on_pod_3"))
+	if(escaped_on_pod_5)
+		SSblackbox.record_feedback("nested tally", "round_end_stats", escaped_on_pod_5, list("escapees", "on_pod_5"))
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivors, [ghosts] ghosts.")
+	// HISPANIA EMBED ○_○
+	var/datum/discord_embed/new_round_embed/nwe = new
+	nwe.embed_title = "Ronda Terminada"
+	nwe.embed_colour = "FF002E"
+	nwe.embed_content = "Una ronda en modo `[name]` acaba de terminar.\n• **[surviving_total]** supervivientes.\n• **[ghosts]** muertos."
+	var/datum/discord_webhook_payload/nr = new
+	nr.embeds += nwe // Insertamos el nuevo discord_embed en la lista.
+
+	SSdiscord.send2discord_complex(DISCORD_WEBHOOK_PRIMARY, nr)
+	SSdiscord.send2discord_simple(DISCORD_WEBHOOK_PRIMARY, "*Una nueva ronda comenzara en breve.* <@&[config.discord_newround_role_id]>")
+
 	return 0
-
 
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
 
-/datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=0)
+/datum/game_mode/proc/get_players_for_role(role, override_jobbans=0)
 	var/list/players = list()
 	var/list/candidates = list()
 	//var/list/drafted = list()
@@ -265,10 +285,10 @@
 							//			Less if there are not enough valid players in the game entirely to make recommended_enemies.
 
 
-/datum/game_mode/proc/latespawn(var/mob)
+/datum/game_mode/proc/latespawn(mob)
 
 /*
-/datum/game_mode/proc/check_player_role_pref(var/role, var/mob/player)
+/datum/game_mode/proc/check_player_role_pref(role, mob/player)
 	if(player.preferences.be_special & role)
 		return 1
 	return 0
@@ -291,8 +311,9 @@
 ///////////////////////////////////
 /datum/game_mode/proc/get_living_heads()
 	. = list()
-	for(var/mob/living/carbon/human/player in GLOB.mob_list)
-		var/list/real_command_positions = command_positions.Copy() - "Nanotrasen Representative"
+	for(var/thing in GLOB.human_list)
+		var/mob/living/carbon/human/player = thing
+		var/list/real_command_positions = GLOB.command_positions.Copy() - "Nanotrasen Representative"
 		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in real_command_positions))
 			. |= player.mind
 
@@ -303,7 +324,7 @@
 /datum/game_mode/proc/get_all_heads()
 	. = list()
 	for(var/mob/player in GLOB.mob_list)
-		var/list/real_command_positions = command_positions.Copy() - "Nanotrasen Representative"
+		var/list/real_command_positions = GLOB.command_positions.Copy() - "Nanotrasen Representative"
 		if(player.mind && (player.mind.assigned_role in real_command_positions))
 			. |= player.mind
 
@@ -312,8 +333,9 @@
 //////////////////////////////////////////////
 /datum/game_mode/proc/get_living_sec()
 	. = list()
-	for(var/mob/living/carbon/human/player in GLOB.mob_list)
-		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in security_positions))
+	for(var/thing in GLOB.human_list)
+		var/mob/living/carbon/human/player = thing
+		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in GLOB.security_positions))
 			. |= player.mind
 
 ////////////////////////////////////////
@@ -321,20 +343,21 @@
 ////////////////////////////////////////
 /datum/game_mode/proc/get_all_sec()
 	. = list()
-	for(var/mob/living/carbon/human/player in GLOB.mob_list)
-		if(player.mind && (player.mind.assigned_role in security_positions))
+	for(var/thing in GLOB.human_list)
+		var/mob/living/carbon/human/player = thing
+		if(player.mind && (player.mind.assigned_role in GLOB.security_positions))
 			. |= player.mind
 
 /datum/game_mode/proc/check_antagonists_topic(href, href_list[])
 	return 0
 
 /datum/game_mode/New()
-	newscaster_announcements = pick(newscaster_standard_feeds)
+	newscaster_announcements = pick(GLOB.newscaster_standard_feeds)
 
 //////////////////////////
 //Reports player logouts//
 //////////////////////////
-proc/display_roundstart_logout_report()
+/proc/display_roundstart_logout_report()
 	var/msg = "<span class='notice'>Roundstart logout report</span>\n\n"
 	for(var/mob/living/L in GLOB.mob_list)
 
@@ -392,7 +415,7 @@ proc/display_roundstart_logout_report()
 			to_chat(M, msg)
 
 //Announces objectives/generic antag text.
-/proc/show_generic_antag_text(var/datum/mind/player)
+/proc/show_generic_antag_text(datum/mind/player)
 	if(player.current)
 		to_chat(player.current, "You are an antagonist! <font color=blue>Within the rules,</font> \
 		try to act as an opposing force to the crew. Further RP and try to make sure \
@@ -401,7 +424,7 @@ proc/display_roundstart_logout_report()
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>")
 
-/proc/show_objectives(var/datum/mind/player)
+/proc/show_objectives(datum/mind/player)
 	if(!player || !player.current) return
 
 	var/obj_count = 1
@@ -410,20 +433,20 @@ proc/display_roundstart_logout_report()
 		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++
 
-/proc/get_roletext(var/role)
+/proc/get_roletext(role)
 	return role
 
 /proc/get_nuke_code()
 	var/nukecode = "ERROR"
-	for(var/obj/machinery/nuclearbomb/bomb in world)
+	for(var/obj/machinery/nuclearbomb/bomb in GLOB.machines)
 		if(bomb && bomb.r_code && is_station_level(bomb.z))
 			nukecode = bomb.r_code
 	return nukecode
 
 /datum/game_mode/proc/replace_jobbanned_player(mob/living/M, role_type)
-	var/list/mob/dead/observer/candidates = pollCandidates("Do you want to play as a [role_type]?", role_type, 0, 100)
+	var/list/mob/dead/observer/candidates = SSghost_spawns.poll_candidates("Do you want to play as a [role_type]?", role_type, FALSE, 10 SECONDS)
 	var/mob/dead/observer/theghost = null
-	if(candidates.len)
+	if(length(candidates))
 		theghost = pick(candidates)
 		to_chat(M, "<span class='userdanger'>Your mob has been taken over by a ghost! Appeal your job ban if you want to avoid this in the future!</span>")
 		message_admins("[key_name_admin(theghost)] has taken control of ([key_name_admin(M)]) to replace a jobbanned player.")
@@ -490,7 +513,7 @@ proc/display_roundstart_logout_report()
 		var/datum/station_goal/picked = pick_n_take(possible)
 		goal_weights += initial(picked.weight)
 		station_goals += new picked
-
+	station_goals += new /datum/station_goal/redspacesearch //Forzamos que siempre sea un station_goal Hispania
 	if(station_goals.len)
 		send_station_goals_message()
 
@@ -504,7 +527,7 @@ proc/display_roundstart_logout_report()
 		message_text += G.get_report()
 		message_text += "<hr>"
 
-	print_command_report(message_text, "[command_name()] Orders")
+	print_command_report(message_text, "[command_name()] Orders", FALSE)
 
 /datum/game_mode/proc/declare_station_goal_completion()
 	for(var/V in station_goals)
@@ -512,11 +535,11 @@ proc/display_roundstart_logout_report()
 		G.print_result()
 
 /datum/game_mode/proc/update_eventmisc_icons_added(datum/mind/mob_mind)
-	var/datum/atom_hud/antag/antaghud = huds[ANTAG_HUD_EVENTMISC]
+	var/datum/atom_hud/antag/antaghud = GLOB.huds[ANTAG_HUD_EVENTMISC]
 	antaghud.join_hud(mob_mind.current)
 	set_antag_hud(mob_mind.current, "hudevent")
 
 /datum/game_mode/proc/update_eventmisc_icons_removed(datum/mind/mob_mind)
-	var/datum/atom_hud/antag/antaghud = huds[ANTAG_HUD_EVENTMISC]
+	var/datum/atom_hud/antag/antaghud = GLOB.huds[ANTAG_HUD_EVENTMISC]
 	antaghud.leave_hud(mob_mind.current)
 	set_antag_hud(mob_mind.current, null)

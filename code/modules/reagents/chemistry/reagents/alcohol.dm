@@ -6,8 +6,6 @@
 	reagent_state = LIQUID
 	nutriment_factor = 0 //So alcohol can fill you up! If they want to.
 	color = "#404030" // rgb: 64, 64, 48
-	addiction_chance = 1
-	addiction_threshold = 10
 	var/dizzy_adj = 3
 	var/alcohol_perc = 1 //percentage of ethanol in a beverage 0.0 - 1.0
 	taste_description = "liquid fire"
@@ -19,22 +17,19 @@
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, volume)
 	if(istype(O,/obj/item/paper))
-		if(istype(O,/obj/item/paper/contract/infernal))
-			to_chat(usr, "The solution ignites on contact with the [O].")
-		else
-			var/obj/item/paper/paperaffected = O
-			paperaffected.clearpaper()
-			to_chat(usr, "The solution melts away the ink on the paper.")
+		var/obj/item/paper/paperaffected = O
+		paperaffected.clearpaper()
+		paperaffected.visible_message("<span class='notice'>The solution melts away the ink on the paper.</span>")
 	if(istype(O,/obj/item/book))
 		if(volume >= 5)
 			var/obj/item/book/affectedbook = O
 			affectedbook.dat = null
-			to_chat(usr, "The solution melts away the ink on the book.")
+			affectedbook.visible_message("<span class='notice'>The solution melts away the ink on the book.</span>")
 		else
-			to_chat(usr, "It wasn't enough...")
+			O.visible_message("<span class='warning'>It wasn't enough...</span>")
 
-/datum/reagent/consumable/ethanol/reaction_mob(mob/living/M, method=TOUCH, volume)//Splashing people with ethanol isn't quite as good as fuel.
-	if(method == TOUCH)
+/datum/reagent/consumable/ethanol/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)//Splashing people with ethanol isn't quite as good as fuel.
+	if(method == REAGENT_TOUCH)
 		M.adjust_fire_stacks(volume / 15)
 
 
@@ -181,7 +176,7 @@
 	description = "Anime's favorite drink."
 	color = "#664300" // rgb: 102, 67, 0
 	alcohol_perc = 0.2
-	drink_icon = "ginvodkaglass"
+	drink_icon = "sake"
 	drink_name = "Glass of Sake"
 	drink_desc = "A glass of Sake."
 	taste_description = "sake"
@@ -377,6 +372,18 @@
 	drink_name = "Whiskey Cola"
 	drink_desc = "An innocent-looking mixture of cola and Whiskey. Delicious."
 	taste_description = "whiskey and coke"
+
+/datum/reagent/consumable/ethanol/daiquiri
+	name = "Daiquiri"
+	id = "daiquiri"
+	description = "Lime juice and sugar mixed with rum. A sweet and refreshing mix."
+	reagent_state = LIQUID
+	color = "#61d961" // rgb: 38, 85, 38
+	alcohol_perc = 0.4
+	drink_icon = "daiquiriglass"
+	drink_name = "Daiquiri"
+	drink_desc = "When Botany gives you limes, make daiquiris."
+	taste_description = "sweetened lime juice and rum"
 
 /datum/reagent/consumable/ethanol/martini
 	name = "Classic Martini"
@@ -680,6 +687,25 @@
 	if(M.bodytemperature < 330)
 		M.bodytemperature = min(330, M.bodytemperature + (20 * TEMPERATURE_DAMAGE_COEFFICIENT)) //310 is the normal bodytemp. 310.055
 	return ..()
+
+/datum/reagent/consumable/ethanol/adminfreeze
+	name = "Admin Freeze"
+	id = "adminfreeze"
+	description = "Ultimate Punishment."
+	reagent_state = LIQUID
+	color = "#30F0FF" // rgb: 048, 240, 255
+	dizzy_adj = 4
+	alcohol_perc = 1.5 // oof
+	drink_icon = "adminfreeze"
+	drink_name = "Admin Freeze"
+	drink_desc = "The ultimate punishment."
+	taste_description = "a series of bad decisions"
+
+/datum/reagent/consumable/ethanol/adminfreeze/reaction_mob(mob/living/M, method = REAGENT_INGEST, volume)
+	..()
+	if(method == REAGENT_INGEST)
+		M.apply_status_effect(/datum/status_effect/freon/watcher)
+		M.adjust_bodytemperature(-110)
 
 /datum/reagent/consumable/ethanol/barefoot
 	name = "Barefoot"
@@ -1142,8 +1168,8 @@
 	can_synth = FALSE
 	taste_description = "<span class='userdanger'>LIQUID FUCKING DEATH OH GOD WHAT THE FUCK</span>"
 
-/datum/reagent/consumable/ethanol/dragons_breath/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(method == INGEST && prob(20))
+/datum/reagent/consumable/ethanol/dragons_breath/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	if(method == REAGENT_INGEST && prob(20))
 		if(M.on_fire)
 			M.adjust_fire_stacks(6)
 
@@ -1192,17 +1218,18 @@
 	taste_description = "motor oil"
 
 /datum/reagent/consumable/ethanol/synthanol/on_mob_life(mob/living/M)
-	if(!M.isSynthetic())
-		holder.remove_reagent(id, 3.6) //gets removed from organics very fast
+	metabolization_rate = REAGENTS_METABOLISM
+	if(!(M.dna.species.reagent_tag & PROCESS_SYN))
+		metabolization_rate += 3.6 //gets removed from organics very fast
 		if(prob(25))
-			holder.remove_reagent(id, 15)
+			metabolization_rate += 15
 			M.fakevomit()
 	return ..()
 
-/datum/reagent/consumable/ethanol/synthanol/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(M.isSynthetic())
+/datum/reagent/consumable/ethanol/synthanol/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	if(M.dna.species.reagent_tag & PROCESS_SYN)
 		return
-	if(method == INGEST)
+	if(method == REAGENT_INGEST)
 		to_chat(M, pick("<span class = 'danger'>That was awful!</span>", "<span class = 'danger'>Yuck!</span>"))
 
 /datum/reagent/consumable/ethanol/synthanol/robottears
@@ -1388,7 +1415,46 @@
 	color = rgb(51, 19, 3) //Sickly brown
 	dizzy_adj = 21
 	alcohol_perc = 3 //I warned you
-	drink_icon = "glass_brown2"
+	drink_icon = "bacchusblessing"
 	drink_name = "Bacchus' Blessing"
 	drink_desc = "You didn't think it was possible for a liquid to be so utterly revolting. Are you sure about this...?"
 	taste_description = "a wall of bricks"
+
+/datum/reagent/consumable/ethanol/fernet
+	name = "Fernet"
+	id = "fernet"
+	description = "An incredibly bitter herbal liqueur used as a digestif."
+	color = "#1B2E24" // rgb: 27, 46, 36
+	alcohol_perc = 0.5
+	drink_icon = "fernetpuro"
+	drink_name = "glass of pure fernet"
+	drink_desc = "Why are you drinking this pure?"
+	taste_description = "utter bitterness"
+	var/remove_nutrition = 2
+
+/datum/reagent/consumable/ethanol/fernet/on_mob_life(mob/living/M)
+	var/update_flags = STATUS_UPDATE_NONE
+	if(!M.nutrition)
+		switch(rand(1, 3))
+			if(1)
+				to_chat(M, "<span class='warning'>You feel hungry...</span>")
+			if(2)
+				update_flags |= M.adjustToxLoss(1, FALSE)
+				to_chat(M, "<span class='warning'>Your stomach grumbles painfully!</span>")
+	else
+		if(prob(60))
+			M.adjust_nutrition(-remove_nutrition)
+			M.overeatduration = 0
+	return ..() | update_flags
+
+/datum/reagent/consumable/ethanol/fernet/fernet_cola
+	name = "Fernet Cola"
+	id = "fernet_cola"
+	description = "A very popular and bittersweet digestif, ideal after a heavy meal. Best served on a sawed-off cola bottle as per tradition."
+	color = "#390600" // rgb: 57, 6, 0
+	alcohol_perc = 0.2
+	drink_icon = "fernetcola"
+	drink_name = "glass of fernet cola"
+	drink_desc = "A sawed-off cola bottle filled with Fernet Cola. You can hear cuarteto music coming from the inside."
+	taste_description = "low class heaven"
+	remove_nutrition = 1

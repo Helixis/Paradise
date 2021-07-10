@@ -230,9 +230,8 @@
 	if(explosion_severity < 3)
 		qdel(holder)
 	else
-		. = 1
-		spawn(5)
-			holder.wither()
+		addtimer(CALLBACK(holder, /obj/structure/spacevine.proc/wither), 5)
+		return TRUE
 
 /datum/spacevine_mutation/explosive/on_death(obj/structure/spacevine/holder, mob/hitter, obj/item/I)
 	explosion(holder.loc, 0, 0, severity, 0, 0)
@@ -418,8 +417,8 @@
 	var/obj/structure/spacevine_controller/master = null
 	var/list/mutations = list()
 
-/obj/structure/spacevine/New()
-	..()
+/obj/structure/spacevine/Initialize(mapload)
+	. = ..()
 	color = "#ffffff"
 
 /obj/structure/spacevine/examine(mob/user)
@@ -656,7 +655,7 @@
 		buckle_mob(V, 1)
 
 /obj/structure/spacevine/proc/spread()
-	var/list/dir_list = cardinal.Copy()
+	var/list/dir_list = GLOB.cardinal.Copy()
 	var/spread_search = FALSE // Whether to exhaustive search all 4 cardinal dirs for an open direction
 	for(var/datum/spacevine_mutation/SM in mutations)
 		spread_search |= SM.on_search(src)

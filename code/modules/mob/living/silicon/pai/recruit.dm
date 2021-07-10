@@ -1,6 +1,6 @@
 // Recruiting observers to play as pAIs
 
-var/datum/paiController/paiController			// Global handler for pAI candidates
+GLOBAL_DATUM_INIT(paiController, /datum/paiController, new) // Global handler for pAI candidates
 
 /datum/paiCandidate
 	var/name
@@ -9,12 +9,6 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	var/role
 	var/comments
 	var/ready = 0
-
-
-/hook/startup/proc/paiControllerSetup()
-	paiController = new /datum/paiController()
-	return 1
-
 
 /datum/paiController
 	var/list/pai_candidates = list()
@@ -120,7 +114,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				return
 		recruitWindow(usr)
 
-/datum/paiController/proc/recruitWindow(var/mob/M as mob)
+/datum/paiController/proc/recruitWindow(mob/M as mob)
 	var/datum/paiCandidate/candidate
 	for(var/datum/paiCandidate/c in pai_candidates)
 		if(!istype(c) || !istype(M))
@@ -249,10 +243,10 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	M << browse(dat, "window=paiRecruit;size=580x580;")
 
-/datum/paiController/proc/findPAI(var/obj/item/paicard/p, var/mob/user)
+/datum/paiController/proc/findPAI(obj/item/paicard/p, mob/user)
 	requestRecruits(p, user)
 	var/list/available = list()
-	for(var/datum/paiCandidate/c in paiController.pai_candidates)
+	for(var/datum/paiCandidate/c in GLOB.paiController.pai_candidates)
 		if(c.ready)
 			var/found = 0
 			for(var/mob/o in GLOB.respawnable_list)
@@ -365,7 +359,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	user << browse(dat, "window=findPai")
 
-/datum/paiController/proc/requestRecruits(var/obj/item/paicard/P, mob/user)
+/datum/paiController/proc/requestRecruits(obj/item/paicard/P, mob/user)
 	for(var/mob/dead/observer/O in GLOB.player_list)
 		if(O.client && (ROLE_PAI in O.client.prefs.be_special))
 			if(player_old_enough_antag(O.client,ROLE_PAI))
@@ -373,7 +367,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 					to_chat(O, "<span class='boldnotice'>A pAI card activated by [user.real_name] is looking for personalities. (<a href='?src=[O.UID()];jump=\ref[P]'>Teleport</a> | <a href='?src=[UID()];signup=\ref[O]'>Sign Up</a>)</span>")
 					//question(O.client)
 
-/datum/paiController/proc/check_recruit(var/mob/dead/observer/O)
+/datum/paiController/proc/check_recruit(mob/dead/observer/O)
 	if(jobban_isbanned(O, ROLE_PAI) || jobban_isbanned(O,"nonhumandept"))
 		return 0
 	if(!player_old_enough_antag(O.client,ROLE_PAI))
@@ -386,7 +380,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		return 1
 	return 0
 
-/datum/paiController/proc/question(var/client/C)
+/datum/paiController/proc/question(client/C)
 	spawn(0)
 		if(!C)	return
 		asked.Add(C.key)

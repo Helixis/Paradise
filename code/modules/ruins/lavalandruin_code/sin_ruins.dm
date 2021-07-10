@@ -90,7 +90,7 @@
 /obj/effect/gluttony/CanPass(atom/movable/mover, turf/target)//So bullets will fly over and stuff.
 	if(ishuman(mover))
 		var/mob/living/carbon/human/H = mover
-		if(H.nutrition >= NUTRITION_LEVEL_FAT || (FAT in H.mutations))
+		if(H.nutrition >= NUTRITION_LEVEL_FAT || HAS_TRAIT(H, TRAIT_FAT))
 			H.visible_message("<span class='warning'>[H] pushes through [src]!</span>", "<span class='notice'>You've seen and eaten worse than this.</span>")
 			return TRUE
 		else
@@ -111,7 +111,7 @@
 	"<span class='notice'>Perfect. Much better! Now <i>nobody</i> will be able to resist yo-</span>")
 
 	var/turf/T = get_turf(user)
-	var/list/levels = space_manager.z_list.Copy()
+	var/list/levels = GLOB.space_manager.z_list.Copy()
 	for(var/level in levels)
 		if(!is_teleport_allowed(level))
 			levels -= level

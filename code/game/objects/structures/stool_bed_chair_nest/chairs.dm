@@ -18,22 +18,11 @@
 	var/propelled = FALSE // Check for fire-extinguisher-driven chairs
 	var/comfort = 0
 
-/obj/structure/chair/New()
-	..()
-	spawn(3)	//sorry. i don't think there's a better way to do this.
-		handle_rotation()
-	return
-
 /obj/structure/chair/narsie_act()
 	if(prob(20))
 		var/obj/structure/chair/wood/W = new/obj/structure/chair/wood(get_turf(src))
 		W.setDir(dir)
 		qdel(src)
-
-/obj/structure/chair/ratvar_act()
-	var/obj/structure/chair/brass/B = new(get_turf(src))
-	B.setDir(dir)
-	qdel(src)
 
 /obj/structure/chair/Move(atom/newloc, direct)
 	..()
@@ -46,10 +35,9 @@
 			to_chat(user, "<span class='notice'>[SK] is not ready to be attached!</span>")
 			return
 		user.drop_item()
-		var/obj/structure/chair/e_chair/E = new /obj/structure/chair/e_chair(src.loc)
+		var/obj/structure/chair/e_chair/E = new /obj/structure/chair/e_chair(get_turf(src), SK)
 		playsound(src.loc, W.usesound, 50, 1)
 		E.dir = dir
-		E.part = SK
 		SK.loc = E
 		SK.master = E
 		qdel(src)
@@ -293,7 +281,7 @@
 	name = "stool"
 	desc = "Apply butt."
 	icon_state = "stool"
-	//can_buckle = TRUE
+	can_buckle = FALSE
 	item_chair = /obj/item/chair/stool
 
 /obj/structure/chair/stool/bar
@@ -447,9 +435,6 @@
 	turns++
 	if(turns >= 8)
 		STOP_PROCESSING(SSfastprocess, src)
-
-/obj/structure/chair/brass/ratvar_act()
-	return
 
 /obj/structure/chair/brass/AltClick(mob/living/user)
 	turns = 0

@@ -27,7 +27,7 @@
 			desc = "A box suited for pizzas."
 			icon_state = "pizzabox1"
 			return
-		timer = Clamp(timer, 10, 100)
+		timer = clamp(timer, 10, 100)
 		icon_state = "pizzabox1"
 		to_chat(user, "<span class='notice'>You set the timer to [timer / 10] before activating the payload and closing \the [src].")
 		message_admins("[key_name_admin(usr)] has set a timer on a pizza bomb to [timer/10] seconds at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>(JMP)</a>.")
@@ -50,14 +50,14 @@
 
 /obj/item/pizza_bomb/proc/go_boom()
 	if(disarmed)
-		visible_message("<span class='danger'>[bicon(src)] Sparks briefly jump out of the [correct_wire] wire on \the [src], but it's disarmed!")
+		visible_message("<span class='danger'>[bicon(src)] Sparks briefly jump out of the [correct_wire] wire on [src], but it's disarmed!</span>")
 		return
-	src.audible_message("[bicon(src)] <b>[src]</b> beeps, \"Enjoy the pizza!\"")
-	src.visible_message("<span class='userdanger'>\The [src] violently explodes!</span>")
+	atom_say("Enjoy the pizza!")
+	visible_message("<span class='userdanger'>[src] violently explodes!</span>")
 	explosion(src.loc,1,2,4,flame_range = 2) //Identical to a minibomb
 	qdel(src)
 
-/obj/item/pizza_bomb/attackby(var/obj/item/I, var/mob/user, params)
+/obj/item/pizza_bomb/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/wirecutters) && primed)
 		to_chat(user, "<span class='danger'>Oh God, what wire do you cut?!</span>")
 		var/chosen_wire = input(user, "OH GOD OH GOD", "WHAT WIRE?!") in wires

@@ -133,6 +133,9 @@
 /obj/item/ammo_box/magazine/internal/shot/riot/short
 	max_ammo = 3
 
+/obj/item/ammo_box/magazine/internal/shot/riot/buckshot
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
+
 /obj/item/ammo_box/magazine/internal/grenadelauncher
 	name = "grenade launcher internal magazine"
 	ammo_type = /obj/item/ammo_casing/a40mm
@@ -268,15 +271,15 @@
 
 /obj/item/ammo_box/magazine/wt550m9/wtap
 	name = "wt550 magazine (Armour Piercing 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mmap
+	ammo_type = /obj/item/ammo_casing/c46x30mm/ap
 
 /obj/item/ammo_box/magazine/wt550m9/wttx
 	name = "wt550 magazine (Toxin Tipped 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mmtox
+	ammo_type = /obj/item/ammo_casing/c46x30mm/tox
 
 /obj/item/ammo_box/magazine/wt550m9/wtic
 	name = "wt550 magazine (Incendiary 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mminc
+	ammo_type = /obj/item/ammo_casing/c46x30mm/inc
 
 /obj/item/ammo_box/magazine/uzim9mm
 	name = "uzi magazine (9mm)"
@@ -299,17 +302,17 @@
 
 /obj/item/ammo_box/magazine/smgm9mm/ap
 	name = "SMG magazine (Armour Piercing 9mm)"
-	ammo_type = /obj/item/ammo_casing/c9mmap
+	ammo_type = /obj/item/ammo_casing/c9mm/ap
 	materials = list(MAT_METAL = 3000)
 
 /obj/item/ammo_box/magazine/smgm9mm/toxin
 	name = "SMG magazine (Toxin Tipped 9mm)"
-	ammo_type = /obj/item/ammo_casing/c9mmtox
+	ammo_type = /obj/item/ammo_casing/c9mm/tox
 	materials = list(MAT_METAL = 3000)
 
 /obj/item/ammo_box/magazine/smgm9mm/fire
 	name = "SMG Magazine (Incendiary 9mm)"
-	ammo_type = /obj/item/ammo_casing/c9mminc
+	ammo_type = /obj/item/ammo_casing/c9mm/inc
 	materials = list(MAT_METAL = 3000)
 
 /obj/item/ammo_box/magazine/smgm9mm/update_icon()
@@ -340,8 +343,8 @@
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
 
 /obj/item/ammo_box/magazine/tommygunm45
-	name = "drum magazine (.45)"
-	icon_state = "drum45"
+	name = "tommy magazine (.45)"
+	icon_state = "tommy45"
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
 	max_ammo = 50
@@ -372,6 +375,10 @@
 	max_ammo = 30
 	multiple_sprites = 2
 
+/obj/item/ammo_box/magazine/m556/arg
+	name = "ARG magazine (5.56mm)"
+	icon_state = "arg"
+
 /obj/item/ammo_box/magazine/m12g
 	name = "shotgun magazine (12g slugs)"
 	desc = "A drum magazine."
@@ -380,10 +387,7 @@
 	origin_tech = "combat=3;syndicate=1"
 	caliber = "shotgun"
 	max_ammo = 8
-
-/obj/item/ammo_box/magazine/m12g/update_icon()
-	..()
-	icon_state = "[initial(icon_state)]-[Ceiling(ammo_count(0)/8)*8]"
+	multiple_sprites = 2
 
 /obj/item/ammo_box/magazine/m12g/buckshot
 	name = "shotgun magazine (12g buckshot slugs)"
@@ -410,6 +414,24 @@
 	name = "shotgun magazine (12g breacher slugs)"
 	icon_state = "m12gbc"
 	ammo_type = /obj/item/ammo_casing/shotgun/breaching
+
+/obj/item/ammo_box/magazine/m12g/XtrLrg
+	name = "\improper XL shotgun magazine (12g slugs)"
+	desc = "An extra large drum magazine."
+	icon_state = "m12gXlSl"
+	w_class = WEIGHT_CLASS_NORMAL
+	ammo_type = /obj/item/ammo_casing/shotgun
+	max_ammo = 16
+
+/obj/item/ammo_box/magazine/m12g/XtrLrg/buckshot
+	name = "\improper XL shotgun magazine (12g buckshot)"
+	icon_state = "m12gXlBs"
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
+
+/obj/item/ammo_box/magazine/m12g/XtrLrg/dragon
+	name = "\improper XL shotgun magazine (12g dragon's breath)"
+	icon_state = "m12gXlDb"
+	ammo_type = /obj/item/ammo_casing/shotgun/incendiary/dragonsbreath
 
 /obj/item/ammo_box/magazine/toy
 	name = "foam force META magazine"
@@ -474,11 +496,11 @@
 /obj/item/ammo_box/magazine/toy/m762
 	name = "donksoft box magazine"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
-	max_ammo = 50
+	max_ammo = 100
 
 /obj/item/ammo_box/magazine/toy/m762/update_icon()
 	..()
-	icon_state = "a762-[round(ammo_count(),10)]"
+	icon_state = "a762-[round(ammo_count()/25,1)*25]"
 
 /obj/item/ammo_box/magazine/toy/m762/riot
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
@@ -494,7 +516,7 @@
 
 /obj/item/ammo_box/magazine/laser/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[Ceiling(ammo_count(0)/20)*20]"
+	icon_state = "[initial(icon_state)]-[CEILING(ammo_count(0)/20, 1)*20]"
 
 /obj/item/ammo_box/magazine/toy/smgm45
 	name = "donksoft SMG magazine"

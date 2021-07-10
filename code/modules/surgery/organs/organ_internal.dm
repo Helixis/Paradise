@@ -13,7 +13,7 @@
 	if(istype(holder))
 		insert(holder)
 
-/obj/item/organ/internal/proc/insert(mob/living/carbon/M, special = 0, var/dont_remove_slot = 0)
+/obj/item/organ/internal/proc/insert(mob/living/carbon/M, special = 0, dont_remove_slot = 0)
 	if(!iscarbon(M) || owner == M)
 		return
 
@@ -36,13 +36,13 @@
 			log_runtime(EXCEPTION("[src] attempted to insert into a [parent_organ], but [parent_organ] wasn't an organ! [atom_loc_line(M)]"), src)
 		else
 			parent.internal_organs |= src
-	//M.internal_bodyparts_by_name[src] |= src(H,1)
 	loc = null
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.Grant(M)
 	if(vital)
 		M.update_stat("Vital organ inserted")
+	STOP_PROCESSING(SSobj, src)
 
 // Removes the given organ from its owner.
 // Returns the removed object, which is usually just itself
@@ -71,9 +71,19 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.Remove(M)
+	START_PROCESSING(SSobj, src)
 	return src
 
-/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target)
+/obj/item/organ/internal/emp_act(severity)
+	if(!is_robotic() || emp_proof)
+		return
+	switch(severity)
+		if(1)
+			receive_damage(20, 1)
+		if(2)
+			receive_damage(7, 1)
+
+/obj/item/organ/internal/replaced(mob/living/carbon/human/target)
     insert(target)
 
 /obj/item/organ/internal/item_action_slot_check(slot, mob/user)
@@ -141,7 +151,7 @@
 
 // Brain is defined in brain_item.dm.
 
-/obj/item/organ/internal/robotize()
+/obj/item/organ/internal/robotize(make_tough)
 	if(!is_robotic())
 		var/list/states = icon_states('icons/obj/surgery.dmi') //Insensitive to specially-defined icon files for species like the Drask or whomever else. Everyone gets the same robotic heart.
 		if(slot == "heart" && ("[slot]-c-on" in states) && ("[slot]-c-off" in states)) //Give the robotic heart its robotic heart icons if they exist.
@@ -225,31 +235,25 @@
 	slot = "brain_tumor"
 	var/organhonked = 0
 	var/suffering_delay = 900
-	var/datum/component/waddle
 	var/datum/component/squeak
 
 /obj/item/organ/internal/honktumor/insert(mob/living/carbon/M, special = 0)
 	..()
-	M.mutations.Add(CLUMSY)
-	M.mutations.Add(COMICBLOCK)
-	M.dna.SetSEState(CLUMSYBLOCK,1,1)
-	M.dna.SetSEState(COMICBLOCK,1,1)
-	genemutcheck(M,CLUMSYBLOCK,null,MUTCHK_FORCED)
-	genemutcheck(M,COMICBLOCK,null,MUTCHK_FORCED)
+	M.dna.SetSEState(GLOB.clumsyblock, TRUE, TRUE)
+	M.dna.SetSEState(GLOB.comicblock, TRUE, TRUE)
+	singlemutcheck(M, GLOB.clumsyblock, MUTCHK_FORCED)
+	singlemutcheck(M, GLOB.comicblock, MUTCHK_FORCED)
 	organhonked = world.time
-	waddle = M.AddComponent(/datum/component/waddling)
-	squeak = M.AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg' = 1), 50)
+	M.AddElement(/datum/element/waddling)
+	squeak = M.AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg' = 1), 50, falloff_exponent = 20)
 
 /obj/item/organ/internal/honktumor/remove(mob/living/carbon/M, special = 0)
 	. = ..()
-
-	M.mutations.Remove(CLUMSY)
-	M.mutations.Remove(COMICBLOCK)
-	M.dna.SetSEState(CLUMSYBLOCK,0)
-	M.dna.SetSEState(COMICBLOCK,0)
-	genemutcheck(M,CLUMSYBLOCK,null,MUTCHK_FORCED)
-	genemutcheck(M,COMICBLOCK,null,MUTCHK_FORCED)
-	QDEL_NULL(waddle)
+	M.dna.SetSEState(GLOB.clumsyblock, FALSE)
+	M.dna.SetSEState(GLOB.comicblock, FALSE)
+	singlemutcheck(M, GLOB.clumsyblock, MUTCHK_FORCED)
+	singlemutcheck(M, GLOB.comicblock, MUTCHK_FORCED)
+	M.RemoveElement(/datum/element/waddling)
 	QDEL_NULL(squeak)
 	qdel(src)
 
@@ -259,9 +263,9 @@
 		to_chat(owner, "<font color='red' size='7'>HONK</font>")
 		owner.SetSleeping(0)
 		owner.Stuttering(20)
-		owner.MinimumDeafTicks(30)
+		owner.AdjustEarDamage(0, 30)
 		owner.Weaken(3)
-		owner << 'sound/items/airhorn.ogg'
+		SEND_SOUND(owner, sound('sound/items/airhorn.ogg'))
 		if(prob(30))
 			owner.Stun(10)
 			owner.Paralyse(4)
@@ -300,7 +304,7 @@
 
 /obj/item/organ/internal/honkbladder/insert(mob/living/carbon/M, special = 0)
 
-	squeak = M.AddComponent(/datum/component/squeak, list('sound/effects/clownstep1.ogg'=1,'sound/effects/clownstep2.ogg'=1), 50)
+	squeak = M.AddComponent(/datum/component/squeak, list('sound/effects/clownstep1.ogg'=1,'sound/effects/clownstep2.ogg'=1), 50, falloff_exponent = 20)
 
 /obj/item/organ/internal/honkbladder/remove(mob/living/carbon/M, special = 0)
 	. = ..()
@@ -336,3 +340,18 @@
 			head_organ.f_style = "Very Long Beard"
 			head_organ.facial_colour = "#D8C078"
 			H.update_fhair()
+
+/obj/item/organ/internal/emp_act(severity)
+	if(!is_robotic() || emp_proof)
+		return
+	switch(severity)
+		if(1)
+			receive_damage(20, 1)
+		if(2)
+			receive_damage(7, 1)
+
+/obj/item/organ/internal/handle_germs()
+	..()
+	if(germ_level >= INFECTION_LEVEL_TWO)
+		if(prob(3))	//about once every 30 seconds
+			receive_damage(1, silent = prob(30))

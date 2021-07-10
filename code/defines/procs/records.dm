@@ -20,12 +20,12 @@
 	G.fields["religion"]	= "Unknown"
 	G.fields["photo_front"]	= front
 	G.fields["photo_side"]	= side
-	data_core.general += G
+	GLOB.data_core.general += G
 
 	qdel(dummy)
 	return G
 
-/proc/CreateSecurityRecord(var/name as text, var/id as text)
+/proc/CreateSecurityRecord(name as text, id as text)
 	var/datum/data/record/R = new /datum/data/record()
 	R.fields["name"] = name
 	R.fields["id"] = id
@@ -33,14 +33,16 @@
 	R.fields["criminal"] = "None"
 	R.fields["mi_crim"] = "None"
 	R.fields["mi_crim_d"] = "No minor crime convictions."
+	R.fields["mo_crim"] = "None" // HISPANIA
+	R.fields["mo_crim_d"] = "No moderate crime convictions." // HISPANIA
 	R.fields["ma_crim"] = "None"
 	R.fields["ma_crim_d"] = "No major crime convictions."
 	R.fields["notes"] = "No notes."
-	data_core.security += R
+	GLOB.data_core.security += R
 	return R
 
 /proc/find_security_record(field, value)
-	return find_record(field, value, data_core.security)
+	return find_record(field, value, GLOB.data_core.security)
 
 /proc/find_record(field, value, list/L)
 	for(var/datum/data/record/R in L)

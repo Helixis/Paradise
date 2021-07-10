@@ -79,8 +79,10 @@ By design, d1 is the smallest direction and d2 is the highest
 	return ..()									// then go ahead and delete the cable
 
 /obj/structure/cable/deconstruct(disassembled = TRUE)
+	var/turf/T = get_turf(src)
+	if(usr)
+		investigate_log("was deconstructed by [key_name(usr, 1)] in [get_area(usr)]([T.x], [T.y], [T.z] - [ADMIN_JMP(T)])","wires")
 	if(!(flags & NODECONSTRUCT))
-		var/turf/T = get_turf(src)
 		if(d1)	// 0-X cables are 1 unit, X-X cables are 2 units long
 			new/obj/item/stack/cable_coil(T, 2, paramcolor = color)
 		else
@@ -95,7 +97,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/hide(i)
 
 	if(level == 1 && isturf(loc))
-		invisibility = i ? 101 : 0
+		invisibility = i ? INVISIBILITY_MAXIMUM : 0
 	updateicon()
 
 /obj/structure/cable/proc/updateicon()
@@ -123,7 +125,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable/proc/surplus()
 	if(powernet)
-		return Clamp(powernet.avail-powernet.load, 0, powernet.avail)
+		return clamp(powernet.avail-powernet.load, 0, powernet.avail)
 	else
 		return 0
 
@@ -139,7 +141,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable/proc/delayed_surplus()
 	if(powernet)
-		return Clamp(powernet.newavail - powernet.delayedload, 0, powernet.newavail)
+		return clamp(powernet.newavail - powernet.delayedload, 0, powernet.newavail)
 	else
 		return 0
 
@@ -227,14 +229,15 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(current_size >= STAGE_FIVE)
 		deconstruct()
 
-obj/structure/cable/proc/cable_color(var/colorC)
-	if(colorC)
-		if(colorC == "rainbow")
-			color = color_rainbow()
-		else
-			color = colorC
+/obj/structure/cable/proc/cable_color(colorC)
+	if(!colorC)
+		color = COLOR_RED
+	else if(colorC == "rainbow")
+		color = color_rainbow()
+	else if(colorC == "orange") //byond only knows 16 colors by name, and orange isn't one of them
+		color = COLOR_ORANGE
 	else
-		color = "#DD0000"
+		color = colorC
 
 /obj/structure/cable/proc/color_rainbow()
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
@@ -495,9 +498,9 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 
 /obj/item/stack/cable_coil/suicide_act(mob/user)
 	if(locate(/obj/structure/chair/stool) in user.loc)
-		user.visible_message("<span class='suicide'>[user] is making a noose with the [name]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
+		user.visible_message("<span class='suicide'>[user] is making a noose with [src]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 	else
-		user.visible_message("<span class='suicide'>[user] is strangling [user.p_them()]self with the [name]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
+		user.visible_message("<span class='suicide'>[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 	return OXYLOSS
 
 /obj/item/stack/cable_coil/New(loc, length = MAXCOIL, paramcolor = null)
@@ -593,7 +596,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 
 /obj/item/stack/cable_coil/examine(mob/user)
 	. = ..()
-	if(in_range(user, src))
+	if(in_range(user, src) && !is_cyborg)
 		if(get_amount() == 1)
 			. += "A short piece of power cable."
 		else if(get_amount() == 2)
@@ -609,10 +612,10 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		// Cable merging is handled by parent proc
-		if(C.amount >= MAXCOIL)
+		if(C.get_amount() >= MAXCOIL)
 			to_chat(user, "The coil is as long as it will get.")
 			return
-		if( (C.amount + src.amount <= MAXCOIL) )
+		if((C.get_amount() + get_amount() <= MAXCOIL))
 			to_chat(user, "You join the cable coils together.")
 			return
 		else
@@ -843,20 +846,26 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
 
-/obj/item/stack/cable_coil/proc/cable_color(var/colorC)
-	if(colorC)
-		if(colorC == "rainbow")
-			colorC = color_rainbow()
-		color = colorC
-	else
+/obj/item/stack/cable_coil/proc/cable_color(colorC)
+	if(!colorC)
 		color = COLOR_RED
+	else if(colorC == "rainbow")
+		color = color_rainbow()
+	else if(colorC == "orange") //byond only knows 16 colors by name, and orange isn't one of them
+		color = COLOR_ORANGE
+	else
+		color = colorC
 
 /obj/item/stack/cable_coil/proc/color_rainbow()
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	return color
 
 /obj/item/stack/cable_coil/cyborg
-	name = "cyborg cable coil"
+	energy_type = /datum/robot_energy_storage/cable
+	is_cyborg = TRUE
+
+/obj/item/stack/cable_coil/cyborg/update_icon()
+	return // icon_state should always be a full cable
 
 /obj/item/stack/cable_coil/cyborg/attack_self(mob/user)
 	var/cablecolor = input(user,"Pick a cable color.","Cable Color") in list("red","yellow","green","blue","pink","orange","cyan","white")

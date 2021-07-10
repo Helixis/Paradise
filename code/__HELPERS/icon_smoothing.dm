@@ -61,12 +61,12 @@
 	var/adjacencies = 0
 
 	var/atom/movable/AM
-	if(ismovableatom(A))
+	if(ismovable(A))
 		AM = A
 		if(AM.can_be_unanchored && !AM.anchored)
 			return 0
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		AM = find_type_in_direction(A, direction)
 		if(AM == NULLTURF_BORDER)
 			if((A.smooth & SMOOTH_BORDER))
@@ -289,7 +289,7 @@
 
 //Icon smoothing helpers
 
-/proc/smooth_zlevel(var/zlevel, now = FALSE)
+/proc/smooth_zlevel(zlevel, now = FALSE)
 	var/list/away_turfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
 	for(var/V in away_turfs)
 		var/turf/T = V

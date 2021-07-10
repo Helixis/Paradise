@@ -7,6 +7,7 @@
 #define PLANE_SPACE_PARALLAX -90
 
 #define FLOOR_PLANE -2
+#define FLOOR_OVERLAY_PLANE -1.5
 #define GAME_PLANE -1
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 
@@ -52,13 +53,12 @@
 #define ABOVE_OBJ_LAYER 3.2
 #define ABOVE_DOOR_LAYER 3.3
 #define ABOVE_WINDOW_LAYER 3.4
-#define LYING_MOB_LAYER  3.5
 #define SIGN_LAYER 3.6
 #define NOT_HIGH_OBJ_LAYER 3.7
 #define HIGH_OBJ_LAYER 3.8
 
 #define BELOW_MOB_LAYER 3.9
-#define LYING_MOB_LAYER 3.91
+#define LYING_MOB_LAYER 3.8
 #define ABOVE_HUMAN_LAYER 4
 //#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define
 #define ABOVE_MOB_LAYER 4.1
@@ -82,8 +82,13 @@
 #define MASSIVE_OBJ_LAYER 11
 #define POINT_LAYER 12
 
+#define CHAT_LAYER 12.0001 // Do not insert layers between these two values
+#define CHAT_LAYER_MAX 12.9999
+
 #define LIGHTING_PLANE 15
 #define LIGHTING_LAYER 15
+
+#define RAD_TEXT_LAYER 15.1
 
 #define ABOVE_LIGHTING_PLANE 16
 #define ABOVE_LIGHTING_LAYER 16
@@ -114,6 +119,3 @@
 
 #define SPLASHSCREEN_LAYER 23
 #define SPLASHSCREEN_PLANE 23
-
-atom/proc/reset_layer()
-	layer = initial(layer)

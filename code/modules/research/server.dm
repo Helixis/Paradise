@@ -1,7 +1,7 @@
 /obj/machinery/r_n_d/server
 	name = "R&D Server"
 	icon = 'icons/obj/machines/research.dmi'
-	icon_state = "server"
+	icon_state = "RD-server"
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()		//List of R&D consoles with upload to server access.
@@ -12,7 +12,7 @@
 	var/heat_gen = 100
 	var/heating_power = 40000
 	var/delay = 10
-	req_access = list(access_rd) //Only the R&D can change server settings.
+	req_access = list(ACCESS_RD) //Only the R&D can change server settings.
 	var/plays_sound = 0
 
 /obj/machinery/r_n_d/server/New()
@@ -44,6 +44,16 @@
 		tot_rating += SP.rating
 	heat_gen /= max(1, tot_rating)
 
+/obj/machinery/r_n_d/server/update_icon()
+	if(stat & NOPOWER)
+		icon_state = "[initial(icon_state)]-off"
+		return
+	icon_state = "[initial(icon_state)]-on"
+
+/obj/machinery/r_n_d/server/power_change()
+	. = ..()
+	update_icon()
+
 /obj/machinery/r_n_d/server/proc/initialize_serv()
 	if(!files)
 		files = new /datum/research(src)
@@ -68,7 +78,7 @@
 		if(0 to T0C)
 			health = min(100, health + 1)
 		if(T0C to (T20C + 20))
-			health = Clamp(health, 0, 100)
+			health = clamp(health, 0, 100)
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
@@ -129,7 +139,7 @@
 				env.merge(removed)
 				air_update_turf()
 
-/obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+/obj/machinery/r_n_d/server/attackby(obj/item/O as obj, mob/user as mob, params)
 	if(disabled)
 		return
 
@@ -137,7 +147,7 @@
 		shock(user,50)
 
 	if(istype(O, /obj/item/screwdriver))
-		default_deconstruction_screwdriver(user, "server_o", "server", O)
+		default_deconstruction_screwdriver(user, "RD-server-on_t", "RD-server-on", O)
 		return 1
 
 	if(exchange_parts(user, O))

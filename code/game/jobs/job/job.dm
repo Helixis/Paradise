@@ -12,9 +12,6 @@
 	var/department_flag = 0
 	var/department_head = list()
 
-	//Players will be allowed to spawn in as jobs that are set to "Station"
-	var/list/faction = list("Station")
-
 	//How many players can be this job
 	var/total_positions = 0
 
@@ -52,7 +49,15 @@
 	var/exp_requirements = 0
 	var/exp_type = ""
 
+///Restriccion de edad
+	var/minimal_character_age = 0
+	var/minimal_command_character_age = 0
+	var/minimal_captain_character_age = 0
+///Fin restriccion de edad
+
 	var/disabilities_allowed = 1
+	var/transfer_allowed = TRUE // If false, ID computer will always discourage transfers to this job, even if player is eligible
+	var/hidden_from_job_prefs = FALSE // if true, job preferences screen never shows this job.
 
 	var/admin_only = 0
 	var/spawn_ert = 0
@@ -113,6 +118,32 @@
 
 	return max(0, minimal_player_age - C.player_age)
 
+///Restriccion de edad
+/datum/job/proc/age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_character_age)
+		return 0
+	if(C.prefs.age < 18)
+		return 1
+
+/datum/job/proc/command_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_command_character_age)
+		return 0
+	if(C.prefs.age < 25)
+		return 1
+
+/datum/job/proc/captain_age_restringed(client/C)
+	if(!C)
+		return 0
+	if(minimal_captain_character_age)
+		return 0
+	if(C.prefs.age < 30)
+		return 1
+///Fin restriccion de edad
+
 /datum/job/proc/barred_by_disability(client/C)
 	if(!C)
 		return 0
@@ -171,9 +202,9 @@
 	if(box && H.dna.species.speciesbox)
 		box = H.dna.species.speciesbox
 
-	if(allow_loadout && H.client && (H.client.prefs.gear && H.client.prefs.gear.len))
-		for(var/gear in H.client.prefs.gear)
-			var/datum/gear/G = gear_datums[gear]
+	if(allow_loadout && H.client && (H.client.prefs.loadout_gear && H.client.prefs.loadout_gear.len))
+		for(var/gear in H.client.prefs.loadout_gear)
+			var/datum/gear/G = GLOB.gear_datums[gear]
 			if(G)
 				var/permitted = FALSE
 
@@ -191,7 +222,7 @@
 					continue
 
 				if(G.slot)
-					if(H.equip_to_slot_or_del(G.spawn_item(H), G.slot))
+					if(H.equip_to_slot_or_del(G.spawn_item(H), G.slot, TRUE))
 						to_chat(H, "<span class='notice'>Equipping you with [gear]!</span>")
 					else
 						gear_leftovers += G
@@ -210,7 +241,7 @@
 
 	if(gear_leftovers.len)
 		for(var/datum/gear/G in gear_leftovers)
-			var/atom/placed_in = H.equip_or_collect(G.spawn_item(null, H.client.prefs.gear[G.display_name]))
+			var/atom/placed_in = H.equip_or_collect(G.spawn_item(null, H.client.prefs.loadout_gear[G.display_name]))
 			if(istype(placed_in))
 				if(isturf(placed_in))
 					to_chat(H, "<span class='notice'>Placing [G.display_name] on [placed_in]!</span>")
@@ -226,7 +257,7 @@
 			to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug.</span>")
 			qdel(G)
 
-		qdel(gear_leftovers)
+		gear_leftovers.Cut()
 
 	return 1
 
@@ -265,6 +296,8 @@
 		PDA.name = "PDA-[H.real_name] ([PDA.ownjob])"
 
 /datum/job/proc/would_accept_job_transfer_from_player(mob/player)
+	if(!transfer_allowed)
+		return FALSE
 	if(!guest_jobbans(title)) // actually checks if job is a whitelisted position
 		return TRUE
 	if(!istype(player))

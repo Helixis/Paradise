@@ -753,7 +753,7 @@
 	category = list("Exosuit Equipment")
 
 /datum/design/mech_mining_scanner
-	name = "Exosuit Engineering Equipement (Mining Scanner)"
+	name = "Exosuit Engineering Equipment (Mining Scanner)"
 	id = "mech_mscanner"
 	build_type = MECHFAB
 	build_path = /obj/item/mecha_parts/mecha_equipment/mining_scanner
@@ -955,8 +955,8 @@
 	locked = 1
 
 /datum/design/mech_grenade_launcher
-	name = "Exosuit Weapon (SGL-6 Grenade Launcher)"
-	desc = "Allows for the construction of SGL-6 Grenade Launcher."
+	name = "Exosuit Weapon (SGL-6 Flashbang Launcher)"
+	desc = "Allows for the construction of SGL-6 Flashbang Launcher."
 	id = "mech_grenade_launcher"
 	build_type = MECHFAB
 	req_tech = list("combat" = 4, "engineering" = 4)
@@ -1047,7 +1047,7 @@
 	id = "borg_upgrade_vtec"
 	build_type = MECHFAB
 	build_path = /obj/item/borg/upgrade/vtec
-	req_tech = list("engineering" = 4, "materials" = 5, "programming" = 4)
+	req_tech = list("engineering" = 6, "materials" = 6, "programming" = 4) //Balance Hispania
 	materials = list(MAT_METAL=80000 , MAT_GLASS=6000 , MAT_URANIUM= 5000)
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
@@ -1067,7 +1067,7 @@
 	id = "borg_upgrade_disablercooler"
 	build_type = MECHFAB
 	build_path = /obj/item/borg/upgrade/disablercooler
-	req_tech = list("combat" = 5, "powerstorage" = 4, "engineering" = 4)
+	req_tech = list("combat" = 7, "powerstorage" = 7, "engineering" = 7)
 	materials = list(MAT_METAL=80000 , MAT_GLASS=6000 , MAT_GOLD= 2000, MAT_DIAMOND = 500)
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
@@ -1093,11 +1093,40 @@
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 
+/datum/design/borg_upgrade_abductor_engi
+	name = "Cyborg Upgrade (Abdcutor Engineering Equipment)"
+	id = "borg_upgade_abductor_engi"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/abductor_engi
+	req_tech = list("engineering" = 7, "materials" = 7, "abductor" = 4)
+	materials = list(MAT_METAL = 25000, MAT_SILVER = 12500, MAT_PLASMA = 5000, MAT_TITANIUM = 10000, MAT_DIAMOND = 10000) //Base abductor engineering tools * 4
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_upgrade_abductor_medi
+	name = "Cyborg Upgrade (Abdcutor Medical Equipment)"
+	id = "borg_upgade_abductor_medi"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/abductor_medi
+	req_tech = list("biotech" = 7, "materials" = 7, "abductor" = 4)
+	materials = list(MAT_METAL = 18000, MAT_GLASS = 1500, MAT_SILVER = 13000, MAT_GOLD = 1000, MAT_PLASMA = 4000, MAT_TITANIUM = 12000, MAT_DIAMOND = 1000) //Base abductor engineering tools *8 + IMS cost
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_upgrade_lavaproof
+	name = "Cyborg Upgrade (Lavaproof Chassis)"
+	id = "borg_upgrade_lavaproof"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/lavaproof
+	materials = list(MAT_METAL = 10000, MAT_PLASMA = 4000, MAT_TITANIUM = 5000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
 /datum/design/borg_syndicate_module
-	name = "Cyborg Upgrade (Illegal Modules)"
+	name = "Cyborg Upgrade (Safety Override)"
 	id = "borg_syndicate_module"
 	build_type = MECHFAB
-	req_tech = list("combat" = 4, "syndicate" = 2)
+	req_tech = list("combat" = 7, "programming" = 7)
 	build_path = /obj/item/borg/upgrade/syndicate
 	materials = list(MAT_METAL=10000,MAT_GLASS=15000,MAT_DIAMOND = 10000)
 	construction_time = 120

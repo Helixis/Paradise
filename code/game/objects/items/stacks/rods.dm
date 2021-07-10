@@ -1,7 +1,7 @@
-var/global/list/datum/stack_recipe/rod_recipes = list ( \
+GLOBAL_LIST_INIT(rod_recipes, list ( \
 	new/datum/stack_recipe("grille", /obj/structure/grille, 2, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("table frame", /obj/structure/table_frame, 2, time = 10, one_per_turf = 1, on_floor = 1), \
-	)
+	))
 
 /obj/item/stack/rods
 	name = "metal rod"
@@ -21,9 +21,15 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 	hitsound = 'sound/weapons/grenadelaunch.ogg'
 	toolspeed = 1
 	usesound = 'sound/items/deconstruct.ogg'
+	merge_type = /obj/item/stack/rods
 
 /obj/item/stack/rods/cyborg
+	energy_type = /datum/robot_energy_storage/rods
+	is_cyborg = TRUE
 	materials = list()
+
+/obj/item/stack/rods/cyborg/update_icon()
+	return // icon_state should always be a full stack of rods.
 
 /obj/item/stack/rods/ten
 	amount = 10
@@ -36,7 +42,7 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 
 /obj/item/stack/rods/New(loc, amount=null)
 	..()
-	recipes = rod_recipes
+	recipes = GLOB.rod_recipes
 	update_icon()
 
 /obj/item/stack/rods/update_icon()

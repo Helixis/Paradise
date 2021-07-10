@@ -67,7 +67,7 @@
 	materials = list(MAT_SILVER = 2000, MAT_METAL = 5000, MAT_DIAMOND = 2000, MAT_BLUESPACE = 3000)
 	build_path = /obj/item/gun/energy/wormhole_projector
 	locked = 1
-	access_requirement = list(access_rd) //screw you, HoS, this aint yours; this is only for a man of science---and trouble.
+	access_requirement = list(ACCESS_RD) //screw you, HoS, this aint yours; this is only for a man of science---and trouble.
 	category = list("Weapons")
 
 /datum/design/large_grenade
@@ -256,4 +256,16 @@
 	materials = list(MAT_METAL = 4000, MAT_GLASS = 1000, MAT_SILVER = 3000, MAT_PLASMA = 2000)
 	build_path = /obj/item/gun/energy/immolator
 	locked = 1
+	category = list("Weapons")
+
+/datum/design/reactive_armour
+	name = "Reactive Armor Shell"
+	desc = "A reactive armor shell, that can have an anomaly core inserted to make a reactive armor"
+	id = "reactivearmor"
+	req_tech = list("combat" = 6, "materials" = 7, "engineering" = 5)
+	build_type = PROTOLATHE
+	materials = list(MAT_PLASMA = 8000, MAT_TITANIUM = 14000, MAT_BLUESPACE = 6000) //Big strong armor needs big-ish investment
+	build_path = /obj/item/reactive_armour_shell
+	locked = TRUE
+	access_requirement = list(ACCESS_RD)
 	category = list("Weapons")

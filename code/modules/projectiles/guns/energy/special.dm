@@ -7,6 +7,7 @@
 	fire_sound = 'sound/weapons/ionrifle.ogg'
 	origin_tech = "combat=4;magnets=4"
 	w_class = WEIGHT_CLASS_HUGE
+	can_holster = FALSE
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/ion)
@@ -18,9 +19,6 @@
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	return
-
-/obj/item/gun/energy/ionrifle/isHandgun()
-	return 0
 
 /obj/item/gun/energy/ionrifle/carbine
 	name = "ion carbine"
@@ -90,10 +88,10 @@
 /obj/item/gun/energy/mindflayer
 	name = "\improper Mind Flayer"
 	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
-	icon_state = "xray"
+	icon_state = "flayer"
 	item_state = null
+	shaded_charge = TRUE
 	ammo_type = list(/obj/item/ammo_casing/energy/mindflayer)
-	ammo_x_offset = 2
 
 // Energy Crossbows //
 /obj/item/gun/energy/kinetic_accelerator/crossbow
@@ -107,17 +105,13 @@
 	suppressed = 1
 	ammo_type = list(/obj/item/ammo_casing/energy/bolt)
 	weapon_weight = WEAPON_LIGHT
-	unique_rename = 0
+	unique_rename = FALSE
 	overheat_time = 20
 	holds_charge = TRUE
 	unique_frequency = TRUE
 	can_flashlight = 0
 	max_mod_capacity = 0
 	empty_state = null
-
-/obj/item/gun/energy/kinetic_accelerator/crossbow/ninja
-	name = "energy dart thrower"
-	ammo_type = list(/obj/item/ammo_casing/energy/dart)
 
 /obj/item/gun/energy/kinetic_accelerator/crossbow/large
 	name = "energy crossbow"
@@ -138,8 +132,8 @@
 /obj/item/gun/energy/kinetic_accelerator/suicide_act(mob/user)
 	if(!suppressed)
 		playsound(loc, 'sound/weapons/kenetic_reload.ogg', 60, 1)
-	user.visible_message("<span class='suicide'>[user] cocks the [name] and pretends to blow [user.p_their()] brains out! It looks like [user.p_theyre()] trying to commit suicide!</b></span>")
-	shoot_live_shot()
+	user.visible_message("<span class='suicide'>[user] cocks [src] and pretends to blow [user.p_their()] brains out! It looks like [user.p_theyre()] trying to commit suicide!</b></span>")
+	shoot_live_shot(user, user, FALSE, FALSE)
 	return OXYLOSS
 
 // Plasma Cutters //
@@ -211,6 +205,8 @@
 	item_state = null
 	icon_state = "wormhole_projector1"
 	origin_tech = "combat=4;bluespace=6;plasmatech=4;engineering=4"
+	charge_delay = 5
+	selfcharge = TRUE
 	var/obj/effect/portal/blue
 	var/obj/effect/portal/orange
 
@@ -320,8 +316,11 @@
 	item_state = "lwap"
 	origin_tech = "combat=6;materials=5;powerstorage=4"
 	ammo_type = list(/obj/item/ammo_casing/energy/sniper)
+	item_state = null
+	weapon_weight = WEAPON_HEAVY
 	slot_flags = SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
+	can_holster = FALSE
 	zoomable = TRUE
 	zoom_amt = 7 //Long range, enough to see in front of you, but no tiles behind you.
 	shaded_charge = 1
@@ -345,12 +344,10 @@
 
 	var/powercost = ""
 	var/powercostcolor = ""
-
-	var/emagged = 0			//ups the temperature cap from 500 to 1000, targets hit by beams over 500 Kelvin will burst into flames
 	var/dat = ""
 
-/obj/item/gun/energy/temperature/New()
-	..()
+/obj/item/gun/energy/temperature/Initialize(mapload, ...)
+	. = ..()
 	update_icon()
 	START_PROCESSING(SSobj, src)
 
@@ -430,7 +427,7 @@
 		update_icon()
 
 		if(istype(loc, /mob/living/carbon))
-			var /mob/living/carbon/M = loc
+			var/mob/living/carbon/M = loc
 			if(src == M.machine)
 				update_dat()
 				M << browse("<TITLE>Temperature Gun Configuration</TITLE><HR>[dat]", "window=tempgun;size=510x102")

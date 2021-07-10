@@ -47,7 +47,7 @@
 
 	if(current_target)
 		LoseTarget()
-	if(!isliving(target) || ismachine(target) || isbot(target) || issilicon(target))
+	if(!isliving(target) || isrobot(target) || isbot(target) || issilicon(target))
 		return
 
 	current_target = target
@@ -56,7 +56,7 @@
 	spawn(0)
 		current_beam.Start()
 
-	feedback_add_details("gun_fired","[type]")
+	SSblackbox.record_feedback("tally", "gun_fired", 1, type)
 
 /obj/item/gun/medbeam/process()
 	var/source = loc
@@ -101,25 +101,25 @@
 				qdel(dummy)
 				return FALSE
 		for(var/obj/effect/ebeam/medical/B in turf)// Don't cross the str-beams!
-			if(B.owner.origin != current_beam.origin)
-				turf.visible_message("<span class='boldwarning'>The medbeams cross and EXPLODE!</span>")
+			if(B.owner != current_beam)
+				turf.visible_message("<span class='userdanger'>The medbeams cross and EXPLODE!</span>")
 				explosion(B.loc,0,3,5,8)
 				qdel(dummy)
 				return FALSE
 	qdel(dummy)
 	return TRUE
 
-/obj/item/gun/medbeam/proc/on_beam_hit(var/mob/living/target)
+/obj/item/gun/medbeam/proc/on_beam_hit(mob/living/target)
 	return
 
-/obj/item/gun/medbeam/proc/on_beam_tick(var/mob/living/target)
+/obj/item/gun/medbeam/proc/on_beam_tick(mob/living/target)
 	if(target.health != target.maxHealth)
 		new /obj/effect/temp_visual/heal(get_turf(target), "#80F5FF", 30)
 	target.adjustBruteLoss(-4)
 	target.adjustFireLoss(-4)
 	if(upgrade)
 		if(ishuman(target))
-			var/var/mob/living/carbon/human/H = target
+			var/mob/living/carbon/human/H = target
 			for(var/obj/item/organ/external/E in H.bodyparts)
 				if(prob(10))
 					E.mend_fracture()
@@ -128,7 +128,7 @@
 			target.adjustOxyLoss(-1)
 	return
 
-/obj/item/gun/medbeam/proc/on_beam_release(var/mob/living/target)
+/obj/item/gun/medbeam/proc/on_beam_release(mob/living/target)
 	return
 
 /obj/effect/ebeam/medical

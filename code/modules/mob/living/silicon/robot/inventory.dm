@@ -39,8 +39,8 @@
 		hud_used.update_robot_modules_display()
 	return 1
 
-/mob/living/silicon/robot/proc/activate_module(var/obj/item/O)
-	if(!(locate(O) in src.module.modules) && O != src.module.emag)
+/mob/living/silicon/robot/proc/activate_module(obj/item/O)
+	if(!(locate(O) in module.modules) && !(O in module.emag_modules))
 		return
 	if(activated(O))
 		to_chat(src, "Already activated")
@@ -78,6 +78,7 @@
 		set_actions(O)
 	else
 		to_chat(src, "You need to disable a module first!")
+	check_module_damage(FALSE)
 	update_icons()
 
 /mob/living/silicon/robot/proc/set_actions(obj/item/I)
@@ -93,7 +94,7 @@
 	uneq_module(module_state_2)
 	uneq_module(module_state_3)
 
-/mob/living/silicon/robot/proc/uneq_numbered(var/module)
+/mob/living/silicon/robot/proc/uneq_numbered(module)
 	if(module < 1 || module > 3) return
 
 	switch(module)
@@ -115,21 +116,21 @@
 		return 0
 
 /mob/living/silicon/robot/drop_item()
-	var/obj/item/I = get_active_hand()
-	if(istype(I, /obj/item/gripper))
-		var/obj/item/gripper/G = I
-		G.drop_item_p(silent = 1)
-	return
+	var/obj/item/gripper/G = get_active_hand()
+	if(istype(G))
+		G.drop_gripped_item(silent = TRUE)
+		return TRUE // The gripper is special because it has a normal item inside that we can drop.
+	return FALSE // All robot inventory items have NODROP, so they should return FALSE.
 
 //Helper procs for cyborg modules on the UI.
 //These are hackish but they help clean up code elsewhere.
 
 //module_selected(module) - Checks whether the module slot specified by "module" is currently selected.
-/mob/living/silicon/robot/proc/module_selected(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/module_selected(module) //Module is 1-3
 	return module == get_selected_module()
 
 //module_active(module) - Checks whether there is a module active in the slot specified by "module".
-/mob/living/silicon/robot/proc/module_active(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/module_active(module) //Module is 1-3
 	if(module < 1 || module > 3) return 0
 
 	switch(module)
@@ -156,7 +157,7 @@
 	return 0
 
 //select_module(module) - Selects the module slot specified by "module"
-/mob/living/silicon/robot/proc/select_module(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/select_module(module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
 	if(!module_active(module)) return
@@ -186,7 +187,7 @@
 	return
 
 //deselect_module(module) - Deselects the module slot specified by "module"
-/mob/living/silicon/robot/proc/deselect_module(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/deselect_module(module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
 	switch(module)
@@ -208,7 +209,7 @@
 	return
 
 //toggle_module(module) - Toggles the selection of the module slot specified by "module".
-/mob/living/silicon/robot/proc/toggle_module(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/toggle_module(module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
 	if(module_selected(module))
@@ -242,7 +243,7 @@
 
 	return
 
-/mob/living/silicon/robot/unEquip(obj/item/I, force)
+/mob/living/silicon/robot/unEquip(obj/item/I, force, silent = FALSE)
 	if(I == module_active)
 		uneq_active(I)
 	return ..()

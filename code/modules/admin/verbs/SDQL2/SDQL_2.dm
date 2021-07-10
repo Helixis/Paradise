@@ -430,23 +430,23 @@
 		else if(expression[start + 1] == "\[" && islist(v))
 			var/list/L = v
 			var/index = SDQL_expression(source, expression[start + 2])
-			if(isnum(index) && (!IsInteger(index) || L.len < index))
+			if(isnum(index) && (!ISINTEGER(index) || L.len < index))
 				to_chat(world, "<span class='danger'>Invalid list index: [index]</span>")
 				return null
 			return L[index]
 
 	return v
 
-/proc/SDQL_function(var/datum/object, var/procname, var/list/arguments, source)
+/proc/SDQL_function(datum/object, procname, list/arguments, source)
 	var/list/new_args = list()
 	for(var/arg in arguments)
 		new_args[++new_args.len] = SDQL_expression(source, arg)
 
 	if(object == world) // Global proc.
 		procname = "/proc/[procname]"
-		return call(procname)(arglist(new_args))
+		return (WrapAdminProcCall(GLOBAL_PROC, procname, new_args))
 
-	return call(object, procname)(arglist(new_args))
+	return (WrapAdminProcCall(object, procname, new_args))
 
 /proc/SDQL2_tokenize(query_text)
 

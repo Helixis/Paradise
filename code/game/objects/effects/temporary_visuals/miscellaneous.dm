@@ -18,7 +18,7 @@
 /obj/effect/temp_visual/dir_setting/bloodsplatter/New(loc, set_dir, blood_color)
 	if(blood_color)
 		color = blood_color
-	if(set_dir in diagonals)
+	if(set_dir in GLOB.diagonals)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
 	else
 		icon_state = "[splatter_type][pick(3, 4, 5)]"
@@ -83,7 +83,7 @@
 
 /obj/effect/temp_visual/dir_setting/wraith
 	name = "blood"
-	icon = 'icons/mob/mob.dmi'
+	icon = 'icons/mob/cult.dmi'
 	icon_state = "phase_shift2"
 	duration = 12
 
@@ -208,7 +208,7 @@
 	name = "healing glow"
 	icon_state = "heal"
 
-/obj/effect/temp_visual/heal/New(loc, colour, var/time = 15)
+/obj/effect/temp_visual/heal/New(loc, colour, time = 15)
 	..()
 	pixel_x = rand(-12, 12)
 	pixel_y = rand(-9, 0)

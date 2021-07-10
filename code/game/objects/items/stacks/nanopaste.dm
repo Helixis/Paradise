@@ -4,6 +4,7 @@
 	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
 	icon = 'icons/obj/nanopaste.dmi'
 	icon_state = "tube"
+	w_class = WEIGHT_CLASS_TINY
 	origin_tech = "materials=2;engineering=3"
 	amount = 6
 	max_amount = 6
@@ -56,9 +57,22 @@
 					E.heal_damage(0, remheal, 0, 1) //Healing Burn
 					remheal = nremheal
 					user.visible_message("<span class='notice'>\The [user] applies some nanite paste at \the [M]'s [E.name] with \the [src].</span>")
-				if(H.bleed_rate && H.isSynthetic())
+				if(H.bleed_rate && ismachineperson(H))
 					H.bleed_rate = 0
 			else
 				to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
 		else
 			to_chat(user, "<span class='notice'>[src] won't work on that.</span>")
+
+/obj/item/stack/nanopaste/cyborg
+	energy_type = /datum/robot_energy_storage/medical/nanopaste
+	is_cyborg = TRUE
+
+/obj/item/stack/nanopaste/cyborg/attack(mob/living/M, mob/user)
+	if(get_amount() <= 0)
+		to_chat(user, "<span class='warning'>You don't have enough energy to dispense more [name]!</span>")
+	else
+		return ..()
+
+/obj/item/stack/nanopaste/cyborg/syndicate
+	energy_type = /datum/robot_energy_storage/medical/nanopaste/syndicate

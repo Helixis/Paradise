@@ -63,10 +63,24 @@
 	display_name = "Fur Cap"
 	path = /obj/item/clothing/head/furcap
 
-/datum/gear/donor/mouse
-	display_name = "Mouse Headband"
-	path = /obj/item/clothing/head/kitty/mouse
-
 /datum/gear/donor/fawkes
 	display_name = "Guy Fawkes mask"
 	path = /obj/item/clothing/mask/fawkes
+
+/datum/gear/donor/id_decal_silver
+	display_name = "Silver ID Decal"
+	path = /obj/item/id_decal/silver
+	donator_tier = 3
+	cost = 2
+
+/datum/gear/donor/id_decal_prisoner
+	display_name = "Prisoner ID Decal"
+	path = /obj/item/id_decal/prisoner
+	donator_tier = 3
+	cost = 2
+
+/datum/gear/donor/id_decal_gold
+	display_name = "Gold ID Decal"
+	path = /obj/item/id_decal/gold
+	donator_tier = 4
+	cost = 4

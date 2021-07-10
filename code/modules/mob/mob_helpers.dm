@@ -12,17 +12,9 @@
 			return 1
 	return 0
 
-/mob/proc/isSynthetic()
-	return 0
-
-/mob/living/carbon/human/isSynthetic()
-	if(ismachine(src))
-		return TRUE
-	return FALSE
-
 /mob/proc/get_screen_colour()
 
-/mob/proc/update_client_colour(var/time = 10) //Update the mob's client.color with an animation the specified time in length.
+/mob/proc/update_client_colour(time = 10) //Update the mob's client.color with an animation the specified time in length.
 	if(!client) //No client_colour without client. If the player logs back in they'll be back through here anyway.
 		return
 	client.colour_transition(get_screen_colour(), time = time) //Get the colour matrix we're going to transition to depending on relevance (magic glasses first, eyes second).
@@ -55,11 +47,11 @@
 	return istype(M) && M.player_logged && M.stat != DEAD
 
 /proc/isAntag(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
-		if(C.mind && C.mind.special_role)
-			return 1
-	return 0
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.mind?.special_role)
+			return TRUE
+	return FALSE
 
 /proc/isNonCrewAntag(A)
 	if(!isAntag(A))
@@ -99,7 +91,7 @@
 			return 1
 	return 0
 
-/proc/hassensorlevel(A, var/level)
+/proc/hassensorlevel(A, level)
 	var/mob/living/carbon/human/H = A
 	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
 		var/obj/item/clothing/under/U = H.w_uniform
@@ -118,7 +110,10 @@
 	log_admin("[key_name(usr)] has offered control of ([key_name(M)]) to ghosts.")
 	var/minhours = input(usr, "Minimum hours required to play [M]?", "Set Min Hrs", 10) as num
 	message_admins("[key_name_admin(usr)] has offered control of ([key_name_admin(M)]) to ghosts with [minhours] hrs playtime")
-	var/list/mob/dead/observer/candidates = pollCandidates("Do you want to play as [M.real_name ? M.real_name : M.name]?", poll_time = 100, min_hours = minhours)
+	var/question = "Do you want to play as [M.real_name ? M.real_name : M.name][M.job ? " ([M.job])" : ""]"
+	if(alert("Do you want to show the antag status?","Show antag status","Yes","No") == "Yes")
+		question += ", [M.mind?.special_role ? M.mind?.special_role : "No special role"]"
+	var/list/mob/dead/observer/candidates = SSghost_spawns.poll_candidates("[question]?", poll_time = 10 SECONDS, min_hours = minhours, source = M)
 	var/mob/dead/observer/theghost = null
 
 	if(LAZYLEN(candidates))
@@ -199,7 +194,7 @@
 	for(var/datum/multilingual_say_piece/S in message_pieces)
 		S.message = stars(S.message, pr)
 
-/proc/slur(phrase, var/list/slurletters = ("'"))//use a different list as an input if you want to make robots slur with $#@%! characters
+/proc/slur(phrase, list/slurletters = ("'"))//use a different list as an input if you want to make robots slur with $#@%! characters
 	phrase = html_decode(phrase)
 	var/leng=length(phrase)
 	var/counter=length(phrase)
@@ -293,7 +288,7 @@
 		S.message = Gibberish(S.message, p)
 
 
-proc/muffledspeech(phrase)
+/proc/muffledspeech(phrase)
 	phrase = html_decode(phrase)
 	var/leng=length(phrase)
 	var/counter=length(phrase)
@@ -316,26 +311,22 @@ proc/muffledspeech(phrase)
 		S.message = muffledspeech(S.message)
 
 
-/proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)
+///Shake the camera of the person viewing the mob SO REAL!
+/proc/shake_camera(mob/M, duration, strength = 1)
+	if(!M || !M.client || duration < 1)
 		return
-	M.shakecamera = 1
-	spawn(1)
+	var/client/C = M.client
+	var/oldx = C.pixel_x
+	var/oldy = C.pixel_y
+	var/max = strength * world.icon_size
+	var/min = -(strength * world.icon_size)
 
-		var/atom/oldeye=M.client.eye
-		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/camera/aiEye))
-			aiEyeFlag = 1
-
-		var/x
-		for(x=0; x<duration, x++)
-			if(aiEyeFlag)
-				M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
-			else
-				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
-			sleep(1)
-		M.client.eye=oldeye
-		M.shakecamera = 0
+	for(var/i in 0 to duration - 1)
+		if(i == 0)
+			animate(C, pixel_x = rand(min, max), pixel_y = rand(min, max), time = 1)
+		else
+			animate(pixel_x = rand(min, max), pixel_y = rand(min, max), time = 1)
+	animate(pixel_x = oldx, pixel_y = oldy, time = 1)
 
 
 /proc/findname(msg)
@@ -345,7 +336,7 @@ proc/muffledspeech(phrase)
 	return 0
 
 
-/mob/proc/abiotic(var/full_body = 0)
+/mob/proc/abiotic(full_body = 0)
 	if(full_body && ((l_hand && !(l_hand.flags & ABSTRACT)) || (r_hand && !(r_hand.flags & ABSTRACT)) || (back || wear_mask)))
 		return 1
 
@@ -355,7 +346,7 @@ proc/muffledspeech(phrase)
 	return 0
 
 //converts intent-strings into numbers and back
-var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
+GLOBAL_LIST_INIT(intents, list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM))
 /proc/intent_numeric(argument)
 	if(istext(argument))
 		switch(argument)
@@ -445,7 +436,7 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 //Direct dead say used both by emote and say
 //It is somewhat messy. I don't know what to do.
 //I know you can't see the change, but I rewrote the name code. It is significantly less messy now
-/proc/say_dead_direct(var/message, var/mob/subject = null)
+/proc/say_dead_direct(message, mob/subject = null)
 	var/name
 	var/keyname
 	if(subject && subject.client)
@@ -464,7 +455,7 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 				name = realname
 
 	for(var/mob/M in GLOB.player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || check_rights(R_ADMIN|R_MOD,0,M)) && M.get_preference(CHAT_DEAD))
+		if(M.client && ((!isnewplayer(M) && M.stat == DEAD) || check_rights(R_ADMIN|R_MOD,0,M)) && M.get_preference(PREFTOGGLE_CHAT_DEAD))
 			var/follow
 			var/lname
 			if(subject)
@@ -476,9 +467,9 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 				if(istype(subject, /mob/dead/observer))
 					DM = subject
 				if(check_rights(R_ADMIN|R_MOD,0,M)) 							// What admins see
-					lname = "[keyname][(DM && DM.client && DM.client.prefs.ghost_anonsay) ? "*" : (DM ? "" : "^")] ([name])"
+					lname = "[keyname][(DM && DM.client && DM.client.prefs.toggles2 & PREFTOGGLE_2_ANONDCHAT) ? "*" : (DM ? "" : "^")] ([name])"
 				else
-					if(DM && DM.client && DM.client.prefs.ghost_anonsay)	// If the person is actually observer they have the option to be anonymous
+					if(DM && DM.client && DM.client.prefs.toggles2 & PREFTOGGLE_2_ANONDCHAT)	// If the person is actually observer they have the option to be anonymous
 						lname = "Ghost of [name]"
 					else if(DM)									// Non-anons
 						lname = "[keyname] ([name])"
@@ -487,9 +478,9 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 				lname = "<span class='name'>[lname]</span> "
 			to_chat(M, "<span class='deadsay'>[lname][follow][message]</span>")
 
-/proc/notify_ghosts(message, ghost_sound = null, enter_link = null, title = null, atom/source = null, image/alert_overlay = null, flashwindow = TRUE, var/action = NOTIFY_JUMP) //Easy notification of ghosts.
+/proc/notify_ghosts(message, ghost_sound = null, enter_link = null, title = null, atom/source = null, image/alert_overlay = null, flashwindow = TRUE, action = NOTIFY_JUMP, role = null) //Easy notification of ghosts.
 	for(var/mob/dead/observer/O in GLOB.player_list)
-		if(O.client)
+		if(O.client && (!role || (role in O.client.prefs.be_special)))
 			to_chat(O, "<span class='ghostalert'>[message][(enter_link) ? " [enter_link]" : ""]</span>")
 			if(ghost_sound)
 				O << sound(ghost_sound)
@@ -518,11 +509,22 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 						alert_overlay.plane = FLOAT_PLANE
 						A.overlays += alert_overlay
 
-/mob/proc/switch_to_camera(var/obj/machinery/camera/C)
-	if(!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || !has_vision() || !canmove))
-		return 0
+/**
+  * Checks if a mob's ghost can reenter their body or not. Used to check for DNR or AntagHUD.
+  *
+  * Returns FALSE if there is a ghost, and it can't reenter the body. Returns TRUE otherwise.
+  */
+/mob/proc/ghost_can_reenter()
+	var/mob/dead/observer/ghost = get_ghost(TRUE)
+	if(ghost && !ghost.can_reenter_corpse)
+		return FALSE
+	return TRUE
+
+/mob/proc/switch_to_camera(obj/machinery/camera/C)
+	if(!C.can_use() || incapacitated() || (get_dist(C, src) > 1 || machine != src || !has_vision()))
+		return FALSE
 	check_eye(src)
-	return 1
+	return TRUE
 
 /mob/proc/rename_character(oldname, newname)
 	if(!newname)
@@ -536,7 +538,7 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 
 	if(oldname)
 		//update the datacore records! This is goig to be a bit costly.
-		for(var/list/L in list(data_core.general,data_core.medical,data_core.security,data_core.locked))
+		for(var/list/L in list(GLOB.data_core.general, GLOB.data_core.medical, GLOB.data_core.security, GLOB.data_core.locked))
 			for(var/datum/data/record/R in L)
 				if(R.fields["name"] == oldname)
 					R.fields["name"] = newname
@@ -576,7 +578,7 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 			objective.explanation_text = copytext(objective.explanation_text, 1, pos)+newname+copytext(objective.explanation_text, pos+length)
 	return 1
 
-/mob/proc/rename_self(var/role, var/allow_numbers = FALSE, var/force = FALSE)
+/mob/proc/rename_self(role, allow_numbers = FALSE, force = FALSE)
 	spawn(0)
 		var/oldname = real_name
 
@@ -679,5 +681,3 @@ var/list/intents = list(INTENT_HELP,INTENT_DISARM,INTENT_GRAB,INTENT_HARM)
 			message_admins("[src.ckey] just got booted back to lobby with no jobs enabled, but antag rolling enabled. Likely antag rolling abuse.")
 		return FALSE //This is the only case someone should actually be completely blocked from antag rolling as well
 	return TRUE
-
-#define isterrorspider(A) (istype((A), /mob/living/simple_animal/hostile/poison/terror_spider))

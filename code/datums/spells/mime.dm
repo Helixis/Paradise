@@ -21,7 +21,7 @@
 		if(!usr.mind.miming)
 			to_chat(usr, "<span class='notice'>You must dedicate yourself to silence first.</span>")
 			return
-		invocation = "<B>[usr.real_name]</B> looks as if a wall is in front of [usr.p_them()]."
+		invocation = "<B>[usr.name]</B> looks as if a wall is in front of [usr.p_them()]."
 	else
 		invocation_type ="none"
 	..()
@@ -38,7 +38,7 @@
 	include_user = 1
 	human_req = 1
 
-	action_icon_state = "mime"
+	action_icon_state = "mime_silence"
 	action_background_icon_state = "bg_mime"
 
 /obj/effect/proc_holder/spell/targeted/mime/speak/Click()
@@ -77,7 +77,7 @@
 	range = -1
 	include_user = TRUE
 
-	action_icon_state = "mime"
+	action_icon_state = "mime_bigwall"
 	action_background_icon_state = "bg_mime"
 	large = TRUE
 
@@ -86,7 +86,7 @@
 		if(!usr.mind.miming)
 			to_chat(usr, "<span class='notice'>You must dedicate yourself to silence first.</span>")
 			return
-		invocation = "<B>[usr.real_name]</B> looks as if a blockade is in front of [usr.p_them()]."
+		invocation = "<B>[usr.name]</B> looks as if a blockade is in front of [usr.p_them()]."
 	else
 		invocation_type ="none"
 	..()
@@ -141,6 +141,7 @@
 	else
 		user.mind.AddSpell(S)
 		to_chat(user, "<span class='notice'>You flip through the pages. Your understanding of the boundaries of reality increases. You can cast [spellname]!</span>")
+		user.create_log(MISC_LOG, "learned the spell [spellname] ([S])")
 		user.create_attack_log("<font color='orange'>[key_name(user)] learned the spell [spellname] ([S]).</font>")
 		onlearned(user)
 

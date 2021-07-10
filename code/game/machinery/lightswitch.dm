@@ -4,8 +4,8 @@
 /obj/machinery/light_switch
 	name = "light switch"
 	desc = "It turns lights on and off. What are you, simple?"
-	icon = 'icons/obj/power.dmi'
-	icon_state = "light1"
+	icon = 'icons/hispania/obj/power.dmi'
+	icon_state = "light-p"
 	anchored = 1.0
 	var/on = 1
 	var/area/area = null
@@ -13,13 +13,11 @@
 	//	luminosity = 1
 	settagwhitelist = list("logic_id_tag")
 	var/light_connect = 1							//Allows the switch to control lights in its associated areas. When set to 0, using the switch won't affect the lights.
-	var/datum/radio_frequency/radio_connection
-	var/frequency = 0
 	var/logic_id_tag = "default"					//Defines the ID tag to send logic signals to.
 	var/logic_connect = 0							//Set this to allow the switch to send out logic signals.
 
 
-/obj/machinery/light_switch/New(turf/loc, var/w_dir=null)
+/obj/machinery/light_switch/New(turf/loc, w_dir=null)
 	..()
 	switch(w_dir)
 		if(NORTH)
@@ -48,7 +46,7 @@
 	..()
 	set_frequency(frequency)
 
-/obj/machinery/light_switch/proc/set_frequency(new_frequency)
+/obj/machinery/light_switch/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)
 	frequency = new_frequency
 	radio_connection = SSradio.add_object(src, frequency, RADIO_LOGIC)
@@ -61,13 +59,16 @@
 	return ..()
 
 /obj/machinery/light_switch/proc/updateicon()
-	if(stat & NOPOWER)
-		icon_state = "light-p"
-	else
+	overlays.Cut()
+	if(!(stat & NOPOWER))
 		if(on)
-			icon_state = "light1"
+			var/image/on_overlay = image(icon,"light1")
+			on_overlay.plane = ABOVE_LIGHTING_PLANE
+			overlays += on_overlay
 		else
-			icon_state = "light0"
+			var/image/off_overlay = image(icon,"light0")
+			off_overlay.plane = ABOVE_LIGHTING_PLANE
+			overlays += off_overlay
 
 /obj/machinery/light_switch/examine(mob/user)
 	. = ..()
@@ -167,7 +168,7 @@
 	new/obj/item/mounted/frame/light_switch(get_turf(src))
 	qdel(src)
 
-/obj/machinery/light_switch/multitool_menu(var/mob/user, var/obj/item/multitool/P)
+/obj/machinery/light_switch/multitool_menu(mob/user, obj/item/multitool/P)
 	return {"
 	<ul>
 	<li><b>Light Circuit Connection:</b> <a href='?src=[UID()];toggle_light_connect=1'>[light_connect ? "On" : "Off"]</a></li>
@@ -175,7 +176,7 @@
 	<li><b>Logic ID Tag:</b> [format_tag("Logic ID Tag", "logic_id_tag")]</li>
 	</ul>"}
 
-/obj/machinery/light_switch/multitool_topic(var/mob/user,var/list/href_list,var/obj/O)
+/obj/machinery/light_switch/multitool_topic(mob/user, list/href_list, obj/O)
 	..()
 	if("toggle_light_connect" in href_list)
 		light_connect = !light_connect

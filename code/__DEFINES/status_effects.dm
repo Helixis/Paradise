@@ -55,7 +55,7 @@
 
 //#define STATUS_EFFECT_HISWRATH /datum/status_effect/his_wrath //His Wrath.
 
-#define STATUS_EFFECT_SUMMONEDGHOST /datum/status_effect/cultghost //is a cult ghost and can't use manifest runes
+#define STATUS_EFFECT_SUMMONEDGHOST /datum/status_effect/cultghost //is a cult ghost: can see dead people, can't manifest more ghosts
 
 #define STATUS_EFFECT_CRUSHERMARK /datum/status_effect/crusher_mark //if struck with a proto-kinetic crusher, takes a ton of damage
 
@@ -84,8 +84,9 @@
 #define STATUS_EFFECT_SYPHONMARK /datum/status_effect/syphon_mark //tracks kills for the KA death syphon module
 
 /////////////
-//  SLIME  //
+//  SLIME  // ---// hispania
 /////////////
 
 #define STATUS_EFFECT_RAINBOWPROTECTION /datum/status_effect/rainbow_protection //Invulnerable and pacifistic
 #define STATUS_EFFECT_SLIMESKIN /datum/status_effect/slimeskin //Increased armor
+// hispania

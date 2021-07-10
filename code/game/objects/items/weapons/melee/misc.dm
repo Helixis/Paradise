@@ -24,7 +24,7 @@
 
 
 /obj/item/melee/chainofcommand/suicide_act(mob/user)
-	to_chat(viewers(user), "<span class='suicide'>[user] is strangling [user.p_them()]self with the [src.name]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
+	to_chat(viewers(user), "<span class='suicide'>[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 	return OXYLOSS
 
 /obj/item/melee/rapier
@@ -38,11 +38,12 @@
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 50
 	armour_penetration = 75
-	sharp = 1
+	sharp = TRUE
 	origin_tech = "combat=5"
 	attack_verb = list("lunged at", "stabbed")
 	hitsound = 'sound/weapons/rapierhit.ogg'
 	materials = list(MAT_METAL = 1000)
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF // Theft targets should be hard to destroy
 
 /obj/item/melee/rapier/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(attack_type == PROJECTILE_ATTACK)
@@ -57,7 +58,7 @@
 	force = 15
 	throwforce = 10
 	w_class = WEIGHT_CLASS_SMALL
-	attack_verb = list("stabbed", "jabbed", "iced,", "drill")
+	attack_verb = list("stabbed", "jabbed", "iced,")
 
 /obj/item/melee/candy_sword
 	name = "candy cane sword"
@@ -96,7 +97,7 @@
 	if(proximity_flag)
 		if(is_type_in_typecache(target, strong_against))
 			new /obj/effect/decal/cleanable/insectguts(target.drop_location())
-			to_chat(user, "<span class='warning'>You easily splat the [target].</span>")
+			to_chat(user, "<span class='warning'>You easily splat [target].</span>")
 			if(istype(target, /mob/living/))
 				var/mob/living/bug = target
 				bug.death(1)

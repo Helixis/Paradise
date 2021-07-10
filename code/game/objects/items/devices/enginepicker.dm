@@ -14,8 +14,12 @@
 	var/list/list_enginebeacons = list()
 	var/isactive = FALSE
 
+/obj/item/enginepicker/Destroy()
+	list_enginebeacons.Cut()
+	return ..()
+
 /obj/item/enginepicker/attack_self(mob/living/carbon/user)
-	if(usr.stat || !usr.canmove || usr.restrained())
+	if(user.incapacitated())
 		return
 
 	if(!isactive)
@@ -40,7 +44,7 @@
 			list_enginebeacons += B
 
 //Spawns and logs / announces the appropriate engine based on the choice made
-/obj/item/enginepicker/proc/processchoice(var/obj/item/radio/beacon/engine/choice, mob/living/carbon/user)
+/obj/item/enginepicker/proc/processchoice(obj/item/radio/beacon/engine/choice, mob/living/carbon/user)
 	var/issuccessful = FALSE	//Check for a successful choice
 	var/engtype					//Engine type
 	var/G						//Generator that will be spawned
@@ -72,7 +76,7 @@
 		new G(T)		//Spawns the switch-selected engine on the chosen beacon's turf
 
 		var/ailist[] = list()
-		for(var/mob/living/silicon/ai/A in GLOB.living_mob_list)
+		for(var/mob/living/silicon/ai/A in GLOB.alive_mob_list)
 			ailist += A
 		if(ailist.len)
 			var/mob/living/silicon/ai/announcer = pick(ailist)
@@ -86,7 +90,7 @@
 		return
 
 //Deletes objects and mobs from the beacon's turf.
-/obj/item/enginepicker/proc/clearturf(var/turf/T)
+/obj/item/enginepicker/proc/clearturf(turf/T)
 	for(var/obj/item/I in T)
 		I.visible_message("\The [I] gets crushed to dust!")
 		qdel(I)

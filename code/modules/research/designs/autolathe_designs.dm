@@ -187,12 +187,28 @@
 	build_path = /obj/item/pipe_painter
 	category = list("initial", "Miscellaneous")
 
+/datum/design/window_painter
+	name = "Window Painter"
+	id = "window_painter"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 5000, MAT_GLASS = 2000)
+	build_path = /obj/item/pipe_painter/window_painter
+	category = list("initial", "Miscellaneous")
+
 /datum/design/floorpainter
 	name = "Floor painter"
 	id = "floor_painter"
 	build_type = AUTOLATHE
 	materials = list(MAT_METAL = 150, MAT_GLASS = 125)
 	build_path = /obj/item/floor_painter
+	category = list("initial", "Miscellaneous")
+
+/datum/design/airlock_painter
+	name = "Airlock painter"
+	id = "airlock_painter"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 3000, MAT_GLASS = 1000)
+	build_path = /obj/item/airlock_painter
 	category = list("initial", "Miscellaneous")
 
 /datum/design/metal
@@ -527,6 +543,14 @@
 	build_path = /obj/item/assembly/health
 	category = list("initial", "Medical")
 
+/datum/design/stethoscope
+	name = "Stethoscope"
+	id = "stethoscope"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 500)
+	build_path = /obj/item/clothing/accessory/stethoscope
+	category = list("initial", "Medical")
+
 /datum/design/timer
 	name = "Timer"
 	id = "timer"
@@ -597,6 +621,14 @@
 	build_type = AUTOLATHE
 	materials = list(MAT_METAL = 500, MAT_GLASS = 500)
 	build_path = /obj/item/reagent_containers/hypospray/safety
+	category = list("initial", "Medical")
+
+/datum/design/automender
+	name = "Auto-mender"
+	id = "automender"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 1000, MAT_GLASS = 1000)
+	build_path = /obj/item/reagent_containers/applicator
 	category = list("initial", "Medical")
 
 /datum/design/prox_sensor
@@ -800,6 +832,14 @@
 	build_path = /obj/item/toy/crayon/spraycan
 	category = list("initial", "Tools")
 
+/datum/design/geiger
+	name = "Geiger Counter"
+	id = "geigercounter"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 150, MAT_GLASS = 150)
+	build_path = /obj/item/geiger_counter
+	category = list("initial", "Tools")
+
 /datum/design/desttagger
 	name = "Destination tagger"
 	id = "desttagger"
@@ -840,22 +880,6 @@
 	build_path = /obj/item/storage/conveyor
 	category = list("initial", "Construction")
 
-/datum/design/laptop
-	name = "Laptop Frame"
-	id = "laptop"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 10000, MAT_GLASS = 1000)
-	build_path = /obj/item/modular_computer/laptop/buildable
-	category = list("initial", "Miscellaneous")
-
-/datum/design/tablet
-	name = "Tablet Frame"
-	id = "tablet"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 2000, MAT_GLASS = 1000)
-	build_path = /obj/item/modular_computer/tablet
-	category = list("initial", "Miscellaneous")
-
 /datum/design/mousetrap
 	name = "Mousetrap"
 	id = "mousetrap"
@@ -863,22 +887,6 @@
 	materials = list(MAT_METAL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/assembly/mousetrap
 	category = list("initial", "Miscellaneous")
-
-/datum/design/videocam
-	name = "Video Camera"
-	id = "videocam"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 120, MAT_GLASS = 60)
-	build_path = /obj/item/videocam
-	category = list("initial", "Miscellaneous")
-
-/datum/design/logic_board
-	name = "Logic Circuit"
-	id = "logic_board"
-	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 50, MAT_GLASS = 50)
-	build_path = /obj/item/circuitboard/logic_gate
-	category = list("initial", "Electronics")
 
 /datum/design/vendor
 	name = "Machine Board (Vendor)"
@@ -914,4 +922,3 @@
 	materials = list(MAT_METAL = 40000)
 	build_path = /obj/item/golem_shell
 	category = list("Imported")
-

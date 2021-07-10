@@ -3,7 +3,7 @@
 
 	head = /obj/item/clothing/head/helmet/space/plasmaman
 	uniform = /obj/item/clothing/under/plasmaman
-	r_hand = /obj/item/tank/plasma/plasmaman/belt/full
+	r_hand = /obj/item/tank/internals/plasmaman/belt/full
 	mask = /obj/item/clothing/mask/breath
 
 /datum/outfit/plasmaman/bar
@@ -176,3 +176,14 @@
 
 	head = /obj/item/clothing/head/helmet/space/plasmaman/blueshield
 	uniform = /obj/item/clothing/under/plasmaman/blueshield
+
+/datum/outfit/plasmaman/wizard
+	name = "Wizard Plasmaman"
+
+	head = /obj/item/clothing/head/helmet/space/plasmaman/wizard
+	uniform = /obj/item/clothing/under/plasmaman/wizard
+
+/datum/outfit/plasmaman/assistant
+	name = "Assistant Plasmaman"
+	head = /obj/item/clothing/head/helmet/space/plasmaman/assistant
+	uniform = /obj/item/clothing/under/plasmaman/assistant

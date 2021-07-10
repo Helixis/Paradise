@@ -6,7 +6,6 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/kinetic)
 	cell_type = /obj/item/stock_parts/cell/emproof
 	needs_permit = 0
-	unique_rename = 1
 	origin_tech = "combat=3;powerstorage=3;engineering=3"
 	weapon_weight = WEAPON_LIGHT
 	can_flashlight = 1
@@ -88,7 +87,7 @@
 	if(!holds_charge)
 		empty()
 
-/obj/item/gun/energy/kinetic_accelerator/shoot_live_shot()
+/obj/item/gun/energy/kinetic_accelerator/shoot_live_shot(mob/living/user, atom/target, pointblank = FALSE, message = TRUE)
 	. = ..()
 	attempt_reload()
 
@@ -166,13 +165,14 @@
 	name = "experimental kinetic accelerator"
 	desc = "A modified version of the proto-kinetic accelerator, with twice the modkit space of the standard version."
 	icon_state = "kineticgun_h"
-	item_state = "kineticgun_h"
+	item_state = "kineticgun"
 	origin_tech = "combat=5;powerstorage=3;engineering=5"
 	max_mod_capacity = 200
 
 //Casing
 /obj/item/ammo_casing/energy/kinetic
 	projectile_type = /obj/item/projectile/kinetic
+	muzzle_flash_color = null
 	select_name = "kinetic"
 	e_cost = 500
 	fire_sound = 'sound/weapons/kenetic_accel.ogg' // fine spelling there chap
@@ -253,7 +253,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "modkit"
 	origin_tech = "programming=2;materials=2;magnets=4"
-	require_module = 1
+	require_module = TRUE
 	module_type = /obj/item/robot_module/miner
 	usesound = 'sound/items/screwdriver.ogg'
 	var/denied_type = null
@@ -275,7 +275,7 @@
 		return ..()
 
 /obj/item/borg/upgrade/modkit/action(mob/living/silicon/robot/R)
-	if(..())
+	if(!..())
 		return
 
 	for(var/obj/item/gun/energy/kinetic_accelerator/cyborg/H in R.module.modules)
@@ -567,6 +567,9 @@
 	var/chassis_name = "super-kinetic accelerator"
 
 /obj/item/borg/upgrade/modkit/chassis_mod/install(obj/item/gun/energy/kinetic_accelerator/KA, mob/user)
+	if(istype(KA, /obj/item/gun/energy/kinetic_accelerator/premiumka))
+		to_chat(user, "<span class='notice'>This modkit does not fit into the [KA.name].</span>")
+		return
 	. = ..()
 	if(.)
 		KA.icon_state = chassis_icon

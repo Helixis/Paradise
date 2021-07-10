@@ -6,12 +6,12 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 65, "acid" = 90)
 	point_return = 18
 
-/obj/structure/blob/node/New(loc, var/h = 100)
-	blob_nodes += src
+/obj/structure/blob/node/Initialize(mapload)
+	. = ..()
+	GLOB.blob_nodes += src
 	START_PROCESSING(SSobj, src)
-	..(loc, h)
 
-/obj/structure/blob/node/adjustcolors(var/a_color)
+/obj/structure/blob/node/adjustcolors(a_color)
 	overlays.Cut()
 	color = null
 	var/image/I = new('icons/mob/blob.dmi', "blob")
@@ -21,7 +21,7 @@
 	src.overlays += C
 
 /obj/structure/blob/node/Destroy()
-	blob_nodes -= src
+	GLOB.blob_nodes -= src
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 

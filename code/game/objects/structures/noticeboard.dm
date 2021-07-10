@@ -18,7 +18,7 @@
 	icon_state = "nboard0[notices]"
 
 //attaching papers!!
-/obj/structure/noticeboard/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+/obj/structure/noticeboard/attackby(obj/item/O as obj, mob/user as mob, params)
 	if(istype(O, /obj/item/paper))
 		if(notices < 5)
 			O.add_fingerprint(user)
@@ -78,10 +78,5 @@
 	if(href_list["read"])
 		var/obj/item/paper/P = locate(href_list["read"])
 		if((P && P.loc == src))
-			if(!( istype(usr, /mob/living/carbon/human) ))
-				usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY><TT>[stars(P.info)]</TT></BODY></HTML>", "window=[P.name]")
-				onclose(usr, "[P.name]")
-			else
-				usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY><TT>[P.info]</TT></BODY></HTML>", "window=[P.name]")
-				onclose(usr, "[P.name]")
+			P.show_content(usr)
 	return

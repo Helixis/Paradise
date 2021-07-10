@@ -27,7 +27,7 @@
 	tastes = list("banana" = 1)
 
 /obj/item/reagent_containers/food/snacks/grown/banana/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is aiming the [name] at [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide.</span>")
+	user.visible_message("<span class='suicide'>[user] is aiming [src] at [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 	playsound(loc, 'sound/items/bikehorn.ogg', 50, 1, -1)
 	sleep(25)
 	if(!user)
@@ -51,7 +51,7 @@
 	throw_range = 7
 
 /obj/item/grown/bananapeel/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] is deliberately slipping on the [src.name]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
+	user.visible_message("<span class='suicide'>[user] is deliberately slipping on [src]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -1)
 	return BRUTELOSS
 
@@ -118,12 +118,10 @@
 /obj/item/grown/bananapeel/specialpeel     //used by /obj/item/clothing/shoes/clown_shoes/banana_shoes
 	name = "synthesized banana peel"
 	desc = "A synthetic banana peel."
-	trip_stun = 2
-	trip_weaken = 2
-	trip_chance = 100
-	trip_walksafe = FALSE
-	trip_verb = TV_SLIP
 
-/obj/item/grown/bananapeel/specialpeel/on_trip(mob/living/carbon/human/H)
-	if(..())
-		qdel(src)
+/obj/item/grown/bananapeel/specialpeel/ComponentInitialize()
+	AddComponent(/datum/component/slippery, src, 2, 2, 100, 0, FALSE)
+
+/obj/item/grown/bananapeel/specialpeel/after_slip(mob/living/carbon/human/H)
+	. = ..()
+	qdel(src)

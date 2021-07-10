@@ -21,7 +21,7 @@
 	drink_desc = "The father of all refreshments."
 	var/water_temperature = 283.15 // As reagents don't have a temperature value, we'll just use 10 celsius.
 
-/datum/reagent/water/reaction_mob(mob/living/M, method = TOUCH, volume)
+/datum/reagent/water/reaction_mob(mob/living/M, method = REAGENT_TOUCH, volume)
 	M.water_act(volume, water_temperature, src, method)
 
 /datum/reagent/water/reaction_turf(turf/T, volume)
@@ -67,53 +67,10 @@
 		O.clean_blood()
 
 /datum/reagent/space_cleaner/reaction_turf(turf/T, volume)
-	if(volume >= 1)
-		var/floor_only = TRUE
-		for(var/obj/effect/decal/cleanable/C in src)
-			var/obj/effect/decal/cleanable/blood/B = C
-			if(istype(B) && B.off_floor)
-				floor_only = FALSE
-			else
-				qdel(C)
-		T.color = initial(T.color)
-		if(floor_only)
-			T.clean_blood()
+	T.clean(volume >= 1)
 
-		for(var/mob/living/simple_animal/slime/M in T)
-			M.adjustToxLoss(rand(5, 10))
-
-/datum/reagent/space_cleaner/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H.lip_style)
-				H.lip_style = null
-				H.update_body()
-		if(C.r_hand)
-			C.r_hand.clean_blood()
-		if(C.l_hand)
-			C.l_hand.clean_blood()
-		if(C.wear_mask)
-			if(C.wear_mask.clean_blood())
-				C.update_inv_wear_mask(0)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = C
-			if(H.head)
-				if(H.head.clean_blood())
-					H.update_inv_head(0,0)
-			if(H.wear_suit)
-				if(H.wear_suit.clean_blood())
-					H.update_inv_wear_suit(0,0)
-			else if(H.w_uniform)
-				if(H.w_uniform.clean_blood())
-					H.update_inv_w_uniform(0,0)
-			if(H.shoes)
-				if(H.shoes.clean_blood())
-					H.update_inv_shoes(0,0)
-		M.clean_blood()
-		..()
-
+/datum/reagent/space_cleaner/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	M.clean_blood()
 
 /datum/reagent/blood
 	data = list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"blood_colour"="#A10808","resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null, "dna" = null)
@@ -128,7 +85,7 @@
 	taste_description = "<span class='warning'>blood</span>"
 	taste_mult = 1.3
 
-/datum/reagent/blood/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/blood/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	if(data && data["viruses"])
 		for(var/thing in data["viruses"])
 			var/datum/disease/D = thing
@@ -136,12 +93,12 @@
 			if(D.spread_flags & SPECIAL || D.spread_flags & NON_CONTAGIOUS)
 				continue
 
-			if(method == TOUCH)
+			if(method == REAGENT_TOUCH)
 				M.ContractDisease(D)
 			else //ingest, patch or inject
 				M.ForceContractDisease(D)
 
-	if(method == INGEST && iscarbon(M))
+	if(method == REAGENT_INGEST && iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.get_blood_id() == "blood")
 			if((!data || !(data["blood_type"] in get_safe_blood(C.dna.blood_type))))
@@ -210,8 +167,8 @@
 	color = "#C81040" // rgb: 200, 16, 64
 	taste_description = "antibodies"
 
-/datum/reagent/vaccine/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(islist(data) && (method == INGEST))
+/datum/reagent/vaccine/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	if(islist(data) && (method == REAGENT_INGEST))
 		for(var/thing in M.viruses)
 			var/datum/disease/D = thing
 			if(D.GetDiseaseID() in data)
@@ -230,8 +187,8 @@
 	color = "#757547"
 	taste_description = "puke"
 
-/datum/reagent/fishwater/reaction_mob(mob/living/M, method=TOUCH, volume)
-	if(method == INGEST)
+/datum/reagent/fishwater/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
+	if(method == REAGENT_INGEST)
 		to_chat(M, "Oh god, why did you drink that?")
 
 /datum/reagent/fishwater/on_mob_life(mob/living/M)
@@ -250,7 +207,7 @@
 	color = "#757547"
 	taste_description = "the inside of a toilet... or worse"
 
-/datum/reagent/fishwater/toiletwater/reaction_mob(mob/living/M, method=TOUCH, volume) //For shennanigans
+/datum/reagent/fishwater/toiletwater/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume) //For shennanigans
 	return
 
 /datum/reagent/holywater
@@ -268,12 +225,27 @@
 /datum/reagent/holywater/on_mob_life(mob/living/M)
 	var/update_flags = STATUS_UPDATE_NONE
 	M.AdjustJitter(-5)
+	//HEAL CHAP STARTS HERE
+	if(ishuman(M) && M.mind.isholy)
+		update_flags |= M.adjustToxLoss(-1.5*REAGENTS_EFFECT_MULTIPLIER, FALSE)
+	//HEAL CHAP ENDS HERE
 	if(current_cycle >= 30)		// 12 units, 60 seconds @ metabolism 0.4 units & tick rate 2.0 sec
 		M.AdjustStuttering(4, bound_lower = 0, bound_upper = 20)
 		M.Dizzy(5)
-		if(iscultist(M) && prob(5))
-			M.AdjustCultSlur(5)//5 seems like a good number...
-			M.say(pick("Av'te Nar'sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","Egkau'haom'nai en Chaous","Ho Diak'nos tou Ap'iron","R'ge Na'sie","Diabo us Vo'iscum","Si gn'um Co'nu"))
+		if(iscultist(M))
+			for(var/datum/action/innate/cult/blood_magic/BM in M.actions)
+				for(var/datum/action/innate/cult/blood_spell/BS in BM.spells)
+					to_chat(M, "<span class='cultlarge'>Your blood rites falter as holy water scours your body!</span>")
+					qdel(BS)
+			if(prob(5))
+				M.AdjustCultSlur(5)//5 seems like a good number...
+				M.say(pick("Av'te Nar'sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","Egkau'haom'nai en Chaous","Ho Diak'nos tou Ap'iron","R'ge Na'sie","Diabo us Vo'iscum","Si gn'um Co'nu"))
+		if(isvampirethrall(M))
+			if(prob(10))
+				M.say(pick("*gasp", "*cough", "*sneeze"))
+			if(prob(5)) //Same as cult, for the real big tell
+				M.visible_message("<span class='warning'>A fog lifts from [M]'s eyes for a moment, but soon returns.</span>")
+
 	if(current_cycle >= 75 && prob(33))	// 30 units, 150 seconds
 		M.AdjustConfused(3)
 		if(isvampirethrall(M))
@@ -284,7 +256,7 @@
 			M.SetConfused(0)
 			return
 		if(iscultist(M))
-			SSticker.mode.remove_cultist(M.mind)
+			SSticker.mode.remove_cultist(M.mind, TRUE, TRUE)
 			holder.remove_reagent(id, volume)	// maybe this is a little too perfect and a max() cap on the statuses would be better??
 			M.SetJitter(0)
 			M.SetStuttering(0)
@@ -298,7 +270,7 @@
 			update_flags |= M.adjustStaminaLoss(5, FALSE)
 			if(prob(20))
 				M.emote("scream")
-			M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+			M.mind.vampire.adjust_nullification(5, 2)
 			M.mind.vampire.bloodusable = max(M.mind.vampire.bloodusable - 3,0)
 			if(M.mind.vampire.bloodusable)
 				V.vomit(0,1)
@@ -310,7 +282,7 @@
 			switch(current_cycle)
 				if(1 to 4)
 					to_chat(M, "<span class = 'warning'>Something sizzles in your veins!</span>")
-					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+					M.mind.vampire.adjust_nullification(5, 2)
 				if(5 to 12)
 					to_chat(M, "<span class = 'danger'>You feel an intense burning inside of you!</span>")
 					update_flags |= M.adjustFireLoss(1, FALSE)
@@ -318,7 +290,7 @@
 					M.Jitter(20)
 					if(prob(20))
 						M.emote("scream")
-					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+					M.mind.vampire.adjust_nullification(5, 2)
 				if(13 to INFINITY)
 					to_chat(M, "<span class = 'danger'>You suddenly ignite in a holy fire!</span>")
 					for(var/mob/O in viewers(M, null))
@@ -330,15 +302,15 @@
 					M.Jitter(30)
 					if(prob(40))
 						M.emote("scream")
-					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+					M.mind.vampire.adjust_nullification(5, 2)
 	return ..() | update_flags
 
 
-/datum/reagent/holywater/reaction_mob(mob/living/M, method=TOUCH, volume)
+/datum/reagent/holywater/reaction_mob(mob/living/M, method=REAGENT_TOUCH, volume)
 	// Vampires have their powers weakened by holy water applied to the skin.
 	if(ishuman(M) && M.mind && M.mind.vampire && !M.mind.vampire.get_ability(/datum/vampire_passive/full))
 		var/mob/living/carbon/human/H=M
-		if(method == TOUCH)
+		if(method == REAGENT_TOUCH)
 			if(H.wear_mask)
 				to_chat(H, "<span class='warning'>Your mask protects you from the holy water!</span>")
 				return
@@ -347,7 +319,7 @@
 				return
 			else
 				to_chat(M, "<span class='warning'>Something holy interferes with your powers!</span>")
-				M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+				M.mind.vampire.adjust_nullification(5, 2)
 
 
 /datum/reagent/holywater/reaction_turf(turf/simulated/T, volume)

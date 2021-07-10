@@ -23,6 +23,7 @@
 /obj/item/reagent_containers/dropper/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
+	dropperdump(target, user) //Hispania Dropperdump
 	var/to_transfer = 0
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -48,14 +49,14 @@
 			if(safe_thing)
 				visible_message("<span class='danger'>[user] tries to drip something into [H]'s eyes, but fails!</span>")
 
-				reagents.reaction(safe_thing, TOUCH)
+				reagents.reaction(safe_thing, REAGENT_TOUCH)
 				to_transfer = reagents.remove_any(amount_per_transfer_from_this)
 
 				to_chat(user, "<span class='notice'>You transfer [to_transfer] units of the solution.</span>")
 				return
 
 		visible_message("<span class='danger'>[user] drips something into [C]'s eyes!</span>")
-		reagents.reaction(C, TOUCH)
+		reagents.reaction(C, REAGENT_TOUCH)
 
 		var/list/injected = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
@@ -115,7 +116,7 @@
 
 /obj/item/reagent_containers/dropper/precision/viral_injector/attack(mob/living/M, mob/living/user, def_zone)
 	if(M.can_inject(user, TRUE))
-		to_chat(user, "<span class='warning'>You stab [M] with the [src].</span>")
+		to_chat(user, "<span class='warning'>You stealthily stab [M] with [src].</span>")
 		if(reagents.total_volume && M.reagents)
 			var/list/injected = list()
 			for(var/datum/reagent/R in reagents.reagent_list)
@@ -137,7 +138,7 @@
 					var/str = english_list(virList)
 					add_attack_logs(user, M, "Infected with [str].")
 
-				reagents.reaction(M, INGEST, reagents.total_volume)
+				reagents.reaction(M, REAGENT_INGEST, reagents.total_volume)
 				reagents.trans_to(M, 1)
 
 			var/contained = english_list(injected)

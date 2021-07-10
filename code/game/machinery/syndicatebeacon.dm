@@ -17,7 +17,7 @@
 	var/selfdestructing = 0
 	var/charges = 1
 
-/obj/machinery/syndicate_beacon/attack_hand(var/mob/user as mob)
+/obj/machinery/syndicate_beacon/attack_hand(mob/user as mob)
 	usr.set_machine(src)
 	var/dat = "<font color=#005500><i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i></font>"
 	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
@@ -121,7 +121,8 @@
 		if(user)
 			to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
 		return
-	for(var/obj/singularity/singulo in GLOB.singularities)
+	for(var/thing in GLOB.singularities)
+		var/obj/singularity/singulo = thing
 		if(singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
@@ -132,7 +133,8 @@
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
-	for(var/obj/singularity/singulo in world)
+	for(var/thing in GLOB.singularities)
+		var/obj/singularity/singulo = thing
 		if(singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"
@@ -145,7 +147,7 @@
 	return
 
 
-/obj/machinery/power/singularity_beacon/attack_hand(var/mob/user as mob)
+/obj/machinery/power/singularity_beacon/attack_hand(mob/user as mob)
 	if(anchored)
 		return active ? Deactivate(user) : Activate(user)
 	else

@@ -14,7 +14,7 @@
 	var/cooldown_time = 0
 	var/cooldown_timeleft = 0
 	var/cooldown_on = FALSE
-	req_access = list(access_ai_upload)
+	req_access = list(ACCESS_AI_UPLOAD)
 
 /obj/machinery/ai_slipper/power_change()
 	if(stat & BROKEN)
@@ -27,7 +27,7 @@
 			disabled = TRUE
 		update_icon()
 
-/obj/machinery/ai_slipper/proc/setState(var/enabled, var/uses)
+/obj/machinery/ai_slipper/proc/setState(enabled, uses)
 	disabled = disabled
 	uses = uses
 	power_change()

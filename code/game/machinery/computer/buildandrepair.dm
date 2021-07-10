@@ -1,13 +1,12 @@
 /obj/structure/computerframe
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	name = "computer frame"
-	icon = 'icons/obj/stock_parts.dmi'
+	icon = 'icons/hispania/obj/stock_parts.dmi'
 	icon_state = "0"
 	max_integrity = 100
 	var/state = 0
 	var/obj/item/circuitboard/circuit = null
-	var/base_mineral = /obj/item/stack/sheet/metal
 
 /obj/structure/computerframe/deconstruct(disassembled = TRUE)
 	if(!(flags & NODECONSTRUCT))
@@ -18,7 +17,7 @@
 	deconstruct()
 
 /obj/structure/computerframe/proc/drop_computer_parts()
-	new base_mineral(loc, 5)
+	new /obj/item/stack/sheet/metal(loc, 5)
 	if(circuit)
 		circuit.forceMove(loc)
 		circuit = null
@@ -45,7 +44,6 @@
 	var/list/req_components = null
 	var/powernet = null
 	var/list/records = null
-	var/frame_desc = null
 	var/contain_parts = 1
 	toolspeed = 1
 	usesound = 'sound/items/deconstruct.ogg'
@@ -64,7 +62,7 @@
 			var/atom/A = B
 			if(!ispath(A))
 				continue
-			nice_list += list("[req_components[A]] [initial(A.name)]")
+			nice_list += list("[req_components[A]] [initial(A.name)]\s")
 		. += "<span class='notice'>Required components: [english_list(nice_list)].</span>"
 
 /obj/item/circuitboard/message_monitor
@@ -160,18 +158,12 @@
 	name = "Circuit board (Security Records)"
 	build_path = /obj/machinery/computer/secure_data
 	origin_tech = "programming=2;combat=2"
-/obj/item/circuitboard/skills
-	name = "Circuit board (Employment Records)"
-	build_path = /obj/machinery/computer/skills
 /obj/item/circuitboard/stationalert_engineering
 	name = "Circuit Board (Station Alert Console (Engineering))"
 	build_path = /obj/machinery/computer/station_alert
-/obj/item/circuitboard/stationalert_security
-	name = "Circuit Board (Station Alert Console (Security))"
+/obj/item/circuitboard/stationalert
+	name = "Circuit Board (Station Alert Console)"
 	build_path = /obj/machinery/computer/station_alert
-/obj/item/circuitboard/stationalert_all
-	name = "Circuit Board (Station Alert Console (All))"
-	build_path = /obj/machinery/computer/station_alert/all
 /obj/item/circuitboard/atmos_alert
 	name = "Circuit Board (Atmospheric Alert Computer)"
 	build_path = /obj/machinery/computer/atmos_alert
@@ -237,14 +229,17 @@
 /obj/item/circuitboard/brigcells
 	name = "Circuit board (Brig Cell Control)"
 	build_path = /obj/machinery/computer/brigcells
-
+/obj/item/circuitboard/sm_monitor
+	name = "Circuit board (Supermatter Monitoring Console)"
+	build_path = /obj/machinery/computer/sm_monitor
+	origin_tech = "programming=2;powerstorage=2"
 
 // RD console circuits, so that {de,re}constructing one of the special consoles doesn't ruin everything forever
 /obj/item/circuitboard/rdconsole
 	name = "Circuit Board (RD Console)"
 	desc = "Swipe a Scientist level ID or higher to reconfigure."
 	build_path = /obj/machinery/computer/rdconsole/core
-	req_access = list(access_tox) // This is for adjusting the type of computer we're building - in case something messes up the pre-existing robotics or mechanics consoles
+	req_access = list(ACCESS_TOX) // This is for adjusting the type of computer we're building - in case something messes up the pre-existing robotics or mechanics consoles
 	var/access_types = list("R&D Core", "Robotics", "E.X.P.E.R.I-MENTOR", "Mechanics", "Public")
 	id = 1
 /obj/item/circuitboard/rdconsole/robotics
@@ -284,7 +279,7 @@
 	origin_tech = "programming=3;powerstorage=3"
 /obj/item/circuitboard/ordercomp
 	name = "Circuit board (Supply Ordering Console)"
-	build_path = /obj/machinery/computer/ordercomp
+	build_path = /obj/machinery/computer/supplycomp/public
 	origin_tech = "programming=3"
 /obj/item/circuitboard/supplycomp
 	name = "Circuit board (Supply Shuttle Console)"
@@ -296,19 +291,6 @@
 	name = "Circuit board (Operating Computer)"
 	build_path = /obj/machinery/computer/operating
 	origin_tech = "programming=2;biotech=3"
-/obj/item/circuitboard/comm_monitor
-	name = "Circuit board (Telecommunications Monitor)"
-	build_path = /obj/machinery/computer/telecomms/monitor
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-/obj/item/circuitboard/comm_server
-	name = "Circuit board (Telecommunications Server Monitor)"
-	build_path = /obj/machinery/computer/telecomms/server
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-/obj/item/circuitboard/comm_traffic
-	name = "Circuitboard (Telecommunications Traffic Control)"
-	build_path = /obj/machinery/computer/telecomms/traffic
-	origin_tech = "programming=3;magnets=3;bluespace=2"
-
 
 /obj/item/circuitboard/shuttle
 	name = "circuit board (Shuttle)"
@@ -364,9 +346,6 @@
 	build_path = /obj/machinery/computer/telescience
 	origin_tech = "programming=6;bluespace=7;plasmatech=5"
 
-/obj/item/circuitboard/atmos_automation
-	name = "Circuit board (Atmospherics Automation)"
-	build_path = /obj/machinery/computer/general_air_control/atmos_automation
 /obj/item/circuitboard/large_tank_control
 	name = "Circuit board (Atmospheric Tank Control)"
 	build_path = /obj/machinery/computer/general_air_control/large_tank_control
@@ -376,14 +355,6 @@
 	name = "circuit board (Turbine Computer)"
 	build_path = /obj/machinery/computer/turbine_computer
 	origin_tech = "programming=4;engineering=4;powerstorage=4"
-
-/obj/item/circuitboard/HONKputer
-	name = "Circuit board (HONKputer)"
-	build_path = /obj/machinery/computer/HONKputer
-	origin_tech = "programming=2"
-	icon = 'icons/obj/machines/HONKputer.dmi'
-	icon_state = "bananium_board"
-	board_type = "honkcomputer"
 
 
 /obj/item/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob, params)
@@ -412,7 +383,7 @@
 /obj/item/circuitboard/rdconsole/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I,/obj/item/card/id)||istype(I, /obj/item/pda))
 		if(allowed(user))
-			user.visible_message("<span class='notice'>\the [user] waves [user.p_their()] ID past the [src]'s access protocol scanner.</span>", "<span class='notice'>You swipe your ID past the [src]'s access protocol scanner.</span>")
+			user.visible_message("<span class='notice'>[user] waves [user.p_their()] ID past [src]'s access protocol scanner.</span>", "<span class='notice'>You swipe your ID past [src]'s access protocol scanner.</span>")
 			var/console_choice = input(user, "What do you want to configure the access to?", "Access Modification", "R&D Core") as null|anything in access_types
 			if(console_choice == null)
 				return
@@ -497,11 +468,11 @@
 				return
 			if(istype(P, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = P
-				if(C.amount >= 5)
+				if(C.get_amount() >= 5)
 					playsound(loc, C.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
 					if(do_after(user, 20 * C.toolspeed, target = src))
-						if(state == 2 && C.amount >= 5 && C.use(5))
+						if(state == 2 && C.get_amount() >= 5 && C.use(5))
 							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 							state = 3
 							icon_state = "3"
@@ -522,11 +493,11 @@
 				return
 			if(istype(P, /obj/item/stack/sheet/glass))
 				var/obj/item/stack/sheet/glass/G = P
-				if(G.amount >= 2)
+				if(G.get_amount() >= 2)
 					playsound(loc, G.usesound, 50, 1)
 					to_chat(user, "<span class='notice'>You start to add the glass panel to the frame.</span>")
 					if(do_after(user, 20 * G.toolspeed, target = src))
-						if(state == 3 && G.amount >= 2 && G.use(2))
+						if(state == 3 && G.get_amount() >= 2 && G.use(2))
 							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
 							state = 4
 							icon_state = "4"
@@ -572,116 +543,3 @@
 	if(I.use_tool(src, user, 50, volume = I.tool_volume) && !state)
 		to_chat(user, "<span class='notice'>You deconstruct [src].</span>")
 		deconstruct(TRUE)
-
-
-
-/obj/structure/computerframe/HONKputer
-	name = "Bananium Computer-frame"
-	icon = 'icons/obj/machines/HONKputer.dmi'
-	base_mineral = /obj/item/stack/sheet/mineral/bananium
-
-/obj/structure/computerframe/HONKputer/attackby(obj/item/P as obj, mob/user as mob, params)
-	switch(state)
-		if(0)
-			if(istype(P, /obj/item/wrench))
-				playsound(loc, P.usesound, 50, 1)
-				if(do_after(user, 20, target = src))
-					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
-					anchored = 1
-					state = 1
-		if(1)
-			if(istype(P, /obj/item/wrench))
-				playsound(loc, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.toolspeed, target = src))
-					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
-					anchored = 0
-					state = 0
-			if(istype(P, /obj/item/circuitboard) && !circuit)
-				var/obj/item/circuitboard/B = P
-				if(B.board_type == "honkcomputer")
-					playsound(loc, P.usesound, 50, 1)
-					to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
-					icon_state = "1"
-					circuit = P
-					user.drop_item()
-					P.loc = src
-				else
-					to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
-			if(istype(P, /obj/item/screwdriver) && circuit)
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
-				state = 2
-				icon_state = "2"
-			if(istype(P, /obj/item/crowbar) && circuit)
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
-				state = 1
-				icon_state = "0"
-				circuit.loc = loc
-				circuit = null
-			return
-		if(2)
-			if(istype(P, /obj/item/screwdriver) && circuit)
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
-				state = 1
-				icon_state = "1"
-			if(istype(P, /obj/item/stack/cable_coil))
-				var/obj/item/stack/cable_coil/C = P
-				if(C.amount >= 5)
-					playsound(loc, C.usesound, 50, 1)
-					to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-					if(do_after(user, 20 * C.toolspeed, target = src))
-						if(state == 2 && C.amount >= 5 && C.use(5))
-							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
-							state = 3
-							icon_state = "3"
-						else
-							to_chat(user, "<span class='warning'>At some point during construction you lost some cable. Make sure you have five lengths before trying again.</span>")
-							return
-				else
-					to_chat(user, "<span class='warning'>You need five lengths of cable to wire the frame.</span>")
-			return
-		if(3)
-			if(istype(P, /obj/item/wirecutters))
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You remove the cables.</span>")
-				state = 2
-				icon_state = "2"
-				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
-				A.amount = 5
-
-			if(istype(P, /obj/item/stack/sheet/glass))
-				var/obj/item/stack/sheet/glass/G = P
-				if(G.amount >= 2)
-					playsound(loc, G.usesound, 50, 1)
-					to_chat(user, "<span class='notice'>You start to add the glass panel to the frame.</span>")
-					if(do_after(user, 20 * G.toolspeed, target = src))
-						if(state == 3 && G.amount >= 2 && G.use(2))
-							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
-							state = 4
-							icon_state = "4"
-						else
-							to_chat(user, "<span class='warning'>At some point during construction you lost some glass. Make sure you have two sheets before trying again.</span>")
-							return
-				else
-					to_chat(user, "<span class='warning'>You need two sheets of glass for this.</span>")
-			return
-		if(4)
-			if(istype(P, /obj/item/crowbar))
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
-				state = 3
-				icon_state = "3"
-				new /obj/item/stack/sheet/glass(loc, 2)
-			if(istype(P, /obj/item/screwdriver))
-				playsound(loc, P.usesound, 50, 1)
-				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
-				var/B = new circuit.build_path (loc)
-				if(circuit.powernet) B:powernet = circuit.powernet
-				if(circuit.id) B:id = circuit.id
-				if(circuit.records) B:records = circuit.records
-				if(circuit.frequency) B:frequency = circuit.frequency
-				qdel(src)
-			return
-	return ..()

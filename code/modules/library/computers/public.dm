@@ -1,7 +1,7 @@
 /obj/machinery/computer/library/public
 	name = "visitor computer"
 
-/obj/machinery/computer/library/public/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/library/public/attack_hand(mob/user as mob)
 	if(..())
 		return
 	interact(user)
@@ -12,7 +12,7 @@
 		return
 	return ..()
 
-/obj/machinery/computer/library/public/interact(var/mob/user)
+/obj/machinery/computer/library/public/interact(mob/user)
 	if(interact_check(user))
 		return
 
@@ -26,8 +26,7 @@
 				<A href='?src=[UID()];setauthor=1'>Filter by Author: [query.author]</A><br />
 				<A href='?src=[UID()];search=1'>\[Start Search\]</A><br />"}
 		if(1)
-			establish_db_connection()
-			if(!dbcon.IsConnected())
+			if(!SSdbcore.IsConnected())
 				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font><br />"
 			else if(num_results == 0)
 				dat += "<em>No results found.</em>"
@@ -75,7 +74,7 @@
 		else
 			var/pn = text2num(href_list["pagenum"])
 			if(!isnull(pn))
-				page_num = Clamp(pn, 1, num_pages)
+				page_num = clamp(pn, 1, num_pages)
 
 	if(href_list["settitle"])
 		var/newtitle = input("Enter a title to search for:") as text|null
@@ -84,7 +83,7 @@
 		else
 			query.title = null
 	if(href_list["setcategory"])
-		var/newcategory = input("Choose a category to search for:") in (list("Any") + library_section_names)
+		var/newcategory = input("Choose a category to search for:") in (list("Any") + GLOB.library_section_names)
 		if(newcategory == "Any")
 			query.category = null
 		else if(newcategory)
@@ -100,11 +99,11 @@
 		if(num_pages == 0)
 			page_num = 1
 		else
-			page_num = Clamp(text2num(href_list["page"]), 1, num_pages)
+			page_num = clamp(text2num(href_list["page"]), 1, num_pages)
 
 	if(href_list["search"])
 		num_results = src.get_num_results()
-		num_pages = Ceiling(num_results/LIBRARY_BOOKS_PER_PAGE)
+		num_pages = CEILING(num_results/LIBRARY_BOOKS_PER_PAGE, 1)
 		page_num = 1
 
 		screenstate = 1
@@ -113,7 +112,7 @@
 		screenstate = 0
 
 	if(href_list["flag"])
-		if(!dbcon.IsConnected())
+		if(!SSdbcore.IsConnected())
 			alert("Connection to Archive has been severed. Aborting.")
 			return
 		var/id = href_list["flag"]
@@ -121,7 +120,7 @@
 			var/datum/cachedbook/B = getBookByID(id)
 			if(B)
 				if((input(usr, "Are you sure you want to flag [B.title] as having inappropriate content?", "Flag Book #[B.id]") in list("Yes", "No")) == "Yes")
-					library_catalog.flag_book_by_id(usr, id)
+					GLOB.library_catalog.flag_book_by_id(usr, id)
 
 	add_fingerprint(usr)
 	updateUsrDialog()

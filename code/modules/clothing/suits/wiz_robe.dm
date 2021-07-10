@@ -22,8 +22,7 @@
 	name = "black wizard hat"
 	desc = "Strange-looking black hat-wear that most certainly belongs to a real skeleton. Spooky."
 	icon_state = "blackwizard"
-	dog_fashion = null
-
+	dog_fashion = /datum/dog_fashion/head/black_wizard
 
 /obj/item/clothing/head/wizard/clown
 	name = "purple wizard hat"
@@ -31,6 +30,18 @@
 	icon_state = "wizhatclown"
 	item_state = "wizhatclown" // cheating
 	dog_fashion = null
+
+/obj/item/clothing/head/wizard/mime
+	name = "magical beret"
+	desc = "A magical red beret."
+	icon_state = "wizhatmime"
+	item_state = "wizhatmime"
+	dog_fashion = null
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/head.dmi',
+		"Drask" = 'icons/mob/species/drask/head.dmi',
+		"Grey" = 'icons/mob/species/grey/head.dmi'
+		)
 
 /obj/item/clothing/head/wizard/fake
 	name = "wizard hat"
@@ -44,17 +55,17 @@
 	dog_fashion = /datum/dog_fashion/head/blue_wizard
 
 /obj/item/clothing/head/wizard/marisa
-	name = "Witch Hat"
+	name = "witch hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
 	icon_state = "marisa"
-	dog_fashion = null
+	dog_fashion = /datum/dog_fashion/head/wizard/marisa
 
 /obj/item/clothing/head/wizard/magus
-	name = "Magus Helm"
+	name = "magus helm"
 	desc = "A mysterious helmet that hums with an unearthly power"
 	icon_state = "magus"
 	item_state = "magus"
-	dog_fashion = null
+	dog_fashion = /datum/dog_fashion/head/wizard/magus
 
 /obj/item/clothing/head/wizard/amp
 	name = "psychic amplifier"
@@ -91,25 +102,36 @@
 	item_state = "blackwizrobe"
 
 /obj/item/clothing/suit/wizrobe/clown
-	name = "Clown Robe"
+	name = "clown robe"
 	desc = "A set of armoured robes that seem to radiate a dark power. That, and bad fashion decisions."
 	icon_state = "wizzclown"
 	item_state = "wizzclown"
 
+/obj/item/clothing/suit/wizrobe/mime
+	name = "mime robe"
+	desc = "Red, black, and white robes. There is not much else to say about them."
+	icon_state = "wizzmime"
+	item_state = "wizzmime"
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi',
+		"Drask" = 'icons/mob/species/drask/suit.dmi',
+		"Grey" = 'icons/mob/species/grey/suit.dmi'
+		)
+
 /obj/item/clothing/suit/wizrobe/marisa
-	name = "Witch Robe"
+	name = "witch robe"
 	desc = "Magic is all about the spell power, ZE!"
 	icon_state = "marisa"
 	item_state = "marisarobe"
 
 /obj/item/clothing/suit/wizrobe/magusblue
-	name = "Magus Robe"
+	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power"
 	icon_state = "magusblue"
 	item_state = "magusblue"
 
 /obj/item/clothing/suit/wizrobe/magusred
-	name = "Magus Robe"
+	name = "magus robe"
 	desc = "A set of armoured robes that seem to radiate a dark power"
 	icon_state = "magusred"
 	item_state = "magusred"
@@ -132,7 +154,7 @@
 	magical = FALSE
 
 /obj/item/clothing/head/wizard/marisa/fake
-	name = "Witch Hat"
+	name = "witch hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
 	icon_state = "marisa"
 	gas_transfer_coefficient = 1
@@ -142,7 +164,7 @@
 	magical = FALSE
 
 /obj/item/clothing/suit/wizrobe/marisa/fake
-	name = "Witch Robe"
+	name = "witch robe"
 	desc = "Magic is all about the spell power, ZE!"
 	icon_state = "marisa"
 	item_state = "marisarobe"
@@ -155,8 +177,8 @@
 //Shielded Armour
 
 /obj/item/clothing/suit/space/hardsuit/shielded/wizard
-	name = "battlemage armour"
-	desc = "Not all wizards are afraid of getting up close and personal."
+	name = "battlemage armor"
+	desc = "Not all wizards are afraid of getting up close and personal. Not spaceproof despite its appearance."
 	icon_state = "hardsuit-wiz"
 	item_state = "wiz_hardsuit"
 	recharge_rate = 0
@@ -171,6 +193,15 @@
 	slowdown = 0
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	magical = TRUE
+
+/obj/item/clothing/suit/space/hardsuit/shielded/wizard/arch
+	desc = "For the arch wizard in need of additional protection."
+	recharge_rate = 1
+	recharge_cooldown = 0
+	max_charges = 15
+	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
+	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
+	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/shielded/wizard/arch
 
 /obj/item/clothing/head/helmet/space/hardsuit/shielded/wizard
 	name = "battlemage helmet"
@@ -187,6 +218,11 @@
 
 /obj/item/clothing/head/helmet/space/hardsuit/shielded/wizard/attack_self(mob/user)
 	return
+
+/obj/item/clothing/head/helmet/space/hardsuit/shielded/wizard/arch
+	desc = "A truly protective helmet."
+	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
 
 /obj/item/wizard_armour_charge
 	name = "battlemage shield charges"

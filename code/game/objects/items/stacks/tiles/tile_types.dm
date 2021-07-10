@@ -41,19 +41,6 @@
 		if(!R && replace)
 			user.put_in_hands(new_item)
 
-	else
-		var/sheet_type = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-		var/obj/item/stack/sheet/mineral/new_item = new sheet_type(user.loc)
-		user.visible_message("[user.name] shaped [src] into a sheet with the welding tool.", \
-					 "<span class='notice'>You shaped [src] into a sheet with the welding tool.</span>", \
-					 "<span class='italics'>You hear welding.</span>")
-		var/obj/item/stack/rods/R = src
-		src = null
-		var/replace = (user.get_inactive_hand()==R)
-		R.use(4)
-		if (!R && replace)
-			user.put_in_hands(new_item)
-
 //Grass
 /obj/item/stack/tile/grass
 	name = "grass tiles"
@@ -74,7 +61,12 @@
 	icon_state = "tile-wood"
 	origin_tech = "biotech=1"
 	turf_type = /turf/simulated/floor/wood
+	merge_type = /obj/item/stack/tile/wood
 	resistance_flags = FLAMMABLE
+
+/obj/item/stack/tile/wood/cyborg
+	energy_type = /datum/robot_energy_storage/wood_tile
+	is_cyborg = TRUE
 
 //Carpets
 /obj/item/stack/tile/carpet
@@ -85,10 +77,16 @@
 	turf_type = /turf/simulated/floor/carpet
 	resistance_flags = FLAMMABLE
 
+/obj/item/stack/tile/carpet/twenty
+	amount = 20
+
 /obj/item/stack/tile/carpet/black
 	name = "black carpet"
 	icon_state = "tile-carpet-black"
 	turf_type = /turf/simulated/floor/carpet/black
+
+/obj/item/stack/tile/carpet/black/twenty
+	amount = 20
 
 //Plasteel
 /obj/item/stack/tile/plasteel
@@ -108,13 +106,17 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 70)
 	resistance_flags = FIRE_PROOF
 
+/obj/item/stack/tile/plasteel/cyborg
+	energy_type = /datum/robot_energy_storage/metal_tile
+	is_cyborg = TRUE
+
 //Light
 /obj/item/stack/tile/light
 	name = "light tiles"
 	gender = PLURAL
 	singular_name = "light floor tile"
-	desc = "A floor tile, made out off glass. Use a multitool on it to change its color."
-	icon_state = "tile_light blue"
+	desc = "A floor tile made of glass, with an integrated light. Use a multitool on it to change its color."
+	icon_state = "tile_white"
 	force = 3
 	throwforce = 5
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "smashed")

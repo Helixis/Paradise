@@ -18,7 +18,7 @@
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
 	var/defaultmsg = "<span class='notice'>Welcome. Please select an option.</span>"
-	var/rebootmsg = "<span class='warning'>%$&(£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
+	var/rebootmsg = "<span class='warning'>%$&(ï¿½: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
 	//Computer properties
 	var/screen = 0 		// 0 = Main menu, 1 = Message Logs, 2 = Hacked screen, 3 = Custom Message
 	var/hacking = 0		// Is it being hacked into by the AI/Cyborg
@@ -52,9 +52,11 @@
 			do_sparks(5, 0, src)
 			var/obj/item/paper/monitorkey/MK = new/obj/item/paper/monitorkey
 			MK.loc = src.loc
+			MK.pixel_y = rand(-10, -8)
+			MK.pixel_x = rand(-9, 9)
 			playsound(loc, 'sound/goonstation/machines/printer_dotmatrix.ogg', 50, 1)
 			// Will help make emagging the console not so easy to get away with.
-			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
+			MK.info += "<br><br><font color='red'>ï¿½%@%(*$%&(ï¿½&?*(%&ï¿½/{}</font>"
 			update_icon()
 			spawn(100*length(src.linkedServer.decryptkey))
 				UnmagConsole()
@@ -75,11 +77,11 @@
 	..()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
 	if(!linkedServer)
-		if(message_servers && message_servers.len > 0)
-			linkedServer = message_servers[1]
+		if(GLOB.message_servers && GLOB.message_servers.len > 0)
+			linkedServer = GLOB.message_servers[1]
 	return
 
-/obj/machinery/computer/message_monitor/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/message_monitor/attack_hand(mob/user as mob)
 	if(..())
 		return
 	if(stat & (NOPOWER|BROKEN))
@@ -87,7 +89,9 @@
 	//If the computer is being hacked or is emagged, display the reboot message.
 	if(hacking || emag)
 		message = rebootmsg
-	var/dat = "<head><title>Message Monitor Console</title></head><body>"
+	var/dat = "<head><title>Message Monitor Console</title>"
+	dat += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head>"
+	dat += "<body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
 	dat += "<center><h4><font color='blue'[message]</h5></center>"
 
@@ -288,11 +292,11 @@
 			if(auth) linkedServer.active = !linkedServer.active
 		//Find a server
 		if(href_list["find"])
-			if(message_servers && message_servers.len > 1)
-				src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in message_servers
+			if(GLOB.message_servers && GLOB.message_servers.len > 1)
+				src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in GLOB.message_servers
 				message = "<span class='alert'>NOTICE: Server selected.</span>"
-			else if(message_servers && message_servers.len > 0)
-				linkedServer = message_servers[1]
+			else if(GLOB.message_servers && GLOB.message_servers.len > 0)
+				linkedServer = GLOB.message_servers[1]
 				message =  "<span class='notice'>NOTICE: Only Single Server Detected - Server selected.</span>"
 			else
 				message = noserver
@@ -396,13 +400,13 @@
 					if("Recepient")
 						//Get out list of viable PDAs
 						var/list/obj/item/pda/sendPDAs = list()
-						for(var/obj/item/pda/P in PDAs)
+						for(var/obj/item/pda/P in GLOB.PDAs)
 							var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
 
 							if(!PM || !PM.can_receive())
 								continue
 							sendPDAs += P
-						if(PDAs && PDAs.len > 0)
+						if(GLOB.PDAs && GLOB.PDAs.len > 0)
 							customrecepient = input(usr, "Select a PDA from the list.") as null|anything in sortAtom(sendPDAs)
 						else
 							customrecepient = null
@@ -436,7 +440,7 @@
 							return src.attack_hand(usr)
 
 						var/obj/item/pda/PDARec = null
-						for(var/obj/item/pda/P in PDAs)
+						for(var/obj/item/pda/P in GLOB.PDAs)
 							var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
 
 							if(!PM || !PM.can_receive())
@@ -459,6 +463,15 @@
 
 							recipient_messenger.notify("<b>Message from [PDARec.owner] ([customjob]), </b>\"[custommessage]\" (<a href='?src=[recipient_messenger.UID()];choice=Message;target=\ref[PDARec]'>Reply</a>)")
 							log_pda("(PDA: [PDARec.owner]) sent \"[custommessage]\" to [customrecepient.owner]", usr)
+						var/log_message = "sent PDA message \"[custommessage]\" using [src] as [customsender] ([customjob])"
+						var/receiver
+						if(ishuman(customrecepient.loc))
+							receiver = customrecepient.loc
+							log_message = "[log_message] to [customrecepient]"
+						else
+							receiver = customrecepient
+							log_message = "[log_message] (no holder)"
+						usr.create_log(MISC_LOG, log_message, receiver)
 						//Finally..
 						ResetMessage()
 
@@ -486,11 +499,11 @@
 /obj/item/paper/monitorkey/New()
 	..()
 	spawn(10)
-		if(message_servers)
-			for(var/obj/machinery/message_server/server in message_servers)
+		if(GLOB.message_servers)
+			for(var/obj/machinery/message_server/server in GLOB.message_servers)
 				if(!isnull(server))
 					if(!isnull(server.decryptkey))
-						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret and away from the clown.<br>If necessary, change the password to a more secure one."
+						info = "<center><h2>Daily Key Reset</h2></center>\n\t<br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret and away from the clown.<br>If necessary, change the password to a more secure one."
 						info_links = info
 						overlays += "paper_words"
 						break

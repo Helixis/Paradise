@@ -19,7 +19,7 @@
 	user.visible_message("[user] begins to wedge \the [tool] in [target]'s [parse_zone(target_zone)].", "<span class='notice'>You begin to wedge [tool] in [target]'s [parse_zone(target_zone)]...</span>")
 	..()
 
-/datum/surgery_step/insert_pill/end_step(mob/living/user, mob/living/carbon/target, target_zone, var/obj/item/reagent_containers/food/pill/tool, datum/surgery/surgery)
+/datum/surgery_step/insert_pill/end_step(mob/living/user, mob/living/carbon/target, target_zone, obj/item/reagent_containers/food/pill/tool, datum/surgery/surgery)
 	if(!istype(tool))
 		return 0
 
@@ -51,7 +51,7 @@
 	to_chat(owner, "<span class='caution'>You grit your teeth and burst the implanted [target]!</span>")
 	add_attack_logs(owner, owner, "Swallowed implanted [target]")
 	if(target.reagents.total_volume)
-		target.reagents.reaction(owner, INGEST)
+		target.reagents.reaction(owner, REAGENT_INGEST)
 		target.reagents.trans_to(owner, target.reagents.total_volume)
 	Remove(owner)
 	qdel(target)

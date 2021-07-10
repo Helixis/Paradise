@@ -6,6 +6,7 @@
 	icon_living = "russianmelee"
 	icon_dead = "russianmelee_dead" // Does not actually exist. del_on_death.
 	icon_gib = "russianmelee_gib" // Does not actually exist. del_on_death.
+	mob_biotypes = MOB_ORGANIC | MOB_HUMANOID
 	speak_chance = 0
 	turns_per_move = 5
 	response_help = "pokes the"
@@ -27,6 +28,9 @@
 			/obj/item/kitchen/knife)
 	del_on_death = 1
 	sentience_type = SENTIENCE_OTHER
+	footstep_type = FOOTSTEP_MOB_SHOE
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	minbodytemp = 0
 
 /mob/living/simple_animal/hostile/russian/ranged
 	icon_state = "russianranged"

@@ -6,6 +6,7 @@
 	icon_state = "gutlunch"
 	icon_living = "gutlunch"
 	icon_dead = "gutlunch"
+	mob_biotypes = MOB_ORGANIC | MOB_BEAST
 	speak_emote = list("warbles", "quavers")
 	emote_hear = list("trills.")
 	emote_see = list("sniffs.", "burps.")
@@ -50,10 +51,9 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/asteroid/gutlunch/regenerate_icons()
-	cut_overlays()
+	..()
 	if(udder.reagents.total_volume == udder.reagents.maximum_volume)
 		add_overlay("gl_full")
-	..()
 
 /mob/living/simple_animal/hostile/asteroid/gutlunch/attackby(obj/item/O, mob/user, params)
 	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))

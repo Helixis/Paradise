@@ -18,6 +18,8 @@
 			T.air.nitrogen = T.nitrogen
 			T.air.carbon_dioxide = T.carbon_dioxide
 			T.air.toxins = T.toxins
+			T.air.sleeping_agent = T.sleeping_agent
+			T.air.agent_b = T.agent_b
 			T.air.temperature = T.temperature
 		SSair.add_to_active(T)
 
@@ -33,7 +35,7 @@
 		if(is_border(T))
 			place(T)
 
-/datum/mapGeneratorModule/border/proc/is_border(var/turf/T)
+/datum/mapGeneratorModule/border/proc/is_border(turf/T)
 	for(var/direction in list(SOUTH,EAST,WEST,NORTH))
 		if(get_step(T,direction) in mother.map)
 			continue

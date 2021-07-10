@@ -175,11 +175,6 @@
 						for(var/datum/reagent/A in D.reagents.reagent_list)
 							R += A.id + " ("
 							R += num2text(A.volume) + "),"
-					if(istype(M, /mob))
-						if(!iscarbon(user))
-							M.LAssailant = null
-						else
-							M.LAssailant = user
 
 					add_attack_logs(user, M, "Shot with dartgun containing [R]")
 
@@ -237,7 +232,7 @@
 	user << browse(dat, "window=dartgun")
 	onclose(user, "dartgun", src)
 
-/obj/item/gun/dartgun/proc/check_beaker_mixing(var/obj/item/B)
+/obj/item/gun/dartgun/proc/check_beaker_mixing(obj/item/B)
 	if(!mixing || !beakers)
 		return 0
 	for(var/obj/item/M in mixing)
@@ -299,4 +294,5 @@
 	density = 0
 
 /obj/effect/syringe_gun_dummy/New()
+	. = ..()
 	create_reagents(15)

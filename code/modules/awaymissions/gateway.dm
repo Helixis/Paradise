@@ -1,4 +1,4 @@
-var/obj/machinery/gateway/centerstation/the_gateway = null
+GLOBAL_DATUM_INIT(the_gateway, /obj/machinery/gateway/centerstation, null)
 /obj/machinery/gateway
 	name = "gateway"
 	desc = "A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations."
@@ -41,21 +41,24 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 
 /obj/machinery/gateway/centerstation/New()
 	..()
-	if(!the_gateway)
-		the_gateway = src
+	if(!GLOB.the_gateway)
+		GLOB.the_gateway = src
 
 /obj/machinery/gateway/centerstation/Initialize()
 	..()
 	update_icon()
-	wait = world.time + config.gateway_delay	//+ thirty minutes default
-	awaygate = locate(/obj/machinery/gateway/centeraway) in world
+	wait = world.time + config.gateway_delay
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/gateway/centerstation/LateInitialize()
+	awaygate = locate(/obj/machinery/gateway/centeraway) in GLOB.machines
 
 /obj/machinery/gateway/centerstation/update_density_from_dir()
 	return
 
 /obj/machinery/gateway/centerstation/Destroy()
-	if(the_gateway == src)
-		the_gateway = null
+	if(GLOB.the_gateway == src)
+		GLOB.the_gateway = null
 	return ..()
 
 /obj/machinery/gateway/centerstation/update_icon()
@@ -79,7 +82,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in alldirs)
+	for(var/i in GLOB.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
@@ -103,7 +106,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 	if(!powered())
 		return
 	if(!awaygate)
-		awaygate = locate(/obj/machinery/gateway/centeraway) in world
+		awaygate = locate(/obj/machinery/gateway/centeraway) in GLOB.machines
 		if(!awaygate)
 			to_chat(user, "<span class='notice'>Error: No destination found.</span>")
 			return
@@ -150,7 +153,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 		M.dir = SOUTH
 		return
 	else
-		var/obj/effect/landmark/dest = pick(awaydestinations)
+		var/obj/effect/landmark/dest = pick(GLOB.awaydestinations)
 		if(dest)
 			M.forceMove(dest.loc)
 			M.dir = SOUTH
@@ -180,7 +183,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 /obj/machinery/gateway/centeraway/Initialize()
 	..()
 	update_icon()
-	stationgate = locate(/obj/machinery/gateway/centerstation) in world
+	stationgate = locate(/obj/machinery/gateway/centerstation) in GLOB.machines
 
 
 /obj/machinery/gateway/centeraway/update_density_from_dir()
@@ -197,7 +200,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in alldirs)
+	for(var/i in GLOB.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
@@ -219,7 +222,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 	if(linked.len != 8)
 		return
 	if(!stationgate)
-		stationgate = locate(/obj/machinery/gateway/centerstation) in world
+		stationgate = locate(/obj/machinery/gateway/centerstation) in GLOB.machines
 		if(!stationgate)
 			to_chat(user, "<span class='notice'>Error: No destination found.</span>")
 			return
@@ -276,7 +279,7 @@ var/obj/machinery/gateway/centerstation/the_gateway = null
 		if(M.client)
 			M.client.move_delay = max(world.time + 5, M.client.move_delay)
 
-/obj/machinery/gateway/centeraway/proc/exilecheck(var/mob/living/carbon/M)
+/obj/machinery/gateway/centeraway/proc/exilecheck(mob/living/carbon/M)
 	for(var/obj/item/implant/exile/E in M)//Checking that there is an exile implant in the contents
 		if(E.imp_in == M)//Checking that it's actually implanted vs just in their pocket
 			to_chat(M, "<span class='notice'>The station gate has detected your exile implant and is blocking your entry.</span>")

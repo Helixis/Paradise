@@ -5,20 +5,19 @@
 	icon_state = "particle"
 	anchored = TRUE
 	density = FALSE
-	var/movement_range = 10
+	var/movement_range = 11
 	var/energy = 10
-	var/speed = 1
 
 /obj/effect/accelerated_particle/weak
-	movement_range = 8
+	movement_range = 9
 	energy = 5
 
 /obj/effect/accelerated_particle/strong
-	movement_range = 15
+	movement_range = 16
 	energy = 15
 
 /obj/effect/accelerated_particle/powerful
-	movement_range = 20
+	movement_range = 21
 	energy = 50
 
 
@@ -32,7 +31,7 @@
 /obj/effect/accelerated_particle/proc/try_irradiate(src, atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
-		L.apply_effect((energy * 6), IRRADIATE, 0)
+		L.rad_act(energy * 6)
 	else if(istype(A, /obj/machinery/the_singularitygen))
 		var/obj/machinery/the_singularitygen/S = A
 		S.energy += energy

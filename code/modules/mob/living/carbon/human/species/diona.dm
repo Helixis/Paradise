@@ -2,9 +2,10 @@
 	name = "Diona"
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
-	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	speech_sounds = list('sound/voice/dionatalk1.ogg') //Credit https://www.youtube.com/watch?v=ufnvlRjsOTI [0:13 - 0:16]
+	male_laughs_sound = list('sound/hispania/voice/human/silence.ogg')//Hispania Laughs
+	female_laughs_sound = list('sound/hispania/voice/human/silence.ogg')//Hispania Laughs
 	speech_chance = 20
 	unarmed_type = /datum/unarmed_attack/diona
 	remains_type = /obj/effect/decal/cleanable/ash
@@ -27,7 +28,9 @@
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
 	water and other radiation."
 
-	species_traits = list(IS_PLANT, NO_PAIN, NO_GERMS, NO_DECAY)
+	species_traits = list(NO_HAIR)
+	inherent_traits = list(TRAIT_NOGERMS, TRAIT_NODECAY, TRAIT_NOPAIN)
+	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID | MOB_PLANT
 	clothing_flags = HAS_SOCKS
 	default_hair_colour = "#000000"
 	has_gender = FALSE
@@ -45,13 +48,11 @@
 		"nutrient channel" =   /obj/item/organ/internal/liver/diona,
 		"respiratory vacuoles" =   /obj/item/organ/internal/lungs/diona,
 		"neural strata" =      /obj/item/organ/internal/heart/diona,
-		"receptor node" =      /obj/item/organ/internal/eyes/diona, //Default darksight of 2.
+		"eyes"			 =      /obj/item/organ/internal/eyes/diona, //Default darksight of 2.
 		"gas bladder" =        /obj/item/organ/internal/brain/diona,
 		"polyp segment" =      /obj/item/organ/internal/kidneys/diona,
 		"anchoring ligament" = /obj/item/organ/internal/appendix/diona
 		)
-
-	vision_organ = /obj/item/organ/internal/eyes/diona
 	has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest/diona),
 		"groin" =  list("path" = /obj/item/organ/external/groin/diona),
@@ -80,6 +81,10 @@
 	..()
 	H.gender = NEUTER
 
+/datum/species/diona/on_species_loss(mob/living/carbon/human/H)
+	. = ..()
+	H.clear_alert("nolight")
+
 /datum/species/diona/handle_reagents(mob/living/carbon/human/H, datum/reagent/R)
 	if(R.id == "glyphosate" || R.id == "atrazine")
 		H.adjustToxLoss(3) //Deal aditional damage
@@ -87,9 +92,8 @@
 	return ..()
 
 /datum/species/diona/handle_life(mob/living/carbon/human/H)
-	if(H.stat == DEAD)
-		return
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
+	var/is_vamp = H.mind?.vampire != null
 	if(isturf(H.loc)) //else, there's considered to be no light
 		var/turf/T = H.loc
 		light_amount = min(1, T.get_lumcount()) - 0.5
@@ -97,9 +101,12 @@
 			H.clear_alert("nolight")
 		else
 			H.throw_alert("nolight", /obj/screen/alert/nolight)
-		H.adjust_nutrition(light_amount * 10)
-		if(H.nutrition > NUTRITION_LEVEL_ALMOST_FULL)
-			H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
+
+		if(!is_vamp)
+			H.adjust_nutrition(light_amount * 10)
+			if(H.nutrition > NUTRITION_LEVEL_ALMOST_FULL)
+				H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
+
 		if(light_amount > 0.2 && !H.suiciding) //if there's enough light, heal
 			if(!pod && H.health <= 0)
 				return
@@ -108,24 +115,38 @@
 			H.adjustToxLoss(-1)
 			H.adjustOxyLoss(-1)
 
-	if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
+	if(!is_vamp && H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		H.adjustBruteLoss(2)
 	..()
+
+/datum/species/diona/bullet_act(obj/item/projectile/P, mob/living/carbon/human/H)
+	switch(P.type)
+		if(/obj/item/projectile/energy/floramut)
+			if(prob(15))
+				H.rad_act(rand(30, 80))
+				H.Weaken(5)
+				H.visible_message("<span class='warning'>[H] writhes in pain as [H.p_their()] vacuoles boil.</span>", "<span class='userdanger'>You writhe in pain as your vacuoles boil!</span>", "<span class='italics'>You hear the crunching of leaves.</span>")
+				if(prob(80))
+					randmutb(H)
+					domutcheck(H)
+				else
+					randmutg(H)
+					domutcheck(H)
+			else
+				H.adjustFireLoss(rand(5, 15))
+				H.show_message("<span class='warning'>The radiation beam singes you!</span>")
+		if(/obj/item/projectile/energy/florayield)
+			H.set_nutrition(min(H.nutrition + 30, NUTRITION_LEVEL_FULL))
+	return TRUE
 
 /datum/species/diona/pod //Same name and everything; we want the same limitations on them; we just want their regeneration to kick in at all times and them to have special factions
 	pod = TRUE
 
-/datum/species/diona/pod/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	. = ..()
-	C.faction |= "plants"
-	C.faction |= "vines"
+	inherent_factions = list("plants", "vines")
 
-/datum/species/diona/pod/on_species_loss(mob/living/carbon/C)
-	. = ..()
-	C.faction -= "plants"
-	C.faction -= "vines"
-
-/datum/species/diona/apply_damage(obj/item/W)
-	if(is_sharp(W))
-		brute_mod = W.force / 2
- ..()
+/datum/species/diona/apply_damage(damage = 0, damagetype = BRUTE, def_zone = null, blocked = 0, mob/living/carbon/human/H, sharp = 0, obj/used_weapon = null)
+	var/old_brute_mob = brute_mod
+	if(sharp)
+		brute_mod = 1
+	..()
+	brain_mod += old_brute_mob - 1

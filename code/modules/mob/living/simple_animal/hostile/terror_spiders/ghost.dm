@@ -14,7 +14,7 @@
 	var/error_on_humanize = ""
 	var/humanize_prompt = "Take direct control of [src]?"
 	humanize_prompt += " Role: [spider_role_summary]"
-	if(user.ckey in ts_ckey_blacklist)
+	if(user.ckey in GLOB.ts_ckey_blacklist)
 		error_on_humanize = "You are not able to control any terror spider this round."
 	else if(cannotPossess(user))
 		error_on_humanize = "You have enabled antag HUD and are unable to re-enter the round."
@@ -42,5 +42,6 @@
 		to_chat(user, "<span class='notice'>Someone else already took this spider.</span>")
 		return
 	key = user.key
+	to_chat(src, "<span class='motd'>For more information, check the wiki page: ([config.wikiurl]/index.php/Terror_Spider)</span>")
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		G.show_message("<i>A ghost has taken control of <b>[src]</b>. ([ghost_follow_link(src, ghost=G)]).</i>")

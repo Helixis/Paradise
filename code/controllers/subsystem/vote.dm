@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(vote)
 	wait = 10
 	flags = SS_KEEP_TIMING|SS_NO_INIT
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+	offline_implications = "Votes (Endround shuttle) will no longer function. Shuttle call recommended."
 
 	var/initiator = null
 	var/started_time = null
@@ -90,10 +91,10 @@ SUBSYSTEM_DEF(vote)
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
 			else if(mode == "gamemode")
-				if(master_mode in choices)
-					choices[master_mode] += non_voters
-					if(choices[master_mode] >= greatest_votes)
-						greatest_votes = choices[master_mode]
+				if(GLOB.master_mode in choices)
+					choices[GLOB.master_mode] += non_voters
+					if(choices[GLOB.master_mode] >= greatest_votes)
+						greatest_votes = choices[GLOB.master_mode]
 			else if(mode == "crew_transfer")
 				var/factor = 0.5
 				switch(world.time / (10 * 60)) // minutes
@@ -164,29 +165,41 @@ SUBSYSTEM_DEF(vote)
 				if(. == "Restart Round")
 					restart = 1
 			if("gamemode")
-				if(master_mode != .)
+				if(GLOB.master_mode != .)
 					world.save_mode(.)
 					if(SSticker && SSticker.mode)
 						restart = 1
 					else
-						master_mode = .
-				if(!going)
-					going = 1
+						GLOB.master_mode = .
+				if(!SSticker.ticker_going)
+					SSticker.ticker_going = TRUE
 					to_chat(world, "<font color='red'><b>The round will start soon.</b></font>")
 			if("crew_transfer")
 				if(. == "Initiate Crew Transfer")
 					init_shift_change(null, 1)
+			if("map")
+				// Find target map.
+				var/datum/map/top_voted_map
+				for(var/x in subtypesof(/datum/map))
+					var/datum/map/M = x
+					// Set top voted map
+					if(. == "[initial(M.fluff_name)] ([initial(M.technical_name)])")
+						top_voted_map = M
+				to_chat(world, "<font color='purple'>Map for next round: [initial(top_voted_map.fluff_name)] ([initial(top_voted_map.technical_name)])</font>")
+				SSmapping.next_map = new top_voted_map
 
 
 	if(restart)
-		world.Reboot("Restart vote successful.", "end_error", "restart vote")
+		SSticker.reboot_helper("Restart vote successful.", "restart vote")
 
 	return .
 
-/datum/controller/subsystem/vote/proc/submit_vote(var/ckey, var/vote)
+/datum/controller/subsystem/vote/proc/submit_vote(ckey, vote)
 	if(mode)
+		/*
 		if(config.vote_no_dead && usr.stat == DEAD && !usr.client.holder)
 			return 0
+		*///Ghost Vote Hispania
 		if(current_votes[ckey])
 			choices[choices[current_votes[ckey]]]--
 		if(vote && 1<=vote && vote<=choices.len)
@@ -196,7 +209,7 @@ SUBSYSTEM_DEF(vote)
 			return vote
 	return 0
 
-/datum/controller/subsystem/vote/proc/initiate_vote(var/vote_type, var/initiator_key)
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, code_invoked = FALSE)
 	if(!mode)
 		if(started_time != null && !check_rights(R_ADMIN))
 			var/next_allowed_time = (started_time + config.vote_delay)
@@ -222,6 +235,14 @@ SUBSYSTEM_DEF(vote)
 						return 0
 					question = "End the shift?"
 					choices.Add("Initiate Crew Transfer", "Continue The Round")
+			if("map")
+				if(!(check_rights(R_SERVER) || code_invoked))
+					return FALSE
+				question = "Map for next round"
+				for(var/x in subtypesof(/datum/map))
+					var/datum/map/M = x
+					choices.Add("[initial(M.fluff_name)] ([initial(M.technical_name)])")
+
 			if("custom")
 				question = html_encode(input(usr,"What is the vote for?") as text|null)
 				if(!question)	return 0
@@ -247,14 +268,10 @@ SUBSYSTEM_DEF(vote)
 			<a href='?src=[UID()];vote=open'>Click here or type vote to place your vote.</a>
 			You have [config.vote_period/10] seconds to vote.</font>"})
 		switch(vote_type)
-			if("crew_transfer")
-				world << sound('sound/ambience/alarm4.ogg')
-			if("gamemode")
-				world << sound('sound/ambience/alarm4.ogg')
-			if("custom")
-				world << sound('sound/ambience/alarm4.ogg')
-		if(mode == "gamemode" && going)
-			going = 0
+			if("crew_transfer", "gamemode", "custom", "map")
+				SEND_SOUND(world, sound('sound/ambience/alarm4.ogg'))
+		if(mode == "gamemode" && SSticker.ticker_going)
+			SSticker.ticker_going = FALSE
 			to_chat(world, "<font color='red'><b>Round start has been delayed.</b></font>")
 		if(mode == "crew_transfer" && config.ooc_allowed)
 			auto_muted = 1
@@ -279,7 +296,7 @@ SUBSYSTEM_DEF(vote)
 		return 1
 	return 0
 
-/datum/controller/subsystem/vote/proc/browse_to(var/client/C)
+/datum/controller/subsystem/vote/proc/browse_to(client/C)
 	if(!C)
 		return
 	var/admin = check_rights(R_ADMIN, 0, user = C.mob)
@@ -320,6 +337,12 @@ SUBSYSTEM_DEF(vote)
 		if(admin)
 			dat += "\t(<a href='?src=[UID()];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 
+		dat += "</li><li>"
+		if(admin)
+			dat += "<a href='?src=[UID()];vote=map'>Map</a>"
+		else
+			dat += "<font color='grey'>Map (Disallowed)</font>"
+
 		dat += "</li>"
 		//custom
 		if(admin)
@@ -329,10 +352,10 @@ SUBSYSTEM_DEF(vote)
 	popup.set_content(dat)
 	popup.open()
 
-/datum/controller/subsystem/vote/proc/update_panel(var/client/C)
+/datum/controller/subsystem/vote/proc/update_panel(client/C)
 	C << output(url_encode(vote_html(C)), "vote.browser:update_vote_div")
 
-/datum/controller/subsystem/vote/proc/vote_html(var/client/C)
+/datum/controller/subsystem/vote/proc/vote_html(client/C)
 	. = ""
 	if(question)
 		. += "<h2>Vote: '[question]'</h2>"
@@ -366,7 +389,7 @@ SUBSYSTEM_DEF(vote)
 				var/votedesc = capitalize(mode)
 				if(mode == "custom")
 					votedesc += " ([question])"
-				admin_log_and_message_admins("cancelled the running [votedesc] vote.")
+				log_and_message_admins("cancelled the running [votedesc] vote.")
 				reset()
 		if("toggle_restart")
 			if(admin)
@@ -380,6 +403,9 @@ SUBSYSTEM_DEF(vote)
 		if("gamemode")
 			if(config.allow_vote_mode || admin)
 				initiate_vote("gamemode",usr.key)
+		if("map")
+			if(admin)
+				initiate_vote("map", usr.key)
 		if("crew_transfer")
 			if(config.allow_vote_restart || admin)
 				initiate_vote("crew_transfer",usr.key)

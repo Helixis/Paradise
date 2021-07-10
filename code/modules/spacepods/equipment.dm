@@ -40,11 +40,9 @@
 		projtwo.starting = get_turf(my_atom)
 		projtwo.firer = usr
 		projtwo.def_zone = "chest"
-		spawn()
-			playsound(src, fire_sound, 50, 1)
-			projone.dumbfire(my_atom.dir)
-			projtwo.dumbfire(my_atom.dir)
-		sleep(2)
+		playsound(src, fire_sound, 50, 1)
+		projone.dumbfire(my_atom.dir)
+		projtwo.dumbfire(my_atom.dir)
 
 /datum/spacepod/equipment
 	var/obj/spacepod/my_atom
@@ -56,7 +54,7 @@
 	var/obj/item/spacepod_equipment/cargo/sec_cargo_system // secondary cargo system
 	var/obj/item/spacepod_equipment/lock/lock_system // lock system
 
-/datum/spacepod/equipment/New(var/obj/spacepod/SP)
+/datum/spacepod/equipment/New(obj/spacepod/SP)
 	..()
 	if(istype(SP))
 		my_atom = SP
@@ -67,7 +65,7 @@
 	var/occupant_mod = 0	// so any module can modify occupancy
 	var/list/storage_mod = list("slots" = 0, "w_class" = 0)		// so any module can modify storage slots
 
-/obj/item/spacepod_equipment/proc/removed(var/mob/user) // So that you can unload cargo when you remove the module
+/obj/item/spacepod_equipment/proc/removed(mob/user) // So that you can unload cargo when you remove the module
 	return
 
 /*
@@ -79,7 +77,7 @@
 /obj/item/spacepod_equipment/weaponry
 	name = "pod weapon"
 	desc = "You shouldn't be seeing this"
-	icon = 'icons/vehicles/spacepod.dmi'
+	icon = 'icons/hispania/obj/spacepod.dmi'
 	icon_state = "blank"
 	var/obj/item/projectile/projectile_type
 	var/shot_cost = 0
@@ -88,21 +86,21 @@
 	var/fire_delay = 15
 	var/harmful = TRUE
 
-/obj/item/spacepod_equipment/weaponry/taser
+/obj/item/spacepod_equipment/weaponry/disabler
 	name = "disabler system"
-	desc = "A weak taser system for space pods, fires disabler beams."
-	icon_state = "weapon_taser"
+	desc = "A weak disabler system for space pods, fires disabler beams."
+	icon_state = "weapon_disabler"
 	projectile_type = /obj/item/projectile/beam/disabler
-	shot_cost = 400
+	shot_cost = 200
 	fire_sound = 'sound/weapons/taser.ogg'
 	harmful = FALSE
 
-/obj/item/spacepod_equipment/weaponry/burst_taser
-	name = "burst taser system"
-	desc = "A weak taser system for space pods, this one fires 3 at a time."
-	icon_state = "weapon_burst_taser"
+/obj/item/spacepod_equipment/weaponry/burst_disabler
+	name = "burst disabler system"
+	desc = "A weak disabler system for space pods, this one fires 3 at a time."
+	icon_state = "weapon_burst_disabler"
 	projectile_type = /obj/item/projectile/beam/disabler
-	shot_cost = 1200
+	shot_cost = 600
 	shots_per = 3
 	fire_sound = 'sound/weapons/taser.ogg'
 	fire_delay = 30
@@ -113,27 +111,25 @@
 	desc = "A weak laser system for space pods, fires concentrated bursts of energy."
 	icon_state = "weapon_laser"
 	projectile_type = /obj/item/projectile/beam
-	shot_cost = 600
+	shot_cost = 300
 	fire_sound = 'sound/weapons/laser.ogg'
 
 // MINING LASERS
 /obj/item/spacepod_equipment/weaponry/mining_laser_basic
 	name = "weak mining laser system"
 	desc = "A weak mining laser system for space pods, fires bursts of energy that cut through rock."
-	icon = 'icons/goonstation/pods/ship.dmi'
-	icon_state = "pod_taser"
+	icon_state = "weapon_mining_weak"
 	projectile_type = /obj/item/projectile/kinetic/pod
-	shot_cost = 300
+	shot_cost = 150
 	fire_delay = 14
 	fire_sound = 'sound/weapons/kenetic_accel.ogg'
 
 /obj/item/spacepod_equipment/weaponry/mining_laser
 	name = "mining laser system"
 	desc = "A mining laser system for space pods, fires bursts of energy that cut through rock."
-	icon = 'icons/goonstation/pods/ship.dmi'
-	icon_state = "pod_m_laser"
+	icon_state = "weapon_mining"
 	projectile_type = /obj/item/projectile/kinetic/pod/regular
-	shot_cost = 250
+	shot_cost = 125
 	fire_delay = 10
 	fire_sound = 'sound/weapons/kenetic_accel.ogg'
 
@@ -143,29 +139,26 @@
 ///////////////////////////////////////
 */
 
+GLOBAL_LIST_EMPTY(pod_trackers)
+
 /obj/item/spacepod_equipment/misc
 	name = "pod misc"
 	desc = "You shouldn't be seeing this"
 	icon = 'icons/goonstation/pods/ship.dmi'
 	icon_state = "blank"
-	var/enabled
 
 /obj/item/spacepod_equipment/misc/tracker
 	name = "\improper spacepod tracking system"
 	desc = "A tracking device for spacepods."
 	icon_state = "pod_locator"
-	enabled = 0
 
-/obj/item/spacepod_equipment/misc/tracker/screwdriver_act(mob/user, obj/item/I)
-	. = TRUE
-	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
-		return
-	if(enabled)
-		enabled = 0
-		user.show_message("<span class='notice'>You disable \the [src]'s power.")
-		return
-	enabled = 1
-	user.show_message("<span class='notice'>You enable \the [src]'s power.</span>")
+/obj/item/spacepod_equipment/misc/tracker/Initialize(mapload)
+	GLOB.pod_trackers |= src
+	return ..()
+
+/obj/item/spacepod_equipment/misc/tracker/Destroy()
+	GLOB.pod_trackers -= src
+	return ..()
 
 /*
 ///////////////////////////////////////
@@ -180,7 +173,7 @@
 	icon_state = "cargo_blank"
 	var/obj/storage = null
 
-/obj/item/spacepod_equipment/cargo/proc/passover(var/obj/item/I)
+/obj/item/spacepod_equipment/cargo/proc/passover(obj/item/I)
 	return
 
 /obj/item/spacepod_equipment/cargo/proc/unload() // called by unload verb
@@ -188,7 +181,7 @@
 		storage.forceMove(get_turf(my_atom))
 		storage = null
 
-/obj/item/spacepod_equipment/cargo/removed(var/mob/user) // called when system removed
+/obj/item/spacepod_equipment/cargo/removed(mob/user) // called when system removed
 	. = ..()
 	unload()
 
@@ -198,7 +191,7 @@
 	desc = "An ore storage system for spacepods. Scoops up any ore you drive over."
 	icon_state = "cargo_ore"
 
-/obj/item/spacepod_equipment/cargo/ore/passover(var/obj/item/I)
+/obj/item/spacepod_equipment/cargo/ore/passover(obj/item/I)
 	if(storage && istype(I,/obj/item/stack/ore))
 		I.forceMove(storage)
 
@@ -255,8 +248,8 @@
 	icon_state = "lock_tumbler"
 	var/static/id_source = 0
 
-/obj/item/spacepod_equipment/lock/keyed/New()
-	..()
+/obj/item/spacepod_equipment/lock/keyed/Initialize(mapload)
+	. = ..()
 	id = ++id_source
 
 // The key

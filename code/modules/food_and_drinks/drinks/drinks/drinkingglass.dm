@@ -11,6 +11,12 @@
 	materials = list(MAT_GLASS=500)
 	max_integrity = 20
 	resistance_flags = ACID_PROOF
+	drop_sound = 'sound/items/handling/drinkglass_drop.ogg'
+	pickup_sound =  'sound/items/handling/drinkglass_pickup.ogg'
+
+/obj/item/reagent_containers/food/drinks/set_APTFT()
+	set hidden = FALSE
+	..()
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/egg)) //breaking eggs
@@ -36,12 +42,15 @@
 	extinguish()
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/on_reagent_change()
+	icon = initial(icon)//regresa a la carpeta original
 	overlays.Cut()
 	if(reagents.reagent_list.len)
 		var/datum/reagent/R = reagents.get_master_reagent()
 		name = R.drink_name
 		desc = R.drink_desc
 		if(R.drink_icon)
+			if(R.icon)//si el reactivo tiene una carpeta de icono propia, para hispania solamente
+				icon = R.icon//entonces cambiamos la ruta del icon
 			icon_state = R.drink_icon
 		else
 			var/image/I = image(icon, "glassoverlay")

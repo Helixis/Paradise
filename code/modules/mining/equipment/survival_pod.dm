@@ -19,7 +19,7 @@
 /obj/item/survivalcapsule/proc/get_template()
 	if(template)
 		return
-	template = shelter_templates[template_id]
+	template = GLOB.shelter_templates[template_id]
 	if(!template)
 		log_runtime("Shelter template ([template_id]) not found!", src)
 		qdel(src)
@@ -70,23 +70,13 @@
 //Pod turfs and objects
 
 //Window
-/obj/structure/window/shuttle/survival_pod
+/obj/structure/window/full/shuttle/survival_pod
 	name = "pod window"
 	icon = 'icons/obj/smooth_structures/pod_window.dmi'
 	icon_state = "smooth"
-	dir = FULLTILE_WINDOW_DIR
-	max_integrity = 100
-	fulltile = TRUE
-	flags = PREVENT_CLICK_UNDER
-	reinf = TRUE
-	heat_resistance = 1600
-	armor = list("melee" = 50, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 100)
 	smooth = SMOOTH_MORE
-	canSmoothWith = list(/turf/simulated/wall/mineral/titanium/survival, /obj/machinery/door/airlock/survival_pod, /obj/structure/window/shuttle/survival_pod)
-	explosion_block = 3
-	level = 3
 	glass_type = /obj/item/stack/sheet/titaniumglass
-	glass_amount = 2
+	canSmoothWith = list(/turf/simulated/wall/mineral/titanium/survival, /obj/machinery/door/airlock/survival_pod, /obj/structure/window/full/shuttle/survival_pod)
 
 /obj/structure/window/reinforced/survival_pod
 	name = "pod window"
@@ -165,7 +155,7 @@
 	desc = "Wall-mounted Medical Equipment dispenser. This one seems just a tiny bit smaller."
 	req_access = list()
 
-	products = list(/obj/item/stack/medical/splint = 2)
+	products = list(/obj/item/stack/medical/splint = 2, /obj/item/reagent_containers/syringe/charcoal = 1, /obj/item/reagent_containers/food/pill/patch/styptic = 2, /obj/item/reagent_containers/food/pill/patch/silver_sulf = 2) //Buff menor a mineria
 	contraband = list()
 
 //Computer
@@ -214,6 +204,9 @@
 
 	if(empty)
 		return
+
+	var/obj/item/storage/bag/plasticbag/mre/M = new(src) // HISPANIA MRE
+	load(M)
 
 	for(var/i in 1 to 5)
 		var/obj/item/reagent_containers/food/snacks/warmdonkpocket_weak/W = new(src)
@@ -334,7 +327,7 @@
 						/obj/item/katana/energy,
 						/obj/item/hierophant_club,
 						/obj/item/storage/toolbox/green/memetic,
-						/obj/item/gun/projectile/automatic/l6_saw,
+						/obj/item/gun/projectile/automatic/fullauto/l6_saw,
 						/obj/item/gun/magic/staff/chaos,
 						/obj/item/gun/magic/staff/spellblade,
 						/obj/item/gun/magic/wand/death,

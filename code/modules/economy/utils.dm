@@ -4,8 +4,8 @@
 // Economy system is such a mess of spaghetti.  This should help.
 ////////////////////////
 
-/proc/get_money_account(var/account_number, var/from_z=-1)
-	for(var/obj/machinery/computer/account_database/DB in world)
+/proc/get_money_account(account_number, from_z=-1)
+	for(var/obj/machinery/computer/account_database/DB in GLOB.machines)
 		if(from_z > -1 && DB.z != from_z) continue
 		if((DB.stat & NOPOWER) || !DB.activated ) continue
 		var/datum/money_account/acct = DB.get_account(account_number)
@@ -13,7 +13,7 @@
 		return acct
 
 
-/obj/proc/get_card_account(var/obj/item/card/I, var/mob/user=null, var/terminal_name="", var/transaction_purpose="", var/require_pin=0)
+/obj/proc/get_card_account(obj/item/card/I, mob/user=null, terminal_name="", transaction_purpose="", require_pin=0)
 	if(terminal_name=="")
 		terminal_name=src.name
 	if(istype(I, /obj/item/card/id))
@@ -27,7 +27,7 @@
 		if(D)
 			return D
 
-/mob/proc/get_worn_id_account(var/require_pin=0, var/mob/user=null)
+/mob/proc/get_worn_id_account(require_pin=0, mob/user=null)
 	if(ishuman(src))
 		var/mob/living/carbon/human/H=src
 		var/obj/item/card/id/I=H.get_idcard()
@@ -41,14 +41,14 @@
 				return null
 		return D
 	else if(issilicon(src))
-		return station_account
+		return GLOB.station_account
 
 /datum/money_account/proc/fmtBalance()
 	return "$[num2septext(money)]"
 
 // Seperated from charge so they can reuse the code and also because there's many instances where a log will be made without actually making a transaction
 /datum/money_account/proc/makeTransactionLog(transaction_amount = 0, transaction_purpose, terminal_name = "",
- dest_name = "UNKNOWN", charging = TRUE, date = current_date_string, time = "")
+ dest_name = "UNKNOWN", charging = TRUE, date = GLOB.current_date_string, time = "")
 	var/datum/transaction/T = new()
 	T.target_name = dest_name
 	T.purpose = transaction_purpose
@@ -102,7 +102,7 @@
 
 // Credit is for giving money to an account out of thin air. Suspension does not matter.
 /datum/money_account/proc/credit(transaction_amount = 0, transaction_purpose,
- terminal_name = "", dest_name = "UNKNOWN", date = current_date_string, time = "")
+ terminal_name = "", dest_name = "UNKNOWN", date = GLOB.current_date_string, time = "")
 
 	money += transaction_amount
 	makeTransactionLog(transaction_amount, transaction_purpose, terminal_name, dest_name, FALSE, date, time)

@@ -61,12 +61,15 @@
 	anchored = FALSE
 	move_resist = MOVE_FORCE_NORMAL
 	density = FALSE
+	death_cooldown = 300 SECONDS
 	var/has_owner = FALSE
 	var/can_transfer = TRUE //if golems can switch bodies to this new shell
 	var/mob/living/owner = null //golem's owner if it has one
-	flavour_text = "<span class='big bold'>You are a Free Golem.</span><b> Your family worships <span class='danger'>The Liberator</span>. In his infinite and divine wisdom, he set your clan free to \
+	important_info = "You are not an antag. Do not mess with the station or create AIs."
+	description = "As a Free Golem on lavaland, you are unable to use most weapons, but you can mine, research and make more of your kind. Earn enough mining points and you can even move your shuttle out of there."
+	flavour_text = "You are a Free Golem. Your family worships The Liberator. In his infinite and divine wisdom, he set your clan free to \
 	travel the stars with a single declaration: \"Yeah go do whatever.\" Though you are bound to the one who created you, it is customary in your society to repeat those same words to newborn \
-	golems, so that no golem may ever be forced to serve again.</b>"
+	golems, so that no golem may ever be forced to serve again."
 
 /obj/effect/mob_spawn/human/golem/Initialize(mapload, datum/species/golem/species = null, mob/creator = null)
 	if(species) //spawners list uses object name to register so this goes before ..()
@@ -77,8 +80,10 @@
 	if(!mapload && A)
 		notify_ghosts("\A [initial(species.prefix)] golem shell has been completed in [A.name].", source = src)
 	if(has_owner && creator)
-		flavour_text = "<span class='big bold'>You are a Golem.</span><b> You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. \
-		Serve [creator], and assist [creator.p_them()] in completing [creator.p_their()] goals at any cost.</b>"
+		important_info = "Serve your creator, even if they are an antag."
+		flavour_text = "You are a golem created to serve your creator."
+		description = "You are a Golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. \
+		Serve [creator], and assist [creator.p_them()] in completing [creator.p_their()] goals at any cost."
 		owner = creator
 
 /obj/effect/mob_spawn/human/golem/special(mob/living/new_spawn, name)
@@ -129,6 +134,25 @@
 		create(ckey = user.ckey, name = user.real_name)
 		user.death()
 		return
+
+/obj/effect/mob_spawn/human/golem/attackby(obj/item/I, mob/living/carbon/user, params)
+	if(!istype(I, /obj/item/slimepotion/transference))
+		return ..()
+	if(iscarbon(user) && can_transfer)
+		var/human_transfer_choice = alert("Transfer your soul to [src]? (Warning, your old body will die!)", null, "Yes", "No")
+		if(human_transfer_choice != "Yes")
+			return
+		if(QDELETED(src) || uses <= 0 || user.stat >= 1 || QDELETED(I))
+			return
+		if(istype(src, /obj/effect/mob_spawn/human/golem/servant))
+			has_owner = FALSE
+		flavour_text = null	
+		user.visible_message("<span class='notice'>As [user] applies the potion on the golem shell, a faint light leaves them, moving to [src] and animating it!</span>",
+		"<span class='notice'>You apply the potion to [src], feeling your mind leave your body!</span>")
+		message_admins("[key_name(user)] used [I] to transfer their mind into [src]")
+		create(ckey = user.ckey, name = user.real_name)
+		user.death()  //Keeps brain intact to prevent forcing redtext
+		qdel(I)
 
 /obj/effect/mob_spawn/human/golem/servant
 	has_owner = TRUE

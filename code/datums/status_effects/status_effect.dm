@@ -5,7 +5,7 @@
 /datum/status_effect
 	var/id = "effect" //Used for screen alerts.
 	var/duration = -1 //How long the status effect lasts in DECISECONDS. Enter -1 for an effect that never ends unless removed through some means.
-	var/tick_interval = 10 //How many deciseconds between ticks, approximately. Leave at 10 for every second.
+	var/tick_interval = 10 //How many deciseconds between ticks, approximately. Leave at 10 for every second. Setting this to -1 will stop processing if duration is also unlimited.
 	var/mob/living/owner //The mob affected by the status effect.
 	var/status_type = STATUS_EFFECT_UNIQUE //How many of the effect can be on one mob, and what happens when you try to add another
 	var/on_remove_on_mob_delete = FALSE //if we call on_remove() when the mob is deleted
@@ -31,7 +31,8 @@
 		var/obj/screen/alert/status_effect/A = owner.throw_alert(id, alert_type)
 		A.attached_effect = src //so the alert can reference us, if it needs to
 		linked_alert = A //so we can reference the alert, if we need to
-	START_PROCESSING(SSfastprocess, src)
+	if(duration > 0 || initial(tick_interval) > 0) //don't process if we don't care
+		START_PROCESSING(SSfastprocess, src)
 	return TRUE
 
 /datum/status_effect/Destroy()
@@ -41,6 +42,9 @@
 		LAZYREMOVE(owner.status_effects, src)
 		on_remove()
 		owner = null
+	if(linked_alert)
+		linked_alert.attached_effect = null
+	linked_alert = null
 	return ..()
 
 /datum/status_effect/process()
@@ -62,6 +66,9 @@
 	LAZYREMOVE(owner.status_effects, src)
 	owner = null
 	qdel(src)
+
+/datum/status_effect/proc/before_remove() //! Called before being removed; returning FALSE will cancel removal
+	return TRUE
 
 /datum/status_effect/proc/refresh()
 	var/original_duration = initial(duration)
@@ -85,6 +92,13 @@
 	desc = "You don't feel any different..."
 	var/datum/status_effect/attached_effect
 
+/obj/screen/alert/status_effect/Destroy()
+	if(attached_effect)
+		attached_effect.linked_alert = null
+	attached_effect = null
+	return ..()
+
+
 //////////////////
 // HELPER PROCS //
 //////////////////
@@ -107,12 +121,13 @@
 	S1 = new effect(arguments)
 	. = S1
 
-/mob/living/proc/remove_status_effect(effect) //removes all of a given status effect from this mob, returning TRUE if at least one was removed
+/mob/living/proc/remove_status_effect(effect, ...) //removes all of a given status effect from this mob, returning TRUE if at least one was removed
 	. = FALSE
+	var/list/arguments = args.Copy(2)
 	if(status_effects)
 		var/datum/status_effect/S1 = effect
 		for(var/datum/status_effect/S in status_effects)
-			if(initial(S1.id) == S.id)
+			if(initial(S1.id) == S.id && S.before_remove(arguments))
 				qdel(S)
 				. = TRUE
 
@@ -194,6 +209,8 @@
 		if(stacks >= stack_threshold && !threshold_crossed) //threshold_crossed check prevents threshold effect from occuring if changing from above threshold to still above threshold
 			threshold_crossed = TRUE
 			on_threshold_cross()
+			if(consumed_on_threshold)
+				return
 		else if(stacks < stack_threshold && threshold_crossed)
 			threshold_crossed = FALSE //resets threshold effect if we fall below threshold so threshold effect can trigger again
 			on_threshold_drop()
@@ -209,8 +226,9 @@
 		qdel(src) //deletes status if stacks fall under one
 
 /datum/status_effect/stacking/on_creation(mob/living/new_owner, stacks_to_apply)
-	..()
-	add_stacks(stacks_to_apply)
+	. = ..()
+	if(.)
+		add_stacks(stacks_to_apply)
 
 /datum/status_effect/stacking/on_apply()
 	if(!can_have_status())
@@ -235,3 +253,22 @@
 		owner.underlays -= status_underlay
 	QDEL_NULL(status_overlay)
 	return ..()
+
+/// Status effect from multiple sources, when all sources are removed, so is the effect
+/datum/status_effect/grouped
+	status_type = STATUS_EFFECT_MULTIPLE //! Adds itself to sources and destroys itself if one exists already, there are never multiple
+	var/list/sources = list()
+
+/datum/status_effect/grouped/on_creation(mob/living/new_owner, source)
+	var/datum/status_effect/grouped/existing = new_owner.has_status_effect(type)
+	if(existing)
+		existing.sources |= source
+		qdel(src)
+		return FALSE
+	else
+		sources |= source
+		return ..()
+
+/datum/status_effect/grouped/before_remove(source)
+	sources -= source
+	return !length(sources)

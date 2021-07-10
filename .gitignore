@@ -9,14 +9,16 @@
 /config/*
 !config/**/*/
 
+# ignore cfg, an internal BYOND folder
+/cfg/*
+
 #ignore other, specific files and folers
 *.before
 data/
 /_maps/map_files/backup/*
 /_maps/map_files/**/backup/*
-/_maps/map_files/**/*.dmm.backup
+*.dmm.backup
 /_maps/quicksave/*
-/nano/debug.html
 **/__pycache__/*
 *.db
 stddef.dm
@@ -32,7 +34,7 @@ stddef.dm
 /tools/dmitool/.project
 
 # ignore midi2piano build cache
-/tools/midi2piano/obj/*
+/tools/midi2piano/midi2piano/obj/*
 
-
-
+# ignore RUSTG linux binary, since linux dependencies vary with pretty much every single install
+data/mode.txt

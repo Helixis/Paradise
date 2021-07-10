@@ -16,12 +16,14 @@
 	w_class = WEIGHT_CLASS_SMALL
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
 	resistance_flags = FIRE_PROOF
-	materials = list(MAT_METAL=70, MAT_GLASS=30)
+	materials = list(MAT_METAL = 70, MAT_GLASS = 20)
 	origin_tech = "engineering=1;plasmatech=1"
 	tool_behaviour = TOOL_WELDER
 	toolspeed = 1
 	tool_enabled = FALSE
 	usesound = 'sound/items/welder.ogg'
+	drop_sound = 'sound/items/handling/weldingtool_drop.ogg'
+	pickup_sound =  'sound/items/handling/weldingtool_pickup.ogg'
 	var/maximum_fuel = 20
 	var/requires_fuel = TRUE //Set to FALSE if it doesn't need fuel, but serves equally well as a cost modifier
 	var/refills_over_time = FALSE //Do we regenerate fuel?
@@ -35,9 +37,11 @@
 	..()
 	create_reagents(maximum_fuel)
 	reagents.add_reagent("fuel", maximum_fuel)
-	if(refills_over_time)
-		reagents.reagents_generated_per_cycle += list("fuel" = 1)
 	update_icon()
+
+/obj/item/weldingtool/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/weldingtool/examine(mob/user)
 	. = ..()
@@ -49,10 +53,15 @@
 	return FIRELOSS
 
 /obj/item/weldingtool/process()
-	var/turf/T = get_turf(src)
-	T.hotspot_expose(2500, 5)
-	if(prob(5))
-		remove_fuel(1)
+	if(tool_enabled)
+		var/turf/T = get_turf(src)
+		if(T) // Implants for instance won't find a turf
+			T.hotspot_expose(2500, 5)
+		if(prob(5))
+			remove_fuel(1)
+	if(refills_over_time)
+		if(GET_FUEL < maximum_fuel)
+			reagents.add_reagent("fuel", 1)
 	..()
 
 /obj/item/weldingtool/attack_self(mob/user)
@@ -60,7 +69,7 @@
 		to_chat(user, "<span class='notice'>You switch off [src].</span>")
 		toggle_welder()
 		return
-	else if(GET_FUEL) //The welder is off, but we need to check if there is fuel in the tank
+	else if(GET_FUEL > 1) //The welder is off, but we need to check if there is fuel in the tank
 		to_chat(user, "<span class='notice'>You switch on [src].</span>")
 		toggle_welder()
 	else //The welder is off and unfuelled
@@ -76,7 +85,8 @@
 		playsound(loc, activation_sound, 50, 1)
 		set_light(light_intensity)
 	else
-		STOP_PROCESSING(SSobj, src)
+		if(!refills_over_time)
+			STOP_PROCESSING(SSobj, src)
 		damtype = BRUTE
 		force = 3
 		hitsound = "swing_hit"
@@ -100,9 +110,9 @@
 		return FALSE
 
 // When welding is about to start, run a normal tool_use_check, then flash a mob if it succeeds.
-/obj/item/weldingtool/tool_start_check(mob/living/user, amount=0)
+/obj/item/weldingtool/tool_start_check(atom/target, mob/living/user, amount=0)
 	. = tool_use_check(user, amount)
-	if(. && user)
+	if(. && user && !ismob(target)) // Don't flash the user if they're repairing robo limbs or repairing a borg etc. Only flash them if the target is an object
 		user.flash_eyes(light_intensity)
 
 /obj/item/weldingtool/use(amount)
@@ -121,7 +131,7 @@
 
 /obj/item/weldingtool/tool_check_callback(mob/living/user, amount, datum/callback/extra_checks)
 	. = ..()
-	if(. && user)
+	if(!. && user)
 		if(progress_flash_divisor == 0)
 			user.flash_eyes(min(light_intensity, 1))
 			progress_flash_divisor = initial(progress_flash_divisor)
@@ -130,7 +140,7 @@
 
 /obj/item/weldingtool/proc/remove_fuel(amount) //NB: doesn't check if we have enough fuel, it just removes however much is left if there's not enough
 	reagents.remove_reagent("fuel", amount * requires_fuel)
-	if(!GET_FUEL)
+	if(GET_FUEL < 1)
 		toggle_welder(TRUE)
 
 /obj/item/weldingtool/refill(mob/user, atom/A, amount)
@@ -159,7 +169,7 @@
 /obj/item/weldingtool/update_icon()
 	if(low_fuel_changes_icon)
 		var/ratio = GET_FUEL / maximum_fuel
-		ratio = Ceiling(ratio*4) * 25
+		ratio = CEILING(ratio*4, 1) * 25
 		if(ratio == 100)
 			icon_state = initial(icon_state)
 		else
@@ -167,6 +177,9 @@
 	update_torch()
 	..()
 
+/obj/item/weldingtool/cyborg_recharge(coeff, emagged)
+	if(reagents.check_and_add("fuel", maximum_fuel, 2 * coeff))
+		update_icon()
 
 /obj/item/weldingtool/largetank
 	name = "industrial welding tool"

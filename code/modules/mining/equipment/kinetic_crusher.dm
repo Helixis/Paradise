@@ -65,6 +65,8 @@
 		user.drop_l_hand()
 		return
 	var/datum/status_effect/crusher_damage/C = target.has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
+	if(!C)
+		C = target.apply_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
 	var/target_health = target.health
 	..()
 	for(var/t in trophies)
@@ -82,7 +84,7 @@
 		var/turf/proj_turf = user.loc
 		if(!isturf(proj_turf))
 			return
-		var/obj/item/projectile/destabilizer/D = new /obj/item/projectile/destabilizer(proj_turf)
+		var/obj/item/projectile/destabilizer/D = new proyectile_type(proj_turf)
 		for(var/t in trophies)
 			var/obj/item/crusher_trophy/T = t
 			T.on_projectile_fire(D, user)
@@ -101,6 +103,8 @@
 		if(!CM || CM.hammer_synced != src || !L.remove_status_effect(STATUS_EFFECT_CRUSHERMARK))
 			return
 		var/datum/status_effect/crusher_damage/C = L.has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
+		if(!C)
+			C = L.apply_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
 		var/target_health = L.health
 		for(var/t in trophies)
 			var/obj/item/crusher_trophy/T = t

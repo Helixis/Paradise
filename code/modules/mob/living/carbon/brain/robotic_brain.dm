@@ -13,7 +13,7 @@
 	var/askDelay = 10 * 60 * 1
 	//var/mob/living/carbon/brain/brainmob = null
 	var/list/ghost_volunteers[0]
-	req_access = list(access_robotics)
+	req_access = list(ACCESS_ROBOTICS)
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 	var/silenced = FALSE //if TRUE, they can't talk.
 	var/next_ping_at = 0
@@ -90,10 +90,13 @@
 
 /obj/item/mmi/robotic_brain/transfer_identity(mob/living/carbon/H)
 	name = "[src] ([H])"
-	if(isnull(brainmob.dna))
-		brainmob.dna = H.dna.Clone()
-	brainmob.name = brainmob.dna.real_name
-	brainmob.real_name = brainmob.name
+
+	brainmob.dna = H.dna.Clone()
+	// I'm not sure we can remove species override. There might be some loophole
+	// that would allow posibrains to be cloned without this.
+	brainmob.dna.species = new /datum/species/machine()
+	brainmob.real_name = brainmob.dna.real_name
+	brainmob.name = brainmob.real_name
 	brainmob.timeofhostdeath = H.timeofdeath
 	brainmob.stat = CONSCIOUS
 	if(brainmob.mind)
@@ -109,7 +112,6 @@
 	if(..())
 		if(imprinted_master)
 			to_chat(H, "<span class='biggerdanger'>You are permanently imprinted to [imprinted_master], obey [imprinted_master]'s every order and assist [imprinted_master.p_them()] in completing [imprinted_master.p_their()] goals at any cost.</span>")
-
 
 /obj/item/mmi/robotic_brain/proc/transfer_personality(mob/candidate)
 	searching = FALSE
@@ -202,10 +204,14 @@
 	brainmob = new(src)
 	brainmob.name = "[pick(list("PBU", "HIU", "SINA", "ARMA", "OSI"))]-[rand(100, 999)]"
 	brainmob.real_name = brainmob.name
-	brainmob.forceMove(src)
 	brainmob.container = src
+	brainmob.forceMove(src)
 	brainmob.stat = CONSCIOUS
 	brainmob.SetSilence(0)
+	brainmob.dna = new(brainmob)
+	brainmob.dna.species = new /datum/species/machine() // Else it will default to human. And we don't want to clone IRC humans now do we?
+	brainmob.dna.ResetSE()
+	brainmob.dna.ResetUI()
 	GLOB.dead_mob_list -= brainmob
 	..()
 

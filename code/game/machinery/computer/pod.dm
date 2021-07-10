@@ -23,7 +23,7 @@
 	timings = list()
 	times = list()
 	synced = list()
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		for(var/ident_tag in id_tags)
 			if((M.id_tag == ident_tag) && !(ident_tag in synced))
@@ -48,8 +48,8 @@
 
 	return
 
-/obj/machinery/computer/pod/proc/solo_sync(var/ident_tag)
-	for(var/obj/machinery/mass_driver/M in world)
+/obj/machinery/computer/pod/proc/solo_sync(ident_tag)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		if((M.id_tag == ident_tag) && !(ident_tag in synced))
 			synced += ident_tag
@@ -74,11 +74,11 @@
 	return
 
 
-/obj/machinery/computer/pod/proc/launch_sequence(var/ident_tag)
+/obj/machinery/computer/pod/proc/launch_sequence(ident_tag)
 	if(stat & (NOPOWER|BROKEN))
 		return
 	var/anydriver = 0
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		if(M.id_tag == ident_tag)
 			anydriver = 1
@@ -94,7 +94,7 @@
 	sleep(20)
 
 
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		if(M.id_tag == ident_tag)
 			M.drive()
@@ -108,12 +108,12 @@
 	return
 
 
-/obj/machinery/computer/pod/attack_ai(var/mob/user as mob)
+/obj/machinery/computer/pod/attack_ai(mob/user as mob)
 	src.add_hiddenprint(user)
 	return attack_hand(user)
 
 
-/obj/machinery/computer/pod/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/pod/attack_hand(mob/user as mob)
 	if(..())
 		return
 
@@ -219,7 +219,7 @@
 			var/ident_tag = href_list["driver"]
 			var/t = text2num(href_list["power"])
 			t = min(max(0.25, t), 16)
-			for(var/obj/machinery/mass_driver/M in world)
+			for(var/obj/machinery/mass_driver/M in GLOB.machines)
 				if(M.id_tag == ident_tag)
 					M.power = t
 			powers[ident_tag] = t
@@ -268,11 +268,11 @@
 /obj/machinery/computer/pod/old/syndicate
 	name = "external airlock controls"
 	desc = "The Syndicate operate on a tight budget. Operates external airlocks."
-	req_access = list(access_syndicate)
+	req_access = list(ACCESS_SYNDICATE)
 	circuit = /obj/item/circuitboard/syndicatedoor
 	light_color = "#00FFFF"
 
-/obj/machinery/computer/pod/old/syndicate/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/pod/old/syndicate/attack_hand(mob/user as mob)
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access Denied</span>")
 		return
@@ -290,11 +290,11 @@
 	var/teleporter_dest = 0
 	circuit = /obj/item/circuitboard/pod/deathsquad
 
-/obj/machinery/computer/pod/deathsquad/launch_sequence(var/ident_tag)
+/obj/machinery/computer/pod/deathsquad/launch_sequence(ident_tag)
 	if(stat & (NOPOWER|BROKEN))
 		return
 	var/anydriver = 0
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		if(M.id_tag == ident_tag)
 			anydriver = 1
@@ -303,10 +303,12 @@
 		return
 
 	var/spawn_marauder[] = new()
-	for(var/obj/effect/landmark/L in world)
+	for(var/thing in GLOB.landmarks_list)
+		var/obj/effect/landmark/L = thing
 		if(L.name == "Marauder Entry")
 			spawn_marauder.Add(L)
-	for(var/obj/effect/landmark/L in world)
+	for(var/thing in GLOB.landmarks_list)
+		var/obj/effect/landmark/L = thing
 		if(L.name == "Marauder Exit")
 			var/obj/effect/portal/P = new(L.loc, pick(spawn_marauder))
 			P.invisibility = 101//So it is not seen by anyone.
@@ -320,7 +322,7 @@
 				M.open()
 	sleep(20)
 
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.z != src.z)	continue
 		if(M.id_tag == ident_tag)
 			M.drive()
@@ -350,7 +352,7 @@
 	var/id_tag = ""
 
 
-/obj/structure/deathsquad_tele/Bumped(var/atom/movable/AM)
+/obj/structure/deathsquad_tele/Bumped(atom/movable/AM)
 	if(!ztarget)	return ..()
 	var/y = AM.y
 	spawn()

@@ -128,25 +128,25 @@
 
 /obj/machinery/gibber/proc/move_into_gibber(mob/user, mob/living/victim)
 	if(occupant)
-		to_chat(user, "<span class='danger'>The [src] is full, empty it first!</span>")
+		to_chat(user, "<span class='danger'>[src] is full, empty it first!</span>")
 		return
 
 	if(operating)
-		to_chat(user, "<span class='danger'>The [src] is locked and running, wait for it to finish.</span>")
+		to_chat(user, "<span class='danger'>[src] is locked and running, wait for it to finish.</span>")
 		return
 
 	if(!ishuman(victim))
-		to_chat(user, "<span class='danger'>This is not suitable for the [src]!</span>")
+		to_chat(user, "<span class='danger'>This is not suitable for [src]!</span>")
 		return
 
 	if(victim.abiotic(1))
 		to_chat(user, "<span class='danger'>Subject may not have abiotic items on.</span>")
 		return
 
-	user.visible_message("<span class='danger'>[user] starts to put [victim] into the [src]!</span>")
+	user.visible_message("<span class='danger'>[user] starts to put [victim] into [src]!</span>")
 	add_fingerprint(user)
 	if(do_after(user, 30, target = victim) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
-		user.visible_message("<span class='danger'>[user] stuffs [victim] into the [src]!</span>")
+		user.visible_message("<span class='danger'>[user] stuffs [victim] into [src]!</span>")
 
 		victim.forceMove(src)
 		occupant = victim
@@ -234,7 +234,7 @@
 		return
 
 	if(UserOverride)
-		msg_admin_attack("[key_name_admin(occupant)] was gibbed by an autogibber (\the [src]) [ADMIN_JMP(src)]")
+		add_attack_logs(user, occupant, "gibbed by an autogibber ([src])")
 		log_game("[key_name(occupant)] was gibbed by an autogibber ([src]) (X:[x] Y:[y] Z:[z])")
 
 	if(operating)
@@ -278,13 +278,9 @@
 	if(!UserOverride)
 		add_attack_logs(user, occupant, "Gibbed in [src]", !!occupant.ckey ? ATKLOG_FEW : ATKLOG_ALL)
 
-		if(!iscarbon(user))
-			occupant.LAssailant = null
-		else
-			occupant.LAssailant = user
-
 	else //this looks ugly but it's better than a copy-pasted startgibbing proc override
 		occupant.create_attack_log("Was gibbed by <b>an autogibber (\the [src])</b>")
+		add_attack_logs(src, occupant, "gibbed")
 
 	occupant.emote("scream")
 	playsound(get_turf(src), 'sound/goonstation/effects/gib.ogg', 50, 1)
@@ -391,8 +387,6 @@
 			var/obj/item/implant/I = O
 			if(I.implanted)
 				continue
-		if(istype(O,/obj/item/organ))
-			continue
 		if(O.flags & NODROP || stealthmode)
 			qdel(O) //they are already dead by now
 		H.unEquip(O)

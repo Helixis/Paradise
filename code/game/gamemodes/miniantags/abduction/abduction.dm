@@ -47,7 +47,7 @@
 
 /datum/game_mode/abduction/proc/make_abductor_team(team_number,preset_agent=null,preset_scientist=null)
 	//Team Name
-	team_names[team_number] = "Mothership [pick(possible_changeling_IDs)]" //TODO Ensure unique and actual alieny names
+	team_names[team_number] = "Mothership [pick(GLOB.possible_changeling_IDs)]" //TODO Ensure unique and actual alieny names
 	//Team Objective
 	var/datum/objective/experiment/team_objective = new
 	team_objective.team = team_number
@@ -158,6 +158,7 @@
 	to_chat(abductor.current, "<span class='notice'>You are an agent of [team_name]!</span>")
 	to_chat(abductor.current, "<span class='notice'>With the help of your teammate, kidnap and experiment on station crew members!</span>")
 	to_chat(abductor.current, "<span class='notice'>Use your stealth technology and equipment to incapacitate humans for your scientist to retrieve.</span>")
+	to_chat(abductor.current, "<span class='motd'>For more information, check the wiki page: ([config.wikiurl]/index.php/Abductor)</span>")
 
 	abductor.announce_objectives()
 
@@ -170,6 +171,7 @@
 	to_chat(abductor.current, "<span class='notice'>You are a scientist of [team_name]!</span>")
 	to_chat(abductor.current, "<span class='notice'>With the help of your teammate, kidnap and experiment on station crew members!</span>")
 	to_chat(abductor.current, "<span class='notice'>Use your tool and ship consoles to support the agent and retrieve human specimens.</span>")
+	to_chat(abductor.current, "<span class='motd'>For more information, check the wiki page: ([config.wikiurl]/index.php/Abductor)</span>")
 
 	abductor.announce_objectives()
 
@@ -208,12 +210,14 @@
 		text += "<br><span class='big'><b>The abductors were:</b></span><br>"
 		for(var/datum/mind/abductor_mind in abductors)
 			text += printplayer(abductor_mind)
+			text += "<br>"
 			text += printobjectives(abductor_mind)
 			text += "<br>"
 		if(abductees.len)
 			text += "<br><span class='big'><b>The abductees were:</b></span><br>"
 			for(var/datum/mind/abductee_mind in abductees)
 				text += printplayer(abductee_mind)
+				text += "<br>"
 				text += printobjectives(abductee_mind)
 				text += "<br>"
 	to_chat(world, text)
@@ -265,6 +269,7 @@
 		SSticker.mode.abductors -= abductor_mind
 		abductor_mind.special_role = null
 		abductor_mind.current.create_attack_log("<span class='danger'>No longer abductor</span>")
+		abductor_mind.current.create_log(CONVERSION_LOG, "No longer abductor")
 		if(issilicon(abductor_mind.current))
 			to_chat(abductor_mind.current, "<span class='userdanger'>You have been turned into a robot! You are no longer an abductor.</span>")
 		else
@@ -272,11 +277,11 @@
 		SSticker.mode.update_abductor_icons_removed(abductor_mind)
 
 /datum/game_mode/proc/update_abductor_icons_added(datum/mind/alien_mind)
-	var/datum/atom_hud/antag/hud = huds[ANTAG_HUD_ABDUCTOR]
+	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_ABDUCTOR]
 	hud.join_hud(alien_mind.current)
 	set_antag_hud(alien_mind.current, ((alien_mind in abductors) ? "abductor" : "abductee"))
 
 /datum/game_mode/proc/update_abductor_icons_removed(datum/mind/alien_mind)
-	var/datum/atom_hud/antag/hud = huds[ANTAG_HUD_ABDUCTOR]
+	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_ABDUCTOR]
 	hud.leave_hud(alien_mind.current)
 	set_antag_hud(alien_mind.current, null)

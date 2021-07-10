@@ -64,7 +64,7 @@
 /obj/item/form_printer/attack_self(mob/user as mob)
 	deploy_paper(get_turf(src))
 
-/obj/item/form_printer/proc/deploy_paper(var/turf/T)
+/obj/item/form_printer/proc/deploy_paper(turf/T)
 	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
 	new /obj/item/paper(T)
 
@@ -73,24 +73,7 @@
 /obj/item/borg
 	var/powerneeded // Percentage of power remaining required to run item
 
-/obj/item/borg/combat/shield
-	name = "personal shielding"
-	desc = "A powerful experimental module that turns aside or absorbs incoming attacks at the cost of charge."
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "shock"
-	powerneeded = 25
-	var/shield_level = 0.5 //Percentage of damage absorbed by the shield.
-
-/obj/item/borg/combat/shield/verb/set_shield_level()
-	set name = "Set shield level"
-	set category = "Object"
-	set src in range(0)
-
-	var/N = input("How much damage should the shield absorb?") in list("5","10","25","50","75","100")
-	if(N)
-		shield_level = text2num(N)/100
-
-/obj/item/borg/combat/mobility
+/obj/item/borg/destroyer/mobility
 	name = "mobility module"
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
 	icon = 'icons/obj/decals.dmi'

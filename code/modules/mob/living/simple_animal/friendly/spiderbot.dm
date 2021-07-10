@@ -22,6 +22,7 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 	speed = 0
+	mob_biotypes = MOB_ROBOTIC
 	mob_size = MOB_SIZE_SMALL
 	speak_emote = list("beeps","clicks","chirps")
 
@@ -107,7 +108,7 @@
 			var/obj/item/pda/pda = O
 			id_card = pda.id
 
-		if(access_robotics in id_card.access)
+		if(ACCESS_ROBOTICS in id_card.access)
 			to_chat(user, "<span class='notice'>You swipe your access card and pop the brain out of [src].</span>")
 			eject_brain()
 			return TRUE
@@ -125,8 +126,6 @@
 		return
 	if(health >= maxHealth)
 		to_chat(user, "<span class='warning'>[src] does not need repairing!</span>")
-		return
-		to_chat(user, "<span class='warning'>Unable to repair with the maintenance panel closed!</span>")
 		return
 	. = TRUE
 	if(!I.use_tool(src, user, volume = I.tool_volume))

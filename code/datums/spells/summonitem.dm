@@ -12,7 +12,8 @@
 	include_user = 1
 
 	var/obj/marked_item
-
+	/// List of objects which will result in the spell stopping with the recursion search
+	var/static/list/blacklisted_summons = list(/obj/machinery/computer/cryopod = TRUE, /obj/machinery/atmospherics = TRUE, /obj/structure/disposalholder = TRUE, /obj/machinery/disposal = TRUE)
 	action_icon_state = "summons"
 
 /obj/effect/proc_holder/spell/targeted/summonitem/cast(list/targets, mob/user = usr)
@@ -41,7 +42,7 @@
 				else
 					message = "<span class='notice'>You must hold the desired item in your hands to mark it for recall.</span>"
 
-		else if(marked_item && marked_item in hand_items) //unlinking item to the spell
+		else if(marked_item && (marked_item in hand_items)) //unlinking item to the spell
 			message = "<span class='notice'>You remove the mark on [marked_item] to use elsewhere.</span>"
 			name = "Instant Summons"
 			marked_item = 		null
@@ -75,13 +76,11 @@
 								B.transfer_identity(C)
 								C.death()
 								add_attack_logs(target, C, "Magically debrained INTENT: [uppertext(target.a_intent)]")*/
-						if(C.stomach_contents && item_to_retrieve in C.stomach_contents)
-							C.stomach_contents -= item_to_retrieve
 						for(var/X in C.bodyparts)
 							var/obj/item/organ/external/part = X
 							if(item_to_retrieve in part.embedded_objects)
 								part.embedded_objects -= item_to_retrieve
-								to_chat(C, "<span class='warning'>The [item_to_retrieve] that was embedded in your [part] has mysteriously vanished. How fortunate!</span>")
+								to_chat(C, "<span class='warning'>\The [item_to_retrieve] that was embedded in your [part] has mysteriously vanished. How fortunate!</span>")
 								if(!C.has_embedded_objects())
 									C.clear_alert("embeddedobject")
 								break
@@ -91,7 +90,7 @@
 						var/obj/machinery/portable_atmospherics/P = item_to_retrieve.loc
 						P.disconnect()
 						P.update_icon()
-					if(istype(item_to_retrieve.loc, /obj/structure/disposalholder) || istype(item_to_retrieve.loc, /obj/machinery/disposal))//fixes the breaking of disposals. No more bluespace connected disposal bins!
+					if(is_type_in_typecache(item_to_retrieve.loc, blacklisted_summons))
 						break
 					item_to_retrieve = item_to_retrieve.loc
 
@@ -100,23 +99,23 @@
 			if(!item_to_retrieve)
 				return
 
-			item_to_retrieve.loc.visible_message("<span class='warning'>The [item_to_retrieve.name] suddenly disappears!</span>")
+			item_to_retrieve.loc.visible_message("<span class='warning'>\The [item_to_retrieve] suddenly disappears!</span>")
 
 
 			if(target.hand) //left active hand
-				if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_l_hand, 0, 1, 1))
-					if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_r_hand, 0, 1, 1))
+				if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_l_hand, FALSE, TRUE))
+					if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_r_hand, FALSE, TRUE))
 						butterfingers = 1
 			else			//right active hand
-				if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_r_hand, 0, 1, 1))
-					if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_l_hand, 0, 1, 1))
+				if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_r_hand, FALSE, TRUE))
+					if(!target.equip_to_slot_if_possible(item_to_retrieve, slot_l_hand, FALSE, TRUE))
 						butterfingers = 1
 			if(butterfingers)
 				item_to_retrieve.loc = target.loc
-				item_to_retrieve.loc.visible_message("<span class='caution'>The [item_to_retrieve.name] suddenly appears!</span>")
+				item_to_retrieve.loc.visible_message("<span class='caution'>\The [item_to_retrieve] suddenly appears!</span>")
 				playsound(get_turf(target),'sound/magic/summonitems_generic.ogg',50,1)
 			else
-				item_to_retrieve.loc.visible_message("<span class='caution'>The [item_to_retrieve.name] suddenly appears in [target]'s hand!</span>")
+				item_to_retrieve.loc.visible_message("<span class='caution'>\The [item_to_retrieve] suddenly appears in [target]'s hand!</span>")
 				playsound(get_turf(target),'sound/magic/summonitems_generic.ogg',50,1)
 
 		if(message)

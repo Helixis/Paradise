@@ -12,9 +12,9 @@
 			visible_message("<span class='warning'>[src] catches [AM]!</span>")
 			throw_mode_off()
 			return TRUE
-	..()
+	return ..()
 
-/mob/living/carbon/water_act(volume, temperature, source, method = TOUCH)
+/mob/living/carbon/water_act(volume, temperature, source, method = REAGENT_TOUCH)
 	. = ..()
 	if(volume > 10) // Anything over 10 volume will make the mob wetter.
 		wetlevel = min(wetlevel + 1,5)
@@ -57,7 +57,7 @@
 				if(M.powerlevel < 0)
 					M.powerlevel = 0
 
-				visible_message("<span class='danger'>The [M.name] has shocked [src]!</span>", "<span class='userdanger'>The [M.name] has shocked you!</span>")
+				visible_message("<span class='danger'>[M] has shocked [src]!</span>", "<span class='userdanger'>[M] has shocked you!</span>")
 
 				do_sparks(5, TRUE, src)
 				var/power = M.powerlevel + rand(0,3)
@@ -72,3 +72,13 @@
 /mob/living/carbon/is_mouth_covered(head_only = FALSE, mask_only = FALSE)
 	if((!mask_only && head && (head.flags_cover & HEADCOVERSMOUTH)) || (!head_only && wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH)))
 		return TRUE
+
+//Called when drawing cult runes/using cult spells. Deal damage to a random arm/hand, or chest if not there.
+/mob/living/carbon/cult_self_harm(damage)
+	var/dam_zone = pick("l_arm", "l_hand", "r_arm", "r_hand")
+	var/obj/item/organ/external/affecting = get_organ(dam_zone)
+	if(!affecting)
+		affecting = get_organ("chest")
+	if(!affecting) //bruh where's your chest
+		return FALSE
+	apply_damage(damage, BRUTE, affecting)

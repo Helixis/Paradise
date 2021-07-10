@@ -7,7 +7,10 @@
 	baseturf = /turf/simulated/floor/plating/asteroid
 	icon_state = "asteroid"
 	icon_plating = "asteroid"
-	footstep_sounds = list()
+	footstep = FOOTSTEP_SAND
+	barefootstep = FOOTSTEP_SAND
+	clawfootstep = FOOTSTEP_SAND
+	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	var/environment_type = "asteroid"
 	var/turf_type = /turf/simulated/floor/plating/asteroid //Because caves do whacky shit to revert to normal
 	var/floor_variance = 20 //probability floor has a different icon state
@@ -85,7 +88,7 @@
 
 	else if(istype(I, /obj/item/storage/bag/ore))
 		var/obj/item/storage/bag/ore/S = I
-		if(S.collection_mode == 1)
+		if(S.pickup_all_on_tile)
 			for(var/obj/item/stack/ore/O in contents)
 				O.attackby(I, user)
 				return
@@ -174,8 +177,8 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 /turf/simulated/floor/plating/asteroid/airless/cave/volcanic
 	mob_spawn_list = list(/mob/living/simple_animal/hostile/asteroid/goliath/beast/random = 50, /obj/structure/spawner/lavaland/goliath = 3,
 		/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/random = 40, /obj/structure/spawner/lavaland = 2,
-		/mob/living/simple_animal/hostile/asteroid/hivelord/legion/random = 30, /obj/structure/spawner/lavaland/legion = 3, /obj/structure/spawner/lavaland/plazmite = 3,
-		SPAWN_MEGAFAUNA = 6, /mob/living/simple_animal/hostile/asteroid/goldgrub = 10)
+		/mob/living/simple_animal/hostile/asteroid/hivelord/legion/random = 30, /obj/structure/spawner/lavaland/legion = 3, /obj/structure/spawner/lavaland/plazmite = 3, /obj/structure/spawner/lavaland/imp = 3, /obj/structure/spawner/lavaland/miner = 1,
+		SPAWN_MEGAFAUNA = 6, /mob/living/simple_animal/hostile/asteroid/goldgrub = 10, /mob/living/simple_animal/hostile/asteroid/imp = 30, /mob/living/simple_animal/hostile/asteroid/miner = 20,)
 
 	data_having_type = /turf/simulated/floor/plating/asteroid/airless/cave/volcanic/has_data
 	turf_type = /turf/simulated/floor/plating/asteroid/basalt/lava_land_surface
@@ -205,7 +208,7 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 		length = set_length
 
 	// Get our directiosn
-	forward_cave_dir = pick(alldirs - exclude_dir)
+	forward_cave_dir = pick(GLOB.alldirs - exclude_dir)
 	// Get the opposite direction of our facing direction
 	backward_cave_dir = angle2dir(dir2angle(forward_cave_dir) + 180)
 
@@ -227,7 +230,7 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 			break
 
 		var/list/L = list(45)
-		if(IsOdd(dir2angle(dir))) // We're going at an angle and we want thick angled tunnels.
+		if(ISODD(dir2angle(dir))) // We're going at an angle and we want thick angled tunnels.
 			L += -45
 
 		// Expand the edges of our tunnel

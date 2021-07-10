@@ -2,7 +2,6 @@
 	// Hispania Configs
 	var/ryzorbot = "http://example.org"
 
-
 	var/server_name = null				// server name (for world name / status)
 	var/server_tag_line = null			// server tagline (for showing on hub entry)
 	var/server_extra_features = null		// server-specific extra features (for hub entry)
@@ -40,7 +39,7 @@
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 //	var/enable_authentication = 0		// goon authentication
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
+	var/del_new_on_log = 1				// qdel's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
@@ -61,10 +60,10 @@
 	var/allow_ai = 1					// allow ai job
 	var/respawn = 0
 	var/guest_jobban = 1
+	var/panic_bunker_threshold = 150	// above this player count threshold, never-before-seen players are blocked from connecting
 	var/usewhitelist = 0
 	var/mods_are_mentors = 0
 	var/load_jobs_from_txt = 0
-	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 	var/round_abandon_penalty_period = 30 MINUTES // Time from round start during which ghosting out is penalized
@@ -163,24 +162,12 @@
 	var/simultaneous_pm_warning_timeout = 100
 
 	var/assistant_maint = 0 //Do assistants get maint access?
-	var/gateway_delay = 6000 //How long the gateway takes before it activates. Default is half an hour.
+	var/gateway_delay = 6000
 	var/ghost_interaction = 0
 
 	var/comms_password = ""
 
-	var/use_irc_bot = 0
-	var/list/irc_bot_host = list()
-	var/main_irc = ""
-	var/admin_irc = ""
-	var/admin_notify_irc = ""
-	var/cidrandomizer_irc = ""
-
 	var/default_laws = 0 //Controls what laws the AI spawns with.
-
-	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
-	var/list/admin_levels= list(2)					// Defines which Z-levels which are for admin functionality, for example including such areas as Central Command and the Syndicate Shuttle
-	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
-	var/list/player_levels = list(1, 3, 4, 5, 6, 7)	// Defines all Z-levels a character can typically reach
 
 	var/const/minutes_to_ticks = 60 * 10
 	// Event settings
@@ -203,8 +190,8 @@
 	var/disable_away_missions = 0 // disable away missions
 	var/disable_space_ruins = 0 //disable space ruins
 
-	var/extra_space_ruin_levels_min = 2
-	var/extra_space_ruin_levels_max = 4
+	var/extra_space_ruin_levels_min = 4
+	var/extra_space_ruin_levels_max = 8
 
 	var/ooc_allowed = 1
 	var/looc_allowed = 1
@@ -254,6 +241,55 @@
 	// Makes gamemodes respect player limits
 	var/enable_gamemode_player_limit = 0
 
+	var/roundstart_traits = TRUE //TRAITS
+	var/disable_human_mood = FALSE //TRAITS
+	/// BYOND account age limit for notifcations of new accounts (Any accounts older than this value will not send notifications on first join)
+	var/byond_account_age_threshold = 7
+
+	/// Are discord webhooks enabled?
+	var/discord_webhooks_enabled = FALSE
+
+	/// Role ID to be pinged for administrative events
+	var/discord_admin_role_id = null // Intentional null usage
+
+	/// Role ID to be pinged for administrative events
+	var/discord_newround_role_id //toma el valor del archivo config.txt, esta es una variable de hispania
+
+	/// Webhook URLs for the main public webhook
+	var/list/discord_main_webhook_urls = list()
+
+	/// Webhook URLs for the admin webhook
+	var/list/discord_admin_webhook_urls = list()
+
+	/// Webhook URLs for the mentor webhook
+	var/list/discord_mentor_webhook_urls = list()
+
+	/// Do we want to forward all adminhelps to the discord or just ahelps when admins are offline.
+	/// (This does not mean all ahelps are pinged, only ahelps sent when staff are offline get the ping, regardless of this setting)
+	var/discord_forward_all_ahelps = FALSE
+
+	/// URL for the CentCom Ban DB API
+	var/centcom_ban_db_url = null
+
+	/// Timeout (seconds) for async SQL queries
+	var/async_sql_query_timeout = 10 SECONDS
+
+	/// Limit of how many SQL threads can run at once
+	var/rust_sql_thread_limit = 50
+
+	/// Max amount of CIDs that one ckey can have attached to them before they trip a warning
+	var/max_client_cid_history = 3
+
+	/// Enable auto profiler of rounds
+	var/auto_profile = FALSE
+
+	// Enable map voting
+	var/map_voting_enabled = TRUE
+
+	// 2FA auth host
+	var/_2fa_auth_host = null
+
+
 /datum/configuration/New()
 	for(var/T in subtypesof(/datum/game_mode))
 		var/datum/game_mode/M = T
@@ -268,6 +304,11 @@
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
+	if(IsAdminAdvancedProcCall())
+		to_chat(usr, "<span class='boldannounce'>Config reload blocked: Advanced ProcCall detected.</span>")
+		message_admins("[key_name(usr)] attempted to reload configuration via advanced proc-call")
+		log_admin("[key_name(usr)] attempted to reload configuration via advanced proc-call")
+		return
 	var/list/Lines = file2list(filename)
 
 	for(var/t in Lines)
@@ -508,7 +549,10 @@
 					config.guest_jobban = 1
 
 				if("guest_ban")
-					guests_allowed = 0
+					GLOB.guests_allowed = 0
+
+				if("panic_bunker_threshold")
+					config.panic_bunker_threshold = text2num(value)
 
 				if("usewhitelist")
 					config.usewhitelist = 1
@@ -558,9 +602,6 @@
 				if("allow_holidays")
 					config.allow_holidays = 1
 
-				if("use_irc_bot")
-					use_irc_bot = 1
-
 				if("ticklag")
 					Ticklag = text2num(value)
 
@@ -575,9 +616,6 @@
 
 				if("humans_need_surnames")
 					humans_need_surnames = 1
-
-				if("tor_ban")
-					ToRban = 1
 
 				if("automute_on")
 					automute_on = 1
@@ -604,29 +642,14 @@
 				if("comms_password")
 					config.comms_password = value
 
-				if("irc_bot_host")
-					config.irc_bot_host = splittext(value, ";")
-
-				if("main_irc")
-					config.main_irc = value
-
-				if("admin_irc")
-					config.admin_irc = value
-
-				if("admin_notify_irc")
-					config.admin_notify_irc = value
-
-				if("cidrandomizer_irc")
-					config.cidrandomizer_irc = value
-
 				if("python_path")
 					if(value)
-						python_path = value
+						GLOB.python_path = value
 					else
 						if(world.system_type == UNIX)
-							python_path = "/usr/bin/env python2"
+							GLOB.python_path = "/usr/bin/env python2"
 						else //probably windows, if not this should work anyway
-							python_path = "pythonw"
+							GLOB.python_path = "pythonw"
 
 				if("assistant_limit")
 					config.assistantlimit = 1
@@ -644,31 +667,31 @@
 					config.max_maint_drones = text2num(value)
 
 				if("expected_round_length")
-					config.expected_round_length = MinutesToTicks(text2num(value))
+					config.expected_round_length = text2num(value) MINUTES
 
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = values[1] MINUTES, "upper" = values[2] MINUTES)
 
 				if("event_custom_start_moderate")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = values[1] MINUTES, "upper" = values[2] MINUTES)
 
 				if("event_custom_start_major")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
+					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = values[1] MINUTES, "upper" = values[2] MINUTES)
 
 				if("event_delay_lower")
 					var/values = text2numlist(value, ";")
-					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
-					config.event_delay_lower[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
-					config.event_delay_lower[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
+					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = values[1] MINUTES
+					config.event_delay_lower[EVENT_LEVEL_MODERATE] = values[2] MINUTES
+					config.event_delay_lower[EVENT_LEVEL_MAJOR] = values[3] MINUTES
 
 				if("event_delay_upper")
 					var/values = text2numlist(value, ";")
-					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
-					config.event_delay_upper[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
-					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
+					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = values[1] MINUTES
+					config.event_delay_upper[EVENT_LEVEL_MODERATE] = values[2] MINUTES
+					config.event_delay_upper[EVENT_LEVEL_MAJOR] = values[3] MINUTES
 
 				if("starlight")
 					config.starlight = 1
@@ -704,7 +727,7 @@
 					config.max_loadout_points = text2num(value)
 
 				if("round_abandon_penalty_period")
-					config.round_abandon_penalty_period = MinutesToTicks(text2num(value))
+					config.round_abandon_penalty_period = text2num(value) MINUTES
 
 				if("medal_hub_address")
 					config.medal_hub_address = value
@@ -719,7 +742,7 @@
 					config.shutdown_on_reboot = 1
 
 				if("shutdown_shell_command")
-					shutdown_shell_command = value
+					GLOB.shutdown_shell_command = value
 
 				if("disable_karma")
 					config.disable_karma = 1
@@ -743,6 +766,34 @@
 					config.disable_localhost_admin = 1
 				if("enable_gamemode_player_limit")
 					config.enable_gamemode_player_limit = 1
+				if("byond_account_age_threshold")
+					config.byond_account_age_threshold = text2num(value)
+				// Discord stuff
+				if("enable_discord_webhooks")
+					discord_webhooks_enabled = TRUE
+				if("discord_webhooks_admin_role_id")
+					discord_admin_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers
+				if("discord_webhooks_newround_role_id")
+					discord_newround_role_id = "[value]" // This MUST be a string because BYOND doesnt like massive integers, esta es una variable de hispania
+				if("discord_webhooks_main_url")
+					discord_main_webhook_urls = splittext(value, "|")
+				if("discord_webhooks_admin_url")
+					discord_admin_webhook_urls = splittext(value, "|")
+				if("discord_webhooks_mentor_url")
+					discord_mentor_webhook_urls = splittext(value, "|")
+				if("discord_forward_all_ahelps")
+					discord_forward_all_ahelps = TRUE
+				// End discord stuff
+				if("centcom_ban_db_url")
+					centcom_ban_db_url = value
+				if("max_client_cid_history")
+					max_client_cid_history = text2num(value)
+				if("enable_auto_profiler")
+					auto_profile = TRUE
+				if("enable_map_voting")
+					map_voting_enabled = TRUE
+				if("2fa_host")
+					_2fa_auth_host = value
 				else
 					log_config("Unknown setting in configuration: '[name]'")
 
@@ -792,11 +843,11 @@
 					if(BombCap > 128)
 						BombCap = 128
 
-					MAX_EX_DEVASTATION_RANGE = round(BombCap/4)
-					MAX_EX_HEAVY_RANGE = round(BombCap/2)
-					MAX_EX_LIGHT_RANGE = BombCap
-					MAX_EX_FLASH_RANGE = BombCap
-					MAX_EX_FLAME_RANGE = BombCap
+					GLOB.max_ex_devastation_range = round(BombCap/4)
+					GLOB.max_ex_heavy_range = round(BombCap/2)
+					GLOB.max_ex_light_range = BombCap
+					GLOB.max_ex_flash_range = BombCap
+					GLOB.max_ex_flame_range = BombCap
 				if("default_laws")
 					config.default_laws = text2num(value)
 				if("randomize_shift_time")
@@ -811,8 +862,12 @@
 					log_config("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/loadsql(filename)  // -- TLE
+	if(IsAdminAdvancedProcCall())
+		to_chat(usr, "<span class='boldannounce'>SQL configuration reload blocked: Advanced ProcCall detected.</span>")
+		message_admins("[key_name(usr)] attempted to reload SQL configuration via advanced proc-call")
+		log_admin("[key_name(usr)] attempted to reload SQL configuration via advanced proc-call")
+		return
 	var/list/Lines = file2list(filename)
-	var/db_version = 0
 	for(var/t in Lines)
 		if(!t)	continue
 
@@ -851,17 +906,13 @@
 			if("feedback_tableprefix")
 				sqlfdbktableprefix = value
 			if("db_version")
-				db_version = text2num(value)
+				sql_version = text2num(value)
+			if("async_query_timeout")
+				async_sql_query_timeout = text2num(value)
+			if("rust_sql_thread_limit")
+				config.rust_sql_thread_limit = text2num(value)
 			else
 				log_config("Unknown setting in configuration: '[name]'")
-	if(config.sql_enabled && db_version != SQL_VERSION)
-		config.sql_enabled = 0
-		log_config("WARNING: DB_CONFIG DEFINITION MISMATCH!")
-		spawn(60)
-			if(SSticker.current_state == GAME_STATE_PREGAME)
-				going = 0
-				spawn(600)
-					to_chat(world, "<span class='alert'>DB_CONFIG MISMATCH, ROUND START DELAYED. <BR>Please check database version for recent upstream changes!</span>")
 
 /datum/configuration/proc/loadoverflowwhitelist(filename)
 	var/list/Lines = file2list(filename)
@@ -898,3 +949,34 @@
 			runnable_modes[M] = probabilities[M.config_tag]
 //			to_chat(world, "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]")
 	return runnable_modes
+
+/datum/configuration/proc/load_rank_colour_map()
+	var/list/lines = file2list("config/rank_colours.txt")
+
+	for(var/line in lines)
+		// Skip newlines
+		if(!length(line))
+			continue
+		// Skip comments
+		if(line[1] == "#")
+			continue
+
+		//Split the line at every " - "
+		var/list/split_holder = splittext(line, " - ")
+		if(!length(split_holder))
+			continue
+
+		// Rank is before the " - "
+		var/rank = split_holder[1]
+		if(!rank)
+			continue
+
+		// Color is after the " - "
+		var/colour = ""
+		if(length(split_holder) >= 2)
+			colour = split_holder[2]
+
+		if(rank && colour)
+			GLOB.rank_colour_map[rank] = colour
+		else
+			stack_trace("Invalid colour for rank '[rank]' in config/rank_colours.txt")

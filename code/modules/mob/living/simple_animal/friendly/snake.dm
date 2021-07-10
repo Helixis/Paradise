@@ -29,6 +29,7 @@
 	ventcrawler = VENTCRAWLER_ALWAYS
 	density = FALSE
 	pass_flags = PASSTABLE | PASSMOB
+	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_REPTILE
 	mob_size = MOB_SIZE_SMALL
 	gold_core_spawnable = FRIENDLY_SPAWN
 	obj_damage = 0
@@ -54,6 +55,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/AttackingTarget()
 	if(istype(target, /mob/living/simple_animal/mouse))
+		do_attack_animation(target)
 		visible_message("<span class='notice'>[name] consumes [target] in a single gulp!</span>", "<span class='notice'>You consume [target] in a single gulp!</span>")
 		QDEL_NULL(target)
 		adjustHealth(-2)

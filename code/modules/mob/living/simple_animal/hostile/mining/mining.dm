@@ -23,10 +23,6 @@
 	var/icon_aggro = null
 	var/crusher_drop_mod = 25
 
-/mob/living/simple_animal/hostile/asteroid/Initialize(mapload)
-	. = ..()
-	apply_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
-
 /mob/living/simple_animal/hostile/asteroid/Aggro()
 	..()
 	if(vision_range != aggro_vision_range)
@@ -52,7 +48,7 @@
 		if(!stat)
 			Aggro()
 		if(T.throwforce <= 20)
-			visible_message("<span class='notice'>The [T.name] [throw_message] [src.name]!</span>")
+			visible_message("<span class='notice'>[T] [throw_message] [src.name]!</span>")
 			return
 	..()
 
@@ -64,9 +60,3 @@
 
 /mob/living/simple_animal/hostile/asteroid/proc/spawn_crusher_loot()
 	butcher_results[crusher_loot] = 1
-
-/mob/living/simple_animal/hostile/asteroid/handle_temperature_damage()
-	if(bodytemperature < minbodytemp)
-		adjustBruteLoss(2)
-	else if(bodytemperature > maxbodytemp)
-		adjustBruteLoss(20)

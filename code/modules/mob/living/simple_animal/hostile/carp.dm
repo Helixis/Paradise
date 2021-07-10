@@ -8,6 +8,7 @@
 	icon_living = "base"
 	icon_dead = "base_dead"
 	icon_gib = "carp_gib"
+	mob_biotypes = MOB_ORGANIC | MOB_BEAST
 	speak_chance = 0
 	turns_per_move = 5
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/carpmeat = 2)
@@ -74,12 +75,11 @@
 		else
 			our_color = pick(carp_colors)
 			add_atom_colour(carp_colors[our_color], FIXED_COLOUR_PRIORITY)
-		add_carp_overlay()
+		regenerate_icons()
 
 /mob/living/simple_animal/hostile/carp/proc/add_carp_overlay()
 	if(!random_color)
 		return
-	cut_overlays()
 	var/mutable_appearance/base_overlay = mutable_appearance(icon, "base_mouth")
 	base_overlay.appearance_flags = RESET_COLOR
 	add_overlay(base_overlay)
@@ -87,7 +87,6 @@
 /mob/living/simple_animal/hostile/carp/proc/add_dead_carp_overlay()
 	if(!random_color)
 		return
-	cut_overlays()
 	var/mutable_appearance/base_dead_overlay = mutable_appearance(icon, "base_dead_mouth")
 	base_dead_overlay.appearance_flags = RESET_COLOR
 	add_overlay(base_dead_overlay)
@@ -103,24 +102,22 @@
 
 /mob/living/simple_animal/hostile/carp/death(gibbed)
 	. = ..()
-	cut_overlays()
 	if(!random_color || gibbed)
 		return
-	add_dead_carp_overlay()
+	regenerate_icons()
 
 /mob/living/simple_animal/hostile/carp/revive()
 	..()
 	regenerate_icons()
 
 /mob/living/simple_animal/hostile/carp/regenerate_icons()
-	cut_overlays()
+	..()
 	if(!random_color)
 		return
 	if(stat != DEAD)
 		add_carp_overlay()
 	else
 		add_dead_carp_overlay()
-	..()
 
 /mob/living/simple_animal/hostile/carp/holocarp
 	icon_state = "holocarp"
@@ -153,10 +150,10 @@
 /mob/living/simple_animal/hostile/carp/megacarp/Initialize()
 	. = ..()
 	name = "[pick(GLOB.megacarp_first_names)] [pick(GLOB.megacarp_last_names)]"
-	melee_damage_lower += rand(2, 10)
-	melee_damage_upper += rand(10, 20)
-	maxHealth += rand(30, 60)
-	move_to_delay = rand(3, 7)
+	melee_damage_lower += rand(10, 20)
+	melee_damage_upper += rand(20, 30)
+	maxHealth += rand(70, 150)
+	move_to_delay = rand(2, 5)
 
 /mob/living/simple_animal/hostile/carp/megacarp/adjustHealth(amount, updating_health = TRUE)
 	. = ..()

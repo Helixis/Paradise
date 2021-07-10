@@ -23,11 +23,17 @@
 	 "sodiumchloride" = list("saltshakersmall", "salt shaker", "Salt. From space oceans, presumably"),
 	 "blackpepper" = list("peppermillsmall", "pepper mill", "Often used to flavor food or make people sneeze"),
 	 "cornoil" = list("oliveoil", "corn oil bottle", "A delicious oil used in cooking. Made from corn"),
+	 "wasabi" = list("wasabitube", "wasabi bottle", "A pungent paste commonly served in tiny amounts with sushi. Spicy!"),
+	 "mayonnaise" = list("mayonnaise", "mayonnaise", "Tasty and beauty mayonnaise!"),
 	 "sugar" = list("emptycondiment", "sugar bottle", "Tasty spacey sugar!"))
 	var/originalname = "condiment" //Can't use initial(name) for this. This stores the name set by condimasters.
 
 /obj/item/reagent_containers/food/condiment/attack_self(mob/user)
 	return
+
+/obj/item/reagent_containers/food/condiment/set_APTFT()
+	set hidden = FALSE
+	..()
 
 /obj/item/reagent_containers/food/condiment/attack(mob/M, mob/user, def_zone)
 
@@ -47,7 +53,7 @@
 		add_attack_logs(user, M, "Fed [src] containing [reagents.log_list()]", reagents.harmless_helper() ? ATKLOG_ALMOSTALL : null)
 
 	var/fraction = min(10/reagents.total_volume, 1)
-	reagents.reaction(M, INGEST, fraction)
+	reagents.reaction(M, REAGENT_INGEST, fraction)
 	reagents.trans_to(M, 10)
 	playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 	return 1
@@ -109,6 +115,9 @@
 	icon_state = "enzyme"
 	list_reagents = list("enzyme" = 50)
 
+/obj/item/reagent_containers/food/condiment/enzyme/cyborg_recharge(coeff, emagged)
+	reagents.check_and_add("enzyme", volume, 2 * coeff) // Only recharge if the current amount of enzyme is under `volume`.
+
 /obj/item/reagent_containers/food/condiment/sugar
 	name = "sugar bottle"
 	desc = "Tasty spacey sugar!"
@@ -131,7 +140,7 @@
 	user.name = newname
 	user.real_name = newname
 	desc = "Salt. From dead crew, presumably."
-	return TOXLOSS
+	return BRUTELOSS
 
 /obj/item/reagent_containers/food/condiment/peppermill
 	name = "pepper mill"

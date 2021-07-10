@@ -11,7 +11,7 @@
 // Alert status
 // And arbitrary messages set by comms computer
 /obj/machinery/status_display
-	icon = 'icons/obj/status_display.dmi'
+	icon = 'icons/hispania/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "status display"
 	anchored = 1
@@ -30,7 +30,7 @@
 	var/index1			// display index for scrolling messages or 0 if non-scrolling
 	var/index2
 
-	var/frequency = DISPLAY_FREQ		// radio frequency
+	frequency = DISPLAY_FREQ		// radio frequency
 
 	var/friendc = 0      // track if Friend Computer mode
 	var/ignore_friendc = 0
@@ -78,8 +78,12 @@
 	set_picture("ai_bsod")
 	..(severity)
 
-/obj/machinery/status_display/get_spooked()
+/obj/machinery/status_display/flicker()
+	if(stat & (NOPOWER | BROKEN))
+		return FALSE
+
 	spookymode = TRUE
+	return TRUE
 
 // set what is displayed
 /obj/machinery/status_display/proc/update()
@@ -158,7 +162,9 @@
 /obj/machinery/status_display/proc/set_picture(state)
 	picture_state = state
 	remove_display()
-	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+	var/image/on_overlay = image(icon,picture_state)
+	on_overlay.plane = ABOVE_LIGHTING_PLANE
+	overlays += on_overlay
 
 /obj/machinery/status_display/proc/update_display(line1, line2, warning = 0)
 	line1 = uppertext(line1)
@@ -230,8 +236,12 @@
 	set_picture("ai_bsod")
 	..(severity)
 
-/obj/machinery/ai_status_display/get_spooked()
+/obj/machinery/ai_status_display/flicker()
+	if(stat & (NOPOWER | BROKEN))
+		return FALSE
+
 	spookymode = TRUE
+	return TRUE
 
 /obj/machinery/ai_status_display/proc/update()
 	if(mode==0) //Blank
@@ -279,11 +289,13 @@
 		return
 
 
-/obj/machinery/ai_status_display/proc/set_picture(var/state)
+/obj/machinery/ai_status_display/proc/set_picture(state)
 	picture_state = state
 	if(overlays.len)
 		overlays.Cut()
-	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+	var/image/on_overlay = image(icon, picture_state)
+	on_overlay.plane = ABOVE_LIGHTING_PLANE
+	overlays += on_overlay
 
 #undef FONT_SIZE
 #undef FONT_COLOR

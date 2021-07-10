@@ -29,7 +29,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 
 
-/obj/item/grab/New(var/mob/user, var/mob/victim)
+/obj/item/grab/New(mob/user, mob/victim)
 	..()
 
 	//Okay, first off, some fucking sanity checking. No user, or no victim, or they are not mobs, no grab.
@@ -53,17 +53,16 @@
 	hud.master = src
 
 	//check if assailant is grabbed by victim as well
-	if(assailant.grabbed_by)
-		for(var/obj/item/grab/G in assailant.grabbed_by)
-			if(G.assailant == affecting && G.affecting == assailant)
-				G.dancing = 1
-				G.adjust_position()
-				dancing = 1
+	for(var/obj/item/grab/G in assailant.grabbed_by)
+		if(G.assailant == affecting && G.affecting == assailant)
+			G.dancing = 1
+			G.adjust_position()
+			dancing = 1
 
 	clean_grabbed_by(assailant, affecting)
 	adjust_position()
 
-/obj/item/grab/proc/clean_grabbed_by(var/mob/user, var/mob/victim) //Cleans up any nulls in the grabbed_by list.
+/obj/item/grab/proc/clean_grabbed_by(mob/user, mob/victim) //Cleans up any nulls in the grabbed_by list.
 	if(istype(user))
 
 		for(var/entry in user.grabbed_by)
@@ -194,6 +193,8 @@
 /obj/item/grab/proc/adjust_position()
 	if(affecting.buckled)
 		return
+	if(!assailant.Adjacent(affecting)) // To prevent teleportation via grab
+		return
 	if(affecting.lying && state != GRAB_KILL)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 5, 1, LINEAR_EASING)
 		return //KJK
@@ -276,7 +277,7 @@
 		assailant.visible_message("<span class='warning'>[assailant] has reinforced [assailant.p_their()] grip on [affecting] (now neck)!</span>")
 		state = GRAB_NECK
 		icon_state = "grabbed+1"
-		assailant.setDir(get_dir(assailant, affecting))
+
 		add_attack_logs(assailant, affecting, "Neck grabbed", ATKLOG_ALL)
 		if(!iscarbon(assailant))
 			affecting.LAssailant = null
@@ -296,7 +297,7 @@
 		assailant.next_move = world.time + 10
 		if(!affecting.get_organ_slot("breathing_tube"))
 			affecting.AdjustLoseBreath(1)
-		affecting.setDir(WEST)
+
 	adjust_position()
 
 //This is used to make sure the victim hasn't managed to yackety sax away before using the grab.
@@ -409,10 +410,10 @@
 				add_attack_logs(attacker, affecting, "Devoured")
 
 			affecting.forceMove(user)
-			attacker.stomach_contents.Add(affecting)
+			LAZYADD(attacker.stomach_contents, affecting)
 			qdel(src)
 
-/obj/item/grab/proc/checkvalid(var/mob/attacker, var/mob/prey) //does all the checking for the attack proc to see if a mob can eat another with the grab
+/obj/item/grab/proc/checkvalid(mob/attacker, mob/prey) //does all the checking for the attack proc to see if a mob can eat another with the grab
 	if(isalien(attacker) && iscarbon(prey)) //Xenomorphs eating carbon mobs
 		return 1
 
@@ -422,7 +423,7 @@
 
 	return 0
 
-/obj/item/grab/proc/checktime(var/mob/attacker, var/mob/prey) //Returns the time the attacker has to wait before they eat the prey
+/obj/item/grab/proc/checktime(mob/attacker, mob/prey) //Returns the time the attacker has to wait before they eat the prey
 	if(isalien(attacker))
 		return EAT_TIME_XENO //xenos get a speed boost
 
@@ -433,9 +434,10 @@
 
 /obj/item/grab/Destroy()
 	if(affecting)
-		affecting.pixel_x = 0
-		affecting.pixel_y = 0 //used to be an animate, not quick enough for del'ing
-		affecting.layer = initial(affecting.layer)
+		if(!affecting.buckled)
+			affecting.pixel_x = 0
+			affecting.pixel_y = 0 //used to be an animate, not quick enough for qdel'ing
+			affecting.layer = initial(affecting.layer)
 		affecting.grabbed_by -= src
 		affecting = null
 	if(assailant)

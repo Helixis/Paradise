@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/Process_Spacemove(var/movement_dir = 0)
+/mob/living/silicon/robot/Process_Spacemove(movement_dir = 0)
 	if(ionpulse())
 		return 1
 	if(..())
@@ -9,7 +9,7 @@
 /mob/living/silicon/robot/movement_delay()
 	. = ..()
 	. += speed
-	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
+	if(module_active && istype(module_active,/obj/item/borg/destroyer/mobility))
 		. -= 3
 	. += config.robot_delay
 

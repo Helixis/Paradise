@@ -13,7 +13,7 @@
 	var/obj/item/gun/energy/chrono_gun/PA = null
 	var/list/erased_minds = list() //a collection of minds from the dead
 
-/obj/item/chrono_eraser/proc/pass_mind(var/datum/mind/M)
+/obj/item/chrono_eraser/proc/pass_mind(datum/mind/M)
 	erased_minds += M
 
 /obj/item/chrono_eraser/dropped()
@@ -32,7 +32,7 @@
 			if(PA)
 				qdel(PA)
 			else
-				PA = new(src)
+				PA = new(user, src)
 				user.put_in_hands(PA)
 
 /obj/item/chrono_eraser/item_action_slot_check(slot, mob/user)
@@ -55,7 +55,7 @@
 	var/obj/structure/chrono_field/field = null
 	var/turf/startpos = null
 
-/obj/item/gun/energy/chrono_gun/New(var/obj/item/chrono_eraser/T)
+/obj/item/gun/energy/chrono_gun/Initialize(mapload, obj/item/chrono_eraser/T)
 	. = ..()
 	if(istype(T))
 		TED = T
@@ -113,7 +113,7 @@
 		field_disconnect(F)
 		return 0
 
-/obj/item/gun/energy/chrono_gun/proc/pass_mind(var/datum/mind/M)
+/obj/item/gun/energy/chrono_gun/proc/pass_mind(datum/mind/M)
 	if(TED)
 		TED.pass_mind(M)
 
@@ -141,6 +141,8 @@
 /obj/item/ammo_casing/energy/chrono_beam
 	name = "eradication beam"
 	projectile_type = /obj/item/projectile/energy/chrono_beam
+	muzzle_flash_effect = /obj/effect/temp_visual/target_angled/muzzle_flash/energy
+	muzzle_flash_color = null
 	icon_state = "chronobolt"
 	e_cost = 0
 
@@ -188,7 +190,7 @@
 
 /obj/structure/chrono_field/update_icon()
 	var/ttk_frame = 1 - (tickstokill / initial(tickstokill))
-	ttk_frame = Clamp(Ceiling(ttk_frame * CHRONO_FRAME_COUNT), 1, CHRONO_FRAME_COUNT)
+	ttk_frame = clamp(CEILING(ttk_frame * CHRONO_FRAME_COUNT, 1), 1, CHRONO_FRAME_COUNT)
 	if(ttk_frame != RPpos)
 		RPpos = ttk_frame
 		mob_underlay.icon_state = "frame[RPpos]"

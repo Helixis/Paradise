@@ -167,7 +167,7 @@
 /datum/design/item/scalpel_laser3
 	name = "Advanced Laser Scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks to be the pinnacle of precision energy cutlery!"
-	id = "scalpel_laser3"
+	//id = "scalpel_laser3"
 	req_tech = list("biotech" = 4, "materials" = 6, "magnets" = 5)
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000)
@@ -178,9 +178,9 @@
 	name = "Incision Management System"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	id = "scalpel_manager"
-	req_tech = list("biotech" = 4, "materials" = 7, "magnets" = 5, "programming" = 4)
+	req_tech = list("biotech" = 5, "materials" = 7, "magnets" = 6, "programming" = 4)
 	build_type = PROTOLATHE | MECHFAB
-	materials = list(MAT_METAL = 2000, MAT_GLASS = 1500, MAT_SILVER = 1000, MAT_GOLD = 1000, MAT_DIAMOND = 1000)
+	materials = list(MAT_METAL = 4000, MAT_GLASS = 2000, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 1000)
 	build_path = /obj/item/scalpel/laser/manager
 	category = list("Medical")
 
@@ -286,7 +286,7 @@
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
 	materials = list(MAT_METAL = 600, MAT_GLASS = 400)
-	build_path = /obj/item/organ/internal/cyberimp/eyes/shield
+	build_path = /obj/item/organ/internal/eyes/cybernetic/shield
 	category = list("Medical")
 
 /datum/design/cyberimp_breather
@@ -320,6 +320,39 @@
 	materials = list(MAT_METAL = 2500, MAT_GLASS = 1500, MAT_SILVER = 1500)
 	construction_time = 200
 	build_path = /obj/item/organ/internal/cyberimp/arm/toolset
+	category = list("Medical")
+
+/datum/design/cyberimp_janitorial
+	name = "Janitorial Toolset Implant"
+	desc = "A set of janitorial tools hidden behind a concealed panel on the user's arm."
+	id = "ci-janitorial"
+	req_tech = list("materials" = 3, "engineering" = 4, "biotech" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(MAT_METAL = 2500, MAT_GLASS = 1500, MAT_SILVER = 1500)
+	construction_time = 200
+	build_path = /obj/item/organ/internal/cyberimp/arm/janitorial
+	category = list("Medical")
+
+/datum/design/cyberimp_botanical
+	name = "Botanical Toolset Implant"
+	desc = "A set of botanical tools hidden behind a concealed panel on the user's arm."
+	id = "ci-botanical"
+	req_tech = list("materials" = 3, "engineering" = 4, "biotech" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(MAT_METAL = 2500, MAT_GLASS = 1500, MAT_SILVER = 1500)
+	construction_time = 200
+	build_path = /obj/item/organ/internal/cyberimp/arm/botanical
+	category = list("Medical")
+
+/datum/design/cyberimp_hacking
+	name = "Hacking Arm Implant"
+	desc = "A small arm implant containing an advanced screwdriver, wirecutters, and multitool designed for engineers and on-the-field machine modification. Actually legal, despite what the name may make you think."
+	id = "ci-hacking"
+	req_tech = list("materials" = 3, "engineering" = 5, "biotech" = 4, "programming" = 4, "abductor" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(MAT_METAL = 5000, MAT_SILVER = 2500, MAT_PLASMA = 5000, MAT_TITANIUM = 2000, MAT_DIAMOND = 2000)
+	construction_time = 200
+	build_path = /obj/item/organ/internal/cyberimp/arm/hacking
 	category = list("Medical")
 
 /datum/design/cyberimp_diagnostic_hud
@@ -359,18 +392,18 @@
 	req_tech = list("materials" = 4, "biotech" = 4, "engineering" = 4)
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(MAT_METAL = 500, MAT_GLASS = 500, MAT_SILVER = 500, MAT_GOLD = 300)
-	build_path = /obj/item/organ/internal/cyberimp/eyes/meson
+	build_path = /obj/item/organ/internal/eyes/cybernetic/meson
 	category = list("Medical")
 
 /datum/design/cyberimp_xray
 	name = "X-Ray implant"
 	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
 	id = "ci-xray"
-	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 7, "magnets" = 5,"plasmatech" = 6)
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 8, "magnets" = 5,"plasmatech" = 6)
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 600, MAT_GOLD = 600, MAT_PLASMA = 1000, MAT_URANIUM = 1000, MAT_DIAMOND = 1000, MAT_BLUESPACE = 1000)
-	build_path = /obj/item/organ/internal/cyberimp/eyes/xray
+	build_path = /obj/item/organ/internal/eyes/cybernetic/xray
 	category = list("Medical")
 
 /datum/design/cyberimp_thermals
@@ -381,7 +414,7 @@
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 600, MAT_GOLD = 600, MAT_PLASMA = 1000, MAT_DIAMOND = 2000)
-	build_path = /obj/item/organ/internal/cyberimp/eyes/thermals
+	build_path = /obj/item/organ/internal/eyes/cybernetic/thermals
 	category = list("Medical")
 
 /datum/design/cyberimp_antidrop
@@ -397,13 +430,24 @@
 
 /datum/design/cyberimp_antistun
 	name = "CNS Rebooter implant"
-	desc = "This implant will automatically give you back control over your central nervous system, reducing downtime when stunned."
+	desc = "This implant will automatically give you back control over your central nervous system, reducing downtime when stunned. Incompatible with the Neural Jumpstarter."
 	id = "ci-antistun"
 	req_tech = list("materials" = 6, "programming" = 5, "biotech" = 6)
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 500, MAT_GOLD = 1000)
 	build_path = /obj/item/organ/internal/cyberimp/brain/anti_stun
+	category = list("Medical")
+
+/datum/design/cyberimp_antisleep
+	name = "Neural Jumperstarter implant"
+	desc = "This implant will automatically attempt to jolt you awake when it detects you have fallen unconscious. Has a short cooldown, incompatible with the CNS Rebooter."
+	id = "ci-antisleep"
+	req_tech = list("materials" = 6, "programming" = 5, "biotech" = 6)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list(MAT_METAL = 600, MAT_GLASS = 600, MAT_SILVER = 500, MAT_GOLD = 1000)
+	build_path = /obj/item/organ/internal/cyberimp/brain/anti_sleep
 	category = list("Medical")
 
 /datum/design/cyberimp_clownvoice
@@ -477,10 +521,20 @@
 	name = "Chemical Implant Case"
 	desc = "A glass case containing an implant."
 	id = "implant_chem"
-	req_tech = list("materials" = 3, "biotech" = 5,)
+	req_tech = list("materials" = 3, "biotech" = 5)
 	build_type = PROTOLATHE
 	materials = list(MAT_GLASS = 700)
 	build_path = /obj/item/implantcase/chem
+	category = list("Medical")
+
+/datum/design/implant_sadtrombone
+	name = "Sad Trombone Implant Case"
+	desc = "Makes death amusing."
+	id = "implant_trombone"
+	req_tech = list("materials" = 3, "biotech" = 5)
+	build_type = PROTOLATHE
+	materials = list(MAT_GLASS = 500, MAT_BANANIUM = 500)
+	build_path = /obj/item/implantcase/sad_trombone
 	category = list("Medical")
 
 /datum/design/implant_tracking
@@ -504,6 +558,17 @@
 	materials = list(MAT_METAL = 500, MAT_GLASS = 500)
 	construction_time = 60
 	build_path = /obj/item/organ/internal/eyes/cybernetic
+	category = list("Medical")
+
+/datum/design/cybernetic_ears
+	name = "Cybernetic Ears"
+	desc = "A cybernetic pair of ears"
+	id = "cybernetic_ears"
+	req_tech = list("biotech" = 4, "materials" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(MAT_METAL = 500, MAT_GLASS = 500)
+	construction_time = 60
+	build_path = /obj/item/organ/internal/ears/cybernetic
 	category = list("Medical")
 
 /datum/design/cybernetic_liver

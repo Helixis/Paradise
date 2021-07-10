@@ -9,6 +9,7 @@
 	icon_dead = "angel"
 	gender = NEUTER
 	a_intent = INTENT_HARM
+	mob_biotypes = MOB_HUMANOID
 
 	response_help = "touches"
 	response_disarm = "pushes"
@@ -52,7 +53,7 @@
 
 // No movement while seen code.
 
-/mob/living/simple_animal/hostile/statue/New(loc, var/mob/living/creator)
+/mob/living/simple_animal/hostile/statue/New(loc, mob/living/creator)
 	..()
 	// Give spells
 	AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/flicker_lights(null))
@@ -180,11 +181,11 @@
 	range = 10
 
 /obj/effect/proc_holder/spell/aoe_turf/blindness/cast(list/targets, mob/user = usr)
-	for(var/mob/living/L in GLOB.living_mob_list)
+	for(var/mob/living/L in GLOB.alive_mob_list)
 		if(L == user)
 			continue
 		var/turf/T = get_turf(L.loc)
-		if(T && T in targets)
+		if(T && (T in targets))
 			L.EyeBlind(4)
 	return
 

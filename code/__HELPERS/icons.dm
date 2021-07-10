@@ -15,7 +15,7 @@ CHANGING ICONS
 Several new procs have been added to the /icon datum to simplify working with icons. To use them,
 remember you first need to setup an /icon var like so:
 
-var/icon/my_icon = new('iconfile.dmi')
+	var/icon/my_icon = new('iconfile.dmi')
 
 icon/ChangeOpacity(amount = 1)
     A very common operation in DM is to try to make an icon more or less transparent. Making an icon more
@@ -570,6 +570,18 @@ world
 /proc/BlendRGBasHSV(rgb1, rgb2, amount)
 	return HSVtoRGB(RGBtoHSV(rgb1), RGBtoHSV(rgb2), amount)
 
+//Returns the perceived brightness of a color.
+//https://en.wikipedia.org/wiki/Relative_luminance
+//https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+/proc/getLuminance(color)
+	var/list/RGB = ReadRGB(color)
+	var/R = RGB[1]
+	var/G = RGB[2]
+	var/B =	RGB[2]
+
+	var/Y = (0.2126 * R) + (0.7152 * G) + (0.0722 * B)
+	return clamp((Y * 0.01), 0, 1) //Returns the brightness of a color in decimal percentage format. Can multiply light_power by this to receive 100% brightness or a lower brightness. Not a higher brightness.
+
 /proc/HueToAngle(hue)
 	// normalize hsv in case anything is screwy
 	if(hue < 0 || hue >= 1536) hue %= 1536
@@ -882,17 +894,17 @@ The _flatIcons list is a cache for generated icon files.
 		composite.Blend(icon(I.icon, I.icon_state, I.dir, 1), ICON_OVERLAY)
 	return composite
 
-/proc/adjust_brightness(var/color, var/value)
+/proc/adjust_brightness(color, value)
 	if(!color) return "#FFFFFF"
 	if(!value) return color
 
 	var/list/RGB = ReadRGB(color)
-	RGB[1] = Clamp(RGB[1]+value,0,255)
-	RGB[2] = Clamp(RGB[2]+value,0,255)
-	RGB[3] = Clamp(RGB[3]+value,0,255)
+	RGB[1] = clamp(RGB[1]+value,0,255)
+	RGB[2] = clamp(RGB[2]+value,0,255)
+	RGB[3] = clamp(RGB[3]+value,0,255)
 	return rgb(RGB[1],RGB[2],RGB[3])
 
-/proc/sort_atoms_by_layer(var/list/atoms)
+/proc/sort_atoms_by_layer(list/atoms)
 	// Comb sort icons based on levels
 	var/list/result = atoms.Copy()
 	var/gap = result.len
@@ -913,7 +925,7 @@ The _flatIcons list is a cache for generated icon files.
 
 //Interface for using DrawBox() to draw 1 pixel on a coordinate.
 //Returns the same icon specifed in the argument, but with the pixel drawn
-/proc/DrawPixel(var/icon/I,var/colour,var/drawX,var/drawY)
+/proc/DrawPixel(icon/I, colour, drawX, drawY)
 	if(!I)
 		return 0
 	var/Iwidth = I.Width()
@@ -926,7 +938,7 @@ The _flatIcons list is a cache for generated icon files.
 	return I
 
 //Interface for easy drawing of one pixel on an atom.
-/atom/proc/DrawPixelOn(var/colour, var/drawX, var/drawY)
+/atom/proc/DrawPixelOn(colour, drawX, drawY)
 	var/icon/I = new(icon)
 	var/icon/J = DrawPixel(I, colour, drawX, drawY)
 	if(J) //Only set the icon if it succeeded, the icon without the pixel is 1000x better than a black square.
@@ -949,7 +961,7 @@ The _flatIcons list is a cache for generated icon files.
 
 //Imagine removing pixels from the main icon that are covered by pixels from the mask icon.
 //Standard behaviour is to cut pixels from the main icon that are covered by pixels from the mask icon unless passed mask_ready, see below.
-/proc/get_icon_difference(var/icon/main, var/icon/mask, var/mask_ready)
+/proc/get_icon_difference(icon/main, icon/mask, mask_ready)
 	/*You should skip prep if the mask is already sprited properly. This significantly improves performance by eliminating most of the realtime icon work.
 	e.g. A 'ready' mask is a mask where the part you want cut out is missing (no pixels, 0 alpha) from the sprite, and everything else is solid white.*/
 

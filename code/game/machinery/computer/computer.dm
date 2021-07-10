@@ -1,6 +1,6 @@
 /obj/machinery/computer
 	name = "computer"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/hispania/obj/computer.dmi'
 	icon_state = "computer"
 	density = 1
 	anchored = 1.0
@@ -17,6 +17,10 @@
 	var/light_range_on = 2
 	var/light_power_on = 1
 	var/overlay_layer
+	/// Are we in the middle of a flicker event?
+	var/flickering = FALSE
+	/// Are we forcing the icon to be represented in a no-power state?
+	var/force_no_power_icon_state = FALSE
 
 /obj/machinery/computer/New()
 	overlay_layer = layer
@@ -29,24 +33,58 @@
 
 /obj/machinery/computer/process()
 	if(stat & (NOPOWER|BROKEN))
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /obj/machinery/computer/extinguish_light()
 	set_light(0)
 	visible_message("<span class='danger'>[src] grows dim, its screen barely readable.</span>")
 
+/*
+ * Reimp, flash the screen on and off repeatedly.
+ */
+/obj/machinery/computer/flicker()
+	if(flickering)
+		return FALSE
+
+	if(stat & (BROKEN|NOPOWER))
+		return FALSE
+
+	flickering = TRUE
+	INVOKE_ASYNC(src, /obj/machinery/computer/.proc/flicker_event)
+
+	return TRUE
+
+/*
+ * Proc to be called by invoke_async in the above flicker() proc.
+ */
+/obj/machinery/computer/proc/flicker_event()
+	var/amount = rand(5, 15)
+
+	for(var/i in 1 to amount)
+		force_no_power_icon_state = TRUE
+		update_icon()
+		sleep(rand(1, 3))
+
+		force_no_power_icon_state = FALSE
+		update_icon()
+		sleep(rand(1, 10))
+	update_icon()
+	flickering = FALSE
+
 /obj/machinery/computer/update_icon()
 	overlays.Cut()
-	if(stat & NOPOWER)
+	if((stat & NOPOWER) || force_no_power_icon_state)
 		if(icon_keyboard)
 			overlays += image(icon,"[icon_keyboard]_off",overlay_layer)
 		return
 
 	if(stat & BROKEN)
-		overlays += image(icon,"[icon_state]_broken",overlay_layer)
+		overlays += "[icon_state]_broken"
 	else
-		overlays += image(icon,icon_screen,overlay_layer)
+		var/image/on_overlay = image(icon,icon_screen)
+		on_overlay.plane = ABOVE_LIGHTING_PLANE
+		overlays += on_overlay
 
 	if(icon_keyboard)
 		overlays += image(icon, icon_keyboard ,overlay_layer)
@@ -135,7 +173,7 @@
 
 /obj/machinery/computer/screwdriver_act(mob/user, obj/item/I)
 	. = TRUE
-	if(!I.tool_start_check(user, 0))
+	if(!I.tool_start_check(src, user, 0))
 		return
 	if(circuit && !(flags & NODECONSTRUCT))
 		if(I.use_tool(src, user, 20, volume = I.tool_volume))

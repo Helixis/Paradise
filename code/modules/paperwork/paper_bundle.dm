@@ -16,10 +16,12 @@
 	var/screen = 0
 
 /obj/item/paper_bundle/New(default_papers = TRUE)
+	. = ..()
 	if(default_papers) // This is to avoid runtime occuring from a paper bundle being created without a paper in it.
 		new /obj/item/paper(src)
 		new /obj/item/paper(src)
 		amount += 1
+		
 /obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob, params)
 	..()
 	var/obj/item/paper/P
@@ -63,13 +65,13 @@
 		qdel(W)
 	else
 		if(istype(W, /obj/item/pen) || istype(W, /obj/item/toy/crayon))
-			usr << browse("", "window=[name]") //Closes the dialog
+			usr << browse("", "window=PaperBundle[UID()]") //Closes the dialog
 		P = src[page]
 		P.attackby(W, user, params)
 
 
 	update_icon()
-	if(winget(usr, "[name]", "is-visible") == "true") // NOT MY FAULT IT IS A BUILT IN PROC PLEASE DO NOT HIT ME
+	if(winget(usr, "PaperBundle[UID()]", "is-visible") == "true") // NOT MY FAULT IT IS A BUILT IN PROC PLEASE DO NOT HIT ME
 		attack_self(usr) //Update the browsed page.
 	add_fingerprint(usr)
 	return
@@ -125,7 +127,7 @@
 	if(istype(src[page], /obj/item/paper))
 		var/obj/item/paper/P = W
 		dat += P.show_content(usr, view = 0)
-		usr << browse(dat, "window=[name]")
+		usr << browse(dat, "window=PaperBundle[UID()]")
 	else if(istype(src[page], /obj/item/photo))
 		var/obj/item/photo/P = W
 		usr << browse_rsc(P.img, "tmp_photo.png")
@@ -133,7 +135,7 @@
 		+ "<body style='overflow:hidden'>" \
 		+ "<div> <img src='tmp_photo.png' width = '180'" \
 		+ "[P.scribble ? "<div><br> Written on the back:<br><i>[P.scribble]</i>" : ""]"\
-		+ "</body></html>", "window=[name]")
+		+ "</body></html>", "window=PaperBundle[UID()]")
 
 /obj/item/paper_bundle/attack_self(mob/user as mob)
 	src.show_content(user)
@@ -166,7 +168,7 @@
 		if(href_list["remove"])
 			var/obj/item/W = src[page]
 			usr.put_in_hands(W)
-			to_chat(usr, "<span class='notice'>You remove the [W.name] from the bundle.</span>")
+			to_chat(usr, "<span class='notice'>You remove [W] from the bundle.</span>")
 			if(amount == 1)
 				var/obj/item/paper/P = src[1]
 				usr.unEquip(src)

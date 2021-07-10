@@ -36,8 +36,14 @@
 	//Temperature effect
 	var/minbodytemp = 250
 	var/maxbodytemp = 350
-	var/heat_damage_per_tick = 2	//amount of damage applied if animal's body temperature is higher than maxbodytemp
-	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
+	/// Amount of damage applied if animal's body temperature is higher than maxbodytemp
+	var/heat_damage_per_tick = 2
+	/// Same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
+	var/cold_damage_per_tick = 2
+	/// If the mob can catch fire
+	var/can_be_on_fire = FALSE
+	/// Damage the mob will take if it is on fire
+	var/fire_damage = 2
 
 	//Healable by medical stacks? Defaults to yes.
 	var/healable = 1
@@ -98,6 +104,8 @@
 	var/tame = 0
 
 	var/my_z // I don't want to confuse this with client registered_z
+	///What kind of footstep this mob should have. Null if it shouldn't have any.
+	var/footstep_type
 
 /mob/living/simple_animal/Initialize(mapload)
 	. = ..()
@@ -114,6 +122,8 @@
 	if(pcollar)
 		pcollar = new(src)
 		regenerate_icons()
+	if(footstep_type)
+		AddComponent(/datum/component/footstep, footstep_type)
 
 /mob/living/simple_animal/Destroy()
 	QDEL_NULL(pcollar)
@@ -144,8 +154,8 @@
 
 /mob/living/simple_animal/updatehealth(reason = "none given")
 	..(reason)
-	health = Clamp(health, 0, maxHealth)
-	med_hud_set_status()
+	health = clamp(health, 0, maxHealth)
+	med_hud_set_health()
 
 /mob/living/simple_animal/StartResting(updating = 1)
 	..()
@@ -166,12 +176,14 @@
 /mob/living/simple_animal/update_stat(reason = "none given")
 	if(status_flags & GODMODE)
 		return
-
-	..(reason)
 	if(stat != DEAD)
-		if(health < 1)
+		if(health <= 0)
 			death()
 			create_debug_log("died of damage, trigger reason: [reason]")
+		else
+			WakeUp()
+			create_debug_log("woke up, trigger reason: [reason]")
+	med_hud_set_status()
 
 /mob/living/simple_animal/proc/handle_automated_action()
 	set waitfor = FALSE
@@ -184,7 +196,7 @@
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
 				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					var/anydir = pick(cardinal)
+					var/anydir = pick(GLOB.cardinal)
 					if(Process_Spacemove(anydir))
 						Move(get_step(src,anydir), anydir)
 						turns_since_move = 0
@@ -231,7 +243,7 @@
 
 	var/areatemp = get_temperature(environment)
 
-	if(abs(areatemp - bodytemperature) > 5 && !(BREATHLESS in mutations))
+	if(abs(areatemp - bodytemperature) > 5 && !HAS_TRAIT(src, TRAIT_NOBREATH))
 		var/diff = areatemp - bodytemperature
 		diff = diff / 5
 		bodytemperature += diff
@@ -317,10 +329,9 @@
 	return verb
 
 /mob/living/simple_animal/movement_delay()
-	. = ..()
-
 	. = speed
-
+	if(forced_look)
+		. += 3
 	. += config.animal_delay
 
 /mob/living/simple_animal/Stat()
@@ -393,13 +404,30 @@
 	return TRUE
 
 /mob/living/simple_animal/handle_fire()
-	return TRUE
+	if(!can_be_on_fire)
+		return FALSE
+	. = ..()
+	if(!.)
+		return
+	adjustFireLoss(fire_damage) // Slowly start dying from being on fire
 
 /mob/living/simple_animal/IgniteMob()
-	return FALSE
+	if(!can_be_on_fire)
+		return FALSE
+	return ..()
 
 /mob/living/simple_animal/ExtinguishMob()
-	return
+	if(!can_be_on_fire)
+		return
+	return ..()
+
+
+/mob/living/simple_animal/update_fire()
+	if(!can_be_on_fire)
+		return
+	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
+	if(on_fire)
+		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
 
 /mob/living/simple_animal/revive()
 	..()
@@ -446,7 +474,7 @@
 		return
 
 	user.set_machine(src)
-	var/dat = "<table><tr><td><B>Collar:</B></td><td><A href='?src=[UID()];item=[slot_collar]'>[(pcollar && !(pcollar.flags & ABSTRACT)) ? pcollar : "<font color=grey>Empty</font>"]</A></td></tr></table>"
+	var/dat = "<table><tr><td><B>Collar:</B></td><td><A href='?src=[UID()];item=[slot_collar]'>[(pcollar && !(pcollar.flags & ABSTRACT)) ? html_encode(pcollar) : "<font color=grey>Empty</font>"]</A></td></tr></table>"
 	dat += "<A href='?src=[user.UID()];mach_close=mob\ref[src]'>Close</A>"
 
 	var/datum/browser/popup = new(user, "mob\ref[src]", "[src]", 440, 250)
@@ -471,7 +499,7 @@
 				return FALSE
 			return TRUE
 
-/mob/living/simple_animal/equip_to_slot(obj/item/W, slot)
+/mob/living/simple_animal/equip_to_slot(obj/item/W, slot, initial = FALSE)
 	if(!istype(W))
 		return FALSE
 
@@ -485,7 +513,7 @@
 		if(slot_collar)
 			add_collar(W)
 
-/mob/living/simple_animal/unEquip(obj/item/I, force)
+/mob/living/simple_animal/unEquip(obj/item/I, force, silent = FALSE)
 	. = ..()
 	if(!. || !I)
 		return
@@ -500,7 +528,7 @@
 		. |= pcollar.GetAccess()
 
 /mob/living/simple_animal/update_canmove(delay_action_updates = 0)
-	if(paralysis || stunned || IsWeakened() || stat || resting)
+	if(paralysis || stunned || IsWeakened() || stat || resting || sleeping) //Se le pone sleeping para que no se puedan mover durmiendo.
 		drop_r_hand()
 		drop_l_hand()
 		canmove = 0
@@ -594,7 +622,7 @@
 		toggle_ai(initial(AIStatus))
 
 /mob/living/simple_animal/proc/add_collar(obj/item/clothing/accessory/petcollar/P, mob/user)
-	if(QDELETED(P) || pcollar)
+	if(!istype(P) || QDELETED(P) || pcollar)
 		return
 	if(user && !user.unEquip(P))
 		return
@@ -609,7 +637,11 @@
 		real_name = P.tagname
 
 /mob/living/simple_animal/regenerate_icons()
+	cut_overlays()
 	if(pcollar && collar_type)
-		cut_overlays()
 		add_overlay("[collar_type]collar")
 		add_overlay("[collar_type]tag")
+
+/mob/living/simple_animal/Login()
+	..()
+	walk(src, 0) // if mob is moving under ai control, then stop AI movement

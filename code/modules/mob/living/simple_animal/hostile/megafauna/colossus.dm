@@ -32,7 +32,7 @@ Difficulty: Very Hard
 	icon_living = "eva"
 	icon_dead = ""
 	friendly = "stares down"
-	icon = 'icons/mob/lavaland/96x96megafauna.dmi'
+	icon = 'icons/hispania/mob/lavaland/96x96megafauna.dmi'
 	speak_emote = list("roars")
 	armour_penetration = 40
 	melee_damage_lower = 40
@@ -83,7 +83,7 @@ Difficulty: Very Hard
 	chosen_attack_num = 4
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
-	anger_modifier = Clamp(((maxHealth - health)/50),0,20)
+	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	ranged_cooldown = world.time + 120
 
 	if(client)
@@ -103,7 +103,7 @@ Difficulty: Very Hard
 			visible_message("<span class='colossus'>\"<b>You can't dodge.</b>\"</span>")
 		ranged_cooldown = world.time + 30
 		telegraph()
-		dir_shots(alldirs)
+		dir_shots(GLOB.alldirs)
 		move_to_delay = 3
 		return
 	else
@@ -122,21 +122,22 @@ Difficulty: Very Hard
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/enrage(mob/living/L)
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		if(H.martial_art && prob(H.martial_art.deflection_chance))
-			. = TRUE
+		if(H.mind && H.mind.martial_art && prob(H.mind.martial_art.deflection_chance))
+			return TRUE
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/alternating_dir_shots()
 	ranged_cooldown = world.time + 40
-	dir_shots(diagonals)
+	dir_shots(GLOB.diagonals)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(cardinal)
+	dir_shots(GLOB.cardinal)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(diagonals)
+	dir_shots(GLOB.diagonals)
 	SLEEP_CHECK_DEATH(10)
-	dir_shots(cardinal)
+	dir_shots(GLOB.cardinal)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/select_spiral_attack()
 	telegraph()
+	icon_state = "eva_attack"
 	if(health < maxHealth/3)
 		return double_spiral()
 	visible_message("<span class='colossus'>\"<b>Judgement.</b>\"</span>")
@@ -150,7 +151,7 @@ Difficulty: Very Hard
 	INVOKE_ASYNC(src, .proc/spiral_shoot, TRUE)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/spiral_shoot(negative = pick(TRUE, FALSE), counter_start = 8)
-	var/turf/start_turf = get_step(src, pick(alldirs))
+	var/turf/start_turf = get_step(src, pick(GLOB.alldirs))
 	var/counter = counter_start
 	for(var/i in 1 to 80)
 		if(negative)
@@ -164,6 +165,7 @@ Difficulty: Very Hard
 		shoot_projectile(start_turf, counter * 22.5)
 		playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
 		SLEEP_CHECK_DEATH(1)
+	icon_state = initial(icon_state)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/shoot_projectile(turf/marker, set_angle)
 	if(!isnum(set_angle) && (!marker || marker == loc))
@@ -189,7 +191,7 @@ Difficulty: Very Hard
 	var/turf/target_turf = get_turf(target)
 	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, TRUE, 2)
 	newtonian_move(get_dir(target_turf, src))
-	var/angle_to_target = Get_Angle(src, target_turf)
+	var/angle_to_target = get_angle(src, target_turf)
 	if(isnum(set_angle))
 		angle_to_target = set_angle
 	var/static/list/colossus_shotgun_shot_angles = list(12.5, 7.5, 2.5, -2.5, -7.5, -12.5)
@@ -198,7 +200,7 @@ Difficulty: Very Hard
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/dir_shots(list/dirs)
 	if(!islist(dirs))
-		dirs = alldirs.Copy()
+		dirs = GLOB.alldirs.Copy()
 	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, TRUE, 2)
 	for(var/d in dirs)
 		var/turf/E = get_step(src, d)
@@ -241,11 +243,19 @@ Difficulty: Very Hard
 		AT.pixel_y += random_y
 	return ..()
 
+/mob/living/simple_animal/hostile/megafauna/colossus/float(on) //we don't want this guy to float, messes up his animations
+	if(throwing)
+		return
+	if(on && !floating)
+		floating = TRUE
+	else if(!on && floating)
+		floating = FALSE
+
 /obj/item/projectile/colossus
 	name ="death bolt"
 	icon_state= "chronobolt"
 	damage = 25
-	armour_penetration = 100
+	armour_penetration = 50
 	speed = 2
 	eyeblur = 0
 	damage_type = BRUTE

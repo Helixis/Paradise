@@ -7,8 +7,6 @@
 	var/broken = FALSE
 
 /obj/structure/New()
-	if (!armor)
-		armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
 	..()
 	if(smooth)
 		if(SSticker && SSticker.current_state == GAME_STATE_PLAYING)
@@ -18,11 +16,16 @@
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
 	if(SSticker)
-		cameranet.updateVisibility(src)
+		GLOB.cameranet.updateVisibility(src)
+
+/obj/structure/Initialize(mapload)
+	if(!armor)
+		armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
+	return ..()
 
 /obj/structure/Destroy()
 	if(SSticker)
-		cameranet.updateVisibility(src)
+		GLOB.cameranet.updateVisibility(src)
 	if(smooth)
 		var/turf/T = get_turf(src)
 		spawn(0)
@@ -38,7 +41,7 @@
 
 	do_climb(usr)
 
-/obj/structure/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+/obj/structure/MouseDrop_T(atom/movable/C, mob/user as mob)
 	if(..())
 		return
 	if(C == user)
@@ -53,7 +56,7 @@
 		return T
 	return null
 
-/obj/structure/proc/do_climb(var/mob/living/user)
+/obj/structure/proc/do_climb(mob/living/user)
 	if(!can_touch(user) || !climbable)
 		return
 	var/blocking_object = density_check()
@@ -66,7 +69,12 @@
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 	climber = user
-	if(!do_after(user, 50, target = src))
+	//HISPATRAITS START
+	var/escala = 50
+	if(HAS_TRAIT(user, TRAIT_FREERUNNING))
+		escala /= 2
+	//HISPATRAITS END
+	if(!do_after(user, escala, target = src))
 		climber = null
 		return
 
@@ -85,7 +93,12 @@
 	for(var/mob/living/M in get_turf(src))
 
 		if(M.lying) return //No spamming this on people.
-
+		//HISPATRAITS START
+		if(HAS_TRAIT(M, TRAIT_FREERUNNING))
+			to_chat(M, "<span class='warning'>You land on your feet like a boss!</span>")
+			to_chat(viewers(loc), "<span class='warning'>[M] lands on hes feet like a boss!</span>")
+			return
+		//HISPATRAITS END
 		M.Weaken(5)
 		to_chat(M, "<span class='warning'>You topple as \the [src] moves under you!</span>")
 
@@ -124,7 +137,7 @@
 			H.UpdateDamageIcon()
 	return
 
-/obj/structure/proc/can_touch(var/mob/user)
+/obj/structure/proc/can_touch(mob/user)
 	if(!user)
 		return 0
 	if(!Adjacent(user))
@@ -160,3 +173,12 @@
 		if(0 to 25)
 			if(!broken)
 				return  "<span class='warning'>It's falling apart!</span>"
+
+/obj/structure/proc/prevents_buckled_mobs_attacking()
+	return FALSE
+
+/obj/structure/zap_act(power, zap_flags)
+	if(zap_flags & ZAP_OBJ_DAMAGE)
+		take_damage(power / 8000, BURN, "energy")
+	power -= power / 2000 //walls take a lot out of ya
+	. = ..()

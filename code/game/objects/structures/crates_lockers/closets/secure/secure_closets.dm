@@ -7,10 +7,10 @@
 	opened = 0
 	locked = 1
 	broken = 0
+	can_be_emaged = TRUE
 	max_integrity = 250
 	armor = list("melee" = 30, "bullet" = 50, "laser" = 50, "energy" = 100, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 80)
 	damage_deflection = 20
-	var/large = 1
 	icon_closed = "secure"
 	var/icon_locked = "secure1"
 	icon_opened = "secureopen"
@@ -60,37 +60,19 @@
 		return
 	if(allowed(user))
 		locked = !locked
-		playsound(loc, 'sound/machines/click.ogg', 15, 1, -3)
 		visible_message("<span class='notice'>The locker has been [locked ? null : "un"]locked by [user].</span>")
 		update_icon()
 	else
 		to_chat(user, "<span class='notice'>Access Denied</span>")
 
-/obj/structure/closet/secure_closet/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/rcs))
-		return ..()
+/obj/structure/closet/secure_closet/closed_item_click(mob/user)
+	togglelock(user)
 
+/obj/structure/closet/secure_closet/AltClick(mob/user)
 	if(opened)
-		if(istype(W, /obj/item/grab))
-			if(large)
-				MouseDrop_T(W:affecting, user)	//act like they were dragged onto the closet
-			else
-				to_chat(user, "<span class='notice'>The locker is too small to stuff [W:affecting] into!</span>")
-		if(isrobot(user))
-			return
-		if(!user.drop_item()) //couldn't drop the item
-			to_chat(user, "<span class='notice'>\The [W] is stuck to your hand, you cannot put it in \the [src]!</span>")
-			return
-		if(W)
-			W.forceMove(loc)
-	else if((istype(W, /obj/item/card/emag)||istype(W, /obj/item/melee/energy/blade)) && !broken)
-		emag_act(user)
-	else if(istype(W,/obj/item/stack/packageWrap) || istype(W,/obj/item/weldingtool))
-		return ..(W, user)
-	else if(user.a_intent != INTENT_HARM)
-		togglelock(user)
-	else
 		return ..()
+	if(Adjacent(user))
+		togglelock(user)
 
 /obj/structure/closet/secure_closet/emag_act(mob/user)
 	if(!broken)
@@ -98,7 +80,7 @@
 		locked = FALSE
 		icon_state = icon_off
 		flick(icon_broken, src)
-		to_chat(user, "<span class='notice'>You break the lock on \the [src].</span>")
+		to_chat(user, "<span class='notice'>You break the lock on [src].</span>")
 
 /obj/structure/closet/secure_closet/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -133,7 +115,7 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/secure_closet/container_resist(var/mob/living/L)
+/obj/structure/closet/secure_closet/container_resist(mob/living/L)
 	var/breakout_time = 2 //2 minutes by default
 	if(opened)
 		if(L.loc == src)
@@ -143,11 +125,9 @@
 		return //It's a secure closet, but isn't locked. Easily escapable from, no need to 'resist'
 
 	//okay, so the closet is either welded or locked... resist!!!
-	L.changeNext_move(CLICK_CD_BREAKOUT)
-	L.last_special = world.time + CLICK_CD_BREAKOUT
 	to_chat(L, "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>")
 	for(var/mob/O in viewers(src))
-		O.show_message("<span class='danger'>The [src] begins to shake violently!</span>", 1)
+		O.show_message("<span class='danger'>[src] begins to shake violently!</span>", 1)
 
 
 	spawn(0)

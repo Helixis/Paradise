@@ -18,13 +18,6 @@
 	name = "syndicate personal AI device"
 	faction = list("syndicate")
 
-/obj/item/paicard/relaymove(var/mob/user, var/direction)
-	if(user.stat || user.stunned)
-		return
-	var/obj/item/rig/rig = get_rig()
-	if(istype(rig))
-		rig.forced_move(direction, user)
-
 /obj/item/paicard/New()
 	..()
 	overlays += "pai-off"
@@ -264,7 +257,7 @@
 			return
 		last_request = world.time / 10
 		looking_for_personality = 1
-		paiController.findPAI(src, usr)
+		GLOB.paiController.findPAI(src, usr)
 	if(href_list["wipe"])
 		var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
 		if(confirm == "Yes")
@@ -310,7 +303,7 @@
 
 /obj/item/paicard
 	var/current_emotion = 1
-/obj/item/paicard/proc/setEmotion(var/emotion)
+/obj/item/paicard/proc/setEmotion(emotion)
 	if(pai)
 		overlays.Cut()
 		switch(emotion)
