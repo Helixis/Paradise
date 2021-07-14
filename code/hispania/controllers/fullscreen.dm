@@ -4,7 +4,7 @@
 	winset(src, "mainwindow.mainvsplit", "splitter=75")
 
 /client/verb/updatefullscreen()
-	set name = "updateFullscreen"
+	set name = "Fullscreen"
 	set category = "Preferences"
 	set desc = "Toggle Fullscreen"
 	if (!fullscreen)
