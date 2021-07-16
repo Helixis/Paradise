@@ -85,3 +85,89 @@
 		new /obj/item/reagent_containers/food/drinks/cans/beer(src)
 	update_icon()
 	return
+
+/obj/item/storage/fancy/pilltablet
+	name = "blister pack"
+	desc = "idk how are you seeing this"
+	icon = 'icons/hispania/obj/food/containers.dmi'
+	icon_state = "pillbox0"
+	icon_type = "pill"
+	item_state = "pillbox"
+	storage_slots = 6
+	throwforce = 1
+	slot_flags = SLOT_BELT
+	var/applying_meds = FALSE
+	can_hold = list(/obj/item/reagent_containers/food/pill)
+
+/obj/item/storage/fancy/pilltablet/can_be_inserted(obj/item/I, stop_messages = FALSE)
+	to_chat(usr, "<span class='warning'>You cant place \the [I] inside \the [src].</span>")
+	return FALSE
+
+/obj/item/storage/fancy/pilltablet/attack(mob/living/M, mob/living/user, def_zone)
+	if(iscarbon(M) && contents.len)
+		if(applying_meds)
+			to_chat(user, "<span class='warning'>You are already applying meds.</span>")
+			return
+		applying_meds = TRUE
+		for(var/obj/item/reagent_containers/food/pill/P in contents)
+			if(P.attack(M, user))
+				applying_meds = FALSE
+			else
+				applying_meds = FALSE
+			break
+		update_icon()
+	else
+		return ..()
+
+/obj/item/storage/fancy/pilltablet/salbutamol
+	name = "salbutamol blister pack"
+	desc = "A blister pack of salbutamol pills."
+	icon_state = "salbox0"
+	icon_type = "sal"
+	item_state = "salbox"
+
+/obj/item/storage/fancy/pilltablet/salbutamol/populate_contents()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/reagent_containers/food/pill/salbutamol(src)
+	update_icon()
+	return
+
+/obj/item/storage/fancy/pilltablet/charcoal
+	name = "charcoal blister pack"
+	desc = "A blister pack of charcoal pills."
+	icon_state = "charbox0"
+	icon_type = "char"
+	item_state = "charbox"
+
+/obj/item/storage/fancy/pilltablet/charcoal/populate_contents()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/reagent_containers/food/pill/charcoal(src)
+	update_icon()
+	return
+
+/obj/item/storage/fancy/pilltablet/salicylic
+	name = "salicylic blister pack"
+	desc = "A blister pack of salicylic pills. DONT CONSUME MORE THAN ONE."
+	icon_state = "cylbox0"
+	icon_type = "cyl"
+	item_state = "cylbox"
+
+/obj/item/storage/fancy/pilltablet/salicylic/populate_contents()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/reagent_containers/food/pill/salicylic(src)
+	update_icon()
+	return
+
+/obj/item/storage/fancy/pilltablet/hydrocodone
+	name = "hydrocodone blister pack"
+	desc = "A blister pack of hydrocodone pills. DONT CONSUME MORE THAN ONE."
+
+/obj/item/storage/fancy/pilltablet/hydrocodone/populate_contents()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/reagent_containers/food/pill/hydrocodone(src)
+	update_icon()
+	return
