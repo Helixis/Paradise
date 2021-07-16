@@ -36,7 +36,7 @@
 	color = "#EEEDC4"
 	dizzy_adj = 2
 	alcohol_perc = 0.2
-	drink_icon = "whitewineglass"
+	drink_icon = "whitewhineglass"
 	drink_name = "Glass of white wine"
 	drink_desc = "A classy glass of white wine."
 	taste_description = "vibrant"

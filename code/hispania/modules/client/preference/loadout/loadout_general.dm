@@ -72,4 +72,4 @@
 /datum/gear/deluxelunchbox
 	display_name = "Deluxe Lunchbox"
 	cost = 5
-	path = /obj/item/storage/fancylunchbox
+	path = /obj/item/storage/toolbox/fancylunchbox
