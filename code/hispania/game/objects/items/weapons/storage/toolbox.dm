@@ -1,14 +1,20 @@
+/obj/item/storage/toolbox/New()
+	..()
+	icon = (hispania_icon ? 'icons/hispania/obj/storage.dmi' : icon)
+	lefthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/toolbox_lefthand.dmi' : lefthand_file)
+	righthand_file = (hispania_icon ? 'icons/hispania/mob/inhands/toolbox_righthand.dmi' : righthand_file)
+
 /obj/item/storage/toolbox/fancylunchbox
 	name = "Fancy Lunchbox"
 	desc = "A fancy leather lunchbox with golden attachs."
-	icon = 'icons/hispania/obj/storage.dmi'
 	icon_state = "fancylunchbox"
 	item_state = "fancylunchbox"
 	force = 3
+	hispania_icon = TRUE
 	throwforce = 3
 	w_class = WEIGHT_CLASS_NORMAL
 	max_combined_w_class = 9
-	storage_slots = 4
+	storage_slots = 6
 
 /obj/item/storage/toolbox/fancylunchbox/populate_contents()
 	var/newwine = pick(/obj/item/reagent_containers/food/drinks/bottle/hispania/white_wine, /obj/item/reagent_containers/food/drinks/bottle/wine)
@@ -18,3 +24,5 @@
 	new /obj/item/reagent_containers/food/drinks/drinkingglass(src)
 	new newentry(src)
 	new newentree(src)
+	new /obj/item/kitchen/utensil/goldfork(src)
+	new /obj/item/kitchen/utensil/goldspoon(src)
