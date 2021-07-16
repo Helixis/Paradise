@@ -15,6 +15,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	max_combined_w_class = 9
 	storage_slots = 6
+	has_latches = FALSE
 
 /obj/item/storage/toolbox/fancylunchbox/populate_contents()
 	var/newwine = pick(/obj/item/reagent_containers/food/drinks/bottle/hispania/white_wine, /obj/item/reagent_containers/food/drinks/bottle/wine)

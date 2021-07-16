@@ -9,7 +9,6 @@
 	desc = "A fork, but classy"
 	icon_state = "goldfork"
 	item_state = "goldenfork"
-	item_state = "knife"
 	hispania_icon = TRUE
 
 /obj/item/kitchen/utensil/goldspoon
