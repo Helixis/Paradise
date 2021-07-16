@@ -29,7 +29,7 @@
 	drink_desc = "A crystal clear glass of 400 Conejos with a little worm inside."
 	taste_description = "tasty worm"
 
-/datum/reagent/consumable/ethanol/white_wine
+/datum/reagent/consumable/ethanol/hispania/white_wine
 	name = "White Wine"
 	id = "whitewine"
 	description = "A fancy version of your regular whine, plus is white."
