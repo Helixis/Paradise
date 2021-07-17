@@ -46,3 +46,24 @@
 	drink_name = "Glass of drake blood"
 	drink_desc = "The raw essence of a Drake RAAWR"
 	taste_description = "fresh blood."
+
+/datum/reagent/hate
+	name = "Pure Hate"
+	id = "hate"
+	description = "I don't like sand. It's all coarse, and rough, and irritating. And it gets everywhere."
+	reagent_state = LIQUID
+	color = "#FF83A5"
+	process_flags = ORGANIC | SYNTHETIC
+	taste_description = "<font color='pink'><b>love</b></font>"
+
+/datum/reagent/hate/on_mob_add(mob/living/L)
+	..()
+	if(L.a_intent != INTENT_HARM)
+		L.a_intent_change(INTENT_HARM)
+	L.can_change_intents = FALSE //Now you have no choice but to do harm
+
+/datum/reagent/hate/on_mob_life(mob/living/M)
+	if(prob(15))
+		var/hate_phrase = pick("nasty", "horrible", "pretty bad", "really bad", "pretty angry with yourself")
+		to_chat(M, "<span class='notice'>You feel [hate_phrase].</span>")
+	return ..()

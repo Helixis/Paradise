@@ -153,3 +153,22 @@
 	/obj/item/reagent_containers/food/snacks/grown/garlic
 	)
 	result = /obj/item/reagent_containers/food/snacks/salmoncurry
+
+//FUNNY HAHAHA
+
+/datum/recipe/microwave/gigapuddi
+	reagents = list("milk" = 5)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/egg,
+		/obj/item/reagent_containers/food/snacks/egg,
+		/obj/item/reagent_containers/food/snacks/chocolatebar
+		)
+	result = /obj/item/reagent_containers/food/snacks/gigapuddi
+
+/datum/recipe/microwave/gigapuddi/happypuddi
+	reagents = list("milk" = 5, "sugar" = 10)
+	result = /obj/item/reagent_containers/food/snacks/gigapuddi/happy
+
+/datum/recipe/microwave/gigapuddi/angrypuddi
+	reagents = list("milk" = 5, "sodiumchloride" = 10)
+	result = /obj/item/reagent_containers/food/snacks/gigapuddi/anger
