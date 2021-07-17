@@ -73,6 +73,16 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
+///Knuckle///
+/datum/crafting_recipe/knuckle
+	name = "Knuckle"
+	result = list(/obj/item/melee/knuckle)
+	time = 15
+	reqs = list(/obj/item/stack/sheet/plasteel = 5 )
+	tools = list(TOOL_WELDER)
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
+
 ///Silla de Oro///
 /datum/crafting_recipe/gold_wheel23
 	name = "Gold Wheel Chair"

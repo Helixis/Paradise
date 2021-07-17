@@ -69,3 +69,13 @@
 			else
 				A.take_damage(120, damtype, "melee", 1)
 		ramming = FALSE
+
+/obj/item/melee/knuckle
+	  name = "Knuckle"
+	  desc = "The perfect weapon for a real man"
+	  icon = 'icons/hispania/obj/items.dmi'
+	  icon_state = "knuckle"
+	  item_state = "knuckle"
+	  force = 12
+	  attack_verb = list("punched","robusted")
+	  max_integrity = 300
