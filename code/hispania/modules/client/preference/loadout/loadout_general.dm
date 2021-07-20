@@ -68,3 +68,8 @@
 	display_name = "ERP"
 	cost = 3
 	path = /obj/item/storage/bag/plasticbag/mre
+
+/datum/gear/deluxelunchbox
+	display_name = "Deluxe Lunchbox"
+	cost = 5
+	path = /obj/item/storage/toolbox/fancylunchbox
